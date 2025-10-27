@@ -1,1 +1,18 @@
-{% extends "page.html" %}
+{% extends "layout.html" %}
+
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item("Organization", h.url_for("organization.index")) }}
+    {{ ui.breadcrumb_item(group_dict.title, h.url_for("organization.read", id=group_dict.name)) }}
+{%- endblock %}
+
+{%- block primary_content_inner %}
+
+    {%- for item in page.items %}
+        {{ ui.package_item(item) }}
+        <hr/>
+    {%- endfor %}
+
+    {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+{%- endblock %}

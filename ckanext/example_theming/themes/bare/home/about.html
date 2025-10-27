@@ -1,1 +1,6 @@
-{% extends "page.html" %}
+{% extends "layout.html" %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item("About", h.url_for("home.about")) }}
+{%- endblock %}

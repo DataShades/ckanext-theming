@@ -7,8 +7,7 @@
 #     preload:
 #       - base/main
 
-# example_theming-css:
-#   filter: cssrewrite
-#   output: ckanext-example_theming/%(version)s-example_theming.css
-#   contents:
-#     - css/example_theming.css
+bare-css:
+  output: ckanext-example-theming/%(version)s-bare.css
+  contents:
+    - bare.css

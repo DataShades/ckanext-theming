@@ -1,14 +1,100 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Document</title>
-    </head>
-    <body>
-        {% if g.debug %}
-            <pre>
-                {%- debug -%}
-            </pre>
-        {% endif %}
-    </body>
-</html>
+{% extends "base.html" %}
+
+{%- block page %}
+    {%- block zone_header -%}
+        {%- block header %}
+            <header id="header">
+                {%- call ui.navbar_block() %}
+                    {% set items = [
+                        ["Datasets", "dataset.search"],
+                        ["Organizations", "organization.index"],
+                        ["Groups", "group.index"],
+                        ["About", "home.about"],
+                    ] %}
+
+                    {%- for label, endpoint in items %}
+                        {{ ui.nav_item(label, h.url_for(endpoint), active=request.endpoint == endpoint) }}
+                    {%- endfor %}
+                {%- endcall %}
+            </header>
+        {%- endblock header %}
+    {%- endblock zone_header %}
+
+    {%- block zone_toolbar %}
+        {%- block breadcrumb %}
+            <div id="breadcrumbs">
+                {%- call ui.breadcrumbs_block() %}
+                    {{ ui.breadcrumb_item("Home", h.url_for("home.index")) }}
+                    {%- block breadcrumb_content %}{% endblock %}
+                {%- endcall %}
+            </div>
+
+        {%- endblock breadcrumb %}
+
+    {%- endblock %}
+
+    {%- block zone_intro %}
+        {%- block flash %}
+            <div id="flash-messages">
+                {%- for category, message in h.get_flashed_messages(with_categories=true) %}
+                    {%- block flash_message scoped %}
+                        <div>{{ h.literal(message) }}</div>
+                    {%- endblock flash_message %}
+                {%- endfor %}
+            </div>
+        {%- endblock flash %}
+    {%- endblock %}
+
+    {%- block zone_content %}
+        {%- block content %}
+            <div id="content" {% block content_attrs %}{% endblock %}>
+
+                {%- block zone_main %}
+                    {%- block zone_secondary -%}
+                        {%- block secondary %}
+                            <aside id="sidebar">
+                                {%- block secondary_content %}
+                                {%- endblock secondary_content %}
+                            </aside>
+                        {%- endblock secondary -%}
+                    {%- endblock zone_secondary %}
+
+                    {%- block zone_primary -%}
+                        {%- block primary -%}
+                            <main id="main">
+                                <article>
+                                    {%- block primary_content %}
+
+                                        {%- block page_action %}{% endblock -%}
+
+                                        {%- block page_header %}
+                                            {%- block content_action %}{% endblock -%}
+                                            {%- block content_nav %}{% endblock -%}
+                                        {% endblock -%}
+
+                                        {%- block primary_content_inner %}
+                                            <pre>
+                                                {%- debug -%}
+                                            </pre>
+                                        {% endblock -%}
+
+                                    {%- endblock primary_content %}
+                                </article>
+
+                            </main>
+                        {%- endblock primary -%}
+                    {%- endblock zone_primary -%}
+                {%- endblock zone_main %}
+
+            </div>
+        {%- endblock content%}
+    {%- endblock zone_content %}
+
+    {%- block zone_outro %}{% endblock -%}
+
+    {%- block zone_footer -%}
+        {%- block footer %}
+            <footer id="footer"></footer>
+        {% endblock %}
+    {%- endblock zone_footer %}
+{%- endblock %}

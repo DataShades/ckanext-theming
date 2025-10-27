@@ -1,1 +1,11 @@
-{% extends "page.html" %}
+{% extends "layout.html" %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item("Dataset", h.url_for("dataset.search")) }}
+    {{ ui.breadcrumb_item(pkg_dict.title, h.url_for("dataset.read", id=pkg_dict.name)) }}
+{%- endblock %}
+
+{%- block primary_content_inner %}
+    {{ super() }}
+{%- endblock %}

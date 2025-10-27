@@ -1,0 +1,6 @@
+{% extends "page.html" %}
+
+{%- block zone_main %}
+    {%- block zone_secondary %}{{ super() }}{% endblock %}
+    {%- block zone_primary %}{{ super() }}{% endblock %}
+{%- endblock %}

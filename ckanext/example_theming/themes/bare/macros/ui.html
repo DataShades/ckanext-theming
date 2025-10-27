@@ -1,19 +1,39 @@
+{% import "macros/ui/component.html" as component with context  %}
+{% import "macros/ui/container.html" as container with context  %}
+{% import "macros/ui/data.html" as data with context %}
+{% import "macros/ui/element.html" as element with context  %}
+{% import "macros/ui/feedback.html" as feedback with context %}
+{% import "macros/ui/form.html" as form with context %}
+{% import "macros/ui/meta.html" as meta with context %}
+{% import "macros/ui/misc.html" as misc with context %}
+{% import "macros/ui/nav.html" as nav with context %}
 
-{% macro button(label, href=None, type="primary", size="md", icon=None, block=False, submit=False) %}
-    {%- if caller %}{% set label = caller() %}{% endif %}
-    {%- set btn_classes = ["btn", "btn-" ~ type] -%}
-    {%- if size != "md" %}{% do btn_classes.append("btn-" ~ size) %}{% endif %}
-    {%- if block %}{% do btn_classes.append("d-block w-100") %}{% endif %}
 
-    {%- if href %}
-        <a href="{{ href }}" class="{{ btn_classes|join(' ') }}">
-            {% if icon %}<i class="bi bi-{{ icon }}"></i>{% endif %}
-            {{ label }}
-        </a>
-    {%- else %}
-        <button type="{{ 'submit' if submit else 'button' }}" class="{{ btn_classes|join(' ') }}">
-            {% if icon %}<i class="bi bi-{{ icon }}"></i>{% endif %}
-            {{ label }}
-        </button>
-    {%- endif %}
-{% endmacro %}
+
+{% set link = element.link %}
+{% set image = element.image %}
+{% set video = element.video %}
+{% set embed = element.embed %}
+{% set divider = element.divider %}
+
+{% set breadcrumbs_block = nav.breadcrumbs_block %}
+{% set breadcrumb_item = nav.breadcrumb_item %}
+{% set navbar_block = nav.navbar_block %}
+{% set nav_item = nav.nav_item %}
+{% set tab_block = nav.tab_block %}
+{% set tab_item = nav.tab_item %}
+{% set menu_block = nav.menu_block %}
+{% set menu_item = nav.menu_item %}
+{% set pagination = nav.pagination %}
+
+{% set card = container.card %}
+{% set panel_block = container.panel_block %}
+{% set section_block = container.section_block %}
+{% set container_block = container.container_block %}
+{% set grid_block = container.grid_block %}
+{% set row_block = container.row_block %}
+{% set column_block = container.column_block %}
+
+{% set organization_item = component.organization_item %}
+{% set group_item = component.group_item %}
+{% set package_item = component.package_item %}
