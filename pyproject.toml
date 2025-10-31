@@ -3,9 +3,6 @@ name = "ckanext-theming"
 version = "0.0.1"
 description = ""
 readme = "README.md"
-authors = [
-    {name = ""}
-]
 license = {text = "AGPL"}
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -18,18 +15,32 @@ classifiers = [
 keywords = [ "CKAN", ]
 dependencies = []
 
+authors = [
+    {name = "DataShades", email = "datashades@linkdigital.com.au"},
+    {name = "Sergey Motornyuk", email = "sergey.motornyuk@linkdigital.com.au"},
+    {name = "Oleksandr Cherniavskyi", email = "mutantsan@gmail.com" },
+]
+maintainers = [
+    {name = "DataShades", email = "datashades@linkdigital.com.au"},
+]
+
 [project.urls]
-Homepage = "https://github.com//ckanext-theming"
+Homepage = "https://github.com/DataShades/ckanext-theming"
 
 [project.entry-points."ckan.plugins"]
-theming = "ckanext.theming.plugin:ExampleThemingPlugin"
+theming = "ckanext.theming.plugin:ThemingPlugin"
+
+[project.optional-dependencies]
+test = ["pytest-ckan", "pytest-benchmark", "pytest-pretty"]
+docs = ["mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]"]
+dev = ["pytest-ckan", "pytest-benchmark", "pytest-pretty", "mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]", "pre-commit", "pytest-playwright"]
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 line-length = 120
 
 [tool.ruff.lint]

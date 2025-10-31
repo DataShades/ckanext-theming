@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 
 @tk.blanket.cli
 @tk.blanket.config_declarations
-class ExampleThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.SingletonPlugin):
+class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.SingletonPlugin):
     @override
     def update_config(self, config: Any):
         tk.add_template_directory(config, "templates")

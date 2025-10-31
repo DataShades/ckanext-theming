@@ -5,7 +5,6 @@ from typing import cast
 
 import click
 
-from ckan.cli import error_shout
 from ckan.common import config
 
 from . import lib as lib_theme

@@ -1,11 +1,12 @@
 from __future__ import annotations
+
 from typing import Any
 
+import pytest
+from faker import Faker
 from pytest_benchmark.fixture import BenchmarkFixture
 
 import ckan.plugins.toolkit as tk
-from faker import Faker
-import pytest
 
 
 @pytest.fixture(autouse=True)
@@ -29,16 +30,16 @@ def render(name: str, title: str, content: str):
 
 
 @pytest.mark.parametrize(
-    ("name",),
+    "name",
     [
-        ["block"],
-        ["direct_include"],
-        ["macro_direct_include"],
-        ["macro_include_with_context"],
-        ["macro_include_without_context"],
-        ["macro_inline"],
-        ["macro_snippet"],
-        ["snippet"],
+        "block",
+        "direct_include",
+        "macro_direct_include",
+        "macro_include_with_context",
+        "macro_include_without_context",
+        "macro_inline",
+        "macro_snippet",
+        "snippet",
     ],
 )
 def test_single(benchmark: BenchmarkFixture, name: str):
@@ -46,32 +47,33 @@ def test_single(benchmark: BenchmarkFixture, name: str):
 
 
 @pytest.mark.parametrize(
-    ("name",),
+    "name",
     [
-        ["block_1k"],
-        ["direct_include_1k"],
-        ["macro_direct_include_1k"],
-        ["macro_include_with_context_1k"],
-        ["macro_include_without_context_1k"],
-        ["macro_inline_1k"],
-        ["macro_snippet_1k"],
-        ["snippet_1k"],
+        "block_1k",
+        "direct_include_1k",
+        "macro_direct_include_1k",
+        "macro_include_with_context_1k",
+        "macro_include_without_context_1k",
+        "macro_inline_1k",
+        "macro_snippet_1k",
+        "snippet_1k",
     ],
 )
 def test_repeat(benchmark: BenchmarkFixture, name: str):
     benchmark(render, name=name, title=title, content=content)
 
+
 @pytest.mark.parametrize(
-    ("name",),
+    "name",
     [
-        ["block_1k"],
-        ["direct_include_legion"],
-        ["macro_direct_include_legion"],
-        ["macro_include_with_context_legion"],
-        ["macro_include_without_context_legion"],
-        ["macro_inline_legion"],
-        ["macro_snippet_legion"],
-        ["snippet_legion"],
+        "block_1k",
+        "direct_include_legion",
+        "macro_direct_include_legion",
+        "macro_include_with_context_legion",
+        "macro_include_without_context_legion",
+        "macro_inline_legion",
+        "macro_snippet_legion",
+        "snippet_legion",
     ],
 )
 def test_legion(benchmark: BenchmarkFixture, name: str):
