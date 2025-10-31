@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% set _layout = "fullwidth" %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item("About", h.url_for("home.about")) }}
+{%- endblock %}
+
+
+{%- block primary_content_inner %}
+    {%- if g.site_about %}
+        {{ ui.text(h.render_markdown(g.site_about)) }}
+
+    {%- else %}
+        {{ ui.heading( _("About"), level=1) }}
+
+        {%- call ui.text_block() %}
+            {% include "home/_about_text.html" %}
+        {%- endcall %}
+
+    {%- endif %}
+{%- endblock %}

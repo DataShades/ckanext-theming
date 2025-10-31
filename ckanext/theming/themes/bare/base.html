@@ -1,0 +1,65 @@
+{%- block doctype %}<!DOCTYPE html>{% endblock %}
+<html{% block html_attrs %} lang="{{ h.lang() }}"{{ ' dir="rtl"' if h.is_rtl_language() }}{% endblock %}>
+    <head>
+        {%- block document_head %}
+            {%- block meta %}
+                <meta charset="utf-8" />
+                <meta name="site-root" content="{{ h.url_for('home.index', locale='default', qualified=true) }}" />
+                <meta name="locale-root" content="{{ h.url_for('home.index', qualified=true) }}" />
+                {%- block meta_csrf %}
+                    <meta name="csrf_field_name" content="{{ g.csrf_field_name }}" />
+                    <meta name="{{ g.csrf_field_name }}" content="{{ csrf_token() }}" />
+                {% endblock meta_csrf %}
+                {%- block meta_generator %}<meta name="generator" content="ckan {{ h.ckan_version() }}" />{% endblock %}
+                {%- block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
+            {%- endblock meta -%}
+
+            <title>
+                {%- block title %}
+                    {%- set subtitle %}
+                    {%- block subtitle %}{% endblock %}
+                    {%- endset %}
+                    {%- if subtitle|trim %}{{ subtitle|trim }} {{ g.template_title_delimiter }} {% endif %}
+                    {{- g.site_title }}
+                {%- endblock title -%}
+            </title>
+
+            {%- block links %}
+                <link rel="shortcut icon" href="{{ g.favicon }}" />
+            {%- endblock %}
+
+            {%- block styles %}
+                {%- asset "theming/bare-css" %}
+            {%- endblock -%}
+
+            {# render all assets included in styles block #}
+            {{- h.render_assets('style') -}}
+
+            {%- block custom_styles %}
+                {%- if g.site_custom_css -%}
+                    <style>
+                     {{ g.site_custom_css | safe }}
+                    </style>
+                {%- endif %}
+            {%- endblock %}
+
+            {%- block head_extras %}{% endblock %}
+
+        {%- endblock document_head %}
+    </head>
+
+    <body{% block body_attrs %}{% endblock %}>
+        {% block document_body %}
+            {%- block page %}{% endblock %}
+
+            {%- block scripts %}{% endblock %}
+            {# render all assets included in scripts block and everywhere else #}
+            {# make sure there are no calls to `asset` tag after this point #}
+            {{ h.render_assets('style') }}
+            {{ h.render_assets('script') }}
+
+            {%- block body_extras %}{% endblock %}
+
+        {%- endblock document_body %}
+    </body>
+</html>

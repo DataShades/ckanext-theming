@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(h.humanize_entity_type("package", dataset_type, "breadcrumb") or _("Datasets"), h.url_for("dataset.search")) }}
+{%- endblock %}
+
+{%- block primary_content_inner %}
+
+    {%- for item in page.items %}
+        {{ ui.package_item(item) }}
+        <hr/>
+    {%- endfor %}
+
+
+    {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+
+{%- endblock %}

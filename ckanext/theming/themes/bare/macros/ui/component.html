@@ -1,0 +1,27 @@
+
+{%- macro organization_item(group) %}
+    {{ ui.group_item(group, **kwargs) }}
+{%- endmacro %}
+
+{%- macro group_item(group) %}
+    {% set img = group.image_display_url or h.url_for_static('/base/images/placeholder-' ~ ('organization' if group.is_organization else 'group') ~ '.png') %}
+    {% set title = group.title or group.name  %}
+    {% set body = h.markdown_extract(group.description, 120)|urlize %}
+
+    {{ ui.card(title=title, img=img, body=body, href=h.url_for(('organization' if group.is_organization else 'group') ~ ".read", id=group.name)) }}
+{%- endmacro %}
+
+
+{%- macro package_item(pkg) %}
+    {% set title = pkg.title or pkg.name  %}
+    {% set body = h.markdown_extract(pkg.notes, 120)|urlize %}
+
+    {{ ui.card(title=title, body=body, href=h.url_for(pkg.type ~ ".read", id=pkg.name)) }}
+{%- endmacro %}
+
+{%- macro resource_item(res) %}
+    {% set title = res.name  %}
+    {% set body = h.markdown_extract(res.description, 120)|urlize %}
+
+    {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id)) }}
+{%- endmacro %}

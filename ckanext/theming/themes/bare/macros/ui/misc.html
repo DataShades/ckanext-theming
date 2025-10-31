@@ -1,0 +1,8 @@
+{%- macro datetime(dt) %}
+    <span data-datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
+        {{ h.render_datetime(dt, with_hours=True) }}
+    </span>
+{%- endmacro %}
+
+collapse(target_id, expanded=False, **kwargs)
+tooltip_target(content, tooltip, **kwargs)

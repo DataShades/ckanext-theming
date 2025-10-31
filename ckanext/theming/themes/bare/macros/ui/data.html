@@ -1,0 +1,48 @@
+{%- macro table_block(striped=false, bordered=false) %}
+    {%- do kwargs -%}
+    <table class="{{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }}">
+        {{ caller() }}
+    </table>
+{%- endmacro %}
+
+{%- macro table_head_block() %}
+    {%- do kwargs -%}
+    <thead>{{ caller() }}</thead>
+
+{%- endmacro %}
+
+
+{%- macro table_body_block() %}
+    {%- do kwargs -%}
+    <tbody>{{ caller() }}</tbody>
+{%- endmacro %}
+
+{%- macro table_row_block() %}
+    {%- do kwargs -%}
+    <tr>
+        {{ caller() }}
+    </tr>
+{%- endmacro %}
+
+{%- macro table_row(columns, heading=false) %}
+    {%- do kwargs -%}
+    {%- call ui.table_row_block() %}
+        {%- for column in columns %}
+            {{ ui.table_cell(column, heading) }}
+        {%- endfor %}
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro table_cell(value, heading=false) %}
+    {%- do kwargs -%}
+    {% set tag = "th" if heading else "td" %}
+    <{{ tag }}>
+    {{ value }}
+    </{{ tag }}>
+{%- endmacro %}
+
+list_group(items, **kwargs)
+definition_list(items, **kwargs)
+stat(label, value, icon=None, **kwargs)
+chart(type, data, options=None, **kwargs)
+code_block(content, language="text", **kwargs)

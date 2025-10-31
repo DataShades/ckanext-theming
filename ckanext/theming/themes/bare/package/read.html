@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+{% set _layout = "fullwidth" %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {%- if pkg_dict.organization %}
+        {%- with group_dict=pkg_dict.organization %}
+            {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
+            {{ ui.breadcrumb_item(group_dict.title or group_dict.name, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
+        {%- endwith%}
+
+    {%- else %}
+        {{ ui.breadcrumb_item(h.humanize_entity_type("package", dataset_type, "breadcrumb") or _("Datasets"), h.url_for("dataset.search")) }}
+
+    {%- endif %}
+    {{ ui.breadcrumb_item(pkg_dict.title, h.url_for("dataset.read", id=pkg_dict.name)) }}
+
+{%- endblock %}
+
+{%- block primary_content_inner %}
+    {{ ui.heading(pkg_dict.title or pkg_dict.name, level=1) }}
+
+    {%- if pkg_dict.notes %}
+        {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
+    {%- endif %}
+
+    {%- if pkg_dict.tags %}
+        <div>
+            {%- for tag  in pkg_dict.tags %}
+                {{ ui.tag(tag.display_name) }}
+            {%- endfor %}
+        </div>
+    {%- endif %}
+
+    {%- call ui.accordion_block() %}
+
+        {%- if pkg_dict.resources %}
+            {%- call ui.accordion_item(_("Resources")) %}
+                {%- for res in pkg_dict.resources %}
+                    {{ ui.resource_item(res) }}
+                {%- endfor %}
+            {%- endcall %}
+        {%- endif %}
+
+        {%- call ui.accordion_item(_("Additional details")) %}
+            {%- call ui.table_block(bordered=true, striped=true) %}
+                {%- call ui.table_head_block() %}
+                    {{ ui.table_row([_("Field"), _("Value")], heading=true) }}
+                {%- endcall %}
+
+                {%- call ui.table_body_block() %}
+
+
+                    {%- if pkg_dict.url %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_('Source'), heading=true) }}
+                            {{ ui.table_cell(ui.link(pkg_dict.url)) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- if pkg_dict.author_email %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_("Author"), heading=true) }}
+                            {{ ui.table_cell(h.mail_to(email_address=pkg_dict.author_email, name=pkg_dict.author)) }}
+                        {%- endcall %}
+
+                    {%- elif pkg_dict.author %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_("Author"), heading=true) }}
+                            {{ ui.table_cell(pkg_dict.author) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- if pkg_dict.maintainer_email %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_('Maintainer'), heading=true) }}
+                            {{ ui.table_cell(h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer)) }}
+                        {%- endcall %}
+
+                    {%- elif pkg_dict.maintainer %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_('Maintainer'), heading=true) }}
+                            {{ ui.table_cell(pkg_dict.maintainer) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- if pkg_dict.version %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_("Version"), heading=true) }}
+                            {{ ui.table_cell(pkg_dict.version) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- if h.check_access('package_update',{'id':pkg_dict.id}) %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_("State"), heading=true) }}
+                            {{ ui.table_cell(_(pkg_dict.state)) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- if pkg_dict.metadata_modified %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_("Last Updated"), heading=true) }}
+                            {{ ui.table_cell(ui.datetime(pkg_dict.metadata_modified)) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- if pkg_dict.metadata_created %}
+                        {%- call ui.table_row_block() %}
+                            {{ ui.table_cell(_("Created"), heading=true) }}
+                            {{ ui.table_cell(ui.datetime(pkg_dict.metadata_created)) }}
+                        {%- endcall %}
+                    {%- endif %}
+
+                    {%- block extras scoped %}
+                        {%- for extra in h.sorted_extras(pkg_dict.extras) %}
+                            {% set key, value = extra %}
+                            {%- call ui.table_row_block() %}
+                                {{ ui.table_cell(_(key|e), heading=true) }}
+                                {{ ui.table_cell(value) }}
+                            {%- endcall %}
+                        {%- endfor %}
+                    {%- endblock %}
+
+                {%- endcall %}
+
+            {%- endcall %}
+        {%- endcall %}
+    {%- endcall %}
+
+{%- endblock %}

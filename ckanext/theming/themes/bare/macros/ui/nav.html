@@ -1,0 +1,92 @@
+
+{%- macro breadcrumbs_block() %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro breadcrumb_item(label, href) %}
+    {%- do kwargs -%}
+    {{ ui.link(href, label) }}
+{%- endmacro %}
+
+
+{%- macro nav_block() %}
+    {%- do kwargs -%}
+    <nav>
+        {{ caller() }}
+    </nav>
+{%- endmacro %}
+
+{%- macro nav_item(label, href, active=False) %}
+    {%- do kwargs -%}
+    {%- if active %}
+        <strong>{{ ui.link(href, label) }}</strong>
+    {%- else -%}
+        {{ ui.link(href, label) }}
+    {%- endif %}
+{%- endmacro %}
+
+
+{%- macro tab_block() %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro tab_item(label, href, active=False) %}
+    {%- do kwargs -%}
+    {%- if active %}
+        <strong>{{ ui.link(href, label) }}</strong>
+    {%- else -%}
+        {{ ui.link(href, label) }}
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro menu_block() %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro menu_item(label, href, active=False) %}
+    {%- do kwargs -%}
+    {%- if active %}
+        <strong>{{ ui.link(href, label) }}</strong>
+    {%- else -%}
+        {{ ui.link(href, label) }}
+    {%- endif %}
+{%- endmacro %}
+
+
+{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) %}
+    {%- do kwargs -%}
+    {%- if total_pages > 1 %}
+
+        {%- if page > 1 %}
+            {{ ui.link(url_generator(page=page - 1), "Previous") }}
+        {%- endif %}
+
+
+        {%- if page - 1 > padding %}
+            {{ ui.link(url_generator(page=1), 1) }}
+            <span>...</span>
+        {%- endif %}
+
+        {%- for i in range([page - padding, 1]|max, [page + padding, total_pages + 1]|min) %}
+            {%- if i == page %}
+                <span>{{ i }}</span>
+            {%- else %}
+                {{ ui.link(url_generator(page=i), i) }}
+            {%- endif %}
+        {%- endfor %}
+
+        {%- if total_pages - page > padding %}
+            <span>...</span>
+            {{ ui.link(url_generator(page=total_pages), total_pages) }}
+        {%- endif %}
+
+
+        {%- if page < total_pages %}
+            {{ ui.link(url_generator(page=page + 1), "Next") }}
+        {%- endif %}
+
+    {%- endif %}
+{%- endmacro %}

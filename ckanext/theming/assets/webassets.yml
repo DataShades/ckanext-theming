@@ -1,0 +1,13 @@
+# theming-js:
+#   filter: rjsmin
+#   output: ckanext-theming/%(version)s-theming.js
+#   contents:
+#     - js/theming.js
+#   extra:
+#     preload:
+#       - base/main
+
+bare-css:
+  output: ckanext-theming/%(version)s-bare.css
+  contents:
+    - bare.css

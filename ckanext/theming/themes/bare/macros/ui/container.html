@@ -1,0 +1,80 @@
+{%- macro card(title=none, body=none, footer=none, img=none, href=none) %}
+    {%- do kwargs -%}
+
+    <div>
+        {%- if img %}
+            {{ ui.image(img) }}
+        {%- endif %}
+
+        <strong>
+            {%- if href %}
+                {{ ui.link(href, title) }}
+            {%- else -%}
+                {{ title }}
+            {%- endif %}
+
+
+        </strong>
+
+
+        {%- if body %}
+            <p>{{ body }}</p>
+        {%- endif %}
+
+        {%- if footer %}
+            <div>{{ footer }}</div>
+        {%- endif %}
+
+    </div>
+
+{%- endmacro %}
+
+{%- macro accordion_block() %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+
+{%- macro accordion_item(title, open=false) %}
+    {%- do kwargs -%}
+    <details {{ "open" if open }}>
+        <summary>{{ title }}</summary>
+        {{ caller() }}
+    </details>
+{%- endmacro %}
+
+{%- macro panel_block(title) %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+
+{%- macro panel_block(title) %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro section_block(title) %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro container_block(fluid=false) %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro grid_block(columns=12) %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro row_block() %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}
+
+{%- macro column_block() %}
+    {%- do kwargs -%}
+    {{ caller() }}
+{%- endmacro %}

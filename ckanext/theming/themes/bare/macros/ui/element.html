@@ -1,0 +1,75 @@
+
+{%- macro link(href, label) -%}
+    {%- do kwargs -%}
+    <a href="{{ href }}">{{ label }}</a>
+{%- endmacro %}
+
+{%- macro button(content, style="primary", href=none, type="button") %}
+    {%- do kwargs -%}
+    {%- if href %}
+        {{ ui.link(href, label) }}
+    {%- else %}
+        <button type="{{ type }}">{{ label }}</button>
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro heading(text, level=1) %}
+    {%- do kwargs -%}
+
+    {%- set tag =  "h" ~ level %}
+    <{{ tag }}>{{ text }}</{{ tag }}>
+{%- endmacro %}
+
+
+{%- macro text_block() %}
+    {%- do kwargs -%}
+    <div>
+        {{ caller() }}
+    </div>
+{%- endmacro %}
+
+{%- macro text(content) %}
+    {%- call ui.text_block(**kwargs) %}
+        {{ content }}
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro badge(label, style="info") %}
+    {%- do kwargs -%}
+    <mark>{{ label }}</mark>
+{%- endmacro %}
+
+{%- macro image(src, alt="") %}
+    {%- do kwargs -%}
+    <img alt="{{ alt }}" src="{{ src }}"/>
+{%- endmacro %}
+
+{%- macro video(src, controls=true) %}
+    {%- do kwargs -%}
+    <video src="{{ src }}" {{ "controls" if controls }}></video>
+{%- endmacro %}
+
+{%- macro embed(url, type) %}
+    {%- do kwargs -%}
+    <embed src="{{ src }}" type="{{ type }}"/>
+{%- endmacro %}
+
+
+{%- macro tag(label, id, href, style="default") %}
+    {%- do kwargs -%}
+    <a href="{{ href or h.url_for('dataset.search', tags=id or label) }}">{{ label }}</a>
+{%- endmacro %}
+
+{%- macro divider(label) %}
+    {%- do kwargs -%}
+    <hr title="{{ label }}" />
+{%- endmacro %}
+
+
+<!--
+
+     icon(name, size="md", **kwargs)
+     avatar(src=None, alt=None, size="md", **kwargs)
+
+     label(text, for_id=None, **kwargs)
+-->
