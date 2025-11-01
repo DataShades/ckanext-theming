@@ -1,29 +1,18 @@
-
-{%- macro link(href, label) -%}
-    {%- do kwargs -%}
-    <a href="{{ href }}">{{ label }}</a>
+{%- macro link(href, content) -%}
+    <a {{ ui.render_attrs(kwargs) }} href="{{ href }}">{{ content }}</a>
 {%- endmacro %}
 
-{%- macro button(content, style="primary", href=none, type="button") %}
-    {%- do kwargs -%}
-    {%- if href %}
-        {{ ui.link(href, label) }}
-    {%- else %}
-        <button type="{{ type }}">{{ label }}</button>
-    {%- endif %}
+{%- macro button(content, style="primary", type="button") %}
+    <button {{ ui.render_attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro heading(text, level=1) %}
-    {%- do kwargs -%}
-
     {%- set tag =  "h" ~ level %}
-    <{{ tag }}>{{ text }}</{{ tag }}>
+    <{{ tag }} {{ ui.render_attrs(kwargs) }}>{{ text }}</{{ tag }}>
 {%- endmacro %}
 
-
 {%- macro text_block() %}
-    {%- do kwargs -%}
-    <div>
+    <div {{ ui.render_attrs(kwargs) }}>
         {{ caller() }}
     </div>
 {%- endmacro %}
@@ -35,41 +24,27 @@
 {%- endmacro %}
 
 {%- macro badge(label, style="info") %}
-    {%- do kwargs -%}
-    <mark>{{ label }}</mark>
+    <mark {{ ui.render_attrs(kwargs) }}>{{ label }}</mark>
 {%- endmacro %}
 
 {%- macro image(src, alt="") %}
-    {%- do kwargs -%}
-    <img alt="{{ alt }}" src="{{ src }}"/>
+    <img {{ ui.render_attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
 {%- endmacro %}
 
 {%- macro video(src, controls=true) %}
-    {%- do kwargs -%}
-    <video src="{{ src }}" {{ "controls" if controls }}></video>
+    <video {{ ui.render_attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
 {%- endmacro %}
 
-{%- macro embed(url, type) %}
-    {%- do kwargs -%}
-    <embed src="{{ src }}" type="{{ type }}"/>
-{%- endmacro %}
-
-
-{%- macro tag(label, id, href, style="default") %}
-    {%- do kwargs -%}
-    <a href="{{ href or h.url_for('dataset.search', tags=id or label) }}">{{ label }}</a>
+{%- macro tag(label, id, href) %}
+    <a {{ ui.render_attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or label) }}">{{ label }}</a>
 {%- endmacro %}
 
 {%- macro divider(label) %}
-    {%- do kwargs -%}
-    <hr title="{{ label }}" />
+    <hr {{ ui.render_attrs(kwargs) }} title="{{ label }}" />
 {%- endmacro %}
 
 
-<!--
 
-     icon(name, size="md", **kwargs)
-     avatar(src=None, alt=None, size="md", **kwargs)
-
-     label(text, for_id=None, **kwargs)
--->
+icon(name, size="md", **kwargs)
+avatar(src=None, alt=None, size="md", **kwargs)
+label(text, for_id=None, **kwargs)

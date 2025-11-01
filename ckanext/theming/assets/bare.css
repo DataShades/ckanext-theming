@@ -1,4 +1,5 @@
 :root {
+    --account-bg: #afc;
     --header-bg: #ecf;
     --breadcrumbs-bg: #efc;
     --sidebar-bg: #eee;
@@ -15,6 +16,11 @@ body {
     margin: 0px;
     display: flex;
     flex-direction: column;
+}
+
+#account {
+    background: var(--account-bg);
+    text-align: right;
 }
 
 #header {

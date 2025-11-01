@@ -1,0 +1,55 @@
+{%- block header_account %}
+    {%- call ui.account_block() %}
+        {%- if current_user.is_authenticated %}
+            {% block header_account_logged %}
+                {%- call ui.nav_block() %}
+                    {{ ui.nav_item(_('Admin'), h.url_for("admin.index"), active=request.endpoint == "admin.index") }}
+
+                    {%- block header_account_profile %}
+                        {{ ui.nav_item(_('View profile'), h.url_for("user.read", id=current_user.name)) }}
+                    {%- endblock header_account_profile %}
+
+                    {% block header_dashboard %}
+                        {{ ui.nav_item(_('Dashboard'), h.url_for("dashboard.datasets")) }}
+                    {% endblock %}
+
+                    {% block header_account_settings_link %}
+                        {{ ui.nav_item(_('Profile settings'), h.url_for("user.edit", id=c.userobj.name)) }}
+                    {% endblock %}
+
+                    {% block header_account_log_out_link %}
+                        {%- call ui.form_block("POST", action=h.url_for('user.logout')) %}
+                            {{ ui.button(_('Log out'), type="submit") }}
+                        {%- endcall %}
+                    {% endblock %}
+
+                {%- endcall %}
+            {% endblock %}
+
+        {%- else -%}
+            {% block header_account_notlogged %}
+                {{ ui.link(h.url_for("user.login"), _("Log in")) }}
+                {{ ui.link(h.url_for("user.register"), _("Register")) if h.check_access("user_create") }}
+            {% endblock %}
+
+        {%- endif %}
+
+    {%- endcall %}
+{%- endblock %}
+
+{%- block header %}
+    {%- call ui.header_block(g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
+        {%- call ui.nav_block() %}
+            {% set items = [
+                        ["Datasets", "dataset.search"],
+                        ["Organizations", "organization.index"],
+                        ["Groups", "group.index"],
+                        ["About", "home.about"],
+            ] %}
+
+            {%- for label, endpoint in items %}
+                {{ ui.nav_item(label, h.url_for(endpoint), active=request.endpoint == endpoint) }}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endcall %}
+{%- endblock %}

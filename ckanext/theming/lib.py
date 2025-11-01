@@ -10,7 +10,7 @@ Example usage::
 
     theme = get_theme(config["ckan.ui.theme"])
     ui = theme.build_ui(app)
-    btn = ui.button("Click me!", href="https://ckan.org")
+    btn = ui.link("https://ckan.org", content="Click me!")
 """
 
 from __future__ import annotations

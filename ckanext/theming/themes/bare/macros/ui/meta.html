@@ -17,14 +17,25 @@
 
         {{ caller() }}
     </header>
-
-
-
-
 {%- endmacro %}
+
+{%- macro footer_block() %}
+    {%- do kwargs -%}
+    <footer id="footer">
+        {{ caller() }}
+    </footer>
+{%- endmacro %}
+
+{%- macro account_block(title=none, subtitle=none, logo=none) %}
+    {%- do kwargs -%}
+
+    <header id="account">
+        {{ caller() }}
+    </header>
+{%- endmacro %}
+
 page(title=None, content=None, **kwargs)
 
-footer(content=None, **kwargs)
 empty_state(title=None, message=None, action=None, **kwargs)
 error_message(title=None, details=None, **kwargs)
 login_form(action=None, **kwargs)

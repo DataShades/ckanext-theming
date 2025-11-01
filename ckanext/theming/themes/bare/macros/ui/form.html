@@ -1,5 +1,21 @@
-form_start(action=None, method="post", enctype=None, **kwargs)
-form_end(**kwargs)
+{%- macro form_block(method, action="", enctype="", includ_csrf=true) %}
+    {{ ui.form_start(method, action, enctype, **kwargs) }}
+    {{ h.csrf_input() if include_csrf }}
+
+    {{ caller() }}
+
+    {{ ui.form_end() }}
+{%- endmacro %}
+
+{%- macro form_start(method, action="", enctype="") %}
+    <form {{ ui.render_attrs(kwargs) }} method="{{ method }}" action="{{ action }}" enctype="{{ enctype }}">
+{%- endmacro %}
+
+{%- macro form_end() %}
+    {%- do kwargs -%}
+    </form>
+{%- endmacro %}
+
 form_group(label=None, field_html=None, help_text=None, errors=None, **kwargs)
 form_submit(label="Submit", style="primary", **kwargs)
 

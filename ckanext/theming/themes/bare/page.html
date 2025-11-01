@@ -3,20 +3,7 @@
 {%- block page %}
     {%- block zone_header -%}
         {%- block header %}
-            {%- call ui.header_block(g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
-                {%- call ui.nav_block() %}
-                    {% set items = [
-                        ["Datasets", "dataset.search"],
-                        ["Organizations", "organization.index"],
-                        ["Groups", "group.index"],
-                        ["About", "home.about"],
-                    ] %}
-
-                    {%- for label, endpoint in items %}
-                        {{ ui.nav_item(label, h.url_for(endpoint), active=request.endpoint == endpoint) }}
-                    {%- endfor %}
-                {%- endcall %}
-            {%- endcall %}
+            {% include "_header.html" %}
         {%- endblock header %}
     {%- endblock zone_header %}
 
@@ -89,14 +76,14 @@
     {%- block zone_outro %}{% endblock -%}
 
     {%- block zone_footer -%}
-        {%- block footer %}
-            <footer id="footer"></footer>
-        {% endblock %}
+        {%- block footer_block %}
+            {%- include "_footer.html" -%}
+        {% endblock footer_block %}
 
         {%- if g.debug %}
             <div style="max-width: 100vw; overflow-x: auto;">
                 {%- call ui.accordion_block() %}
-                    {%- call ui.accordion_item("Debug") %}
+                    {%- call ui.accordion_item("Debug", open=true) %}
                         <pre>
                             {%- debug -%}
                         </pre>
