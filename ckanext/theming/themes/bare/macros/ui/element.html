@@ -1,48 +1,37 @@
-{%- macro link(content, href) -%}
-    <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
+{%- macro badge(content, style) -%}
+    <mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark>
 {%- endmacro %}
 
-{%- macro button(content, style="default", type="button") -%}
+{%- macro button(content, style, type="button") -%}
     <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
-{%- macro heading(text, level=1) -%}
+{%- macro divider() -%}
+    <hr {{ ui.util.attrs(kwargs) }}/>
+{%- endmacro %}
+
+{%- macro heading(content, level=1) -%}
     {%- set tag =  "h" ~ level %}
-    <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ text }}</{{ tag }}>
-{%- endmacro %}
-
-{%- macro text_block() -%}
-    <div {{ ui.util.attrs(kwargs) }}>
-        {{ caller() }}
-    </div>
-{%- endmacro %}
-
-{%- macro text(content) -%}
-    {%- call ui.text_block(**kwargs) %}
-        {{ content }}
-    {%- endcall %}
-{%- endmacro %}
-
-{%- macro badge(label, style="default") -%}
-    <mark {{ ui.util.attrs(kwargs) }}>{{ label }}</mark>
+    <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
 {%- endmacro %}
 
 {%- macro image(src, alt="") -%}
     <img {{ ui.util.attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
 {%- endmacro %}
 
+{%- macro link(content, href) -%}
+    <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro text(content) -%}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
 {%- macro video(src, controls=true) -%}
     <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
 {%- endmacro %}
-
-{%- macro tag(label, id, href) -%}
-    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or label) }}">{{ label }}</a>
-{%- endmacro %}
-
-{%- macro divider(label) -%}
-    <hr {{ ui.util.attrs(kwargs) }} title="{{ label }}" />
-{%- endmacro %}
-
 
 
 icon(name, size="md", **kwargs)

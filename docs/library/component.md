@@ -6,7 +6,7 @@ Renders an item representing a group.
 
 ### Arguments
 
-TBA
+*   `group` (object): group details.
 
 ## `organization_item`
 
@@ -14,7 +14,7 @@ Renders an item representing an organization.
 
 ### Arguments
 
-TBA
+*   `group` (object): organization details.
 
 ## `package_item`
 
@@ -22,11 +22,22 @@ Renders an item representing a package (dataset).
 
 ### Arguments
 
-TBA
+*   `pkg` (object): package details.
 
 ## `resource_item`
 
 Renders an item representing a resource.
 
 ### Arguments
-TBA
+
+*   `res` (object): resource details.
+
+## `tag`
+
+Displays a tag.
+
+### Arguments
+
+*   `content` (string): The tag text.
+*   `id` (string): The tag ID.
+*   `href` (string): The tag URL.

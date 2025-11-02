@@ -89,6 +89,7 @@ nav:
       - library/container.md
       - library/data.md
       - library/element.md
+      - library/feedback.md
       - library/form.md
       - library/meta.md
       - library/misc.md

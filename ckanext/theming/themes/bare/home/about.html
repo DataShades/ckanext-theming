@@ -14,7 +14,7 @@
     {%- else %}
         {{ ui.heading( _("About"), level=1) }}
 
-        {%- call ui.text_block() %}
+        {%- call ui.util.call(ui.text) %}
             {% include "home/_about_text.html" %}
         {%- endcall %}
 

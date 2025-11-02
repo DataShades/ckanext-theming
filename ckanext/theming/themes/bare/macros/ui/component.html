@@ -1,4 +1,3 @@
-
 {%- macro organization_item(group) -%}
     {{ ui.group_item(group, **kwargs) }}
 {%- endmacro %}
@@ -24,4 +23,8 @@
     {% set body = h.markdown_extract(res.description, 120)|urlize %}
 
     {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id)) }}
+{%- endmacro %}
+
+{%- macro tag(content, id, href) -%}
+    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
 {%- endmacro %}

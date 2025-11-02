@@ -1,34 +1,3 @@
-{%- macro card(title=none, body=none, footer=none, img=none, href=none) -%}
-    {%- do kwargs -%}
-
-    <div>
-        {%- if img %}
-            {{ ui.image(img) }}
-        {%- endif %}
-
-        <strong>
-            {%- if href %}
-                {{ ui.link(title, href=href) }}
-            {%- else -%}
-                {{ title }}
-            {%- endif %}
-
-
-        </strong>
-
-
-        {%- if body %}
-            <p>{{ body }}</p>
-        {%- endif %}
-
-        {%- if footer %}
-            <div>{{ footer }}</div>
-        {%- endif %}
-
-    </div>
-
-{%- endmacro %}
-
 {%- macro accordion_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
@@ -43,32 +12,60 @@
     </details>
 {%- endmacro %}
 
-{%- macro panel_block(title) -%}
+{%- macro card(content, title, footer, img, href) -%}
+    {%- do kwargs -%}
+
+    <div>
+        {%- if img -%}
+            {{ ui.image(img) }}
+        {%- endif %}
+
+        <strong>
+            {%- if href -%}
+                {{ ui.link(title, href=href) }}
+            {%- else -%}
+                {{ title }}
+            {%- endif %}
+        </strong>
+
+        {%- if content -%}
+            <div>{{ content }}</div>
+        {%- endif %}
+
+        {%- if footer -%}
+            <div>{{ footer }}</div>
+        {%- endif %}
+
+    </div>
+
+{%- endmacro %}
+
+{%- macro column_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro section_block(title) -%}
+{%- macro container_wrapper(fluid=false) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro container_block(fluid=false) -%}
+{%- macro grid_wrapper(columns) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro grid_block(columns=12) -%}
+{%- macro panel_wrapper(title) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro row_block() -%}
+{%- macro row_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro column_block() -%}
+{%- macro section_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}

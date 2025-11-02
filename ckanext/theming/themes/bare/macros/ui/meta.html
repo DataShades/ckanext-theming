@@ -1,6 +1,5 @@
 {%- macro header_block(title=none, subtitle=none, logo=none) -%}
     {%- do kwargs -%}
-
     <header id="header">
         {%- if logo %}
             {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
@@ -33,11 +32,3 @@
         {{ caller() }}
     </header>
 {%- endmacro %}
-
-page(title=None, content=None, **kwargs)
-
-empty_state(title=None, message=None, action=None, **kwargs)
-error_message(title=None, details=None, **kwargs)
-login_form(action=None, **kwargs)
-search_bar(name="q", value=None, placeholder=None, **kwargs)
-filter_bar(filters=None, **kwargs)

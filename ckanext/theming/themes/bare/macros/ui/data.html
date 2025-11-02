@@ -33,11 +33,11 @@
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro table_cell(value, heading=false) -%}
+{%- macro table_cell(content, heading=false) -%}
     {%- do kwargs -%}
     {% set tag = "th" if heading else "td" %}
     <{{ tag }}>
-    {{ value }}
+    {{ content }}
     </{{ tag }}>
 {%- endmacro %}
 

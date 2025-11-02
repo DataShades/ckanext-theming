@@ -1,14 +1,12 @@
-
 {%- macro breadcrumb_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro breadcrumb_item(label, href) -%}
+{%- macro breadcrumb_item(content, href) -%}
     {%- do kwargs -%}
-    {{ ui.link(label, href) }}
+    {{ ui.link(content, href) }}
 {%- endmacro %}
-
 
 {%- macro nav_wrapper() -%}
     {%- do kwargs -%}
@@ -17,27 +15,26 @@
     </nav>
 {%- endmacro %}
 
-{%- macro nav_item(label, href, active=False) -%}
+{%- macro nav_item(content, href, active=False) -%}
     {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(label, href) }}</strong>
+        <strong>{{ ui.link(content, href) }}</strong>
     {%- else -%}
-        {{ ui.link(label, href) }}
+        {{ ui.link(content, href) }}
     {%- endif %}
 {%- endmacro %}
-
 
 {%- macro tab_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro tab_item(label, href, active=False) -%}
+{%- macro tab_item(content, href, active=False) -%}
     {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(label, href) }}</strong>
+        <strong>{{ ui.link(content, href) }}</strong>
     {%- else -%}
-        {{ ui.link(label, href) }}
+        {{ ui.link(content, href) }}
     {%- endif %}
 {%- endmacro %}
 
@@ -46,15 +43,14 @@
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro menu_item(label, href, active=False) -%}
+{%- macro menu_item(content, href, active=False) -%}
     {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(label, href) }}</strong>
+        <strong>{{ ui.link(content, href) }}</strong>
     {%- else -%}
-        {{ ui.link(label, href) }}
+        {{ ui.link(content, href) }}
     {%- endif %}
 {%- endmacro %}
-
 
 {%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
     {%- do kwargs -%}
