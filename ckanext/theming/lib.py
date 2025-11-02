@@ -47,7 +47,7 @@ class Util:
     def __init__(self, ui: UI):
         self.ui = ui
 
-    def render_attrs(self, kwargs: dict[str, Any]):
+    def attrs(self, kwargs: dict[str, Any]):
         """Helper method to render HTML attributes from a dictionary."""
         parts = []
 
@@ -75,16 +75,16 @@ class Util:
 
         As result, it cannot be called in form `{% call ui.button() %}` and
         rendering button with nested HTML turns into a verbose task. But using
-        `ui.call`, `button` can be used with `call`::
+        `ui.util.call`, `button` can be used with `call`::
 
-            {% call ui.call(ui.button) %}
+            {% call ui.util.call(ui.button) %}
                 <i class="icon"/>
                 Click!
             {% endcall %}
 
         The content of the `call` block will be passed as a first argument into
         the target macro. Any other positional and named arguments of the
-        `ui.call` will be redirected into `ui.button` as well.
+        `ui.util.call` will be redirected into `ui.button` as well.
         """
         return el(caller(), *args, **kwargs)
 
@@ -95,12 +95,15 @@ class UI(Iterable[str], abc.ABC):
     A UI provides access to a set of macros that can be used in templates.
     """
 
+    Util: type[Util] = Util
+    util: Util
+
     def __init__(self, app: types.CKANApp):
         """Initialize the UI with the CKAN application instance.
 
         :param app: The CKAN application instance.
         """
-        self.util = Util(self)
+        self.util = self.Util(self)
 
     @override
     @abc.abstractmethod
@@ -166,6 +169,7 @@ class Theme:
     extends: str | None
 
     UI: type[UI] = MacroUI
+    _ui: UI | None = None
 
     def __init__(self, path: str, extends: str | None = None):
         self.path = path
@@ -180,7 +184,8 @@ class Theme:
         :param app: The CKAN application instance.
         :return: A UI instance.
         """
-        return self.UI(app)
+        self._ui = self.UI(app)
+        return self._ui
 
 
 def get_theme(name: str):

@@ -1,20 +1,89 @@
-{%- macro form_block(method, action="", enctype="", includ_csrf=true) -%}
+{%- macro form_block(method="GET", action="", enctype="", include_csrf=true) -%}
     {{ ui.form_start(method, action, enctype, **kwargs) }}
-    {{ h.csrf_input() if include_csrf }}
+    {{ h.csrf_input() if include_csrf and method|upper != "GET" }}
 
     {{ caller() }}
 
     {{ ui.form_end() }}
 {%- endmacro %}
 
+{%- macro form_actions_wrapper() -%}
+    {{ caller() }}
+{%- endmacro %}
+
 {%- macro form_start(method, action="", enctype="") -%}
-    <form {{ ui.render_attrs(kwargs) }} method="{{ method }}" action="{{ action }}" enctype="{{ enctype }}">
+    <form {{ ui.util.attrs(kwargs) }} method="{{ method }}" action="{{ action }}" enctype="{{ enctype }}">
 {%- endmacro %}
 
 {%- macro form_end() -%}
     {%- do kwargs -%}
     </form>
 {%- endmacro %}
+
+{%- macro form_errors(errors={}) -%}
+    {% if errors %}
+        <div>
+            <p>{{ _('The form contains invalid entries:') }}</p>
+            <ul>
+                {% for key, error in errors.items() %}
+                    <li>{% if key %}{{ key }}: {% endif %}{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+    {%- if label -%}
+        <label for="{{ id }}">{{ label }}</label>
+    {%- endif %}
+    <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" />
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+{%- endmacro %}
+
+{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+    {{ ui.input(name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, attrs={"checked": ""}) }}
+{% endmacro %}
+
+{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+    {{ ui.input(name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, attrs={"checked": ""}) }}
+{% endmacro %}
+
+{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+    {{ ui.input(name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, attrs={"checked": ""}) }}
+{% endmacro %}
+
+{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+    {{ ui.input(name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, attrs={"checked": ""}) }}
+{% endmacro %}
+
+
+
+{#
+
+{% macro input_block(for, label="", error="", classes=[], control_classes=[], extra_html="", is_required=false) %}
+
+    <div class="form-group{{ " error" if error }}{{ " " ~ classes | join(' ') }}">
+
+        <label class="form-label" for="{{ for }}">
+            {% if is_required %}<span class="control-required">*</span> {% endif %}
+            {{ label or _('Custom') }}
+        </label>
+
+        <div class="controls{{ " " ~ control_classes | join(' ') }}">
+            {{ caller() }}
+            {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
+            {{ extra_html }}
+        </div>
+    </div>
+{% endmacro %}
+
+#}
 
 form_group(label=None, field_html=None, help_text=None, errors=None, **kwargs)
 form_submit(label="Submit", style="primary", **kwargs)

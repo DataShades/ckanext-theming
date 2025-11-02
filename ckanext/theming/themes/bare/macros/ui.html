@@ -3,7 +3,7 @@
 {% import "macros/ui/data.html" as data with context %}
 {% import "macros/ui/element.html" as element with context  %}
 {% import "macros/ui/feedback.html" as feedback with context %}
-{% import "macros/ui/form.html" as form with context %}
+{% import "macros/ui/form.html" as _form with context %}
 {% import "macros/ui/meta.html" as meta with context %}
 {% import "macros/ui/misc.html" as misc with context %}
 {% import "macros/ui/nav.html" as nav with context %}
@@ -54,9 +54,13 @@
 {% set table_row = data.table_row %}
 {% set table_cell = data.table_cell %}
 
-{% set form_block = form.form_block %}
-{% set form_start = form.form_start %}
-{% set form_end = form.form_end %}
+{% set form_block = _form.form_block %}
+{% set form_start = _form.form_start %}
+{% set form_end = _form.form_end %}
+{% set form_errors = _form.form_errors %}
+{% set form_actions_wrapper = _form.form_actions_wrapper %}
+{% set input = _form.input %}
+{% set checkbox = _form.checkbox %}
 
 {% set group_item = component.group_item %}
 {% set organization_item = component.organization_item %}

@@ -1,18 +1,18 @@
 {%- macro link(content, href) -%}
-    <a {{ ui.render_attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 
 {%- macro button(content, style="primary", type="button") -%}
-    <button {{ ui.render_attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
+    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro heading(text, level=1) -%}
     {%- set tag =  "h" ~ level %}
-    <{{ tag }} {{ ui.render_attrs(kwargs) }}>{{ text }}</{{ tag }}>
+    <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ text }}</{{ tag }}>
 {%- endmacro %}
 
 {%- macro text_block() -%}
-    <div {{ ui.render_attrs(kwargs) }}>
+    <div {{ ui.util.attrs(kwargs) }}>
         {{ caller() }}
     </div>
 {%- endmacro %}
@@ -24,23 +24,23 @@
 {%- endmacro %}
 
 {%- macro badge(label, style="info") -%}
-    <mark {{ ui.render_attrs(kwargs) }}>{{ label }}</mark>
+    <mark {{ ui.util.attrs(kwargs) }}>{{ label }}</mark>
 {%- endmacro %}
 
 {%- macro image(src, alt="") -%}
-    <img {{ ui.render_attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
+    <img {{ ui.util.attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
 {%- endmacro %}
 
 {%- macro video(src, controls=true) -%}
-    <video {{ ui.render_attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
+    <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
 {%- endmacro %}
 
 {%- macro tag(label, id, href) -%}
-    <a {{ ui.render_attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or label) }}">{{ label }}</a>
+    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or label) }}">{{ label }}</a>
 {%- endmacro %}
 
 {%- macro divider(label) -%}
-    <hr {{ ui.render_attrs(kwargs) }} title="{{ label }}" />
+    <hr {{ ui.util.attrs(kwargs) }} title="{{ label }}" />
 {%- endmacro %}
 
 

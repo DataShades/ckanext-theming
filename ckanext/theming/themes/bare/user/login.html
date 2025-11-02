@@ -3,3 +3,22 @@
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item("Log in", h.url_for("user.login")) }}
 {%- endblock %}
+
+
+{%- block primary_content_inner %}
+    {%- call ui.form_block("POST") %}
+
+        {{ error_summary }}
+        {{ ui.form_errors(errors=error_summary) }}
+
+        {{ ui.input("login", label=_("Username or Email"), error=username_error) }} <br/>
+        {{ ui.input("password", label=_("Password"), type="password", error=password_error) }} <br/>
+        {{ ui.checkbox("remember", label=_("Remember me"), checked=true, value=config.REMEMBER_COOKIE_DURATION) }} <br/>
+
+        {%- call ui.form_actions_wrapper() %}
+            {{ ui.button(_("Log in"), type="submit") }}
+        {%- endcall %}
+
+    {%- endcall %}
+
+{%- endblock %}
