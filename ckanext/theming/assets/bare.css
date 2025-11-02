@@ -1,7 +1,7 @@
 :root {
     --account-bg: #afc;
     --header-bg: #ecf;
-    --breadcrumbs-bg: #efc;
+    --breadcrumb-bg: #efc;
     --sidebar-bg: #eee;
     --main-bg: #cef;
     --footer-bg: #fec;
@@ -32,9 +32,9 @@ body {
     gap: 1rem;
 }
 
-#breadcrumbs {background: var(--breadcrumbs-bg);}
-#breadcrumbs > a:not(:first-child):before {content: " / ";}
-#breadcrumbs > a:last-child {
+#breadcrumb {background: var(--breadcrumb-bg);}
+#breadcrumb > a:not(:first-child):before {content: " / ";}
+#breadcrumb > a:last-child {
     text-decoration: none;
     pointer-events: none;
     font-weight: bold;

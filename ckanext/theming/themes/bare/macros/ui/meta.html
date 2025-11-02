@@ -1,13 +1,13 @@
-{%- macro header_block(title=none, subtitle=none, logo=none) %}
+{%- macro header_block(title=none, subtitle=none, logo=none) -%}
     {%- do kwargs -%}
 
     <header id="header">
         {%- if logo %}
-            {{ ui.link(h.url_for("home.index"), ui.image(h.url_for_static_or_external(g.site_logo), alt=title)) }}
+            {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
 
         {%- else %}
             <div>
-                {{ ui.heading(ui.link(h.url_for("home.index"), title), level=1) }}
+                {{ ui.heading(ui.link(title, href=h.url_for("home.index")), level=1) }}
                 {% if subtitle %}
                     {{ ui.heading(subtitle, level=2) }}
                 {% endif %}
@@ -19,14 +19,14 @@
     </header>
 {%- endmacro %}
 
-{%- macro footer_block() %}
+{%- macro footer_block() -%}
     {%- do kwargs -%}
     <footer id="footer">
         {{ caller() }}
     </footer>
 {%- endmacro %}
 
-{%- macro account_block(title=none, subtitle=none, logo=none) %}
+{%- macro account_block(title=none, subtitle=none, logo=none) -%}
     {%- do kwargs -%}
 
     <header id="account">

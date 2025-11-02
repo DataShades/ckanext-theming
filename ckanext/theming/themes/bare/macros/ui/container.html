@@ -1,4 +1,4 @@
-{%- macro card(title=none, body=none, footer=none, img=none, href=none) %}
+{%- macro card(title=none, body=none, footer=none, img=none, href=none) -%}
     {%- do kwargs -%}
 
     <div>
@@ -8,7 +8,7 @@
 
         <strong>
             {%- if href %}
-                {{ ui.link(href, title) }}
+                {{ ui.link(title, href=href) }}
             {%- else -%}
                 {{ title }}
             {%- endif %}
@@ -29,13 +29,13 @@
 
 {%- endmacro %}
 
-{%- macro accordion_block() %}
+{%- macro accordion_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
 
-{%- macro accordion_item(title, open=false) %}
+{%- macro accordion_item(title, open=false) -%}
     {%- do kwargs -%}
     <details {{ "open" if open }}>
         <summary>{{ title }}</summary>
@@ -43,38 +43,32 @@
     </details>
 {%- endmacro %}
 
-{%- macro panel_block(title) %}
+{%- macro panel_block(title) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-
-{%- macro panel_block(title) %}
+{%- macro section_block(title) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro section_block(title) %}
+{%- macro container_block(fluid=false) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro container_block(fluid=false) %}
+{%- macro grid_block(columns=12) -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro grid_block(columns=12) %}
+{%- macro row_block() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro row_block() %}
-    {%- do kwargs -%}
-    {{ caller() }}
-{%- endmacro %}
-
-{%- macro column_block() %}
+{%- macro column_block() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}

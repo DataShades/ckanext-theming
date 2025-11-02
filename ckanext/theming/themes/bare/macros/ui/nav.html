@@ -1,72 +1,72 @@
 
-{%- macro breadcrumbs_block() %}
+{%- macro breadcrumb_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro breadcrumb_item(label, href) %}
+{%- macro breadcrumb_item(label, href) -%}
     {%- do kwargs -%}
-    {{ ui.link(href, label) }}
+    {{ ui.link(label, href) }}
 {%- endmacro %}
 
 
-{%- macro nav_block() %}
+{%- macro nav_wrapper() -%}
     {%- do kwargs -%}
     <nav>
         {{ caller() }}
     </nav>
 {%- endmacro %}
 
-{%- macro nav_item(label, href, active=False) %}
+{%- macro nav_item(label, href, active=False) -%}
     {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(href, label) }}</strong>
+        <strong>{{ ui.link(label, href) }}</strong>
     {%- else -%}
-        {{ ui.link(href, label) }}
+        {{ ui.link(label, href) }}
     {%- endif %}
 {%- endmacro %}
 
 
-{%- macro tab_block() %}
+{%- macro tab_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro tab_item(label, href, active=False) %}
+{%- macro tab_item(label, href, active=False) -%}
     {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(href, label) }}</strong>
+        <strong>{{ ui.link(label, href) }}</strong>
     {%- else -%}
-        {{ ui.link(href, label) }}
+        {{ ui.link(label, href) }}
     {%- endif %}
 {%- endmacro %}
 
-{%- macro menu_block() %}
+{%- macro menu_wrapper() -%}
     {%- do kwargs -%}
     {{ caller() }}
 {%- endmacro %}
 
-{%- macro menu_item(label, href, active=False) %}
+{%- macro menu_item(label, href, active=False) -%}
     {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(href, label) }}</strong>
+        <strong>{{ ui.link(label, href) }}</strong>
     {%- else -%}
-        {{ ui.link(href, label) }}
+        {{ ui.link(label, href) }}
     {%- endif %}
 {%- endmacro %}
 
 
-{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) %}
+{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
     {%- do kwargs -%}
     {%- if total_pages > 1 %}
 
         {%- if page > 1 %}
-            {{ ui.link(url_generator(page=page - 1), "Previous") }}
+            {{ ui.link(_("Previous"), href=url_generator(page=page - 1)) }}
         {%- endif %}
 
 
         {%- if page - 1 > padding %}
-            {{ ui.link(url_generator(page=1), 1) }}
+            {{ ui.link(1, href=url_generator(page=1)) }}
             <span>...</span>
         {%- endif %}
 
@@ -74,18 +74,18 @@
             {%- if i == page %}
                 <span>{{ i }}</span>
             {%- else %}
-                {{ ui.link(url_generator(page=i), i) }}
+                {{ ui.link(i, href=url_generator(page=i)) }}
             {%- endif %}
         {%- endfor %}
 
         {%- if total_pages - page > padding %}
             <span>...</span>
-            {{ ui.link(url_generator(page=total_pages), total_pages) }}
+            {{ ui.link(total_pages, href=url_generator(page=total_pages)) }}
         {%- endif %}
 
 
         {%- if page < total_pages %}
-            {{ ui.link(url_generator(page=page + 1), "Next") }}
+            {{ ui.link(_("Next"), href=url_generator(page=page + 1)) }}
         {%- endif %}
 
     {%- endif %}

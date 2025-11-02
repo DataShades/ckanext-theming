@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_("Register"), h.url_for("user.register")) }}
+{%- endblock %}
+
 {%- block primary_content_inner %}
     {{ form | safe }}
 {%- endblock %}

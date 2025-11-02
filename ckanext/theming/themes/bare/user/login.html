@@ -1,1 +1,5 @@
 {% extends "layout.html" %}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item("Log in", h.url_for("user.login")) }}
+{%- endblock %}

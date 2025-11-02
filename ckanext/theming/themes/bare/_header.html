@@ -1,8 +1,10 @@
 {%- block header_account %}
     {%- call ui.account_block() %}
-        {%- if current_user.is_authenticated %}
-            {% block header_account_logged %}
-                {%- call ui.nav_block() %}
+        {%- call ui.nav_wrapper() %}
+
+            {%- if current_user.is_authenticated %}
+                {% block header_account_logged %}
+
                     {{ ui.nav_item(_('Admin'), h.url_for("admin.index"), active=request.endpoint == "admin.index") }}
 
                     {%- block header_account_profile %}
@@ -23,23 +25,24 @@
                         {%- endcall %}
                     {% endblock %}
 
-                {%- endcall %}
-            {% endblock %}
 
-        {%- else -%}
-            {% block header_account_notlogged %}
-                {{ ui.link(h.url_for("user.login"), _("Log in")) }}
-                {{ ui.link(h.url_for("user.register"), _("Register")) if h.check_access("user_create") }}
-            {% endblock %}
+                {% endblock %}
 
-        {%- endif %}
+            {%- else -%}
+                {% block header_account_notlogged %}
+                    {{ ui.nav_item(_("Log in"), h.url_for("user.login")) }}
+                    {{ ui.nav_item(_("Register"), h.url_for("user.register")) if h.check_access("user_create") }}
+                {% endblock %}
 
+            {%- endif %}
+
+        {%- endcall %}
     {%- endcall %}
 {%- endblock %}
 
 {%- block header %}
     {%- call ui.header_block(g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
-        {%- call ui.nav_block() %}
+        {%- call ui.nav_wrapper() %}
             {% set items = [
                         ["Datasets", "dataset.search"],
                         ["Organizations", "organization.index"],

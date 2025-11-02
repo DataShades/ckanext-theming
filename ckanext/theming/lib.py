@@ -10,7 +10,7 @@ Example usage::
 
     theme = get_theme(config["ckan.ui.theme"])
     ui = theme.build_ui(app)
-    btn = ui.link("https://ckan.org", content="Click me!")
+    btn = ui.link("Click me!", href="https://ckan.org")
 """
 
 from __future__ import annotations
@@ -21,6 +21,8 @@ import os
 from collections.abc import Iterable, Iterator
 from typing import Any, Protocol, cast
 
+from jinja2.runtime import Macro
+from markupsafe import Markup
 from typing_extensions import override
 
 import ckan
@@ -36,37 +38,14 @@ log = logging.getLogger(__name__)
 
 
 class PElement(Protocol):
-    def __call__(self, *args: Any, **kwargs: Any) -> str: ...
+    def __call__(self, *args: Any, **kwargs: Any) -> Markup: ...
 
 
-class UI(Iterable[str], abc.ABC):
-    """Abstract base class for theme UIs.
+class Util:
+    ui: UI
 
-    A UI provides access to a set of macros that can be used in templates.
-    """
-
-    @abc.abstractmethod
-    def __init__(self, app: types.CKANApp):
-        """Initialize the UI with the CKAN application instance.
-
-        :param app: The CKAN application instance.
-        """
-
-    @override
-    @abc.abstractmethod
-    def __iter__(self) -> Iterator[str]:
-        """Return an iterable of element names provided by this UI.
-
-        :return: An iterable of element names.
-        """
-
-    @abc.abstractmethod
-    def __getattr__(self, name: str) -> PElement:
-        """Get an element factory by name.
-
-        :param name: The name of the element.
-        :return: A callable that produces the element.
-        """
+    def __init__(self, ui: UI):
+        self.ui = ui
 
     def render_attrs(self, kwargs: dict[str, Any]):
         """Helper method to render HTML attributes from a dictionary."""
@@ -84,6 +63,61 @@ class UI(Iterable[str], abc.ABC):
 
         return h.literal(" ".join(parts))
 
+    def call(self, el: PElement, /, *args: Any, caller: Macro, **kwargs: Any) -> Markup:
+        """Call an inline element as a block element.
+
+        Allows passing complex content into an element using a Jinja2
+        caller. For example, following simple macro does not contain `caller()`::
+
+            {% macro button(content) %}
+                <button>{{ content }}</button>
+            {% endmacro %}
+
+        As result, it cannot be called in form `{% call ui.button() %}` and
+        rendering button with nested HTML turns into a verbose task. But using
+        `ui.call`, `button` can be used with `call`::
+
+            {% call ui.call(ui.button) %}
+                <i class="icon"/>
+                Click!
+            {% endcall %}
+
+        The content of the `call` block will be passed as a first argument into
+        the target macro. Any other positional and named arguments of the
+        `ui.call` will be redirected into `ui.button` as well.
+        """
+        return el(caller(), *args, **kwargs)
+
+
+class UI(Iterable[str], abc.ABC):
+    """Abstract base class for theme UIs.
+
+    A UI provides access to a set of macros that can be used in templates.
+    """
+
+    def __init__(self, app: types.CKANApp):
+        """Initialize the UI with the CKAN application instance.
+
+        :param app: The CKAN application instance.
+        """
+        self.util = Util(self)
+
+    @override
+    @abc.abstractmethod
+    def __iter__(self) -> Iterator[str]:
+        """Return an iterable of element names provided by this UI.
+
+        :return: An iterable of element names.
+        """
+
+    @abc.abstractmethod
+    def __getattr__(self, name: str) -> PElement:
+        """Get an element factory by name.
+
+        :param name: The name of the element.
+        :return: A callable that produces the element.
+        """
+
 
 class MacroUI(UI):
     """A UI implementation that loads macros from a Jinja2 template.
@@ -98,6 +132,7 @@ class MacroUI(UI):
 
     @override
     def __init__(self, app: types.CKANApp):
+        super().__init__(app)
         self.__env = app.jinja_env
         self.__tpl = app.jinja_env.get_template(self.source)
 

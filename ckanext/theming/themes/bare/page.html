@@ -9,8 +9,8 @@
 
     {%- block zone_toolbar %}
         {%- block breadcrumb %}
-            <div id="breadcrumbs">
-                {%- call ui.breadcrumbs_block() %}
+            <div id="breadcrumb">
+                {%- call ui.breadcrumb_wrapper() %}
                     {{ ui.breadcrumb_item("Home", h.url_for("home.index")) }}
                     {%- block breadcrumb_content %}{% endblock %}
                 {%- endcall %}
@@ -76,13 +76,13 @@
     {%- block zone_outro %}{% endblock -%}
 
     {%- block zone_footer -%}
-        {%- block footer_block %}
+        {%- block footer %}
             {%- include "_footer.html" -%}
-        {% endblock footer_block %}
+        {% endblock footer %}
 
         {%- if g.debug %}
             <div style="max-width: 100vw; overflow-x: auto;">
-                {%- call ui.accordion_block() %}
+                {%- call ui.accordion_wrapper() %}
                     {%- call ui.accordion_item("Debug", open=true) %}
                         <pre>
                             {%- debug -%}
