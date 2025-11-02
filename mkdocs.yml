@@ -42,6 +42,7 @@ plugins:
 watch:
   - README.md
   - ckanext/theming
+  - docs/
 
 theme:
   name: material
@@ -83,3 +84,12 @@ theme:
 
 nav:
   - index.md
+  - Library:
+      - library/component.md
+      - library/container.md
+      - library/data.md
+      - library/element.md
+      - library/form.md
+      - library/meta.md
+      - library/misc.md
+      - library/nav.md
