@@ -8,8 +8,7 @@
 {%- block primary_content_inner %}
     {%- call ui.form_block("POST") %}
 
-        {{ error_summary }}
-        {{ ui.form_errors(errors=error_summary) }}
+        {{ ui.form_errors(error_summary) }}
 
         {{ ui.input("login", label=_("Username or Email"), error=username_error) }} <br/>
         {{ ui.input("password", label=_("Password"), type="password", error=password_error) }} <br/>

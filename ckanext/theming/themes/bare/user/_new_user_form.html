@@ -1,0 +1,29 @@
+
+{%- call ui.form_block("POST", enctype="multipart/form-data") %}
+    {{ ui.form_errors(error_summary) }}
+
+    {{ ui.input("name", label=_("Username"), value=data.name, error=errors.name, required=true) }}<br/>
+    {{ ui.input("fullname", label=_("Full Name"), value=data.fullname, errors=errors.fullname) }}<br/>
+    {{ ui.input("email", label=_("Email"), type="email", value=data.email, errors=errors.email, required=true) }}<br/>
+    {{ ui.input("password1", label=_("Password"), type="password", value=data.password1, errors=errors.password1, required=true) }}<br/>
+    {{ ui.input("password2", label=_("Confirm"), type="password", value=data.password2, errors=errors.password2, required=true) }}<br/>
+
+
+
+    {{ ui.input("image_url", label=_("Profile picture URL"), type="url", value=data.image_url, error=errors.image_url) }}<br/>
+
+    {%- if h.uploads_enabled() %}
+        {{ ui.input("image_upload", label=_("Profile picture"), type="file") }} <br/>
+
+        {%- if data.image_url and not data.image_url.startswith('http') %}
+            {{ ui.checkbox("clear_upload", label=_('Clear Upload'))  }} <br/>
+        {%- endif %}
+
+    {%- endif %}
+
+
+
+    {%- call ui.form_actions_wrapper() -%}
+        {{ ui.button(_("Create Account"), type="submit", attrs={"name": "save"}) }}
+    {%- endcall %}
+{%- endcall %}

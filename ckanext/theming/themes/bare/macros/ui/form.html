@@ -38,7 +38,7 @@
     {%- if label -%}
         <label for="{{ id }}">{{ label }}</label>
     {%- endif %}
-    <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" />
+    <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }}/>
     {%- if errors -%}
         {%- for error in errors -%}
             <span>{{ error }}</span><br/>
