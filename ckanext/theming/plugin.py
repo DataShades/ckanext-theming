@@ -53,6 +53,7 @@ class UIManager:
 
     @classmethod
     def get(cls):
+        """Get the current UI instance. Creates one if it doesn't exist."""
         if cls.ui is None:
             cls.set(tk.config["ckan.ui.theme"])
 
@@ -60,10 +61,12 @@ class UIManager:
 
     @classmethod
     def set(cls, theme: str):
+        """Set the UI instance to a new theme."""
         cls.ui = get_theme(theme).build_ui(current_app)
 
     @classmethod
     def reset(cls):
+        """Reset the UI instance to None."""
         cls.ui = None
 
 
