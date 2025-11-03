@@ -6,7 +6,7 @@ Wraps the breadcrumb trail. This is a block macro.
 
 ### Arguments
 
-None
+*   `content` (string): breadcrumb items.
 
 ## `breadcrumb_item`
 
@@ -23,7 +23,7 @@ Wraps a navigation element (e.g., `<nav>`). This is a block macro.
 
 ### Arguments
 
-None
+*   `content` (string): nav items.
 
 ## `nav_item`
 
@@ -41,7 +41,7 @@ Wraps a tabbed interface. This is a block macro.
 
 ### Arguments
 
-None
+*   `content` (string): tab items.
 
 ## `tab_item`
 
@@ -59,7 +59,7 @@ Wraps a menu. This is a block macro.
 
 ### Arguments
 
-None
+*   `content` (string): menu items.
 
 ## `menu_item`
 

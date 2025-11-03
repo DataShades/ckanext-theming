@@ -1,5 +1,14 @@
 # Elements
 
+## `avatar`
+
+Displays a user avatar.
+
+### Arguments
+
+*   `src` (string): The image source URL.
+*   `alt` (string): The image alt text. Defaults to "".
+
 ## `badge`
 
 Displays a badge element.
@@ -7,7 +16,6 @@ Displays a badge element.
 ### Arguments
 
 *   `content` (string): The text to display in the badge.
-*   `style` (string): The style of the badge.
 
 ## `button`
 
@@ -16,7 +24,6 @@ Renders a button.
 ### Arguments
 
 *   `content` (string): The text to display on the button.
-*   `style` (string): The style of the button.
 *   `type` (string): The button type. Defaults to "button".
 
 ## `divider`
@@ -54,6 +61,16 @@ Creates a hyperlink.
 *   `content` (string): The link text.
 *   `href` (string): The link URL. Same as content if empty.
 
+
+## `tag`
+
+Displays a tag.
+
+### Arguments
+
+*   `content` (string): The tag text.
+*   `id` (string): The tag ID.
+*   `href` (string): The tag URL.
 
 ## `text`
 

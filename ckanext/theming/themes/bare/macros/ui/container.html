@@ -1,6 +1,6 @@
-{%- macro accordion_wrapper() -%}
+{%- macro accordion_wrapper(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
 
@@ -40,32 +40,34 @@
 
 {%- endmacro %}
 
-{%- macro column_wrapper() -%}
+{%- macro column(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
-{%- macro container_wrapper(fluid=false) -%}
+{%- macro container(content, fluid=false) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    <div class="bare-container">
+        {{ content }}
+    </div>
 {%- endmacro %}
 
-{%- macro grid_wrapper(columns) -%}
+{%- macro grid(content, columns) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
-{%- macro panel_wrapper(title) -%}
+{%- macro panel(content, title) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
-{%- macro row_wrapper() -%}
+{%- macro row(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
-{%- macro section_wrapper() -%}
+{%- macro section(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}

@@ -1,6 +1,6 @@
-{%- macro breadcrumb_wrapper() -%}
+{%- macro breadcrumb_wrapper(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
 {%- macro breadcrumb_item(content, href) -%}
@@ -8,11 +8,9 @@
     {{ ui.link(content, href) }}
 {%- endmacro %}
 
-{%- macro nav_wrapper() -%}
+{%- macro nav_wrapper(content) -%}
     {%- do kwargs -%}
-    <nav>
-        {{ caller() }}
-    </nav>
+    <nav>{{ content }}</nav>
 {%- endmacro %}
 
 {%- macro nav_item(content, href, active=False) -%}
@@ -24,9 +22,9 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro tab_wrapper() -%}
+{%- macro tab_wrapper(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
 {%- macro tab_item(content, href, active=False) -%}
@@ -38,9 +36,9 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro menu_wrapper() -%}
+{%- macro menu_wrapper(content) -%}
     {%- do kwargs -%}
-    {{ caller() }}
+    {{ content }}
 {%- endmacro %}
 
 {%- macro menu_item(content, href, active=False) -%}

@@ -1,44 +1,46 @@
 {% import "macros/ui/component.html" as component with context  %}
-{% import "macros/ui/container.html" as container with context  %}
+{% import "macros/ui/container.html" as _container with context  %}
 {% import "macros/ui/data.html" as data with context %}
 {% import "macros/ui/element.html" as element with context  %}
 {% import "macros/ui/feedback.html" as feedback with context %}
 {% import "macros/ui/form.html" as _form with context %}
 {% import "macros/ui/meta.html" as meta with context %}
 {% import "macros/ui/misc.html" as misc with context %}
-{% import "macros/ui/nav.html" as nav with context %}
+{% import "macros/ui/nav.html" as _nav with context %}
 
 
 
+{% set avatar = element.avatar %}
 {% set badge = element.badge %}
 {% set button = element.button %}
 {% set divider = element.divider %}
 {% set heading = element.heading %}
 {% set image = element.image %}
 {% set link = element.link %}
+{% set tag = element.tag %}
 {% set text = element.text %}
 {% set text_block = element.text_block %}
 {% set video = element.video %}
 
-{% set breadcrumb_item = nav.breadcrumb_item %}
-{% set breadcrumb_wrapper = nav.breadcrumb_wrapper %}
-{% set menu_wrapper = nav.menu_wrapper %}
-{% set menu_item = nav.menu_item %}
-{% set nav_wrapper = nav.nav_wrapper %}
-{% set nav_item = nav.nav_item %}
-{% set pagination = nav.pagination %}
-{% set tab_wrapper = nav.tab_wrapper %}
-{% set tab_item = nav.tab_item %}
+{% set breadcrumb_item = _nav.breadcrumb_item %}
+{% set breadcrumb_wrapper = _nav.breadcrumb_wrapper %}
+{% set menu_wrapper = _nav.menu_wrapper %}
+{% set menu_item = _nav.menu_item %}
+{% set nav_wrapper = _nav.nav_wrapper %}
+{% set nav_item = _nav.nav_item %}
+{% set pagination = _nav.pagination %}
+{% set tab_wrapper = _nav.tab_wrapper %}
+{% set tab_item = _nav.tab_item %}
 
-{% set accordion_wrapper = container.accordion_wrapper %}
-{% set accordion_item = container.accordion_item %}
-{% set card = container.card %}
-{% set column_wrapper = container.column_wrapper %}
-{% set container_wrapper = container.container_wrapper %}
-{% set grid_wrapper = container.grid_wrapper %}
-{% set panel_wrapper = container.panel_wrapper %}
-{% set row_wrapper = container.row_wrapper %}
-{% set section_wrapper = container.section_wrapper %}
+{% set accordion_wrapper = _container.accordion_wrapper %}
+{% set accordion_item = _container.accordion_item %}
+{% set card = _container.card %}
+{% set column = _container.column %}
+{% set container = _container.container %}
+{% set grid = _container.grid %}
+{% set panel = _container.panel %}
+{% set row = _container.row %}
+{% set section = _container.section %}
 
 {% set header_block = meta.header_block %}
 {% set footer_block = meta.footer_block %}
@@ -65,4 +67,3 @@
 {% set organization_item = component.organization_item %}
 {% set package_item = component.package_item %}
 {% set resource_item = component.resource_item %}
-{% set tag = component.tag %}

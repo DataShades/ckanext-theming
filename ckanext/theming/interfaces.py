@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from ckan.plugins import Interface
 
 if TYPE_CHECKING:
-    from ckan.lib.theme import Theme
+    from ckanext.theming.lib import Theme
 
 
 class ITheme(Interface):

@@ -1,8 +1,8 @@
-{%- macro badge(content, style) -%}
+{%- macro badge(content) -%}
     <mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark>
 {%- endmacro %}
 
-{%- macro button(content, style, type="button") -%}
+{%- macro button(content, type="button") -%}
     <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
@@ -34,6 +34,19 @@
 {%- endmacro %}
 
 
+{%- macro tag(content, id, href) -%}
+    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+{%- endmacro %}
+
+
+{%- macro avatar(src, alt) -%}
+    {%- if kwargs.attrs -%}
+        {%- do kwargs.attrs.setdefault("width", 100) -%}
+        {%- do kwargs.attrs.setdefault("height", 100) -%}
+    {%- endif -%}
+
+    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
+{%- endmacro %}
+
 icon(name, size="md", **kwargs)
-avatar(src=None, alt=None, size="md", **kwargs)
 label(text, for_id=None, **kwargs)

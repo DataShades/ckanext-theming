@@ -20,10 +20,6 @@
 {%- block primary_content_inner %}
     {{ ui.heading(pkg_dict.title or pkg_dict.name, level=1) }}
 
-    {%- if pkg_dict.notes %}
-        {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
-    {%- endif %}
-
     {%- if pkg_dict.tags %}
         <div>
             {%- for tag  in pkg_dict.tags %}
@@ -32,7 +28,7 @@
         </div>
     {%- endif %}
 
-    {%- call ui.accordion_wrapper() %}
+    {%- call ui.util.call(ui.accordion_wrapper) %}
 
         {%- if pkg_dict.resources %}
             {%- call ui.accordion_item(_("Resources")) %}
@@ -127,5 +123,10 @@
             {%- endcall %}
         {%- endcall %}
     {%- endcall %}
+
+    {%- if pkg_dict.notes %}
+        {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
+    {%- endif %}
+
 
 {%- endblock %}

@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% set _layout = "fullwidth" %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item("Log in", h.url_for("user.login")) }}
@@ -14,10 +15,7 @@
         {{ ui.input("password", label=_("Password"), type="password", error=password_error) }} <br/>
         {{ ui.checkbox("remember", label=_("Remember me"), checked=true, value=config.REMEMBER_COOKIE_DURATION) }} <br/>
 
-        {%- call ui.form_actions_wrapper() %}
-            {{ ui.button(_("Log in"), type="submit") }}
-        {%- endcall %}
-
+        {{ ui.form_actions_wrapper(ui.button(_("Log in"), type="submit")) }}
     {%- endcall %}
 
 {%- endblock %}

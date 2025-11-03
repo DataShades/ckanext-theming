@@ -88,6 +88,10 @@ class Util:
         """
         return el(caller(), *args, **kwargs)
 
+    def merge(self, *fragments: Markup) -> Markup:
+        """Merge multiple Markup fragments into a single Markup object."""
+        return Markup().join(fragments)
+
 
 class UI(Iterable[str], abc.ABC):
     """Abstract base class for theme UIs.
@@ -154,7 +158,6 @@ class MacroUI(UI):
         for name in dir(self.__tpl.module):
             if name.startswith("_"):
                 continue
-            getattr(self.__tpl.module, name)
             yield name
 
 

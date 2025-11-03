@@ -1,34 +1,36 @@
-{%- macro header_block(title=none, subtitle=none, logo=none) -%}
+{%- macro header_block(content, title=none, subtitle=none, logo=none) -%}
     {%- do kwargs -%}
     <header id="header">
-        {%- if logo %}
-            {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
+        {%- call ui.util.call(ui.container) -%}
+            {%- if logo %}
+                {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
 
-        {%- else %}
-            <div>
-                {{ ui.heading(ui.link(title, href=h.url_for("home.index")), level=1) }}
-                {% if subtitle %}
-                    {{ ui.heading(subtitle, level=2) }}
-                {% endif %}
-            </div>
+            {%- else %}
+                <div>
+                    {{ ui.heading(ui.link(title, href=h.url_for("home.index")), level=1) }}
+                    {% if subtitle %}
+                        {{ ui.heading(subtitle, level=2) }}
+                    {% endif %}
+                </div>
 
-        {%- endif %}
+            {%- endif %}
 
-        {{ caller() }}
+            {{ content }}
+        {%- endcall %}
     </header>
 {%- endmacro %}
 
-{%- macro footer_block() -%}
+{%- macro footer_block(content) -%}
     {%- do kwargs -%}
     <footer id="footer">
-        {{ caller() }}
+        {{ ui.container(content) }}
     </footer>
 {%- endmacro %}
 
-{%- macro account_block(title=none, subtitle=none, logo=none) -%}
+{%- macro account_block(content, title=none, subtitle=none, logo=none) -%}
     {%- do kwargs -%}
 
     <header id="account">
-        {{ caller() }}
+        {{ ui.container(content) }}
     </header>
 {%- endmacro %}

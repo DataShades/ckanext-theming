@@ -1,7 +1,6 @@
 {%- block header_account %}
-    {%- call ui.account_block() %}
-        {%- call ui.nav_wrapper() %}
-
+    {%- call ui.util.call(ui.account_block) %}
+        {%- call ui.util.call(ui.nav_wrapper) %}
             {%- if current_user.is_authenticated %}
                 {% block header_account_logged %}
 
@@ -16,7 +15,7 @@
                     {% endblock %}
 
                     {% block header_account_settings_link %}
-                        {{ ui.nav_item(_('Profile settings'), h.url_for("user.edit", id=c.userobj.name)) }}
+                        {{ ui.nav_item(ui.util.merge(h.user_image(current_user.id, 12), _('Profile settings')), h.url_for("user.edit", id=c.userobj.name)) }}
                     {% endblock %}
 
                     {% block header_account_log_out_link %}
@@ -46,8 +45,8 @@
 {%- endblock %}
 
 {%- block header %}
-    {%- call ui.header_block(g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
-        {%- call ui.nav_wrapper() %}
+    {%- call ui.util.call(ui.header_block, g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
+        {%- call ui.util.call(ui.nav_wrapper) %}
             {% set items = [
                         ["Datasets", "dataset.search"],
                         ["Organizations", "organization.index"],

@@ -31,13 +31,3 @@ Renders an item representing a resource.
 ### Arguments
 
 *   `res` (object): resource details.
-
-## `tag`
-
-Displays a tag.
-
-### Arguments
-
-*   `content` (string): The tag text.
-*   `id` (string): The tag ID.
-*   `href` (string): The tag URL.

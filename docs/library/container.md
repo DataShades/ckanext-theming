@@ -6,7 +6,7 @@ Wraps an accordion component.
 
 ### Arguments
 
-None
+*   `content` (string): accordion items.
 
 ## `accordion_item`
 
@@ -30,50 +30,53 @@ Renders a card component.
 *   `img` (string): image source URL for the card.
 *   `href` (string): URL to link to when the card is clicked.
 
-## `column_wrapper`
+## `column`
 
 Creates a single column inside the grid.
 
 ### Arguments
 
-None
+*   `content` (string): content of the column.
 
-## `container_wrapper`
+## `container`
 
 Creates a container block.
 
 ### Arguments
 
+*   `content` (string): content of the container.
 *   `fluid` (boolean): Whether the container should be fluid. Defaults to `false`.
 
-## `grid_wrapper`
+## `grid`
 
 Creates a grid layout block.
 
 ### Arguments
 
+*   `content` (string): content of the grid.
 *   `columns` (integer): number of columns in the grid.
 
-## `panel_wrapper`
+## `panel`
 
 Creates a panel block.
 
 ### Arguments
 
+*   `content` (string): content of the panel.
 *   `title` (string): title of the panel.
 
-## `row_wrapper`
+## `row`
 
 Creates a row block.
 
 ### Arguments
 
-None
+*   `content` (string): content of the row.
 
-## `section_wrapper`
+## `section`
 
 Creates a section block.
 
 ### Arguments
 
-None
+*   `content` (string): content of the section.

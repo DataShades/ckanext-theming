@@ -21,9 +21,5 @@
 
     {%- endif %}
 
-
-
-    {%- call ui.form_actions_wrapper() -%}
-        {{ ui.button(_("Create Account"), type="submit", attrs={"name": "save"}) }}
-    {%- endcall %}
+    {{ ui.form_actions_wrapper(ui.button(_("Create Account"), type="submit", attrs={"name": "save"})) }}
 {%- endcall %}

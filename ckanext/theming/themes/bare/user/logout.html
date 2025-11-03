@@ -1,1 +1,7 @@
 {% extends "layout.html" %}
+{% set _layout = "fullwidth" %}
+
+
+{%- block primary_content_inner %}
+    {{ ui.text(_("You are now logged out.")) }}
+{%- endblock %}

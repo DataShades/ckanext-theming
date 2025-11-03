@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% set _layout = "fullwidth" %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(_("Register"), h.url_for("user.register")) }}
