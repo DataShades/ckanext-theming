@@ -71,3 +71,30 @@
     {%- do kwargs -%}
     {{ content }}
 {%- endmacro %}
+
+{%- macro jumbotron(content, title=None, subtitle=None) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="jumbotron">
+        {%- if title %}
+            <h1>{{ title }}</h1>
+        {%- endif %}
+        {%- if subtitle %}
+            <p>{{ subtitle }}</p>
+        {%- endif %}
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro well(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="well">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro media_object(img, content, **kwargs) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="media">
+        {{ ui.image(img, **kwargs) }}
+        <div class="media-body">{{ content }}</div>
+    </div>
+{%- endmacro %}
+
+{%- macro list_group_item(content, active=False) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="list-group-item {{ 'active' if active }}">{{ content }}</div>
+{%- endmacro %}

@@ -84,3 +84,31 @@
 
     {%- endif %}
 {%- endmacro %}
+
+{%- macro dropdown_wrapper(content, title=None) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="dropdown">
+        {%- if title %}
+            <button class="dropdown-toggle" type="button" data-toggle="dropdown">{{ title }}</button>
+        {%- endif %}
+        <ul class="dropdown-menu">{{ content }}</ul>
+    </div>
+{%- endmacro %}
+
+{%- macro dropdown_item(content, href="#") -%}
+    <li {{ ui.util.attrs(kwargs) }}><a href="{{ href }}">{{ content }}</a></li>
+{%- endmacro %}
+
+{%- macro sidebar(content) -%}
+    <aside {{ ui.util.attrs(kwargs) }} class="sidebar">{{ content }}</aside>
+{%- endmacro %}
+
+{%- macro navbar(brand, items) -%}
+    <nav {{ ui.util.attrs(kwargs) }} class="navbar">
+        <div class="navbar-brand">{{ brand }}</div>
+        <div class="navbar-nav">{{ items }}</div>
+    </nav>
+{%- endmacro %}
+
+{%- macro breadcrumb_divider() -%}
+    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">/</span>
+{%- endmacro %}

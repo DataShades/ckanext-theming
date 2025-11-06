@@ -80,3 +80,39 @@ Creates a section block.
 ### Arguments
 
 *   `content` (string): content of the section.
+
+## `jumbotron`
+
+Creates a jumbotron container for featured content.
+
+### Arguments
+
+*   `content` (string): content of the jumbotron.
+*   `title` (string): title for the jumbotron. Defaults to `None`.
+*   `subtitle` (string): subtitle for the jumbotron. Defaults to `None`.
+
+## `well`
+
+Creates a well container for inset content.
+
+### Arguments
+
+*   `content` (string): content of the well.
+
+## `media_object`
+
+Creates a media object with aligned content.
+
+### Arguments
+
+*   `img` (string): image source URL for the media object.
+*   `content` (string): content to display next to the image.
+
+## `list_group_item`
+
+Creates a single item in a list group.
+
+### Arguments
+
+*   `content` (string): content of the list group item.
+*   `active` (boolean): Whether the item is currently active. Defaults to `false`.

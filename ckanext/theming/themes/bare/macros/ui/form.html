@@ -53,3 +53,112 @@
 {% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
     {{ ui.input(name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, attrs={"checked": ""}) }}
 {% endmacro %}
+
+{%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    {%- if label -%}
+        <label for="{{ id }}">{{ label }}</label>
+    {%- endif %}
+
+    <textarea {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" {{ "required" if required }}>{{ value }}</textarea>
+
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+
+{%- endmacro %}
+
+{%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    {%- if label -%}
+        <label for="{{ id }}">{{ label }}</label>
+    {%- endif %}
+
+    <select {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" {{ "required" if required }}>
+        {%- for option in options %}
+            {%- if option is string %}
+                <option value="{{ option }}" {{ "selected" if option == selected }}>{{ option }}</option>
+            {%- else %}
+                <option value="{{ option.value }}" {{ "selected" if option.value == selected }}>{{ option.text or option.value }}</option>
+            {%- endif %}
+        {%- endfor %}
+    </select>
+
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+
+{%- endmacro %}
+
+{%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <input {{ ui.util.attrs(kwargs) }} type="radio" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }} />
+
+    {%- if label -%}
+        <label for="{{ id }}">{{ label }}</label>
+    {%- endif %}
+
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+
+{%- endmacro %}
+
+{%- macro file_input(name, id, label="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    {%- if label -%}
+        <label for="{{ id }}">{{ label }}</label>
+    {%- endif %}
+
+    <input {{ ui.util.attrs(kwargs) }} type="file" name="{{ name }}" id="{{ id }}" {{ "required" if required }}/>
+
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+
+{%- endmacro %}
+
+{%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    {%- if label -%}
+        <label for="{{ id }}">{{ label }}</label>
+    {%- endif %}
+
+    <input {{ ui.util.attrs(kwargs) }} type="range" name="{{ name }}" id="{{ id }}" value="{{ value }}" min="{{ min }}" max="{{ max }}" {{ "required" if required }}/>
+
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+
+{%- endmacro %}
+
+{%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="toggle-switch">
+        <input {{ ui.util.attrs(kwargs) }} type="checkbox" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }}>
+        <label for="{{ id }}">{{ label }}</label>
+    </div>
+
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+
+{%- endmacro %}

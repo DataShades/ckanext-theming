@@ -88,3 +88,21 @@ Embeds a video.
 
 *   `src` (string): The video source URL.
 *   `controls` (boolean): Whether to display video controls. Defaults to `true`.
+
+## `icon`
+
+Displays an icon element.
+
+### Arguments
+
+*   `name` (string): The name of the icon.
+*   `size` (string): The size of the icon. Defaults to "md".
+
+## `label`
+
+Displays a form label.
+
+### Arguments
+
+*   `text` (string): The label text.
+*   `for_id` (string): The ID of the form element this label is for. Defaults to `None`.

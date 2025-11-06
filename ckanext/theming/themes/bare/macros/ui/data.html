@@ -41,8 +41,40 @@
     </{{ tag }}>
 {%- endmacro %}
 
-list_group(items, **kwargs)
-definition_list(items, **kwargs)
-stat(label, value, icon=None, **kwargs)
-chart(type, data, options=None, **kwargs)
-code_block(content, language="text", **kwargs)
+{%- macro list_group(items) -%}
+    <ul {{ ui.util.attrs(kwargs) }}>
+        {%- for item in items %}
+            <li class="list-group-item">{{ item }}</li>
+        {%- endfor %}
+    </ul>
+{%- endmacro %}
+
+{%- macro definition_list(items) -%}
+    <dl {{ ui.util.attrs(kwargs) }}>
+        {%- for term, definition in items %}
+            <dt>{{ term }}</dt>
+            <dd>{{ definition }}</dd>
+        {%- endfor %}
+    </dl>
+{%- endmacro %}
+
+{%- macro stat(label, value, icon=None) -%}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {%- if icon %}
+            {{ ui.icon(icon) }}
+        {%- endif %}
+        <strong>{{ value }}</strong>
+        <span>{{ label }}</span>
+    </div>
+{%- endmacro %}
+
+{%- macro chart(type, data, options=None) -%}
+    {%- do kwargs -%}
+    <div data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
+        Chart placeholder
+    </div>
+{%- endmacro %}
+
+{%- macro code_block(content, language="text") -%}
+    <pre {{ ui.util.attrs(kwargs) }}><code class="language-{{ language }}">{{ content }}</code></pre>
+{%- endmacro %}

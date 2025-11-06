@@ -84,7 +84,8 @@ theme:
 
 nav:
   - index.md
-  - Library:
+  - theme.md
+  - Component Library:
       - library/component.md
       - library/container.md
       - library/data.md

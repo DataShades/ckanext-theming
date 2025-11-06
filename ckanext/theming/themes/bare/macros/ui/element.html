@@ -45,8 +45,14 @@
         {%- do kwargs.attrs.setdefault("height", 100) -%}
     {%- endif -%}
 
-    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
+    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt) }}
 {%- endmacro %}
 
-icon(name, size="md", **kwargs)
-label(text, for_id=None, **kwargs)
+{%- macro icon(name, size="md") -%}
+    {%- do kwargs -%}
+    <i class="icon-{{ name }} icon-{{ size }}"></i>
+{%- endmacro %}
+
+{%- macro label(text, for_id=None) -%}
+    <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}">{{ text }}</label>
+{%- endmacro %}

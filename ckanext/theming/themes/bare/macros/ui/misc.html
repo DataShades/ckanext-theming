@@ -3,3 +3,39 @@
         {{ h.render_datetime(dt, with_hours=True) }}
     </span>
 {%- endmacro %}
+
+{%- macro spacer(size="md") -%}
+    {%- do kwargs -%}
+    <div class="spacer spacer-{{ size }}"></div>
+{%- endmacro %}
+
+{%- macro divider_with_text(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="divider-with-text">
+        <hr />
+        <span>{{ content }}</span>
+        <hr />
+    </div>
+{%- endmacro %}
+
+{%- macro truncate(content, max_lines=1) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="truncate" style="-webkit-line-clamp: {{ max_lines }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro badge_count(count) -%}
+    <span {{ ui.util.attrs(kwargs) }} class="badge badge-count">{{ count }}</span>
+{%- endmacro %}
+
+{%- macro skeleton_loader(type="text") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="skeleton-loader skeleton-{{ type }}"></div>
+{%- endmacro %}
+
+{%- macro notification(title, content, type="info") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="notification notification-{{ type }}">
+        {%- if title %}
+            <h5>{{ title }}</h5>
+        {%- endif %}
+        <p>{{ content }}</p>
+    </div>
+{%- endmacro %}

@@ -81,3 +81,46 @@ Renders pagination controls.
 *   `total_pages` (integer): The total number of pages. Defaults to 1.
 *   `url_generator` (callable): A function to generate URLs for pages. Defaults to `h.pager_url`.
 *   `padding` (integer): The number of page links to show around the current page. Defaults to 2.
+
+## `dropdown_wrapper`
+
+Wraps a dropdown menu.
+
+### Arguments
+
+*   `content` (string): dropdown menu items.
+*   `title` (string): The title for the dropdown button. Defaults to `None`.
+
+## `dropdown_item`
+
+Creates a single item in a dropdown menu.
+
+### Arguments
+
+*   `content` (string): The text to display for the dropdown item.
+*   `href` (string): The URL for the dropdown item. Defaults to "#".
+
+## `sidebar`
+
+Creates a sidebar navigation container.
+
+### Arguments
+
+*   `content` (string): content to display in the sidebar.
+
+## `navbar`
+
+Creates a navigation bar.
+
+### Arguments
+
+*   `brand` (string): The brand/branding content for the navbar.
+*   `items` (string): navigation items to display in the navbar.
+
+## `breadcrumb_divider`
+
+Creates a breadcrumb divider element.
+
+### Arguments
+
+None
