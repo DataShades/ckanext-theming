@@ -1,0 +1,77 @@
+{%- macro group_item(group) -%}
+    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="row g-0">
+            <div class="col-md-2">
+                {{ ui.image(group.image_display_url if group.image_display_url else h.url_for_static('/base/images/placeholder-group.png'), alt=group.title, class="img-fluid rounded-start") }}
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ ui.link(group.title or group.name, href=h.url_for('group.read', id=group.name)) }}
+                    </h5>
+                    <p class="card-text">
+                        {{ h.markdown_extract(group.description, 180) if group.description else '' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro organization_item(organization) -%}
+    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="row g-0">
+            <div class="col-md-2">
+                {{ ui.image(organization.image_display_url if organization.image_display_url else h.url_for_static('/base/images/placeholder-organization.png'), alt=organization.title, class="img-fluid rounded-start") }}
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ ui.link(organization.title or organization.name, href=h.url_for('organization.read', id=organization.name)) }}
+                    </h5>
+                    <p class="card-text">
+                        {{ h.markdown_extract(organization.description, 180) if organization.description else '' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro package_item(pkg) -%}
+    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ ui.link(pkg.title or pkg.name, href=h.url_for('dataset.read', id=pkg.name)) }}
+            </h5>
+            <p class="card-text">
+                {{ h.markdown_extract(pkg.notes, 180) if pkg.notes else '' }}
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                {%- if pkg.organization %}
+                    <span class="badge bg-secondary">
+                        {{ pkg.organization.title or pkg.organization.name }}
+                    </span>
+                {%- endif %}
+                {%- for tag in pkg.tags[:3] %}
+                    <span class="badge bg-primary">
+                        {{ tag.display_name }}
+                    </span>
+                {%- endfor %}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro resource_item(res) -%}
+    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ res.name or res.description or res.url[:50] ~ '...' }}</h5>
+            <p class="card-text">{{ res.description if res.description else res.url }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-info">{{ res.format or res.mimetype_inner or res.mimetype or 'Resource' }}</span>
+                <small class="text-muted">Size: {{ res.size|filesizeformat if res.size else 'Unknown' }}</small>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

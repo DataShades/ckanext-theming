@@ -1,0 +1,144 @@
+{%- macro breadcrumb_wrapper(content) -%}
+    <nav aria-label="breadcrumb" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <ol class="breadcrumb">
+            {{ content }}
+        </ol>
+    </nav>
+{%- endmacro %}
+
+{%- macro breadcrumb_item(content, href) -%}
+    <li class="breadcrumb-item">
+        <a href="{{ href }}">{{ content }}</a>
+    </li>
+{%- endmacro %}
+
+{%- macro nav_wrapper(content) -%}
+    <nav class="nav {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </nav>
+{%- endmacro %}
+
+{%- macro nav_item(content, href, active=False) -%}
+    <a class="nav-link {{ 'active' if active }}" href="{{ href }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro tab_wrapper(content) -%}
+    <ul class="nav nav-tabs {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" id="myTab" role="tablist">
+        {{ content }}
+    </ul>
+{%- endmacro %}
+
+{%- macro tab_item(content, href, active=False) -%}
+    <li class="nav-item" role="presentation">
+        <button class="nav-link {{ 'active' if active }}" id="{{ href|replace('#', '') }}-tab" data-bs-toggle="tab" data-bs-target="{{ href }}" type="button" role="tab">
+            {{ content }}
+        </button>
+    </li>
+{%- endmacro %}
+
+{%- macro menu_wrapper(content) -%}
+    <div class="list-group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro menu_item(content, href, active=False) -%}
+    <a class="list-group-item list-group-item-action {{ 'active' if active }}" href="{{ href }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
+    {%- if total_pages > 1 %}
+        <nav aria-label="Page navigation" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+            <ul class="pagination">
+                {%- if page > 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_generator(page=page - 1) }}">Previous</a>
+                    </li>
+                {%- else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                {%- endif %}
+
+                {%- if page - 1 > padding %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_generator(page=1) }}">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                {%- endif %}
+
+                {%- for i in range([page - padding, 1]|max, [page + padding, total_pages + 1]|min) %}
+                    <li class="page-item {{ 'active' if i == page }}">
+                        <a class="page-link" href="{{ url_generator(page=i) }}">{{ i }}</a>
+                    </li>
+                {%- endfor %}
+
+                {%- if total_pages - page > padding %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">...</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_generator(page=total_pages) }}">{{ total_pages }}</a>
+                    </li>
+                {%- endif %}
+
+                {%- if page < total_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_generator(page=page + 1) }}">Next</a>
+                    </li>
+                {%- else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                {%- endif %}
+            </ul>
+        </nav>
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro dropdown_wrapper(content, title=None) -%}
+    <div class="dropdown {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ title or 'Dropdown' }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {{ content }}
+        </ul>
+    </div>
+{%- endmacro %}
+
+{%- macro dropdown_item(content, href="#") -%}
+    <li><a class="dropdown-item" href="{{ href }}">{{ content }}</a></li>
+{%- endmacro %}
+
+{%- macro sidebar(content) -%}
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <span class="fs-5">{{ g.site_title or 'CKAN' }}</span>
+        </a>
+        <hr>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro navbar(brand, items) -%}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ h.url_for('home.index') }}">{{ brand }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    {{ items }}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{%- endmacro %}
+
+{%- macro breadcrumb_divider() -%}
+    <li class="breadcrumb-item active" aria-current="page">/</li>
+{%- endmacro %}

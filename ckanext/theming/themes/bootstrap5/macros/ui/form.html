@@ -1,0 +1,234 @@
+{%- macro form_block(method="GET", action="", enctype="", include_csrf=true) -%}
+    {{ ui.form_start(method, action, enctype, **kwargs) }}
+    {{ h.csrf_input() if include_csrf and method|upper != "GET" }}
+
+    {{ caller() }}
+
+    {{ ui.form_end() }}
+{%- endmacro %}
+
+{%- macro form_actions_wrapper(content) -%}
+    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro form_start(method, action="", enctype="") -%}
+    <form {{ ui.util.attrs(kwargs) }} method="{{ method }}" action="{{ action }}" enctype="{{ enctype }}" class="needs-validation" novalidate>
+{%- endmacro %}
+
+{%- macro form_end() -%}
+    {%- do kwargs -%}
+    </form>
+{%- endmacro %}
+
+{%- macro form_errors(errors={}) -%}
+    {% if errors %}
+        <div class="alert alert-danger {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+            <h4 class="alert-heading">{{ _('Form Errors') }}</h4>
+            <p>{{ _('The form contains invalid entries:') }}</p>
+            <ul class="mb-0">
+                {% for key, error in errors.items() %}
+                    <li>{% if key %}{{ key }}: {% endif %}{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">
+                {{ label }}
+                {%- if required %}<span class="text-danger">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        <input type="{{ type }}"
+               name="{{ name }}"
+               id="{{ id }}"
+               value="{{ value }}"
+               class="form-control {{ 'is-invalid' if errors else '' }}"
+               {{ "required" if required }} />
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 form-check {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <input type="checkbox"
+               class="form-check-input {{ 'is-invalid' if errors else '' }}"
+               name="{{ name }}"
+               id="{{ id }}"
+               value="{{ value }}"
+               {{ "checked" if checked }}
+               {{ "required" if required }} />
+        <label class="form-check-label" for="{{ id }}">
+            {{ label }}
+            {%- if required %}<span class="text-danger">*</span>{%- endif %}
+        </label>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">
+                {{ label }}
+                {%- if required %}<span class="text-danger">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        <textarea name="{{ name }}"
+                  id="{{ id }}"
+                  class="form-control {{ 'is-invalid' if errors else '' }}"
+                  rows="3"
+                  {{ "required" if required }}>{{ value }}</textarea>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">
+                {{ label }}
+                {%- if required %}<span class="text-danger">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        <select name="{{ name }}"
+                id="{{ id }}"
+                class="form-select {{ 'is-invalid' if errors else '' }}"
+                {{ "required" if required }}>
+            {%- for option in options %}
+                {%- if option is string %}
+                    <option value="{{ option }}" {{ "selected" if option == selected }}>{{ option }}</option>
+                {%- else %}
+                    <option value="{{ option.value }}" {{ "selected" if option.value == selected }}>{{ option.text or option.value }}</option>
+                {%- endif %}
+            {%- endfor %}
+        </select>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 form-check {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <input type="radio"
+               class="form-check-input {{ 'is-invalid' if errors else '' }}"
+               name="{{ name }}"
+               id="{{ id }}"
+               value="{{ value }}"
+               {{ "checked" if checked }}
+               {{ "required" if required }} />
+        <label class="form-check-label" for="{{ id }}">
+            {{ label }}
+            {%- if required %}<span class="text-danger">*</span>{%- endif %}
+        </label>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro file_input(name, id, label="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">
+                {{ label }}
+                {%- if required %}<span class="text-danger">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        <input type="file"
+               class="form-control {{ 'is-invalid' if errors else '' }}"
+               name="{{ name }}"
+               id="{{ id }}"
+               {{ "required" if required }} />
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">
+                {{ label }}
+                {%- if required %}<span class="text-danger">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        <input type="range"
+               class="form-range {{ 'is-invalid' if errors else '' }}"
+               name="{{ name }}"
+               id="{{ id }}"
+               value="{{ value }}"
+               min="{{ min }}"
+               max="{{ max }}"
+               {{ "required" if required }} />
+        <div class="form-text">{{ value }}</div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="mb-3 form-check form-switch {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <input class="form-check-input {{ 'is-invalid' if errors else '' }}"
+               type="checkbox"
+               role="switch"
+               name="{{ name }}"
+               id="{{ id }}"
+               value="{{ value }}"
+               {{ "checked" if checked }}
+               {{ "required" if required }} />
+        <label class="form-check-label" for="{{ id }}">
+            {{ label }}
+            {%- if required %}<span class="text-danger">*</span>{%- endif %}
+        </label>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}

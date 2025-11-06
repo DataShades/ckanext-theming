@@ -1,0 +1,113 @@
+{%- macro accordion_wrapper(content) -%}
+    <div class="accordion {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro accordion_item(title, open=false) -%}
+    <div class="accordion-item {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <h2 class="accordion-header">
+            <button class="accordion-button {{ 'collapsed' if not open }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ title|replace(' ', '-')|lower }}">
+                {{ title }}
+            </button>
+        </h2>
+        <div id="collapse-{{ title|replace(' ', '-')|lower }}" class="accordion-collapse collapse {{ 'show' if open }}" data-bs-parent="#accordion-{{ caller().__name__|default('accordion') }}">
+            <div class="accordion-body">
+                {{ caller() }}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro card(content, title, footer, img, href) -%}
+    <div class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if img -%}
+            <img src="{{ img }}" class="card-img-top" alt="{{ title or 'Card image' }}">
+        {%- endif %}
+        <div class="card-body">
+            {%- if title -%}
+                <h5 class="card-title">
+                    {%- if href -%}
+                        <a href="{{ href }}" class="card-link text-decoration-none">{{ title }}</a>
+                    {%- else -%}
+                        {{ title }}
+                    {%- endif -%}
+                </h5>
+            {%- endif -%}
+            <p class="card-text">{{ content }}</p>
+        </div>
+        {%- if footer -%}
+            <div class="card-footer">
+                {{ footer }}
+            </div>
+        {%- endif -%}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content) -%}
+    <div class="col {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro container(content, fluid=false) -%}
+    <div class="{{ 'container-fluid' if fluid else 'container' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro grid(content, columns) -%}
+    <div class="row {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro panel(content, title) -%}
+    <div class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if title -%}
+            <div class="card-header">{{ title }}</div>
+        {%- endif -%}
+        <div class="card-body">
+            {{ content }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro row(content) -%}
+    <div class="row {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro section(content) -%}
+    <section class="py-5 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</section>
+{%- endmacro %}
+
+{%- macro jumbotron(content, title=None, subtitle=None) -%}
+    <div class="bg-primary text-white p-5 mb-4 rounded-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="container-fluid py-5">
+            {%- if title -%}
+                <h1 class="display-5 fw-bold">{{ title }}</h1>
+            {%- endif -%}
+            {%- if subtitle -%}
+                <p class="col-md-8 fs-4">{{ subtitle }}</p>
+            {%- endif -%}
+            {{ content }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro well(content) -%}
+    <div class="bg-light p-4 rounded-2 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro media_object(img, content) -%}
+    <div class="d-flex {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if img -%}
+            <img src="{{ img }}" class="flex-shrink-0 me-3 rounded" alt="Media image" width="64" height="64">
+        {%- endif -%}
+        <div class="flex-grow-1">
+            {{ content }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro list_group_item(content, active=False) -%}
+    <a href="#" class="list-group-item list-group-item-action {{ 'active' if active }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</a>
+{%- endmacro %}

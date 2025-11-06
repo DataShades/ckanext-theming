@@ -34,6 +34,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
             "bare": Theme(os.path.join(root, "themes/bare")),
             "bulma": Theme(os.path.join(root, "themes/bulma")),
             "tailwind": Theme(os.path.join(root, "themes/tailwind")),
+            "bootstrap5": Theme(os.path.join(root, "themes/bootstrap5")),
         }
 
     @override

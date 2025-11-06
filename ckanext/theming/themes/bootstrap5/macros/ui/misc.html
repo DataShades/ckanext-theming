@@ -1,0 +1,62 @@
+{%- macro datetime(dt) -%}
+    <time datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ h.render_datetime(dt, with_hours=True) }}
+    </time>
+{%- endmacro %}
+
+{%- macro spacer(size="md") -%}
+    {%- set size_classes = {
+        'xs': 'my-1',
+        'sm': 'my-2',
+        'md': 'my-3',
+        'lg': 'my-4',
+        'xl': 'my-5'
+    } %}
+    <div class="{{ size_classes.get(size, size_classes.md) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"></div>
+{%- endmacro %}
+
+{%- macro divider_with_text(content) -%}
+    <div class="d-flex align-items-center my-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="flex-grow-1 border-top"></div>
+        <span class="mx-3 text-muted">{{ content }}</span>
+        <div class="flex-grow-1 border-top"></div>
+    </div>
+{%- endmacro %}
+
+{%- macro truncate(content, max_lines=1) -%}
+    <div class="{{ 'd-inline-block text-truncate' if max_lines == 1 else 'text-truncate' }}" style="{{ 'max-width: 100%' if max_lines == 1 else 'display: -webkit-box; -webkit-line-clamp: ' ~ max_lines ~ '; -webkit-box-orient: vertical; overflow: hidden;' }}" {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro badge_count(count) -%}
+    <span class="badge rounded-pill bg-danger {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ count }}</span>
+{%- endmacro %}
+
+{%- macro skeleton_loader(type="text") -%}
+    <div class="placeholder-glow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if type == 'avatar' %}
+            <span class="placeholder placeholder-xs col-2 rounded-pill bg-secondary"></span>
+        {%- elif type == 'input' %}
+            <span class="placeholder col-12"></span>
+        {%- else %}
+            <span class="placeholder col-6"></span>
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro notification(title, content, type="info") -%}
+    {%- set alert_types = {
+        'info': 'primary',
+        'success': 'success',
+        'warning': 'warning',
+        'error': 'danger',
+        'danger': 'danger'
+    } %}
+    <div class="alert alert-{{ alert_types.get(type, 'primary') }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if title %}
+            <h4 class="alert-heading">{{ title }}</h4>
+        {%- endif %}
+        <p>{{ content }}</p>
+    </div>
+{%- endmacro %}

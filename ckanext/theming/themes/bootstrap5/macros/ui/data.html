@@ -1,0 +1,79 @@
+{%- macro table_block(striped=false, bordered=false) -%}
+    <div class="table-responsive {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <table class="table {{ 'table-striped' if striped }} {{ 'table-bordered' if bordered }}">
+            {{ caller() }}
+        </table>
+    </div>
+{%- endmacro %}
+
+{%- macro table_head_block() -%}
+    <thead {{ ui.util.attrs(kwargs) }}>
+        {{ caller() }}
+    </thead>
+{%- endmacro %}
+
+{%- macro table_body_block() -%}
+    <tbody {{ ui.util.attrs(kwargs) }}>
+        {{ caller() }}
+    </tbody>
+{%- endmacro %}
+
+{%- macro table_row_block() -%}
+    <tr {{ ui.util.attrs(kwargs) }}>
+        {{ caller() }}
+    </tr>
+{%- endmacro %}
+
+{%- macro table_row(columns, heading=false) -%}
+    {%- call ui.table_row_block() %}
+        {%- for column in columns %}
+            {{ ui.table_cell(column, heading) }}
+        {%- endfor %}
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro table_cell(content, heading=false) -%}
+    {% set tag = "th" if heading else "td" %}
+    <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
+{%- endmacro %}
+
+{%- macro list_group(items) -%}
+    <ul class="list-group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- for item in items %}
+            <li class="list-group-item">{{ item }}</li>
+        {%- endfor %}
+    </ul>
+{%- endmacro %}
+
+{%- macro definition_list(items) -%}
+    <dl class="row {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- for term, definition in items %}
+            <dt class="col-sm-3">{{ term }}</dt>
+            <dd class="col-sm-9">{{ definition }}</dd>
+        {%- endfor %}
+    </dl>
+{%- endmacro %}
+
+{%- macro stat(label, value, icon=None) -%}
+    <div class="card text-center {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="card-body">
+            {%- if icon %}
+                <i class="bi bi-{{ icon }} fs-2"></i>
+            {%- endif %}
+            <h5 class="card-title">{{ value }}</h5>
+            <p class="card-text">{{ label }}</p>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro chart(type, data, options=None) -%}
+    <div class="chart-container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="position: relative; height:40vh; width:100%;">
+        <canvas data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
+            Chart placeholder
+        </canvas>
+    </div>
+{%- endmacro %}
+
+{%- macro code_block(content, language="text") -%}
+    <pre class="bg-light p-3 border rounded {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"><code class="language-{{ language }}">{{ content }}</code></pre>
+{%- endmacro %}
