@@ -32,6 +32,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
         root = os.path.dirname(os.path.abspath(__file__))
         return {
             "bare": Theme(os.path.join(root, "themes/bare")),
+            "bulma": Theme(os.path.join(root, "themes/bulma")),
         }
 
     @override

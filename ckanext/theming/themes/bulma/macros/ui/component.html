@@ -1,0 +1,87 @@
+{%- macro group_item(group) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-64x64">
+                    {{ ui.image(group.image_display_url if group.image_display_url else h.url_for_static('/base/images/placeholder-group.png'), alt=group.title) }}
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ ui.link(group.title or group.name, href=h.url_for('group.read', id=group.name)) }}</strong>
+                        <br>
+                        <small>{{ h.markdown_extract(group.description, 180) if group.description else '' }}</small>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+{%- endmacro %}
+
+{%- macro organization_item(organization) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-64x64">
+                    {{ ui.image(organization.image_display_url if organization.image_display_url else h.url_for_static('/base/images/placeholder-organization.png'), alt=organization.title) }}
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ ui.link(organization.title or organization.name, href=h.url_for('organization.read', id=organization.name)) }}</strong>
+                        <br>
+                        <small>{{ h.markdown_extract(organization.description, 180) if organization.description else '' }}</small>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+{%- endmacro %}
+
+{%- macro package_item(pkg) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ ui.link(pkg.title or pkg.name, href=h.url_for('dataset.read', id=pkg.name)) }}</strong>
+                        <br>
+                        <small>{{ h.markdown_extract(pkg.notes, 180) if pkg.notes else '' }}</small>
+                        <br>
+                        <span class="tags">
+                            {%- if pkg.organization %}
+                                <span class="tag is-info">{{ pkg.organization.title or pkg.organization.name }}</span>
+                            {%- endif %}
+                            {%- for tag in pkg.tags[:3] %}
+                                <span class="tag">{{ tag.display_name }}</span>
+                            {%- endfor %}
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+{%- endmacro %}
+
+{%- macro resource_item(res) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ res.name or res.description or res.url[:50] ~ '...' }}</strong>
+                        <br>
+                        <small>{{ res.description if res.description else res.url }}</small>
+                        <br>
+                        <span class="tags">
+                            <span class="tag is-primary">{{ res.format or res.mimetype_inner or res.mimetype or 'Resource' }}</span>
+                            <span class="tag is-link">Size: {{ res.size|filesizeformat if res.size else 'Unknown' }}</span>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+{%- endmacro %}

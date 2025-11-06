@@ -1,0 +1,111 @@
+{% import "macros/ui/component.html" as component with context  %}
+{% import "macros/ui/container.html" as _container with context  %}
+{% import "macros/ui/data.html" as data with context %}
+{% import "macros/ui/element.html" as element with context  %}
+{% import "macros/ui/feedback.html" as feedback with context %}
+{% import "macros/ui/form.html" as _form with context %}
+{% import "macros/ui/meta.html" as meta with context %}
+{% import "macros/ui/misc.html" as misc with context %}
+{% import "macros/ui/nav.html" as _nav with context %}
+
+{# Element macros #}
+{% set avatar = element.avatar %}
+{% set badge = element.badge %}
+{% set button = element.button %}
+{% set divider = element.divider %}
+{% set heading = element.heading %}
+{% set image = element.image %}
+{% set link = element.link %}
+{% set tag = element.tag %}
+{% set text = element.text %}
+{% set text_block = element.text_block %}
+{% set video = element.video %}
+{% set icon = element.icon %}
+{% set label = element.label %}
+
+{# Navigation macros #}
+{% set breadcrumb_item = _nav.breadcrumb_item %}
+{% set breadcrumb_wrapper = _nav.breadcrumb_wrapper %}
+{% set menu_wrapper = _nav.menu_wrapper %}
+{% set menu_item = _nav.menu_item %}
+{% set nav_wrapper = _nav.nav_wrapper %}
+{% set nav_item = _nav.nav_item %}
+{% set pagination = _nav.pagination %}
+{% set tab_wrapper = _nav.tab_wrapper %}
+{% set tab_item = _nav.tab_item %}
+{% set dropdown_wrapper = _nav.dropdown_wrapper %}
+{% set dropdown_item = _nav.dropdown_item %}
+{% set sidebar = _nav.sidebar %}
+{% set navbar = _nav.navbar %}
+{% set breadcrumb_divider = _nav.breadcrumb_divider %}
+
+{# Container macros #}
+{% set accordion_wrapper = _container.accordion_wrapper %}
+{% set accordion_item = _container.accordion_item %}
+{% set card = _container.card %}
+{% set column = _container.column %}
+{% set container = _container.container %}
+{% set grid = _container.grid %}
+{% set panel = _container.panel %}
+{% set row = _container.row %}
+{% set section = _container.section %}
+{% set jumbotron = _container.jumbotron %}
+{% set well = _container.well %}
+{% set media_object = _container.media_object %}
+{% set list_group_item = _container.list_group_item %}
+
+{# Meta macros #}
+{% set header_block = meta.header_block %}
+{% set footer_block = meta.footer_block %}
+{% set account_block = meta.account_block %}
+
+{# Data macros #}
+{% set table_block = data.table_block %}
+{% set table_head_block = data.table_head_block %}
+{% set table_body_block = data.table_body_block %}
+{% set table_row_block = data.table_row_block %}
+{% set table_row = data.table_row %}
+{% set table_cell = data.table_cell %}
+{% set list_group = data.list_group %}
+{% set definition_list = data.definition_list %}
+{% set stat = data.stat %}
+{% set chart = data.chart %}
+{% set code_block = data.code_block %}
+
+{# Form macros #}
+{% set form_block = _form.form_block %}
+{% set form_start = _form.form_start %}
+{% set form_end = _form.form_end %}
+{% set form_errors = _form.form_errors %}
+{% set input = _form.input %}
+{% set checkbox = _form.checkbox %}
+{% set textarea = _form.textarea %}
+{% set select = _form.select %}
+{% set radio = _form.radio %}
+{% set file_input = _form.file_input %}
+{% set range_input = _form.range_input %}
+{% set toggle_switch = _form.toggle_switch %}
+
+{# Feedback macros #}
+{% set alert = feedback.alert %}
+{% set toast = feedback.toast %}
+{% set modal = feedback.modal %}
+{% set tooltip = feedback.tooltip %}
+{% set popover = feedback.popover %}
+{% set progress = feedback.progress %}
+{% set spinner = feedback.spinner %}
+
+{# Component macros #}
+{% set group_item = component.group_item %}
+{% set organization_item = component.organization_item %}
+{% set package_item = component.package_item %}
+{% set resource_item = component.resource_item %}
+
+{# Miscellaneous macros #}
+{% set datetime = misc.datetime %}
+{% set spacer = misc.spacer %}
+{% set divider_with_text = misc.divider_with_text %}
+{% set truncate = misc.truncate %}
+{% set badge_count = misc.badge_count %}
+{% set skeleton_loader = misc.skeleton_loader %}
+{% set notification = misc.notification %}

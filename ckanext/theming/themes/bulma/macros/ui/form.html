@@ -1,0 +1,197 @@
+{%- macro form_block(method="GET", action="", enctype="", include_csrf=true) -%}
+    {{ ui.form_start(method, action, enctype, **kwargs) }}
+    {{ h.csrf_input() if include_csrf and method|upper != "GET" }}
+
+    {{ caller() }}
+
+    {{ ui.form_end() }}
+{%- endmacro %}
+
+{%- macro form_actions_wrapper(content) -%}
+    <div class="field is-grouped" {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro form_start(method, action="", enctype="") -%}
+    <form class="form" {{ ui.util.attrs(kwargs) }} method="{{ method }}" action="{{ action }}" enctype="{{ enctype }}">
+{%- endmacro %}
+
+{%- macro form_end() -%}
+    {%- do kwargs -%}
+    </form>
+{%- endmacro %}
+
+{%- macro form_errors(errors={}) -%}
+    {% if errors %}
+        <div class="notification is-danger" {{ ui.util.attrs(kwargs) }}>
+            <p>{{ _('The form contains invalid entries:') }}</p>
+            <ul>
+                {% for key, error in errors.items() %}
+                    <li>{% if key %}{{ key }}: {% endif %}{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        {%- if label -%}
+            <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        <div class="control">
+            <input class="input {{ 'is-danger' if errors }}" name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }}/>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        <div class="control">
+            <label class="checkbox">
+                <input type="checkbox" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }} />
+                {{ label }}
+            </label>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        {%- if label -%}
+            <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        <div class="control">
+            <textarea class="textarea {{ 'is-danger' if errors }}" name="{{ name }}" id="{{ id }}" {{ "required" if required }}>{{ value }}</textarea>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        {%- if label -%}
+            <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        <div class="control">
+            <div class="select {{ 'is-danger' if errors }}">
+                <select name="{{ name }}" id="{{ id }}" {{ "required" if required }}>
+                    {%- for option in options %}
+                        {%- if option is string %}
+                            <option value="{{ option }}" {{ "selected" if option == selected }}>{{ option }}</option>
+                        {%- else %}
+                            <option value="{{ option.value }}" {{ "selected" if option.value == selected }}>{{ option.text or option.value }}</option>
+                        {%- endif %}
+                    {%- endfor %}
+                </select>
+            </div>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        <div class="control">
+            <label class="radio">
+                <input type="radio" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }} />
+                {{ label }}
+            </label>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro file_input(name, id, label="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        {%- if label -%}
+            <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        <div class="file">
+            <label class="file-label">
+                <input class="file-input" type="file" name="{{ name }}" id="{{ id }}" {{ "required" if required }}/>
+                <span class="file-cta">
+                    <span class="file-label">Choose a file…</span>
+                </span>
+            </label>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        {%- if label -%}
+            <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        <div class="control">
+            <input class="slider is-fullwidth" type="range" name="{{ name }}" id="{{ id }}" value="{{ value }}" min="{{ min }}" max="{{ max }}" {{ "required" if required }}/>
+        </div>
+        <div class="has-text-centered">{{ value }}</div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        <div class="control">
+            <label class="checkbox">
+                <input type="checkbox" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }}>
+                <span class="switch"></span>
+                {{ label }}
+            </label>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}

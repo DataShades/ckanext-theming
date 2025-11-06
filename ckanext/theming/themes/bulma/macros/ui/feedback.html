@@ -1,0 +1,54 @@
+{%- macro alert(message, type="info") -%}
+    <div class="notification {{ 'is-' ~ type }}" {{ ui.util.attrs(kwargs) }}>
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{%- macro toast(message, type="info") -%}
+    <div class="notification {{ 'is-' ~ type }} is-toast" {{ ui.util.attrs(kwargs) }} role="alert">
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{%- macro modal(title=None, body=None, footer=None) -%}
+    <div class="modal" {{ ui.util.attrs(kwargs) }}>
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            {%- if title %}
+                <header class="modal-card-head">
+                    <p class="modal-card-title">{{ title }}</p>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+            {%- endif %}
+            <section class="modal-card-body">
+                {{ body }}
+            </section>
+            {%- if footer %}
+                <footer class="modal-card-foot">
+                    {{ footer }}
+                </footer>
+            {%- endif %}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro tooltip(text) -%}
+    {%- do kwargs -%}
+    <span class="has-tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
+{%- endmacro %}
+
+{%- macro popover(title=None, content=None) -%}
+    {%- do kwargs -%}
+    <span class="has-popover" data-popover-title="{{ title }}" data-popover-content="{{ content }}">{{ caller() if caller else title or content }}</span>
+{%- endmacro %}
+
+{%- macro progress(value, max=100, label=None) -%}
+    <progress class="progress {{ 'is-' ~ (type if type else 'primary') }}" value="{{ value }}" max="{{ max }}" {{ ui.util.attrs(kwargs) }}>
+        {{ (value / max) * 100 }}%
+    </progress>
+    {%- if label %}{{ label }}{% else %}{{ value }} / {{ max }}{% endif %}
+{%- endmacro %}
+
+{%- macro spinner(size="md") -%}
+    <span class="loader {{ 'is-' ~ size }}" {{ ui.util.attrs(kwargs) }}></span>
+{%- endmacro %}

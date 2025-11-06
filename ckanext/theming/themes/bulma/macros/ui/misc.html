@@ -1,0 +1,68 @@
+{%- macro datetime(dt) -%}
+    <time datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}" {{ ui.util.attrs(kwargs) }}>
+        {{ h.render_datetime(dt, with_hours=True) }}
+    </time>
+{%- endmacro %}
+
+{%- macro spacer(size="md") -%}
+    {%- do kwargs -%}
+    <div class="spacer-{{ size }}" style="
+        {%- if size == 'xs' %}height: 0.25rem;
+        {%- elif size == 'sm' %}height: 0.5rem;
+        {%- elif size == 'md' %}height: 1rem;
+        {%- elif size == 'lg' %}height: 1.5rem;
+        {%- elif size == 'xl' %}height: 3rem;
+        {%- else %}height: 1rem;{%- endif %}"></div>
+{%- endmacro %}
+
+{%- macro divider_with_text(content) -%}
+    <div class="field has-addons" {{ ui.util.attrs(kwargs) }}>
+        <div class="control is-expanded">
+            <hr class="hr">
+        </div>
+        <div class="control">
+            <span class="has-text-grey-light">{{ content }}</span>
+        </div>
+        <div class="control is-expanded">
+            <hr class="hr">
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro truncate(content, max_lines=1) -%}
+    <div class="content-truncated" style="display: -webkit-box; -webkit-line-clamp: {{ max_lines }}; -webkit-box-orient: vertical; overflow: hidden;" {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro badge_count(count) -%}
+    <span class="tag is-primary" {{ ui.util.attrs(kwargs) }}>{{ count }}</span>
+{%- endmacro %}
+
+{%- macro skeleton_loader(type="text") -%}
+    <div class="skeleton-loader {{ 'is-' ~ type }}" {{ ui.util.attrs(kwargs) }} style="
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 4px;
+        min-height: 1em;
+        margin: 0.5em 0;
+    ">
+        &nbsp;
+    </div>
+    <style>
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+{%- endmacro %}
+
+{%- macro notification(title, content, type="info") -%}
+    <div class="notification {{ 'is-' ~ type }}" {{ ui.util.attrs(kwargs) }}>
+        {%- if title %}
+            <h4 class="title is-5">{{ title }}</h4>
+        {%- endif %}
+        <p>{{ content }}</p>
+    </div>
+{%- endmacro %}

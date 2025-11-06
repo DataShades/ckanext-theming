@@ -1,0 +1,123 @@
+{%- macro accordion_wrapper(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="accordion">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro accordion_item(title, open=false) -%}
+    <div class="panel">
+        <p class="panel-heading">
+            {{ title }}
+        </p>
+        <div class="panel-block" style="{{ 'display: block' if open else 'display: none' }}">
+            {{ caller() }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro card(content, title, footer, img, href) -%}
+    <div class="card" {{ ui.util.attrs(kwargs) }}>
+        {%- if img -%}
+            <div class="card-image">
+                {{ ui.image(img) }}
+            </div>
+        {%- endif %}
+        <div class="card-content">
+            <div class="media">
+                <div class="media-content">
+                    {%- if title -%}
+                        <p class="title is-4">
+                            {%- if href -%}
+                                {{ ui.link(title, href=href) }}
+                            {%- else -%}
+                                {{ title }}
+                            {%- endif -%}
+                        </p>
+                    {%- endif -%}
+                </div>
+            </div>
+            <div class="content">
+                {{ content }}
+            </div>
+        </div>
+        {%- if footer -%}
+            <footer class="card-footer">
+                <p class="card-footer-item">{{ footer }}</p>
+            </footer>
+        {%- endif -%}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content) -%}
+    <div class="column" {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro container(content, fluid=false) -%}
+    <div class="{{ 'container is-fluid' if fluid else 'container' }}" {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro grid(content, columns) -%}
+    <div class="columns" {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro panel(content, title) -%}
+    <article class="panel is-primary" {{ ui.util.attrs(kwargs) }}>
+        {%- if title -%}
+            <p class="panel-heading">{{ title }}</p>
+        {%- endif -%}
+        <div class="panel-block">
+            <p>{{ content }}</p>
+        </div>
+    </article>
+{%- endmacro %}
+
+{%- macro row(content) -%}
+    <div class="column" {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro section(content) -%}
+    <section class="section" {{ ui.util.attrs(kwargs) }}>{{ content }}</section>
+{%- endmacro %}
+
+{%- macro jumbotron(content, title=None, subtitle=None) -%}
+    <section class="hero is-primary is-bold" {{ ui.util.attrs(kwargs) }}>
+        <div class="hero-body">
+            <div class="container">
+                {%- if title -%}
+                    <p class="title">{{ title }}</p>
+                {%- endif -%}
+                {%- if subtitle -%}
+                    <p class="subtitle">{{ subtitle }}</p>
+                {%- endif -%}
+                {{ content }}
+            </div>
+        </div>
+    </section>
+{%- endmacro %}
+
+{%- macro well(content) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro media_object(img, content) -%}
+    <article class="media" {{ ui.util.attrs(kwargs) }}>
+        {%- if img -%}
+            <figure class="media-left">
+                <p class="image is-64x64">
+                    {{ ui.image(img) }}
+                </p>
+            </figure>
+        {%- endif -%}
+        <div class="media-content">
+            <div class="content">{{ content }}</div>
+        </div>
+    </article>
+{%- endmacro %}
+
+{%- macro list_group_item(content, active=False) -%}
+    <a class="panel-block {{ 'is-active' if active }}" {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </a>
+{%- endmacro %}

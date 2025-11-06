@@ -1,0 +1,56 @@
+{%- macro badge(content) -%}
+    <span class="tag">{{ content }}</span>
+{%- endmacro %}
+
+{%- macro button(content, type="button") -%}
+    <button class="button is-{{ type }}">{{ content }}</button>
+{%- endmacro %}
+
+{%- macro divider() -%}
+    <hr class="hr"/>
+{%- endmacro %}
+
+{%- macro heading(content, level=1) -%}
+    {%- set tag =  "h" ~ level %}
+    <{{ tag }} class="title is-{{ level }}">{{ content }}</{{ tag }}>
+{%- endmacro %}
+
+{%- macro image(src, alt="") -%}
+    <img {{ ui.util.attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
+{%- endmacro %}
+
+{%- macro link(content, href) -%}
+    <a class="has-text-link" href="{{ href or content }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro text(content) -%}
+    <p {{ ui.util.attrs(kwargs) }}>{{ content }}</p>
+{%- endmacro %}
+
+{%- macro video(src, controls=true) -%}
+    <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
+{%- endmacro %}
+
+{%- macro tag(content, id, href) -%}
+    <a class="tag is-link" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro avatar(src, alt) -%}
+    {%- if kwargs.attrs -%}
+        {%- do kwargs.attrs.setdefault("width", 100) -%}
+        {%- do kwargs.attrs.setdefault("height", 100) -%}
+    {%- endif -%}
+
+    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt) }}
+{%- endmacro %}
+
+{%- macro icon(name, size="md") -%}
+    {%- do kwargs -%}
+    <span class="icon">
+        <i class="fas fa-{{ name }} fa-{{ size }}"></i>
+    </span>
+{%- endmacro %}
+
+{%- macro label(text, for_id=None) -%}
+    <label {{ ui.util.attrs(kwargs) }} class="label" for="{{ for_id }}">{{ text }}</label>
+{%- endmacro %}
