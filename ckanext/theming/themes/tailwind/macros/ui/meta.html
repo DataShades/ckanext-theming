@@ -1,0 +1,64 @@
+{%- macro header_block(content, title=none, subtitle=none, logo=none) -%}
+    <header id="header" class="bg-white shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    {%- if logo %}
+                        {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index"), class="h-10 w-auto") }}
+                    {%- else %}
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">
+                                {{ ui.link(title, href=h.url_for("home.index"), class="hover:text-blue-600") }}
+                            </h1>
+                            {% if subtitle %}
+                                <p class="text-sm text-gray-500">{{ subtitle }}</p>
+                            {% endif %}
+                        </div>
+                    {%- endif %}
+                </div>
+                <div class="flex items-center space-x-4">
+                    {{ content }}
+                </div>
+            </div>
+        </div>
+    </header>
+{%- endmacro %}
+
+{%- macro footer_block(content) -%}
+    <footer class="bg-white border-t border-gray-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex justify-center space-x-6 md:order-2">
+                    {{ content }}
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex justify-center space-x-6 md:order-2">
+                    <p class="text-center text-sm text-gray-500">
+                        &copy; {{ h.render_datetime(h.now(), date_format='%Y') }} {{ g.site_title or 'CKAN' }}. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{%- endmacro %}
+
+{%- macro account_block(content, title=none, subtitle=none, logo=none) -%}
+    <header id="account" class="bg-gray-50 py-8 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    {%- if title %}
+                        <h1 class="text-2xl font-bold text-gray-900">{{ title }}</h1>
+                    {%- endif %}
+                    {%- if subtitle %}
+                        <p class="mt-1 text-sm text-gray-500">{{ subtitle }}</p>
+                    {%- endif %}
+                </div>
+                <div>
+                    {{ content }}
+                </div>
+            </div>
+        </div>
+    </header>
+{%- endmacro %}

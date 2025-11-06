@@ -1,0 +1,174 @@
+{%- macro breadcrumb_wrapper(content) -%}
+    <nav class="flex {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+            {{ content }}
+        </ol>
+    </nav>
+{%- endmacro %}
+
+{%- macro breadcrumb_item(content, href) -%}
+    <li class="inline-flex items-center">
+        <div class="flex items-center">
+            {{ ui.link(content, href=href, class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2") }}
+        </div>
+    </li>
+{%- endmacro %}
+
+{%- macro nav_wrapper(content) -%}
+    <nav class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="navigation">
+        {{ content }}
+    </nav>
+{%- endmacro %}
+
+{%- macro nav_item(content, href, active=False) -%}
+    <a href="{{ href }}" class="{{ 'bg-blue-100 text-blue-700' if active else 'text-gray-700 hover:bg-gray-50 hover:text-gray-900' }} px-3 py-2 rounded-md text-sm font-medium">
+        {{ content }}
+    </a>
+{%- endmacro %}
+
+{%- macro tab_wrapper(content) -%}
+    <div class="border-b border-gray-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <nav class="-mb-px flex space-x-8">
+            {{ content }}
+        </nav>
+    </div>
+{%- endmacro %}
+
+{%- macro tab_item(content, href, active=False) -%}
+    <a href="{{ href }}" class="{{ 'border-blue-500 text-blue-600' if active else 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+        {{ content }}
+    </a>
+{%- endmacro %}
+
+{%- macro menu_wrapper(content) -%}
+    <div class="space-y-1 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <ul>
+            {{ content }}
+        </ul>
+    </div>
+{%- endmacro %}
+
+{%- macro menu_item(content, href, active=False) -%}
+    <li>
+        <a href="{{ href }}" class="{{ 'bg-gray-100 text-gray-900' if active else 'text-gray-700 hover:bg-gray-50 hover:text-gray-900' }} block px-3 py-2 text-sm font-medium rounded-md">
+            {{ content }}
+        </a>
+    </li>
+{%- endmacro %}
+
+{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
+    {%- if total_pages > 1 %}
+        <nav class="flex items-center justify-between {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="navigation" aria-label="Pagination">
+            <div class="flex-1 flex">
+                {%- if page > 1 %}
+                    <a href="{{ url_generator(page=page - 1) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                        Previous
+                    </a>
+                {%- else %}
+                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-l-md">
+                        Previous
+                    </span>
+                {%- endif %}
+            </div>
+
+            <div class="hidden md:flex-1 md:flex md:justify-center md:space-x-1">
+                {%- if page - 1 > padding %}
+                    <a href="{{ url_generator(page=1) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                        1
+                    </a>
+                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700">
+                        ...
+                    </span>
+                {%- endif %}
+
+                {%- for i in range([page - padding, 1]|max, [page + padding, total_pages + 1]|min) %}
+                    {%- if i == page %}
+                        <span class="relative z-10 inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 border border-blue-500 bg-blue-50">
+                            {{ i }}
+                        </span>
+                    {%- else %}
+                        <a href="{{ url_generator(page=i) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                            {{ i }}
+                        </a>
+                    {%- endif %}
+                {%- endfor %}
+
+                {%- if total_pages - page > padding %}
+                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700">
+                        ...
+                    </span>
+                    <a href="{{ url_generator(page=total_pages) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                        {{ total_pages }}
+                    </a>
+                {%- endif %}
+            </div>
+
+            <div class="flex-1 flex justify-end">
+                {%- if page < total_pages %}
+                    <a href="{{ url_generator(page=page + 1) }}" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                        Next
+                    </a>
+                {%- else %}
+                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default rounded-r-md">
+                        Next
+                    </span>
+                {%- endif %}
+            </div>
+        </nav>
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro dropdown_wrapper(content, title=None) -%}
+    <div class="relative inline-block text-left {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div>
+            <button type="button" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                {{ title or 'Options' }}
+                <svg class="-mr-1 ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+        <div class="absolute right-0 z-10 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div class="py-1" role="none">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro dropdown_item(content, href="#") -%}
+    <a href="{{ href }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">
+        {{ content }}
+    </a>
+{%- endmacro %}
+
+{%- macro sidebar(content) -%}
+    <aside class="w-64 h-screen bg-white border-r border-gray-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="h-full px-3 py-4 overflow-y-auto">
+            {{ content }}
+        </div>
+    </aside>
+{%- endmacro %}
+
+{%- macro navbar(brand, items) -%}
+    <nav class="bg-white shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex items-center flex-shrink-0 text-2xl font-bold text-gray-900">
+                        {{ brand }}
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        {{ items }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+{%- endmacro %}
+
+{%- macro breadcrumb_divider() -%}
+    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+    </svg>
+{%- endmacro %}
