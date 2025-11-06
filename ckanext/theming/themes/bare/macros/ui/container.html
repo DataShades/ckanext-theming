@@ -88,9 +88,9 @@
     <div {{ ui.util.attrs(kwargs) }} class="well">{{ content }}</div>
 {%- endmacro %}
 
-{%- macro media_object(img, content, **kwargs) -%}
+{%- macro media_object(img, content) -%}
     <div {{ ui.util.attrs(kwargs) }} class="media">
-        {{ ui.image(img, **kwargs) }}
+        {{ ui.image(img) }}
         <div class="media-body">{{ content }}</div>
     </div>
 {%- endmacro %}

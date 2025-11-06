@@ -1,16 +1,20 @@
 {%- macro badge(content) -%}
+    {%- do kwargs -%}
     <span class="tag">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro button(content, type="button") -%}
+    {%- do kwargs -%}
     <button class="button is-{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}
+    {%- do kwargs -%}
     <hr class="hr"/>
 {%- endmacro %}
 
 {%- macro heading(content, level=1) -%}
+    {%- do kwargs -%}
     {%- set tag =  "h" ~ level %}
     <{{ tag }} class="title is-{{ level }}">{{ content }}</{{ tag }}>
 {%- endmacro %}

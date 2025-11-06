@@ -225,7 +225,7 @@ def resolve_paths(theme: str | None) -> list[str]:
         paths.append(info.path)
         theme = info.extends
 
-    return paths[::-1]
+    return paths[::]
 
 
 def switch_theme(name: str, config: Any):
