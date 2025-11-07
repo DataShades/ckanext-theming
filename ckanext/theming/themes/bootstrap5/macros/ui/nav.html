@@ -7,6 +7,7 @@
 {%- endmacro %}
 
 {%- macro breadcrumb_item(content, href) -%}
+    {%- do kwargs -%}
     <li class="breadcrumb-item">
         <a href="{{ href }}">{{ content }}</a>
     </li>
@@ -19,6 +20,7 @@
 {%- endmacro %}
 
 {%- macro nav_item(content, href, active=False) -%}
+    {%- do kwargs -%}
     <a class="nav-link {{ 'active' if active }}" href="{{ href }}">{{ content }}</a>
 {%- endmacro %}
 
@@ -29,6 +31,7 @@
 {%- endmacro %}
 
 {%- macro tab_item(content, href, active=False) -%}
+    {%- do kwargs -%}
     <li class="nav-item" role="presentation">
         <button class="nav-link {{ 'active' if active }}" id="{{ href|replace('#', '') }}-tab" data-bs-toggle="tab" data-bs-target="{{ href }}" type="button" role="tab">
             {{ content }}
@@ -43,6 +46,7 @@
 {%- endmacro %}
 
 {%- macro menu_item(content, href, active=False) -%}
+    {%- do kwargs -%}
     <a class="list-group-item list-group-item-action {{ 'active' if active }}" href="{{ href }}">{{ content }}</a>
 {%- endmacro %}
 
@@ -110,6 +114,7 @@
 {%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
+    {%- do kwargs -%}
     <li><a class="dropdown-item" href="{{ href }}">{{ content }}</a></li>
 {%- endmacro %}
 
@@ -140,5 +145,6 @@
 {%- endmacro %}
 
 {%- macro breadcrumb_divider() -%}
+    {%- do kwargs -%}
     <li class="breadcrumb-item active" aria-current="page">/</li>
 {%- endmacro %}

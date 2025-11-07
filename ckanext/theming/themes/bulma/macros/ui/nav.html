@@ -5,6 +5,7 @@
 {%- endmacro %}
 
 {%- macro breadcrumb_item(content, href) -%}
+    {%- do kwargs -%}
     <li><a href="{{ href }}">{{ content }}</a></li>
 {%- endmacro %}
 
@@ -15,6 +16,7 @@
 {%- endmacro %}
 
 {%- macro nav_item(content, href, active=False) -%}
+    {%- do kwargs -%}
     <a class="navbar-item {{ 'is-active' if active }}" href="{{ href }}">{{ content }}</a>
 {%- endmacro %}
 
@@ -25,6 +27,7 @@
 {%- endmacro %}
 
 {%- macro tab_item(content, href, active=False) -%}
+    {%- do kwargs -%}
     <li class="{{ 'is-active' if active }}"><a href="{{ href }}">{{ content }}</a></li>
 {%- endmacro %}
 
@@ -35,6 +38,7 @@
 {%- endmacro %}
 
 {%- macro menu_item(content, href, active=False) -%}
+    {%- do kwargs -%}
     <li>
         <a class="{{ 'is-active' if active }}" href="{{ href }}">{{ content }}</a>
     </li>
@@ -97,6 +101,7 @@
 {%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
+    {%- do kwargs -%}
     <a href="{{ href }}" class="dropdown-item">{{ content }}</a>
 {%- endmacro %}
 

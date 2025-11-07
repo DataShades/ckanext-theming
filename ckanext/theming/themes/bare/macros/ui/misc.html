@@ -1,4 +1,5 @@
 {%- macro datetime(dt) -%}
+    {%- do kwargs -%}
     <span data-datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
         {{ h.render_datetime(dt, with_hours=True) }}
     </span>

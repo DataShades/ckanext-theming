@@ -5,6 +5,7 @@
 {%- endmacro %}
 
 {%- macro accordion_item(title, open=false) -%}
+    {%- do kwargs -%}
     <div class="panel">
         <p class="panel-heading">
             {{ title }}

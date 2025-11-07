@@ -24,6 +24,7 @@
 {%- endmacro %}
 
 {%- macro link(content, href) -%}
+    {%- do kwargs -%}
     <a class="has-text-link" href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 
@@ -36,6 +37,7 @@
 {%- endmacro %}
 
 {%- macro tag(content, id, href) -%}
+    {%- do kwargs -%}
     <a class="tag is-link" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
 {%- endmacro %}
 

@@ -1,8 +1,10 @@
 {%- macro organization_item(group) -%}
+    {%- do kwargs -%}
     {{ ui.group_item(group, **kwargs) }}
 {%- endmacro %}
 
 {%- macro group_item(group) -%}
+    {%- do kwargs -%}
     {% set img = group.image_display_url or h.url_for_static('/base/images/placeholder-' ~ ('organization' if group.is_organization else 'group') ~ '.png') %}
     {% set title = group.title or group.name  %}
     {% set body = h.markdown_extract(group.description, 120)|urlize %}
@@ -12,6 +14,7 @@
 
 
 {%- macro package_item(pkg) -%}
+    {%- do kwargs -%}
     {% set title = pkg.title or pkg.name  %}
     {% set body = h.markdown_extract(pkg.notes, 120)|urlize %}
 
@@ -19,6 +22,7 @@
 {%- endmacro %}
 
 {%- macro resource_item(res) -%}
+    {%- do kwargs -%}
     {% set title = res.name  %}
     {% set body = h.markdown_extract(res.description, 120)|urlize %}
 
