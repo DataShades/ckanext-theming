@@ -1,55 +1,196 @@
 # Data
 
+Data macros provide components for displaying and organizing information in structured formats. These components handle tabular data, lists, statistics, and other data visualization needs with proper accessibility and consistent styling.
+
 ## `table_block`
 
-Renders a table.
+Renders a complete table element with optional styling features like.striped rows and borders. Provides a semantic HTML table structure with theme-appropriate styling and accessibility features.
 
-### Arguments
+**Use Cases:**
+- Data grids and reports
+- Comparison tables
+- Product listings
+- User data displays
+- Financial reports
+- Analytics dashboards
+- Schedule or calendar displays
 
-*   `striped` (boolean): Whether to stripe the table rows. Defaults to `false`.
-*   `bordered` (boolean): Whether to add borders to the table. Defaults to `false`.
+**Usage Context:**
+Use when you need to display structured data in a tabular format where rows and columns represent related information.
+
+**Example:**
+```
+{{ ui.table_block(striped=true, bordered=true) }}
+  {{ ui.table_head_block() }}
+    {{ ui.table_row_block() }}
+      {{ ui.table_cell("Name", heading=true) }}
+      {{ ui.table_cell("Email", heading=true) }}
+      {{ ui.table_cell("Status", heading=true) }}
+    {{ ui.table_row_block() }}
+  {{ ui.table_body_block() }}
+    {{ ui.table_row_block() }}
+      {{ ui.table_cell("John Doe") }}
+      {{ ui.table_cell("john@example.com") }}
+      {{ ui.table_cell("Active") }}
+    {{ ui.table_row_block() }}
+{{ ui.table_end() }}
+```
+
+**Recommendations:**
+- Use appropriate styling options for readability (striped for dense data, bordered for clarity)
+- Different themes provide various table styles (Bootstrap: .table, .table-striped, Tailwind: divide-y, Bulma: .table)
+- Ensure proper header structure with table_head_block and table_cell(heading=true)
+- Include proper scope attributes for accessibility (automatically handled by theme)
+- Consider responsive behavior for mobile viewing (horizontal scrolling or stacking)
 
 ## `table_head_block`
 
-Renders the table header.
+Renders the table header section (`<thead>`) to contain header rows. Provides semantic structure for table headers and proper accessibility markup.
 
-### Arguments
+**Use Cases:**
+- Table header sections
+- Column labeling
+- Data category identification
+- Header row grouping
+- Column sorting indicators
 
-None
+**Usage Context:**
+Use to wrap the header row(s) of a table to provide proper semantic structure and accessibility features.
+
+**Example:**
+```
+{{ ui.table_head_block() }}
+  {{ ui.table_row_block() }}
+    {{ ui.table_cell("Product", heading=true) }}
+    {{ ui.table_cell("Price", heading=true) }}
+    {{ ui.table_cell("Stock", heading=true) }}
+  {{ ui.table_row_block() }}
+{{ ui.table_head_block() }}
+```
+
+**Recommendations:**
+- Always use with table_body_block for proper structure
+- Different themes may apply specific styling (Bootstrap: .thead-light, Tailwind: bg-gray-50, Bulma: .table th is-light)
+- Use heading=true for table_cell elements inside the header
+- Provides proper ARIA associations for screen readers
 
 ## `table_body_block`
 
-Renders the table body.
+Renders the table body section (`<tbody>`) to contain data rows. Provides semantic structure for the main data content of the table with proper accessibility features.
 
-### Arguments
+**Use Cases:**
+- Table data rows
+- Dynamic content display
+- Scrollable table content
+- Data pagination
+- Row-level interactions
 
-None
+**Usage Context:**
+Use to wrap the data rows of a table to provide proper semantic structure and styling for the main content.
+
+**Example:**
+```
+{{ ui.table_body_block() }}
+  {{ ui.table_row_block() }}
+    {{ ui.table_cell("Product A") }}
+    {{ ui.table_cell("$29.99") }}
+    {{ ui.table_cell("In Stock") }}
+  {{ ui.table_row_block() }}
+  {{ ui.table_row_block() }}
+    {{ ui.table_cell("Product B") }}
+    {{ ui.table_cell("$39.99") }}
+    {{ ui.table_cell("Out of Stock") }}
+  {{ ui.table_row_block() }}
+{{ ui.table_body_block() }}
+```
+
+**Recommendations:**
+- Always pair with table_head_block for complete structure
+- Different themes may provide different styling (Bootstrap: default body styling, Tailwind: divide-y, Bulma: .table td)
+- Can be made scrollable for large datasets
+- Properly associated with headers for screen reader accessibility
 
 ## `table_row_block`
 
-Renders a table row.
+Renders a single table row (`<tr>`) to contain table cells. Provides the basic structure for organizing table content horizontally.
 
-### Arguments
+**Use Cases:**
+- Individual data rows
+- Header rows
+- Summary rows
+- Action rows
+- Grouped data rows
 
-None
+**Usage Context:**
+Use to wrap table cells that belong together as a single logical row of data.
+
+**Example:**
+```
+{{ ui.table_row_block() }}
+  {{ ui.table_cell("Row Data 1") }}
+  {{ ui.table_cell("Row Data 2") }}
+  {{ ui.table_cell("Row Data 3") }}
+{{ ui.table_row_block() }}
+```
+
+**Recommendations:**
+- Use with table_cell elements for proper structure
+- Different themes may customize row behavior (Bootstrap: hover effects, Tailwind: hover:bg-gray-50, Bulma: .table tr:hover)
+- Ensure equal number of cells for proper alignment
+- Consider alternating styles for better readability
 
 ## `table_row`
 
-Renders a table row.
+Renders a complete table row with cells from a list of content. Provides a convenient shorthand for creating table rows from data arrays, useful for programmatic table generation.
 
-### Arguments
+**Use Cases:**
+- Programmatic table generation
+- Data-driven tables
+- CSV import displays
+- Dynamic row creation
+- Template-driven content display
 
-*   `columns` (list): A list of table cells.
-*   `heading` (boolean): Whether the row is a header row. Defaults to `false`.
+**Usage Context:**
+Use when you have data in an array format that you want to convert to a table row without manually creating each cell.
+
+**Example:**
+```
+{{ ui.table_row(["Name", "Email", "Date"], heading=true) }}
+{{ ui.table_row(["John Doe", "john@example.com", "2024-01-01"]) }}
+{{ ui.table_row(["Jane Smith", "jane@example.com", "2024-01-02"]) }}
+```
+
+**Recommendations:**
+- Useful for dynamic table generation
+- Use heading=true for header rows
+- Different themes will apply styling based on parent table configuration
+- Ensure consistent data structure across rows
 
 ## `table_cell`
 
-Renders a table cell.
+Renders a table cell (`<td>` or `<th>`) with content and optional header designation. Provides the basic building block for table content with proper semantic structure and accessibility features.
 
-### Arguments
+**Use Cases:**
+- Data cells in tables
+- Header cells
+- Action cells
+- Empty state cells
+- Rich content cells
 
-*   `content` (string): The content of the table cell.
-*   `heading` (boolean): Whether the cell is a header cell. Defaults to `false`.
+**Usage Context:**
+Use as the fundamental unit of table content, either for data cells or header cells.
+
+**Example:**
+```
+{{ ui.table_cell("Regular Data Cell") }}
+{{ ui.table_cell("Header Cell", heading=true) }}
+```
+
+**Recommendations:**
+- Use heading=true for column and row headers
+- Different themes provide various cell styling (Bootstrap: .table-cell, Tailwind: px-6 py-4, Bulma: .table td/th)
+- Consider content length and alignment
+- Properly associated with headers and rows for accessibility
 
 ## `list_group`
 

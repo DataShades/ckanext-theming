@@ -1,86 +1,244 @@
 # Navigation
 
+Navigation macros provide structured ways to implement various navigation patterns throughout the application. These components help users understand their location within the site and navigate between different sections effectively.
+
 ## `breadcrumb_wrapper`
 
-Wraps the breadcrumb trail. This is a block macro.
+Wraps the breadcrumb trail to provide proper container structure and styling for hierarchical navigation paths. Breadcrumbs show the user's current location within the site hierarchy and provide an easy way to navigate back to parent sections.
 
-### Arguments
+**Use Cases:**
+- E-commerce category hierarchies
+- Document navigation
+- Site structure visualization
+- User location tracking
+- Hierarchical content organization
 
-*   `content` (string): breadcrumb items.
+**Usage Context:**
+Use on pages where users need to understand their location within a hierarchy and potentially navigate to parent sections. Commonly appears near the top of content pages.
+
+**Example:**
+```
+{{ ui.breadcrumb_wrapper(
+  ui.breadcrumb_item("Home", href="/") +
+  ui.breadcrumb_item("Categories", href="/categories") +
+  ui.breadcrumb_item("Technology", href="/categories/tech") +
+  ui.breadcrumb_item("Laptops", href="/categories/tech/laptops")
+) }}
+```
+
+**Recommendations:**
+- Limit to 3-5 levels to avoid clutter
+- Different themes implement breadcrumbs differently (Bootstrap: .breadcrumb, Tailwind: flex with separators, Bulma: .breadcrumb)
+- Don't include the current page in the breadcrumb trail
 
 ## `breadcrumb_item`
 
-Creates a single item in a breadcrumb trail.
+Creates a single item in a breadcrumb trail that represents a step in the navigation hierarchy. Each item provides a clickable link to a previous level in the site structure.
 
-### Arguments
+**Use Cases:**
+- Linking to parent categories
+- Document hierarchy navigation
+- Site location indicators
+- Navigation history
 
-*   `content` (string): The text to display for the breadcrumb item.
-*   `href` (string): The URL for the breadcrumb item.
+**Usage Context:**
+Use within a `breadcrumb_wrapper` to create individual steps in the navigation path. Each item should represent a meaningful section of the site hierarchy.
+
+**Example:**
+```
+{{ ui.breadcrumb_item("Products", href="/products") }}
+```
+
+**Recommendations:**
+- Use clear, descriptive text
+- Don't apply to the current page item
+- Different themes may customize separators (Bootstrap: CSS arrows, Tailwind: SVG arrows, Bulma: / character)
+- Ensure the last item in the trail represents the current page without a link
 
 ## `nav_wrapper`
 
-Wraps a navigation element (e.g., `<nav>`). This is a block macro.
+Wraps a navigation element to provide proper container structure and styling for primary navigation areas. Serves as the main container for navigation items, ensuring consistent styling and behavior.
 
-### Arguments
+**Use Cases:**
+- Main site navigation
+- Secondary navigation menus
+- Top navigation bars
+- Sidebar navigation
+- Footer navigation
 
-*   `content` (string): nav items.
+**Usage Context:**
+Use as the container for navigation items to create a structured navigation area with consistent styling.
+
+**Example:**
+```
+{{ ui.nav_wrapper(
+  ui.nav_item("Home", href="/") +
+  ui.nav_item("Products", href="/products") +
+  ui.nav_item("About", href="/about", active=true)
+) }}
+```
+
+**Recommendations:**
+- Use for primary navigation areas
+- Different themes provide various navigation containers (Bootstrap: .navbar, Tailwind: flex container, Bulma: .nav)
+- Consider responsive behavior for mobile devices
 
 ## `nav_item`
 
-Creates a single item in a navigation list.
+Creates a single item in a navigation list with active state indication. Navigation items are the fundamental building blocks of site navigation, providing links to different sections of the site.
 
-### Arguments
+**Use Cases:**
+- Main menu links
+- Secondary navigation
+- Sidebar items
+- Top navigation links
+- Tab navigation items
 
-*   `content` (string): The text to display for the navigation item.
-*   `href` (string): The URL for the navigation item.
-*   `active` (boolean): Whether the item is currently active. Defaults to `false`.
+**Usage Context:**
+Use within a `nav_wrapper` to create actionable navigation items. The `active` parameter highlights the current page or section.
+
+**Example:**
+```
+{{ ui.nav_item("Dashboard", href="/dashboard", active=true) }}
+```
+
+**Recommendations:**
+- Use meaningful text that describes the target content
+- Set `active=true` for the current page or section
+- Different themes may apply different active styling (Bootstrap: .active, Tailwind: bg-blue-100, Bulma: .is-active)
+- Consider accessibility when implementing active states
 
 ## `tab_wrapper`
 
-Wraps a tabbed interface. This is a block macro.
+Wraps a tabbed interface to provide proper container structure and styling for tab-based navigation. Tabs organize content into separate sections that can be accessed via clickable headers.
 
-### Arguments
+**Use Cases:**
+- Content organization
+- Settings panels
+- Profile sections
+- Dashboard views
+- Category navigation
 
-*   `content` (string): tab items.
+**Usage Context:**
+Use when you need to organize content into multiple sections that can be accessed without leaving the current page. Commonly used in settings or profile pages.
+
+**Example:**
+```
+{{ ui.tab_wrapper(
+  ui.tab_item("Profile", href="#profile", active=true) +
+  ui.tab_item("Settings", href="#settings") +
+  ui.tab_item("Activity", href="#activity")
+) }}
+```
+
+**Recommendations:**
+- Use for organizing related content sections
+- Different themes implement tabs differently (Bootstrap: .nav-tabs, Tailwind: border-b with underline, Bulma: .tabs)
+- Ensure proper ARIA attributes for accessibility
 
 ## `tab_item`
 
-Creates a single tab item.
+Creates a single tab in a tabbed interface with active state indication. Each tab serves as a clickable header that reveals associated content.
 
-### Arguments
+**Use Cases:**
+- Profile sections
+- Settings categories
+- Content filtering
+- Dashboard sections
+- Information organization
 
-*   `content` (string): The text to display for the tab item.
-*   `href` (string): The URL for the tab item.
-*   `active` (boolean): Whether the tab is currently active. Defaults to `false`.
+**Usage Context:**
+Use within a `tab_wrapper` to create individual tab elements that control content visibility. The `active` parameter indicates the currently selected tab.
+
+**Example:**
+```
+{{ ui.tab_item("Account", href="#account", active=true) }}
+```
+
+**Recommendations:**
+- Keep tab titles concise
+- Set `active=true` for the currently selected tab
+- Different themes may customize appearance (Bootstrap: .nav-link, Tailwind: border-b-2, Bulma: .is-active)
+- Ensure tab content is properly associated with tab items
 
 ## `menu_wrapper`
 
-Wraps a menu. This is a block macro.
+Wraps a menu to provide proper container structure and styling for menu systems. Menus organize related links or actions in a structured format.
 
-### Arguments
+**Use Cases:**
+- Dropdown menus
+- Sidebar menus
+- Context menus
+- Administrative menus
+- Navigation menus
 
-*   `content` (string): menu items.
+**Usage Context:**
+Use as the container for menu items to create organized lists of related functionality or content links.
+
+**Example:**
+```
+{{ ui.menu_wrapper(
+  ui.menu_item("Edit", href="/edit") +
+  ui.menu_item("Delete", href="/delete") +
+  ui.menu_item("Share", href="/share")
+) }}
+```
+
+**Recommendations:**
+- Use for related actions or links
+- Different themes implement menus differently (Bootstrap: .dropdown-menu, Tailwind: space-y-1, Bulma: .menu-list)
+- Consider vertical vs. horizontal menu layouts
 
 ## `menu_item`
 
-Creates a single item in a menu.
+Creates a single item in a menu system with active state indication. Menu items are clickable elements that perform actions or navigate to different content areas.
 
-### Arguments
+**Use Cases:**
+- Dropdown menu options
+- Sidebar navigation items
+- Context menu actions
+- Administrative links
+- Navigation links
 
-*   `content` (string): The text to display for the menu item.
-*   `href` (string): The URL for the menu item.
-*   `active` (boolean): Whether the item is currently active. Defaults to `false`.
+**Usage Context:**
+Use within a `menu_wrapper` to create individual menu options. The `active` parameter highlights the current selection.
+
+**Example:**
+```
+{{ ui.menu_item("Account Settings", href="/account/settings", active=true) }}
+```
+
+**Recommendations:**
+- Use clear, action-oriented text
+- Set `active=true` for the current selection
+- Different themes may customize appearance (Bootstrap: .dropdown-item, Tailwind: px-4 py-2, Bulma: .panel-block)
+- Consider icon integration for visual recognition
 
 ## `pagination`
 
-Renders pagination controls.
+Renders pagination controls for navigating through multiple pages of content. Pagination controls help users navigate through large sets of content distributed across multiple pages.
 
-### Arguments
+**Use Cases:**
+- Search results
+- Product listings
+- User lists
+- Content archives
+- Data tables
 
-*   `page` (integer): The current page number. Defaults to 1.
-*   `total_pages` (integer): The total number of pages. Defaults to 1.
-*   `url_generator` (callable): A function to generate URLs for pages. Defaults to `h.pager_url`.
-*   `padding` (integer): The number of page links to show around the current page. Defaults to 2.
+**Usage Context:**
+Use when content is divided across multiple pages to help users navigate between different sections of the dataset.
+
+**Example:**
+```
+{{ ui.pagination(page=currentPage, total_pages=totalPages, url_generator=h.pager_url, padding=2) }}
+```
+
+**Recommendations:**
+- Use consistent URL patterns for page navigation
+- Different themes style pagination differently (Bootstrap: .pagination, Tailwind: flex with buttons, Bulma: .pagination)
+- Show current page clearly and provide first/last page navigation
+- Consider the number of page links to show with the `padding` parameter
+- Implement proper ARIA labels for accessibility (current page, page N of M)
 
 ## `dropdown_wrapper`
 
