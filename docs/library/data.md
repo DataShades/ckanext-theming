@@ -7,6 +7,7 @@ Data macros provide components for displaying and organizing information in stru
 Renders a complete table element with optional styling features like.striped rows and borders. Provides a semantic HTML table structure with theme-appropriate styling and accessibility features.
 
 **Use Cases:**
+
 - Data grids and reports
 - Comparison tables
 - Product listings
@@ -16,9 +17,11 @@ Renders a complete table element with optional styling features like.striped row
 - Schedule or calendar displays
 
 **Usage Context:**
+
 Use when you need to display structured data in a tabular format where rows and columns represent related information.
 
 **Example:**
+
 ```
 {{ ui.table_block(striped=true, bordered=true) }}
   {{ ui.table_head_block() }}
@@ -37,6 +40,7 @@ Use when you need to display structured data in a tabular format where rows and 
 ```
 
 **Recommendations:**
+
 - Use appropriate styling options for readability (striped for dense data, bordered for clarity)
 - Different themes provide various table styles (Bootstrap: .table, .table-striped, Tailwind: divide-y, Bulma: .table)
 - Ensure proper header structure with table_head_block and table_cell(heading=true)
@@ -48,6 +52,7 @@ Use when you need to display structured data in a tabular format where rows and 
 Renders the table header section (`<thead>`) to contain header rows. Provides semantic structure for table headers and proper accessibility markup.
 
 **Use Cases:**
+
 - Table header sections
 - Column labeling
 - Data category identification
@@ -55,9 +60,11 @@ Renders the table header section (`<thead>`) to contain header rows. Provides se
 - Column sorting indicators
 
 **Usage Context:**
+
 Use to wrap the header row(s) of a table to provide proper semantic structure and accessibility features.
 
 **Example:**
+
 ```
 {{ ui.table_head_block() }}
   {{ ui.table_row_block() }}
@@ -69,6 +76,7 @@ Use to wrap the header row(s) of a table to provide proper semantic structure an
 ```
 
 **Recommendations:**
+
 - Always use with table_body_block for proper structure
 - Different themes may apply specific styling (Bootstrap: .thead-light, Tailwind: bg-gray-50, Bulma: .table th is-light)
 - Use heading=true for table_cell elements inside the header
@@ -79,6 +87,7 @@ Use to wrap the header row(s) of a table to provide proper semantic structure an
 Renders the table body section (`<tbody>`) to contain data rows. Provides semantic structure for the main data content of the table with proper accessibility features.
 
 **Use Cases:**
+
 - Table data rows
 - Dynamic content display
 - Scrollable table content
@@ -86,9 +95,11 @@ Renders the table body section (`<tbody>`) to contain data rows. Provides semant
 - Row-level interactions
 
 **Usage Context:**
+
 Use to wrap the data rows of a table to provide proper semantic structure and styling for the main content.
 
 **Example:**
+
 ```
 {{ ui.table_body_block() }}
   {{ ui.table_row_block() }}
@@ -105,6 +116,7 @@ Use to wrap the data rows of a table to provide proper semantic structure and st
 ```
 
 **Recommendations:**
+
 - Always pair with table_head_block for complete structure
 - Different themes may provide different styling (Bootstrap: default body styling, Tailwind: divide-y, Bulma: .table td)
 - Can be made scrollable for large datasets
@@ -115,6 +127,7 @@ Use to wrap the data rows of a table to provide proper semantic structure and st
 Renders a single table row (`<tr>`) to contain table cells. Provides the basic structure for organizing table content horizontally.
 
 **Use Cases:**
+
 - Individual data rows
 - Header rows
 - Summary rows
@@ -122,9 +135,11 @@ Renders a single table row (`<tr>`) to contain table cells. Provides the basic s
 - Grouped data rows
 
 **Usage Context:**
+
 Use to wrap table cells that belong together as a single logical row of data.
 
 **Example:**
+
 ```
 {{ ui.table_row_block() }}
   {{ ui.table_cell("Row Data 1") }}
@@ -134,6 +149,7 @@ Use to wrap table cells that belong together as a single logical row of data.
 ```
 
 **Recommendations:**
+
 - Use with table_cell elements for proper structure
 - Different themes may customize row behavior (Bootstrap: hover effects, Tailwind: hover:bg-gray-50, Bulma: .table tr:hover)
 - Ensure equal number of cells for proper alignment
@@ -144,6 +160,7 @@ Use to wrap table cells that belong together as a single logical row of data.
 Renders a complete table row with cells from a list of content. Provides a convenient shorthand for creating table rows from data arrays, useful for programmatic table generation.
 
 **Use Cases:**
+
 - Programmatic table generation
 - Data-driven tables
 - CSV import displays
@@ -151,9 +168,11 @@ Renders a complete table row with cells from a list of content. Provides a conve
 - Template-driven content display
 
 **Usage Context:**
+
 Use when you have data in an array format that you want to convert to a table row without manually creating each cell.
 
 **Example:**
+
 ```
 {{ ui.table_row(["Name", "Email", "Date"], heading=true) }}
 {{ ui.table_row(["John Doe", "john@example.com", "2024-01-01"]) }}
@@ -161,6 +180,7 @@ Use when you have data in an array format that you want to convert to a table ro
 ```
 
 **Recommendations:**
+
 - Useful for dynamic table generation
 - Use heading=true for header rows
 - Different themes will apply styling based on parent table configuration
@@ -171,6 +191,7 @@ Use when you have data in an array format that you want to convert to a table ro
 Renders a table cell (`<td>` or `<th>`) with content and optional header designation. Provides the basic building block for table content with proper semantic structure and accessibility features.
 
 **Use Cases:**
+
 - Data cells in tables
 - Header cells
 - Action cells
@@ -178,15 +199,18 @@ Renders a table cell (`<td>` or `<th>`) with content and optional header designa
 - Rich content cells
 
 **Usage Context:**
+
 Use as the fundamental unit of table content, either for data cells or header cells.
 
 **Example:**
+
 ```
 {{ ui.table_cell("Regular Data Cell") }}
 {{ ui.table_cell("Header Cell", heading=true) }}
 ```
 
 **Recommendations:**
+
 - Use heading=true for column and row headers
 - Different themes provide various cell styling (Bootstrap: .table-cell, Tailwind: px-6 py-4, Bulma: .table td/th)
 - Consider content length and alignment

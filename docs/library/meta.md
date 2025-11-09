@@ -7,6 +7,7 @@ Meta macros provide structural components for the overall page layout including 
 Renders a complete header block for page branding, navigation, and primary site identification. The header block provides a consistent top section for all pages, typically containing the site logo, main title, and primary navigation.
 
 **Use Cases:**
+
 - Main site header
 - Page branding
 - Logo display
@@ -16,9 +17,11 @@ Renders a complete header block for page branding, navigation, and primary site 
 - Search functionality placement
 
 **Usage Context:**
+
 Use at the top of all pages to provide consistent branding and navigation. This typically appears once per page and contains major site-level controls.
 
 **Example:**
+
 ```
 {{ ui.header_block(
   title="My Website",
@@ -32,6 +35,7 @@ Use at the top of all pages to provide consistent branding and navigation. This 
 ```
 
 **Recommendations:**
+
 - Include site-identifying content (logo, title)
 - Keep primary navigation limited to main sections
 - Different themes provide various header implementations (Bootstrap: .header with navbar, Tailwind: bg-white shadow, Bulma: .hero.is-primary)
@@ -45,6 +49,7 @@ Use at the top of all pages to provide consistent branding and navigation. This 
 Renders a complete footer block for page-end content such as secondary navigation, legal information, and contact details. The footer provides a consistent bottom section for all pages with supplementary information.
 
 **Use Cases:**
+
 - Site-wide footer
 - Legal information display
 - Contact information
@@ -55,9 +60,11 @@ Renders a complete footer block for page-end content such as secondary navigatio
 - Privacy policy links
 
 **Usage Context:**
+
 Use at the bottom of all pages to provide consistent supplementary information and navigation. This appears once per page, at the lowest position.
 
 **Example:**
+
 ```
 {{ ui.footer_block(
   ui.link("Privacy Policy", href="/privacy") +
@@ -67,6 +74,7 @@ Use at the bottom of all pages to provide consistent supplementary information a
 ```
 
 **Recommendations:**
+
 - Include important but less-frequently-used links
 - Different themes implement footers differently (Bootstrap: .footer, Tailwind: bg-gray-100, Bulma: .footer)
 - Keep content relevant and concise
@@ -79,6 +87,7 @@ Use at the bottom of all pages to provide consistent supplementary information a
 Renders an account-related header or section block, typically used for user-specific content and controls. The account block handles user profile information, login/logout functionality, and other user-focused elements.
 
 **Use Cases:**
+
 - User dashboard headers
 - Account profile sections
 - Login/logout controls
@@ -89,9 +98,11 @@ Renders an account-related header or section block, typically used for user-spec
 - Account management tools
 
 **Usage Context:**
+
 Use in areas where user-specific content or controls are needed, such as account pages, dashboards, or user profile sections.
 
 **Example:**
+
 ```
 {{ ui.account_block(
   title="My Account",
@@ -101,6 +112,7 @@ Use in areas where user-specific content or controls are needed, such as account
 ```
 
 **Recommendations:**
+
 - Include user profile information when applicable
 - Different themes may customize account sections (Bootstrap: user dropdown, Tailwind: flex with avatar, Bulma: .media)
 - Keep account-related controls prominent

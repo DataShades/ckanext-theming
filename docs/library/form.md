@@ -7,6 +7,7 @@ Form macros provide a comprehensive system for creating consistent, accessible f
 Displays a complete form wrapper with automatic CSRF protection and proper form structure. This macro handles the form creation process with security measures and proper opening and closing tags.
 
 **Use Cases:**
+
 - Complete standalone forms
 - Content creation forms
 - User registration
@@ -15,9 +16,11 @@ Displays a complete form wrapper with automatic CSRF protection and proper form 
 - Contact forms
 
 **Usage Context:**
+
 Use as the main wrapper for any form that requires submission to the server, especially when CSRF protection is needed.
 
 **Example:**
+
 ```
 {{ ui.form_block(method="POST", action="/submit", include_csrf=true) }}
   {{ ui.input(name="username", label="Username") }}
@@ -28,6 +31,7 @@ Use as the main wrapper for any form that requires submission to the server, esp
 ```
 
 **Recommendations:**
+
 - Always use for forms that submit to the server
 - Enable CSRF protection (default behavior) for security
 - Different themes may customize form styling (Bootstrap: .needs-validation, Tailwind: space-y-6, Bulma: .box)
@@ -38,6 +42,7 @@ Use as the main wrapper for any form that requires submission to the server, esp
 Wraps form actions such as submit, reset, and cancel buttons. Provides consistent spacing and alignment for form control elements.
 
 **Use Cases:**
+
 - Submit and cancel buttons
 - Form action grouping
 - Button alignment
@@ -45,9 +50,11 @@ Wraps form actions such as submit, reset, and cancel buttons. Provides consisten
 - Multi-step form navigation
 
 **Usage Context:**
+
 Use at the end of forms to wrap action buttons that perform operations like saving, submitting, or canceling.
 
 **Example:**
+
 ```
 {{ ui.form_actions_wrapper(
   ui.button("Save", type="submit") +
@@ -56,6 +63,7 @@ Use at the end of forms to wrap action buttons that perform operations like savi
 ```
 
 **Recommendations:**
+
 - Place below form content for consistency
 - Different themes may position buttons differently (Bootstrap: mb-3, Tailwind: flex justify-between, Bulma: field is-grouped)
 - Primary action should be visually prominent
@@ -66,6 +74,7 @@ Use at the end of forms to wrap action buttons that perform operations like savi
 Starts the HTML `<form>` tag with specified method, action, and encoding type. Provides the opening element for form structures with proper attributes.
 
 **Use Cases:**
+
 - Manual form construction
 - Advanced form control
 - Custom form behavior
@@ -73,14 +82,17 @@ Starts the HTML `<form>` tag with specified method, action, and encoding type. P
 - Progressive enhancement scenarios
 
 **Usage Context:**
+
 Use when you need manual control over form creation or when building forms programmatically.
 
 **Example:**
+
 ```
 {{ ui.form_start(method="POST", action="/upload", enctype="multipart/form-data") }}
 ```
 
 **Recommendations:**
+
 - Pair with form_end() for proper closure
 - Use appropriate enctype for file uploads (multipart/form-data)
 - Different themes may apply default styling (Bootstrap: .form-horizontal, Tailwind: space-y-6)
@@ -91,15 +103,18 @@ Use when you need manual control over form creation or when building forms progr
 Closes the HTML `</form>` tag. Provides the closing element for form structures.
 
 **Use Cases:**
+
 - Closing form structures
 - Manual form construction
 - Form component building
 - Custom form implementations
 
 **Usage Context:**
+
 Use to properly close any form started with form_start().
 
 **Example:**
+
 ```
 {{ ui.form_start(method="POST", action="/process") }}
   <!-- form content -->
@@ -107,6 +122,7 @@ Use to properly close any form started with form_start().
 ```
 
 **Recommendations:**
+
 - Always pair with form_start()
 - Different themes may not customize this element specifically
 - Essential for proper HTML structure
@@ -116,6 +132,7 @@ Use to properly close any form started with form_start().
 Displays a formatted list of form validation errors in a user-friendly way. Provides clear feedback about issues with form submission and guides users to correct problems.
 
 **Use Cases:**
+
 - Validation error display
 - User feedback
 - Form correction guidance
@@ -123,9 +140,11 @@ Displays a formatted list of form validation errors in a user-friendly way. Prov
 - Error summary presentation
 
 **Usage Context:**
+
 Place near the top of the form or near the submit button to provide immediate feedback when form submission fails validation.
 
 **Example:**
+
 ```
 {{ ui.form_errors(errors={
   "username": "Username is required and must be unique",
@@ -134,6 +153,7 @@ Place near the top of the form or near the submit button to provide immediate fe
 ```
 
 **Recommendations:**
+
 - Display prominently when validation fails
 - Different themes style errors differently (Bootstrap: .alert-danger, Tailwind: bg-red-50 p-4, Bulma: .notification.is-danger)
 - Include specific error messages for each field
@@ -144,6 +164,7 @@ Place near the top of the form or near the submit button to provide immediate fe
 Renders a standard HTML input field with associated label and error handling. Provides a flexible component for various input types (text, email, password, etc.).
 
 **Use Cases:**
+
 - Text input fields
 - Email and password fields
 - Number inputs
@@ -152,15 +173,18 @@ Renders a standard HTML input field with associated label and error handling. Pr
 - Custom input types
 
 **Usage Context:**
+
 Use for any single-line text input or specialized input fields like email addresses, passwords, numbers, etc.
 
 **Example:**
+
 ```
 {{ ui.input(name="email", label="Email Address", type="email", required=true) }}
 {{ ui.input(name="phone", label="Phone Number", type="tel", value="+1234567890") }}
 ```
 
 **Recommendations:**
+
 - Always include appropriate labels for accessibility
 - Use correct input types for better user experience (email, password, number)
 - Different themes style inputs with various approaches (Bootstrap: .form-control, Tailwind: border-gray-300, Bulma: .input)
@@ -172,6 +196,7 @@ Use for any single-line text input or specialized input fields like email addres
 Renders an HTML checkbox input field with associated label and error handling. Provides a binary choice input with optional labeling.
 
 **Use Cases:**
+
 - Agreement checkboxes
 - Option selections
 - Feature toggles
@@ -179,15 +204,18 @@ Renders an HTML checkbox input field with associated label and error handling. P
 - Multiple choice selections
 
 **Usage Context:**
+
 Use when users need to make a binary choice or select multiple options from a small set.
 
 **Example:**
+
 ```
 {{ ui.checkbox(name="terms", label="I agree to the terms and conditions", required=true) }}
 {{ ui.checkbox(name="newsletter", label="Subscribe to newsletter", checked=true) }}
 ```
 
 **Recommendations:**
+
 - Include clear, descriptive labels
 - Different themes style checkboxes differently (Bootstrap: .form-check-input, Tailwind: form-checkbox, Bulma: .checkbox)
 - Use `required=true` for mandatory agreements

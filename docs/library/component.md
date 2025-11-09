@@ -7,6 +7,7 @@ Component macros provide specialized components for representing CKAN-specific e
 Renders a visual representation of a CKAN group with associated metadata, image, and navigation. Provides a consistent way to display group information throughout the application with appropriate linking and visual representation.
 
 **Use Cases:**
+
 - Group listings
 - Category displays
 - Organizational structures
@@ -15,9 +16,11 @@ Renders a visual representation of a CKAN group with associated metadata, image,
 - Project groupings
 
 **Usage Context:**
+
 Use when displaying a list of groups in CKAN, such as on category pages, browse pages, or when showing related groups.
 
 **Example:**
+
 ```
 {{ ui.group_item({
   "title": "Research Groups",
@@ -30,6 +33,7 @@ Use when displaying a list of groups in CKAN, such as on category pages, browse 
 ```
 
 **Recommendations:**
+
 - Displays relevant metadata like follower count and package count
 - Different themes customize group item appearance (Bootstrap: card layout, Tailwind: flex items, Bulma: media object)
 - Includes appropriate images when available
@@ -41,6 +45,7 @@ Use when displaying a list of groups in CKAN, such as on category pages, browse 
 Renders a visual representation of a CKAN organization with associated metadata, image, and navigation. Organizations are specialized groups in CKAN that typically represent institutions or companies managing datasets.
 
 **Use Cases:**
+
 - Organization listings
 - Publisher displays
 - Institutional showcases
@@ -49,9 +54,11 @@ Renders a visual representation of a CKAN organization with associated metadata,
 - Authority displays
 
 **Usage Context:**
+
 Use when displaying a list of organizations in CKAN, such as on publisher browse pages or when showing organizational structure.
 
 **Example:**
+
 ```
 {{ ui.organization_item({
   "title": "City Government",
@@ -64,6 +71,7 @@ Use when displaying a list of organizations in CKAN, such as on publisher browse
 ```
 
 **Recommendations:**
+
 - Treat similar to group items with organization-specific styling
 - Different themes may differentiate organization items visually (Bootstrap: with organization badges, Tailwind: with authority indicators, Bulma: with organization-specific styles)
 - Emphasizes trust and authority aspects
@@ -75,6 +83,7 @@ Use when displaying a list of organizations in CKAN, such as on publisher browse
 Renders a visual representation of a CKAN package (dataset) with associated metadata and navigation. Packages represent datasets in CKAN and are one of the core entity types displayed to users.
 
 **Use Cases:**
+
 - Dataset listings
 - Search results
 - Browse dataset pages
@@ -83,9 +92,11 @@ Renders a visual representation of a CKAN package (dataset) with associated meta
 - Related package displays
 
 **Usage Context:**
+
 Use when displaying a list of datasets in CKAN, such as on search results pages, dataset browse pages, or when showing related datasets.
 
 **Example:**
+
 ```
 {{ ui.package_item({
   "title": "Population Statistics 2024",
@@ -102,6 +113,7 @@ Use when displaying a list of datasets in CKAN, such as on search results pages,
 ```
 
 **Recommendations:**
+
 - Displays key metadata including title, description, organization, and tags
 - Different themes provide various dataset item styles (Bootstrap: resource cards, Tailwind: dataset previews, Bulma: package listings)
 - Includes organization information for provenance
@@ -114,6 +126,7 @@ Use when displaying a list of datasets in CKAN, such as on search results pages,
 Renders a visual representation of a CKAN resource which represents downloadable files or access points within packages. Resources are the actual data files or services within a dataset.
 
 **Use Cases:**
+
 - Dataset resource lists
 - Download displays
 - Resource browsing
@@ -122,9 +135,11 @@ Renders a visual representation of a CKAN resource which represents downloadable
 - Resource access points
 
 **Usage Context:**
+
 Use when displaying resources within a package, such as on dataset detail pages or when showing download options.
 
 **Example:**
+
 ```
 {{ ui.resource_item({
   "name": "Data file (CSV)",
@@ -138,6 +153,7 @@ Use when displaying resources within a package, such as on dataset detail pages 
 ```
 
 **Recommendations:**
+
 - Displays format, size, and description information
 - Different themes style resources appropriately (Bootstrap: list-group items, Tailwind: resource cards, Bulma: panel-blocks)
 - Shows file size and format for user expectations
