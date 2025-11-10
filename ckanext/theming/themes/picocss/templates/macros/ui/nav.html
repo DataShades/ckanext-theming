@@ -1,0 +1,123 @@
+{%- macro breadcrumb_wrapper(content) -%}
+    <nav aria-label="breadcrumb" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <ul class="breadcrumb">
+            {{ content }}
+        </ul>
+    </nav>
+{%- endmacro %}
+
+{%- macro breadcrumb_item(content, href) -%}
+    <li><a href="{{ href }}">{{ content }}</a></li>
+{%- endmacro %}
+
+{%- macro nav_wrapper(content) -%}
+    <nav {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </nav>
+{%- endmacro %}
+
+{%- macro nav_item(content, href, active=False) -%}
+    <a href="{{ href }}" class="{{ 'active' if active }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro tab_wrapper(content) -%}
+    <nav role="tablist" class="tabs {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <ul>
+            {{ content }}
+        </ul>
+    </nav>
+{%- endmacro %}
+
+{%- macro tab_item(content, href, active=False) -%}
+    <li role="presentation">
+        <a href="{{ href }}" aria-selected="{{ 'true' if active else 'false' }}">{{ content }}</a>
+    </li>
+{%- endmacro %}
+
+{%- macro menu_wrapper(content) -%}
+    <nav {{ ui.util.attrs(kwargs) }}>
+        <ul>
+            {{ content }}
+        </ul>
+    </nav>
+{%- endmacro %}
+
+{%- macro menu_item(content, href, active=False) -%}
+    <li class="{{ 'active' if active }}">
+        <a href="{{ href }}">{{ content }}</a>
+    </li>
+{%- endmacro %}
+
+{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
+    {%- if total_pages > 1 %}
+        <nav role="navigation" aria-label="pagination" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+            <ul class="pagination">
+                {%- if page > 1 %}
+                    <li><a href="{{ url_generator(page=page - 1) }}">‹ Previous</a></li>
+                {%- else %}
+                    <li aria-disabled="true"><span aria-hidden="true">‹ Previous</span></li>
+                {%- endif %}
+
+                {%- if page - 1 > padding %}
+                    <li><a href="{{ url_generator(page=1) }}">1</a></li>
+                    <li aria-disabled="true"><span>…</span></li>
+                {%- endif %}
+
+                {%- for i in range([page - padding, 1]|max, [page + padding, total_pages + 1]|min) %}
+                    <li class="{{ 'active' if i == page }}">
+                        <a href="{{ url_generator(page=i) }}">{{ i }}</a>
+                    </li>
+                {%- endfor %}
+
+                {%- if total_pages - page > padding %}
+                    <li aria-disabled="true"><span>…</span></li>
+                    <li><a href="{{ url_generator(page=total_pages) }}">{{ total_pages }}</a></li>
+                {%- endif %}
+
+                {%- if page < total_pages %}
+                    <li><a href="{{ url_generator(page=page + 1) }}">Next ›</a></li>
+                {%- else %}
+                    <li aria-disabled="true"><span aria-hidden="true">Next ›</span></li>
+                {%- endif %}
+            </ul>
+        </nav>
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro dropdown_wrapper(content, title=None) -%}
+    <details class="dropdown {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <summary>{{ title or 'Menu' }}</summary>
+        <ul>
+            {{ content }}
+        </ul>
+    </details>
+{%- endmacro %}
+
+{%- macro dropdown_item(content, href="#") -%}
+    <li><a href="{{ href }}">{{ content }}</a></li>
+{%- endmacro %}
+
+{%- macro sidebar(content) -%}
+    <aside class="container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <nav>
+            {{ content }}
+        </nav>
+    </aside>
+{%- endmacro %}
+
+{%- macro navbar(brand, items) -%}
+    <header class="container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <nav class="navbar">
+            <div>
+                <a href="{{ h.url_for('home.index') }}" class="brand">{{ brand }}</a>
+            </div>
+            <ul>
+                {{ items }}
+            </ul>
+        </nav>
+    </header>
+{%- endmacro %}
+
+{%- macro breadcrumb_divider() -%}
+    <li aria-hidden="true">/</li>
+{%- endmacro %}

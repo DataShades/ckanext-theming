@@ -1,0 +1,70 @@
+{%- macro alert(message, type="info") -%}
+    {%- set alert_types = {
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'error': 'error',
+        'danger': 'error'
+    } %}
+    <div class="alert {{ alert_types.get(type, 'info') }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{%- macro toast(message, type="info") -%}
+    {%- set toast_types = {
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'error': 'error',
+        'danger': 'error'
+    } %}
+    <div class="toast {{ toast_types.get(type, 'info') }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{%- macro modal(title=None, body=None, footer=None) -%}
+    <dialog class="modal {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <article>
+            {%- if title %}
+                <header>
+                    <h3>{{ title }}</h3>
+                    <button aria-label="Close" rel="prev"></button>
+                </header>
+            {%- endif %}
+            <div class="content">
+                {{ body }}
+            </div>
+            {%- if footer %}
+                <footer>
+                    {{ footer }}
+                </footer>
+            {%- endif %}
+        </article>
+    </dialog>
+{%- endmacro %}
+
+{%- macro tooltip(text) -%}
+    {%- do kwargs -%}
+    <span class="tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
+{%- endmacro %}
+
+{%- macro popover(title=None, content=None) -%}
+    {%- do kwargs -%}
+    <span class="tooltip" data-tooltip="{{ content or title }}">{{ caller() if caller else title or content }}</span>
+{%- endmacro %}
+
+{%- macro progress(value, max=100, label=None) -%}
+    <div class="progress-container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <progress value="{{ value }}" max="{{ max }}">{{ (value / max) * 100 }}%</progress>
+        <small>
+            {%- if label %}{{ label }}{% else %}{{ value }} / {{ max }}{% endif %}
+        </small>
+    </div>
+{%- endmacro %}
+
+{%- macro spinner(size="md") -%}
+    {%- do kwargs -%}
+    <span class="loading-spinner {{ 'size-' ~ size if size in ['sm', 'md', 'lg'] else 'md' }}"></span>
+{%- endmacro %}

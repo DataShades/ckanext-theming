@@ -27,6 +27,7 @@ from typing_extensions import override
 
 import ckan
 import ckan.plugins as p
+import ckan.plugins.toolkit as tk
 from ckan import types
 from ckan.common import config
 from ckan.exceptions import CkanConfigurationException
@@ -225,12 +226,23 @@ def resolve_paths(theme: str | None) -> list[str]:
         paths.append(info.path)
         theme = info.extends
 
-    return paths[::]
+    return paths
 
 
 def switch_theme(name: str, config: Any):
+    """Switch to the specified theme by updating the CKAN configuration.
+
+    This function updates the CKAN configuration to use the specified theme. It
+    updates the template paths and static asset paths based on the theme's
+    definition.
+
+    :param name: The name of the theme to switch to.
+    :param config: The CKAN configuration dictionary.
+    :raises CkanConfigurationException: if the theme or its parent is not found
+
+    """
     try:
-        template_paths = resolve_paths(name)
+        paths = resolve_paths(name)
     except KeyError as e:
         missing_theme: str = e.args[0]
         if missing_theme == name:
@@ -241,6 +253,17 @@ def switch_theme(name: str, config: Any):
 
         raise CkanConfigurationException(msg) from e
 
+    for abspath in paths:
+        relpath = os.path.relpath(abspath, __file__)
+
+        breakpoint()
+        if os.path.isdir(os.path.join(abspath, "assets")):
+            tk.add_resource(os.path.join(relpath, "assets"), f"theme-{name}")
+
+        if os.path.isdir(os.path.join(abspath, "public")):
+            tk.add_public_directory(config, os.path.join(relpath, "public"))
+
+    template_paths = [os.path.join(p, "templates") for p in paths]
     log.info("Re-loading templates from %s", template_paths)
 
     if "plugin_template_paths" in config:

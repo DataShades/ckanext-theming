@@ -23,9 +23,10 @@ log = logging.getLogger(__name__)
 class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.SingletonPlugin):
     @override
     def update_config(self, config: Any):
-        tk.add_template_directory(config, "templates")
-        tk.add_public_directory(config, "public")
-        tk.add_resource("assets", "theming")
+        # tk.add_template_directory(config, "templates")
+        # tk.add_public_directory(config, "public")
+        # tk.add_resource("assets", "theming")
+        pass
 
     @override
     def register_themes(self) -> dict[str, Theme]:
@@ -35,6 +36,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
             "bulma": Theme(os.path.join(root, "themes/bulma"), extends="bare"),
             "tailwind": Theme(os.path.join(root, "themes/tailwind"), extends="bare"),
             "bs5": Theme(os.path.join(root, "themes/bs5"), extends="bare"),
+            "picocss": Theme(os.path.join(root, "themes/picocss"), extends="bare"),
         }
 
     @override

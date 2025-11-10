@@ -1,0 +1,67 @@
+{%- macro group_item(group) -%}
+    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="grid">
+            {%- if group.image_display_url %}
+                <img src="{{ group.image_display_url }}" alt="{{ group.title }}" width="64" height="64">
+            {%- else %}
+                <img src="{{ h.url_for_static('/base/images/placeholder-group.png') }}" alt="{{ group.title }}" width="64" height="64">
+            {%- endif %}
+            <div class="flow">
+                <h3>
+                    {{ ui.link(group.title or group.name, href=h.url_for('group.read', id=group.name)) }}
+                </h3>
+                <p>{{ h.markdown_extract(group.description, 180) if group.description else '' }}</p>
+            </div>
+        </div>
+    </article>
+{%- endmacro %}
+
+{%- macro organization_item(organization) -%}
+    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="grid">
+            {%- if organization.image_display_url %}
+                <img src="{{ organization.image_display_url }}" alt="{{ organization.title }}" width="64" height="64">
+            {%- else %}
+                <img src="{{ h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ organization.title }}" width="64" height="64">
+            {%- endif %}
+            <div class="flow">
+                <h3>
+                    {{ ui.link(organization.title or organization.name, href=h.url_for('organization.read', id=organization.name)) }}
+                </h3>
+                <p>{{ h.markdown_extract(organization.description, 180) if organization.description else '' }}</p>
+            </div>
+        </div>
+    </article>
+{%- endmacro %}
+
+{%- macro package_item(pkg) -%}
+    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="flow">
+            <h3>
+                {{ ui.link(pkg.title or pkg.name, href=h.url_for('dataset.read', id=pkg.name)) }}
+            </h3>
+            <p>{{ h.markdown_extract(pkg.notes, 180) if pkg.notes else '' }}</p>
+            <div>
+                {%- if pkg.organization %}
+                    <span class="contrast">{{ pkg.organization.title or pkg.organization.name }}</span>
+                {%- endif %}
+                {%- for tag in pkg.tags[:3] %}
+                    <a href="{{ h.url_for('dataset.search', tags=tag.name) }}" class="secondary">{{ tag.display_name }}</a>
+                {%- endfor %}
+            </div>
+        </div>
+    </article>
+{%- endmacro %}
+
+{%- macro resource_item(res) -%}
+    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div class="flow">
+            <h4>{{ res.name or res.description or res.url[:50] ~ '...' }}</h4>
+            <p>{{ res.description if res.description else res.url }}</p>
+            <div>
+                <span class="secondary">{{ res.format or res.mimetype_inner or res.mimetype or 'Resource' }}</span>
+                <small>Size: {{ res.size|filesizeformat if res.size else 'Unknown' }}</small>
+            </div>
+        </div>
+    </article>
+{%- endmacro %}

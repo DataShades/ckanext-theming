@@ -1,0 +1,62 @@
+{%- macro badge(content) -%}
+    <span class="contrast {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</span>
+{%- endmacro %}
+
+{%- macro button(content, type="button") -%}
+    <button type="{{ type if type in ['button', 'submit', 'reset', 'primary', 'secondary', 'contrast', 'outline'] else 'button' }}" class="{{ 'primary' if type == 'primary' or type == 'submit' else type if type in ['secondary', 'contrast', 'outline'] else 'outline' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</button>
+{%- endmacro %}
+
+{%- macro divider() -%}
+    <hr class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"/>
+{%- endmacro %}
+
+{%- macro heading(content, level=1) -%}
+    {%- set tag =  "h" ~ level %}
+    {%- set sizes = {
+        1: 'h1',
+        2: 'h2',
+        3: 'h3',
+        4: 'h4',
+        5: 'h5',
+        6: 'h6'
+    } %}
+    <{{ tag }} class="{{ sizes[level] if level in sizes else 'h1' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</{{ tag }}>
+{%- endmacro %}
+
+{%- macro image(src, alt="") -%}
+    <img {{ ui.util.attrs(kwargs) }} class="img-fluid" alt="{{ alt }}" src="{{ src }}"/>
+{%- endmacro %}
+
+{%- macro link(content, href) -%}
+    <a class="secondary {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" href="{{ href or content }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro text(content) -%}
+    <p {{ ui.util.attrs(kwargs) }}>{{ content }}</p>
+{%- endmacro %}
+
+{%- macro video(src, controls=true) -%}
+    <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }} class="img-fluid"></video>
+{%- endmacro %}
+
+{%- macro tag(content, id, href) -%}
+    <a class="secondary" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro avatar(src, alt) -%}
+    {%- if kwargs.attrs -%}
+        {%- do kwargs.attrs.setdefault("width", 100) -%}
+        {%- do kwargs.attrs.setdefault("height", 100) -%}
+    {%- endif -%}
+
+    <img class="rounded-circle" {{ ui.util.attrs(kwargs) }} src="{{ src or h.url_for_static('/base/images/placeholder-user.png') }}" alt="{{ alt or 'Avatar' }}" width="48" height="48">
+{%- endmacro %}
+
+{%- macro icon(name, size="md") -%}
+    {%- do kwargs -%}
+    <i class="bi bi-{{ name }} fs-{{ '6' if size == 'sm' else '5' if size == 'md' else '4' if size == 'lg' else '3' }}"></i>
+{%- endmacro %}
+
+{%- macro label(text, for_id=None) -%}
+    <label for="{{ for_id }}" class="form-label {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ text }}</label>
+{%- endmacro %}

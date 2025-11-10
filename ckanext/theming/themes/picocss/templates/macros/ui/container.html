@@ -1,0 +1,111 @@
+{%- macro accordion_wrapper(content) -%}
+    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro accordion_item(title, open=false) -%}
+    <details class="{{ 'open' if open }}" {{ ui.util.attrs(kwargs) }}>
+        <summary>{{ title }}</summary>
+        <div>
+            {{ caller() }}
+        </div>
+    </details>
+{%- endmacro %}
+
+{%- macro card(content, title, footer, img, href) -%}
+    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if img -%}
+            <img src="{{ img }}" alt="{{ title or 'Card image' }}">
+        {%- endif %}
+        {%- if title -%}
+            <h3>
+                {%- if href -%}
+                    <a href="{{ href }}">{{ title }}</a>
+                {%- else -%}
+                    {{ title }}
+                {%- endif -%}
+            </h3>
+        {%- endif %}
+        <p>{{ content }}</p>
+        {%- if footer -%}
+            <footer>{{ footer }}</footer>
+        {%- endif %}
+    </article>
+{%- endmacro %}
+
+{%- macro column(content) -%}
+    <div class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro container(content, fluid=false) -%}
+    <div class="{{ 'container' if not fluid else '' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro grid(content, columns) -%}
+    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro panel(content, title) -%}
+    <section class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {%- if title -%}
+            <h3>{{ title }}</h3>
+        {%- endif %}
+        {{ content }}
+    </section>
+{%- endmacro %}
+
+{%- macro row(content) -%}
+    <div class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro section(content) -%}
+    <section class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </section>
+{%- endmacro %}
+
+{%- macro jumbotron(content, title=None, subtitle=None) -%}
+    <section class="section">
+        <div class="container">
+            <div class="grid">
+                <div class="flow">
+                    {%- if title -%}
+                        <hgroup>
+                            <h1>{{ title }}</h1>
+                        {%- endif %}
+                        {%- if subtitle -%}
+                            <p class="lead">{{ subtitle }}</p>
+                        {%- endif %}
+                    </hgroup>
+                    {{ content }}
+                </div>
+            </div>
+        </div>
+    </section>
+{%- endmacro %}
+
+{%- macro well(content) -%}
+    <div class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro media_object(img, content) -%}
+    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div>
+            {%- if img -%}
+                {{ ui.image(img) }}
+            {%- endif -%}
+        </div>
+        <div>
+            <div>{{ content }}</div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro list_group_item(content, active=False) -%}
+    <article class="card {{ 'highlight' if active }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        {{ content }}
+    </article>
+{%- endmacro %}
