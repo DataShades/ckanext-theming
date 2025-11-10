@@ -166,18 +166,18 @@ class Theme:
     """Information about a theme.
 
     :param path: Path to the theme directory.
-    :param extends: Name of the parent theme, or None.
+    :param parent: Name of the parent theme, or None.
     """
 
     path: str
-    extends: str | None
+    parent: str | None
 
     UI: type[UI] = MacroUI
     _ui: UI | None = None
 
-    def __init__(self, path: str, extends: str | None = None):
+    def __init__(self, path: str, parent: str | None = None):
         self.path = path
-        self.extends = extends
+        self.parent = parent
 
     def build_ui(self, app: types.CKANApp) -> UI:
         """Build a UI instance for this theme.
@@ -224,7 +224,7 @@ def resolve_paths(theme: str | None) -> list[str]:
     while theme:
         info = themes[theme]
         paths.append(info.path)
-        theme = info.extends
+        theme = info.parent
 
     return paths
 
@@ -241,29 +241,35 @@ def switch_theme(name: str, config: Any):
     :raises CkanConfigurationException: if the theme or its parent is not found
 
     """
-    try:
-        paths = resolve_paths(name)
-    except KeyError as e:
-        missing_theme: str = e.args[0]
-        if missing_theme == name:
-            msg = f"The configured theme '{name}' is not recognised."
+    themes = collect_themes()
 
-        else:
-            msg = f"The configured theme '{name}'" + f" extends unknown theme '{missing_theme}'."
+    next_name = name
+    enabled_themes = {next_name}
+    template_paths = []
+    while theme := themes.get(next_name):
+        template_paths.append(os.path.join(theme.path, "templates"))
+        relpath = os.path.relpath(theme.path, os.path.dirname(__file__))
 
-        raise CkanConfigurationException(msg) from e
+        if os.path.isdir(os.path.join(theme.path, "assets")):
+            tk.add_resource(os.path.join(relpath, "assets"), f"theming/{next_name}")
 
-    for abspath in paths:
-        relpath = os.path.relpath(abspath, __file__)
-
-        breakpoint()
-        if os.path.isdir(os.path.join(abspath, "assets")):
-            tk.add_resource(os.path.join(relpath, "assets"), f"theme-{name}")
-
-        if os.path.isdir(os.path.join(abspath, "public")):
+        if os.path.isdir(os.path.join(theme.path, "public")):
             tk.add_public_directory(config, os.path.join(relpath, "public"))
 
-    template_paths = [os.path.join(p, "templates") for p in paths]
+        next_name = theme.parent
+        if not next_name:
+            break
+
+        if next_name in enabled_themes:
+            log.warning("Theme %s causes a recursion in theme hierarchy", next_name)
+            break
+
+        enabled_themes.add(next_name)
+
+    else:
+        msg = f"Theme '{next_name}' is not recognised."
+        raise CkanConfigurationException(msg)
+
     log.info("Re-loading templates from %s", template_paths)
 
     if "plugin_template_paths" in config:

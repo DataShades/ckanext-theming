@@ -33,10 +33,10 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
         root = os.path.dirname(os.path.abspath(__file__))
         return {
             "bare": Theme(os.path.join(root, "themes/bare")),
-            "bulma": Theme(os.path.join(root, "themes/bulma"), extends="bare"),
-            "tailwind": Theme(os.path.join(root, "themes/tailwind"), extends="bare"),
-            "bs5": Theme(os.path.join(root, "themes/bs5"), extends="bare"),
-            "picocss": Theme(os.path.join(root, "themes/picocss"), extends="bare"),
+            "bulma": Theme(os.path.join(root, "themes/bulma"), parent="bare"),
+            "tailwind": Theme(os.path.join(root, "themes/tailwind"), parent="bare"),
+            "bs5": Theme(os.path.join(root, "themes/bs5"), parent="bare"),
+            "picocss": Theme(os.path.join(root, "themes/picocss"), parent="bare"),
         }
 
     @override

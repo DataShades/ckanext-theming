@@ -40,7 +40,7 @@ class YourExtensionPlugin(ITheme, p.SingletonPlugin):
             'your_theme': Theme(
                 os.path.join(root, 'themes/your_theme'),
                 # Optionally specify a parent theme to extend
-                # extends='parent_theme_name'
+                # parent='parent_theme_name'
             ),
         }
 ```

@@ -26,7 +26,7 @@ class ITheme(Interface):
                     "mytheme": Theme("/path/to/mytheme"),
                     "myothertheme": Theme(
                         "/path/to/myothertheme",
-                        extends="templates",
+                        parent="templates",
                     ),
                 }
 

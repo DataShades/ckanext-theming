@@ -28,11 +28,11 @@ def list_themes():
         click.echo(f"\tPath: {info.path}")
 
         lineage = []
-        parent = info.extends
+        parent = info.parent
         while parent:
             if parent_info := themes.get(parent):
                 lineage.append(parent)
-                parent = parent_info.extends
+                parent = parent_info.parent
             else:
                 lineage.append(click.style(parent, fg="red"))
 
