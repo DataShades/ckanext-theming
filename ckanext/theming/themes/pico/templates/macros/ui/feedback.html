@@ -24,7 +24,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title=None, footer=None) -%}
+{%- macro modal(content, title, footer) -%}
     <dialog class="modal {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <article>
             {%- if title %}
@@ -50,7 +50,7 @@
     <span class="tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
 {%- endmacro %}
 
-{%- macro popover(title=None, content=None) -%}
+{%- macro popover(title, content) -%}
     {%- do kwargs -%}
     <span class="tooltip" data-tooltip="{{ content or title }}">{{ caller() if caller else title or content }}</span>
 {%- endmacro %}

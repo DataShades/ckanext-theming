@@ -54,7 +54,7 @@
     </dl>
 {%- endmacro %}
 
-{%- macro stat(label, value, icon=None) -%}
+{%- macro stat(label, value, icon) -%}
     <div class="card text-center {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="card-body">
             {%- if icon %}
@@ -66,7 +66,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro chart(type, data, options=None) -%}
+{%- macro chart(type, data, options) -%}
     <div class="chart-container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="position: relative; height:40vh; width:100%;">
         <canvas data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
             Chart placeholder

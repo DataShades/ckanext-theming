@@ -82,7 +82,7 @@
     <section class="section" {{ ui.util.attrs(kwargs) }}>{{ content }}</section>
 {%- endmacro %}
 
-{%- macro jumbotron(content, title=None, subtitle=None) -%}
+{%- macro jumbotron(content, title, subtitle) -%}
     <section class="hero is-primary is-bold" {{ ui.util.attrs(kwargs) }}>
         <div class="hero-body">
             <div class="container">

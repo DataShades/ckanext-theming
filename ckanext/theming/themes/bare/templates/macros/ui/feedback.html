@@ -35,7 +35,7 @@
     <span title="{{ text }}" data-toggle="tooltip">{{ caller() if caller else text }}</span>
 {%- endmacro %}
 
-{%- macro popover(title=None, content=None) -%}
+{%- macro popover(title, content) -%}
     {%- do kwargs -%}
     <span data-toggle="popover" title="{{ title }}" data-content="{{ content }}">{{ caller() if caller else title or content }}</span>
 {%- endmacro %}

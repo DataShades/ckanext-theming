@@ -72,7 +72,7 @@
     {{ content }}
 {%- endmacro %}
 
-{%- macro jumbotron(content, title=None, subtitle=None) -%}
+{%- macro jumbotron(content, title, subtitle) -%}
     <div {{ ui.util.attrs(kwargs) }} class="jumbotron">
         {%- if title %}
             <h1>{{ title }}</h1>

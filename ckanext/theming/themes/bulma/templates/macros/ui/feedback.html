@@ -10,7 +10,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title=None, footer=None) -%}
+{%- macro modal(content, title, footer) -%}
     <div class="modal" {{ ui.util.attrs(kwargs) }}>
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -37,7 +37,7 @@
     <span class="has-tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
 {%- endmacro %}
 
-{%- macro popover(title=None, content=None) -%}
+{%- macro popover(title, content) -%}
     {%- do kwargs -%}
     <span class="has-popover" data-popover-title="{{ title }}" data-popover-content="{{ content }}">{{ caller() if caller else title or content }}</span>
 {%- endmacro %}

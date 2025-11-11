@@ -84,7 +84,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro dropdown_wrapper(content, title=None) -%}
+{%- macro dropdown_wrapper(content, title) -%}
     <details class="dropdown {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <summary>{{ title or 'Menu' }}</summary>
         <ul>

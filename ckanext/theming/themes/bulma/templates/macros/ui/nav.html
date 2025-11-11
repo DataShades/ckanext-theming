@@ -82,7 +82,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro dropdown_wrapper(content, title=None) -%}
+{%- macro dropdown_wrapper(content, title) -%}
     <div class="dropdown" {{ ui.util.attrs(kwargs) }}>
         <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">

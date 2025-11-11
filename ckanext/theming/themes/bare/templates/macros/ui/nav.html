@@ -85,7 +85,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro dropdown_wrapper(content, title=None) -%}
+{%- macro dropdown_wrapper(content, title) -%}
     <div {{ ui.util.attrs(kwargs) }} class="dropdown">
         {%- if title %}
             <button class="dropdown-toggle" type="button" data-toggle="dropdown">{{ title }}</button>

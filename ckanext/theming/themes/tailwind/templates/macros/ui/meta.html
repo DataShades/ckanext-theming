@@ -1,4 +1,4 @@
-{%- macro header_block(content, title=none, subtitle=none, logo=none) -%}
+{%- macro header_block(content, title, subtitle, logo) -%}
     <header id="header" class="bg-white shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
@@ -43,7 +43,7 @@
     </footer>
 {%- endmacro %}
 
-{%- macro account_block(content, title=none, subtitle=none, logo=none) -%}
+{%- macro account_block(content, title, subtitle, logo) -%}
     <header id="account" class="bg-gray-50 py-8 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">

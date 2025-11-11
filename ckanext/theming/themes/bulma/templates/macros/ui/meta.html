@@ -1,4 +1,4 @@
-{%- macro header_block(content, title=none, subtitle=none, logo=none) -%}
+{%- macro header_block(content, title, subtitle, logo) -%}
     <header id="header" {{ ui.util.attrs(kwargs) }}>
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
@@ -31,7 +31,7 @@
     </footer>
 {%- endmacro %}
 
-{%- macro account_block(content, title=none, subtitle=none, logo=none) -%}
+{%- macro account_block(content, title, subtitle, logo) -%}
     <header id="account" class="hero is-light" {{ ui.util.attrs(kwargs) }}>
         <div class="hero-body">
             <div class="container">

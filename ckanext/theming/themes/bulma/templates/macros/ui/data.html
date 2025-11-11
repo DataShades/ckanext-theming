@@ -50,7 +50,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro stat(label, value, icon=None) -%}
+{%- macro stat(label, value, icon) -%}
     <div class="level-item has-text-centered" {{ ui.util.attrs(kwargs) }}>
         <div>
             {%- if icon %}
@@ -62,7 +62,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro chart(type, data, options=None) -%}
+{%- macro chart(type, data, options) -%}
     <div class="chart-container" {{ ui.util.attrs(kwargs) }} style="position: relative; height:40vh; width:100%;">
         <canvas data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
             Chart placeholder

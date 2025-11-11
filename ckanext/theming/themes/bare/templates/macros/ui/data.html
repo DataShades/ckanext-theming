@@ -58,7 +58,7 @@
     </dl>
 {%- endmacro %}
 
-{%- macro stat(label, value, icon=None) -%}
+{%- macro stat(label, value, icon) -%}
     <div {{ ui.util.attrs(kwargs) }}>
         {%- if icon %}
             {{ ui.icon(icon) }}
@@ -68,7 +68,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro chart(type, data, options=None) -%}
+{%- macro chart(type, data, options) -%}
     {%- do kwargs -%}
     <div data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
         Chart placeholder

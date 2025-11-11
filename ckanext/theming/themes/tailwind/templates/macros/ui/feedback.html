@@ -24,7 +24,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title=None, footer=None) -%}
+{%- macro modal(content, title, footer) -%}
     <div class="fixed inset-0 z-50 overflow-y-auto {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -73,7 +73,7 @@
     </span>
 {%- endmacro %}
 
-{%- macro popover(title=None, content=None) -%}
+{%- macro popover(title, content) -%}
     <span class="relative group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         {{ caller() if caller else title or content }}
         <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-64 opacity-0 group-hover:opacity-100 transition-opacity z-10 hidden group-hover:block">

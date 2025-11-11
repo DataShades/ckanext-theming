@@ -60,7 +60,7 @@
     </dl>
 {%- endmacro %}
 
-{%- macro stat(label, value, icon=None) -%}
+{%- macro stat(label, value, icon) -%}
     <div class="flex flex-col items-center p-4 bg-white border border-gray-200 rounded-lg shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         {%- if icon %}
             {{ ui.icon(icon, class="w-8 h-8 text-blue-500") }}
@@ -70,7 +70,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro chart(type, data, options=None) -%}
+{%- macro chart(type, data, options) -%}
     <div class="chart-container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="position: relative; height:40vh; width:100%;">
         <canvas data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
             Chart placeholder

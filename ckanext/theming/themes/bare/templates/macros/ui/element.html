@@ -53,6 +53,6 @@
     <i class="icon-{{ name }} icon-{{ size }}"></i>
 {%- endmacro %}
 
-{%- macro label(text, for_id=None) -%}
+{%- macro label(text, for_id) -%}
     <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}">{{ text }}</label>
 {%- endmacro %}

@@ -82,7 +82,7 @@
     <section class="py-12 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</section>
 {%- endmacro %}
 
-{%- macro jumbotron(content, title=None, subtitle=None) -%}
+{%- macro jumbotron(content, title, subtitle) -%}
     <div class="relative py-16 overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="max-w-2xl mx-auto text-center">

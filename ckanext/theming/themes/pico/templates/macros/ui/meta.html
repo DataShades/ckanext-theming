@@ -1,4 +1,4 @@
-{%- macro header_block(content, title=none, subtitle=none, logo=none) -%}
+{%- macro header_block(content, title, subtitle, logo) -%}
     <header class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="container">
             <div class="grid">
@@ -34,7 +34,7 @@
     </footer>
 {%- endmacro %}
 
-{%- macro account_block(content, title=none, subtitle=none, logo=none) -%}
+{%- macro account_block(content, title, subtitle, logo) -%}
     <header class="section {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="container">
             <div class="grid">

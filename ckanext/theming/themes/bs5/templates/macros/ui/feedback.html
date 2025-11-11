@@ -31,7 +31,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title=None, footer=None) -%}
+{%- macro modal(content, title, footer) -%}
     <div class="modal fade {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -60,7 +60,7 @@
     </span>
 {%- endmacro %}
 
-{%- macro popover(title=None, content=None) -%}
+{%- macro popover(title, content) -%}
     <span class="d-inline-block" data-bs-toggle="popover" data-bs-title="{{ title }}" data-bs-content="{{ content }}" {{ ui.util.attrs(kwargs) }}>
         {{ caller() if caller else title or content }}
     </span>

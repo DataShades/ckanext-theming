@@ -79,7 +79,7 @@
     <section class="py-5 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</section>
 {%- endmacro %}
 
-{%- macro jumbotron(content, title=None, subtitle=None) -%}
+{%- macro jumbotron(content, title, subtitle) -%}
     <div class="bg-primary text-white p-5 mb-4 rounded-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <div class="container-fluid py-5">
             {%- if title -%}
