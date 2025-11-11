@@ -36,7 +36,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
             "bulma": Theme(os.path.join(root, "themes/bulma"), parent="bare"),
             "tailwind": Theme(os.path.join(root, "themes/tailwind"), parent="bare"),
             "bs5": Theme(os.path.join(root, "themes/bs5"), parent="bare"),
-            "picocss": Theme(os.path.join(root, "themes/picocss"), parent="bare"),
+            "pico": Theme(os.path.join(root, "themes/pico"), parent="bare"),
         }
 
     @override

@@ -17,7 +17,7 @@
             <title>
                 {%- block title %}
                     {%- set subtitle %}
-                    {%- block subtitle %}{% endblock %}
+                        {%- block subtitle %}{% endblock %}
                     {%- endset %}
                     {%- if subtitle|trim %}{{ subtitle|trim }} {{ g.template_title_delimiter }} {% endif %}
                     {{- g.site_title }}
@@ -29,7 +29,9 @@
             {%- endblock %}
 
             {%- block styles %}
-                {%- asset "theming/bare/css" %}
+                {%- block styles_bare %}
+                    {%- asset "theming/bare/styles" %}
+                {%- endblock %}
             {%- endblock -%}
 
             {# render all assets included in styles block #}
@@ -52,7 +54,10 @@
         {% block document_body %}
             {%- block page %}{% endblock %}
 
-            {%- block scripts %}{% endblock %}
+            {%- block scripts %}
+                {%- block scripts_bare %}
+                {%- endblock %}
+            {% endblock %}
             {# render all assets included in scripts block and everywhere else #}
             {# make sure there are no calls to `asset` tag after this point #}
             {{ h.render_assets('style') }}

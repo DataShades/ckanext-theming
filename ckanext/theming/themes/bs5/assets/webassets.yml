@@ -7,7 +7,12 @@
 #     preload:
 #       - base/main
 
-styles:
-  output: ckanext-theming/%(version)s-tailwind.css
+scripts:
+  output: ckanext-theming/%(version)s-bs5.js
   contents:
-    - style.css
+    - vendor.js
+
+styles:
+  output: ckanext-theming/%(version)s-bs5.css
+  contents:
+    - vendor.css

@@ -7,7 +7,7 @@
 #     preload:
 #       - base/main
 
-css:
+styles:
   output: ckanext-theming/%(version)s-bare.css
   contents:
-    - bare.css
+    - style.css

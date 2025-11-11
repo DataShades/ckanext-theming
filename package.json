@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@picocss/pico": "^2.1.1",
     "@tailwindcss/cli": "^4.1.17",
+    "bootstrap": "^5.3.8",
+    "bulma": "^1.0.4",
     "tailwindcss": "^4.1.17"
   }
 }

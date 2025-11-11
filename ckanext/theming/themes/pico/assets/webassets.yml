@@ -8,6 +8,6 @@
 #       - base/main
 
 styles:
-  output: ckanext-theming/%(version)s-tailwind.css
+  output: ckanext-theming/%(version)s-pico.css
   contents:
     - style.css

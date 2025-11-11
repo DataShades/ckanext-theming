@@ -1,36 +1,33 @@
 {%- block header_account %}
-    {%- call ui.util.call(ui.account_block) %}
-        {%- call ui.util.call(ui.nav_wrapper) %}
+    {%- call ui.util.call(ui.account_block) -%}
+        {%- call ui.util.call(ui.nav_wrapper) -%}
             {%- if current_user.is_authenticated %}
-                {% block header_account_logged %}
+                {%- block header_account_logged -%}
 
                     {{ ui.nav_item(_('Admin'), h.url_for("admin.index"), active=request.endpoint == "admin.index") }}
 
-                    {%- block header_account_profile %}
+                    {%- block header_account_profile -%}
                         {{ ui.nav_item(_('View profile'), h.url_for("user.read", id=current_user.name)) }}
                     {%- endblock header_account_profile %}
 
-                    {% block header_dashboard %}
+                    {%- block header_dashboard -%}
                         {{ ui.nav_item(_('Dashboard'), h.url_for("dashboard.datasets")) }}
-                    {% endblock %}
+                    {%- endblock %}
 
-                    {% block header_account_settings_link %}
+                    {%- block header_account_settings_link -%}
                         {{ ui.nav_item(ui.util.merge(h.user_image(current_user.id, 12), _('Profile settings')), h.url_for("user.edit", id=c.userobj.name)) }}
-                    {% endblock %}
+                    {%- endblock %}
 
-                    {% block header_account_log_out_link %}
+                    {%- block header_account_log_out_link -%}
 
-                        {{ ui.button(_('Log out'), type="submit", attrs={"form": "form-logout"}) }}
-
+                        {{ ui.button(_('Log out'), type="submit", attrs={"form": "form-logout"}) -}}
                         <div hidden="">
-
                             {%- call ui.form_block("POST", action=h.url_for('user.logout'), attrs={"id": "form-logout"}) %}
                             {%- endcall %}
                         </div>
-                    {% endblock %}
+                    {%- endblock %}
 
-
-                {% endblock %}
+                {%- endblock %}
 
             {%- else -%}
                 {% block header_account_notlogged %}
