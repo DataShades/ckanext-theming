@@ -55,6 +55,9 @@
             {%- block page %}{% endblock %}
 
             {%- block scripts %}
+                {%- block scripts_base -%}
+                    {%- asset "base/main" -%}
+                {%- endblock %}
                 {%- block scripts_bare %}
                 {%- endblock %}
             {% endblock %}

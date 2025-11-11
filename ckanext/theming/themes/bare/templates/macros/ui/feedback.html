@@ -13,27 +13,21 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(title=None, body=None, footer=None) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                {%- if title %}
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{ title }}</h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                {%- endif %}
-                <div class="modal-body">
-                    {{ body }}
-                </div>
-                {%- if footer %}
-                    <div class="modal-footer">
-                        {{ footer }}
-                    </div>
-                {%- endif %}
-            </div>
+{%- macro modal(content, title=None, footer=None) -%}
+    <dialog>
+        {%- if title %}
+            {{ ui.heading(title, level=2) }}
+        {%- endif %}
+
+        <div>
+            {{ content }}
         </div>
-    </div>
+        {%- if footer -%}
+            <div>
+                {{ footer }}
+            </div>
+        {%- endif %}
+    </dialog>
 {%- endmacro %}
 
 {%- macro tooltip(text) -%}

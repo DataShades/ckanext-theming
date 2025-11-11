@@ -31,7 +31,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(title=None, body=None, footer=None) -%}
+{%- macro modal(content, title=None, footer=None) -%}
     <div class="modal fade {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -42,7 +42,7 @@
                     </div>
                 {%- endif %}
                 <div class="modal-body">
-                    {{ body }}
+                    {{ content }}
                 </div>
                 {%- if footer %}
                     <div class="modal-footer">

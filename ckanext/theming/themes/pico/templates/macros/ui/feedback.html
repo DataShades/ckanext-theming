@@ -24,7 +24,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(title=None, body=None, footer=None) -%}
+{%- macro modal(content, title=None, footer=None) -%}
     <dialog class="modal {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
         <article>
             {%- if title %}
@@ -34,7 +34,7 @@
                 </header>
             {%- endif %}
             <div class="content">
-                {{ body }}
+                {{ content }}
             </div>
             {%- if footer %}
                 <footer>
