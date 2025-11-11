@@ -3,7 +3,6 @@ groups:
   - annotation: Theming
     options:
       - key: ckan.ui.theme
-        default: classic
         example: midnight-blue
         description: |
           The theme to use for the CKAN UI. .

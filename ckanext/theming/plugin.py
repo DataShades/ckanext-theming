@@ -41,13 +41,13 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
 
     @override
     def configure(self, config: Any) -> None:
-        switch_theme(config["ckan.ui.theme"], config)
+        if config["ckan.ui.theme"]:
+            switch_theme(config["ckan.ui.theme"], config)
         UIManager.reset()
 
     @override
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
-        if config["debug"]:
-            app.jinja_env.add_extension("jinja2.ext.debug")
+        app.jinja_env.add_extension("jinja2.ext.debug")
 
         app.jinja_env.globals.update({"ui": ui})
         return app
