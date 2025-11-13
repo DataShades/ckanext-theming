@@ -3,9 +3,9 @@
     <span class="tag">{{ content }}</span>
 {%- endmacro %}
 
-{%- macro button(content, style="button", btn_type="button") -%}
+{%- macro button(content, style="button", type="button") -%}
     {%- do kwargs -%}
-    <button type="{{ btn_type }}" class="button is-{{ style }}">{{ content }}</button>
+    <button type="{{ type }}" class="button is-{{ style }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}

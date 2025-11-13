@@ -2,8 +2,8 @@
     <span {{ ui.util.attrs(kwargs) }} class="badge bg-secondary">{{ content }}</span>
 {%- endmacro %}
 
-{%- macro button(content, style="primary", btn_type="button") -%}
-    <button {{ ui.util.attrs(kwargs) }} type="{{ btn_type }}" class="btn btn-{{ style }}">{{ content }}</button>
+{%- macro button(content, style="primary", type="button") -%}
+    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}
