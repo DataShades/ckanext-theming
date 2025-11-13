@@ -100,8 +100,8 @@ Each macro file should contain actual implementations that use appropriate CSS c
 Example `themes/your_theme/macros/ui/element.html` (using Bootstrap classes):
 
 ```html
-{%- macro button(content, type="primary") -%}
-    <button type="button" class="btn btn-{{ type }}">
+{%- macro button(content, style="primary", type="button") -%}
+    <button type="{{ type }}" class="btn btn-{{ style }}">
         {{ content }}
     </button>
 {%- endmacro %}

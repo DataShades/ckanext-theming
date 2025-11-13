@@ -69,9 +69,9 @@ class MyThemePlugin(plugins.SingletonPlugin):
 Once a theme is active, UI macros can be used in templates:
 
 ```html
-{{ ui.button("Click Me", type="primary") }}
+{{ ui.button("Click Me", style="primary", type="button") }}
 {{ ui.card(title="My Card", content="Card content here") }}
-{{ ui.alert("Success message", type="success") }}
+{{ ui.alert("Success message", style="success") }}
 ```
 
 ### Creating Custom Themes

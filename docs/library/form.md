@@ -26,7 +26,7 @@ Use as the main wrapper for any form that requires submission to the server, esp
   {{ ui.input(name="username", label="Username") }}
   {{ ui.input(name="email", label="Email", type="email") }}
   {{ ui.textarea(name="comment", label="Comment") }}
-  {{ ui.button("Submit", type="submit") }}
+  {{ ui.button("Submit", style="primary", type="submit") }}
 {{ ui.form_end() }}
 ```
 
@@ -57,8 +57,8 @@ Use at the end of forms to wrap action buttons that perform operations like savi
 
 ```
 {{ ui.form_actions_wrapper(
-  ui.button("Save", type="submit") +
-  ui.button("Cancel", type="button")
+  ui.button("Save", style="primary", type="submit") +
+  ui.button("Cancel", style="secondary", type="button")
 ) }}
 ```
 

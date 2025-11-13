@@ -22,14 +22,18 @@ Use to communicate immediate feedback about user actions or system states. Posit
 **Example:**
 
 ```
-{{ ui.alert("Your changes have been saved successfully!", type="success") }}
-{{ ui.alert("Please review the highlighted fields for corrections.", type="warning") }}
-{{ ui.alert("An error occurred while processing your request.", type="error") }}
+{{ ui.alert("Your changes have been saved successfully!", style="success") }}
+{{ ui.alert("Please review the highlighted fields for corrections.", style="warning") }}
+{{ ui.alert("An error occurred while processing your request.", style="danger") }}
 ```
+
+**Arguments:**
+
+- `style` (string): Visual styling of the alert. One of "primary", "secondary", "info", "success", "warning", "danger". Defaults to "info".
 
 **Recommendations:**
 
-- Use appropriate alert types (info, success, warning, error)
+- Use appropriate alert styles (info, success, warning, danger)
 - Different themes provide various alert styles (Bootstrap: .alert, .alert-success, Tailwind: bg-green-100 text-green-800, Bulma: .notification)
 - Keep messages concise and actionable
 - Include dismiss functionality when appropriate
@@ -55,9 +59,13 @@ Use for brief notifications that don't require immediate attention, allowing use
 **Example:**
 
 ```
-{{ ui.toast("Item added to cart", type="success") }}
-{{ ui.toast("Preferences saved", type="info") }}
+{{ ui.toast("Item added to cart", style="success") }}
+{{ ui.toast("Preferences saved", style="info") }}
 ```
+
+**Arguments:**
+
+- `style` (string): Visual styling of the toast. One of "primary", "secondary", "info", "success", "warning", "danger". Defaults to "info".
 
 **Recommendations:**
 
@@ -88,7 +96,7 @@ Use for interactions that require immediate user attention and decision-making, 
 **Example:**
 
 ```
-{{ ui.modal(title="Delete Confirmation", body="Are you sure you want to delete this item? This action cannot be undone.", footer=ui.button("Delete", type="danger") + ui.button("Cancel", type="secondary")) }}
+{{ ui.modal(title="Delete Confirmation", body="Are you sure you want to delete this item? This action cannot be undone.", footer=ui.button("Delete", style="danger", type="button") + ui.button("Cancel", style="secondary", type="button")) }}
 ```
 
 **Recommendations:**
@@ -120,7 +128,7 @@ Use for supplementary information that helps users understand interface elements
 
 ```
 {{ ui.tooltip("Click to save your work") }}
-  {{ ui.button("Save", type="primary") }}
+  {{ ui.button("Save", style="primary", type="button") }}
 {{ ui.tooltip() }}
 ```
 
@@ -151,8 +159,8 @@ Use when you need to display more information or functionality than a simple too
 **Example:**
 
 ```
-{{ ui.popover(title="Advanced Settings", content="Configure additional options for this feature...", type="info") }}
-  {{ ui.button("Settings", type="secondary") }}
+{{ ui.popover(title="Advanced Settings", content="Configure additional options for this feature...") }}
+  {{ ui.button("Settings", style="secondary", type="button") }}
 {{ ui.popover() }}
 ```
 

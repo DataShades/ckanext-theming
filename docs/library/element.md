@@ -77,14 +77,21 @@ Use for any interactive element that performs an action when clicked, as opposed
 **Example:**
 
 ```
-{{ ui.button("Submit Form", type="primary") }}
-{{ ui.button("Cancel", type="secondary") }}
+{{ ui.button("Submit Form", style="primary", type="submit") }}
+{{ ui.button("Cancel", style="secondary", type="button") }}
 ```
+
+**Arguments:**
+
+- `style` (string): Visual styling of the button. One of "primary", "secondary", "info", "success", "warning", "danger". Defaults to "primary".
+- `type` (string): HTML button type attribute. One of "submit", "button", "reset". Controls the button's behavior. Defaults to "button".
 
 **Recommendations:**
 
-- Use appropriate button types for visual consistency
+- Use appropriate button styles for visual consistency
 - Different themes provide various styling options (Bootstrap: btn-primary, btn-secondary; Tailwind: bg-blue-600, bg-gray-600; Bulma: is-primary, is-link)
+- Use `type="submit"` for form submission buttons
+- Use `type="button"` for general action buttons
 
 ## `divider`
 

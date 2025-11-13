@@ -182,6 +182,10 @@ Use when content is loading to provide visual feedback that improves perceived p
 {{ ui.skeleton_loader(type="text") }}
 ```
 
+**Arguments:**
+
+- `type` (string): The type of skeleton loader to display. One of "text", "avatar", "input". Defaults to "text".
+
 **Recommendations:**
 
 - Use during asynchronous content loading
@@ -210,14 +214,18 @@ Use for displaying messages that provide information to users without requiring 
 **Example:**
 
 ```
-{{ ui.notification(title="Information", content="Your profile has been updated successfully.", type="info") }}
+{{ ui.notification(title="Information", content="Your profile has been updated successfully.", style="info") }}
 ```
+
+**Arguments:**
+
+- `style` (string): Visual styling of the notification. One of "primary", "secondary", "info", "success", "warning", "danger". Defaults to "info".
 
 **Recommendations:**
 
 - Use for informative messages
 - Different themes provide various notification styles (Bootstrap: alert variants, Tailwind: bg-* classes, Bulma: notification colors)
-- Choose appropriate type (info, success, warning, etc.)
+- Choose appropriate style (info, success, warning, etc.)
 - Consider auto-dismissing for non-critical notifications
 - Ensure accessibility with proper ARIA roles
 ## `spacer`
@@ -269,4 +277,4 @@ Displays a notification message.
 
 *   `title` (string): The title of the notification. Defaults to `None`.
 *   `content` (string): The content of the notification.
-*   `type` (string): The type of notification (e.g., "info", "success", "warning", "error"). Defaults to "info".
+*   `style` (string): The visual style of notification (e.g., "primary", "secondary", "info", "success", "warning", "danger"). Defaults to "info".
