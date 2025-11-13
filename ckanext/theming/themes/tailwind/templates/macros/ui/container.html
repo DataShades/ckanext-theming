@@ -1,11 +1,11 @@
 {%- macro accordion_wrapper(content) -%}
-    <div class="space-y-2 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="space-y-2">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro accordion_item(title, open=false) -%}
-    <div class="border border-gray-200 rounded-lg {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="border border-gray-200 rounded-lg">
         <button class="flex items-center justify-between w-full p-4 text-left text-gray-700 bg-gray-50 rounded-t-lg hover:bg-gray-100 focus:outline-none">
             <span>{{ title }}</span>
             <svg class="w-5 h-5 transition-transform duration-200 {{ 'rotate-180' if open else '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,7 +19,7 @@
 {%- endmacro %}
 
 {%- macro card(content, title, footer, img, href) -%}
-    <div class="overflow-hidden bg-white rounded-lg shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="overflow-hidden bg-white rounded-lg shadow">
         {%- if img -%}
             <img class="object-cover w-full h-48" src="{{ img }}" alt="{{ title or 'Card image' }}">
         {%- endif %}
@@ -48,21 +48,21 @@
 {%- endmacro %}
 
 {%- macro column(content) -%}
-    <div class="flex-1 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="flex-1">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro container(content, fluid=false) -%}
-    <div class="{{ 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' if not fluid else 'w-full' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="{{ 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8' if not fluid else 'w-full' }}">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro grid(content, columns) -%}
-    <div class="grid grid-cols-{{ columns if columns else '1' }} gap-6 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="grid grid-cols-{{ columns if columns else '1' }} gap-6">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro panel(content, title) -%}
-    <div class="bg-white shadow rounded-lg {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="bg-white shadow rounded-lg">
         {%- if title -%}
             <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">{{ title }}</h3>
@@ -75,15 +75,15 @@
 {%- endmacro %}
 
 {%- macro row(content) -%}
-    <div class="flex {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="flex">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro section(content) -%}
-    <section class="py-12 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</section>
+    <section {{ ui.util.attrs(kwargs) }} class="py-12">{{ content }}</section>
 {%- endmacro %}
 
 {%- macro jumbotron(content, title, subtitle) -%}
-    <div class="relative py-16 overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="relative py-16 overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-600">
         <div class="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="max-w-2xl mx-auto text-center">
                 {%- if title -%}
@@ -101,11 +101,11 @@
 {%- endmacro %}
 
 {%- macro well(content) -%}
-    <div class="p-6 bg-gray-50 rounded-lg border border-gray-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="p-6 bg-gray-50 rounded-lg border border-gray-200">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro media_object(img, content) -%}
-    <div class="flex {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="flex">
         {%- if img -%}
             <div class="flex-shrink-0 mr-4">
                 {{ ui.image(img, class="w-16 h-16 rounded-full object-cover") }}
@@ -118,7 +118,7 @@
 {%- endmacro %}
 
 {%- macro list_group_item(content, active=False) -%}
-    <a class="block px-4 py-3 text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 {{ 'bg-blue-50 border-blue-200' if active else '' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <a {{ ui.util.attrs(kwargs) }} class="block px-4 py-3 text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 {{ 'bg-blue-50 border-blue-200' if active else '' }}">
         {{ content }}
     </a>
 {%- endmacro %}

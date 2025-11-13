@@ -1,13 +1,13 @@
 {%- macro badge(content) -%}
-    <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</span>
+    <span {{ ui.util.attrs(kwargs) }} class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro button(content, type="button") -%}
-    <button class="px-4 py-2 font-medium text-white bg-{{ type if type in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-600 rounded-md hover:bg-{{ type if type in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-{{ type if type in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-500 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</button>
+    <button {{ ui.util.attrs(kwargs) }} class="px-4 py-2 font-medium text-white bg-{{ type if type in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-600 rounded-md hover:bg-{{ type if type in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-{{ type if type in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-500">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}
-    <hr class="my-4 border-t border-gray-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"/>
+    <hr {{ ui.util.attrs(kwargs) }} class="my-4 border-t border-gray-200"/>
 {%- endmacro %}
 
 {%- macro heading(content, level=1) -%}
@@ -20,7 +20,7 @@
         5: 'text-lg font-medium',
         6: 'text-base font-medium'
     } %}
-    <{{ tag }} class="{{ sizes[level] if level in sizes else 'text-xl font-bold' }} text-gray-900 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</{{ tag }}>
+    <{{ tag }} {{ ui.util.attrs(kwargs) }} class="{{ sizes[level] if level in sizes else 'text-xl font-bold' }} text-gray-900">{{ content }}</{{ tag }}>
 {%- endmacro %}
 
 {%- macro image(src, alt="") -%}
@@ -28,11 +28,11 @@
 {%- endmacro %}
 
 {%- macro link(content, href) -%}
-    <a class="font-medium text-blue-600 hover:text-blue-800 hover:underline {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" href="{{ href or content }}">{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs) }} class="font-medium text-blue-600 hover:text-blue-800 hover:underline" href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 
 {%- macro text(content) -%}
-    <p class="text-gray-700 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</p>
+    <p {{ ui.util.attrs(kwargs) }} class="text-gray-700">{{ content }}</p>
 {%- endmacro %}
 
 {%- macro video(src, controls=true) -%}
@@ -40,7 +40,7 @@
 {%- endmacro %}
 
 {%- macro tag(content, id, href) -%}
-    <a class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full hover:bg-blue-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs) }} class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full hover:bg-blue-200" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
 {%- endmacro %}
 
 {%- macro avatar(src, alt) -%}
@@ -54,11 +54,11 @@
 
 {%- macro icon(name, size="md") -%}
     {%- do kwargs -%}
-    <svg class="w-{{ '4' if size == 'sm' else '6' if size == 'md' else '8' if size == 'lg' else '10' }} h-{{ '4' if size == 'sm' else '6' if size == 'md' else '8' if size == 'lg' else '10' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg {{ ui.util.attrs(kwargs) }} class="w-{{ '4' if size == 'sm' else '6' if size == 'md' else '8' if size == 'lg' else '10' }} h-{{ '4' if size == 'sm' else '6' if size == 'md' else '8' if size == 'lg' else '10' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M{{ name }}"></path>
     </svg>
 {%- endmacro %}
 
 {%- macro label(text, for_id=None) -%}
-    <label class="block text-sm font-medium text-gray-700 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" for="{{ for_id }}">{{ text }}</label>
+    <label {{ ui.util.attrs(kwargs) }} class="block text-sm font-medium text-gray-700" for="{{ for_id }}">{{ text }}</label>
 {%- endmacro %}

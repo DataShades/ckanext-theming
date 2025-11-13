@@ -1,16 +1,13 @@
 {% ckan_extends %}
 
-{%- block styles %}
-    {{ super() }}
-    {%- block styles_bare -%}{%- endblock %}
+{%- block styles_theming %}
     {%- block styles_bs5 -%}
         {%- asset "theming/bs5/styles" -%}
     {%- endblock %}
 {%- endblock %}
 
-{%- block scripts %}
+{%- block scripts_theming %}
     {{ super() }}
-    {%- block scripts_bare -%}{%- endblock %}
     {%- block scripts_bs5 -%}
         {%- asset "theming/bs5/scripts" -%}
     {%- endblock %}

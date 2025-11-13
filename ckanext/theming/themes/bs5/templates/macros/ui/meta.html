@@ -1,5 +1,5 @@
 {%- macro header_block(content, title, subtitle, logo) -%}
-    <header id="header" class="bg-light border-bottom {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} id="header" class="bg-light border-bottom">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-between py-3">
                 <div class="d-flex align-items-center">
@@ -25,7 +25,7 @@
 {%- endmacro %}
 
 {%- macro footer_block(content) -%}
-    <footer class="bg-light border-top {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <footer {{ ui.util.attrs(kwargs) }} class="bg-light border-top">
         <div class="container-fluid">
             <div class="row py-4">
                 <div class="col-md-12 text-center">
@@ -42,7 +42,7 @@
 {%- endmacro %}
 
 {%- macro account_block(content, title, subtitle, logo) -%}
-    <header id="account" class="bg-light py-4 border-bottom {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} id="account" class="bg-light py-4 border-bottom">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-8">

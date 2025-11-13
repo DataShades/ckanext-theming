@@ -1,0 +1,14 @@
+{% ckan_extends %}
+
+{%- block zone_intro -%}
+{%- endblock %}
+
+{%- block zone_outro -%}
+    {{ super() }}
+
+    {%- block flash -%}
+        <div id="flash-messages" class="toast-container position-fixed" style="right: 1rem; bottom: 1rem;">
+
+        </div>
+    {%- endblock %}
+{%- endblock %}

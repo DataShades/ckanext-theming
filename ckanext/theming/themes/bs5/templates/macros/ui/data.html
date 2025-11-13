@@ -1,5 +1,5 @@
 {%- macro table_block(striped=false, bordered=false) -%}
-    <div class="table-responsive {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="table-responsive">
         <table class="table {{ 'table-striped' if striped }} {{ 'table-bordered' if bordered }}">
             {{ caller() }}
         </table>
@@ -38,7 +38,7 @@
 {%- endmacro %}
 
 {%- macro list_group(items) -%}
-    <ul class="list-group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <ul {{ ui.util.attrs(kwargs) }} class="list-group">
         {%- for item in items %}
             <li class="list-group-item">{{ item }}</li>
         {%- endfor %}
@@ -46,7 +46,7 @@
 {%- endmacro %}
 
 {%- macro definition_list(items) -%}
-    <dl class="row {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <dl {{ ui.util.attrs(kwargs) }} class="row">
         {%- for term, definition in items %}
             <dt class="col-sm-3">{{ term }}</dt>
             <dd class="col-sm-9">{{ definition }}</dd>
@@ -55,7 +55,7 @@
 {%- endmacro %}
 
 {%- macro stat(label, value, icon) -%}
-    <div class="card text-center {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card text-center">
         <div class="card-body">
             {%- if icon %}
                 <i class="bi bi-{{ icon }} fs-2"></i>
@@ -67,7 +67,7 @@
 {%- endmacro %}
 
 {%- macro chart(type, data, options) -%}
-    <div class="chart-container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="position: relative; height:40vh; width:100%;">
+    <div {{ ui.util.attrs(kwargs) }} class="chart-container" style="position: relative; height:40vh; width:100%;">
         <canvas data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
             Chart placeholder
         </canvas>
@@ -75,5 +75,5 @@
 {%- endmacro %}
 
 {%- macro code_block(content, language="text") -%}
-    <pre class="bg-light p-3 border rounded {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"><code class="language-{{ language }}">{{ content }}</code></pre>
+    <pre {{ ui.util.attrs(kwargs) }} class="bg-light p-3 border rounded"><code class="language-{{ language }}">{{ content }}</code></pre>
 {%- endmacro %}

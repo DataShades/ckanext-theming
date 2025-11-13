@@ -8,7 +8,7 @@
 {%- endmacro %}
 
 {%- macro form_actions_wrapper(content) -%}
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {{ content }}
     </div>
 {%- endmacro %}
@@ -24,7 +24,7 @@
 
 {%- macro form_errors(errors={}) -%}
     {% if errors %}
-        <div class="alert error {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <div {{ ui.util.attrs(kwargs) }} class="alert error">
             <p>{{ _('The form contains invalid entries:') }}</p>
             <ul>
                 {% for key, error in errors.items() %}
@@ -38,7 +38,7 @@
 {% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
         {%- endif %}
@@ -59,7 +59,7 @@
 {% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <label class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <label {{ ui.util.attrs(kwargs) }} class="">
         <input type="checkbox"
                name="{{ name }}"
                id="{{ id }}"
@@ -78,7 +78,7 @@
 {%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
         {%- endif %}
@@ -97,7 +97,7 @@
 {%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
         {%- endif %}
@@ -124,7 +124,7 @@
 {%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <label class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <label {{ ui.util.attrs(kwargs) }} class="">
         <input type="radio"
                name="{{ name }}"
                id="{{ id }}"
@@ -143,7 +143,7 @@
 {%- macro file_input(name, id, label="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
         {%- endif %}
@@ -163,7 +163,7 @@
 {%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
         {%- endif %}
@@ -187,7 +187,7 @@
 {%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <label class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <label {{ ui.util.attrs(kwargs) }} class="">
         <input type="checkbox"
                name="{{ name }}"
                id="{{ id }}"

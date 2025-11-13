@@ -1,13 +1,13 @@
 {%- macro badge(content) -%}
-    <span class="badge bg-secondary {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</span>
+    <span {{ ui.util.attrs(kwargs) }} class="badge bg-secondary">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro button(content, type="primary") -%}
-    <button type="button" class="btn btn-{{ type }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</button>
+    <button {{ ui.util.attrs(kwargs) }} type="button" class="btn btn-{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}
-    <hr class="my-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"/>
+    <hr {{ ui.util.attrs(kwargs) }} class="my-4"/>
 {%- endmacro %}
 
 {%- macro heading(content, level=1) -%}
@@ -20,7 +20,7 @@
         5: 'h5',
         6: 'h6'
     } %}
-    <{{ tag }} class="{{ sizes[level] if level in sizes else 'h1' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</{{ tag }}>
+    <{{ tag }} {{ ui.util.attrs(kwargs) }} class="{{ sizes[level] if level in sizes else 'h1' }}">{{ content }}</{{ tag }}>
 {%- endmacro %}
 
 {%- macro image(src, alt="") -%}
@@ -28,11 +28,11 @@
 {%- endmacro %}
 
 {%- macro link(content, href) -%}
-    <a class="link-primary text-decoration-none {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" href="{{ href or content }}">{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs) }} class="link-primary text-decoration-none" href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 
 {%- macro text(content) -%}
-    <p class="text-body {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</p>
+    <p {{ ui.util.attrs(kwargs) }} class="text-body">{{ content }}</p>
 {%- endmacro %}
 
 {%- macro video(src, controls=true) -%}
@@ -40,7 +40,7 @@
 {%- endmacro %}
 
 {%- macro tag(content, id, href) -%}
-    <a class="badge bg-primary text-decoration-none {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs) }} class="badge bg-primary text-decoration-none" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
 {%- endmacro %}
 
 {%- macro avatar(src, alt) -%}
@@ -58,5 +58,5 @@
 {%- endmacro %}
 
 {%- macro label(text, for_id=None) -%}
-    <label for="{{ for_id }}" class="form-label {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ text }}</label>
+    <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}" class="form-label">{{ text }}</label>
 {%- endmacro %}

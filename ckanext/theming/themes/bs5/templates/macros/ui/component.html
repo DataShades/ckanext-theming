@@ -1,5 +1,5 @@
 {%- macro group_item(group) -%}
-    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card mb-3">
         <div class="row g-0">
             <div class="col-md-2">
                 {{ ui.image(group.image_display_url if group.image_display_url else h.url_for_static('/base/images/placeholder-group.png'), alt=group.title, class="img-fluid rounded-start") }}
@@ -19,7 +19,7 @@
 {%- endmacro %}
 
 {%- macro organization_item(organization) -%}
-    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card mb-3">
         <div class="row g-0">
             <div class="col-md-2">
                 {{ ui.image(organization.image_display_url if organization.image_display_url else h.url_for_static('/base/images/placeholder-organization.png'), alt=organization.title, class="img-fluid rounded-start") }}
@@ -39,7 +39,7 @@
 {%- endmacro %}
 
 {%- macro package_item(pkg) -%}
-    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">
                 {{ ui.link(pkg.title or pkg.name, href=h.url_for('dataset.read', id=pkg.name)) }}
@@ -64,7 +64,7 @@
 {%- endmacro %}
 
 {%- macro resource_item(res) -%}
-    <div class="card mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card mb-3">
         <div class="card-body">
             <h5 class="card-title">{{ res.name or res.description or res.url[:50] ~ '...' }}</h5>
             <p class="card-text">{{ res.description if res.description else res.url }}</p>

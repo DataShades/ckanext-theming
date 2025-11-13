@@ -1,5 +1,5 @@
 {%- macro breadcrumb_wrapper(content) -%}
-    <nav aria-label="breadcrumb" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <nav {{ ui.util.attrs(kwargs) }} aria-label="breadcrumb" class="">
         <ul class="breadcrumb">
             {{ content }}
         </ul>
@@ -21,7 +21,7 @@
 {%- endmacro %}
 
 {%- macro tab_wrapper(content) -%}
-    <nav role="tablist" class="tabs {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <nav {{ ui.util.attrs(kwargs) }} role="tablist" class="tabs">
         <ul>
             {{ content }}
         </ul>
@@ -50,7 +50,7 @@
 
 {%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
     {%- if total_pages > 1 %}
-        <nav role="navigation" aria-label="pagination" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+        <nav {{ ui.util.attrs(kwargs) }} role="navigation" aria-label="pagination" class="">
             <ul class="pagination">
                 {%- if page > 1 %}
                     <li><a href="{{ url_generator(page=page - 1) }}">‹ Previous</a></li>
@@ -85,7 +85,7 @@
 {%- endmacro %}
 
 {%- macro dropdown_wrapper(content, title) -%}
-    <details class="dropdown {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <details {{ ui.util.attrs(kwargs) }} class="dropdown">
         <summary>{{ title or 'Menu' }}</summary>
         <ul>
             {{ content }}
@@ -98,7 +98,7 @@
 {%- endmacro %}
 
 {%- macro sidebar(content) -%}
-    <aside class="container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <aside {{ ui.util.attrs(kwargs) }} class="container">
         <nav>
             {{ content }}
         </nav>
@@ -106,7 +106,7 @@
 {%- endmacro %}
 
 {%- macro navbar(brand, items) -%}
-    <header class="container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} class="container">
         <nav class="navbar">
             <div>
                 <a href="{{ h.url_for('home.index') }}" class="brand">{{ brand }}</a>

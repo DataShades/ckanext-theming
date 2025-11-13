@@ -17,5 +17,7 @@
          );
      }
     </script>
-    <button onclick="showModal()">Click</button>
+    {{ ui.button("Click", attrs={"onclick": "showModal()"}) }}
+
+    {{ ui.toast("hello") }}
 {%- endblock %}

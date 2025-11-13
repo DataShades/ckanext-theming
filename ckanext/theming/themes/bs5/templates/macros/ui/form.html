@@ -8,7 +8,7 @@
 {%- endmacro %}
 
 {%- macro form_actions_wrapper(content) -%}
-    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
         {{ content }}
     </div>
 {%- endmacro %}
@@ -24,7 +24,7 @@
 
 {%- macro form_errors(errors={}) -%}
     {% if errors %}
-        <div class="alert alert-danger {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+        <div {{ ui.util.attrs(kwargs) }} class="alert alert-danger" role="alert">
             <h4 class="alert-heading">{{ _('Form Errors') }}</h4>
             <p>{{ _('The form contains invalid entries:') }}</p>
             <ul class="mb-0">
@@ -39,7 +39,7 @@
 {% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
         {%- if label -%}
             <label for="{{ id }}" class="form-label">
                 {{ label }}
@@ -63,7 +63,7 @@
 {% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 form-check {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3 form-check">
         <input type="checkbox"
                class="form-check-input {{ 'is-invalid' if errors else '' }}"
                name="{{ name }}"
@@ -86,7 +86,7 @@
 {%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
         {%- if label -%}
             <label for="{{ id }}" class="form-label">
                 {{ label }}
@@ -109,7 +109,7 @@
 {%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
         {%- if label -%}
             <label for="{{ id }}" class="form-label">
                 {{ label }}
@@ -139,7 +139,7 @@
 {%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 form-check {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3 form-check">
         <input type="radio"
                class="form-check-input {{ 'is-invalid' if errors else '' }}"
                name="{{ name }}"
@@ -162,7 +162,7 @@
 {%- macro file_input(name, id, label="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
         {%- if label -%}
             <label for="{{ id }}" class="form-label">
                 {{ label }}
@@ -185,7 +185,7 @@
 {%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
         {%- if label -%}
             <label for="{{ id }}" class="form-label">
                 {{ label }}
@@ -212,7 +212,7 @@
 {%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-3 form-check form-switch {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3 form-check form-switch">
         <input class="form-check-input {{ 'is-invalid' if errors else '' }}"
                type="checkbox"
                role="switch"

@@ -1,6 +1,14 @@
 {% ckan_extends %}
 
-{%- block styles %}
+{%- block styles_theming %}
+    {%- block styles_pico -%}
+        {%- asset "theming/pico/styles" -%}
+    {%- endblock %}
+{%- endblock %}
+
+{%- block scripts_theming %}
     {{ super() }}
-    {%- asset "theming/pico/styles" -%}
+    {%- block scripts_pico -%}
+        {%- asset "theming/pico/scripts" -%}
+    {%- endblock %}
 {%- endblock %}

@@ -6,7 +6,7 @@
         'error': 'danger',
         'danger': 'danger'
     } %}
-    <div class="alert alert-{{ alert_types.get(type, 'primary') }} alert-dismissible fade show {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(type, 'primary') }} alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -20,7 +20,7 @@
         'error': 'danger',
         'danger': 'danger'
     } %}
-    <div class="toast {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert" aria-live="assertive" aria-atomic="true">
+    <div {{ ui.util.attrs(kwargs) }} class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <strong class="me-auto text-{{ toast_types.get(type, 'primary') }}">Notification</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -32,7 +32,7 @@
 {%- endmacro %}
 
 {%- macro modal(content, title, footer) -%}
-    <div class="modal fade {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div {{ ui.util.attrs(kwargs) }} class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 {%- if title %}
@@ -67,7 +67,7 @@
 {%- endmacro %}
 
 {%- macro progress(value, max=100, label=None) -%}
-    <div class="progress {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="progressbar" aria-label="Progress" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ max }}">
+    <div {{ ui.util.attrs(kwargs) }} class="progress" role="progressbar" aria-label="Progress" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ max }}">
         <div class="progress-bar" style="width: {{ (value / max) * 100 }}%"></div>
     </div>
     <div class="mt-1 small text-muted">
@@ -81,7 +81,7 @@
         'md': '',
         'lg': 'spinner-border-lg'
     } %}
-    <div class="spinner-border {{ size_classes.get(size, '') }}" role="status" {{ ui.util.attrs(kwargs) }}>
+    <div {{ ui.util.attrs(kwargs) }} class="spinner-border {{ size_classes.get(size, '') }}" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
 {%- endmacro %}

@@ -1,11 +1,11 @@
 {%- macro accordion_wrapper(content) -%}
-    <div class="accordion {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="accordion">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro accordion_item(title, open=false) -%}
-    <div class="accordion-item {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button {{ 'collapsed' if not open }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ title|replace(' ', '-')|lower }}">
                 {{ title }}
@@ -20,7 +20,7 @@
 {%- endmacro %}
 
 {%- macro card(content, title, footer, img, href) -%}
-    <div class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card">
         {%- if img -%}
             <img src="{{ img }}" class="card-img-top" alt="{{ title or 'Card image' }}">
         {%- endif %}
@@ -45,23 +45,23 @@
 {%- endmacro %}
 
 {%- macro column(content) -%}
-    <div class="col {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="col">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro container(content, fluid=false) -%}
-    <div class="{{ 'container-fluid' if fluid else 'container' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="{{ 'container-fluid' if fluid else 'container' }}">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro grid(content, columns) -%}
-    <div class="row {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="row">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro panel(content, title) -%}
-    <div class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card">
         {%- if title -%}
             <div class="card-header">{{ title }}</div>
         {%- endif -%}
@@ -72,15 +72,15 @@
 {%- endmacro %}
 
 {%- macro row(content) -%}
-    <div class="row {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="row">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro section(content) -%}
-    <section class="py-5 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</section>
+    <section {{ ui.util.attrs(kwargs) }} class="py-5">{{ content }}</section>
 {%- endmacro %}
 
 {%- macro jumbotron(content, title, subtitle) -%}
-    <div class="bg-primary text-white p-5 mb-4 rounded-3 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="bg-primary text-white p-5 mb-4 rounded-3">
         <div class="container-fluid py-5">
             {%- if title -%}
                 <h1 class="display-5 fw-bold">{{ title }}</h1>
@@ -94,11 +94,11 @@
 {%- endmacro %}
 
 {%- macro well(content) -%}
-    <div class="bg-light p-4 rounded-2 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="bg-light p-4 rounded-2">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro media_object(img, content) -%}
-    <div class="d-flex {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="d-flex">
         {%- if img -%}
             <img src="{{ img }}" class="flex-shrink-0 me-3 rounded" alt="Media image" width="64" height="64">
         {%- endif -%}
@@ -109,5 +109,5 @@
 {%- endmacro %}
 
 {%- macro list_group_item(content, active=False) -%}
-    <a href="#" class="list-group-item list-group-item-action {{ 'active' if active }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs) }} href="#" class="list-group-item list-group-item-action {{ 'active' if active }}">{{ content }}</a>
 {%- endmacro %}

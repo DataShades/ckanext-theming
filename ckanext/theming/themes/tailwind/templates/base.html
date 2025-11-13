@@ -1,6 +1,14 @@
 {% ckan_extends %}
 
 {%- block styles %}
+    {%- block styles_tailwind -%}
+        {%- asset "theming/tailwind/styles" -%}
+    {%- endblock %}
+{%- endblock %}
+
+{%- block scripts_theming %}
     {{ super() }}
-    {%- asset "theming/tailwind/styles" -%}
+    {%- block scripts_tailwind -%}
+        {%- asset "theming/tailwind/scripts" -%}
+    {%- endblock %}
 {%- endblock %}

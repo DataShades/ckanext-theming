@@ -1,5 +1,5 @@
 {%- macro datetime(dt) -%}
-    <time datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <time {{ ui.util.attrs(kwargs) }} datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
         {{ h.render_datetime(dt, with_hours=True) }}
     </time>
 {%- endmacro %}
@@ -12,11 +12,11 @@
         'lg': 'my-4',
         'xl': 'my-5'
     } %}
-    <div class="{{ size_classes.get(size, size_classes.md) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"></div>
+    <div {{ ui.util.attrs(kwargs) }} class="{{ size_classes.get(size, size_classes.md) }}"></div>
 {%- endmacro %}
 
 {%- macro divider_with_text(content) -%}
-    <div class="d-flex align-items-center my-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="d-flex align-items-center my-4">
         <div class="flex-grow-1 border-top"></div>
         <span class="mx-3 text-muted">{{ content }}</span>
         <div class="flex-grow-1 border-top"></div>
@@ -30,11 +30,11 @@
 {%- endmacro %}
 
 {%- macro badge_count(count) -%}
-    <span class="badge rounded-pill bg-danger {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ count }}</span>
+    <span {{ ui.util.attrs(kwargs) }} class="badge rounded-pill bg-danger">{{ count }}</span>
 {%- endmacro %}
 
 {%- macro skeleton_loader(type="text") -%}
-    <div class="placeholder-glow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="placeholder-glow">
         {%- if type == 'avatar' %}
             <span class="placeholder placeholder-xs col-2 rounded-pill bg-secondary"></span>
         {%- elif type == 'input' %}
@@ -53,7 +53,7 @@
         'error': 'danger',
         'danger': 'danger'
     } %}
-    <div class="alert alert-{{ alert_types.get(type, 'primary') }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(type, 'primary') }}">
         {%- if title %}
             <h4 class="alert-heading">{{ title }}</h4>
         {%- endif %}

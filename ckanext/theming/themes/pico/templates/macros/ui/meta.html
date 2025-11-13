@@ -1,5 +1,5 @@
 {%- macro header_block(content, title, subtitle, logo) -%}
-    <header class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} class="">
         <div class="container">
             <div class="grid">
                 <div>
@@ -23,7 +23,7 @@
 {%- endmacro %}
 
 {%- macro footer_block(content) -%}
-    <footer class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <footer {{ ui.util.attrs(kwargs) }} class="">
         <div class="container">
             <div class="grid">
                 <div class="flow">
@@ -35,7 +35,7 @@
 {%- endmacro %}
 
 {%- macro account_block(content, title, subtitle, logo) -%}
-    <header class="section {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} class="section">
         <div class="container">
             <div class="grid">
                 <div>

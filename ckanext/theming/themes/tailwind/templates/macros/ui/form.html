@@ -8,7 +8,7 @@
 {%- endmacro %}
 
 {%- macro form_actions_wrapper(content) -%}
-    <div class="flex items-center justify-between pt-6 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="flex items-center justify-between pt-6">
         {{ content }}
     </div>
 {%- endmacro %}

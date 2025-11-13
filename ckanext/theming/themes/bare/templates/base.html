@@ -29,8 +29,10 @@
             {%- endblock %}
 
             {%- block styles %}
-                {%- block styles_bare %}
-                    {%- asset "theming/bare/styles" %}
+                {%- block styles_theming -%}
+                    {%- block styles_bare %}
+                        {%- asset "theming/bare/styles" %}
+                    {%- endblock %}
                 {%- endblock %}
             {%- endblock -%}
 
@@ -58,8 +60,11 @@
                 {%- block scripts_base -%}
                     {%- asset "base/main" -%}
                 {%- endblock %}
-                {%- block scripts_bare %}
-                    {%- asset "theming/bare/scripts" -%}
+
+                {%- block scripts_theming -%}
+                    {%- block scripts_bare %}
+                        {%- asset "theming/bare/scripts" -%}
+                    {%- endblock %}
                 {%- endblock %}
             {% endblock %}
             {# render all assets included in scripts block and everywhere else #}
