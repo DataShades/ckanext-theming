@@ -18,11 +18,8 @@ body {
     flex-direction: column;
 }
 
-dialog {
-    top: 50%;
-    transform: translateY(-50%);
-    overflow: auto;
-    max-height: calc(100vh - 4rem);
+dialog::backdrop {
+    backdrop-filter: brightness(0.8) blur(3px);
 }
 
 #account {

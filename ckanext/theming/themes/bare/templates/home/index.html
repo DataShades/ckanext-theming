@@ -5,7 +5,17 @@
 {%- block breadcrumb %}{%- endblock %}
 
 {%- block primary_content_inner -%}
-    <dialog open>
-        <p>Greetings, one and all!</p>
-    </dialog>
+    <script>
+     function showModal() {
+         const sb = ckan.sandbox();
+         const title = document.createElement("mark");
+         title.append("hello world")
+         sb.ui.notification(
+             "Content",
+             "Title",
+             {dismissible: true, timeout: 4000}
+         );
+     }
+    </script>
+    <button onclick="showModal()">Click</button>
 {%- endblock %}

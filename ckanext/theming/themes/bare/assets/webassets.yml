@@ -7,6 +7,15 @@
 #     preload:
 #       - base/main
 
+scripts:
+  filter: rjsmin
+  extra:
+    preload:
+      - base/main
+  output: ckanext-theming/%(version)s-bare.js
+  contents:
+    - script.js
+
 styles:
   output: ckanext-theming/%(version)s-bare.css
   contents:

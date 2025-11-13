@@ -34,3 +34,6 @@ vendor-bs5:  ## update bootstrap5 theme
 
 
 vendor: vendor-tailwind vendor-bulma vendor-pico vendor-bs5 ## update all vendor files
+
+watch-%:  ## track and compile changes in typescript of specified theme
+	npx tsc -p tsconfig.$*.json -w
