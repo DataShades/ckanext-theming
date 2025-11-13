@@ -1,4 +1,4 @@
-{%- macro alert(message, type="info") -%}
+{%- macro alert(message, style="info") -%}
     {%- set alert_types = {
         'info': 'primary',
         'success': 'success',
@@ -6,13 +6,13 @@
         'error': 'danger',
         'danger': 'danger'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(type, 'primary') }} alert-dismissible fade show" role="alert">
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(style, 'primary') }} alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 {%- endmacro %}
 
-{%- macro toast(message, type="info") -%}
+{%- macro toast(message, style="info") -%}
     {%- set toast_types = {
         'info': 'primary',
         'success': 'success',
@@ -22,7 +22,7 @@
     } %}
     <div {{ ui.util.attrs(kwargs) }} class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <strong class="me-auto text-{{ toast_types.get(type, 'primary') }}">Notification</strong>
+            <strong class="me-auto text-{{ toast_types.get(style, 'primary') }}">Notification</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">

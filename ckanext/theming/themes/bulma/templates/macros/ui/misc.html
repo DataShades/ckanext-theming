@@ -39,8 +39,8 @@
     <span class="tag is-primary" {{ ui.util.attrs(kwargs) }}>{{ count }}</span>
 {%- endmacro %}
 
-{%- macro skeleton_loader(type="text") -%}
-    <div class="skeleton-loader {{ 'is-' ~ type }}" {{ ui.util.attrs(kwargs) }} style="
+{%- macro skeleton_loader(style="text") -%}
+    <div class="skeleton-loader {{ 'is-' ~ style }}" {{ ui.util.attrs(kwargs) }} style="
         background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
         background-size: 200% 100%;
         animation: loading 1.5s infinite;
@@ -58,8 +58,8 @@
     </style>
 {%- endmacro %}
 
-{%- macro notification(title, content, type="info") -%}
-    <div class="notification {{ 'is-' ~ type }}" {{ ui.util.attrs(kwargs) }}>
+{%- macro notification(title, content, style="info") -%}
+    <div class="notification {{ 'is-' ~ style }}" {{ ui.util.attrs(kwargs) }}>
         {%- if title %}
             <h4 class="title is-5">{{ title }}</h4>
         {%- endif %}

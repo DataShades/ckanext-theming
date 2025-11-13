@@ -33,11 +33,11 @@
     <span {{ ui.util.attrs(kwargs) }} class="badge rounded-pill bg-danger">{{ count }}</span>
 {%- endmacro %}
 
-{%- macro skeleton_loader(type="text") -%}
+{%- macro skeleton_loader(style="text") -%}
     <div {{ ui.util.attrs(kwargs) }} class="placeholder-glow">
-        {%- if type == 'avatar' %}
+        {%- if style == 'avatar' %}
             <span class="placeholder placeholder-xs col-2 rounded-pill bg-secondary"></span>
-        {%- elif type == 'input' %}
+        {%- elif style == 'input' %}
             <span class="placeholder col-12"></span>
         {%- else %}
             <span class="placeholder col-6"></span>
@@ -45,7 +45,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro notification(title, content, type="info") -%}
+{%- macro notification(title, content, style="info") -%}
     {%- set alert_types = {
         'info': 'primary',
         'success': 'success',
@@ -53,7 +53,7 @@
         'error': 'danger',
         'danger': 'danger'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(type, 'primary') }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(style, 'primary') }}">
         {%- if title %}
             <h4 class="alert-heading">{{ title }}</h4>
         {%- endif %}

@@ -2,8 +2,8 @@
     <mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark>
 {%- endmacro %}
 
-{%- macro button(content, type="button") -%}
-    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
+{%- macro button(content, style="default", btn_type="button") -%}
+    <button {{ ui.util.attrs(kwargs) }} type="{{ btn_type }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}

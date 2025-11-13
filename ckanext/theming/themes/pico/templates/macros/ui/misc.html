@@ -36,8 +36,8 @@
     <sup {{ ui.util.attrs(kwargs) }} class="badge">{{ count }}</sup>
 {%- endmacro %}
 
-{%- macro skeleton_loader(type="text") -%}
-    <div {{ ui.util.attrs(kwargs) }} class="skeleton-loader {{ type if type in ['text', 'paragraph', 'button', 'image', 'input', 'avatar'] else 'text' }}"
+{%- macro skeleton_loader(style="text") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="skeleton-loader {{ style if style in ['text', 'paragraph', 'button', 'image', 'input', 'avatar'] else 'text' }}"
          style="background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
                 background-size: 200% 100%;
                 animation: loading 1.5s infinite;
@@ -54,7 +54,7 @@
     </style>
 {%- endmacro %}
 
-{%- macro notification(title, content, type="info") -%}
+{%- macro notification(title, content, style="info") -%}
     {%- set alert_types = {
         'info': 'info',
         'success': 'success',
@@ -62,7 +62,7 @@
         'error': 'error',
         'danger': 'error'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert {{ alert_types.get(type, 'info') }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert {{ alert_types.get(style, 'info') }}">
         {%- if title %}
             <h4>{{ title }}</h4>
         {%- endif %}

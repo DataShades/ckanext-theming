@@ -1,4 +1,4 @@
-{%- macro alert(message, type="info") -%}
+{%- macro alert(message, style="info") -%}
     {%- set alert_types = {
         'info': 'info',
         'success': 'success',
@@ -6,12 +6,12 @@
         'error': 'error',
         'danger': 'error'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert {{ alert_types.get(type, 'info') }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert {{ alert_types.get(style, 'info') }}">
         {{ message }}
     </div>
 {%- endmacro %}
 
-{%- macro toast(message, type="info") -%}
+{%- macro toast(message, style="info") -%}
     {%- set toast_types = {
         'info': 'info',
         'success': 'success',
@@ -19,7 +19,7 @@
         'error': 'error',
         'danger': 'error'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="toast {{ toast_types.get(type, 'info') }}" role="alert">
+    <div {{ ui.util.attrs(kwargs) }} class="toast {{ toast_types.get(style, 'info') }}" role="alert">
         {{ message }}
     </div>
 {%- endmacro %}

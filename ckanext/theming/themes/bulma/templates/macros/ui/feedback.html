@@ -1,11 +1,11 @@
-{%- macro alert(message, type="info") -%}
-    <div class="notification {{ 'is-' ~ type }}" {{ ui.util.attrs(kwargs) }}>
+{%- macro alert(message, style="info") -%}
+    <div class="notification {{ 'is-' ~ style }}" {{ ui.util.attrs(kwargs) }}>
         {{ message }}
     </div>
 {%- endmacro %}
 
-{%- macro toast(message, type="info") -%}
-    <div class="notification {{ 'is-' ~ type }} is-toast" {{ ui.util.attrs(kwargs) }} role="alert">
+{%- macro toast(message, style="info") -%}
+    <div class="notification {{ 'is-' ~ style }} is-toast" {{ ui.util.attrs(kwargs) }} role="alert">
         {{ message }}
     </div>
 {%- endmacro %}

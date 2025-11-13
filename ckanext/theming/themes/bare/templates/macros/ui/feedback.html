@@ -1,5 +1,5 @@
-{%- macro alert(message, type="info", dismissible=True) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ type }}">
+{%- macro alert(message, style="info", dismissible=True) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ style }}">
         {%- if dismissible %}
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         {%- endif %}
@@ -7,8 +7,8 @@
     </div>
 {%- endmacro %}
 
-{%- macro toast(message, type="info") -%}
-    <div {{ ui.util.attrs(kwargs) }} class="toast toast-{{ type }}" role="alert">
+{%- macro toast(message, style="info") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="toast toast-{{ style }}" role="alert">
         {{ message }}
     </div>
 {%- endmacro %}

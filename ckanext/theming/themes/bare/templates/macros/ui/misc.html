@@ -28,12 +28,12 @@
     <span {{ ui.util.attrs(kwargs) }} class="badge badge-count">{{ count }}</span>
 {%- endmacro %}
 
-{%- macro skeleton_loader(type="text") -%}
-    <div {{ ui.util.attrs(kwargs) }} class="skeleton-loader skeleton-{{ type }}"></div>
+{%- macro skeleton_loader(style="text") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="skeleton-loader skeleton-{{ style }}"></div>
 {%- endmacro %}
 
-{%- macro notification(title, content, type="info") -%}
-    <div {{ ui.util.attrs(kwargs) }} class="notification notification-{{ type }}">
+{%- macro notification(title, content, style="info") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="notification notification-{{ style }}">
         {%- if title %}
             <h5>{{ title }}</h5>
         {%- endif %}

@@ -2,8 +2,8 @@
     <span {{ ui.util.attrs(kwargs) }} class="contrast">{{ content }}</span>
 {%- endmacro %}
 
-{%- macro button(content, type="button") -%}
-    <button {{ ui.util.attrs(kwargs) }} type="{{ type if type in ['button', 'submit', 'reset', 'primary', 'secondary', 'contrast', 'outline'] else 'button' }}" class="{{ 'primary' if type == 'primary' or type == 'submit' else type if type in ['secondary', 'contrast', 'outline'] else 'outline' }}">{{ content }}</button>
+{%- macro button(content, style="outline", btn_type="button") -%}
+    <button {{ ui.util.attrs(kwargs) }} type="{{ btn_type }}" class="{{ 'primary' if style == 'primary' or style == 'submit' else style if style in ['secondary', 'contrast', 'outline'] else 'outline' }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}
