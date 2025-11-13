@@ -24,7 +24,7 @@
 
 {%- macro form_errors(errors={}) -%}
     {% if errors %}
-        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+        <div {{ ui.util.attrs(kwargs) }} class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
             <p>{{ _('The form contains invalid entries:') }}</p>
             <ul class="mt-2 list-disc pl-5 space-y-1">
                 {% for key, error in errors.items() %}
@@ -38,7 +38,7 @@
 {% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         {%- if label -%}
             <label for="{{ id }}" class="block mb-2 text-sm font-medium text-gray-700">
                 {{ label }}
@@ -62,7 +62,7 @@
 {% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         <div class="flex items-start">
             <div class="flex items-center h-5">
                 <input type="checkbox"
@@ -91,7 +91,7 @@
 {%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         {%- if label -%}
             <label for="{{ id }}" class="block mb-2 text-sm font-medium text-gray-700">
                 {{ label }}
@@ -114,7 +114,7 @@
 {%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         {%- if label -%}
             <label for="{{ id }}" class="block mb-2 text-sm font-medium text-gray-700">
                 {{ label }}
@@ -144,7 +144,7 @@
 {%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         <div class="flex items-center">
             <input type="radio"
                    name="{{ name }}"
@@ -169,7 +169,7 @@
 {%- macro file_input(name, id, label="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         {%- if label -%}
             <label class="block mb-2 text-sm font-medium text-gray-700">
                 {{ label }}
@@ -197,7 +197,7 @@
 {%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         {%- if label -%}
             <label for="{{ id }}" class="block mb-2 text-sm font-medium text-gray-700">
                 {{ label }}
@@ -226,7 +226,7 @@
 {%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    <div class="mb-4 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
         <div class="flex items-center justify-between">
             <label for="{{ id }}" class="block text-sm font-medium text-gray-700">
                 {{ label }}

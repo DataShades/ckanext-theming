@@ -1,5 +1,5 @@
 {%- macro group_item(group) -%}
-    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <article {{ ui.util.attrs(kwargs) }} class="card">
         <div class="grid">
             {%- if group.image_display_url %}
                 <img src="{{ group.image_display_url }}" alt="{{ group.title }}" width="64" height="64">
@@ -17,7 +17,7 @@
 {%- endmacro %}
 
 {%- macro organization_item(organization) -%}
-    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <article {{ ui.util.attrs(kwargs) }} class="card">
         <div class="grid">
             {%- if organization.image_display_url %}
                 <img src="{{ organization.image_display_url }}" alt="{{ organization.title }}" width="64" height="64">
@@ -35,7 +35,7 @@
 {%- endmacro %}
 
 {%- macro package_item(pkg) -%}
-    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <article {{ ui.util.attrs(kwargs) }} class="card">
         <div class="flow">
             <h3>
                 {{ ui.link(pkg.title or pkg.name, href=h.url_for('dataset.read', id=pkg.name)) }}
@@ -54,7 +54,7 @@
 {%- endmacro %}
 
 {%- macro resource_item(res) -%}
-    <article class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <article {{ ui.util.attrs(kwargs) }} class="card">
         <div class="flow">
             <h4>{{ res.name or res.description or res.url[:50] ~ '...' }}</h4>
             <p>{{ res.description if res.description else res.url }}</p>

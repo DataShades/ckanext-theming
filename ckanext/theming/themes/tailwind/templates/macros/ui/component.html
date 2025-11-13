@@ -1,5 +1,5 @@
 {%- macro group_item(group) -%}
-    <div class="overflow-hidden bg-white rounded-lg shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="overflow-hidden bg-white rounded-lg shadow">
         <div class="p-6">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -19,7 +19,7 @@
 {%- endmacro %}
 
 {%- macro organization_item(organization) -%}
-    <div class="overflow-hidden bg-white rounded-lg shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="overflow-hidden bg-white rounded-lg shadow">
         <div class="p-6">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -39,7 +39,7 @@
 {%- endmacro %}
 
 {%- macro package_item(pkg) -%}
-    <div class="overflow-hidden bg-white rounded-lg shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="overflow-hidden bg-white rounded-lg shadow">
         <div class="p-6">
             <div class="flex items-center justify-between">
                 <div class="flex-1 min-w-0">
@@ -70,7 +70,7 @@
 {%- endmacro %}
 
 {%- macro resource_item(res) -%}
-    <div class="overflow-hidden bg-white rounded-lg shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="overflow-hidden bg-white rounded-lg shadow">
         <div class="p-6">
             <div class="flex items-center justify-between">
                 <div class="flex-1 min-w-0">

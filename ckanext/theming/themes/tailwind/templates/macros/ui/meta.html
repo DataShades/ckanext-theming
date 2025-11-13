@@ -1,5 +1,5 @@
 {%- macro header_block(content, title, subtitle, logo) -%}
-    <header id="header" class="bg-white shadow {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} id="header" class="bg-white shadow">
         <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
@@ -25,7 +25,7 @@
 {%- endmacro %}
 
 {%- macro footer_block(content) -%}
-    <footer class="bg-white border-t border-gray-200 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <footer {{ ui.util.attrs(kwargs) }} class="bg-white border-t border-gray-200">
         <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex justify-center space-x-6 md:order-2">
@@ -44,7 +44,7 @@
 {%- endmacro %}
 
 {%- macro account_block(content, title, subtitle, logo) -%}
-    <header id="account" class="bg-gray-50 py-8 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <header {{ ui.util.attrs(kwargs) }} id="account" class="bg-gray-50 py-8">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <div>

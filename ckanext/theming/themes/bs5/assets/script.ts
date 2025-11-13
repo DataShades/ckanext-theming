@@ -1,26 +1,28 @@
 /// <reference path="../../../../../types.d.ts" />
+/// <reference types="bootstrap"/>
+
+declare global {
+  namespace bootstrap {}
+}
 
 ((ckan) => {
   const asNode = (value: any) =>
     value instanceof Node ? value : new Text(value);
 
-  const util = {
-    applyAttrs(el: HTMLElement, attrs: { [key: string]: string }) {
+  const util: IUtil = {
+    applyAttrs(el, attrs) {
       Object.entries(attrs).forEach(([key, value]) =>
         el.setAttribute(key, value),
       );
     },
 
-    applyProps(el: HTMLElement, props: { [key: string]: any }) {
+    applyProps(el, props) {
       Object.entries(props).forEach(
         ([key, value]) => ((el as any)[key] = value),
       );
     },
 
-    applyListeners(
-      el: HTMLElement,
-      listeners: { [key: string]: Theming.Listener | Theming.ComplexListener },
-    ) {
+    applyListeners(el, listeners) {
       Object.entries(listeners).forEach(([key, value]) => {
         if (typeof value == "function") {
           el.addEventListener(key, value);
@@ -30,7 +32,7 @@
       });
     },
 
-    animateTimeout(el: HTMLProgressElement, start: number, timeout: number) {
+    animateTimeout(el, start, timeout) {
       const diff = Number(new Date()) - start;
       el.value = timeout - diff;
       if (el.value > 0) {
@@ -109,38 +111,50 @@
       if (!container) {
         throw `Notification container(${containerId}) is not defined`;
       }
-
       const el = document.createElement("div");
-      el.hidden = true;
-      if (title) {
-        el.appendChild(document.createElement("strong")).append(title);
-      }
-      el.appendChild(document.createElement("p")).append(content);
+      el.classList.add("toast", "fade");
 
-      if (props.dismissible) {
-        el.appendChild(
-          ui.button("x", { props: { onclick: () => el.remove() } }),
-        );
+      if (title) {
+        const header = el.appendChild(document.createElement("strong"));
+        header.classList.add("toast-header");
+        const text = header.appendChild(document.createElement("strong"));
+        text.classList.add("me-auto");
+        text.append(title);
+
+        if (props.dismissible) {
+          header.appendChild(
+            ui.button("", {
+              attrs: {
+                class: "btn-close",
+                "data-bs-dismiss": "toast",
+                "aria-label": "Close",
+              },
+            }),
+          );
+        }
       }
+
+      const body = el.appendChild(document.createElement("div"));
+      body.append(content);
+      body.classList.add("toast-body");
 
       if (props.timeout) {
-        const progress = el.appendChild(document.createElement("progress"));
-        progress.max = props.timeout;
-        progress.value = props.timeout;
-        const start = Number(new Date());
-
-        setTimeout(() => el.remove(), props.timeout);
-        util.animateTimeout(progress, start, props.timeout);
+        el.setAttribute("data-bs-delay", String(props.timeout));
+      } else {
+        el.setAttribute("data-bs-autohide", "false");
       }
 
       container.append(el);
+
+      const toast = bootstrap.Toast.getOrCreateInstance(el);
+
       const result = {
         el,
-        hide() {
-          el.hidden = true;
-        },
         show() {
-          el.hidden = false;
+          toast.show();
+        },
+        hide() {
+          toast.hide();
         },
         destroy() {
           el.remove();

@@ -11,6 +11,7 @@ scripts:
   output: ckanext-theming/%(version)s-bs5.js
   contents:
     - vendor.js
+    - script.js
 
 styles:
   output: ckanext-theming/%(version)s-bs5.css

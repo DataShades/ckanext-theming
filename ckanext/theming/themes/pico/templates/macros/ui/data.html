@@ -1,5 +1,5 @@
 {%- macro table_block(striped=false, bordered=false) -%}
-    <div class="table-wrapper {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="table-wrapper">
         <table class="{{ 'striped' if striped }} {{ 'bordered' if bordered }}">
             {{ caller() }}
         </table>
@@ -34,7 +34,7 @@
 {%- endmacro %}
 
 {%- macro list_group(items) -%}
-    <ul class="card-group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <ul {{ ui.util.attrs(kwargs) }} class="card-group">
         {%- for item in items %}
             <li class="card">{{ item }}</li>
         {%- endfor %}
@@ -42,7 +42,7 @@
 {%- endmacro %}
 
 {%- macro definition_list(items) -%}
-    <dl class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <dl {{ ui.util.attrs(kwargs) }} class="grid">
         {%- for term, definition in items %}
             <dt>{{ term }}</dt>
             <dd>{{ definition }}</dd>
@@ -51,7 +51,7 @@
 {%- endmacro %}
 
 {%- macro stat(label, value, icon) -%}
-    <div class="card text-center {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="card text-center">
         {%- if icon %}
             {{ ui.icon(icon) }}
         {%- endif %}
@@ -61,7 +61,7 @@
 {%- endmacro %}
 
 {%- macro chart(type, data, options) -%}
-    <div class="chart-container {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="position: relative; height:40vh; width:100%;">
+    <div {{ ui.util.attrs(kwargs) }} class="chart-container" style="position: relative; height:40vh; width:100%;">
         <canvas data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
             Chart placeholder
         </canvas>
@@ -69,5 +69,5 @@
 {%- endmacro %}
 
 {%- macro code_block(content, language="text") -%}
-    <pre class="card {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"><code class="language-{{ language }}">{{ content }}</code></pre>
+    <pre {{ ui.util.attrs(kwargs) }} class="card"><code class="language-{{ language }}">{{ content }}</code></pre>
 {%- endmacro %}

@@ -1,5 +1,5 @@
 {%- macro datetime(dt) -%}
-    <time datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}" class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <time {{ ui.util.attrs(kwargs) }} datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
         {{ h.render_datetime(dt, with_hours=True) }}
     </time>
 {%- endmacro %}
@@ -12,11 +12,11 @@
         'lg': 'h-6',
         'xl': 'h-8'
     } %}
-    <div class="{{ size_classes.get(size, size_classes.md) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"></div>
+    <div {{ ui.util.attrs(kwargs) }} class="{{ size_classes.get(size, size_classes.md) }}"></div>
 {%- endmacro %}
 
 {%- macro divider_with_text(content) -%}
-    <div class="relative my-6 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="relative my-6">
         <div class="absolute inset-0 flex items-center">
             <div class="w-full border-t border-gray-300"></div>
         </div>
@@ -27,19 +27,19 @@
 {%- endmacro %}
 
 {%- macro truncate(content, max_lines=1) -%}
-    <div class="{{ 'line-clamp-' ~ max_lines if max_lines > 1 else 'truncate' }} text-gray-700 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="{{ 'line-clamp-' ~ max_lines if max_lines > 1 else 'truncate' }} text-gray-700">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro badge_count(count) -%}
-    <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <span {{ ui.util.attrs(kwargs) }} class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-500 rounded-full">
         {{ count }}
     </span>
 {%- endmacro %}
 
 {%- macro skeleton_loader(type="text") -%}
-    <div class="animate-pulse {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="animate-pulse">
         {%- if type == 'avatar' %}
             <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
         {%- elif type == 'input' %}
@@ -58,7 +58,7 @@
         'error': 'bg-red-50 text-red-800 border-red-200',
         'danger': 'bg-red-50 text-red-800 border-red-200'
     } %}
-    <div class="p-4 mb-4 bg-white border rounded-lg shadow {{ color_classes.get(type, color_classes.info) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="p-4 mb-4 bg-white border rounded-lg shadow {{ color_classes.get(type, color_classes.info) }}">
         {%- if title %}
             <h4 class="font-bold">{{ title }}</h4>
         {%- endif %}

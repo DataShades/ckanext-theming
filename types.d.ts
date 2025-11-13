@@ -36,7 +36,16 @@ declare global {
   }
   interface ISandbox {
     setup: (callback: (sandbox: ISandbox) => void) => void;
-    ui: IUi & { util: object };
+    ui: IUi & { util: IUtil };
+  }
+  interface IUtil {
+    animateTimeout(el: HTMLProgressElement, start: number, timeout: number):void;
+    applyListeners(
+      el: HTMLElement,
+      listeners: { [key: string]: Theming.Listener | Theming.ComplexListener },
+    ):void;
+    applyProps(el: HTMLElement, props: { [key: string]: any }):void;
+    applyAttrs(el: HTMLElement, attrs: { [key: string]: string }):void;
   }
   interface IUi {
     modal: (
@@ -62,7 +71,9 @@ declare global {
     el: T;
   }
   interface INotification<T = HTMLElement> {
-    dismiss: () => void;
+    show: () => void;
+    hide: () => void;
+    destroy: () => void;
     el: T;
   }
 }

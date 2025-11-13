@@ -6,7 +6,7 @@
         'error': 'bg-red-50 text-red-800 border-red-200',
         'danger': 'bg-red-50 text-red-800 border-red-200'
     } %}
-    <div class="p-4 mb-4 text-sm rounded-lg border {{ color_classes.get(type, color_classes.info) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+    <div {{ ui.util.attrs(kwargs) }} class="p-4 mb-4 text-sm rounded-lg border {{ color_classes.get(type, color_classes.info) }}" role="alert">
         {{ message }}
     </div>
 {%- endmacro %}
@@ -19,13 +19,13 @@
         'error': 'bg-red-500',
         'danger': 'bg-red-500'
     } %}
-    <div class="fixed bottom-4 right-4 z-50 px-6 py-4 text-white rounded-md shadow-lg {{ color_classes.get(type, color_classes.info) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="alert">
+    <div {{ ui.util.attrs(kwargs) }} class="fixed bottom-4 right-4 z-50 px-6 py-4 text-white rounded-md shadow-lg {{ color_classes.get(type, color_classes.info) }}" role="alert">
         {{ message }}
     </div>
 {%- endmacro %}
 
 {%- macro modal(content, title, footer) -%}
-    <div class="fixed inset-0 z-50 overflow-y-auto {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="fixed inset-0 z-50 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -65,7 +65,7 @@
 {%- endmacro %}
 
 {%- macro tooltip(text) -%}
-    <span class="relative group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <span {{ ui.util.attrs(kwargs) }} class="relative group">
         {{ caller() if caller else text }}
         <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
             {{ text }}
@@ -74,7 +74,7 @@
 {%- endmacro %}
 
 {%- macro popover(title, content) -%}
-    <span class="relative group {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <span {{ ui.util.attrs(kwargs) }} class="relative group">
         {{ caller() if caller else title or content }}
         <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-64 opacity-0 group-hover:opacity-100 transition-opacity z-10 hidden group-hover:block">
             {%- if title %}
@@ -86,7 +86,7 @@
 {%- endmacro %}
 
 {%- macro progress(value, max=100, label=None) -%}
-    <div class="w-full bg-gray-200 rounded-full h-2.5 {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="w-full bg-gray-200 rounded-full h-2.5">
         <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ (value / max) * 100 }}%"></div>
     </div>
     <div class="mt-1 text-sm text-gray-600">
@@ -101,7 +101,7 @@
         'lg': 'w-12 h-12',
         'xl': 'w-16 h-16'
     } %}
-    <div class="inline-block {{ size_classes.get(size, size_classes.md) }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" role="status">
+    <div {{ ui.util.attrs(kwargs) }} class="inline-block {{ size_classes.get(size, size_classes.md) }}" role="status">
         <svg class="animate-spin text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>

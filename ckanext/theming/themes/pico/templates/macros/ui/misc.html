@@ -16,7 +16,7 @@
 {%- endmacro %}
 
 {%- macro divider_with_text(content) -%}
-    <div class="grid {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         <hr />
         <span>{{ content }}</span>
         <hr />
@@ -24,7 +24,7 @@
 {%- endmacro %}
 
 {%- macro truncate(content, max_lines=1) -%}
-    <div class="{{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}" style="
+    <div {{ ui.util.attrs(kwargs) }} class="" style="
         display: -webkit-box;
         -webkit-line-clamp: {{ max_lines }};
         -webkit-box-orient: vertical;
@@ -33,11 +33,11 @@
 {%- endmacro %}
 
 {%- macro badge_count(count) -%}
-    <sup class="badge {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">{{ count }}</sup>
+    <sup {{ ui.util.attrs(kwargs) }} class="badge">{{ count }}</sup>
 {%- endmacro %}
 
 {%- macro skeleton_loader(type="text") -%}
-    <div class="skeleton-loader {{ type if type in ['text', 'paragraph', 'button', 'image', 'input', 'avatar'] else 'text' }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}"
+    <div {{ ui.util.attrs(kwargs) }} class="skeleton-loader {{ type if type in ['text', 'paragraph', 'button', 'image', 'input', 'avatar'] else 'text' }}"
          style="background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
                 background-size: 200% 100%;
                 animation: loading 1.5s infinite;
@@ -62,7 +62,7 @@
         'error': 'error',
         'danger': 'error'
     } %}
-    <div class="alert {{ alert_types.get(type, 'info') }} {{ ui.util.attrs(kwargs).strip('class=') if ui.util.attrs(kwargs) else '' }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert {{ alert_types.get(type, 'info') }}">
         {%- if title %}
             <h4>{{ title }}</h4>
         {%- endif %}
