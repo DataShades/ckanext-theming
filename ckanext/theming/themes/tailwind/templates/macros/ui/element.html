@@ -2,8 +2,17 @@
     <span {{ ui.util.attrs(kwargs) }} class="inline-block px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full">{{ content }}</span>
 {%- endmacro %}
 
-{%- macro button(content, style="blue", type="button") -%}
-    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="px-4 py-2 font-medium text-white bg-{{ style if style in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-600 rounded-md hover:bg-{{ style if style in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-{{ style if style in ['blue', 'red', 'green', 'yellow', 'indigo', 'purple', 'pink', 'gray'] else 'blue' }}-500">{{ content }}</button>
+{%- macro button(content, style="primary", type="button") -%}
+    {%- set style_map = {
+        'primary': 'blue',
+        'secondary': 'gray',
+        'info': 'blue',
+        'success': 'green',
+        'warning': 'yellow',
+        'danger': 'red'
+    } %}
+    {%- set color = style_map.get(style, 'blue') %}
+    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="px-4 py-2 font-medium text-white bg-{{ color }}-600 rounded-md hover:bg-{{ color }}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-{{ color }}-500">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}

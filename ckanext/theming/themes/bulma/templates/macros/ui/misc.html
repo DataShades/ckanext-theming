@@ -59,7 +59,15 @@
 {%- endmacro %}
 
 {%- macro notification(title, content, style="info") -%}
-    <div class="notification {{ 'is-' ~ style }}" {{ ui.util.attrs(kwargs) }}>
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'light',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <div class="notification {{ 'is-' ~ style_map.get(style, 'info') }}" {{ ui.util.attrs(kwargs) }}>
         {%- if title %}
             <h4 class="title is-5">{{ title }}</h4>
         {%- endif %}

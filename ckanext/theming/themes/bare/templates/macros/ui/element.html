@@ -2,8 +2,16 @@
     <mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark>
 {%- endmacro %}
 
-{%- macro button(content, style="default", type="button") -%}
-    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
+{%- macro button(content, style="primary", type="button") -%}
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'secondary',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="{{ style_map.get(style, 'primary') }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}

@@ -1,5 +1,13 @@
 {%- macro alert(message, style="info", dismissible=True) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ style }}">
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'secondary',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ style_map.get(style, 'info') }}">
         {%- if dismissible %}
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         {%- endif %}
@@ -8,7 +16,15 @@
 {%- endmacro %}
 
 {%- macro toast(message, style="info") -%}
-    <div {{ ui.util.attrs(kwargs) }} class="toast toast-{{ style }}" role="alert">
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'secondary',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <div {{ ui.util.attrs(kwargs) }} class="toast toast-{{ style_map.get(style, 'info') }}" role="alert">
         {{ message }}
     </div>
 {%- endmacro %}

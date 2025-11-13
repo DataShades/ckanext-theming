@@ -1,25 +1,27 @@
 {%- macro alert(message, style="info") -%}
-    {%- set alert_types = {
+    {%- set style_map = {
+        'primary': 'info',
+        'secondary': 'info',
         'info': 'info',
         'success': 'success',
         'warning': 'warning',
-        'error': 'error',
         'danger': 'error'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert {{ alert_types.get(style, 'info') }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert {{ style_map.get(style, 'info') }}">
         {{ message }}
     </div>
 {%- endmacro %}
 
 {%- macro toast(message, style="info") -%}
-    {%- set toast_types = {
+    {%- set style_map = {
+        'primary': 'info',
+        'secondary': 'info',
         'info': 'info',
         'success': 'success',
         'warning': 'warning',
-        'error': 'error',
         'danger': 'error'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="toast {{ toast_types.get(style, 'info') }}" role="alert">
+    <div {{ ui.util.attrs(kwargs) }} class="toast {{ style_map.get(style, 'info') }}" role="alert">
         {{ message }}
     </div>
 {%- endmacro %}

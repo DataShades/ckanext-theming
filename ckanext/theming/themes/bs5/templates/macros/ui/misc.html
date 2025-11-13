@@ -46,14 +46,15 @@
 {%- endmacro %}
 
 {%- macro notification(title, content, style="info") -%}
-    {%- set alert_types = {
-        'info': 'primary',
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'secondary',
+        'info': 'info',
         'success': 'success',
         'warning': 'warning',
-        'error': 'danger',
         'danger': 'danger'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ alert_types.get(style, 'primary') }}">
+    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ style_map.get(style, 'info') }}">
         {%- if title %}
             <h4 class="alert-heading">{{ title }}</h4>
         {%- endif %}

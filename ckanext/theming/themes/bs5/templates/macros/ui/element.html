@@ -3,7 +3,15 @@
 {%- endmacro %}
 
 {%- macro button(content, style="primary", type="button") -%}
-    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">{{ content }}</button>
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'secondary',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style_map.get(style, 'primary') }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}

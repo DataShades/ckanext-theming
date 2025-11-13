@@ -51,14 +51,15 @@
 {%- endmacro %}
 
 {%- macro notification(title, content, style="info") -%}
-    {%- set color_classes = {
+    {%- set style_map = {
+        'primary': 'bg-indigo-50 text-indigo-800 border-indigo-200',
+        'secondary': 'bg-gray-50 text-gray-800 border-gray-200',
         'info': 'bg-blue-50 text-blue-800 border-blue-200',
         'success': 'bg-green-50 text-green-800 border-green-200',
         'warning': 'bg-yellow-50 text-yellow-800 border-yellow-200',
-        'error': 'bg-red-50 text-red-800 border-red-200',
         'danger': 'bg-red-50 text-red-800 border-red-200'
     } %}
-    <div {{ ui.util.attrs(kwargs) }} class="p-4 mb-4 bg-white border rounded-lg shadow {{ color_classes.get(style, color_classes.info) }}">
+    <div {{ ui.util.attrs(kwargs) }} class="p-4 mb-4 bg-white border rounded-lg shadow {{ style_map.get(style, style_map.info) }}">
         {%- if title %}
             <h4 class="font-bold">{{ title }}</h4>
         {%- endif %}

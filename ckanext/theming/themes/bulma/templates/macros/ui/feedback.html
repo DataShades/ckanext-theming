@@ -1,11 +1,27 @@
 {%- macro alert(message, style="info") -%}
-    <div class="notification {{ 'is-' ~ style }}" {{ ui.util.attrs(kwargs) }}>
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'light',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <div class="notification {{ 'is-' ~ style_map.get(style, 'info') }}" {{ ui.util.attrs(kwargs) }}>
         {{ message }}
     </div>
 {%- endmacro %}
 
 {%- macro toast(message, style="info") -%}
-    <div class="notification {{ 'is-' ~ style }} is-toast" {{ ui.util.attrs(kwargs) }} role="alert">
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'light',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <div class="notification {{ 'is-' ~ style_map.get(style, 'info') }} is-toast" {{ ui.util.attrs(kwargs) }} role="alert">
         {{ message }}
     </div>
 {%- endmacro %}

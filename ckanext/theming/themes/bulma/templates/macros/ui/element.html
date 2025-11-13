@@ -3,9 +3,16 @@
     <span class="tag">{{ content }}</span>
 {%- endmacro %}
 
-{%- macro button(content, style="button", type="button") -%}
-    {%- do kwargs -%}
-    <button type="{{ type }}" class="button is-{{ style }}">{{ content }}</button>
+{%- macro button(content, style="primary", type="button") -%}
+    {%- set style_map = {
+        'primary': 'primary',
+        'secondary': 'secondary',
+        'info': 'info',
+        'success': 'success',
+        'warning': 'warning',
+        'danger': 'danger'
+    } %}
+    <button type="{{ type }}" class="button is-{{ style_map.get(style, 'primary') }}">{{ content }}</button>
 {%- endmacro %}
 
 {%- macro divider() -%}
