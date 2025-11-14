@@ -58,7 +58,7 @@
         <div class="row mt-5">
             <div class="col-lg-6">
                 <h3 class="mb-4">Recent Datasets</h3>
-                {% set datasets = h.get_recent_datasets(limit=3) %}
+                {% set datasets = h.get_recent_datasets() %}
                 {% if datasets %}
                     {% for dataset in datasets %}
                         <div class="card mb-3">
@@ -78,25 +78,19 @@
                 {% endif %}
             </div>
             <div class="col-lg-6">
-                <h3 class="mb-4">Popular Organizations</h3>
-                {% set organizations = h.get_organizations(limit=3) %}
-                {% if organizations %}
-                    {% for org in organizations %}
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ ui.link(org.title or org.name, h.url_for('organization.read', id=org.name)) }}</h5>
-                                <p class="card-text">{{ org.description[:180] if org.description else "No description provided." }}</p>
-                                <div class="small text-muted">
-                                    {{ h.SI_number_span(org.package_count) }} datasets
-                                </div>
-                            </div>
+                <h3 class="mb-4">Popular Tags</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Popular tags will be displayed here.</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-primary">Data</span>
+                            <span class="badge bg-info">Open</span>
+                            <span class="badge bg-success">Research</span>
+                            <span class="badge bg-warning">Government</span>
+                            <span class="badge bg-secondary">Statistics</span>
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="alert alert-info">
-                        No organizations available yet.
                     </div>
-                {% endif %}
+                </div>
             </div>
         </div>
     </div>

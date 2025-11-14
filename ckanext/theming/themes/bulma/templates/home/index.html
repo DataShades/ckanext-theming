@@ -62,7 +62,7 @@
                 <div class="columns">
                     <div class="column is-6">
                         <h3 class="title is-3">Recent Datasets</h3>
-                        {% set datasets = h.get_recent_datasets(limit=3) %}
+                        {% set datasets = h.get_recent_datasets() %}
                         {% if datasets %}
                             {% for dataset in datasets %}
                                 <div class="box mb-4">
@@ -84,27 +84,17 @@
                         {% endif %}
                     </div>
                     <div class="column is-6">
-                        <h3 class="title is-3">Popular Organizations</h3>
-                        {% set organizations = h.get_organizations(limit=3) %}
-                        {% if organizations %}
-                            {% for org in organizations %}
-                                <div class="box mb-4">
-                                    <h4 class="title is-5">
-                                        <a href="{{ h.url_for('organization.read', id=org.name) }}" class="has-text-info">
-                                            {{ org.title or org.name }}
-                                        </a>
-                                    </h4>
-                                    <p class="subtitle is-6">
-                                        {{ org.description[:120] if org.description else "No description provided." }}
-                                    </p>
-                                    <small class="has-text-grey">{{ h.SI_number_span(org.package_count) }} datasets</small>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <div class="notification">
-                                <p>No organizations available yet.</p>
+                        <h3 class="title is-3">Popular Tags</h3>
+                        <div class="box mb-4">
+                            <p class="subtitle is-6">Popular tags will be displayed here.</p>
+                            <div class="tags">
+                                <span class="tag is-primary">Data</span>
+                                <span class="tag is-info">Open</span>
+                                <span class="tag is-success">Research</span>
+                                <span class="tag is-warning">Government</span>
+                                <span class="tag is-danger">Statistics</span>
                             </div>
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

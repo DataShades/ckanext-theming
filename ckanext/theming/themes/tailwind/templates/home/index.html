@@ -58,7 +58,7 @@
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
                 <h3 class="text-2xl font-semibold mb-4">Recent Datasets</h3>
-                {% set datasets = h.get_recent_datasets(limit=3) %}
+                {% set datasets = h.get_recent_datasets() %}
                 {% if datasets %}
                     {% for dataset in datasets %}
                         <article class="bg-white p-4 rounded-lg shadow mb-4 border border-gray-100">
@@ -80,27 +80,17 @@
                 {% endif %}
             </div>
             <div>
-                <h3 class="text-2xl font-semibold mb-4">Popular Organizations</h3>
-                {% set organizations = h.get_organizations(limit=3) %}
-                {% if organizations %}
-                    {% for org in organizations %}
-                        <article class="bg-white p-4 rounded-lg shadow mb-4 border border-gray-100">
-                            <h4 class="text-lg font-medium mb-2">
-                                <a href="{{ h.url_for('organization.read', id=org.name) }}" class="text-indigo-600 hover:text-indigo-800">
-                                    {{ org.title or org.name }}
-                                </a>
-                            </h4>
-                            <p class="text-gray-600 text-sm mb-2">
-                                {{ org.description[:120] if org.description else "No description provided." }}
-                            </p>
-                            <small class="text-gray-400">
-                                {{ h.SI_number_span(org.package_count) }} datasets
-                            </small>
-                        </article>
-                    {% endfor %}
-                {% else %}
-                    <p class="text-gray-500 py-4 text-center">No organizations available yet.</p>
-                {% endif %}
+                <h3 class="text-2xl font-semibold mb-4">Popular Tags</h3>
+                <div class="bg-white p-4 rounded-lg shadow mb-4 border border-gray-100">
+                    <p class="text-gray-600 text-sm mb-3">Popular tags will be displayed here.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">Data</span>
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">Open</span>
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">Research</span>
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">Government</span>
+                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">Statistics</span>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

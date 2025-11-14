@@ -35,7 +35,7 @@
         <section class="grid">
             <div>
                 <h3>Recent Datasets</h3>
-                {% set datasets = h.get_recent_datasets(limit=3) %}
+                {% set datasets = h.get_recent_datasets() %}
                 {% if datasets %}
                     {% for dataset in datasets %}
                         <article class="card">
@@ -49,19 +49,19 @@
                 {% endif %}
             </div>
             <div>
-                <h3>Popular Organizations</h3>
-                {% set organizations = h.get_organizations(limit=3) %}
-                {% if organizations %}
-                    {% for org in organizations %}
-                        <article class="card">
-                            <h4><a href="{{ h.url_for('organization.read', id=org.name) }}">{{ org.title or org.name }}</a></h4>
-                            <p>{{ org.description[:120] if org.description else "No description provided." }}</p>
-                            <small class="secondary">{{ h.SI_number_span(org.package_count) }} datasets</small>
-                        </article>
-                    {% endfor %}
-                {% else %}
-                    <p class="secondary">No organizations available yet.</p>
-                {% endif %}
+                <h3>Popular Tags</h3>
+                <article class="card">
+                    <div>
+                        <p>Popular tags will be displayed here.</p>
+                        <div class="d-flex flex-wrap gap-1">
+                            <span class="secondary">Data</span>
+                            <span class="secondary">Open</span>
+                            <span class="secondary">Research</span>
+                            <span class="secondary">Government</span>
+                            <span class="secondary">Statistics</span>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
     </div>
