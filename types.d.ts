@@ -39,13 +39,17 @@ declare global {
     ui: IUi & { util: IUtil };
   }
   interface IUtil {
-    animateTimeout(el: HTMLProgressElement, start: number, timeout: number):void;
+    animateTimeout(
+      el: HTMLProgressElement,
+      start: number,
+      timeout: number,
+    ): void;
     applyListeners(
       el: HTMLElement,
       listeners: { [key: string]: Theming.Listener | Theming.ComplexListener },
-    ):void;
-    applyProps(el: HTMLElement, props: { [key: string]: any }):void;
-    applyAttrs(el: HTMLElement, attrs: { [key: string]: string }):void;
+    ): void;
+    applyProps(el: HTMLElement, props: { [key: string]: any }): void;
+    applyAttrs(el: HTMLElement, attrs: { [key: string]: string }): void;
   }
   interface IUi {
     modal: (

@@ -23,6 +23,41 @@ structured approach to UI customization. The system is built around a
 macro-based UI framework that allows themes to provide consistent, reusable
 components across CKAN instances.
 
+
+Traditional CKAN Theme Implementation
+ - Uses template inheritance with base templates (base.html, page.html)
+ - Contains inline HTML with CSS framework-specific classes directly in templates
+ - Form macros and UI elements are implemented directly as template code with HTML
+ - Example: Input elements have direct Bootstrap classes embedded in the macro
+
+ckanext-theming Macro-Based Approach
+ - Creates a collection of UI macros that abstract the underlying CSS framework
+ - Developers use semantic calls like {{ ui.button("Click Me", style="primary") }} instead of writing HTML
+ - Different themes can implement the same macros with different CSS frameworks (Bootstrap 5, Tailwind, Bulma,
+   Pico CSS, etc.)
+ - The theme system allows switching between completely different CSS frameworks by changing one configuration
+   setting
+ - Each theme provides its own implementation of the same set of macros using its specific CSS framework
+   classes
+ - Provides a consistent API regardless of the underlying CSS framework
+
+How Users Can Customize Themes with Different CSS Frameworks
+
+1. Theme Registration: Extensions can register new themes by implementing the ITheme interface and providing a
+   Theme object
+1. Macro Implementation: Each theme implements the same set of macros using their chosen CSS framework's
+   classes
+1. Configuration: Users can switch themes by setting ckan.ui.theme = theme-name in their config
+1. Template Usage: Templates use semantic calls like {{ ui.button(...) }} instead of framework-specific HTML
+1. Flexibility: The same CKAN templates can work with different CSS frameworks by simply changing the active
+   theme
+
+The key benefit is the complete separation of content structure from styling. This means users can
+completely change the visual appearance of their CKAN instance (from Bootstrap to Tailwind, for example) by
+just changing the theme configuration, without modifying any templates or code.
+
+
+
 ## Installation
 
 To install ckanext-theming:
