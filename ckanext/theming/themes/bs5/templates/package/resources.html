@@ -1,0 +1,67 @@
+{% extends "package/base.html" %}
+
+{%- block subtitle %}{{ _('Resources') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for('dataset.search')) }}
+    {{ ui.breadcrumb_item(pkg_dict.title or pkg_dict.name, h.url_for('dataset.read', id=pkg_dict.name)) }}
+    {{ ui.breadcrumb_item(_('Resources'), h.url_for('dataset.resources', id=pkg_dict.name)) }}
+{%- endblock -%}
+
+{%- block primary_content_inner %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4">{{ _('Resources') }}</h2>
+        {%- if h.check_access('package_update', {'id':pkg_dict.id }) %}
+            {{ ui.button(_('Add New Resource'), href=h.url_for('resource.new', id=pkg_dict.name), style="primary") }}
+        {%- endif %}
+    </div>
+
+    {%- if pkg_dict.resources %}
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ _('Name') }}</th>
+                                <th>{{ _('Format') }}</th>
+                                <th>{{ _('Last Modified') }}</th>
+                                <th>{{ _('Actions') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%- for resource in pkg_dict.resources %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ h.url_for('resource.read', id=pkg_dict.name, resource_id=resource.id) }}">
+                                            {{ resource.name or resource.description or _('Unnamed resource') }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ ui.tag(resource.format or _('unknown'), class="badge bg-secondary") }}
+                                    </td>
+                                    <td>
+                                        {{ ui.datetime(resource.last_modified) or ui.datetime(resource.created) or _('unknown') }}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            {{ ui.button(_('Edit'), href=h.url_for('resource.edit', id=pkg_dict.name, resource_id=resource.id), style="secondary", class="btn-sm") }}
+                                            {{ ui.button(_('Delete'), href=h.url_for('resource.delete', id=pkg_dict.name, resource_id=resource.id), style="danger", class="btn-sm") }}
+                                        </div>
+                                    </td>
+                                </tr>
+                            {%- endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {%- else %}
+        <div class="alert alert-info">
+            <p>{{ _('No resources found for this dataset.') }}</p>
+            {%- if h.check_access('package_update', {'id':pkg_dict.id }) %}
+                <p>{{ ui.link(_('Add New Resource'), h.url_for('resource.new', id=pkg_dict.name)) }}</p>
+            {%- endif %}
+        </div>
+    {%- endif %}
+{%- endblock -%}

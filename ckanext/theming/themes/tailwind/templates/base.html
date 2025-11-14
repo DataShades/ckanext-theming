@@ -1,14 +1,5 @@
 {% ckan_extends %}
 
-{%- block styles %}
-    {%- block styles_tailwind -%}
-        {%- asset "theming/tailwind/styles" -%}
-    {%- endblock %}
-{%- endblock %}
-
-{%- block scripts_theming %}
-    {{ super() }}
-    {%- block scripts_tailwind -%}
-        {%- asset "theming/tailwind/scripts" -%}
-    {%- endblock %}
+{%- block head_extras %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- endblock %}

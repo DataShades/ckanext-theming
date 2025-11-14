@@ -1,1 +1,20 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ user_dict.display_name or user_dict.name }}</h1>
+
+    {%- if user_dict.about %}
+        <p>{{ h.render_markdown(user_dict.about) }}</p>
+    {%- endif %}
+
+    <div class="user-info">
+        <p><strong>{{ _('Username') }}:</strong> {{ user_dict.name }}</p>
+        <p><strong>{{ _('Member since') }}:</strong> {{ ui.datetime(user_dict.created) }}</p>
+        <p><strong>{{ _('Number of datasets') }}:</strong> {{ user_dict.number_created_packages }}</p>
+        <p><strong>{{ _('Number of followers') }}:</strong> {{ user_dict.number_of_followers }}</p>
+    </div>
+
+    {%- if h.check_access('user_update', {'id': user_dict.id}) %}
+        {{ ui.button(_('Edit Profile'), href=h.url_for('user.edit', id=user_dict.name), attrs={"class": "btn btn-primary"}) }}
+    {%- endif %}
+{%- endblock %}

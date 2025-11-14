@@ -1,1 +1,53 @@
-{% extends "layout.html" %}
+{% extends "admin/base.html" %}
+
+{%- block primary_content_inner %}
+    <h2>{{ _('Current Sysadmins') }}</h2>
+
+    {{ ui.table_block(bordered=true, striped=true) }}
+        {{ ui.table_head_block() }}
+            {{ ui.table_row([_('User'), ''], heading=true) }}
+        {{- ui.table_head_block() }}
+
+        {{ ui.table_body_block() }}
+            {%- for user in sysadmins %}
+                {{ ui.table_row_block() }}
+                    {{ ui.table_cell(h.linked_user(user)) }}
+                    <td>
+                        <form method="POST" action="{{ h.url_for('user.sysadmin') }}">
+                            {{ h.csrf_input() }}
+                            <input type="hidden" value="{{ user }}" name="username" />
+                            <input type="hidden" value="0" name="status" />
+                            {{ ui.button(_('Revoke'), type="submit", attrs={"class": "btn btn-danger btn-sm"}) }}
+                        </form>
+                    </td>
+                {{- ui.table_row_block() }}
+            {%- endfor %}
+        {{- ui.table_body_block() }}
+    {{- ui.table_block(bordered=true, striped=true) }}
+
+    <hr />
+
+    <h2>{{ _('Promote user to Sysadmin') }}</h2>
+
+    {{ ui.form_start(method="POST", action=h.url_for('user.sysadmin')) }}
+        {{ h.csrf_input() }}
+
+        {{ ui.input("username", label=_('Username'), placeholder=_('Username'),
+                    attrs={"data-module": "autocomplete",
+                           "data-module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}) }}
+        <input type="hidden" value="1" name="status" />
+
+        {{ ui.button(_('Promote'), type="submit", attrs={"class": "btn btn-primary"}) }}
+    {{ ui.form_end() }}
+{%- endblock %}
+
+{%- block secondary_content %}
+    <div class="module module-narrow module-shallow">
+        {{ ui.heading(_('Administer CKAN'), level=2) }}
+        <div class="module-content">
+            {%- set docs_url = "https://docs.ckan.org/en/{0}/sysadmin-guide.html".format(g.ckan_doc_version) %}
+            <p>{% trans %}As a sysadmin user you have full control over this CKAN instance. Proceed with care!{% endtrans %}</p>
+            <p>{% trans docs_url=docs_url %}<a href="{{ docs_url }}" target="_blank" rel="noreferrer">sysadmin guide</a>{% endtrans %}</p>
+        </div>
+    </div>
+{%- endblock %}

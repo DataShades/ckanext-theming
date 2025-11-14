@@ -1,1 +1,17 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ _('Followers') }}</h1>
+
+    {%- if followers %}
+        <ul>
+            {%- for follower in followers %}
+                <li>{{ ui.link(follower.display_name or follower.name, href=h.url_for('user.read', id=follower.name)) }}</li>
+            {%- endfor %}
+        </ul>
+
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- else %}
+        <p>{{ _('No followers') }}</p>
+    {%- endif %}
+{%- endblock %}

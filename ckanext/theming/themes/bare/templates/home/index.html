@@ -1,36 +1,62 @@
-{% set _layout = _layout | default("fullwidth") %}
-{% extends "layout.html" %}
+{% extends "page.html" %}
 
+{%- block subtitle %}{{ _("Welcome") }}{% endblock %}
 
-{%- block breadcrumb %}{%- endblock %}
+{%- block maintag %}{% endblock %}
+{%- block toolbar %}{% endblock %}
 
-{%- block primary_content_inner -%}
-    <script>
-     function showModal() {
-         const sb = ckan.sandbox();
-         const title = document.createElement("mark");
-         title.append("hello world")
-         sb.ui.notification(
-             "Content",
-             "Title",
-             {dismissible: true, timeout: 3000}
-         ).show();
-     }
-    </script>
-    {{ ui.button("Click", attrs={"onclick": "showModal()"}) }}
+{%- block primary_content_inner %}
+    {{ self.flash() }}
 
-    {{ ui.toast("hello", attrs={"data-bs-delay": 1000}) }}
+    <div class="homepage">
+        <div class="main hero">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        {%- block promoted %}
+                            <div class="promoted-content">
+                                <h2>{{ _('Welcome to CKAN') }}</h2>
+                                <p>{{ _('This is a place where you can find and share data with others.') }}</p>
+                            </div>
+                        {%- endblock %}
+                    </div>
+                    <div class="col-md-6">
+                        {%- block search %}
+                            {{ ui.form_start(method="GET", action=h.url_for('dataset.search'), **{"class": "search-form"}) }}
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="q"
+                                           placeholder="{{ _('Search datasets...') }}"
+                                           autocomplete="off">
+                                    <button type="submit" class="btn btn-primary">{{ _('Search') }}</button>
+                                </div>
+                            {{ ui.form_end() }}
+                        {%- endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="true" id="x">
-  <div class="toast-header">
-    <img src="..." class="rounded me-2" alt="...">
-    <strong class="me-auto">Bootstrap</strong>
-    <small>11 mins ago</small>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-      Hello, world! This is a toast message.
-  </div>
-</div>
-
+        <div class="main module-feeds">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        {%- block featured_group %}
+                            <div class="featured-group">
+                                <h3>{{ _('Featured Group') }}</h3>
+                                <p>{{ _('A featured group would appear here.') }}</p>
+                            </div>
+                        {%- endblock %}
+                    </div>
+                    <div class="col-md-6">
+                        {%- block featured_organization %}
+                            <div class="featured-organization">
+                                <h3>{{ _('Featured Organization') }}</h3>
+                                <p>{{ _('A featured organization would appear here.') }}</p>
+                            </div>
+                        {%- endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {%- endblock %}

@@ -1,1 +1,20 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ _('Dashboard') }}</h1>
+
+    <div class="dashboard-menu">
+        <h2>{{ _('My Datasets') }}</h2>
+        {{ ui.link(_('Manage Datasets'), href=h.url_for('dashboard.datasets')) }}
+    </div>
+
+    <div class="dashboard-menu">
+        <h2>{{ _('My Organizations') }}</h2>
+        {{ ui.link(_('Manage Organizations'), href=h.url_for('dashboard.organizations')) }}
+    </div>
+
+    <div class="dashboard-menu">
+        <h2>{{ _('My Groups') }}</h2>
+        {{ ui.link(_('Manage Groups'), href=h.url_for('dashboard.groups')) }}
+    </div>
+{%- endblock %}

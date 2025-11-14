@@ -1,18 +1,49 @@
-{% set _layout = _layout | default("fullwidth") %}
-
-{% extends "layout.html" %}
-
-{%- block breadcrumb_content %}
-    {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), h.url_for(group_type ~ '.index')) }}
-{%- endblock %}
+{% extends "group/base.html" %}
 
 {%- block primary_content_inner %}
+    {%- block page_primary_action %}
+        {%- if h.check_access('group_create') %}
+            {{ ui.button(_('Add Group'), href=h.url_for('group.new')) }}
+        {%- endif %}
+    {%- endblock %}
 
-    {%- for item in page.items %}
-        {{ ui.group_item(item) }}
-        <hr/>
-    {%- endfor %}
+    {%- block search_form %}
+        {{ ui.form_start(method="GET", action=h.url_for('group.index'), **{"hx-boost": "true", "hx-disinherit": "hx-boost", "class": "search-form"}) }}
 
-    {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+        <div {{ ui.util.attrs({"class": "input-group"}) }}>
+            <input type="text" class="form-control" name="q" value="{{ q or '' }}"
+                   placeholder="{{ _('Search groups...') }}"
+                   autocomplete="off">
+            <button type="submit" class="btn btn-primary">{{ _('Search') }}</button>
+        </div>
+
+        <h2>
+            {%- if page.item_count %}
+                {{ h.paginator_info(page, 'group', 'groups') }}
+            {%- else %}
+                {{ _('No groups found') }}
+            {%- endif %}
+        </h2>
+
+        {{ ui.form_end() }}
+    {%- endblock %}
+
+    {%- block group_list %}
+        {%- if page.items %}
+            {%- for item in page.items %}
+                {{ ui.group_item(item) }}
+                <hr/>
+            {%- endfor %}
+        {%- else %}
+            {%- if q %}
+                <p>{{ _('There was an error while searching.') }}</p>
+            {%- else %}
+                <p>{{ _('No groups found.') }}</p>
+            {%- endif %}
+        {%- endif %}
+    {%- endblock %}
+
+    {%- block pagination %}
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- endblock %}
 {%- endblock %}

@@ -1,0 +1,145 @@
+{%- extends "page.html" -%}
+
+{%- block subtitle %}{{ g.site_title }}{% endblock -%}
+
+{%- block primary_content %}
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title is-1">{{ ui.heading(g.site_title, level=1) }}</h1>
+                    <p class="subtitle is-4">Welcome to our data portal. Discover, share, and collaborate on datasets from various sources.</p>
+                    <div class="buttons">
+                        <a href="{{ h.url_for('dataset.search') }}" class="button is-info is-large">Explore Datasets</a>
+                        <a href="#" class="button is-light is-large">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="container">
+                <div class="columns is-multiline">
+                    <div class="column is-4">
+                        <div class="box has-text-centered">
+                            <div class="icon is-large has-text-primary">
+                                {{ ui.icon("database", size="lg") }}
+                            </div>
+                            <h3 class="title is-4">Find Data</h3>
+                            <p class="subtitle is-6">Search and discover thousands of datasets across various topics and organizations.</p>
+                            <a href="{{ h.url_for('dataset.search') }}" class="button is-primary">Browse &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="box has-text-centered">
+                            <div class="icon is-large has-text-primary">
+                                {{ ui.icon("upload", size="lg") }}
+                            </div>
+                            <h3 class="title is-4">Share Data</h3>
+                            <p class="subtitle is-6">Publish your datasets to make them accessible and reusable for others.</p>
+                            <a href="{{ h.url_for('dataset.new') }}" class="button is-primary">Publish &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="column is-4">
+                        <div class="box has-text-centered">
+                            <div class="icon is-large has-text-primary">
+                                {{ ui.icon("people", size="lg") }}
+                            </div>
+                            <h3 class="title is-4">Collaborate</h3>
+                            <p class="subtitle is-6">Join communities and work together on data projects and initiatives.</p>
+                            <a href="{{ h.url_for('organization.index') }}" class="button is-primary">Join &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="section">
+            <div class="container">
+                <div class="columns">
+                    <div class="column is-6">
+                        <h3 class="title is-3">Recent Datasets</h3>
+                        {% set datasets = h.get_recent_datasets(limit=3) %}
+                        {% if datasets %}
+                            {% for dataset in datasets %}
+                                <div class="box mb-4">
+                                    <h4 class="title is-5">
+                                        <a href="{{ h.url_for('dataset.read', id=dataset.name) }}" class="has-text-info">
+                                            {{ dataset.title or dataset.name }}
+                                        </a>
+                                    </h4>
+                                    <p class="subtitle is-6">
+                                        {{ h.markdown_extract(dataset.notes, 120) if dataset.notes else "No description provided." }}
+                                    </p>
+                                    <small class="has-text-grey">Updated {{ h.time_ago_from_timestamp(dataset.metadata_modified) }}</small>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="notification">
+                                <p>No datasets available yet.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="column is-6">
+                        <h3 class="title is-3">Popular Organizations</h3>
+                        {% set organizations = h.get_organizations(limit=3) %}
+                        {% if organizations %}
+                            {% for org in organizations %}
+                                <div class="box mb-4">
+                                    <h4 class="title is-5">
+                                        <a href="{{ h.url_for('organization.read', id=org.name) }}" class="has-text-info">
+                                            {{ org.title or org.name }}
+                                        </a>
+                                    </h4>
+                                    <p class="subtitle is-6">
+                                        {{ org.description[:120] if org.description else "No description provided." }}
+                                    </p>
+                                    <small class="has-text-grey">{{ h.SI_number_span(org.package_count) }} datasets</small>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="notification">
+                                <p>No organizations available yet.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{%- endblock -%}
+
+{%- block secondary_content %}
+    <div class="card">
+        <div class="card-content">
+            <h4 class="title is-4">Site Activity</h4>
+            <div class="content">
+                <div class="level mb-3">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <strong>Total Datasets</strong>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <span class="tag is-primary is-medium">{{ h.get_dataset_count() }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-content">
+            <h4 class="title is-4">Quick Links</h4>
+            <div class="content">
+                <a href="{{ h.url_for('dataset.new') }}" class="button is-primary is-fullwidth mb-2">Submit Dataset</a>
+                <a href="/api" class="button is-light is-fullwidth">API Documentation</a>
+            </div>
+        </div>
+    </div>
+{%- endblock -%}

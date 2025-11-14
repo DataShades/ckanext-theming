@@ -1,17 +1,49 @@
-{% set _layout = _layout | default("fullwidth") %}
-{% extends "layout.html" %}
-
-{%- block breadcrumb_content %}
-    {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_type, 'breadcrumb') or _('Organizations'), h.url_for(group_type ~ '.index')) }}
-{%- endblock %}
+{% extends "organization/base.html" %}
 
 {%- block primary_content_inner %}
+    {%- block page_primary_action %}
+        {%- if h.check_access('organization_create') %}
+            {{ ui.button(_('Add Organization'), href=h.url_for('organization.new')) }}
+        {%- endif %}
+    {%- endblock %}
 
-    {%- for item in page.items %}
-        {{ ui.organization_item(item) }}
-        <hr/>
-    {%- endfor %}
+    {%- block search_form %}
+        {{ ui.form_start(method="GET", action=h.url_for('organization.index'), **{"hx-boost": "true", "hx-disinherit": "hx-boost", "class": "search-form"}) }}
 
-    {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+        <div {{ ui.util.attrs({"class": "input-group"}) }}>
+            <input type="text" class="form-control" name="q" value="{{ q or '' }}"
+                   placeholder="{{ _('Search organizations...') }}"
+                   autocomplete="off">
+            <button type="submit" class="btn btn-primary">{{ _('Search') }}</button>
+        </div>
+
+        <h2>
+            {%- if page.item_count %}
+                {{ h.paginator_info(page, 'organization', 'organizations') }}
+            {%- else %}
+                {{ _('No organizations found') }}
+            {%- endif %}
+        </h2>
+
+        {{ ui.form_end() }}
+    {%- endblock %}
+
+    {%- block organization_list %}
+        {%- if page.items %}
+            {%- for item in page.items %}
+                {{ ui.organization_item(item) }}
+                <hr/>
+            {%- endfor %}
+        {%- else %}
+            {%- if q %}
+                <p>{{ _('There was an error while searching.') }}</p>
+            {%- else %}
+                <p>{{ _('No organizations found.') }}</p>
+            {%- endif %}
+        {%- endif %}
+    {%- endblock %}
+
+    {%- block pagination %}
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- endblock %}
 {%- endblock %}

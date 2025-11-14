@@ -1,18 +1,36 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
 
+{%- block subtitle %}{{ group_dict.title or group_dict.name }}{% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ super() }}
     {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
     {{ ui.breadcrumb_item(group_dict.title, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
+    <h1>{{ group_dict.title or group_dict.name }}</h1>
 
-    {%- for item in page.items %}
-        {{ ui.package_item(item) }}
-        <hr/>
-    {%- endfor %}
+    {%- if group_dict.description %}
+        <p>{{ h.render_markdown(group_dict.description) }}</p>
+    {%- endif %}
 
-    {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    <div class="organization-info">
+        <p><strong>{{ _('Packages') }}:</strong> {{ group_dict.package_count }}</p>
+    </div>
+
+    {%- if h.check_access('organization_update', {'id': group_dict.id}) %}
+        {{ ui.button(_('Edit'), href=h.url_for(group_dict.type ~ '.edit', id=group_dict.name), attrs={"class": "btn btn-primary"}) }}
+    {%- endif %}
+
+    {%- if page.items %}
+        <h2>{{ _('Datasets') }}</h2>
+        {%- for item in page.items %}
+            {{ ui.package_item(item) }}
+            <hr/>
+        {%- endfor %}
+
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- else %}
+        <p>{{ _('No datasets in this organization') }}</p>
+    {%- endif %}
 {%- endblock %}

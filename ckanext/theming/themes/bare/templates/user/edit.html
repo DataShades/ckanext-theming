@@ -1,1 +1,23 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ _('Edit Profile') }}</h1>
+
+    {{ ui.form_start(method="POST", action="", attrs={"class": "user-form"}) }}
+    {{ h.csrf_input() }}
+
+    {{ ui.input("name", "field-name", label=_('Username'), value=data.name or "", errors=errors.name or []) }}
+    {{ ui.input("email", "field-email", label=_('Email'), value=data.email or "", errors=errors.email or [], type="email") }}
+    {{ ui.input("fullname", "field-fullname", label=_('Full Name'), value=data.fullname or "", errors=errors.fullname or []) }}
+    {{ ui.textarea("about", "field-about", label=_('About'), value=data.about or "", errors=errors.about or []) }}
+
+    {{ ui.input("password1", "field-password", label=_('New Password'), type="password", errors=errors.password1 or []) }}
+    {{ ui.input("password2", "field-password-confirm", label=_('Confirm Password'), type="password", errors=errors.password2 or []) }}
+
+    <div class="form-actions">
+        {{ ui.button(_('Update Profile'), type="submit", attrs={"class": "btn btn-primary"}) }}
+        {{ ui.button(_('Cancel'), type="button", href=h.url_for('user.read', id=user_dict.name), attrs={"class": "btn btn-secondary"}) }}
+    </div>
+
+    {{ ui.form_end() }}
+{%- endblock %}

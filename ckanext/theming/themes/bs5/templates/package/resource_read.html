@@ -1,0 +1,58 @@
+{% extends "package/base.html" %}
+
+{%- block subtitle %}{{ _('Resource') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for('dataset.search')) }}
+    {{ ui.breadcrumb_item(pkg_dict.title or pkg_dict.name, h.url_for('dataset.read', id=pkg_dict.name)) }}
+    {{ ui.breadcrumb_item(_('Resources'), h.url_for('dataset.resources', id=pkg_dict.name)) }}
+    {{ ui.breadcrumb_item(resource.name or resource.description or _('Unnamed resource'), h.url_for('resource.read', id=pkg_dict.name, resource_id=resource.id)) }}
+{%- endblock -%}
+
+{%- block primary_content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title mb-0">{{ resource.name or resource.description or _('Unnamed resource') }}</h3>
+        </div>
+        <div class="card-body">
+            {%- block primary_content_inner %}{% endblock -%}
+        </div>
+    </div>
+{%- endblock -%}
+
+{%- block secondary_content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Resource Information') }}</h5>
+            <dl class="row">
+                {%- if resource.format %}
+                    <dt class="col-sm-4">{{ _('Format') }}</dt>
+                    <dd class="col-sm-8">{{ ui.tag(resource.format, class="badge bg-primary") }}</dd>
+                {%- endif %}
+                {%- if resource.size %}
+                    <dt class="col-sm-4">{{ _('Size') }}</dt>
+                    <dd class="col-sm-8">{{ resource.size }}</dd>
+                {%- endif %}
+                {%- if resource.created %}
+                    <dt class="col-sm-4">{{ _('Created') }}</dt>
+                    <dd class="col-sm-8">{{ ui.datetime(resource.created) }}</dd>
+                {%- endif %}
+                {%- if resource.last_modified %}
+                    <dt class="col-sm-4">{{ _('Last Modified') }}</dt>
+                    <dd class="col-sm-8">{{ ui.datetime(resource.last_modified) }}</dd>
+                {%- endif %}
+                {%- if resource.mimetype %}
+                    <dt class="col-sm-4">{{ _('MIME Type') }}</dt>
+                    <dd class="col-sm-8">{{ resource.mimetype }}</dd>
+                {%- endif %}
+            </dl>
+
+            <div class="mt-3">
+                {%- if h.check_access('package_update', {'id':pkg_dict.id }) %}
+                    {{ ui.button(_('Edit Resource'), href=h.url_for('resource.edit', id=pkg_dict.name, resource_id=resource.id), style="secondary", class="me-2") }}
+                    {{ ui.button(_('Delete Resource'), href=h.url_for('resource.delete', id=pkg_dict.name, resource_id=resource.id), style="danger") }}
+                {%- endif %}
+            </div>
+        </div>
+    </div>
+{%- endblock -%}

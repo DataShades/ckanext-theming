@@ -1,21 +1,45 @@
-{% extends "layout.html" %}
-{% set _layout = "fullwidth" %}
+{% extends "page.html" %}
+
+{%- block subtitle %}{{ _('Login') }}{% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item("Log in", h.url_for("user.login")) }}
+    {{ ui.breadcrumb_item(_('Login'), h.url_for("user.login")) }}
 {%- endblock %}
 
-
 {%- block primary_content_inner %}
-    {%- call ui.form_block("POST") %}
+    {{ ui.heading(_('Login'), level=1) }}
 
+    {%- call ui.form_block("POST") %}
         {{ ui.form_errors(error_summary) }}
 
-        {{ ui.input("login", label=_("Username or Email"), error=username_error) }} <br/>
-        {{ ui.input("password", label=_("Password"), type="password", error=password_error) }} <br/>
-        {{ ui.checkbox("remember", label=_("Remember me"), checked=true, value=config.REMEMBER_COOKIE_DURATION) }} <br/>
+        {{ ui.input("login", label=_("Username or Email"), errors=errors.login) }}
+        {{ ui.input("password", label=_("Password"), type="password", errors=errors.password) }}
+        {{ ui.checkbox("remember", label=_("Remember me"), checked=true, value=1) }}
 
         {{ ui.form_actions_wrapper(ui.button(_("Log in"), type="submit")) }}
     {%- endcall %}
+{%- endblock %}
 
+{%- block secondary_content %}
+    {%- if h.check_access('user_create') %}
+        <section class="module module-narrow module-shallow">
+            <h2>{{ _('Need an Account?') }}</h2>
+            <div class="module-content">
+                <p>{% trans %}Then sign right up, it only takes a minute.{% endtrans %}</p>
+                <p class="action">
+                    {{ ui.button(_('Create an Account'), href=h.url_for('user.register'), attrs={"class": "btn btn-secondary"}) }}
+                </p>
+            </div>
+        </section>
+    {%- endif %}
+
+    <section class="module module-narrow module-shallow">
+        <h2>{{ _('Forgotten your password?') }}</h2>
+        <div class="module-content">
+            <p>{% trans %}No problem, use our password recovery form to reset it.{% endtrans %}</p>
+            <p class="action">
+                {{ ui.button(_('Forgot your password?'), href=h.url_for('user.request_reset'), attrs={"class": "btn btn-secondary"}) }}
+            </p>
+        </div>
+    </section>
 {%- endblock %}

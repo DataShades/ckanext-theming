@@ -1,0 +1,135 @@
+{%- extends "page.html" -%}
+
+{%- block subtitle %}UI Macros Test{% endblock -%}
+
+{%- block primary_content %}
+    <div class="container">
+        <h1 class="display-4">UI Macros Test Page</h1>
+        <p class="lead">This page tests various UI macros to ensure they work properly with different themes.</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Basic Elements -->
+                <h2>Basic Elements</h2>
+
+                <div class="mb-3">
+                    {{ ui.heading("Test Heading", level=1) }}
+                    {{ ui.heading("Test Heading", level=2) }}
+                    {{ ui.heading("Test Heading", level=3) }}
+                    {{ ui.heading("Test Heading", level=4) }}
+                    {{ ui.heading("Test Heading", level=5) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ ui.text("This is a text element") }}
+                    This is a text block element
+                </div>
+
+                <div class="mb-3">
+                    {{ ui.link("This is a link", "#") }}
+                    {{ ui.button("Primary Button", style="primary") }}
+                    {{ ui.button("Secondary Button", style="secondary") }}
+                    {{ ui.button("Success Button", style="success") }}
+                    {{ ui.button("Danger Button", style="danger") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ ui.badge("New") }}
+                    {{ ui.tag("Tag Item", "tag-id") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ ui.image("https://via.placeholder.com/150", alt="Placeholder image") }}
+                    {{ ui.avatar("https://via.placeholder.com/40x40", "User Avatar") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ ui.icon("gear") }}
+                    {{ ui.icon("heart", size="lg") }}
+                    {{ ui.icon("star", size="sm") }}
+                </div>
+
+                {{ ui.divider() }}
+            </div>
+
+            <div class="col-md-6">
+                <!-- Form Elements -->
+                <h2>Form Elements</h2>
+
+                {{ ui.form_block(method="POST", action="#") }}
+                    {{ ui.input("username", "username", label="Username", value="john_doe", required=true) }}
+                    {{ ui.input("email", "email", label="Email", type="email", value="john@example.com") }}
+                    {{ ui.textarea("bio", "bio", label="Bio", value="Hello, I'm a user") }}
+
+                    {{ ui.select("country", "country", label="Country",
+                            options=[{"value": "us", "text": "United States"}, {"value": "ca", "text": "Canada"}, {"value": "uk", "text": "United Kingdom"}],
+                            selected="us") }}
+
+                    {{ ui.checkbox("terms", "terms", label="I agree to terms and conditions", checked=true) }}
+                    {{ ui.toggle_switch("notifications", "notifications", label="Enable notifications", checked=true) }}
+
+                    {{ ui.form_actions_wrapper(
+                        ui.button("Submit", style="primary") ~
+                        ui.button("Cancel", type="button", style="secondary")
+                    ) }}
+                {{ ui.form_end() }}
+
+                {{ ui.divider() }}
+
+                <!-- Alerts and Feedback -->
+                <h2>Alerts and Feedback</h2>
+                {{ ui.alert("This is an info alert", style="info") }}
+                {{ ui.alert("This is a success alert", style="success") }}
+                {{ ui.alert("This is a warning alert", style="warning") }}
+                {{ ui.alert("This is a danger alert", style="danger") }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <!-- Navigation Elements -->
+                <h2>Navigation Elements</h2>
+                {{ ui.nav_wrapper(
+                    ui.nav_item("Home", "#") ~
+                    ui.nav_item("About", "#", active=true) ~
+                    ui.nav_item("Contact", "#")
+                ) }}
+
+                {{ ui.tab_wrapper(
+                    ui.tab_item("Home", "#home", active=true) ~
+                    ui.tab_item("Profile", "#profile") ~
+                    ui.tab_item("Messages", "#messages")
+                ) }}
+
+                {{ ui.menu_wrapper(
+                    ui.menu_item("Dashboard", "#") ~
+                    ui.menu_item("Settings", "#", active=true) ~
+                    ui.menu_item("Help", "#")
+                ) }}
+            </div>
+
+            <div class="col-md-6">
+                <!-- Container Elements -->
+                <h2>Container Elements</h2>
+                {{ ui.card(title="Card Title", content="This is the card content. It supports various content types.", footer="Card Footer") }}
+
+                {{ ui.container(
+                    ui.row(
+                        ui.column("6", ui.text("Column 1")) ~
+                        ui.column("6", ui.text("Column 2"))
+                    )
+                ) }}
+            </div>
+        </div>
+    </div>
+{%- endblock -%}
+
+{%- block secondary_content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Sidebar</h5>
+            <p class="card-text">This is the sidebar content area.</p>
+            {{ ui.button("Action Button", href="#", style="primary", class="w-100") }}
+        </div>
+    </div>
+{%- endblock -%}

@@ -1,16 +1,5 @@
 {% ckan_extends %}
 
-{%- block styles_theming %}
-    {%- block styles_bulma -%}
-        {%- asset "theming/bulma/styles" -%}
-    {%- endblock %}
-{%- endblock %}
-
-
-
-{%- block scripts_theming %}
-    {{ super() }}
-    {%- block scripts_bulma -%}
-        {%- asset "theming/bulma/scripts" -%}
-    {%- endblock %}
+{%- block head_extras %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- endblock %}

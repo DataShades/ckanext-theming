@@ -1,0 +1,7 @@
+{% extends "page.html" %}
+
+{%- block subtitle %}{{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), h.url_for(group_type ~ '.index')) }}
+{%- endblock %}

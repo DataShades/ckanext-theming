@@ -1,0 +1,7 @@
+{% extends "page.html" %}
+
+{%- block subtitle %}{{ _('Admin') }}{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_('Admin'), h.url_for('admin.index')) }}
+{%- endblock %}

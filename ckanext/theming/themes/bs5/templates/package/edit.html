@@ -1,0 +1,36 @@
+{% extends "package/base.html" %}
+
+{%- block subtitle %}{{ _('Edit Dataset') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for('dataset.search')) }}
+    {{ ui.breadcrumb_item(pkg_dict.title or pkg_dict.name, h.url_for('dataset.read', id=pkg_dict.name)) }}
+    {{ ui.breadcrumb_item(_('Edit'), h.url_for('dataset.edit', id=pkg_dict.name)) }}
+{%- endblock -%}
+
+{%- block primary_content %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title mb-0">{{ _('Edit Dataset') }}</h3>
+        </div>
+        <div class="card-body">
+            {%- block primary_content_inner %}{% endblock -%}
+        </div>
+    </div>
+{%- endblock -%}
+
+{%- block secondary_content %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ _('Next Steps') }}</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {{ ui.link(_('Add Resource'), h.url_for('resource.new', id=pkg_dict.name), class="btn btn-sm btn-outline-primary") }}
+                </li>
+                <li class="list-group-item">
+                    {{ ui.link(_('Manage Datasets'), h.url_for('dataset.search'), class="btn btn-sm btn-outline-secondary") }}
+                </li>
+            </ul>
+        </div>
+    </div>
+{%- endblock -%}

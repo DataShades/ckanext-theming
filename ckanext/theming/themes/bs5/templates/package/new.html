@@ -1,0 +1,29 @@
+{% extends "package/edit.html" %}
+
+{%- block subtitle %}{{ _('Create Dataset') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for('dataset.search')) }}
+    {{ ui.breadcrumb_item(_('Create Dataset'), h.url_for('dataset.new')) }}
+{%- endblock -%}
+
+{%- block primary_content_inner %}
+    <h2 class="h4 mb-4">{{ _('Create Dataset') }}</h2>
+
+    <div class="alert alert-info">
+        {{ _('Create a new dataset for this site.') }}
+    </div>
+
+    {%- block errors %}{% endblock -%}
+
+    {{ ui.form_block(method="POST", action=h.url_for('dataset.new'), class="dataset-form") }}
+        {%- block dataset_fields %}{% endblock -%}
+
+        <div class="form-actions mt-3">
+            {{ ui.form_actions_wrapper(
+                ui.button(_('Create Dataset'), type="submit", style="primary") ~
+                ui.button(_('Cancel'), type="button", href=h.url_for('dataset.search'), style="secondary")
+            ) }}
+        </div>
+    {{ ui.form_end() }}
+{%- endblock -%}

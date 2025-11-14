@@ -1,14 +1,5 @@
 {% ckan_extends %}
 
-{%- block styles_theming %}
-    {%- block styles_pico -%}
-        {%- asset "theming/pico/styles" -%}
-    {%- endblock %}
-{%- endblock %}
-
-{%- block scripts_theming %}
-    {{ super() }}
-    {%- block scripts_pico -%}
-        {%- asset "theming/pico/scripts" -%}
-    {%- endblock %}
+{%- block head_extras %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- endblock %}

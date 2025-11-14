@@ -1,0 +1,28 @@
+{% extends "page.html" %}
+
+{%- block subtitle %}{{ _('Admin') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_('Admin'), h.url_for('admin.index')) }}
+{%- endblock -%}
+
+{%- block primary_content %}
+    <div class="card">
+        <div class="card-body">
+            {%- block primary_content_inner %}{% endblock -%}
+        </div>
+    </div>
+{%- endblock -%}
+
+{%- block secondary_content %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">{{ _('Administration') }}</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            {{ ui.nav_item(_('Config'), h.url_for('admin.config'), active=(c.action == 'config')) }}
+            {{ ui.nav_item(_('Trash View'), h.url_for('admin.trash'), active=(c.action == 'trash')) }}
+            {{ ui.nav_item(_('Purge Trash'), h.url_for('admin.purge', confirmed=False), active=false) }}
+        </div>
+    </div>
+{%- endblock -%}

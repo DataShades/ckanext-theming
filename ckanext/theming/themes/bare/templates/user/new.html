@@ -1,10 +1,28 @@
-{% extends "layout.html" %}
-{% set _layout = "fullwidth" %}
+{% extends "page.html" %}
+
+{%- block subtitle %}{{ _('Register') }}{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(_("Register"), h.url_for("user.register")) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ form | safe }}
+    <h1>{{ _('Register') }}</h1>
+
+    {{ ui.form_start(method="POST", action=h.url_for('user.register'), attrs={"class": "user-register-form"}) }}
+    {{ h.csrf_input() }}
+
+    {{ ui.input("name", "field-name", label=_('Username'), value=data.name or "", errors=errors.name or []) }}
+    {{ ui.input("email", "field-email", label=_('Email'), value=data.email or "", errors=errors.email or [], type="email") }}
+    {{ ui.input("fullname", "field-fullname", label=_('Full Name'), value=data.fullname or "", errors=errors.fullname or []) }}
+
+    {{ ui.input("password1", "field-password", label=_('Password'), type="password", errors=errors.password1 or []) }}
+    {{ ui.input("password2", "field-password-confirm", label=_('Confirm Password'), type="password", errors=errors.password2 or []) }}
+
+    <div class="form-actions">
+        {{ ui.button(_('Register'), type="submit", attrs={"class": "btn btn-primary"}) }}
+        {{ ui.button(_('Cancel'), type="button", href=h.url_for('home.index'), attrs={"class": "btn btn-secondary"}) }}
+    </div>
+
+    {{ ui.form_end() }}
 {%- endblock %}

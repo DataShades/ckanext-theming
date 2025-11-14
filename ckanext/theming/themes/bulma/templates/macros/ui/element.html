@@ -39,6 +39,10 @@
     <p {{ ui.util.attrs(kwargs) }}>{{ content }}</p>
 {%- endmacro %}
 
+{%- macro text_block(content) -%}
+    <div {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
 {%- macro video(src, controls=true) -%}
     <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
 {%- endmacro %}

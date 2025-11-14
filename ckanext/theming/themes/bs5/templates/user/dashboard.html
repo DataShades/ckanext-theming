@@ -1,0 +1,89 @@
+{% extends "user/base.html" %}
+
+{%- block subtitle %}{{ _('Dashboard') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_('Users'), h.url_for('user.index')) }}
+    {{ ui.breadcrumb_item(_('Dashboard'), h.url_for('user.dashboard')) }}
+{%- endblock -%}
+
+{%- block primary_content_inner %}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">{{ _('Activity Stream') }}</h5>
+                </div>
+                <div class="card-body">
+                    {%- if c.dashboard_activity_stream %}
+                        {{ c.dashboard_activity_stream }}
+                    {%- else %}
+                        <p class="text-muted">{{ _('No activity') }}</p>
+                    {%- endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">{{ _('My Datasets') }}</h5>
+                </div>
+                <div class="card-body">
+                    {%- if c.user_dict.datasets %}
+                        <ul class="list-group list-group-flush">
+                            {%- for dataset in c.user_dict.datasets %}
+                                <li class="list-group-item">
+                                    {{ ui.link(dataset.title or dataset.name, h.url_for('dataset.read', id=dataset.name)) }}
+                                </li>
+                            {%- endfor %}
+                        </ul>
+                    {%- else %}
+                        <p class="text-muted">{{ _('No datasets') }}</p>
+                    {%- endif %}
+                    {{ ui.button(_('Manage Datasets'), href=h.url_for('user.dashboard_datasets'), style="secondary", class="mt-2 w-100") }}
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">{{ _('My Organizations') }}</h5>
+                </div>
+                <div class="card-body">
+                    {%- if c.organizations %}
+                        <ul class="list-group list-group-flush">
+                            {%- for org in c.organizations %}
+                                <li class="list-group-item">
+                                    {{ ui.link(org.title or org.name, h.url_for('organization.read', id=org.name)) }}
+                                </li>
+                            {%- endfor %}
+                        </ul>
+                    {%- else %}
+                        <p class="text-muted">{{ _('No organizations') }}</p>
+                    {%- endif %}
+                    {{ ui.button(_('View Organizations'), href=h.url_for('user.dashboard_organizations'), style="secondary", class="mt-2 w-100") }}
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">{{ _('My Groups') }}</h5>
+                </div>
+                <div class="card-body">
+                    {%- if c.groups %}
+                        <ul class="list-group list-group-flush">
+                            {%- for group in c.groups %}
+                                <li class="list-group-item">
+                                    {{ ui.link(group.title or group.name, h.url_for('group.read', id=group.name)) }}
+                                </li>
+                            {%- endfor %}
+                        </ul>
+                    {%- else %}
+                        <p class="text-muted">{{ _('No groups') }}</p>
+                    {%- endif %}
+                    {{ ui.button(_('View Groups'), href=h.url_for('user.dashboard_groups'), style="secondary", class="mt-2 w-100") }}
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endblock -%}

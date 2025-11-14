@@ -1,1 +1,22 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ resource.name or resource.description or _('Unnamed resource') }}</h1>
+
+    {%- if resource.description %}
+        <p>{{ h.render_markdown(resource.description) }}</p>
+    {%- endif %}
+
+    <div class="resource-info">
+        <p><strong>{{ _('URL') }}:</strong> {{ ui.link(resource.url, href=resource.url) }}</p>
+        <p><strong>{{ _('Format') }}:</strong> {{ resource.format or _('Not specified') }}</p>
+        <p><strong>{{ _('Size') }}:</strong> {{ resource.size or _('Unknown') }}</p>
+        <p><strong>{{ _('Last Modified') }}:</strong> {{ ui.datetime(resource.last_modified) if resource.last_modified }}</p>
+    </div>
+
+    {{ ui.button(_('Download'), href=resource.url, attrs={"class": "btn btn-primary"}) }}
+
+    {%- if h.check_access('package_update', {'id': pkg_dict.id}) %}
+        {{ ui.button(_('Edit'), href=h.url_for('dataset_resource.edit', id=pkg_dict.name, resource_id=resource.id), attrs={"class": "btn btn-secondary"}) }}
+    {%- endif %}
+{%- endblock %}

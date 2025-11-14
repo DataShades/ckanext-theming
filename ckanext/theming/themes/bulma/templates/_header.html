@@ -1,0 +1,34 @@
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ h.url_for('home.index') }}">
+            <strong>{{ g.site_title }}</strong>
+        </a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{{ h.url_for('dataset.search') }}">Datasets</a>
+            <a class="navbar-item" href="{{ h.url_for('organization.index') }}">Organizations</a>
+            <a class="navbar-item" href="{{ h.url_for('group.index') }}">Groups</a>
+        </div>
+
+        <div class="navbar-end">
+            {%- if current_user.is_authorized %}
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        {{ ui.avatar(h.get_user().name, h.get_user().display_name) }}
+                        <span>{{ h.get_user().display_name or h.get_user().name }}</span>
+                    </a>
+                    <div class="navbar-dropdown is-right">
+                        <a class="navbar-item" href="{{ h.url_for('user.read', id=h.get_user().name) }}">Profile</a>
+                        <a class="navbar-item" href="{{ h.url_for('user.dashboard') }}">Dashboard</a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="{{ h.url_for('user.logout') }}">Logout</a>
+                    </div>
+                </div>
+            {%- else %}
+                <a class="navbar-item" href="{{ h.url_for('user.login') }}">Login</a>
+            {%- endif %}
+        </div>
+    </div>
+</nav>

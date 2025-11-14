@@ -1,0 +1,47 @@
+{% extends "page.html" %}
+
+{%- block subtitle %}{{ _('Login') }}{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_('Users'), h.url_for('user.index')) }}
+    {{ ui.breadcrumb_item(_('Login'), h.url_for('user.login')) }}
+{%- endblock -%}
+
+{%- block primary_content %}
+    <section class="card">
+        <header>
+            <h3>{{ _('Login') }}</h3>
+        </header>
+        <div>
+            {%- block primary_content_inner %}
+                {{ ui.form_block(method="POST", action=h.url_for('user.login'), class="login-form") }}
+                    {{ ui.input("login", "field-login", label=_('Username or Email'), value=c.user, required=true, class="mb-3") }}
+                    {{ ui.input("password", "field-password", label=_('Password'), type="password", required=true, class="mb-3") }}
+
+                    {{ ui.checkbox("remember", "field-remember", label=_('Remember me'), class="mb-3") }}
+
+                    {{ ui.form_actions_wrapper(
+                        ui.button(_('Login'), type="submit", class="contrast") ~
+                        ui.button(_('Cancel'), type="button", href=h.url_for('home.index'), class="outline")
+                    ) }}
+                {{ ui.form_end() }}
+
+                {%- if h.check_access('user_create') %}
+                    <div class="mt-3">
+                        {{ _('Need an Account?') }} {{ ui.link(_('Register here'), h.url_for('user.register')) }}
+                    </div>
+                {%- endif %}
+            {%- endblock -%}
+        </div>
+    </section>
+{%- endblock -%}
+
+{%- block secondary_content %}
+    <section class="card">
+        <div>
+            <h5>{{ _('New to the site?') }}</h5>
+            <p>{{ _('Signing up is easy and only takes a minute.') }}</p>
+            {{ ui.button(_('Create an Account'), href=h.url_for('user.register'), class="contrast w-100") }}
+        </div>
+    </section>
+{%- endblock -%}

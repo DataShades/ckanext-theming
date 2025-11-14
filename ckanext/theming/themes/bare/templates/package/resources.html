@@ -1,1 +1,21 @@
-{% extends "layout.html" %}
+{% extends "package/edit_base.html" %}
+
+{%- block primary_content_inner %}
+    <h2>{{ _('Resources') }}</h2>
+
+    {%- if pkg_dict.resources %}
+        <ul>
+            {%- for resource in pkg_dict.resources %}
+                <li>
+                    {{ ui.link(resource.name or resource.description or _('Unnamed resource'),
+                              href=h.url_for('dataset_resource.read', id=pkg_dict.name, resource_id=resource.id)) }}
+                    ({{ resource.format or _('Format unknown') }})
+                </li>
+            {%- endfor %}
+        </ul>
+    {%- else %}
+        <p>{{ _('No resources') }}</p>
+    {%- endif %}
+
+    {{ ui.button(_('Add New Resource'), href=h.url_for('dataset_resource.new', id=pkg_dict.name), attrs={"class": "btn btn-primary"}) }}
+{%- endblock %}

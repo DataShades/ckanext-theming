@@ -1,1 +1,17 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ _('Users') }}</h1>
+
+    {%- if users %}
+        <ul>
+            {%- for user in users %}
+                <li>{{ ui.link(user.display_name or user.name, href=h.url_for('user.read', id=user.name)) }}</li>
+            {%- endfor %}
+        </ul>
+
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- else %}
+        <p>{{ _('No users found') }}</p>
+    {%- endif %}
+{%- endblock %}

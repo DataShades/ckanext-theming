@@ -1,1 +1,17 @@
-{% extends "layout.html" %}
+{% extends "page.html" %}
+
+{%- block primary_content_inner %}
+    <h1>{{ _('Resource History') }}</h1>
+
+    {%- if history %}
+        <ul>
+            {%- for record in history %}
+                <li>{{ record.timestamp }} - {{ record.operation }}</li>
+            {%- endfor %}
+        </ul>
+
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- else %}
+        <p>{{ _('No history') }}</p>
+    {%- endif %}
+{%- endblock %}
