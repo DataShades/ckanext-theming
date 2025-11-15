@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/">
+        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/theme/">
       
       
+        <link rel="prev" href="..">
       
-        <link rel="next" href="theme/">
+      
+        <link rel="next" href="../library/component/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
     
     
       
-        <title>ckanext-theming</title>
+        <title>Creating and Registering CKAN Themes - ckanext-theming</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ckanext-theming" class="md-skip">
+        <a href="#creating-and-registering-ckan-themes" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="ckanext-theming" class="md-header__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
+    <a href=".." title="ckanext-theming" class="md-header__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Creating and Registering CKAN Themes
             
           </span>
         </div>
@@ -236,7 +238,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="ckanext-theming" class="md-nav__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
+    <a href=".." title="ckanext-theming" class="md-nav__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -263,6 +265,28 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -280,7 +304,7 @@
   
   
   <span class="md-ellipsis">
-    Home
+    Creating and Registering CKAN Themes
     
   </span>
   
@@ -288,12 +312,12 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    Home
+    Creating and Registering CKAN Themes
     
   </span>
   
@@ -316,64 +340,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#theme-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      Requirements
+      Theme Structure
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#registering-a-theme" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      Registering a Theme
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
+    <nav class="md-nav" aria-label="Registering a Theme">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#registering-themes" class="md-nav__link">
+  <a href="#1-implement-the-itheme-interface-in-your-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      Registering Themes
+      1. Implement the ITheme Interface in Your Plugin
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-ui-macros" class="md-nav__link">
+  <a href="#2-custom-ui-implementation-optional" class="md-nav__link">
     <span class="md-ellipsis">
-      Using UI Macros
+      2. Custom UI Implementation (Optional)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#creating-custom-themes" class="md-nav__link">
+  <a href="#3-create-the-main-macros-entry-point" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating Custom Themes
+      3. Create the Main Macros Entry Point
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-implement-individual-macro-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Implement Individual Macro Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-provide-template-overrides-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Provide Template Overrides (Optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-add-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Add Assets
     </span>
   </a>
   
@@ -385,69 +418,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#using-the-theme" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Using the Theme
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#development" class="md-nav__link">
+  <a href="#reference-implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      Development
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Development">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installation_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#running-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running Tests
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Documentation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contributing
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      License
+      Reference Implementation
     </span>
   </a>
   
@@ -457,28 +439,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="theme/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Creating and Registering CKAN Themes
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -548,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/component/" class="md-nav__link">
+      <a href="../library/component/" class="md-nav__link">
         
   
   
@@ -571,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/container/" class="md-nav__link">
+      <a href="../library/container/" class="md-nav__link">
         
   
   
@@ -594,7 +554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/data/" class="md-nav__link">
+      <a href="../library/data/" class="md-nav__link">
         
   
   
@@ -617,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/element/" class="md-nav__link">
+      <a href="../library/element/" class="md-nav__link">
         
   
   
@@ -640,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/feedback/" class="md-nav__link">
+      <a href="../library/feedback/" class="md-nav__link">
         
   
   
@@ -663,7 +623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/form/" class="md-nav__link">
+      <a href="../library/form/" class="md-nav__link">
         
   
   
@@ -686,7 +646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/meta/" class="md-nav__link">
+      <a href="../library/meta/" class="md-nav__link">
         
   
   
@@ -709,7 +669,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/misc/" class="md-nav__link">
+      <a href="../library/misc/" class="md-nav__link">
         
   
   
@@ -732,7 +692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="library/nav/" class="md-nav__link">
+      <a href="../library/nav/" class="md-nav__link">
         
   
   
@@ -782,64 +742,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
+  <a href="#theme-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      Requirements
+      Theme Structure
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#registering-a-theme" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      Registering a Theme
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
+    <nav class="md-nav" aria-label="Registering a Theme">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#registering-themes" class="md-nav__link">
+  <a href="#1-implement-the-itheme-interface-in-your-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      Registering Themes
+      1. Implement the ITheme Interface in Your Plugin
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#using-ui-macros" class="md-nav__link">
+  <a href="#2-custom-ui-implementation-optional" class="md-nav__link">
     <span class="md-ellipsis">
-      Using UI Macros
+      2. Custom UI Implementation (Optional)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#creating-custom-themes" class="md-nav__link">
+  <a href="#3-create-the-main-macros-entry-point" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating Custom Themes
+      3. Create the Main Macros Entry Point
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-implement-individual-macro-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Implement Individual Macro Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-provide-template-overrides-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Provide Template Overrides (Optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-add-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Add Assets
     </span>
   </a>
   
@@ -851,69 +820,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#using-the-theme" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Using the Theme
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#development" class="md-nav__link">
+  <a href="#reference-implementation" class="md-nav__link">
     <span class="md-ellipsis">
-      Development
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Development">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#installation_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#running-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running Tests
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Documentation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contributing
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      License
+      Reference Implementation
     </span>
   </a>
   
@@ -938,135 +856,135 @@
   
 
 
-<p><a href="https://github.com/DataShades/ckanext-theming/actions"><img alt="Tests" src="https://github.com/DataShades/ckanext-theming/workflows/Tests/badge.svg?branch=main" /></a></p>
-<h1 id="ckanext-theming">ckanext-theming</h1>
-<p>This is a prototype of CKAN theming proposal. It defines a standard way to
-customize the look and feel of a CKAN instance. It allows developers and
-designers to create and apply themes without modifying core CKAN code, ensuring
-easier upgrades and maintenance.</p>
-<h2 id="requirements">Requirements</h2>
-<p>Compatibility with core CKAN versions:</p>
-<table>
-<thead>
-<tr>
-<th>CKAN version</th>
-<th>Compatible?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2.11</td>
-<td>no</td>
-</tr>
-<tr>
-<td>2.12</td>
-<td>yes</td>
-</tr>
-</tbody>
-</table>
-<h2 id="overview">Overview</h2>
-<p>The CKAN Theming Extension introduces a modern theming system that provides a
-structured approach to UI customization. The system is built around a
-macro-based UI framework that allows themes to provide consistent, reusable
-components across CKAN instances.</p>
-<p>Traditional CKAN Theme Implementation
- - Uses template inheritance with base templates (base.html, page.html)
- - Contains inline HTML with CSS framework-specific classes directly in templates
- - Form macros and UI elements are implemented directly as template code with HTML
- - Example: Input elements have direct Bootstrap classes embedded in the macro</p>
-<p>ckanext-theming Macro-Based Approach
- - Creates a collection of UI macros that abstract the underlying CSS framework
- - Developers use semantic calls like {{ ui.button("Click Me", style="primary") }} instead of writing HTML
- - Different themes can implement the same macros with different CSS frameworks (Bootstrap 5, Tailwind, Bulma,
-   Pico CSS, etc.)
- - The theme system allows switching between completely different CSS frameworks by changing one configuration
-   setting
- - Each theme provides its own implementation of the same set of macros using its specific CSS framework
-   classes
- - Provides a consistent API regardless of the underlying CSS framework</p>
-<p>How Users Can Customize Themes with Different CSS Frameworks</p>
-<ol>
-<li>Theme Registration: Extensions can register new themes by implementing the ITheme interface and providing a
-   Theme object</li>
-<li>Macro Implementation: Each theme implements the same set of macros using their chosen CSS framework's
-   classes</li>
-<li>Configuration: Users can switch themes by setting ckan.ui.theme = theme-name in their config</li>
-<li>Template Usage: Templates use semantic calls like {{ ui.button(...) }} instead of framework-specific HTML</li>
-<li>Flexibility: The same CKAN templates can work with different CSS frameworks by simply changing the active
-   theme</li>
-</ol>
-<p>The key benefit is the complete separation of content structure from styling. This means users can
-completely change the visual appearance of their CKAN instance (from Bootstrap to Tailwind, for example) by
-just changing the theme configuration, without modifying any templates or code.</p>
-<h2 id="installation">Installation</h2>
-<p>To install ckanext-theming:</p>
-<ol>
-<li>Activate your CKAN virtual environment:</li>
-</ol>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>ckanext-theming
+<h1 id="creating-and-registering-ckan-themes">Creating and Registering CKAN Themes</h1>
+<p>A CKAN theme allows you to customize the look and feel of your CKAN instance by providing a set of UI macros that can be used consistently across your site. The theming system works by providing a collection of macros that replace or augment the default UI elements.</p>
+<h2 id="theme-structure">Theme Structure</h2>
+<p>A CKAN theme should be organized in a specific directory structure:</p>
+<div class="highlight"><pre><span></span><code>your_theme/
+ ├── templates/
+ │   ├── (your custom templates)
+ │   └── macros/
+ │       └── ui.html
+ │
+ ├── assets/
+ │   └── webassets.yml
+ │
+ └── public/
 </code></pre></div>
-<ol>
-<li>Add <code>theming</code> to the <code>ckan.plugins</code> setting in your CKAN config file:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><span class="na">ckan.plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">... theming</span>
-</code></pre></div>
-<h2 id="usage">Usage</h2>
-<h3 id="registering-themes">Registering Themes</h3>
-<p>Extensions can register themes by implementing the <code>ITheme</code> interface in their
-plugin class:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ckan.plugins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plugins</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">MacroUI</span>
+<h2 id="registering-a-theme">Registering a Theme</h2>
+<h3 id="1-implement-the-itheme-interface-in-your-plugin">1. Implement the ITheme Interface in Your Plugin</h3>
+<p>In your extension's <code>plugin.py</code> file, implement the <code>ITheme</code> interface. The key method is <code>register_themes()</code> which returns a dictionary mapping theme names to <code>Theme</code> objects:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ckan.plugins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">p</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">ITheme</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Theme</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MyThemePlugin</span><span class="p">(</span><span class="n">plugins</span><span class="o">.</span><span class="n">SingletonPlugin</span><span class="p">):</span>
-    <span class="n">plugins</span><span class="o">.</span><span class="n">implements</span><span class="p">(</span><span class="n">plugins</span><span class="o">.</span><span class="n">ITheme</span><span class="p">,</span> <span class="n">inherit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">YourExtensionPlugin</span><span class="p">(</span><span class="n">ITheme</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">SingletonPlugin</span><span class="p">):</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Return a dictionary of theme names to Theme objects</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;my_theme&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;My Theme&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A custom theme implementation&#39;</span>
+            <span class="s1">&#39;your_theme&#39;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;themes/your_theme&#39;</span><span class="p">),</span>
+                <span class="c1"># Optionally specify a parent theme to extend</span>
+                <span class="c1"># parent=&#39;parent_theme_name&#39;</span>
+            <span class="p">),</span>
         <span class="p">}</span>
+</code></pre></div>
+<h3 id="2-custom-ui-implementation-optional">2. Custom UI Implementation (Optional)</h3>
+<p>You can customize the macro loading mechanism by setting a custom UI class on the Theme. This allows you to customize how macros are loaded:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">MacroUI</span><span class="p">,</span> <span class="n">Theme</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">MacroUI</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;my_extension/themes/my_theme/macros/ui.html&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="using-ui-macros">Using UI Macros</h3>
-<p>Once a theme is active, UI macros can be used in templates:</p>
-<div class="highlight"><pre><span></span><code>{{ ui.button(&quot;Click Me&quot;, style=&quot;primary&quot;, type=&quot;button&quot;) }}
-{{ ui.card(title=&quot;My Card&quot;, content=&quot;Card content here&quot;) }}
-{{ ui.alert(&quot;Success message&quot;, style=&quot;success&quot;) }}
-</code></pre></div>
-<h3 id="creating-custom-themes">Creating Custom Themes</h3>
-<p>For detailed instructions on creating custom themes, see <a href="docs/theme.md">docs/theme.md</a>.</p>
-<h2 id="configuration">Configuration</h2>
-<p>The extension provides CLI commands for theme management:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># List available themes</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>list
+<span class="k">class</span><span class="w"> </span><span class="nc">YourThemeUI</span><span class="p">(</span><span class="n">MacroUI</span><span class="p">):</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="s2">&quot;custom/location/of/macros/ui.html&quot;</span>
 
-<span class="c1"># Show theme components</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>components
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="c1"># Additional initialization if needed</span>
+</code></pre></div>
+<p>Then assign it to your theme:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">.theme</span><span class="w"> </span><span class="kn">import</span> <span class="n">YourThemeUI</span>  <span class="c1"># Import your custom UI class</span>
 
-<span class="c1"># Debug theme issues</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>debug
+    <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+    <span class="n">theme</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;themes/your_theme&#39;</span><span class="p">))</span>
+    <span class="n">theme</span><span class="o">.</span><span class="n">UI</span> <span class="o">=</span> <span class="n">YourThemeUI</span>  <span class="c1"># Set custom UI class</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;your_theme&#39;</span><span class="p">:</span> <span class="n">theme</span><span class="p">,</span>
+    <span class="p">}</span>
 </code></pre></div>
-<h2 id="development">Development</h2>
-<h3 id="installation_1">Installation</h3>
-<p>To install ckanext-theming for development:</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/DataShades/ckanext-theming.git
-<span class="nb">cd</span><span class="w"> </span>ckanext-theming
-pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+<h3 id="3-create-the-main-macros-entry-point">3. Create the Main Macros Entry Point</h3>
+<p>Create <code>themes/your_theme/macros/ui.html</code> with definition of all the
+macros. You can define macro elsewhere and re-export it by creating global
+template variable.</p>
+<div class="highlight"><pre><span></span><code>{% import &quot;macros/ui/element.html&quot; as element %}
+
+{# Re-export macro #}
+{% set button = element.button %}
+
+{# Define new macro #}
+{% macro input() %}
+    ...
+{% endmacro %}
 </code></pre></div>
-<h3 id="running-tests">Running Tests</h3>
-<div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>--ckan-ini<span class="o">=</span>test.ini
+<h3 id="4-implement-individual-macro-files">4. Implement Individual Macro Files</h3>
+<p>Each macro file should contain actual implementations that use appropriate CSS classes for your chosen framework:</p>
+<p>Example <code>themes/your_theme/macros/ui/element.html</code> (using Bootstrap classes):</p>
+<div class="highlight"><pre><span></span><code>{%- macro button(content, style=&quot;primary&quot;, type=&quot;button&quot;) -%}
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;{{ type }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-{{ style }}&quot;</span><span class="p">&gt;</span>
+        {{ content }}
+    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+{%- endmacro %}
+
+{%- macro divider() -%}
+    <span class="p">&lt;</span><span class="nt">hr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-4&quot;</span><span class="p">/&gt;</span>
+{%- endmacro %}
+
+{%- macro image(src, alt=&quot;&quot;) -%}
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;img-fluid&quot;</span>
+        <span class="na">alt</span><span class="o">=</span><span class="s">&quot;{{ alt }}&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ src }}&quot;</span><span class="p">/&gt;</span>
+{%- endmacro %}
+
+{%- macro link(content, href) -%}
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;link-primary text-decoration-none&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ href or content }}&quot;</span><span class="p">&gt;</span>
+        {{ content }}
+    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+{%- endmacro %}
 </code></pre></div>
-<h3 id="documentation">Documentation</h3>
-<p>Documentation is available in the <code>docs/</code> directory:
-- <a href="docs/theme.md">theme.md</a> - Guide to creating and registering themes
-- <a href="docs/library/">library/</a> - Documentation for individual UI macro components</p>
-<h2 id="contributing">Contributing</h2>
-<p>This extension is designed to be extensible and welcomes contributions. See the individual macro documentation in <code>docs/library/</code> for details on the available components and how to extend them.</p>
-<h2 id="license">License</h2>
-<p><a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All macros should accept arbitrary keyword arguments. If a macro doesn't
+reference <code>kwargs</code> directly in its body, add <code>{%- do kwargs -%}</code> as the first
+line. If it uses attributes, use <code>{{ ui.util.attrs(kwargs) }}</code>.</p>
+</div>
+<h3 id="5-provide-template-overrides-optional">5. Provide Template Overrides (Optional)</h3>
+<p>Create custom templates in <code>themes/your_theme/templates/</code> to override CKAN's
+default templates. Common templates to override include:</p>
+<ul>
+<li><code>base.html</code> - The main base template</li>
+<li><code>home/index.html</code> - Home page template</li>
+<li><code>package/search.html</code> - Dataset search page template</li>
+</ul>
+<h3 id="6-add-assets">6. Add Assets</h3>
+<p>Include CSS, JavaScript, and image assets in <code>themes/your_theme/assets/</code> to
+style and enhance your theme.</p>
+<h2 id="using-the-theme">Using the Theme</h2>
+<p>Once your theme is properly registered:</p>
+<ol>
+<li>Install your extension: <code>pip install -e .</code></li>
+<li>Add your plugin alongside with <code>theming</code> to CKAN's configuration:
+   <code>ckan.plugins = ... your_extension theming</code></li>
+<li>Configure the theme in your CKAN configuration: <code>ckan.ui.theme = your_theme</code></li>
+<li>The theme will be available and can be used throughout CKAN templates via
+   the UI macros</li>
+</ol>
+<h2 id="reference-implementation">Reference Implementation</h2>
+<p>The <code>bare</code>, <code>bulma</code>, <code>tailwind</code>, and <code>bs5</code> themes in this extension
+serve as reference implementations showing how different CSS frameworks can be
+integrated with the theming system. You can use them as starting points for
+building your own themes.</p>
 
 
 
@@ -1101,15 +1019,31 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="theme/" class="md-footer__link md-footer__link--next" aria-label="Next: Creating and Registering CKAN Themes">
+          <a href="../library/component/" class="md-footer__link md-footer__link--next" aria-label="Next: Components">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Creating and Registering CKAN Themes
+                Components
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1147,10 +1081,10 @@ pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </s
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.footer", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tooltips", "content.footnote.tooltips"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.footer", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tooltips", "content.footnote.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>

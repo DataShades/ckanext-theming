@@ -287,6 +287,28 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Creating and Registering CKAN Themes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -320,15 +342,15 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
-    Library
+    Component Library
     
   </span>
   
@@ -336,10 +358,10 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Library
+            Component Library
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -544,21 +566,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="header_block">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arguments" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arguments
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -568,21 +575,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="footer_block">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arguments_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arguments
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -591,21 +583,6 @@
       account_block
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="account_block">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arguments_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arguments
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -704,21 +681,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="header_block">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arguments" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arguments
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -728,21 +690,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="footer_block">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arguments_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arguments
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -751,21 +698,6 @@
       account_block
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="account_block">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#arguments_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Arguments
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -789,22 +721,105 @@
 
 
 <h1 id="meta-macros">Meta Macros</h1>
+<p>Meta macros provide structural components for the overall page layout including headers, footers, and account-related sections. These macros establish the global layout structure and branding elements of the application.</p>
 <h2 id="header_block"><code>header_block</code></h2>
-<p>Renders a header block. This is a block macro.</p>
-<h3 id="arguments">Arguments</h3>
+<p>Renders a complete header block for page branding, navigation, and primary site identification. The header block provides a consistent top section for all pages, typically containing the site logo, main title, and primary navigation.</p>
+<p><strong>Use Cases:</strong></p>
 <ul>
-<li><code>title</code> (string): The main title to display. Defaults to <code>None</code>.</li>
-<li><code>subtitle</code> (string): The subtitle to display. Defaults to <code>None</code>.</li>
-<li><code>logo</code> (string): Path to the logo image. If provided, overrides title/subtitle. Defaults to <code>None</code>.</li>
+<li>Main site header</li>
+<li>Page branding</li>
+<li>Logo display</li>
+<li>Primary navigation container</li>
+<li>Site identification</li>
+<li>Account quick-links</li>
+<li>Search functionality placement</li>
+</ul>
+<p><strong>Usage Context:</strong></p>
+<p>Use at the top of all pages to provide consistent branding and navigation. This typically appears once per page and contains major site-level controls.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code>{{ ui.header_block(
+  title=&quot;My Website&quot;,
+  subtitle=&quot;Quality Services&quot;,
+  content=ui.nav_wrapper(
+    ui.nav_item(&quot;Home&quot;, href=&quot;/&quot;, active=true) +
+    ui.nav_item(&quot;Services&quot;, href=&quot;/services&quot;) +
+    ui.nav_item(&quot;Contact&quot;, href=&quot;/contact&quot;)
+  )
+) }}
+</code></pre></div>
+<p><strong>Recommendations:</strong></p>
+<ul>
+<li>Include site-identifying content (logo, title)</li>
+<li>Keep primary navigation limited to main sections</li>
+<li>Different themes provide various header implementations (Bootstrap: .header with navbar, Tailwind: bg-white shadow, Bulma: .hero.is-primary)</li>
+<li>Ensure consistent spacing and branding</li>
+<li>Include search functionality if appropriate</li>
+<li>Consider mobile-responsive behavior</li>
+<li>Position consistently across all pages</li>
 </ul>
 <h2 id="footer_block"><code>footer_block</code></h2>
-<p>Renders a footer block. This is a block macro.</p>
-<h3 id="arguments_1">Arguments</h3>
-<p>None</p>
+<p>Renders a complete footer block for page-end content such as secondary navigation, legal information, and contact details. The footer provides a consistent bottom section for all pages with supplementary information.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Site-wide footer</li>
+<li>Legal information display</li>
+<li>Contact information</li>
+<li>Secondary navigation</li>
+<li>Copyright notices</li>
+<li>Social media links</li>
+<li>Site map links</li>
+<li>Privacy policy links</li>
+</ul>
+<p><strong>Usage Context:</strong></p>
+<p>Use at the bottom of all pages to provide consistent supplementary information and navigation. This appears once per page, at the lowest position.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code>{{ ui.footer_block(
+  ui.link(&quot;Privacy Policy&quot;, href=&quot;/privacy&quot;) +
+  ui.link(&quot;Terms of Service&quot;, href=&quot;/terms&quot;) +
+  ui.text(&quot;© 2024 Company Name. All rights reserved.&quot;)
+) }}
+</code></pre></div>
+<p><strong>Recommendations:</strong></p>
+<ul>
+<li>Include important but less-frequently-used links</li>
+<li>Different themes implement footers differently (Bootstrap: .footer, Tailwind: bg-gray-100, Bulma: .footer)</li>
+<li>Keep content relevant and concise</li>
+<li>Include accessibility links for screen readers</li>
+<li>Consider internationalization for copyright dates</li>
+<li>Use consistent styling with header branding</li>
+</ul>
 <h2 id="account_block"><code>account_block</code></h2>
-<p>Renders an account-related block. This is a block macro.</p>
-<h3 id="arguments_2">Arguments</h3>
-<p>None</p>
+<p>Renders an account-related header or section block, typically used for user-specific content and controls. The account block handles user profile information, login/logout functionality, and other user-focused elements.</p>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>User dashboard headers</li>
+<li>Account profile sections</li>
+<li>Login/logout controls</li>
+<li>User-specific navigation</li>
+<li>Personal settings sections</li>
+<li>Notification displays</li>
+<li>User profile information</li>
+<li>Account management tools</li>
+</ul>
+<p><strong>Usage Context:</strong></p>
+<p>Use in areas where user-specific content or controls are needed, such as account pages, dashboards, or user profile sections.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code>{{ ui.account_block(
+  title=&quot;My Account&quot;,
+  subtitle=&quot;Manage your preferences&quot;,
+  content=ui.link(&quot;Logout&quot;, href=&quot;/logout&quot;)
+) }}
+</code></pre></div>
+<p><strong>Recommendations:</strong></p>
+<ul>
+<li>Include user profile information when applicable</li>
+<li>Different themes may customize account sections (Bootstrap: user dropdown, Tailwind: flex with avatar, Bulma: .media)</li>
+<li>Keep account-related controls prominent</li>
+<li>Ensure privacy and security considerations</li>
+<li>Include appropriate user identification</li>
+<li>Consider user role-specific content</li>
+<li>Provide clear path to account settings</li>
+</ul>
 
 
 
