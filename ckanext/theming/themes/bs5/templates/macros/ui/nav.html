@@ -6,10 +6,14 @@
     </nav>
 {%- endmacro %}
 
-{%- macro breadcrumb_item(content, href) -%}
+{%- macro breadcrumb_item(content, href, is_first=false) -%}
     {%- do kwargs -%}
-    <li class="breadcrumb-item">
-        <a href="{{ href }}">{{ content }}</a>
+    <li class="breadcrumb-item {{ 'active' if is_first }}">
+        {%- if is_first %}
+            {{ content }}
+        {%- else %}
+            <a href="{{ href }}">{{ content }}</a>
+        {%- endif %}
     </li>
 {%- endmacro %}
 

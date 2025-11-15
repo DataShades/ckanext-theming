@@ -6,12 +6,16 @@
     </nav>
 {%- endmacro %}
 
-{%- macro breadcrumb_item(content, href) -%}
+{%- macro breadcrumb_item(content, href, is_first=false) -%}
     {%- do kwargs -%}
     <li class="inline-flex items-center">
-        <div class="flex items-center">
-            {{ ui.link(content, href=href, class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2") }}
-        </div>
+        {%- if is_first %}
+            <span class="text-sm font-medium text-gray-500 md:ml-2">{{ content }}</span>
+        {%- else %}
+            <div class="flex items-center">
+                {{ ui.link(content, href=href, class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2") }}
+            </div>
+        {%- endif %}
     </li>
 {%- endmacro %}
 

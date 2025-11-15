@@ -6,8 +6,12 @@
     </nav>
 {%- endmacro %}
 
-{%- macro breadcrumb_item(content, href) -%}
-    <li><a href="{{ href }}">{{ content }}</a></li>
+{%- macro breadcrumb_item(content, href, is_first=false) -%}
+    {%- if is_first %}
+        <li aria-current="page">{{ content }}</li>
+    {%- else %}
+        <li><a href="{{ href }}">{{ content }}</a></li>
+    {%- endif %}
 {%- endmacro %}
 
 {%- macro nav_wrapper(content) -%}
