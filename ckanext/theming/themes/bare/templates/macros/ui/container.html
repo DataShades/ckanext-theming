@@ -40,11 +40,6 @@
 
 {%- endmacro %}
 
-{%- macro column(content) -%}
-    {%- do kwargs -%}
-    {{ content }}
-{%- endmacro %}
-
 {%- macro container(content, fluid=false) -%}
     {%- do kwargs -%}
     <div class="bare-container">
@@ -52,17 +47,21 @@
     </div>
 {%- endmacro %}
 
-{%- macro grid(content, columns) -%}
+{%- macro grid(content) -%}
     {%- do kwargs -%}
-    {{ content }}
+    <div class="grid">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content, span={}) -%}
+    {%- do kwargs -%}
+    <div class="col{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}">
+        {{ content }}
+    </div>
 {%- endmacro %}
 
 {%- macro panel(content, title) -%}
-    {%- do kwargs -%}
-    {{ content }}
-{%- endmacro %}
-
-{%- macro row(content) -%}
     {%- do kwargs -%}
     {{ content }}
 {%- endmacro %}

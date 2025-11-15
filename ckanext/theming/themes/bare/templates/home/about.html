@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "_layout.html" %}
 {% set _layout = "fullwidth" %}
 
 {%- block breadcrumb_content %}
@@ -13,10 +13,7 @@
 
     {%- else %}
         {{ ui.heading( _("About"), level=1) }}
-
-        {%- call ui.util.call(ui.text) %}
-            {% include "home/_about_text.html" %}
-        {%- endcall %}
+        {% include "home/_about_text.html" %}
 
     {%- endif %}
 {%- endblock %}

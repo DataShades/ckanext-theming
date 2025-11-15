@@ -2,6 +2,7 @@
 
 
 {%- block page %}
+    {%- block zone_start -%}{%- endblock %}
 
     {%- block zone_header -%}
         {%- block header %}
@@ -32,21 +33,22 @@
         {%- endblock notifications_container %}
     {%- endblock %}
 
-    {%- block zone_content %}
-        {%- block content %}
+    {%- block zone_center %}
+        {%- block content -%}
             <div id="content" {% block content_attrs %}{% endblock %}>
 
-                {%- block zone_main %}
-                    {%- block zone_secondary -%}
+                {%- block zone_content %}
+
+                    {%- block zone_sidebar -%}
                         {%- block secondary %}
                             <aside id="sidebar">
                                 {%- block secondary_content %}
                                 {%- endblock secondary_content %}
                             </aside>
                         {%- endblock secondary -%}
-                    {%- endblock zone_secondary %}
+                    {%- endblock zone_sidebar %}
 
-                    {%- block zone_primary -%}
+                    {%- block zone_main -%}
                         {%- block primary -%}
                             <main id="main">
                                 <article>
@@ -63,15 +65,14 @@
 
                                     {%- endblock primary_content %}
                                 </article>
-
                             </main>
-                        {%- endblock primary -%}
-                    {%- endblock zone_primary -%}
-                {%- endblock zone_main %}
+                        {%- endblock primary %}
+                    {%- endblock zone_main %}
 
+                {%- endblock zone_content %}
             </div>
         {%- endblock content%}
-    {%- endblock zone_content %}
+    {%- endblock zone_center %}
 
     {%- block zone_outro %}{% endblock -%}
 
@@ -90,6 +91,7 @@
                 </dialog>
             {%- endif %}
         {%- endblock %}
-
     {%- endblock zone_footer %}
+
+    {%- block zone_end -%}{%- endblock %}
 {%- endblock %}

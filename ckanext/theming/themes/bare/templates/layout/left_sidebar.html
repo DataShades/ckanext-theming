@@ -1,6 +1,6 @@
 {% extends "page.html" %}
 
-{%- block zone_main %}
-    {%- block zone_secondary %}{{ super() }}{% endblock %}
-    {%- block zone_primary %}{{ super() }}{% endblock %}
+{%- block zone_content %}
+    {%- block zone_sidebar %}{{ super() }}{% endblock %}
+    {%- block zone_main %}{{ super() }}{% endblock %}
 {%- endblock %}

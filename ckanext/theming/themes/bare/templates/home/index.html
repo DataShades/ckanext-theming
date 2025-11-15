@@ -2,61 +2,59 @@
 
 {%- block subtitle %}{{ _("Welcome") }}{% endblock %}
 
-{%- block maintag %}{% endblock %}
 {%- block toolbar %}{% endblock %}
 
 {%- block primary_content_inner %}
-    {{ self.flash() }}
 
-    <div class="homepage">
-        <div class="main hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        {%- block promoted %}
-                            <div class="promoted-content">
-                                <h2>{{ _('Welcome to CKAN') }}</h2>
-                                <p>{{ _('This is a place where you can find and share data with others.') }}</p>
-                            </div>
-                        {%- endblock %}
-                    </div>
-                    <div class="col-md-6">
-                        {%- block search %}
-                            {{ ui.form_start(method="GET", action=h.url_for('dataset.search'), **{"class": "search-form"}) }}
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="q"
-                                           placeholder="{{ _('Search datasets...') }}"
-                                           autocomplete="off">
-                                    <button type="submit" class="btn btn-primary">{{ _('Search') }}</button>
-                                </div>
-                            {{ ui.form_end() }}
-                        {%- endblock %}
-                    </div>
+    {%- call ui.util.call(ui.grid) -%}
+        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+            {%- block promoted %}
+                <div class="promoted-content">
+                    {{ ui.heading(_('Welcome to CKAN'), level=2) }}
+                    <p>{{ _('This is a place where you can find and share data with others.') }}</p>
                 </div>
-            </div>
-        </div>
+            {%- endblock %}
+        {%- endcall %}
 
-        <div class="main module-feeds">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        {%- block featured_group %}
-                            <div class="featured-group">
-                                <h3>{{ _('Featured Group') }}</h3>
-                                <p>{{ _('A featured group would appear here.') }}</p>
-                            </div>
-                        {%- endblock %}
-                    </div>
-                    <div class="col-md-6">
-                        {%- block featured_organization %}
-                            <div class="featured-organization">
-                                <h3>{{ _('Featured Organization') }}</h3>
-                                <p>{{ _('A featured organization would appear here.') }}</p>
-                            </div>
-                        {%- endblock %}
-                    </div>
+        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+            {%- block search %}
+                {{ ui.heading(_('Discover Datasets'), level=3) }}
+                {%- call ui.form_block(action=h.url_for('dataset.search')) -%}
+                    {{ ui.input("q", attrs={"placeholder": _('Search datasets...'), "autocomplete": "off"}) }}
+                    {{ ui.button(_("Search"), type="submit") }}
+                {%- endcall %}
+            {%- endblock %}
+        {%- endcall %}
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.grid) -%}
+        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+
+            {%- block featured_group %}
+                <div class="featured-group">
+                    {{ ui.heading(_('Featured Groups'), level=3) }}
+                    {%- for item in h.get_featured_groups() -%}
+                        {{ ui.group_item(item) }}
+            {%- else -%}
+                        <p>{{ _('A featured group would appear here.') }}</p>
+                    {%- endfor %}
                 </div>
-            </div>
-        </div>
-    </div>
+            {%- endblock %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+
+            {%- block featured_organization %}
+                <div class="featured-organization">
+                    {{ ui.heading(_('Featured Organizations'), level=3) }}
+                    {%- for item in h.get_featured_organizations() -%}
+                        {{ ui.organization_item(item) }}
+            {%- else -%}
+                        <p>{{ _('A featured organization would appear here.') }}</p>
+                    {%- endfor %}
+                </div>
+            {%- endblock %}
+        {%- endcall %}
+    {%- endcall %}
+
 {%- endblock %}

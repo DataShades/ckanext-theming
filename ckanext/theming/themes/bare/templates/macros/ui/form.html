@@ -1,9 +1,7 @@
 {%- macro form_block(method="GET", action="", enctype="", include_csrf=true) -%}
     {{ ui.form_start(method, action, enctype, **kwargs) }}
     {{ h.csrf_input() if include_csrf and method|upper != "GET" }}
-
     {{ caller() }}
-
     {{ ui.form_end() }}
 {%- endmacro %}
 
@@ -37,18 +35,19 @@
 {% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
-    {%- if label -%}
-        <label for="{{ id }}">{{ label }}</label>
-    {%- endif %}
+    <div>
+        {%- if label -%}
+            <label for="{{ id }}">{{ label }}</label>
+        {%- endif %}
 
-    <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }}/>
+        <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }}/>
 
-    {%- if errors -%}
-        {%- for error in errors -%}
-            <span>{{ error }}</span><br/>
-        {%- endfor %}
-    {%- endif %}
-
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <span>{{ error }}</span><br/>
+            {%- endfor %}
+        {%- endif %}
+    </div>
 {%- endmacro %}
 
 {% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}

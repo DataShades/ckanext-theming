@@ -58,7 +58,11 @@
 {%- endmacro %}
 
 {%- macro grid(content, columns) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="grid grid-cols-{{ columns if columns else '1' }} gap-6">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="grid grid-cols-{{ columns if columns else '1' }} gap-6">
+        <div class="flex">
+            {{ content }}
+        </div>
+    </div>
 {%- endmacro %}
 
 {%- macro panel(content, title) -%}
@@ -72,10 +76,6 @@
             {{ content }}
         </div>
     </div>
-{%- endmacro %}
-
-{%- macro row(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="flex">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro section(content) -%}

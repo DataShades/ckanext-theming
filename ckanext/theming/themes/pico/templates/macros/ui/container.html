@@ -59,12 +59,6 @@
     </section>
 {%- endmacro %}
 
-{%- macro row(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="">
-        {{ content }}
-    </div>
-{%- endmacro %}
-
 {%- macro section(content) -%}
     <section {{ ui.util.attrs(kwargs) }} class="">
         {{ content }}

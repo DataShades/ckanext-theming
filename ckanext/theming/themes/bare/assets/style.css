@@ -22,6 +22,10 @@ dialog::backdrop {
     backdrop-filter: brightness(0.8) blur(3px);
 }
 
+img {
+    max-width: 100%;
+}
+
 #account {
     background: var(--account-bg);
     text-align: right;

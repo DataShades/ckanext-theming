@@ -32,9 +32,9 @@
 {%- endmacro %}
 
 {%- macro text(content) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
+    <p {{ ui.util.attrs(kwargs) }}>
         {{ content }}
-    </div>
+    </p>
 {%- endmacro %}
 
 {%- macro video(src, controls=true) -%}

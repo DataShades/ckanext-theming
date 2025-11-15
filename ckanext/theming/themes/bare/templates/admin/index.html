@@ -3,14 +3,14 @@
 {%- block primary_content_inner %}
     <h2>{{ _('Current Sysadmins') }}</h2>
 
-    {{ ui.table_block(bordered=true, striped=true) }}
-        {{ ui.table_head_block() }}
+    {%- call ui.table_block(bordered=true, striped=true) -%}
+        {%- call ui.table_head_block() -%}
             {{ ui.table_row([_('User'), ''], heading=true) }}
-        {{- ui.table_head_block() }}
+        {%- endcall %}
 
-        {{ ui.table_body_block() }}
+        {%- call ui.table_body_block() -%}
             {%- for user in sysadmins %}
-                {{ ui.table_row_block() }}
+                {%- call ui.table_row_block() -%}
                     {{ ui.table_cell(h.linked_user(user)) }}
                     <td>
                         <form method="POST" action="{{ h.url_for('user.sysadmin') }}">
@@ -20,10 +20,11 @@
                             {{ ui.button(_('Revoke'), type="submit", attrs={"class": "btn btn-danger btn-sm"}) }}
                         </form>
                     </td>
-                {{- ui.table_row_block() }}
+                {%- endcall %}
             {%- endfor %}
-        {{- ui.table_body_block() }}
-    {{- ui.table_block(bordered=true, striped=true) }}
+        {%- endcall %}
+
+    {%- endcall %}
 
     <hr />
 
