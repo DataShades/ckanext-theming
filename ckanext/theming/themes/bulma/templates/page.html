@@ -21,21 +21,21 @@
     {%- endblock %}
 
     {%- block zone_intro %}
-        {%- block flash %}
+        {%- block notifications_container %}
             <section class="section is-small">
                 <div class="container">
                     {%- for category, message in h.get_flashed_messages(with_categories=true) %}
-                        {%- block flash_message scoped %}
+                        {%- block notification_item scoped %}
                             <article class="message is-{{ category }}">
                                 <div class="message-body">
                                     {{ message|safe }}
                                 </div>
                             </article>
-                        {%- endblock flash_message %}
+                        {%- endblock notification_item %}
                     {%- endfor %}
                 </div>
             </section>
-        {%- endblock flash %}
+        {%- endblock notifications_container %}
     {%- endblock %}
 
     {%- block zone_content %}

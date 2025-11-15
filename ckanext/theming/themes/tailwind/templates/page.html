@@ -19,17 +19,17 @@
     {%- endblock %}
 
     {%- block zone_intro %}
-        {%- block flash %}
+        {%- block notifications_container %}
             <div class="container mx-auto px-4 py-2">
                 {%- for category, message in h.get_flashed_messages(with_categories=true) %}
-                    {%- block flash_message scoped %}
+                    {%- block notification_item scoped %}
                         <div class="mb-2 p-4 rounded-md bg-{{ category }}-100 text-{{ category }}-800 border border-{{ category }}-200">
                             {{ message|safe }}
                         </div>
-                    {%- endblock flash_message %}
+                    {%- endblock notification_item %}
                 {%- endfor %}
             </div>
-        {%- endblock flash %}
+        {%- endblock notifications_container %}
     {%- endblock %}
 
     {%- block zone_content %}

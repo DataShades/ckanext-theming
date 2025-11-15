@@ -3,7 +3,7 @@
     {{ content }}
 {%- endmacro %}
 
-{%- macro breadcrumb_item(content, href) -%}
+{%- macro breadcrumb_item(content, href, is_first) -%}
     {%- do kwargs -%}
     {{ ui.link(content, href) }}
 {%- endmacro %}

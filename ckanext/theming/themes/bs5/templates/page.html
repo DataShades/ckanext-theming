@@ -17,9 +17,9 @@
     {%- endblock %}
 
     {%- block zone_intro %}
-        {%- block flash %}
-            <!-- Flash messages will appear as toasts in the bottom right -->
-        {%- endblock flash %}
+        {%- block notifications_container %}
+            <!-- Notifications will appear as toasts in the bottom right -->
+        {%- endblock notifications_container %}
     {%- endblock %}
 
     {%- block zone_content %}
@@ -74,12 +74,12 @@
     {%- endblock zone_content %}
 
     {%- block zone_outro %}
-        {%- block flash_toasts -%}
+        {%- block toast_notifications -%}
             <div id="flash-messages" class="toast-container position-fixed bottom-0 end-0 p-3">
                 {%- for category, message in h.get_flashed_messages(with_categories=true) %}
-                    {%- block flash_message scoped %}
+                    {%- block notification_item scoped %}
                         {{ ui.toast(message|safe, style=category) }}
-                    {%- endblock flash_message %}
+                    {%- endblock notification_item %}
                 {%- endfor %}
             </div>
         {%- endblock %}
