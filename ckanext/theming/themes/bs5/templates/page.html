@@ -1,105 +1,68 @@
-{%- block page %}
+{% ckan_extends %}
 
-    {%- block zone_header -%}
-        {%- block header %}
-            {% include "_header.html" %}
-        {%- endblock header %}
-    {%- endblock zone_header %}
+{%- block breadcrumb %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            {{ ui.breadcrumb_wrapper(class="breadcrumb mb-3") }}
+        </nav>
+    </div>
+{%- endblock breadcrumb %}
 
-    {%- block zone_toolbar %}
-        {%- block breadcrumb %}
-            <div class="container">
-                <nav aria-label="breadcrumb">
-                    {{ ui.breadcrumb_wrapper(class="breadcrumb mb-3") }}
-                </nav>
-            </div>
-        {%- endblock breadcrumb %}
-    {%- endblock %}
+{%- block zone_intro %}
+{%- endblock %}
 
-    {%- block zone_intro %}
-        {%- block notifications_container %}
-            <!-- Notifications will appear as toasts in the bottom right -->
-        {%- endblock notifications_container %}
-    {%- endblock %}
+{%- block content %}
+    <main id="content" class="container-fluid">
+        <div class="row">
+            {%- block zone_content %}
+                {{ super() }}
+            {%- endblock %}
+        </div>
+    </main>
+{%- endblock content%}
 
-    {%- block zone_content %}
-        {%- block content %}
-            <main id="content" class="container-fluid">
-                <div class="row">
-                    {%- block zone_main %}
-                        {%- block zone_secondary -%}
-                            {%- block secondary %}
-                                <aside id="sidebar" class="col-lg-3 col-md-4">
-                                    {%- block secondary_content %}
-                                        <div class="card mb-4">
-                                            <div class="card-header">
-                                                <h5 class="card-title mb-0">Navigation</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <!-- Sidebar content will be added by specific pages -->
-                                                This is a sidebar area. Specific page content will appear here.
-                                            </div>
-                                        </div>
-                                    {%- endblock secondary_content %}
-                                </aside>
-                            {%- endblock secondary -%}
-                        {%- endblock zone_secondary %}
 
-                        {%- block zone_primary -%}
-                            {%- block primary -%}
-                                <div class="col-lg-9 col-md-8">
-                                    <article>
-                                        {%- block primary_content %}
-                                            {%- block page_action %}{% endblock -%}
-
-                                            {%- block page_header %}
-                                                <header class="mb-4">
-                                                    {%- block content_action %}{% endblock -%}
-                                                    {%- block content_nav %}{% endblock -%}
-                                                </header>
-                                            {% endblock -%}
-
-                                            {%- block primary_content_inner %}
-                                            {% endblock -%}
-
-                                        {%- endblock primary_content %}
-                                    </article>
-                                </div>
-                            {%- endblock primary -%}
-                        {%- endblock zone_primary -%}
-                    {%- endblock zone_main %}
+{%- block secondary %}
+    <aside id="sidebar" class="col-lg-3 col-md-4">
+        {%- block secondary_content %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Navigation</h5>
                 </div>
-            </main>
-        {%- endblock content%}
-    {%- endblock zone_content %}
-
-    {%- block zone_outro %}
-        {%- block toast_notifications -%}
-            <div id="flash-messages" class="toast-container position-fixed bottom-0 end-0 p-3">
-                {%- for category, message in h.get_flashed_messages(with_categories=true) %}
-                    {%- block notification_item scoped %}
-                        {{ ui.toast(message|safe, style=category) }}
-                    {%- endblock notification_item %}
-                {%- endfor %}
+                <div class="card-body">
+                    <!-- Sidebar content will be added by specific pages -->
+                    This is a sidebar area. Specific page content will appear here.
+                </div>
             </div>
-        {%- endblock %}
+        {%- endblock secondary_content %}
+    </aside>
+{%- endblock secondary -%}
+
+{%- block primary -%}
+    <div class="col-lg-9 col-md-8">
+        <article>
+            {%- block primary_content %}
+                {{ super() }}
+            {%- endblock primary_content %}
+        </article>
+    </div>
+{%- endblock primary -%}
+
+{%- block page_header %}
+    <header class="mb-4">
+        {{ super() }}
+    </header>
+{% endblock -%}
+
+
+{%- block zone_outro %}
+    {%- block notifications_container -%}
+        <div id="flash-messages" class="toast-container position-fixed bottom-0 end-0 p-3">
+            {%- for category, message in h.get_flashed_messages(with_categories=true) %}
+                {%- block notification_item scoped %}
+                    {{ ui.toast(message|safe, style=category) }}
+                {%- endblock notification_item %}
+            {%- endfor %}
+        </div>
     {%- endblock %}
-
-    {%- block zone_footer -%}
-        {%- block footer %}
-            {% include "_footer.html" %}
-        {% endblock footer %}
-
-        {%- block debug -%}
-            {%- if g.debug %}
-                <button onclick="window['debug-modal'].showModal()" accesskey="d" hidden>Debug</button>
-                <dialog id="debug-modal" style="max-width: 90vw; overflow-x: auto;">
-                    <pre>
-                        {%- debug -%}
-                    </pre>
-                </dialog>
-            {%- endif %}
-        {%- endblock %}
-    {%- endblock zone_footer %}
-
 {%- endblock %}

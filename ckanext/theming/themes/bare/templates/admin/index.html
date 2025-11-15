@@ -3,23 +3,21 @@
 {%- block primary_content_inner %}
     <h2>{{ _('Current Sysadmins') }}</h2>
 
-    {%- call ui.table_block(bordered=true, striped=true) -%}
-        {%- call ui.table_head_block() -%}
-            {{ ui.table_row([_('User'), ''], heading=true) }}
-        {%- endcall %}
+    {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
+        {{ ui.table_head(ui.table_row(cells=[_('User'), ''], heading=true)) }}
 
-        {%- call ui.table_body_block() -%}
+        {%- call ui.util.call(ui.table_body) -%}
             {%- for user in sysadmins %}
-                {%- call ui.table_row_block() -%}
+                {%- call ui.util.call(ui.table_row) -%}
                     {{ ui.table_cell(h.linked_user(user)) }}
-                    <td>
+                    {%- call ui.util.call(ui.table_cell) -%}
                         <form method="POST" action="{{ h.url_for('user.sysadmin') }}">
                             {{ h.csrf_input() }}
                             <input type="hidden" value="{{ user }}" name="username" />
                             <input type="hidden" value="0" name="status" />
                             {{ ui.button(_('Revoke'), type="submit", attrs={"class": "btn btn-danger btn-sm"}) }}
                         </form>
-                    </td>
+                    {%- endcall %}
                 {%- endcall %}
             {%- endfor %}
         {%- endcall %}
@@ -31,14 +29,14 @@
     <h2>{{ _('Promote user to Sysadmin') }}</h2>
 
     {{ ui.form_start(method="POST", action=h.url_for('user.sysadmin')) }}
-        {{ h.csrf_input() }}
+    {{ h.csrf_input() }}
 
-        {{ ui.input("username", label=_('Username'), placeholder=_('Username'),
+    {{ ui.input("username", label=_('Username'), placeholder=_('Username'),
                     attrs={"data-module": "autocomplete",
                            "data-module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}) }}
-        <input type="hidden" value="1" name="status" />
+    <input type="hidden" value="1" name="status" />
 
-        {{ ui.button(_('Promote'), type="submit", attrs={"class": "btn btn-primary"}) }}
+    {{ ui.button(_('Promote'), type="submit", attrs={"class": "btn btn-primary"}) }}
     {{ ui.form_end() }}
 {%- endblock %}
 

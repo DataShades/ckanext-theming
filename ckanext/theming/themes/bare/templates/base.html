@@ -11,7 +11,7 @@
                     <meta name="{{ g.csrf_field_name }}" content="{{ csrf_token() }}" />
                 {% endblock meta_csrf %}
                 {%- block meta_generator %}<meta name="generator" content="ckan {{ h.ckan_version() }}" />{% endblock %}
-                {%- block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
+                {%- block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1">{% endblock %}
             {%- endblock meta -%}
 
             <title>

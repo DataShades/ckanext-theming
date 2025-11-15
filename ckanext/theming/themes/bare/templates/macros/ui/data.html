@@ -1,36 +1,29 @@
-{%- macro table_block(striped=false, bordered=false) -%}
-    {%- do kwargs -%}
-    <table class="{{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }}">
-        {{ caller() }}
+{%- macro table(content, striped=false, bordered=false) -%}
+    <table {{ ui.util.attrs(kwargs) }} class="{{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }}">
+        {{ content }}
     </table>
 {%- endmacro %}
 
-{%- macro table_head_block() -%}
-    {%- do kwargs -%}
-    <thead>{{ caller() }}</thead>
-
+{%- macro table_head(content) -%}
+    <thead {{ ui.util.attrs(kwargs) }}>{{ content }}</thead>
 {%- endmacro %}
 
 
-{%- macro table_body_block() -%}
+{%- macro table_body(content) -%}
     {%- do kwargs -%}
-    <tbody>{{ caller() }}</tbody>
+    <tbody>{{ content }}</tbody>
 {%- endmacro %}
 
-{%- macro table_row_block() -%}
-    {%- do kwargs -%}
-    <tr>
-        {{ caller() }}
+{%- macro table_row(content, cells=[], heading=false) -%}
+    <tr {{ ui.util.attrs(kwargs) }}>
+        {%- if content -%}
+            {{ content }}
+        {%- else -%}
+            {%- for cell in cells %}
+                {{ ui.table_cell(cell, heading) }}
+            {%- endfor %}
+        {%- endif %}
     </tr>
-{%- endmacro %}
-
-{%- macro table_row(columns, heading=false) -%}
-    {%- do kwargs -%}
-    {%- call ui.table_row_block() %}
-        {%- for column in columns %}
-            {{ ui.table_cell(column, heading) }}
-        {%- endfor %}
-    {%- endcall %}
 {%- endmacro %}
 
 {%- macro table_cell(content, heading=false) -%}

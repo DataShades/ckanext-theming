@@ -1,31 +1,29 @@
-{%- macro table_block(striped=false, bordered=false) -%}
+{%- macro table(content, striped=false, bordered=false) -%}
     <div {{ ui.util.attrs(kwargs) }} class="table-wrapper">
         <table class="{{ 'striped' if striped }} {{ 'bordered' if bordered }}">
-            {{ caller() }}
+            {{ content }}
         </table>
     </div>
 {%- endmacro %}
 
-{%- macro table_head_block() -%}
-    <thead {{ ui.util.attrs(kwargs) }}>{{ caller() }}</thead>
+{%- macro table_head(content) -%}
+    <thead {{ ui.util.attrs(kwargs) }}>{{ content }}</thead>
 {%- endmacro %}
 
-{%- macro table_body_block() -%}
-    <tbody {{ ui.util.attrs(kwargs) }}>{{ caller() }}</tbody>
+{%- macro table_body(content) -%}
+    <tbody {{ ui.util.attrs(kwargs) }}>{{ content }}</tbody>
 {%- endmacro %}
 
-{%- macro table_row_block() -%}
+{%- macro table_row(content, cells=[], heading=false) -%}
     <tr {{ ui.util.attrs(kwargs) }}>
-        {{ caller() }}
+        {%- if content -%}
+            {{ content }}
+        {%- else -%}
+            {%- for cell in cells %}
+                {{ ui.table_cell(cell, heading) }}
+            {%- endfor %}
+        {%- endif %}
     </tr>
-{%- endmacro %}
-
-{%- macro table_row(columns, heading=false) -%}
-    {%- call ui.table_row_block() %}
-        {%- for column in columns %}
-            {{ ui.table_cell(column, heading) }}
-        {%- endfor %}
-    {%- endcall %}
 {%- endmacro %}
 
 {%- macro table_cell(content, heading=false) -%}

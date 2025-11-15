@@ -2,9 +2,9 @@
 
 Data macros provide components for displaying and organizing information in structured formats. These components handle tabular data, lists, statistics, and other data visualization needs with proper accessibility and consistent styling.
 
-## `table_block`
+## `table`
 
-Renders a complete table element with optional styling features like.striped rows and borders. Provides a semantic HTML table structure with theme-appropriate styling and accessibility features.
+Renders a complete table element with optional styling features like striped rows and borders. Provides a semantic HTML table structure with theme-appropriate styling and accessibility features.
 
 **Use Cases:**
 
@@ -23,20 +23,22 @@ Use when you need to display structured data in a tabular format where rows and 
 **Example:**
 
 ```
-{{ ui.table_block(striped=true, bordered=true) }}
-  {{ ui.table_head_block() }}
-    {{ ui.table_row_block() }}
-      {{ ui.table_cell("Name", heading=true) }}
-      {{ ui.table_cell("Email", heading=true) }}
-      {{ ui.table_cell("Status", heading=true) }}
-    {{ ui.table_row_block() }}
-  {{ ui.table_body_block() }}
-    {{ ui.table_row_block() }}
-      {{ ui.table_cell("John Doe") }}
-      {{ ui.table_cell("john@example.com") }}
-      {{ ui.table_cell("Active") }}
-    {{ ui.table_row_block() }}
-{{ ui.table_end() }}
+{% call ui.util.call(ui.table_block, striped=true, bordered=true) %}
+    {% call ui.util.call(ui.table_head) %}
+        {% call ui.util.call(ui.table_row) %}
+            {{ ui.table_cell("Name", heading=true) }}
+            {{ ui.table_cell("Email", heading=true) }}
+            {{ ui.table_cell("Status", heading=true) }}
+        {% endcall %}
+    {% endcall %}
+    {% call ui.util.call(ui.table_body) %}
+        {% call ui.util.call(ui.table_row) %}
+            {{ ui.table_cell("John Doe") }}
+            {{ ui.table_cell("john@example.com") }}
+            {{ ui.table_cell("Active") }}
+        {% endcall %}
+    {% endcall %}
+{% endcall %}
 ```
 
 **Recommendations:**
@@ -47,7 +49,7 @@ Use when you need to display structured data in a tabular format where rows and 
 - Include proper scope attributes for accessibility (automatically handled by theme)
 - Consider responsive behavior for mobile viewing (horizontal scrolling or stacking)
 
-## `table_head_block`
+## `table_head`
 
 Renders the table header section (`<thead>`) to contain header rows. Provides semantic structure for table headers and proper accessibility markup.
 
@@ -66,13 +68,13 @@ Use to wrap the header row(s) of a table to provide proper semantic structure an
 **Example:**
 
 ```
-{{ ui.table_head_block() }}
-  {{ ui.table_row_block() }}
-    {{ ui.table_cell("Product", heading=true) }}
-    {{ ui.table_cell("Price", heading=true) }}
-    {{ ui.table_cell("Stock", heading=true) }}
-  {{ ui.table_row_block() }}
-{{ ui.table_head_block() }}
+{% call ui.util.call(ui.table_head) %}
+    {% call ui.util.call(ui.table_row) %}
+        {{ ui.table_cell("Name", heading=true) }}
+        {{ ui.table_cell("Email", heading=true) }}
+        {{ ui.table_cell("Status", heading=true) }}
+    {% endcall %}
+{% endcall %}
 ```
 
 **Recommendations:**
@@ -82,7 +84,7 @@ Use to wrap the header row(s) of a table to provide proper semantic structure an
 - Use heading=true for table_cell elements inside the header
 - Provides proper ARIA associations for screen readers
 
-## `table_body_block`
+## `table_body`
 
 Renders the table body section (`<tbody>`) to contain data rows. Provides semantic structure for the main data content of the table with proper accessibility features.
 
@@ -101,18 +103,18 @@ Use to wrap the data rows of a table to provide proper semantic structure and st
 **Example:**
 
 ```
-{{ ui.table_body_block() }}
-  {{ ui.table_row_block() }}
-    {{ ui.table_cell("Product A") }}
-    {{ ui.table_cell("$29.99") }}
-    {{ ui.table_cell("In Stock") }}
-  {{ ui.table_row_block() }}
-  {{ ui.table_row_block() }}
-    {{ ui.table_cell("Product B") }}
-    {{ ui.table_cell("$39.99") }}
-    {{ ui.table_cell("Out of Stock") }}
-  {{ ui.table_row_block() }}
-{{ ui.table_body_block() }}
+{% call ui.util.call(ui.table_body) %}
+    {% call ui.util.call(ui.table_row) %}
+        {{ ui.table_cell("Product A") }}
+        {{ ui.table_cell("$29.99") }}
+        {{ ui.table_cell("In Stock") }}
+    {% endcall %}
+    {% call ui.util.call(ui.table_row) %}
+        {{ ui.table_cell("Product B") }}
+        {{ ui.table_cell("$39.99") }}
+        {{ ui.table_cell("Out of Stock") }}
+    {% endcall %}
+{% endcall %}
 ```
 
 **Recommendations:**
@@ -121,39 +123,6 @@ Use to wrap the data rows of a table to provide proper semantic structure and st
 - Different themes may provide different styling (Bootstrap: default body styling, Tailwind: divide-y, Bulma: .table td)
 - Can be made scrollable for large datasets
 - Properly associated with headers for screen reader accessibility
-
-## `table_row_block`
-
-Renders a single table row (`<tr>`) to contain table cells. Provides the basic structure for organizing table content horizontally.
-
-**Use Cases:**
-
-- Individual data rows
-- Header rows
-- Summary rows
-- Action rows
-- Grouped data rows
-
-**Usage Context:**
-
-Use to wrap table cells that belong together as a single logical row of data.
-
-**Example:**
-
-```
-{{ ui.table_row_block() }}
-  {{ ui.table_cell("Row Data 1") }}
-  {{ ui.table_cell("Row Data 2") }}
-  {{ ui.table_cell("Row Data 3") }}
-{{ ui.table_row_block() }}
-```
-
-**Recommendations:**
-
-- Use with table_cell elements for proper structure
-- Different themes may customize row behavior (Bootstrap: hover effects, Tailwind: hover:bg-gray-50, Bulma: .table tr:hover)
-- Ensure equal number of cells for proper alignment
-- Consider alternating styles for better readability
 
 ## `table_row`
 
@@ -174,9 +143,15 @@ Use when you have data in an array format that you want to convert to a table ro
 **Example:**
 
 ```
-{{ ui.table_row(["Name", "Email", "Date"], heading=true) }}
-{{ ui.table_row(["John Doe", "john@example.com", "2024-01-01"]) }}
-{{ ui.table_row(["Jane Smith", "jane@example.com", "2024-01-02"]) }}
+{{ ui.table_row(cells=["Name", "Email", "Date"], heading=true) }}
+
+{{ ui.table_row(ui.table_cell("John Doe") ~ ui.table_cell("john@example.com") ~ ui.table_cell("2024-01-01")) }}
+
+{% call ui.util.call(ui.table_row) %}
+    {{ ui.table_cell("Jane Smith") }}
+    {{ ui.table_cell("jane@example.com") }}
+    {{ ui.table_cell("2024-01-02") }}
+{% endcall %}
 ```
 
 **Recommendations:**
