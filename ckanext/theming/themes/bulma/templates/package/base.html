@@ -26,13 +26,4 @@
             {%- endblock %}
         </div>
     </div>
-    {%- block dataset_search_other %}
-        <div class="card mt-4">
-            <div class="card-content">
-                <h4 class="title is-4">{{ _('Other Datasets') }}</h4>
-                {% set list_datasets = h.package_list(page=1, limit=5) %}
-                {{ ui.misc.dataset_list(list_datasets) }}
-            </div>
-        </div>
-    {%- endblock %}
 {%- endblock -%}
