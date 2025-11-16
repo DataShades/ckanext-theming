@@ -66,37 +66,6 @@ Content below
 - Available sizes may vary by theme (xs, sm, md, lg, xl)
 - Helps maintain visual hierarchy and readability
 
-## `divider_with_text`
-
-Creates a horizontal divider with centered text content, effectively separating content sections with descriptive labels. Provides a visually distinct way to separate related content groups.
-
-**Use Cases:**
-
-- Section separation with labels
-- Content group boundaries
-- Thematic breaks in forms
-- Visual content organization
-- Process step separators
-- Category divisions
-
-**Usage Context:**
-
-Use when you need to clearly separate content sections with descriptive labels, such as in forms, articles, or content sections that need thematic separation.
-
-**Example:**
-
-```
-Previous content section
-{{ ui.divider_with_text("Or continue with") }}
-Alternative content section
-```
-
-**Recommendations:**
-
-- Use for clear content separation
-- Different themes implement dividers differently (Bootstrap: hr with text, Tailwind: flex with hr elements, Bulma: field with addons)
-- Keep text concise and descriptive
-- Consider using for process steps or alternates
 
 ## `truncate`
 
@@ -235,14 +204,6 @@ Creates a spacing element.
 ### Arguments
 
 *   `size` (string): The size of the spacer. Defaults to "md".
-
-## `divider_with_text`
-
-Creates a horizontal divider with centered text.
-
-### Arguments
-
-*   `content` (string): text to display in the center of the divider.
 
 ## `truncate`
 

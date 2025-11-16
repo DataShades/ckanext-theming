@@ -67,8 +67,9 @@
 {%- endmacro %}
 
 {%- macro section(content) -%}
-    {%- do kwargs -%}
-    {{ content }}
+    <section {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </section>
 {%- endmacro %}
 
 {%- macro jumbotron(content, title, subtitle) -%}

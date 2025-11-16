@@ -30,6 +30,12 @@
 {% set menu_item = _nav.menu_item %}
 {% set nav_wrapper = _nav.nav_wrapper %}
 {% set nav_item = _nav.nav_item %}
+{% set account_nav_wrapper = _nav.account_nav_wrapper %}
+{% set account_nav_item = _nav.account_nav_item %}
+{% set main_nav_wrapper = _nav.main_nav_wrapper %}
+{% set main_nav_item = _nav.main_nav_item %}
+{% set content_nav_wrapper = _nav.content_nav_wrapper %}
+{% set content_nav_item = _nav.content_nav_item %}
 {% set pagination = _nav.pagination %}
 {% set tab_wrapper = _nav.tab_wrapper %}
 {% set tab_item = _nav.tab_item %}
@@ -63,7 +69,6 @@
 {% set table = data.table %}
 {% set table_head = data.table_head %}
 {% set table_body = data.table_body %}
-{% set table_row_block = data.table_row_block %}
 {% set table_row = data.table_row %}
 {% set table_cell = data.table_cell %}
 {% set list_group = data.list_group %}
@@ -80,6 +85,7 @@
 {% set input = _form.input %}
 {% set checkbox = _form.checkbox %}
 {% set textarea = _form.textarea %}
+{% set markdown = _form.markdown %}
 {% set select = _form.select %}
 {% set radio = _form.radio %}
 {% set file_input = _form.file_input %}
@@ -104,7 +110,6 @@
 {# Miscellaneous macros #}
 {% set datetime = misc.datetime %}
 {% set spacer = misc.spacer %}
-{% set divider_with_text = misc.divider_with_text %}
 {% set truncate = misc.truncate %}
 {% set badge_count = misc.badge_count %}
 {% set skeleton_loader = misc.skeleton_loader %}

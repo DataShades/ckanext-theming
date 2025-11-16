@@ -7,8 +7,8 @@
     {{ ui.form_end() }}
 {%- endmacro %}
 
-{%- macro form_actions_wrapper(content) -%}
-    <div class="field is-grouped" {{ ui.util.attrs(kwargs) }}>
+{%- macro form_actions(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="field is-grouped">
         {{ content }}
     </div>
 {%- endmacro %}

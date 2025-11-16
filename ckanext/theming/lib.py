@@ -16,8 +16,11 @@ Example usage::
 from __future__ import annotations
 
 import abc
+import datetime
 import logging
 import os
+import uuid
+from collections import defaultdict
 from collections.abc import Iterable, Iterator
 from typing import Any, Protocol, cast
 
@@ -36,6 +39,8 @@ from ckan.lib.helpers import helper_functions as h
 from .interfaces import ITheme
 
 log = logging.getLogger(__name__)
+
+NAMESPACE_UI = uuid.uuid4()
 
 
 class PElement(Protocol):
@@ -90,8 +95,69 @@ class Util:
         return el(caller(), *args, **kwargs)
 
     def merge(self, *fragments: Markup) -> Markup:
-        """Merge multiple Markup fragments into a single Markup object."""
+        """Merge multiple Markup fragments into a single Markup object.
+
+        :param fragments: Markup fragments to merge.
+        :return: A single Markup object containing all fragments.
+        """
         return Markup().join(fragments)
+
+    def now(self, tz: datetime.timezone = datetime.timezone.utc):
+        """Get the current UTC datetime.
+
+        :param tz: Timezone for the returned datetime. Defaults to UTC.
+        :return: Current datetime with the specified timezone.
+        """
+        return datetime.datetime.now(tz)
+
+    def id(self, value: str | None = None, prefix: str = "id-"):
+        """Generate a unique identifier.
+
+        If `value` is provided, a UUID5 based on the value is generated,
+        otherwise a random UUID4 is generated.
+
+        Useful for generating HTML element IDs.
+
+        :param value: Optional value to base the UUID5 on.
+        :param prefix: Prefix to prepend to the identifier.
+        :return: A unique identifier string.
+        """
+        result = uuid.uuid5(NAMESPACE_UI, value) if value else uuid.uuid4()
+        return f"{prefix}{result.hex}"
+
+    def keep_item(self, category: str, key: str, value: Any):
+        """Keep an item in the UI storage under the specified category.
+
+        This method allows storing arbitrary items in a per-request storage
+        associated with the UI. Items can be retrieved later during the same
+        request.
+
+        :param category: The category under which to store the item.
+        :param key: The key for the item.
+        :param value: The item to store.
+        """
+        storage = tk.g.setdefault("ui_storage", defaultdict(dict))
+        storage[category][key] = value
+
+    def pop_items(self, category: str, key: str | None = None) -> dict[str, Any] | Any:
+        """Pop items from the UI storage under the specified category.
+
+        :param category: The category from which to pop items.
+        :param key: Optional key of the item to pop. If not provided, all items
+                    under the category are popped.
+        :return: A list of items stored under the category.
+        """
+        storage = tk.g.setdefault("ui_storage", defaultdict(list))
+        return storage[category].pop(key, None) if key else storage.pop(category)
+
+    def get_items(self, category: str, key: str | None = None) -> list[Any]:
+        """Get all items stored under the specified category in the UI storage.
+
+        :param category: The category from which to get items.
+        :return: A list of items stored under the category.
+        """
+        storage = tk.g.setdefault("ui_storage", defaultdict(list))
+        return storage[category].get(key, None) if key else storage[category]
 
 
 class UI(Iterable[str], abc.ABC):

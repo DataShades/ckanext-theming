@@ -9,18 +9,27 @@
 {%- endmacro %}
 
 {%- macro nav_wrapper(content) -%}
-    {%- do kwargs -%}
-    <nav>{{ content }}</nav>
+    <nav {{ ui.util.attrs(kwargs) }}>{{ content }}</nav>
 {%- endmacro %}
 
 {%- macro nav_item(content, href, active=False) -%}
-    {%- do kwargs -%}
     {%- if active %}
-        <strong>{{ ui.link(content, href) }}</strong>
+        <strong>{{ ui.link(content, href, **kwargs) }}</strong>
     {%- else -%}
-        {{ ui.link(content, href) }}
+        {{ ui.link(content, href, **kwargs) }}
     {%- endif %}
 {%- endmacro %}
+
+{%- macro main_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro main_nav_item(content, href, active=false) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+
+{%- macro account_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro account_nav_item(content, href, active=false) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+
+{%- macro content_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_item(content, href, active=false) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+
+
 
 {%- macro tab_wrapper(content) -%}
     {%- do kwargs -%}

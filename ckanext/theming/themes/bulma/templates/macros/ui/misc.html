@@ -15,20 +15,6 @@
         {%- else %}height: 1rem;{%- endif %}"></div>
 {%- endmacro %}
 
-{%- macro divider_with_text(content) -%}
-    <div class="field has-addons" {{ ui.util.attrs(kwargs) }}>
-        <div class="control is-expanded">
-            <hr class="hr">
-        </div>
-        <div class="control">
-            <span class="has-text-grey-light">{{ content }}</span>
-        </div>
-        <div class="control is-expanded">
-            <hr class="hr">
-        </div>
-    </div>
-{%- endmacro %}
-
 {%- macro truncate(content, max_lines=1) -%}
     <div class="content-truncated" style="display: -webkit-box; -webkit-line-clamp: {{ max_lines }}; -webkit-box-orient: vertical; overflow: hidden;" {{ ui.util.attrs(kwargs) }}>
         {{ content }}

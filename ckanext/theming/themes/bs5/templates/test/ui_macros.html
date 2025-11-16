@@ -68,7 +68,7 @@
                     {{ ui.checkbox("terms", "terms", label="I agree to terms and conditions", checked=true) }}
                     {{ ui.toggle_switch("notifications", "notifications", label="Enable notifications", checked=true) }}
 
-                    {{ ui.form_actions_wrapper(
+                    {{ ui.form_actions(
                         ui.button("Submit", style="primary") ~
                         ui.button("Cancel", type="button", style="secondary")
                     ) }}

@@ -10,14 +10,6 @@
     <div class="spacer spacer-{{ size }}"></div>
 {%- endmacro %}
 
-{%- macro divider_with_text(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="divider-with-text">
-        <hr />
-        <span>{{ content }}</span>
-        <hr />
-    </div>
-{%- endmacro %}
-
 {%- macro truncate(content, max_lines=1) -%}
     <div {{ ui.util.attrs(kwargs) }} class="truncate" style="-webkit-line-clamp: {{ max_lines }}">
         {{ content }}

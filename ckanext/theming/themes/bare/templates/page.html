@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-
 {%- block page %}
     {%- block zone_start -%}{%- endblock %}
 
@@ -57,7 +56,10 @@
 
                                         {%- block page_header %}
                                             {%- block content_action %}{% endblock -%}
-                                            {%- block content_nav %}{% endblock -%}
+
+                                            {%- call ui.util.call(ui.content_nav_wrapper) -%}
+                                                {%- block content_nav %}{% endblock -%}
+                                            {%- endcall %}
                                         {% endblock -%}
 
                                         {%- block primary_content_inner %}

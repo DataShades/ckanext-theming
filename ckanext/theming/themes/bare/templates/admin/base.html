@@ -1,7 +1,16 @@
-{% extends "page.html" %}
+{% extends "_layout.html" %}
+{% set _layout = _layout | default("default") %}
 
 {%- block subtitle %}{{ _('Admin') }}{% endblock %}
 
 {%- block breadcrumb_content %}
+    {{ super() }}
     {{ ui.breadcrumb_item(_('Admin'), h.url_for('admin.index')) }}
 {%- endblock %}
+
+
+{% block content_nav %}
+    {{ ui.content_nav_item( _('Sysadmins'), h.url_for('admin.index')) }}
+    {{ ui.content_nav_item(_('Config'), h.url_for('admin.config')) }}
+    {{ ui.content_nav_item(_('Trash'), h.url_for('admin.trash')) }}
+{% endblock %}

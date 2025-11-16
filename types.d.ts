@@ -67,7 +67,11 @@ declare global {
       title: Theming.Content,
       props: Theming.INotificationParams,
     ) => INotification;
+
+    getModal(id: string): IModal | null;
+    getNotification(id: string): INotification | null;
   }
+
   interface IModal<T = HTMLElement> {
     show: () => void;
     close: () => void;

@@ -29,8 +29,8 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title=None, footer=None) -%}
-    <dialog>
+{%- macro modal(content, title, footer, dismissible, dismiss_label, id) -%}
+    <dialog {{ ui.util.attrs(kwargs) }} id="{{ id }}" closedby="{{ 'any' if dismissible else 'closerequest' }}">
         {%- if title %}
             {{ ui.heading(title, level=2) }}
         {%- endif %}
@@ -46,14 +46,19 @@
     </dialog>
 {%- endmacro %}
 
-{%- macro tooltip(text) -%}
-    {%- do kwargs -%}
-    <span title="{{ text }}" data-toggle="tooltip">{{ caller() if caller else text }}</span>
+{%- macro tooltip(content, tooltip) -%}
+    <span {{ ui.util.attrs(kwargs) }} title="{{ tooltip }}">{{ content }}</span>
 {%- endmacro %}
 
-{%- macro popover(title, content) -%}
-    {%- do kwargs -%}
-    <span data-toggle="popover" title="{{ title }}" data-content="{{ content }}">{{ caller() if caller else title or content }}</span>
+{%- macro popover_content(content, title, id) -%}
+    <div popover ontoggle="console.log(event.source)" id="{{ id }}">
+        {{ ui.heading(title, level=4) if title }}
+        <div>{{ content }}</div>
+    </div>
+{%- endmacro %}
+
+{%- macro popover_handler(content, id) -%}
+    <span onclick="window['{{ id }}'].togglePopover({source: this})">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro progress(value, max=100, label=None) -%}

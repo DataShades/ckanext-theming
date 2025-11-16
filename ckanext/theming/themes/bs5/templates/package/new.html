@@ -20,7 +20,7 @@
         {%- block dataset_fields %}{% endblock -%}
 
         <div class="form-actions mt-3">
-            {{ ui.form_actions_wrapper(
+            {{ ui.form_actions(
                 ui.button(_('Create Dataset'), type="submit", style="primary") ~
                 ui.button(_('Cancel'), type="button", href=h.url_for('dataset.search'), style="secondary")
             ) }}

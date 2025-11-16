@@ -16,7 +16,7 @@
         {{ ui.input("password", label=_("Password"), type="password", errors=errors.password) }}
         {{ ui.checkbox("remember", label=_("Remember me"), checked=true, value=1) }}
 
-        {{ ui.form_actions_wrapper(ui.button(_("Log in"), type="submit")) }}
+        {{ ui.form_actions(ui.button(_("Log in"), type="submit")) }}
     {%- endcall %}
 {%- endblock %}
 

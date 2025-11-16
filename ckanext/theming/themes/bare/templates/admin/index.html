@@ -1,7 +1,13 @@
 {% extends "admin/base.html" %}
 
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item("Sysadmins", h.url_for("admin.index")) }}
+{%- endblock %}
+
 {%- block primary_content_inner %}
-    <h2>{{ _('Current Sysadmins') }}</h2>
+
+    {{ ui.heading(_('Current Sysadmins'), level=2) }}
 
     {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
         {{ ui.table_head(ui.table_row(cells=[_('User'), ''], heading=true)) }}
@@ -11,12 +17,11 @@
                 {%- call ui.util.call(ui.table_row) -%}
                     {{ ui.table_cell(h.linked_user(user)) }}
                     {%- call ui.util.call(ui.table_cell) -%}
-                        <form method="POST" action="{{ h.url_for('user.sysadmin') }}">
-                            {{ h.csrf_input() }}
+                        {%- call ui.form_block("POST", action=h.url_for('user.sysadmin')) -%}
                             <input type="hidden" value="{{ user }}" name="username" />
                             <input type="hidden" value="0" name="status" />
-                            {{ ui.button(_('Revoke'), type="submit", attrs={"class": "btn btn-danger btn-sm"}) }}
-                        </form>
+                            {{ ui.button(_('Revoke'), type="submit", stye="danger") }}
+                        {%- endcall %}
                     {%- endcall %}
                 {%- endcall %}
             {%- endfor %}
@@ -24,29 +29,33 @@
 
     {%- endcall %}
 
-    <hr />
+    {{ ui.divider() }}
 
-    <h2>{{ _('Promote user to Sysadmin') }}</h2>
+    <div>
+        {{ ui.heading(_('Promote user to Sysadmin'), level=2) }}
+        {%- call ui.form_block("POST", action=h.url_for('user.sysadmin')) -%}
+            {{ ui.input("username", label=_('Username'), placeholder=_('Username'),
+                    data={"module": "autocomplete", "module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}
+            ) }}
+            <input type="hidden" value="1" name="status" />
+            {{ ui.form_actions(ui.button(_('Promote'), type="submit")) }}
+        {%- endcall %}
+    </div>
 
-    {{ ui.form_start(method="POST", action=h.url_for('user.sysadmin')) }}
-    {{ h.csrf_input() }}
-
-    {{ ui.input("username", label=_('Username'), placeholder=_('Username'),
-                    attrs={"data-module": "autocomplete",
-                           "data-module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}) }}
-    <input type="hidden" value="1" name="status" />
-
-    {{ ui.button(_('Promote'), type="submit", attrs={"class": "btn btn-primary"}) }}
-    {{ ui.form_end() }}
 {%- endblock %}
 
 {%- block secondary_content %}
-    <div class="module module-narrow module-shallow">
+    {%- call ui.util.call(ui.section) -%}
         {{ ui.heading(_('Administer CKAN'), level=2) }}
-        <div class="module-content">
-            {%- set docs_url = "https://docs.ckan.org/en/{0}/sysadmin-guide.html".format(g.ckan_doc_version) %}
-            <p>{% trans %}As a sysadmin user you have full control over this CKAN instance. Proceed with care!{% endtrans %}</p>
-            <p>{% trans docs_url=docs_url %}<a href="{{ docs_url }}" target="_blank" rel="noreferrer">sysadmin guide</a>{% endtrans %}</p>
+        <div>
+            <p>
+                {{ _("As a sysadmin user you have full control over this CKAN instance. Proceed with care!") }}
+            </p>
+            <p>
+                {%- with docs_url = "https://docs.ckan.org/en/{0}/sysadmin-guide.html".format(g.ckan_doc_version) -%}
+                    {{ ui.link(_("Sysadmin guide"), href=docs_url, attrs={"target": "_blank", "rel": "noreferrer"}) }}
+                {%- endwith -%}
+            </p>
         </div>
-    </div>
+    {%- endcall %}
 {%- endblock %}

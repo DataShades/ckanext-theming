@@ -15,14 +15,6 @@
     <div {{ ui.util.attrs(kwargs) }} class="{{ size_classes.get(size, size_classes.md) }}"></div>
 {%- endmacro %}
 
-{%- macro divider_with_text(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="d-flex align-items-center my-4">
-        <div class="flex-grow-1 border-top"></div>
-        <span class="mx-3 text-muted">{{ content }}</span>
-        <div class="flex-grow-1 border-top"></div>
-    </div>
-{%- endmacro %}
-
 {%- macro truncate(content, max_lines=1) -%}
     <div class="{{ 'd-inline-block text-truncate' if max_lines == 1 else 'text-truncate' }}" style="{{ 'max-width: 100%' if max_lines == 1 else 'display: -webkit-box; -webkit-line-clamp: ' ~ max_lines ~ '; -webkit-box-orient: vertical; overflow: hidden;' }}" {{ ui.util.attrs(kwargs) }}>
         {{ content }}

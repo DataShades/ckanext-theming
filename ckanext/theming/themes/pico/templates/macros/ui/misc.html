@@ -15,14 +15,6 @@
         {%- else %}height: 1rem;{%- endif %}"></div>
 {%- endmacro %}
 
-{%- macro divider_with_text(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="grid">
-        <hr />
-        <span>{{ content }}</span>
-        <hr />
-    </div>
-{%- endmacro %}
-
 {%- macro truncate(content, max_lines=1) -%}
     <div {{ ui.util.attrs(kwargs) }} class="" style="
         display: -webkit-box;

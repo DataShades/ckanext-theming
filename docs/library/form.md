@@ -37,7 +37,7 @@ Use as the main wrapper for any form that requires submission to the server, esp
 - Different themes may customize form styling (Bootstrap: .needs-validation, Tailwind: space-y-6, Bulma: .box)
 - Consider using appropriate HTTP methods (GET for searches, POST for changes)
 
-## `form_actions_wrapper`
+## `form_actions`
 
 Wraps form actions such as submit, reset, and cancel buttons. Provides consistent spacing and alignment for form control elements.
 
@@ -56,8 +56,8 @@ Use at the end of forms to wrap action buttons that perform operations like savi
 **Example:**
 
 ```
-{{ ui.form_actions_wrapper(
-  ui.button("Save", style="primary", type="submit") +
+{{ ui.form_actions(
+  ui.button("Save", style="primary", type="submit") ~
   ui.button("Cancel", style="secondary", type="button")
 ) }}
 ```

@@ -1,4 +1,6 @@
-{% extends "page.html" %}
+{% extends "_layout.html" %}
+{% set _layout = _layout | default("fullwidth") %}
+
 
 {%- block subtitle %}{{ _("Welcome") }}{% endblock %}
 

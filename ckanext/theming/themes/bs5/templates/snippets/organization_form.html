@@ -10,7 +10,7 @@
             {{ ui.input("image_url", "field-image-upload", label=_('Image'), type="file", error=errors.image_url, class="mb-3") }}
         {%- endif %}
 
-        {{ ui.form_actions_wrapper(
+        {{ ui.form_actions(
             ui.button(_('Save Organization'), type="submit", style="primary") ~
             ui.button(_('Cancel'), type="button", href=h.url_for('organization.index'), style="secondary")
         ) }}

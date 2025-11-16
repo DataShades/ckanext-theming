@@ -39,6 +39,35 @@
     },
   };
 
+  class Modal implements IModal<HTMLDialogElement> {
+    constructor(public el: HTMLDialogElement) {}
+
+    destroy() {
+      this.el.remove();
+    }
+
+    show() {
+      document.body.appendChild(this.el);
+      this.el.showModal();
+    }
+
+    close() {
+      this.el.close();
+    }
+  }
+
+  class Notification implements INotification {
+    constructor(public el: HTMLElement) {}
+    hide() {
+      this.el.hidden = true;
+    }
+    show() {
+      this.el.hidden = false;
+    }
+    destroy() {
+      this.el.remove();
+    }
+  }
   const ui: IUi = {
     button(content: any, params = {}) {
       const btn = document.createElement("button");
@@ -64,7 +93,7 @@
     modal(content, title: any, actions = [], params = {}) {
       const modal = document.createElement("dialog");
 
-      modal.addEventListener("close", () => result.el.remove());
+      modal.addEventListener("close", () => result.destroy());
 
       if (params.dismissible) {
         // does not work in safari
@@ -89,18 +118,17 @@
         modal.appendChild(document.createElement("div")).append(...actions);
       }
 
-      const result = <IModal<HTMLDialogElement>>{
-        el: modal,
+      const result = new Modal(modal);
 
-        show() {
-          document.body.appendChild(this.el);
-          this.el.showModal();
-        },
-        close() {
-          this.el.close();
-        },
-      };
       return result;
+    },
+
+    getModal(id) {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Modal(<HTMLDialogElement>el);
     },
 
     notification(content, title, props = {}) {
@@ -134,19 +162,16 @@
       }
 
       container.append(el);
-      const result = {
-        el,
-        hide() {
-          el.hidden = true;
-        },
-        show() {
-          el.hidden = false;
-        },
-        destroy() {
-          el.remove();
-        },
-      };
+      const result = new Notification(el);
       return result;
+    },
+
+    getNotification(id) {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Notification(el);
     },
   };
 

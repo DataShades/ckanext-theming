@@ -31,7 +31,7 @@
                         {# Recaptcha snippet would go here #}
                     {%- endif %}
 
-                    {{ ui.form_actions_wrapper(
+                    {{ ui.form_actions(
                         ui.button(_('Create Account'), type="submit", style="primary") ~
                         ui.button(_('Cancel'), type="button", href=h.url_for('home.index'), style="secondary")
                     ) }}

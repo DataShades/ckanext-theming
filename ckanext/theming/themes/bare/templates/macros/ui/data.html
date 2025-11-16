@@ -1,5 +1,5 @@
 {%- macro table(content, striped=false, bordered=false) -%}
-    <table {{ ui.util.attrs(kwargs) }} class="{{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }}">
+    <table {{ ui.util.attrs(kwargs) }} width="100%" class="{{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }}">
         {{ content }}
     </table>
 {%- endmacro %}

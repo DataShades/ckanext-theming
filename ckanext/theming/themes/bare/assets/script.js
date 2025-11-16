@@ -26,6 +26,35 @@
             }
         },
     };
+    class Modal {
+        constructor(el) {
+            this.el = el;
+        }
+        destroy() {
+            this.el.remove();
+        }
+        show() {
+            document.body.appendChild(this.el);
+            this.el.showModal();
+        }
+        close() {
+            this.el.close();
+        }
+    }
+    class Notification {
+        constructor(el) {
+            this.el = el;
+        }
+        hide() {
+            this.el.hidden = true;
+        }
+        show() {
+            this.el.hidden = false;
+        }
+        destroy() {
+            this.el.remove();
+        }
+    }
     const ui = {
         button(content, params = {}) {
             const btn = document.createElement("button");
@@ -47,7 +76,7 @@
         },
         modal(content, title, actions = [], params = {}) {
             const modal = document.createElement("dialog");
-            modal.addEventListener("close", () => result.el.remove());
+            modal.addEventListener("close", () => result.destroy());
             if (params.dismissible) {
                 // does not work in safari
                 modal.closedBy = "any";
@@ -64,17 +93,15 @@
             if (actions.length) {
                 modal.appendChild(document.createElement("div")).append(...actions);
             }
-            const result = {
-                el: modal,
-                show() {
-                    document.body.appendChild(this.el);
-                    this.el.showModal();
-                },
-                close() {
-                    this.el.close();
-                },
-            };
+            const result = new Modal(modal);
             return result;
+        },
+        getModal(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                return null;
+            }
+            return new Modal(el);
         },
         notification(content, title, props = {}) {
             const containerId = "flash-messages";
@@ -83,6 +110,7 @@
                 throw `Notification container(${containerId}) is not defined`;
             }
             const el = document.createElement("div");
+            el.hidden = true;
             if (title) {
                 el.appendChild(document.createElement("strong")).append(title);
             }
@@ -99,13 +127,15 @@
                 util.animateTimeout(progress, start, props.timeout);
             }
             container.append(el);
-            const result = {
-                el,
-                dismiss() {
-                    el.remove();
-                },
-            };
+            const result = new Notification(el);
             return result;
+        },
+        getNotification(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                return null;
+            }
+            return new Notification(el);
         },
     };
     ckan.sandbox.setup((sb) => {
