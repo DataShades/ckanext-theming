@@ -1,4 +1,4 @@
-{%- macro alert(message, style="info") -%}
+{%- macro alert(message, style="info", dismissible=True) -%}
     {%- set style_map = {
         'primary': 'primary',
         'secondary': 'light',
@@ -8,6 +8,9 @@
         'danger': 'danger'
     } %}
     <div class="notification {{ 'is-' ~ style_map.get(style, 'info') }}" {{ ui.util.attrs(kwargs) }}>
+        {%- if dismissible %}
+            <button class="delete"></button>
+        {%- endif %}
         {{ message }}
     </div>
 {%- endmacro %}
@@ -26,14 +29,18 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title, footer) -%}
-    <div class="modal" {{ ui.util.attrs(kwargs) }}>
-        <div class="modal-background"></div>
+{%- macro modal(content, title, footer, dismissible=true, dismiss_label="Close", id) -%}
+    <div class="modal" id="{{ id }}" {{ ui.util.attrs(kwargs) }}>
+        {%- if dismissible %}
+            <div class="modal-background"></div>
+        {%- endif %}
         <div class="modal-card">
             {%- if title %}
                 <header class="modal-card-head">
                     <p class="modal-card-title">{{ title }}</p>
-                    <button class="delete" aria-label="close"></button>
+                    {%- if dismissible %}
+                        <button class="delete" aria-label="{{ dismiss_label }}"></button>
+                    {%- endif %}
                 </header>
             {%- endif %}
             <section class="modal-card-body">
@@ -48,9 +55,9 @@
     </div>
 {%- endmacro %}
 
-{%- macro tooltip(text) -%}
+{%- macro tooltip(content, tooltip) -%}
     {%- do kwargs -%}
-    <span class="has-tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
+    <span class="has-tooltip" data-tooltip="{{ tooltip }}">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro popover_content(content, title, id) -%}

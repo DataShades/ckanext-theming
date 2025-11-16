@@ -1,4 +1,4 @@
-{%- macro alert(message, style="info") -%}
+{%- macro alert(message, style="info", dismissible=True) -%}
     {%- set style_map = {
         'primary': 'info',
         'secondary': 'info',
@@ -8,6 +8,9 @@
         'danger': 'error'
     } %}
     <div {{ ui.util.attrs(kwargs) }} class="alert {{ style_map.get(style, 'info') }}">
+        {%- if dismissible %}
+            <button aria-label="Close" rel="prev"></button>
+        {%- endif %}
         {{ message }}
     </div>
 {%- endmacro %}
@@ -26,13 +29,15 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title, footer) -%}
-    <dialog {{ ui.util.attrs(kwargs) }} class="modal">
+{%- macro modal(content, title, footer, dismissible=true, dismiss_label="Close", id) -%}
+    <dialog {{ ui.util.attrs(kwargs) }} id="{{ id }}" class="modal">
         <article>
             {%- if title %}
                 <header>
                     <h3>{{ title }}</h3>
-                    <button aria-label="Close" rel="prev"></button>
+                    {%- if dismissible %}
+                        <button aria-label="{{ dismiss_label }}" rel="prev"></button>
+                    {%- endif %}
                 </header>
             {%- endif %}
             <div class="content">
@@ -47,9 +52,9 @@
     </dialog>
 {%- endmacro %}
 
-{%- macro tooltip(text) -%}
+{%- macro tooltip(content, tooltip) -%}
     {%- do kwargs -%}
-    <span class="tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
+    <span class="tooltip" data-tooltip="{{ tooltip }}">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro popover_content(content, title, id) -%}

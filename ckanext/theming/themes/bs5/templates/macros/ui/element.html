@@ -65,6 +65,6 @@
     <i class="bi bi-{{ name }} fs-{{ '6' if size == 'sm' else '5' if size == 'md' else '4' if size == 'lg' else '3' }}"></i>
 {%- endmacro %}
 
-{%- macro label(text, for_id=None) -%}
+{%- macro label(text, for_id) -%}
     <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}" class="form-label">{{ text }}</label>
 {%- endmacro %}

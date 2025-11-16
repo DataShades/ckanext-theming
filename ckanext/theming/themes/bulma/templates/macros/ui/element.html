@@ -64,6 +64,6 @@
     </span>
 {%- endmacro %}
 
-{%- macro label(text, for_id=None) -%}
+{%- macro label(text, for_id) -%}
     <label {{ ui.util.attrs(kwargs) }} class="label" for="{{ for_id }}">{{ text }}</label>
 {%- endmacro %}

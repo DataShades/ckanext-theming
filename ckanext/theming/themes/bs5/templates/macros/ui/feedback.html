@@ -1,4 +1,4 @@
-{%- macro alert(message, style="info") -%}
+{%- macro alert(message, style="info", dismissible=True) -%}
     {%- set style_map = {
         'primary': 'primary',
         'secondary': 'secondary',
@@ -8,8 +8,10 @@
         'danger': 'danger'
     } %}
     <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ style_map.get(style, 'info') }} alert-dismissible fade show" role="alert">
+        {%- if dismissible %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {%- endif %}
         {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 {%- endmacro %}
 
@@ -33,14 +35,16 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title, footer) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="modal fade" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+{%- macro modal(content, title, footer, dismissible=true, dismiss_label="Close", id) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="modal fade" id="{{ id }}" tabindex="-1" aria-labelledby="{{ id }}Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 {%- if title %}
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">{{ title }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="{{ id }}Label">{{ title }}</h5>
+                        {%- if dismissible %}
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ dismiss_label }}">{{ dismiss_label }}</button>
+                        {%- endif %}
                     </div>
                 {%- endif %}
                 <div class="modal-body">
@@ -56,9 +60,9 @@
     </div>
 {%- endmacro %}
 
-{%- macro tooltip(text) -%}
-    <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-title="{{ text }}" {{ ui.util.attrs(kwargs) }}>
-        {{ caller() if caller else text }}
+{%- macro tooltip(content, tooltip) -%}
+    <span class="d-inline-block" data-bs-toggle="tooltip" data-bs-title="{{ tooltip }}" {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
     </span>
 {%- endmacro %}
 

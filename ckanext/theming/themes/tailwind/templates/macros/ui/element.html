@@ -68,6 +68,6 @@
     </svg>
 {%- endmacro %}
 
-{%- macro label(text, for_id=None) -%}
+{%- macro label(text, for_id) -%}
     <label {{ ui.util.attrs(kwargs) }} class="block text-sm font-medium text-gray-700" for="{{ for_id }}">{{ text }}</label>
 {%- endmacro %}
