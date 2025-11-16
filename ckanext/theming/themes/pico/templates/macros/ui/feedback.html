@@ -52,9 +52,12 @@
     <span class="tooltip" data-tooltip="{{ text }}">{{ caller() if caller else text }}</span>
 {%- endmacro %}
 
-{%- macro popover(title, content) -%}
-    {%- do kwargs -%}
-    <span class="tooltip" data-tooltip="{{ content or title }}">{{ caller() if caller else title or content }}</span>
+{%- macro popover_content(content, title, id) -%}
+    <div class="tooltip" id="{{ id }}" {{ ui.util.attrs(kwargs) }}>{{ content or title }}</div>
+{%- endmacro %}
+
+{%- macro popover_handler(content, id) -%}
+    <span class="tooltip-target" data-tooltip-target="#{{ id }}" {{ ui.util.attrs(kwargs) }}>{{ content }}</span>
 {%- endmacro %}
 
 {%- macro progress(value, max=100, label=None) -%}
