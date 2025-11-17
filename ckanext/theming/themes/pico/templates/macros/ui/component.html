@@ -65,3 +65,46 @@
         </div>
     </article>
 {%- endmacro %}
+
+{%- macro search_form(query, sorting, sorting_options, query_name="q", sorting_name="sort", active_filters=[] ) -%}
+    {%- set facets = {
+            'fields': fields_grouped,
+            'search': search_facets,
+            'titles': facet_titles,
+            'translated_fields': translated_fields,
+            'remove_field': remove_field }
+    %}
+
+    {%- call ui.util.call(ui.form, **kwargs) -%}
+        <div class="grid">
+            <div>
+                {{ ui.input(query_name, label=_("Search"), value=query, type="search") }}
+            </div>
+            {%- if sorting %}
+            <div>
+                {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) }}
+            </div>
+            {%- endif %}
+            <div>
+                {{ ui.form_actions(ui.button(_('Search'), type="submit")) }}
+            </div>
+        </div>
+
+        {%- if active_filters %}
+            <div class="flow">
+                {%- call ui.util.call(ui.listing) -%}
+                    {%- for group, fields in active_filters|groupby(0) -%}
+                        <div>
+                            <strong>{{ group }}:</strong>
+                            {%- for name, value in fields -%}
+                                {{ ui.hidden_input(name, value=value) }}
+                                <del>{{ ui.tag(value, href=h.remove_url_param(name, value)) }}</del>
+                            {%- endfor %}
+                        </div>
+                    {%- endfor %}
+                {%- endcall %}
+            </div>
+        {%- endif %}
+
+    {%- endcall %}
+{%- endmacro %}

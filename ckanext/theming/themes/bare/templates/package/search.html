@@ -5,14 +5,30 @@
 {%- endblock %}
 
 {%- block page_header -%}
-{%- endblock %}
+    {%- set sorting_options = [
+            {"text": _('Relevance'), "value": "score desc, metadata_modified desc"},
+            {"text": _('Name Ascending'), "value": "title_string asc"},
+            {"text": _('Name Descending'), "value": "title_string desc"},
+            {"text": _('Last Modified'), "value": "metadata_modified desc"}
+    ] %}
 
-{%- block primary_content_inner %}
+    {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields) }}
 
-    {{ fields }}
+    {%- call ui.util.call(ui.listing) -%}
+        {%- for key, values in fields_grouped.items() -%}
+            <div>
+                <strong>{{ facet_titles.get(key, key) }}:</strong>
+                {%- for value in values %}
+                    <del>
+                        {%- with label=h.list_dict_filter(search_facets[key]["items"], 'name', 'display_name', value) -%}
+                            {{ ui.link(label, h.remove_url_param(key, value)) }}
+                        {%- endwith %}
+                    </del>
+                {% endfor %}
+            </div>
 
-    {{ ui.search_form(q) }}
-
+        {%- endfor %}
+    {%- endcall %}
     <h2>
         {%- if not query_error %}
             {%- if page.item_count %}
@@ -24,6 +40,9 @@
             {{ _('Error') }}
         {%- endif %}
     </h2>
+{%- endblock %}
+
+{%- block primary_content_inner %}
 
     {%- block package_list %}
         {%- if page.items %}
@@ -40,4 +59,19 @@
     {%- block pagination %}
         {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
     {%- endblock %}
+{%- endblock %}
+
+{%- block secondary_content -%}
+    {%- for key, facets in search_facets.items() -%}
+        {%- call ui.util.call(ui.facet_group, facet_titles.get(key, key)) -%}
+
+            {% set items = h.get_facet_items_dict(key, search_facets) %}
+            {%- call ui.util.call(ui.listing) -%}
+                {%- for item in items -%}
+                    {{ ui.facet_item(key=key, value=item.name, label=item.display_name, count=item.count, active=item.active) }}
+                {%- endfor %}
+            {%- endcall %}
+
+        {%- endcall %}
+    {%- endfor %}
 {%- endblock %}

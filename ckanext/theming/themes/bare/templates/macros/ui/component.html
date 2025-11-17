@@ -30,7 +30,7 @@
 {%- endmacro %}
 
 
-{%- macro search_form(query, query_name="q") -%}
+{%- macro search_form(query, sorting, sorting_options, query_name="q", sorting_name="sort", hidden_filters=[] ) -%}
     {%- set facets = {
             'fields': fields_grouped,
             'search': search_facets,
@@ -38,54 +38,35 @@
             'translated_fields': translated_fields,
             'remove_field': remove_field }
     %}
-    {%- set sorting = [
-            (_('Relevance'), 'score desc, metadata_modified desc'),
-            (_('Name Ascending'), 'title_string asc'),
-            (_('Name Descending'), 'title_string desc'),
-            (_('Last Modified'), 'metadata_modified desc')
-    ]
-    %}
 
     {%- call ui.util.call(ui.form, **kwargs) -%}
-        {{ ui.input(query_name, value=query, type="search", placeholder=_('Search...')) }}
-        {{ ui.button(_('Search'), type="submit") }}
+        {{ ui.input(query_name, label=_("Search"), value=query, type="search") }}
+        {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) if sorting }}
+        {{ ui.form_actions(ui.button(_('Search'), type="submit")) }}
+
+        {%- for name, value in hidden_filters -%}
+            {{ ui.hidden_input(name, value=value) }}
+        {%- endfor %}
+
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro facet_item(key, value, label, count, active) -%}
+    {% set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) %}
+
+    {%- call ui.util.call(ui.link, href=url) -%}
+        <div style="display: flex; justify-content: space-between;">
+            <span>{{ label }}</span>
+            <span>{{ "&times;"|safe if active else count }}</span>
+        </div>
     {%- endcall %}
 
+{%- endmacro %}
 
-
-    {%- if fields %}
-        {%- for field_name, field_value in fields %}
-            <input type="hidden" name="{{ field_name }}" value="{{ field_value }}">
-        {%- endfor %}
-    {%- endif %}
-
-    {%- if sorting %}
-        <div class="form-group">
-            <label for="field-order-by">{{ _('Order by') }}</label>
-            {{ ui.select("sort", "field-order-by", label="", options=sorting, selected=sort_by_selected) }}
-            {{ ui.button(_('Go'), type="submit", attrs={"class": "btn btn-secondary"}) }}
-        </div>
-    {%- endif %}
-
-
-    {%- if fields_grouped %}
-        <p {{ ui.util.attrs({"class": "filter-list"}) }}>
-            {%- for field in fields_grouped %}
-                {%- set search_facets_items = search_facets.get(field).items if search_facets and field in search_facets else [] %}
-                <span {{ ui.util.attrs({"class": "facet"}) }}>{{ facet_titles.get(field) }}:</span>
-                {%- for value in fields_grouped[field] %}
-                    <span {{ ui.util.attrs({"class": "filtered pill"}) }}>
-                        {%- if translated_fields and (field,value) in translated_fields -%}
-                            {{ translated_fields[(field,value)] }}
-                        {%- else -%}
-                            {{ h.list_dict_filter(search_facets_items, 'name', 'display_name', value) }}
-                        {%- endif %}
-                        {{ ui.link(_('Remove'), href=remove_field(field, value), **{"class": "remove"}) }}
-                    </span>
-                {%- endfor %}
-            {%- endfor %}
-        </p>
-    {%- endif %}
-
-
+{%- macro facet_group(content, title) -%}
+    {%- call ui.util.call(ui.section) -%}
+        {{ ui.heading(title, level=3) }}
+        {{ content }}
+        {{ ui.divider() }}
+    {%- endcall %}
 {%- endmacro %}

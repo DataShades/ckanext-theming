@@ -34,7 +34,7 @@
 {%- endmacro %}
 
 
-{%- macro tag(content, id, href) -%}
+{%- macro tag(content, href, id) -%}
     <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
 {%- endmacro %}
 

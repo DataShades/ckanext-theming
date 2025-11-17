@@ -95,3 +95,46 @@
         </div>
     </div>
 {%- endmacro %}
+
+{%- macro search_form(query, sorting, sorting_options, query_name="q", sorting_name="sort", active_filters=[] ) -%}
+    {%- set facets = {
+            'fields': fields_grouped,
+            'search': search_facets,
+            'titles': facet_titles,
+            'translated_fields': translated_fields,
+            'remove_field': remove_field }
+    %}
+
+    {%- call ui.util.call(ui.form, **kwargs) -%}
+        <div class="space-y-4">
+            <div>
+                {{ ui.input(query_name, label=_("Search"), value=query, type="search", class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+            </div>
+            {%- if sorting %}
+            <div>
+                {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options, class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+            </div>
+            {%- endif %}
+            <div>
+                {{ ui.form_actions(ui.button(_('Search'), type="submit", class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500")) }}
+            </div>
+        </div>
+
+        {%- if active_filters %}
+            <div class="mt-4 space-y-2">
+                {%- call ui.util.call(ui.listing) -%}
+                    {%- for group, fields in active_filters|groupby(0) -%}
+                        <div class="flex items-center gap-2">
+                            <strong class="text-sm font-medium text-gray-700">{{ group }}:</strong>
+                            {%- for name, value in fields -%}
+                                {{ ui.hidden_input(name, value=value) }}
+                                <del class="text-sm text-gray-500">{{ ui.tag(value, href=h.remove_url_param(name, value)) }}</del>
+                            {%- endfor %}
+                        </div>
+                    {%- endfor %}
+                {%- endcall %}
+            </div>
+        {%- endif %}
+
+    {%- endcall %}
+{%- endmacro %}

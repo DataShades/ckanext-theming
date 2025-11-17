@@ -47,7 +47,7 @@
     <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }} class="img-fluid"></video>
 {%- endmacro %}
 
-{%- macro tag(content, id, href) -%}
+{%- macro tag(content, href, id) -%}
     <a {{ ui.util.attrs(kwargs) }} class="badge bg-primary text-decoration-none" href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
 {%- endmacro %}
 
