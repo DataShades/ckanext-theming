@@ -39,17 +39,14 @@
     {%- endcall %}
 
 
-    {% set close_button = ui.button(_("Close"), attrs={"onclick": "ckan.sandbox().ui.getModal('{modal_id}').close()".format(modal_id=modal_id)}) %}
     {% set form_id = ui.util.id() %}
-    {% set confirm_button = ui.button(_("Confirm"), attrs={"onclick": "window['{form_id}'].submit()".format(form_id=form_id)}) %}
-
-    {%- call ui.util.call(ui.modal, title=_("Confirm"), id=modal_id, footer=close_button + confirm_button) -%}
-        {{ _('Are you sure you want to reset the config?') }}
-
-        {%- call ui.form_block("POST", action=h.url_for('admin.reset_config'), attrs={"id": form_id}) -%}
-
-        {%- endcall %}
+    {%- call ui.form_block("POST", action=h.url_for('admin.reset_config'), attrs={"id": form_id}) -%}
     {%- endcall %}
+
+    {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=form_id) -%}
+        {{ _('Are you sure you want to reset the config?') }}
+    {%- endcall %}
+
 {%- endblock %}
 
 {%- block secondary_content -%}

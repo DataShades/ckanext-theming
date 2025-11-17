@@ -50,6 +50,26 @@
     {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)}) }}
 {%- endmacro %}
 
+{%- macro modal_close(content, id) -%}
+    {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').close()".format(id=id)}) }}
+{%- endmacro %}
+
+{%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label) -%}
+    {%- if not form_id -%}
+        {% set form_id = ui.util.id() %}
+        {%- call ui.form_block("POST", attrs={"id": form_id}) -%}
+        {%- endcall %}
+    {%- endif %}
+
+    {%- set close_button = ui.modal_close(cancel_label or _("Close"), id=id) %}
+    {%- set confirm_button = ui.button(confirm_label or _("Confirm"), attrs={"onclick": "window['{form_id}'].submit()".format(form_id=form_id)}) %}
+
+    {%- call ui.util.call(ui.modal, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) -%}
+        {{ content }}
+    {%- endcall %}
+
+{%- endmacro %}
+
 {%- macro tooltip(content, tooltip) -%}
     <span {{ ui.util.attrs(kwargs) }} title="{{ tooltip }}">{{ content }}</span>
 {%- endmacro %}
