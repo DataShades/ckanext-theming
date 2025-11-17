@@ -4,7 +4,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro accordion_item(title, open=false) -%}
+{%- macro accordion_item(content, title, open=false) -%}
     <div {{ ui.util.attrs(kwargs) }} class="accordion-item">
         <h2 class="accordion-header">
             <button class="accordion-button {{ 'collapsed' if not open }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ title|replace(' ', '-')|lower }}">
@@ -13,7 +13,7 @@
         </h2>
         <div id="collapse-{{ title|replace(' ', '-')|lower }}" class="accordion-collapse collapse {{ 'show' if open }}" data-bs-parent="#accordion-{{ caller().__name__|default('accordion') }}">
             <div class="accordion-body">
-                {{ caller() }}
+                {{ content }}
             </div>
         </div>
     </div>

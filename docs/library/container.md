@@ -21,9 +21,9 @@ Use when you need to present multiple content sections that can be individually 
 
 ```
 {{ ui.accordion_wrapper(
-  ui.accordion_item(title="First Item", open=true) +
-  ui.accordion_item(title="Second Item") +
-  ui.accordion_item(title="Third Item")
+  ui.accordion_item("first content", title="First Item", open=true) +
+  ui.accordion_item("second content", title="Second Item") +
+  ui.accordion_item("third content", title="Third Item")
 ) }}
 ```
 
@@ -51,7 +51,7 @@ Use within an `accordion_wrapper` to create individual expandable sections. Each
 **Example:**
 
 ```
-{% call ui.accordion_item(title="How do I sign up?", open=true) %}
+{% call ui.util.call(ui.accordion_item, title="How do I sign up?", open=true) %}
   <p>Visit our registration page and fill out the form with your details.</p>
 {% endcall %}
 ```

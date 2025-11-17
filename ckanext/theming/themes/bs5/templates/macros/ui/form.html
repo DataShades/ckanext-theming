@@ -36,6 +36,14 @@
     {% endif %}
 {%- endmacro %}
 
+{%- macro field_errors(errors) -%}
+    {%- if errors -%}
+        {%- for error in errors -%}
+            <span>{{ error }}</span><br/>
+        {%- endfor %}
+    {%- endif %}
+{%- endmacro %}
+
 {% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
@@ -106,6 +114,51 @@
     </div>
 {%- endmacro %}
 
+{%- macro markdown(name, id, label="", value="", errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+    {% set popover_id = ui.util.id() %}
+
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">{{ label }}</label>
+        {%- endif %}
+
+        <textarea name="{{ name }}" id="{{ id }}" class="form-control {{ 'is-invalid' if errors else '' }}" rows="5" {{ "required" if required }}>{{ value }}</textarea>
+
+        {%- call ui.util.call(ui.popover_content, title=_("Markdown formatting"), id=popover_id) -%}
+            <p>__Bold text__ or _italic text_</p>
+            <p># title
+                <br>## secondary title
+                <br>### etc
+            </p>
+            <p>* list
+                <br>* of
+                <br>* items
+            </p>
+            <p>http://auto.link.ed/</p>
+            <p>
+                <strong>
+                    <a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'>Full markdown syntax</a>
+                </strong>
+            </p>
+            <p>
+                <strong>Please note:</strong>
+                HTML tags are stripped out for security reasons
+            </p>
+        {%- endcall -%}
+
+        <span class="form-text">
+            You can use {{ ui.popover_handler(_("Markdown formatting"), id=popover_id) }} here
+        </span>
+
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
 {%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
@@ -134,6 +187,11 @@
             {%- endfor %}
         {%- endif %}
     </div>
+{%- endmacro %}
+
+{%- macro submit(value, name) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("name", name) -%}
+    {{ ui.button(value, type="submit", **kwargs) }}
 {%- endmacro %}
 
 {%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}

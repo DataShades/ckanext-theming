@@ -4,7 +4,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro accordion_item(title, open=false) -%}
+{%- macro accordion_item(content, title, open=false) -%}
     <div {{ ui.util.attrs(kwargs) }} class="border border-gray-200 rounded-lg">
         <button class="flex items-center justify-between w-full p-4 text-left text-gray-700 bg-gray-50 rounded-t-lg hover:bg-gray-100 focus:outline-none">
             <span>{{ title }}</span>
@@ -13,7 +13,7 @@
             </svg>
         </button>
         <div class="{{ 'block' if open else 'hidden' }} p-4 border-t border-gray-200">
-            {{ caller() }}
+            {{ content }}
         </div>
     </div>
 {%- endmacro %}

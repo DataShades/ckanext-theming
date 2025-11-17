@@ -86,7 +86,7 @@
         {%- block debug -%}
             {%- if g.debug %}
                 <button onclick="window['debug-modal'].showModal()" accesskey="d" hidden>Debug</button>
-                <dialog id="debug-modal" style="max-width: 90vw; overflow-x: auto;">
+                <dialog id="debug-modal" style="max-width: 90vw; overflow-x: auto;" closedby="any">
                     <pre>
                         {%- debug -%}
                     </pre>

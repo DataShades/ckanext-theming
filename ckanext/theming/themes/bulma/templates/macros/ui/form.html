@@ -117,6 +117,11 @@
     </div>
 {%- endmacro %}
 
+{%- macro submit(value, name) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("name", name) -%}
+    {{ ui.button(value, type="submit", **kwargs) }}
+{%- endmacro %}
+
 {%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 

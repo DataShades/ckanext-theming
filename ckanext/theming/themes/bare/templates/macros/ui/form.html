@@ -70,6 +70,10 @@
     </div>
 {%- endmacro %}
 
+{%- macro submit(value, name) -%}
+    {%- do kwargs.setdefault("attrs", {}).update({"value": value, "name": name}) -%}
+    {{ ui.button(value, type="submit", **kwargs) }}
+{%- endmacro %}
 
 {%- macro markdown(name, id, label, value, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}

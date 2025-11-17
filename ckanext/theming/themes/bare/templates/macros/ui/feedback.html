@@ -46,6 +46,10 @@
     </dialog>
 {%- endmacro %}
 
+{%- macro modal_handler(content, id) -%}
+    {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)}) }}
+{%- endmacro %}
+
 {%- macro tooltip(content, tooltip) -%}
     <span {{ ui.util.attrs(kwargs) }} title="{{ tooltip }}">{{ content }}</span>
 {%- endmacro %}

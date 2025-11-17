@@ -2,7 +2,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item("Config", h.url_for("admin.config")) }}
+    {{ ui.breadcrumb_item(_("Config"), h.url_for("admin.config")) }}
 {%- endblock %}
 
 
@@ -27,21 +27,14 @@
 
             {{ ui.textarea('ckan.site_custom_css', id='field-ckan-site-custom-css', label=_('Custom CSS'), value=data['ckan.site_custom_css'], errors=errors['ckan.site_custom_css'], placeholder=_('Customisable css inserted into the page header')) }}
 
-            {#
-            {% set field_url = 'ckan.site_logo' %}
-            {% set is_upload = data[field_url] and not data[field_url].startswith('http') %}
-            {% set is_url = data[field_url] and data[field_url].startswith('http') %}
-            {{ ui.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, upload_label = _('Site logo'), url_label=_('Site logo'),  field_url=field_url, field_upload='logo_upload', field_clear='clear_logo_upload' )}}
-            #}
-
             {{ ui.input("ckan.site_logo", label="Site logo URL", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = ''; this.form['clear_logo_upload'].checked = true"}) }}
             {{ ui.input("logo_upload", label="Site logo upload", type="file", value=data["logo_upload"], errors=errors["logo_upload"], attrs={"onchange": "this.form['ckan.site_logo'].value = '';"}) }}
 
         {%- endblock %}
 
         {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.button(_('Reset'), attrs={"onclick": "ckan.sandbox().ui.getModal('{modal_id}').show()".format(modal_id=modal_id)}) }}
-            {{ ui.button(_('Update Config'), type="submit", attrs={"name": "save"}) }}
+            {{ ui.modal_handler(_('Reset'), id=modal_id) }}
+            {{ ui.submit(_('Update Config'), name="save") }}
         {%- endcall %}
     {%- endcall %}
 

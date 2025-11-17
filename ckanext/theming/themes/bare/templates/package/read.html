@@ -31,14 +31,14 @@
     {%- call ui.util.call(ui.accordion_wrapper) %}
 
         {%- if pkg_dict.resources %}
-            {%- call ui.accordion_item(_("Resources")) %}
+            {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
                 {%- for res in pkg_dict.resources %}
                     {{ ui.resource_item(res) }}
                 {%- endfor %}
             {%- endcall %}
         {%- endif %}
 
-        {%- call ui.accordion_item(_("Additional details")) %}
+        {%- call ui.util.call(ui.accordion_item, title=_("Additional details")) %}
 
             {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
                 {{ ui.table_head(ui.table_row(cells=[_("Field"), _("Value")], heading=true)) }}

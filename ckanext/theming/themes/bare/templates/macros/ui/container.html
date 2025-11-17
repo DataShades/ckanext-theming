@@ -4,11 +4,11 @@
 {%- endmacro %}
 
 
-{%- macro accordion_item(title, open=false) -%}
+{%- macro accordion_item(content, title, open=false) -%}
     {%- do kwargs -%}
     <details {{ "open" if open }}>
         <summary>{{ title }}</summary>
-        {{ caller() }}
+        {{ content }}
     </details>
 {%- endmacro %}
 

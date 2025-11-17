@@ -10,7 +10,7 @@
 
 
 {% block content_nav %}
-    {{ ui.content_nav_item( _('Sysadmins'), h.url_for('admin.index')) }}
-    {{ ui.content_nav_item(_('Config'), h.url_for('admin.config')) }}
-    {{ ui.content_nav_item(_('Trash'), h.url_for('admin.trash')) }}
+    {{ ui.content_nav_item( _('Sysadmins'), h.url_for('admin.index'), active=request.endpoint == "admin.index") }}
+    {{ ui.content_nav_item(_('Config'), h.url_for('admin.config'), active=request.endpoint == "admin.config") }}
+    {{ ui.content_nav_item(_('Trash'), h.url_for('admin.trash'), active=request.endpoint == "admin.trash") }}
 {% endblock %}

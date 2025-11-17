@@ -12,7 +12,7 @@
     <nav {{ ui.util.attrs(kwargs) }}>{{ content }}</nav>
 {%- endmacro %}
 
-{%- macro nav_item(content, href, active=False) -%}
+{%- macro nav_item(content, href, active) -%}
     {%- if active %}
         <strong>{{ ui.link(content, href, **kwargs) }}</strong>
     {%- else -%}

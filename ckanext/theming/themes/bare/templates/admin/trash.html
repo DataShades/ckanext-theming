@@ -1,1 +1,53 @@
-{% extends "_layout.html" %}
+{% extends "admin/base.html" %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Trash"), h.url_for("admin.trash")) }}
+{%- endblock %}
+
+
+{%- block primary_content_inner -%}
+    {% set modal_id = ui.util.id() %}
+    {{ ui.modal_handler(_('Purge all'), id=modal_id) }}
+
+
+    {% set form_id = ui.util.id() %}
+    {% set close_button = ui.button(_("Close"), attrs={"onclick": "ckan.sandbox().ui.getModal('{modal_id}').close()".format(modal_id=modal_id)}) %}
+    {% set confirm_button = ui.button(_("Confirm"), attrs={"onclick": "window['{form_id}'].submit()".format(form_id=form_id)}) %}
+
+    {%- call ui.util.call(ui.modal, title=_("Confirm"), id=modal_id, footer=close_button + confirm_button) -%}
+        {{ _('Are you sure you want to purge everything?') }}
+        {%- call ui.form_block("POST", attrs={"id": form_id}) -%}
+            <input type="hidden" name="action" value="all">
+        {%- endcall %}
+    {%- endcall %}
+
+    {% for ent_type, entities in data.items() %}
+
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {%- call ui.util.call(ui.accordion_item, title=_('Deleted datasets') if ent_type == 'package' else _('Deleted organizations') if ent_type == 'organization' else _('Deleted groups'), open=true) -%}
+                <ul>
+                    {%- for entity in entities -%}
+                        <li>
+                            {{ ui.link(entity.title or entity.name, h.url_for(entity.type ~ ".read", id=entity.name)) }}
+                        </li>
+                    {%- endfor %}
+                </ul>
+            {%- endcall %}
+        {%- endcall %}
+    {% endfor %}
+
+
+{%- endblock %}
+
+{%- block secondary_content -%}
+    {%- call ui.util.call(ui.section) -%}
+        {{ ui.heading(_("Trash"), level=2) }}
+
+        <div>
+            <p>
+                {{ _("Purge deleted datasets, organizations or groups forever and irreversibly.") }}
+            </p>
+        </div>
+    {%- endcall %}
+{%- endblock %}

@@ -4,14 +4,14 @@
     </div>
 {%- endmacro %}
 
-{%- macro accordion_item(title, open=false) -%}
+{%- macro accordion_item(content, title, open) -%}
     {%- do kwargs -%}
     <div class="panel">
         <p class="panel-heading">
             {{ title }}
         </p>
         <div class="panel-block" style="{{ 'display: block' if open else 'display: none' }}">
-            {{ caller() }}
+            {{ content }}
         </div>
     </div>
 {%- endmacro %}

@@ -111,6 +111,11 @@
     </div>
 {%- endmacro %}
 
+{%- macro submit(value, name) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("name", name) -%}
+    {{ ui.button(value, type="submit", **kwargs) }}
+{%- endmacro %}
+
 {%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
