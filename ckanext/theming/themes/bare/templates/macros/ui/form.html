@@ -1,7 +1,11 @@
-{%- macro form_block(method, action, enctype, include_csrf=true) -%}
+{%- macro form_block() -%}
+    {{ ui.form(caller(), *varargs, **kwargs) }}
+{%- endmacro %}
+
+{%- macro form(content, method, action, enctype, include_csrf=true) -%}
     {{ ui.form_start(method, action, enctype, **kwargs) }}
     {{ h.csrf_input() if include_csrf and method|upper != "GET" }}
-    {{ caller() }}
+    {{ content }}
     {{ ui.form_end() }}
 {%- endmacro %}
 
@@ -50,6 +54,10 @@
         <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }}/>
         {{ ui.field_errors(errors) }}
     </div>
+{%- endmacro %}
+
+{%- macro hidden_input(name, value) -%}
+    <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value }}">
 {%- endmacro %}
 
 {% macro checkbox(name, id, label, value="on", checked=false, errors=[], required=false) %}

@@ -67,7 +67,6 @@
     {%- call ui.util.call(ui.modal, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) -%}
         {{ content }}
     {%- endcall %}
-
 {%- endmacro %}
 
 {%- macro tooltip(content, tooltip) -%}

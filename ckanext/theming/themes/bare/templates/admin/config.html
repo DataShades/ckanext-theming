@@ -39,13 +39,14 @@
     {%- endcall %}
 
 
-    {% set form_id = ui.util.id() %}
-    {%- call ui.form_block("POST", action=h.url_for('admin.reset_config'), attrs={"id": form_id}) -%}
-    {%- endcall %}
+    {%- with form_id = ui.util.id() -%}
+        {{ ui.form(method="POST", action=h.url_for('admin.reset_config'), attrs={"id": form_id}) }}
 
-    {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=form_id) -%}
-        {{ _('Are you sure you want to reset the config?') }}
-    {%- endcall %}
+        {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=form_id) -%}
+            {{ _('Are you sure you want to reset the config?') }}
+        {%- endcall %}
+    {%- endwith %}
+
 
 {%- endblock %}
 

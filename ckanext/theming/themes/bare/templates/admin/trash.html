@@ -1,5 +1,12 @@
 {% extends "admin/base.html" %}
 
+
+{% set titles = {
+"package": _('Deleted datasets'),
+"organization": _('Deleted organizations'),
+"group": _('Deleted groups'),
+} %}
+
 {%- block breadcrumb_content -%}
     {{ super() }}
     {{ ui.breadcrumb_item(_("Trash"), h.url_for("admin.trash")) }}
@@ -7,22 +14,24 @@
 
 
 {%- block primary_content_inner -%}
-    {% set modal_id = ui.util.id() %}
-    {% set form_id = ui.util.id() %}
-    {%- call ui.form_block("POST", attrs={"id": form_id}) -%}
-        <input type="hidden" name="action" value="all">
-    {%- endcall %}
+    {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
+        {{ ui.modal_handler(_('Purge all'), id=modal_id) }}
+        {{ ui.form(ui.hidden_input("action", "all"), method="POST", attrs={"id": form_id}) }}
+        {{ ui.confirm_modal(_('Are you sure you want to purge everything?'), id=modal_id, form_id=form_id) }}
+    {%- endwith %}
 
-    {{ ui.modal_handler(_('Purge all'), id=modal_id) }}
+    {%- call ui.util.call(ui.accordion_wrapper) -%}
+        {%- for ent_type, entities in data.items() -%}
+            {% set entities = entities|list %}
 
-    {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=form_id) -%}
-        {{ _('Are you sure you want to purge everything?') }}
-    {%- endcall %}
+            {%- call ui.util.call(ui.accordion_item, title=titles[ent_type]) -%}
 
-    {% for ent_type, entities in data.items() %}
+                {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
+                    {{ ui.modal_handler(_('Purge'), id=modal_id) }}
+                    {{ ui.form(ui.hidden_input("action", ent_type), method="POST", attrs={"id": form_id}) }}
+                    {{ ui.confirm_modal(_('Are you sure you want to purge everything?'), id=modal_id, form_id=form_id) }}
+                {%- endwith %}
 
-        {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion_item, title=_('Deleted datasets') if ent_type == 'package' else _('Deleted organizations') if ent_type == 'organization' else _('Deleted groups'), open=true) -%}
                 <ul>
                     {%- for entity in entities -%}
                         <li>
@@ -31,8 +40,8 @@
                     {%- endfor %}
                 </ul>
             {%- endcall %}
-        {%- endcall %}
-    {% endfor %}
+        {% endfor %}
+    {%- endcall %}
 
 
 {%- endblock %}
