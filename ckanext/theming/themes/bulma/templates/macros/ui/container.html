@@ -118,3 +118,9 @@
         {{ content }}
     </a>
 {%- endmacro %}
+
+{%- macro listing(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
+        {{ content }}
+    </div>
+{%- endmacro %}

@@ -51,7 +51,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
+{% macro input(name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="mb-3">
@@ -66,7 +66,7 @@
                id="{{ id }}"
                value="{{ value }}"
                class="form-control {{ 'is-invalid' if errors else '' }}"
-               {{ "required" if required }} />
+               {{ "required" if required }} placeholder="{{ placeholder }}" />
         {%- if errors -%}
             {%- for error in errors -%}
                 <div class="invalid-feedback">{{ error }}</div>

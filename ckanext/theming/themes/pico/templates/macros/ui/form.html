@@ -42,7 +42,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
+{% macro input(name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="grid">
@@ -54,7 +54,7 @@
                id="{{ id }}"
                value="{{ value }}"
                class="{{ 'error' if errors }}"
-               {{ "required" if required }}/>
+               {{ "required" if required }} placeholder="{{ placeholder }}"/>
         {%- if errors -%}
             {%- for error in errors -%}
                 <small class="error">{{ error }}</small>

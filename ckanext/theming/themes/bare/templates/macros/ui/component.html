@@ -28,3 +28,64 @@
 
     {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id)) }}
 {%- endmacro %}
+
+
+{%- macro search_form(query, query_name="q") -%}
+    {%- set facets = {
+            'fields': fields_grouped,
+            'search': search_facets,
+            'titles': facet_titles,
+            'translated_fields': translated_fields,
+            'remove_field': remove_field }
+    %}
+    {%- set sorting = [
+            (_('Relevance'), 'score desc, metadata_modified desc'),
+            (_('Name Ascending'), 'title_string asc'),
+            (_('Name Descending'), 'title_string desc'),
+            (_('Last Modified'), 'metadata_modified desc')
+    ]
+    %}
+
+    {%- call ui.util.call(ui.form, **kwargs) -%}
+        {{ ui.input(query_name, value=query, type="search", placeholder=_('Search...')) }}
+        {{ ui.button(_('Search'), type="submit") }}
+    {%- endcall %}
+
+
+
+    {%- if fields %}
+        {%- for field_name, field_value in fields %}
+            <input type="hidden" name="{{ field_name }}" value="{{ field_value }}">
+        {%- endfor %}
+    {%- endif %}
+
+    {%- if sorting %}
+        <div class="form-group">
+            <label for="field-order-by">{{ _('Order by') }}</label>
+            {{ ui.select("sort", "field-order-by", label="", options=sorting, selected=sort_by_selected) }}
+            {{ ui.button(_('Go'), type="submit", attrs={"class": "btn btn-secondary"}) }}
+        </div>
+    {%- endif %}
+
+
+    {%- if fields_grouped %}
+        <p {{ ui.util.attrs({"class": "filter-list"}) }}>
+            {%- for field in fields_grouped %}
+                {%- set search_facets_items = search_facets.get(field).items if search_facets and field in search_facets else [] %}
+                <span {{ ui.util.attrs({"class": "facet"}) }}>{{ facet_titles.get(field) }}:</span>
+                {%- for value in fields_grouped[field] %}
+                    <span {{ ui.util.attrs({"class": "filtered pill"}) }}>
+                        {%- if translated_fields and (field,value) in translated_fields -%}
+                            {{ translated_fields[(field,value)] }}
+                        {%- else -%}
+                            {{ h.list_dict_filter(search_facets_items, 'name', 'display_name', value) }}
+                        {%- endif %}
+                        {{ ui.link(_('Remove'), href=remove_field(field, value), **{"class": "remove"}) }}
+                    </span>
+                {%- endfor %}
+            {%- endfor %}
+        </p>
+    {%- endif %}
+
+
+{%- endmacro %}

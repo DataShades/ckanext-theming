@@ -40,3 +40,8 @@
         <p>{{ content }}</p>
     </div>
 {%- endmacro %}
+
+{%- macro pagination_info(first, last, total, template) -%}
+    {% set template = template | default(_("Records {first} - {last} out of {total}"))  %}
+    {{ template.format(first=first, last=last, total=total) }}
+{%- endmacro %}

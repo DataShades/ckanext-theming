@@ -15,7 +15,7 @@
 {%- macro card(content, title, footer, img, href) -%}
     {%- do kwargs -%}
 
-    <div>
+    <div style="border: 1px solid gray">
         {%- if img -%}
             {{ ui.image(img) }}
         {%- endif %}
@@ -70,6 +70,12 @@
     <section {{ ui.util.attrs(kwargs) }}>
         {{ content }}
     </section>
+{%- endmacro %}
+
+{%- macro listing(content) -%}
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {{ content }}
+    </div>
 {%- endmacro %}
 
 {%- macro jumbotron(content, title, subtitle) -%}

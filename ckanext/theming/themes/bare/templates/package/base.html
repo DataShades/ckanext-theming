@@ -1,13 +1,8 @@
-{% extends "page.html" %}
+{% extends "_layout.html" %}
+{% set _layout = _layout | default("sidebar") %}
 
 {%- block subtitle %}{{ h.humanize_entity_type('package', dataset_type, 'page title') or _('Datasets') }}{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for(dataset_type ~ '.search')) }}
-{%- endblock %}
-
-{%- block secondary_content %}
-    {%- block dataset_facets %}
-        {# Facets will be implemented in search templates using UI macros #}
-    {%- endblock %}
 {%- endblock %}

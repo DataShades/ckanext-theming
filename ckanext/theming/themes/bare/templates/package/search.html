@@ -1,96 +1,39 @@
 {% extends "package/base.html" %}
 
+{%- block page_action %}
+    {{ ui.link(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}
+{%- endblock %}
+
+{%- block page_header -%}
+{%- endblock %}
+
 {%- block primary_content_inner %}
-    {%- block page_primary_action %}
-        {%- if h.check_access('package_create') %}
-            {{ ui.button(_('Add Dataset'), href=h.url_for('dataset.new')) }}
-        {%- endif %}
-    {%- endblock %}
 
-    {%- block search_form %}
-        {%- set facets = {
-            'fields': fields_grouped,
-            'search': search_facets,
-            'titles': facet_titles,
-            'translated_fields': translated_fields,
-            'remove_field': remove_field }
-        %}
-        {%- set sorting = [
-            (_('Relevance'), 'score desc, metadata_modified desc'),
-            (_('Name Ascending'), 'title_string asc'),
-            (_('Name Descending'), 'title_string desc'),
-            (_('Last Modified'), 'metadata_modified desc')
-            ]
-        %}
+    {{ fields }}
 
-        {{ ui.form_start(method="GET", action=h.url_for('dataset.search'), **{"hx-boost": "true", "hx-disinherit": "hx-boost", "class": "search-form"}) }}
+    {{ ui.search_form(q) }}
 
-        <div {{ ui.util.attrs({"class": "input-group"}) }}>
-            {{ ui.input("q", label="", value=q or "", type="search", placeholder=h.humanize_entity_type('package', dataset_type, 'search placeholder') or _('Search datasets...'), attrs={"autocomplete": "off"}) }}
-            {{ ui.button(_('Search'), type="submit", attrs={"class": "btn btn-primary"}) }}
-        </div>
-
-        {%- if fields %}
-            {%- for field_name, field_value in fields %}
-                <input type="hidden" name="{{ field_name }}" value="{{ field_value }}">
-            {%- endfor %}
-        {%- endif %}
-
-        {%- if sorting %}
-            <div class="form-group">
-                <label for="field-order-by">{{ _('Order by') }}</label>
-                {{ ui.select("sort", "field-order-by", label="", options=sorting, selected=sort_by_selected) }}
-                {{ ui.button(_('Go'), type="submit", attrs={"class": "btn btn-secondary"}) }}
-            </div>
-        {%- endif %}
-
-        <h2>
-            {%- if not query_error %}
-                {%- if page.item_count %}
-                    {{ h.paginator_info(page, 'dataset', 'datasets') }}
-                {%- else %}
-                    {{ _('No datasets found') }}
-                {%- endif %}
+    <h2>
+        {%- if not query_error %}
+            {%- if page.item_count %}
+                {{ ui.pagination_info(page.first_item, page.last_item, page.item_count) }}
             {%- else %}
-                {{ _('Error') }}
+                {{ _('No datasets found') }}
             {%- endif %}
-        </h2>
-
-        {%- if fields_grouped %}
-            <p {{ ui.util.attrs({"class": "filter-list"}) }}>
-                {%- for field in fields_grouped %}
-                    {%- set search_facets_items = search_facets.get(field).items if search_facets and field in search_facets else [] %}
-                    <span {{ ui.util.attrs({"class": "facet"}) }}>{{ facet_titles.get(field) }}:</span>
-                    {%- for value in fields_grouped[field] %}
-                        <span {{ ui.util.attrs({"class": "filtered pill"}) }}>
-                            {%- if translated_fields and (field,value) in translated_fields -%}
-                                {{ translated_fields[(field,value)] }}
-                            {%- else -%}
-                                {{ h.list_dict_filter(search_facets_items, 'name', 'display_name', value) }}
-                            {%- endif %}
-                            {{ ui.link(_('Remove'), href=remove_field(field, value), **{"class": "remove"}) }}
-                        </span>
-                    {%- endfor %}
-                {%- endfor %}
-            </p>
+        {%- else %}
+            {{ _('Error') }}
         {%- endif %}
-
-        {{ ui.form_end() }}
-
-    {%- endblock %}
+    </h2>
 
     {%- block package_list %}
         {%- if page.items %}
-            {%- for item in page.items %}
-                {{ ui.package_item(item) }}
-                <hr/>
-            {%- endfor %}
+            {%- call ui.util.call(ui.listing) -%}
+                {%- for item in page.items %}
+                    {{ ui.package_item(item) }}
+                {%- endfor %}
+            {%- endcall %}
         {%- else %}
-            {%- if q %}
-                <p>{{ _('There was an error while searching.') }}</p>
-            {%- else %}
-                <p>{{ _('No datasets found.') }}</p>
-            {%- endif %}
+            <p>{{ _('No datasets found.') }}</p>
         {%- endif %}
     {%- endblock %}
 

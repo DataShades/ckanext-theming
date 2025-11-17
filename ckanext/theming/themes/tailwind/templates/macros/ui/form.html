@@ -42,7 +42,7 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro input(name, id, label="", value="", type="text", errors=[], required=false) -%}
+{% macro input(name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="mb-4">
@@ -57,7 +57,7 @@
                id="{{ id }}"
                value="{{ value }}"
                class="{{ 'border-red-500 focus:border-red-500 focus:ring-red-500' if errors else 'border-gray-300 focus:border-blue-500 focus:ring-blue-500' }} block w-full px-3 py-2 mt-1 border rounded-md shadow-sm sm:text-sm"
-               {{ "required" if required }} />
+               {{ "required" if required }} placeholder="{{ placeholder }}" />
         {%- if errors -%}
             {%- for error in errors -%}
                 <p class="mt-2 text-sm text-red-600">{{ error }}</p>
