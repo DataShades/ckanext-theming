@@ -136,7 +136,7 @@ def analyze_theme(ctx: click.Context, theme_name: str | None):
         templates_path = os.path.join(info.path, "templates")
         if os.path.exists(templates_path):
             click.secho("\nTemplate files:", fg="yellow")
-            for root, dirs, files in os.walk(templates_path):
+            for root, _dirs, files in os.walk(templates_path):
                 for file in files:
                     if file.endswith((".html", ".htm", ".xml")):
                         rel_path = os.path.relpath(os.path.join(root, file), info.path)
@@ -146,7 +146,7 @@ def analyze_theme(ctx: click.Context, theme_name: str | None):
         click.echo(click.style(f"Error: Theme '{theme_name}' not found", fg="red"))
         click.echo("Available themes:")
         themes = lib_theme.collect_themes()
-        for name in themes.keys():
+        for name in themes:
             click.echo(f"  - {name}")
 
 
@@ -290,7 +290,7 @@ def check_theme(theme_name: str | None):
             click.echo(click.style("✓ Assets directory exists", fg="green"))
             # List asset files
             asset_files = []
-            for root, dirs, files in os.walk(assets_dir):
+            for root, _dirs, files in os.walk(assets_dir):
                 for file in files:
                     asset_files.append(os.path.relpath(os.path.join(root, file), assets_dir))
             click.echo(f"  Assets: {len(asset_files)} files")

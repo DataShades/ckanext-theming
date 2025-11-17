@@ -22,7 +22,7 @@ import os
 import uuid
 from collections import defaultdict
 from collections.abc import Iterable, Iterator
-from typing import Any, Protocol, cast
+from typing import Any, Protocol
 
 from jinja2.runtime import Macro
 from markupsafe import Markup
@@ -311,10 +311,11 @@ def switch_theme(name: str, config: Any):
 
     next_name = name
     enabled_themes = {next_name}
-    template_paths = []
     while theme := themes.get(next_name):
-        template_paths.append(os.path.join(theme.path, "templates"))
         relpath = os.path.relpath(theme.path, os.path.dirname(__file__))
+
+        if os.path.isdir(os.path.join(theme.path, "templates")):
+            tk.add_template_directory(config, os.path.join(relpath, "templates"))
 
         if os.path.isdir(os.path.join(theme.path, "assets")):
             tk.add_resource(os.path.join(relpath, "assets"), f"theming/{next_name}")
@@ -335,14 +336,3 @@ def switch_theme(name: str, config: Any):
     else:
         msg = f"Theme '{next_name}' is not recognised."
         raise CkanConfigurationException(msg)
-
-    log.info("Re-loading templates from %s", template_paths)
-
-    if "plugin_template_paths" in config:
-        template_paths = cast(list[str], config["plugin_template_paths"]) + template_paths
-
-    if extra_template_paths := cast(str, config["extra_template_paths"]):
-        # must be first for them to override defaults
-        template_paths = extra_template_paths.split(",") + template_paths
-
-    config["computed_template_paths"] = template_paths

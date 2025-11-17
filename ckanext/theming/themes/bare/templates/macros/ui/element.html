@@ -1,5 +1,5 @@
 {%- macro badge(content) -%}
-    <mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark>
+    <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}
 
 {%- macro button(content, style="primary", type="button") -%}

@@ -1,17 +1,10 @@
-{% extends "page.html" %}
+{% extends "package/read.html" %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    <h1>{{ _('Activity Stream') }}</h1>
-
-    {%- if activities %}
-        <ul>
-            {%- for activity in activities %}
-                <li>{{ activity.activity_type }} - {{ ui.datetime(activity.timestamp) }}</li>
-            {%- endfor %}
-        </ul>
-
-        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
-    {%- else %}
-        <p>{{ _('No activity') }}</p>
-    {%- endif %}
+    {%- include "snippets/activity_stream.html" -%}
 {%- endblock %}

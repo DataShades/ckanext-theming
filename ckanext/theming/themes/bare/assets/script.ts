@@ -58,7 +58,7 @@
 
   class Notification implements INotification {
     constructor(public el: HTMLElement) {}
-    hide() {
+    close() {
       this.el.hidden = true;
     }
     show() {
@@ -68,6 +68,33 @@
       this.el.remove();
     }
   }
+
+  class Tooltip implements ITooltip {
+    constructor(public el: HTMLElement) {}
+    close() {
+      this.el.hidden = true;
+    }
+    show() {
+      this.el.hidden = false;
+    }
+    destroy() {
+      this.el.remove();
+    }
+  }
+  class Popover implements IPopover {
+    constructor(public el: HTMLElement) {}
+    close() {
+      this.el.hidePopover();
+    }
+    show() {
+      document.body.appendChild(this.el);
+      this.el.showPopover();
+    }
+    destroy() {
+      this.el.remove();
+    }
+  }
+
   const ui: IUi = {
     button(content: any, params = {}) {
       const btn = document.createElement("button");
@@ -172,6 +199,39 @@
         return null;
       }
       return new Notification(el);
+    },
+
+    tooltip(content, target, props = {}) {
+      if (typeof content !== "string") {
+        throw "Only string tooltips are supported";
+      }
+      const el = document.createElement("span");
+      el.dataset.tooltip = content;
+      target.insertAdjacentElement("afterend", el);
+
+      return new Tooltip(el);
+    },
+
+    getTooltip(id) {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Tooltip(el);
+    },
+    popover(content, props = {}) {
+      const el = document.createElement("div");
+      el.popover = "auto";
+      el.append(content);
+      return new Popover(el);
+    },
+
+    getPopover(id) {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Popover(el);
     },
   };
 

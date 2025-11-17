@@ -45,11 +45,40 @@
         constructor(el) {
             this.el = el;
         }
-        hide() {
+        close() {
             this.el.hidden = true;
         }
         show() {
             this.el.hidden = false;
+        }
+        destroy() {
+            this.el.remove();
+        }
+    }
+    class Tooltip {
+        constructor(el) {
+            this.el = el;
+        }
+        close() {
+            this.el.hidden = true;
+        }
+        show() {
+            this.el.hidden = false;
+        }
+        destroy() {
+            this.el.remove();
+        }
+    }
+    class Popover {
+        constructor(el) {
+            this.el = el;
+        }
+        close() {
+            this.el.hidePopover();
+        }
+        show() {
+            document.body.appendChild(this.el);
+            this.el.showPopover();
         }
         destroy() {
             this.el.remove();
@@ -136,6 +165,35 @@
                 return null;
             }
             return new Notification(el);
+        },
+        tooltip(content, target, props = {}) {
+            if (typeof content !== "string") {
+                throw "Only string tooltips are supported";
+            }
+            const el = document.createElement("span");
+            el.dataset.tooltip = content;
+            target.insertAdjacentElement("afterend", el);
+            return new Tooltip(el);
+        },
+        getTooltip(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                return null;
+            }
+            return new Tooltip(el);
+        },
+        popover(content, props = {}) {
+            const el = document.createElement("div");
+            el.popover = "auto";
+            el.append(content);
+            return new Popover(el);
+        },
+        getPopover(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                return null;
+            }
+            return new Popover(el);
         },
     };
     ckan.sandbox.setup((sb) => {

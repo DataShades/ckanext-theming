@@ -26,6 +26,13 @@ img {
     max-width: 100%;
 }
 
+:hover+[data-tooltip]:after {
+    content: attr(data-tooltip);
+    padding: 0.5rem;
+    background: #fff;
+    position: absolute;
+}
+
 #account {
     background: var(--account-bg);
     text-align: right;

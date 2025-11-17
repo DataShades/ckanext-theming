@@ -1,1 +1,49 @@
-{% extends "_layout.html" %}
+{% set content_id = ui.util.id() %}
+
+<div id="{{ content_id }}">
+    {{ ui.heading(_('Activity Stream'), level=1) }}
+
+    {%- if activity_stream %}
+        {%- block activity_stream -%}
+            {%- call ui.util.call(ui.activity_stream) -%}
+                {%- for activity in activity_stream %}
+                    {%- block activity_item scoped -%}
+                        {%- call ui.util.call(ui.activity_item, activity=activity) -%}
+                            {{ h.linked_user(activity.user_id) }}
+                            {{ activity.activity_type }}
+
+                            {% if activity.data.package %}
+                                {{ ui.link(activity.data.package.title, h.url_for(activity.data.package.type ~ ".read", id=activity.data.package.name)) }}
+
+                            {% elif activity.data.group %}
+                                {{ ui.link(activity.data.group.title, h.url_for(activity.data.group.type ~ ".read", id=activity.data.group.name)) }}
+
+                            {% endif %}
+
+                            <br/>
+                            {{ h.time_ago_from_timestamp(activity.timestamp) }}
+
+                            {%- if activity.activity_type == "changed package" -%}
+                                {{ ui.link(_("Changes"), h.url_for("activity.package_changes", id=activity.id)) }}
+                            {%- endif %}
+
+                        {%- endcall %}
+                    {%- endblock activity_item %}
+                {%- endfor %}
+            {%- endcall %}
+        {%- endblock activity_stream %}
+
+        {% if newer_activities_url or older_activities_url %}
+            <div hx-boost="true" hx-target="#{{ content_id }}" hx-swap="outerHTML">
+                {{ ui.link(_('Newer activities'), newer_activities_url) if newer_activities_url }}
+                {{ ui.link(_('Older activities'), older_activities_url) if older_activities_url}}
+            </div>
+        {% endif %}
+
+    {%- else %}
+        <p>
+            {{ _('No activity found') }}.
+        </p>
+    {%- endif %}
+
+</div>

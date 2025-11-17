@@ -21,6 +21,10 @@ declare global {
       timeout?: number;
     }
 
+    interface ITooltipParams extends IParams {}
+
+    interface IPopoverParams extends IParams {}
+
     type Content = string | Node;
     type Listener = (this: HTMLElement, e: Event) => any;
     type ComplexListener = {
@@ -68,7 +72,20 @@ declare global {
       props: Theming.INotificationParams,
     ) => INotification;
 
+    popover: (
+      content: Theming.Content,
+      props: Theming.IPopoverParams,
+    ) => IPopover;
+
+    tooltip: (
+      content: Theming.Content,
+      target: HTMLElement,
+      props: Theming.ITooltipParams,
+    ) => ITooltip;
+
     getModal(id: string): IModal | null;
+    getTooltip(id: string): ITooltip | null;
+    getPopover(id: string): IPopover | null;
     getNotification(id: string): INotification | null;
   }
 
@@ -80,7 +97,19 @@ declare global {
   }
   interface INotification<T = HTMLElement> {
     show: () => void;
-    hide: () => void;
+    close: () => void;
+    destroy: () => void;
+    el: T;
+  }
+  interface ITooltip<T = HTMLElement> {
+    show: () => void;
+    close: () => void;
+    destroy: () => void;
+    el: T;
+  }
+  interface IPopover<T = HTMLElement> {
+    show: () => void;
+    close: () => void;
     destroy: () => void;
     el: T;
   }

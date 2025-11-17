@@ -70,3 +70,14 @@
         {{ ui.divider() }}
     {%- endcall %}
 {%- endmacro %}
+
+{%- macro activity_stream(content) -%}
+    {{ ui.listing(content) }}
+{%- endmacro %}
+
+
+{%- macro activity_item(content, activity) -%}
+    <div>
+        {{ content }}
+    </div>
+{%- endmacro %}

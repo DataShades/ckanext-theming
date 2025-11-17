@@ -20,13 +20,12 @@ log = logging.getLogger(__name__)
 
 @tk.blanket.cli
 @tk.blanket.config_declarations
-class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.SingletonPlugin):
+class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
     @override
     def update_config(self, config: Any):
-        # tk.add_template_directory(config, "templates")
-        # tk.add_public_directory(config, "public")
-        # tk.add_resource("assets", "theming")
-        pass
+        if config["ckan.ui.theme"]:
+            switch_theme(config["ckan.ui.theme"], config)
+        UIManager.reset()
 
     @override
     def register_themes(self) -> dict[str, Theme]:
@@ -38,12 +37,6 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IConfigurable, p.IMiddleware, p.Sin
             "bs5": Theme(os.path.join(root, "themes/bs5"), parent="bare"),
             "pico": Theme(os.path.join(root, "themes/pico"), parent="bare"),
         }
-
-    @override
-    def configure(self, config: Any) -> None:
-        if config["ckan.ui.theme"]:
-            switch_theme(config["ckan.ui.theme"], config)
-        UIManager.reset()
 
     @override
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
