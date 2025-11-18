@@ -1,0 +1,39 @@
+{% extends "package/read.html" %}
+
+{% block subtitle %}Changes {{ g.template_title_delimiter }} {{ pkg_dict.title }}{% endblock %}
+
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) }}
+    {{ ui.breadcrumb_item(_("Changes"), h.url_for("activity.package_changes", id=activity_diffs[0].activities[1].id)) }}
+{%- endblock %}
+
+
+{%- block primary_content_inner -%}
+    {{ ui.heading(_("Changes"), level=1) }}
+
+    {% set select_list1 = h.activity_list_select(pkg_activity_list, activity_diffs[-1].activities[0].id) %}
+    {% set select_list2 = h.activity_list_select(pkg_activity_list, activity_diffs[0].activities[1].id) %}
+
+    {% for i in range(activity_diffs|length) %}
+        {% set activity_diff = activity_diffs[i] %}
+        {% set activity = activity_diff.activities[1] %}
+
+        <strong>
+            {{ _('On {timestamp}, {username}:').format(timestamp=h.render_datetime(activity.timestamp, with_hours=True, with_seconds=True), username=h.linked_user(activity.user_id)) }}
+        </strong>
+
+        {% set changes = h.compare_pkg_dicts(activity_diff.activities[0].data.package, activity.data.package, activity_diff.activities[0].id) %}
+        {%- call ui.util.call(ui.listing) -%}
+            {% for change in changes %}
+                {% snippet "snippets/changes/{}.html".format(change.type), change=change, pkg_dict=pkg_dict, dataset_type=activity.data.package.type %}
+            {% endfor %}
+        {%- endcall %}
+
+        {{ ui.accordion_wrapper(ui.accordion_item(activity_diffs[0]['diff']|safe, title=_("Show metadata diff"))) if i == 0 }}
+
+        {{ ui.divider() }}
+    {% endfor %}
+
+{%- endblock %}

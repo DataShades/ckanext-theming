@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Config"), h.url_for("admin.config")) }}
+    {{ ui.breadcrumb_item(_("Confirm Reset"), h.url_for("admin.reset_config")) }}
+{%- endblock %}
+
+
+{%- block primary_content_inner -%}
+    {%- call ui.form_block("POST") -%}
+        <p>{{ _('Are you sure you want to reset the config?') }}</p>
+
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.submit(_('Cancel'), name="cancel") }}
+            {{ ui.submit(_('Confirm Reset'), name="delete") }}
+        {%- endcall %}
+    {%- endcall %}
+
+{%- endblock %}

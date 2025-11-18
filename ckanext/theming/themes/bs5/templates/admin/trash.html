@@ -1,0 +1,59 @@
+{% extends "admin/base.html" %}
+
+
+{% set titles = {
+"package": _('Deleted datasets'),
+"organization": _('Deleted organizations'),
+"group": _('Deleted groups'),
+} %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Trash"), h.url_for("admin.trash")) }}
+{%- endblock %}
+
+
+{%- block primary_content_inner -%}
+    {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
+        {{ ui.modal_handler(_('Purge all'), id=modal_id) }}
+        {{ ui.form(ui.hidden_input("action", "all"), method="POST", attrs={"id": form_id}) }}
+        {{ ui.confirm_modal(_('Are you sure you want to purge everything?'), id=modal_id, form_id=form_id) }}
+    {%- endwith %}
+
+    {%- call ui.util.call(ui.accordion_wrapper) -%}
+        {%- for ent_type, entities in data.items() -%}
+            {% set entities = entities|list %}
+
+            {%- call ui.util.call(ui.accordion_item, title=titles[ent_type]) -%}
+
+                {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
+                    {{ ui.modal_handler(_('Purge'), id=modal_id) }}
+                    {{ ui.form(ui.hidden_input("action", ent_type), method="POST", attrs={"id": form_id}) }}
+                    {{ ui.confirm_modal(_('Are you sure you want to purge everything?'), id=modal_id, form_id=form_id) }}
+                {%- endwith %}
+
+                <ul>
+                    {%- for entity in entities -%}
+                        <li>
+                            {{ ui.link(entity.title or entity.name, h.url_for(entity.type ~ ".read", id=entity.name)) }}
+                        </li>
+                    {%- endfor %}
+                </ul>
+            {%- endcall %}
+        {% endfor %}
+    {%- endcall %}
+
+
+{%- endblock %}
+
+{%- block secondary_content -%}
+    {%- call ui.util.call(ui.section) -%}
+        {{ ui.heading(_("Trash"), level=2) }}
+
+        <div>
+            <p>
+                {{ _("Purge deleted datasets, organizations or groups forever and irreversibly.") }}
+            </p>
+        </div>
+    {%- endcall %}
+{%- endblock %}

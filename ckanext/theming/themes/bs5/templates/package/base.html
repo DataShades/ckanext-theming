@@ -1,10 +1,24 @@
 {% extends "page.html" %}
+{% set _layout = _layout | default("sidebar") %}
 
 {%- block subtitle %}{{ h.humanize_entity_type('package', dataset_type, 'page title') or _('Datasets') }}{% endblock -%}
 
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for('dataset.search')) }}
-    {{ ui.breadcrumb_item(_('Search Datasets'), h.url_for('dataset.search')) }}
+    {%- if pkg_dict and pkg_dict.organization -%}
+        {%- with group_dict=pkg_dict.organization %}
+            {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
+            {{ ui.breadcrumb_item(group_dict.title or group_dict.name, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
+        {%- endwith%}
+
+    {%- else -%}
+        {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for(dataset_type ~ '.search')) }}
+
+    {%- endif %}
+
+    {%- if pkg_dict -%}
+        {{ ui.breadcrumb_item(pkg_dict.title, h.url_for("dataset.read", id=pkg_dict.name)) }}
+    {%- endif %}
+
 {%- endblock -%}
 
 {%- block primary_content %}
@@ -16,16 +30,18 @@
 {%- endblock -%}
 
 {%- block secondary_content %}
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title mb-0">{{ _('Filter Results') }}</h5>
+    {%- if _layout == "sidebar" %}
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">{{ _('Filter Results') }}</h5>
+            </div>
+            <div class="card-body">
+                {%- block dataset_search_filters %}
+                    {% for facet in facet_titles %}
+                        {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet) }}
+                    {% endfor %}
+                {%- endblock %}
+            </div>
         </div>
-        <div class="card-body">
-            {%- block dataset_search_filters %}
-                {% for facet in facet_titles %}
-                    {{ h.snippet('snippets/facet_list.html', title=facet_titles[facet], name=facet) }}
-                {% endfor %}
-            {%- endblock %}
-        </div>
-    </div>
+    {%- endif %}
 {%- endblock -%}

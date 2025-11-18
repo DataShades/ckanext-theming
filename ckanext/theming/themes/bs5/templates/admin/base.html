@@ -3,6 +3,7 @@
 {%- block subtitle %}{{ _('Admin') }}{% endblock -%}
 
 {%- block breadcrumb_content %}
+    {{ super() }}
     {{ ui.breadcrumb_item(_('Admin'), h.url_for('admin.index')) }}
 {%- endblock -%}
 
@@ -20,9 +21,9 @@
             <h5 class="card-title mb-0">{{ _('Administration') }}</h5>
         </div>
         <div class="list-group list-group-flush">
-            {{ ui.nav_item(_('Config'), h.url_for('admin.config'), active=(c.action == 'config')) }}
-            {{ ui.nav_item(_('Trash View'), h.url_for('admin.trash'), active=(c.action == 'trash')) }}
-            {{ ui.nav_item(_('Purge Trash'), h.url_for('admin.purge', confirmed=False), active=false) }}
+            {{ ui.content_nav_item( _('Sysadmins'), h.url_for('admin.index'), active=request.endpoint == "admin.index") }}
+            {{ ui.content_nav_item(_('Config'), h.url_for('admin.config'), active=request.endpoint == "admin.config") }}
+            {{ ui.content_nav_item(_('Trash'), h.url_for('admin.trash'), active=request.endpoint == "admin.trash") }}
         </div>
     </div>
 {%- endblock -%}

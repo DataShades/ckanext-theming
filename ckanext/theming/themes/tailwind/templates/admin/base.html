@@ -3,6 +3,7 @@
 {%- block subtitle %}{{ _('Admin') }}{% endblock -%}
 
 {%- block breadcrumb_content %}
+    {{ super() }}
     {{ ui.breadcrumb_item(_('Admin'), h.url_for('admin.index')) }}
 {%- endblock -%}
 
@@ -16,9 +17,9 @@
     <div class="bg-white rounded-lg shadow p-6 mb-6">
         <h4 class="text-lg font-semibold mb-4">{{ _('Administration') }}</h4>
         <div class="space-y-2">
-            {{ ui.nav_item(_('Config'), h.url_for('admin.config'), active=(c.action == 'config'), class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded") }}
-            {{ ui.nav_item(_('Trash View'), h.url_for('admin.trash'), active=(c.action == 'trash'), class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded") }}
-            {{ ui.nav_item(_('Purge Trash'), h.url_for('admin.purge', confirmed=False), active=false, class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded") }}
+            {{ ui.content_nav_item( _('Sysadmins'), h.url_for('admin.index'), active=request.endpoint == "admin.index") }}
+            {{ ui.content_nav_item(_('Config'), h.url_for('admin.config'), active=request.endpoint == "admin.config") }}
+            {{ ui.content_nav_item(_('Trash'), h.url_for('admin.trash'), active=request.endpoint == "admin.trash") }}
         </div>
     </div>
 {%- endblock -%}
