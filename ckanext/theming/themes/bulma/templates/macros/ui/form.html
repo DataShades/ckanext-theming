@@ -42,12 +42,15 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro input(name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
+{% macro input(content, name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div class="field" {{ ui.util.attrs(kwargs) }}>
         {%- if label -%}
             <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <p class="help">{{ content }}</p>
         {%- endif %}
         <div class="control">
             <input class="input {{ 'is-danger' if errors }}" name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }} placeholder="{{ placeholder }}"/>
@@ -82,12 +85,15 @@
     </div>
 {%- endmacro %}
 
-{%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
+{%- macro textarea(content, name, id, label="", value="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div class="field" {{ ui.util.attrs(kwargs) }}>
         {%- if label -%}
             <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <p class="help">{{ content }}</p>
         {%- endif %}
         <div class="control">
             <textarea class="textarea {{ 'is-danger' if errors }}" name="{{ name }}" id="{{ id }}" {{ "required" if required }}>{{ value }}</textarea>
@@ -100,12 +106,15 @@
     </div>
 {%- endmacro %}
 
-{%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
+{%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div class="field" {{ ui.util.attrs(kwargs) }}>
         {%- if label -%}
             <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <p class="help">{{ content }}</p>
         {%- endif %}
         <div class="control">
             <div class="select {{ 'is-danger' if errors }}">

@@ -74,7 +74,7 @@
 {%- endmacro %}
 
 {%- macro popover_content(content, title, id) -%}
-    <div popover ontoggle="console.log(event.source)" id="{{ id }}">
+    <div popover id="{{ id }}">
         {{ ui.heading(title, level=4) if title }}
         <div>{{ content }}</div>
     </div>
