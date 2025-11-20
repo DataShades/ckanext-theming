@@ -108,11 +108,11 @@
     {%- call ui.util.call(ui.form, **kwargs) -%}
         <div class="space-y-4">
             <div>
-                {{ ui.input(query_name, label=_("Search"), value=query, type="search", class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+                {{ ui.input(name=query_name, label=_("Search"), value=query, type="search", class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
             </div>
             {%- if sorting %}
             <div>
-                {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options, class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
+                {{ ui.select(name=sorting_name, label=_("Order by"), selected=sorting, options=sorting_options, class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500") }}
             </div>
             {%- endif %}
             <div>
@@ -127,7 +127,7 @@
                         <div class="flex items-center gap-2">
                             <strong class="text-sm font-medium text-gray-700">{{ group }}:</strong>
                             {%- for name, value in fields -%}
-                                {{ ui.hidden_input(name, value=value) }}
+                                {{ ui.hidden_input(name=name, value=value) }}
                                 <del class="text-sm text-gray-500">{{ ui.tag(value, href=h.remove_url_param(name, value)) }}</del>
                             {%- endfor %}
                         </div>

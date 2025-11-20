@@ -78,8 +78,8 @@
 
 {%- macro search_form(query, sorting, sorting_options, query_name="q", sorting_name="sort", active_filters=[] ) -%}
     {%- call ui.util.call(ui.form, **kwargs) -%}
-        {{ ui.input(query_name, label=_("Search"), value=query, type="search", class="mb-2") }}
-        {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) if sorting }}
+        {{ ui.input(name=query_name, label=_("Search"), value=query, type="search", class="mb-2") }}
+        {{ ui.select(name=sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) if sorting }}
         {{ ui.form_actions(ui.button(_('Search'), type="submit")) }}
 
         {%- if active_filters %}
@@ -88,7 +88,7 @@
                     <div class="mb-1">
                         <strong>{{ group }}:</strong>
                         {%- for name, value in fields -%}
-                            {{ ui.hidden_input(name, value=value) }}
+                            {{ ui.hidden_input(name=name, value=value) }}
                             <del>{{ ui.tag(value, href=h.remove_url_param(name, value)) }}</del>
                         {%- endfor %}
                     </div>

@@ -1,7 +1,7 @@
 {% set sorting = sorting if sorting else [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
 
 {% block search_input %}
-    {{ ui.input(query_name, label=_("Search"), value=query, type="search") }}
+    {{ ui.input(name=query_name, label=_("Search"), value=query, type="search") }}
 
     {% block search_input_button %}
         {{ ui.button(_('Search'), type="submit") }}

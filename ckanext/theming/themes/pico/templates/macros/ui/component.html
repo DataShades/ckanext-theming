@@ -78,11 +78,11 @@
     {%- call ui.util.call(ui.form, **kwargs) -%}
         <div class="grid">
             <div>
-                {{ ui.input(query_name, label=_("Search"), value=query, type="search") }}
+                {{ ui.input(name=query_name, label=_("Search"), value=query, type="search") }}
             </div>
             {%- if sorting %}
             <div>
-                {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) }}
+                {{ ui.select(name=sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) }}
             </div>
             {%- endif %}
             <div>
@@ -97,7 +97,7 @@
                         <div>
                             <strong>{{ group }}:</strong>
                             {%- for name, value in fields -%}
-                                {{ ui.hidden_input(name, value=value) }}
+                                {{ ui.hidden_input(name=name, value=value) }}
                                 <del>{{ ui.tag(value, href=h.remove_url_param(name, value)) }}</del>
                             {%- endfor %}
                         </div>
