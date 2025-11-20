@@ -30,24 +30,9 @@
 {%- endmacro %}
 
 
-{%- macro search_form(query, sorting, sorting_options, query_name="q", sorting_name="sort", hidden_filters=[] ) -%}
-    {%- set facets = {
-            'fields': fields_grouped,
-            'search': search_facets,
-            'titles': facet_titles,
-            'translated_fields': translated_fields,
-            'remove_field': remove_field }
-    %}
-
+{%- macro search_form(query, sorting, sorting_options, query_error, item_count, first_item_position, last_item_position, facets, facet_titles, active_filters, query_name="q", sorting_name="sort" ) -%}
     {%- call ui.util.call(ui.form, **kwargs) -%}
-        {{ ui.input(query_name, label=_("Search"), value=query, type="search") }}
-        {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) if sorting }}
-        {{ ui.form_actions(ui.button(_('Search'), type="submit")) }}
-
-        {%- for name, value in hidden_filters -%}
-            {{ ui.hidden_input(name, value=value) }}
-        {%- endfor %}
-
+        {%- include "macros/ui/snippets/search_form.html" -%}
     {%- endcall %}
 {%- endmacro %}
 

@@ -4,11 +4,11 @@
     {{ ui.form_start(method="POST", action="", attrs={"class": "dataset-form"}) }}
     {{ h.csrf_input() }}
 
-    {{ ui.input("name", "field-name", label=_('Name'), value=data.name or "", errors=errors.name or []) }}
-    {{ ui.input("title", "field-title", label=_('Title'), value=data.title or "", errors=errors.title or []) }}
-    {{ ui.textarea("notes", "field-notes", label=_('Description'), value=data.notes or "", errors=errors.notes or []) }}
+    {{ ui.input(name="name", id="field-name", label=_('Name'), value=data.name or "", errors=errors.name or []) }}
+    {{ ui.input(name="title", id="field-title", label=_('Title'), value=data.title or "", errors=errors.title or []) }}
+    {{ ui.textarea(name="notes", id="field-notes", label=_('Description'), value=data.notes or "", errors=errors.notes or []) }}
 
-    {{ ui.select("license_id", "field-license",
+    {{ ui.select(name="license_id", id="field-license",
                  label=_('License'),
                  options=h.license_options(),
                  selected=data.license_id) }}

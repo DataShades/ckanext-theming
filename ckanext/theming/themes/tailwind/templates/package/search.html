@@ -41,7 +41,7 @@
         {%- if sorting %}
             <div class="mb-3">
                 <label for="field-order-by" class="block text-sm font-medium text-gray-700">{{ _('Order by') }}</label>
-                {{ ui.select("sort", "field-order-by", options=sorting, selected=sort_by_selected, class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md") }}
+                {{ ui.select(name="sort", id="field-order-by", options=sorting, selected=sort_by_selected, class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md") }}
                 {{ ui.button(_('Go'), type="submit", class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-2 rounded-md ml-2") }}
             </div>
         {%- endif %}

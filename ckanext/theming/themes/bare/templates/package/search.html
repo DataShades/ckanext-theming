@@ -12,34 +12,8 @@
             {"text": _('Last Modified'), "value": "metadata_modified desc"}
     ] %}
 
-    {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields) }}
+    {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item) }}
 
-    {%- call ui.util.call(ui.listing) -%}
-        {%- for key, values in fields_grouped.items() -%}
-            <div>
-                <strong>{{ facet_titles.get(key, key) }}:</strong>
-                {%- for value in values %}
-                    <del>
-                        {%- with label=h.list_dict_filter(search_facets[key]["items"], 'name', 'display_name', value) -%}
-                            {{ ui.link(label, h.remove_url_param(key, value)) }}
-                        {%- endwith %}
-                    </del>
-                {% endfor %}
-            </div>
-
-        {%- endfor %}
-    {%- endcall %}
-    <h2>
-        {%- if not query_error %}
-            {%- if page.item_count %}
-                {{ ui.pagination_info(page.first_item, page.last_item, page.item_count) }}
-            {%- else %}
-                {{ _('No datasets found') }}
-            {%- endif %}
-        {%- else %}
-            {{ _('Error') }}
-        {%- endif %}
-    </h2>
 {%- endblock %}
 
 {%- block primary_content_inner %}

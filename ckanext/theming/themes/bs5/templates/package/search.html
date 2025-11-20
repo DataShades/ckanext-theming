@@ -41,7 +41,7 @@
         {%- if sorting %}
             <div class="mb-3">
                 <label for="field-order-by" class="form-label">{{ _('Order by') }}</label>
-                {{ ui.select("sort", "field-order-by", label="", options=sorting, selected=sort_by_selected, class="form-select") }}
+                {{ ui.select(name="sort", id="field-order-by", label="", options=sorting, selected=sort_by_selected, class="form-select") }}
                 {{ ui.button(_('Go'), type="submit", style="secondary") }}
             </div>
         {%- endif %}

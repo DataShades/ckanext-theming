@@ -42,12 +42,15 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro input(name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
+{% macro input(content, name, id, label="", value="", required=false, placeholder="", type="text", errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <small>{{ content }}</small>
         {%- endif %}
         <input type="{{ type }}"
                name="{{ name }}"
@@ -67,9 +70,12 @@
     <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value }}">
 {%- endmacro %}
 
-{% macro checkbox(name, id, label="", value="on", checked=false, errors=[], required=false) %}
+{% macro checkbox(content, name, id, label="", value="on", checked=false, errors=[], required=false) %}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
+    {%- if content -%}
+        <small>{{ content }}</small>
+    {%- endif %}
     <label {{ ui.util.attrs(kwargs) }} class="">
         <input type="checkbox"
                name="{{ name }}"
@@ -86,12 +92,15 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro textarea(name, id, label="", value="", errors=[], required=false) -%}
+{%- macro textarea(content, name, id, label="", value="", errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <small>{{ content }}</small>
         {%- endif %}
         <textarea name="{{ name }}"
                   id="{{ id }}"
@@ -110,12 +119,15 @@
     {{ ui.button(value, type="submit", **kwargs) }}
 {%- endmacro %}
 
-{%- macro select(name, id, label="", options=[], selected=None, errors=[], required=false) -%}
+{%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="grid">
         {%- if label -%}
             <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <small>{{ content }}</small>
         {%- endif %}
         <select name="{{ name }}"
                 id="{{ id }}"

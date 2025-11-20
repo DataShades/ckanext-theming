@@ -54,7 +54,11 @@
     </div>
 {%- endmacro %}
 
-{%- macro pagination_info(first, last, total, template) -%}
-    {% set template = template | default(_("Records {first} - {last} out of {total}"))  %}
+{%- macro pagination_info(total, first, last, template) -%}
+    {%- if not template and first is undefined or last is undefined -%}
+        {% set template = ungettext("Found {total} result", "Found {total} results", total) %}
+    {%- elif not template -%}
+        {% set template = _("Results {first} - {last} out of {total}")  %}
+    {%- endif -%}
     {{ template.format(first=first, last=last, total=total) }}
 {%- endmacro %}

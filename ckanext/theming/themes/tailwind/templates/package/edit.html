@@ -8,7 +8,7 @@
     {{ ui.input("title", "field-title", label=_('Title'), value=data.title or "", errors=errors.title or []) }}
     {{ ui.textarea("notes", "field-notes", label=_('Description'), value=data.notes or "", errors=errors.notes or []) }}
 
-    {{ ui.select("license_id", "field-license",
+    {{ ui.select(name="license_id", id="field-license",
                  label=_('License'),
                  options=h.license_options(),
                  selected=data.license_id) }}

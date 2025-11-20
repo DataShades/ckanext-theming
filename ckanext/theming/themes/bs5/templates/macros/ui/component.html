@@ -77,14 +77,6 @@
 {%- endmacro %}
 
 {%- macro search_form(query, sorting, sorting_options, query_name="q", sorting_name="sort", active_filters=[] ) -%}
-    {%- set facets = {
-            'fields': fields_grouped,
-            'search': search_facets,
-            'titles': facet_titles,
-            'translated_fields': translated_fields,
-            'remove_field': remove_field }
-    %}
-
     {%- call ui.util.call(ui.form, **kwargs) -%}
         {{ ui.input(query_name, label=_("Search"), value=query, type="search", class="mb-2") }}
         {{ ui.select(sorting_name, label=_("Order by"), selected=sorting, options=sorting_options) if sorting }}
