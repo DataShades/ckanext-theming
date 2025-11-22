@@ -182,6 +182,33 @@
     </div>
 {%- endmacro %}
 
+{%- macro select_block(content, name, id, label="", selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div {{ ui.util.attrs(kwargs) }} class="mb-3">
+        {%- if label -%}
+            <label for="{{ id }}" class="form-label">
+                {{ label }}
+                {%- if required %}<span class="text-danger">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        {%- if content -%}
+            <p class="form-text">{{ content }}</p>
+        {%- endif %}
+        <select name="{{ name }}"
+                id="{{ id }}"
+                class="form-select {{ 'is-invalid' if errors else '' }}"
+                {{ "required" if required }}>
+            {{ caller() }}
+        </select>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <div class="invalid-feedback">{{ error }}</div>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
 {%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 

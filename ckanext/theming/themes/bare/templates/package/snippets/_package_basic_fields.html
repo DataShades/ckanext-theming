@@ -4,83 +4,66 @@
 {% set default_group_type = h.default_group_type('organization') %}
 
 {% block package_basic_fields_title %}
-    {{ ui.input('title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, errors=errors.title) }}
+    {{ ui.input(name='title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, errors=errors.title) }}
 {% endblock %}
 
 {% block package_basic_fields_url %}
-    {{ ui.input('name', label=_('URL'), placeholder=_('eg. my-dataset'), value=data.name, errors=errors.name, required=true) }}
+    {{ ui.input(name='name', label=_('URL'), placeholder=_('eg. my-dataset'), value=data.name, errors=errors.name, required=true) }}
 {% endblock %}
 
 {% block package_basic_fields_custom %}{% endblock %}
 
 {% block package_basic_fields_description %}
-    {{ ui.markdown('notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, errors=errors.notes) }}
+    {{ ui.markdown(name='notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, errors=errors.notes) }}
 {% endblock %}
 
 {% block package_basic_fields_tags %}
-    {{ ui.input('tag_string', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, errors=errors.tags) }}
+    {{ ui.input(name='tag_string', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, errors=errors.tags) }}
 {% endblock %}
 
 {% block package_basic_fields_license %}
-    {{ ui.select(name="license_id", label=_("License"), selected=data.license_id, errors=errors.license_id, options=h.license_options(existing_license_id)) }}
-
-    {{ h.license_options(existing_license_id)|map("dict")|list }}
+    {%- call ui.select_block(name="license_id", label=_("License"), errors=errors.license_id, options=h.license_options(existing_license_id)) -%}
+        {%- for value, text in h.license_options(existing_license_id) -%}
+            <option value="{{ value }}" {{ "selected" if value == data.license_id }}>{{ text }}</option>
+        {%- endfor %}
+    {%- endcall %}
 {% endblock %}
 
 {% block package_basic_fields_org %}
     {# if we have a default group then this wants remembering #}
-    {{ ui.hidden_input("groups__0__id", data.group_id) if data.group_id }}
+    {{ ui.hidden_input(name="groups__0__id", value=data.group_id) if data.group_id }}
 
     {% set organizations_available = h.organizations_available('create_dataset') %}
 
-    {{ organizations_available }}
-    {{ organizations_available|map(attribute="name")|list }}
     {% if organizations_available and h.can_update_owner_org(data, organizations_available) %}
         {% set existing_org = data.owner_org or data.group_id %}
-        {{ ui.select(name="owner_org", label=h.humanize_entity_type('organization', default_group_type, 'default label') or _('Organization'), selected=data.owner_org, errors=errors.owner_org, options=[]) }}
 
-        <div class="form-group control-medium">
+        {%- call ui.select_block(name="owner_org", label=h.humanize_entity_type('organization', default_group_type, 'default label') or _('Organization'), errors=errors.owner_org) -%}
 
-            <div class="controls">
-                <select id="field-organizations" name="owner_org" data-module="autocomplete">
-                    {% if h.check_config_permission('create_unowned_dataset') %}
-                        <option value="" {% if not selected_org and data.id %} selected="selected" {% endif %}>{{ h.humanize_entity_type('organization', default_group_type, 'no label') or _('No Organization') }}</option>
-                    {% endif %}
-                    {% for organization in organizations_available %}
-                        {# get out first org from users list only if there is not an existing org #}
-                        {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
-                        <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.display_name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-        </div>
-    {% endif %}
+            {%- if h.check_config_permission('create_unowned_dataset') -%}
+                <option value="" {{ "selected" if not data.owner_org and data.id }}>
+                    {{- h.humanize_entity_type('organization', default_group_type, 'no label') or _('No Organization') -}}
+                </option>
+            {%- endif %}
+
+            {%- for organization in organizations_available %}
+                <option value="{{ organization.id }}" {{ "selected" if data.owner_org == organization.id }}>
+                    {{- organization.display_name -}}
+                </option>
+            {%- endfor %}
+
+        {%- endcall %}
+    {%- endif %}
 
     {% if data.owner_org or data.group_id or (organizations_available and (current_user.sysadmin or data.get('state', 'draft') == 'draft')) %}
         {% block package_metadata_fields_visibility %}
-            <div class="form-group control-medium">
-                <label for="field-private" class="form-label">{{ _('Visibility') }}</label>
-                <div class="controls">
-                    <select id="field-private" name="private" class="form-control">
-                        {% for option in [('True', _('Private')), ('False', _('Public'))] %}
-                            <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+            {{ ui.select(name="private", label=_("Visibility"), selected=data.private|trim, options=[{"text": _("Private"), "value": "True"}, {"text": _("Public"), "value": "False"}]) }}
         {% endblock %}
     {% endif %}
 
     {% if data.id and h.check_access('package_delete', {'id': data.id}) and data.state != 'active' %}
-        <div class="form-group control-medium">
-            <label for="field-state" class="form-label">{{ _('State') }}</label>
-            <div class="controls">
-                <select class="form-control" id="field-state" name="state">
-                    <option value="active" {% if data.get('state', 'none') == 'active' %} selected="selected" {% endif %}>{{ _('Active') }}</option>
-                    <option value="deleted" {% if data.get('state', 'none') == 'deleted' %} selected="selected" {% endif %}>{{ _('Deleted') }}</option>
-                </select>
-            </div>
-        </div>
+        {{ ui.select(name="state", label=_("State"), selected=data.state, options=[{"text": _("Active"), "value": "active"}, {"text": _("Deleted"), "value": "deleted"}]) }}
+
     {% endif %}
 
 {% endblock %}

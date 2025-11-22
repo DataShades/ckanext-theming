@@ -119,6 +119,30 @@
     {{ ui.button(value, type="submit", **kwargs) }}
 {%- endmacro %}
 
+{%- macro select_block(content, name, id, label="", selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
+        {%- if label -%}
+            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <small>{{ content }}</small>
+        {%- endif %}
+        <select name="{{ name }}"
+                id="{{ id }}"
+                class="{{ 'error' if errors }}"
+                {{ "required" if required }}>
+            {{ caller() }}
+        </select>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <small class="error">{{ error }}</small>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
 {%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 

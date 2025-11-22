@@ -136,6 +136,33 @@
     {{ ui.button(value, type="submit", **kwargs) }}
 {%- endmacro %}
 
+{%- macro select_block(content, name, id, label="", selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div {{ ui.util.attrs(kwargs) }} class="mb-4">
+        {%- if label -%}
+            <label for="{{ id }}" class="block mb-2 text-sm font-medium text-gray-700">
+                {{ label }}
+                {%- if required %}<span class="text-red-500">*</span>{%- endif %}
+            </label>
+        {%- endif %}
+        {%- if content -%}
+            <p class="mt-1 text-sm text-gray-500">{{ content }}</p>
+        {%- endif %}
+        <select name="{{ name }}"
+                id="{{ id }}"
+                class="{{ 'border-red-500 focus:border-red-500 focus:ring-red-500' if errors else 'border-gray-300 focus:border-blue-500 focus:ring-blue-500' }} block w-full px-3 py-2 mt-1 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                {{ "required" if required }}>
+            {{ caller() }}
+        </select>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
 {%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 

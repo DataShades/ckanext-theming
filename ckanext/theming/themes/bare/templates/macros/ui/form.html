@@ -132,18 +132,28 @@
 
 {%- endmacro %}
 
-{%- macro select(content, name, id, label, selected, multiple, options=[], errors=[], required=false) -%}
+{%- macro select_block(content, name, id, label, multiple, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
-    {% set selected = selected if valud is not string and value is iterable else [selected] %}
+    <div>
+        {%- if label -%}
+            <label for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <p>{{ content }}</p>
+        {%- endif %}
 
-    {%- if label -%}
-        <label for="{{ id }}">{{ label }}</label>
-    {%- endif %}
-    {%- if content -%}
-        <p>{{ content }}</p>
-    {%- endif %}
+        <select {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" {{ "required" if required }} {{ "multiple" if multiple }}>
+            {{ caller() }}
+        </select>
 
-    <select {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" {{ "required" if required }} {{ "multiple" if multiple }}>
+        {{ ui.field_errors(errors) }}
+    </div>
+{%- endmacro %}
+
+{%- macro select(content, name, id, label, selected, multiple, options=[], errors=[], required=false) -%}
+    {% set selected = selected if value is not string and value is iterable else [selected] %}
+
+    {%- call ui.select_block(content=content, name=name, id=id, label=label, selected=selected, multiple=multiple, options=options, errors=errors, required=required, **kwargs) -%}
         {%- for option in options %}
             {%- if option is string %}
                 {% set value, text = option, option %}
@@ -156,9 +166,8 @@
 
             <option value="{{ value }}" {{ "selected" if value in selected }}>{{ text }}</option>
         {%- endfor %}
-    </select>
 
-    {{ ui.field_errors(errors) }}
+    {%- endcall %}
 {%- endmacro %}
 
 {%- macro radio(content, name, id, label="", value="on", checked=false, errors=[], required=false) -%}

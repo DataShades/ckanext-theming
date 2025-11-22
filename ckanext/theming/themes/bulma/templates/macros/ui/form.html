@@ -106,6 +106,31 @@
     </div>
 {%- endmacro %}
 
+{%- macro select_block(content, name, id, label="", selected=None, errors=[], required=false) -%}
+    {%- set id = id or "field-" ~ name if name else "" -%}
+
+    <div class="field" {{ ui.util.attrs(kwargs) }}>
+        {%- if label -%}
+            <label class="label" for="{{ id }}">{{ label }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <p class="help">{{ content }}</p>
+        {%- endif %}
+        <div class="control">
+            <div class="select {{ 'is-danger' if errors }}">
+                <select name="{{ name }}" id="{{ id }}" {{ "required" if required }}>
+                    {{ caller() }}
+                </select>
+            </div>
+        </div>
+        {%- if errors -%}
+            {%- for error in errors -%}
+                <p class="help is-danger">{{ error }}</p>
+            {%- endfor %}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
 {%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
 
