@@ -63,7 +63,10 @@
 {%- endmacro %}
 
 {% macro checkbox(content, name, id, label, value="on", checked=false, errors=[], required=false) %}
-    {{ ui.input(content, name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, attrs={"checked": ""}, **kwargs) }}
+    {%- if checked -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
+    {%- endif %}
+    {{ ui.input(content, name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, **kwargs) }}
 {% endmacro %}
 
 {%- macro textarea(content, name, id, label, value, placeholder, errors=[], required=false) -%}

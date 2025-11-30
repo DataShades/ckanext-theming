@@ -2,6 +2,12 @@
 
 {%- block subtitle %}{{ h.humanize_entity_type('package', dataset_type, 'create title') or _('Create Dataset') }}{% endblock %}
 
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Create"), h.url_for(dataset_type ~ ".new")) }}
+{%- endblock %}
+
+
 {%- block primary_content_inner %}
     {{- h.snippet(form_snippet, pkg_dict=pkg_dict, **form_vars) -}}
 {%- endblock %}

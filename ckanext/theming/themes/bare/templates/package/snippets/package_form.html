@@ -1,7 +1,9 @@
 {%- call ui.util.call(ui.form, method="POST") -%}
 
-    {{ ui.hidden_input("_ckan_phase", "dataset_new_1") }}
-    {{ ui.hidden_input("pkg_name", data.id) }}
+    {%- block hidden_fields -%}
+        {{ ui.hidden_input("_ckan_phase", "dataset_new_1") }}
+        {{ ui.hidden_input("pkg_name", data.id) }}
+    {%- endblock %}
 
     {% block errors %}{{ ui.form_errors(error_summary) }}{% endblock %}
 
@@ -10,7 +12,7 @@
     {% endblock %}
 
     {% block metadata_fields %}
-        {% snippet 'package/snippets/package_metadata_fields.html', data=data, errors=errors %}
+        {% snippet 'package/snippets/_package_metadata_fields.html', data=data, errors=errors %}
     {% endblock %}
 
     {% block form_actions %}

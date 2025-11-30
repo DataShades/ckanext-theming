@@ -1,0 +1,25 @@
+{%- macro custom(prefix, extra) -%}
+    <fieldset>
+        <legend>{{ _('Custom Field') }}</legend>
+        {{ ui.input(name=prefix ~ "key", label=_("Key"), value=extra.key, errors=errors[prefix~"key"]) }}
+        {{ ui.input(name=prefix ~ "value", label=_("Value"), value=extra.value, errors=errors[prefix~"value"]) }}
+        {{ ui.button(_("Remove"), style="danger", attrs={"onclick": "this.closest('fieldset').remove()"}) }}
+    </fieldset>
+{%- endmacro %}
+
+<div data-module="custom-fields">
+    {% for extra in extras %}
+        {% set prefix = 'extras__%d__' % loop.index0 %}
+        {{ custom(prefix, extra) }}
+    {% endfor %}
+
+    {% set total_extras = extras|count %}
+    {% set empty_extras = [(limit or 3) - total_extras, 1]|max %}
+
+    {% for index in range(total_extras, total_extras + empty_extras) %}
+        {% set prefix = 'extras__%d__' % index %}
+        {{ custom(prefix, {}) }}
+    {% endfor %}
+
+
+</div>
