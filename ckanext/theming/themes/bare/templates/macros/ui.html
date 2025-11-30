@@ -7,6 +7,7 @@
 {% import "macros/ui/meta.html" as meta with context %}
 {% import "macros/ui/misc.html" as misc with context %}
 {% import "macros/ui/nav.html" as _nav with context %}
+{% import "macros/ui/search.html" as _search with context %}
 
 {% set avatar = avatar | default(element.avatar) %}
 {% set badge = badge | default(element.badge) %}
@@ -101,7 +102,13 @@
 {% set organization_item = organization_item | default(component.organization_item) %}
 {% set package_item = package_item | default(component.package_item) %}
 {% set resource_item = resource_item | default(component.resource_item) %}
-{% set search_form = search_form | default(component.search_form) %}
+{% set search_form = search_form | default(_search.search_form) %}
+{% set search_input = search_input | default(_search.search_input) %}
+{% set search_submit_button = search_submit_button | default(_search.search_submit_button) %}
+{% set search_sort_control = search_sort_control | default(_search.search_sort_control) %}
+{% set search_results_header = search_results_header | default(_search.search_results_header) %}
+{% set search_active_filters = search_active_filters | default(_search.search_active_filters) %}
+{% set search_advanced_controls = search_advanced_controls | default(_search.search_advanced_controls) %}
 {% set facet_group = facet_group | default(component.facet_group) %}
 {% set facet_item = facet_item | default(component.facet_item) %}
 {% set activity_stream = activity_stream | default(component.activity_stream) %}

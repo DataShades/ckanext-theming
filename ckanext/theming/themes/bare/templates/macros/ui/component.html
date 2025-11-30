@@ -30,11 +30,6 @@
 {%- endmacro %}
 
 
-{%- macro search_form(query, sorting, sorting_options, query_error, item_count, first_item_position, last_item_position, facets, facet_titles, active_filters, query_name="q", sorting_name="sort" ) -%}
-    {%- call ui.util.call(ui.form, **kwargs) -%}
-        {%- include "macros/ui/snippets/search_form.html" -%}
-    {%- endcall %}
-{%- endmacro %}
 
 {%- macro facet_item(key, value, label, count, active) -%}
     {% set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) %}

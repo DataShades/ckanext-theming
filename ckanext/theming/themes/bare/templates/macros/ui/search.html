@@ -1,0 +1,90 @@
+{%- macro search_input(name="q", value="", label=_("Search"), placeholder=_("Search...")) -%}
+    {{ ui.input(name=name, label=label, value=value, type="search", placeholder=placeholder) }}
+{%- endmacro %}
+
+{%- macro search_submit_button(label=_("Search")) -%}
+    {{ ui.button(label, type="submit") }}
+{%- endmacro %}
+
+{%- macro search_sort_control(name="sort", selected="", options=[], label=_("Order by")) -%}
+    {{ ui.select(name=name, label=label, selected=selected, options=options) if options }}
+{%- endmacro %}
+
+{%- macro search_results_header(item_count, first_item_position, last_item_position, query_error) -%}
+    {%- call ui.util.call(ui.heading, level=2) -%}
+        {%- if query_error %}
+            {{ _('Error: {error}').format(query_error) }}
+
+        {%- else %}
+            {%- if item_count %}
+                {{ ui.pagination_info(item_count, first_item_position, last_item_position) }}
+            {%- else %}
+                {{ _('No results found') }}
+            {%- endif %}
+
+        {%- endif %}
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro search_active_filters(active_filters, facet_titles, facets) -%}
+    {%- if active_filters -%}
+        {%- call ui.util.call(ui.listing) -%}
+            {%- for key, values in active_filters|groupby(0) -%}
+                <div>
+                    <strong>{{ facet_titles.get(key, key) }}:</strong>
+                    {%- for _, value in values %}
+                        <del>
+                            {%- with label=h.list_dict_filter(facets[key]["items"], 'name', 'display_name', value) -%}
+                                {{ ui.link(label, h.remove_url_param(key, value)) }}
+                            {%- endwith %}
+                        </del>
+                    {% endfor %}
+                </div>
+            {%- endfor %}
+        {%- endcall %}
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro search_advanced_controls() -%}
+{%- endmacro %}
+
+{%- macro search_form(query, sorting, sorting_options, query_error, item_count, first_item_position, last_item_position, facets, facet_titles, active_filters, query_name="q", sorting_name="sort", fields_grouped={}, search_facets={}, translated_fields={}, remove_field={} ) -%}
+    {%- set search_data = {
+            'fields': fields_grouped,
+            'search': search_facets,
+            'titles': facet_titles,
+            'translated_fields': translated_fields,
+            'remove_field': remove_field }
+    %}
+
+    {%- call ui.util.call(ui.form, **kwargs) -%}
+        <div class="search-container">
+            <div class="search-input-section">
+                {{ ui.search_input(name=query_name, value=query) }}
+                {{ ui.search_submit_button() }}
+            </div>
+
+            {%- if active_filters -%}
+                {%- for name, value in active_filters -%}
+                    {{ ui.hidden_input(name, value=value) }}
+                {%- endfor %}
+            {%- endif %}
+
+            <div class="search-sort-section">
+                {{ ui.search_sort_control(name=sorting_name, selected=sorting, options=sorting_options) }}
+            </div>
+
+            <div class="search-results-header">
+                {{ ui.search_results_header(item_count, first_item_position, last_item_position, query_error) }}
+            </div>
+
+            <div class="search-filters-section">
+                {{ ui.search_active_filters(active_filters, facet_titles, facets) }}
+            </div>
+
+            <div class="search-advanced-section">
+                {{ ui.search_advanced_controls() }}
+            </div>
+        </div>
+    {%- endcall %}
+{%- endmacro %}
