@@ -21,5 +21,22 @@
         {{ custom(prefix, {}) }}
     {% endfor %}
 
+    <template id="custom-field-template">
+        {{ custom('extras__TPL__', {}) }}
+    </template>
+    {{ ui.button(_("Add"), data={"index": total_extras + empty_extras}, attrs={"onclick": "
+const tpl = document.getElementById('custom-field-template').content.cloneNode(true);
+tpl.querySelectorAll('input').forEach(el => {
+  el.name = el.name.replace('TPL', this.dataset.index);
+  el.id = el.id.replace('TPL', this.dataset.index);
+})
+tpl.querySelectorAll('label').forEach(el => {
+  el.setAttribute('for', el.getAttribute('for').replace('TPL', this.dataset.index));
+})
+
+++this.dataset.index;
+this.parentNode.insertBefore(tpl, this);
+
+    "}) }}
 
 </div>
