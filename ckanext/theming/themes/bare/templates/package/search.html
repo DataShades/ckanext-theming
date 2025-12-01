@@ -1,4 +1,4 @@
-{% extends "package/base.html" %}
+{% extends "package/_base.html" %}
 
 {%- block page_action %}
     {{ ui.link(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}

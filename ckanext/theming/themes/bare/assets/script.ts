@@ -233,6 +233,11 @@
       }
       return new Popover(el);
     },
+
+    autocomplete(target, props = {}) {
+      // TODO: add module
+      console.error("Autocomplete is not implemented;");
+    },
   };
 
   ckan.sandbox.setup((sb) => {

@@ -25,7 +25,7 @@ components across CKAN instances.
 
 
 Traditional CKAN Theme Implementation
- - Uses template inheritance with base templates (base.html, page.html)
+ - Uses template inheritance with base templates (_base.html, _page.html)
  - Contains inline HTML with CSS framework-specific classes directly in templates
  - Form macros and UI elements are implemented directly as template code with HTML
  - Example: Input elements have direct Bootstrap classes embedded in the macro

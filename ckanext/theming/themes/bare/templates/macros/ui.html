@@ -100,6 +100,7 @@
 {% set extra_field = extra_field | default(_form.extra_field) %}
 {% set extra_field_multiplicator = extra_field_multiplicator | default(_form.extra_field_multiplicator) %}
 {% set extra_fields_collection = extra_fields_collection | default(_form.extra_fields_collection) %}
+{% set autocomplete = autocomplete | default(_form.autocomplete) %}
 
 {% set group_item = group_item | default(component.group_item) %}
 {% set group_list = group_list | default(component.group_list) %}

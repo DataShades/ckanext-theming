@@ -184,7 +184,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro select_block(content, name, id, label, multiple, errors=[], required=false) -%}
+{%- macro select_block(content, name, id, label, multiple, required, autocomplete, errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
     <div>
         {%- if label and id -%}
@@ -202,10 +202,10 @@
     </div>
 {%- endmacro %}
 
-{%- macro select(content, name, id, label, selected, multiple, options=[], errors=[], required=false) -%}
+{%- macro select(content, selected, options=[]) -%}
     {%- set selected = selected if value is not string and value is iterable else [selected] %}
 
-    {%- call ui.select_block(content=content, name=name, id=id, label=label, selected=selected, multiple=multiple, options=options, errors=errors, required=required, **kwargs) -%}
+    {%- call ui.select_block(content, selected=selected, options=options, **kwargs) -%}
         {%- for option in options %}
             {%- if option is string %}
                 {% set value, text = option, option %}
@@ -266,4 +266,8 @@ this.parentNode.insertBefore(tpl, this);
 
         {{- ui.extra_field_multiplicator(max_extras) }}
     </div>
+{%- endmacro %}
+
+{%- macro autocomplete(content, source, multiple, param_name="q", param_template="{value}") -%}
+    {{ ui.input(content, **kwargs) }}
 {%- endmacro %}

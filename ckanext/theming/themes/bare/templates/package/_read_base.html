@@ -1,0 +1,33 @@
+{% extends "package/_base.html" %}
+
+{%- block subtitle %}
+    {{ pkg_dict.title }} {{ g.template_title_delimiter }} {{ super() }}
+
+{% endblock %}
+
+{%- block content_nav %}
+    {%- if pkg_dict -%}
+        {{ ui.content_nav_item(_("Details"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) }}
+        {{ ui.content_nav_item(h.humanize_entity_type('group', h.default_group_type('group'), 'content tab') or _('Groups'), h.url_for(pkg_dict.type ~ ".groups", id=pkg_dict.name)) }}
+        {{ ui.content_nav_item(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) if h.plugin_loaded("activity")}}
+    {%- endif %}
+
+{% endblock -%}
+
+{%- block breadcrumb_content %}
+    {%- if pkg_dict and pkg_dict.organization -%}
+        {%- with group_dict=pkg_dict.organization %}
+            {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
+            {{ ui.breadcrumb_item(group_dict.title or group_dict.name, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
+        {%- endwith%}
+
+    {%- else -%}
+        {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'breadcrumb') or _('Datasets'), h.url_for(dataset_type ~ '.search')) }}
+
+    {%- endif %}
+
+    {%- if pkg_dict -%}
+        {{ ui.breadcrumb_item(pkg_dict.title, h.url_for("dataset.read", id=pkg_dict.name)) }}
+    {%- endif %}
+
+{%- endblock %}

@@ -234,7 +234,7 @@ def check_theme(theme_name: str | None):
             return 1
 
         # Check if essential templates exist
-        essential_templates = ["base.html", "page.html", "_header.html", "_footer.html", "macros/ui.html"]
+        essential_templates = ["_base.html", "_page.html", "_header.html", "_footer.html", "macros/ui.html"]
 
         missing_templates = []
         for template in essential_templates:

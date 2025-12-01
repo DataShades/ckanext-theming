@@ -134,7 +134,7 @@ line. If it uses attributes, use `{{ ui.util.attrs(kwargs) }}`.
 Create custom templates in `themes/your_theme/templates/` to override CKAN's
 default templates. Common templates to override include:
 
-- `base.html` - The main base template
+- `_base.html` - The main base template
 - `home/index.html` - Home page template
 - `package/search.html` - Dataset search page template
 
