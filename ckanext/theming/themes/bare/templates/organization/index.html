@@ -19,7 +19,7 @@
 
         <h2>
             {%- if page.item_count %}
-                {{ h.paginator_info(page, 'organization', 'organizations') }}
+                {{ ui.pagination_info(page.item_count, page.first_item, last_item) }}
             {%- else %}
                 {{ _('No organizations found') }}
             {%- endif %}
@@ -30,11 +30,7 @@
 
     {%- block organization_list %}
         {%- if page.items %}
-            {%- call ui.util.call(ui.organizaation_list) -%}
-                {%- for item in page.items %}
-                    {{ ui.organization_item(item) }}
-                {%- endfor %}
-            {%- endcall %}
+            {{ ui.organization_list(ui.util.map(ui.organization_item, page.items)) }}
         {%- else %}
             {%- if q %}
                 <p>{{ _('There was an error while searching.') }}</p>

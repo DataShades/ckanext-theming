@@ -10,8 +10,7 @@
 
 
 {%- macro table_body(content) -%}
-    {%- do kwargs -%}
-    <tbody>{{ content }}</tbody>
+    <tbody {{ ui.util.attrs(kwargs) }}>{{ content }}</tbody>
 {%- endmacro %}
 
 {%- macro table_row(content, cells=[], heading=false) -%}
@@ -27,9 +26,8 @@
 {%- endmacro %}
 
 {%- macro table_cell(content, heading=false) -%}
-    {%- do kwargs -%}
     {% set tag = "th" if heading else "td" %}
-    <{{ tag }}>
+    <{{ tag }} {{ ui.util.attrs(kwargs) }}>
     {{ content }}
     </{{ tag }}>
 {%- endmacro %}
@@ -62,8 +60,7 @@
 {%- endmacro %}
 
 {%- macro chart(type, data, options) -%}
-    {%- do kwargs -%}
-    <div data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
+    <div {{ ui.util.attrs(kwargs) }} data-chart-type="{{ type }}" data-chart-data="{{ data|tojson }}" data-chart-options="{{ options|tojson if options else '{}' }}">
         Chart placeholder
     </div>
 {%- endmacro %}

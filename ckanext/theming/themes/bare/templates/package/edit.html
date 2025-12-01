@@ -1,19 +1,29 @@
 {% extends "package/edit_base.html" %}
 
-{%- block subtitle %}{{ _("Edit") }}{% endblock %}
+{%- block subtitle -%}
+    {{ _("Edit") }} {{ g.template_title_delimiter }} {{ super() }}
+{%- endblock %}
 
 {%- block content_action %}
     {{ ui.link(_("View"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) }}
 {%- endblock %}
 
-{%- block content_nav %}
-    {{ ui.content_nav_item(_("Edit"), h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) }}
-    {{ ui.nav_item(_('Reorder resources'), h.url_for(pkg_dict.type ~ '.resources', id=pkg_dict.name)) }}
-    {%- if h.check_config_permission('allow_dataset_collaborators') and h.check_access('package_collaborator_create', {'id': pkg_dict.id}) %}
-        {{ ui.nav_item(_('Collaborators'), href=h.url_for(pkg_dict.type ~ '.collaborators_read', id=pkg_dict.name)) }}
-    {%- endif %}
-{%- endblock %}
-
 {%- block primary_content_inner %}
     {{- h.snippet(form_snippet, pkg_dict=pkg_dict, **form_vars) -}}
+{%- endblock %}
+
+
+{%- block secondary_content %}
+    {{ ui.heading(_('Resources'), level=2) }}
+    {%- call ui.util.call(ui.listing) -%}
+        {%- if pkg_dict.resources %}
+            {%- for resource in pkg_dict.resources[:5] %}
+                {{ ui.link(resource.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "_resource.edit", id=pkg_dict.name, resource_id=resource.id)) }}
+            {%- endfor %}
+
+        {%- else %}
+            <p>{{ _('No resources') }}</p>
+        {%- endif %}
+    {%- endcall %}
+
 {%- endblock %}

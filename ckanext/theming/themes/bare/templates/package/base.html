@@ -1,7 +1,12 @@
 {% extends "_layout.html" %}
 {% set _layout = _layout | default("sidebar") %}
 
-{%- block subtitle %}{{ h.humanize_entity_type('package', dataset_type, 'page title') or _('Datasets') }}{% endblock %}
+{%- block subtitle %}
+    {%- if pkg_dict -%}
+        {{ pkg_dict.title }} {{ g.template_title_delimiter }}
+    {%- endif %}
+    {{ h.humanize_entity_type('package', pkg_dict.type if pkg_dict else dataset_type, 'page title') or _('Datasets') }}
+{% endblock %}
 
 {%- block content_nav %}
     {%- if pkg_dict -%}

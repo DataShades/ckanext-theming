@@ -46,13 +46,13 @@
     {{ ui.listing(content) }}
 {%- endmacro %}
 
-{%- macro facet_item(key, value, label, count, active) -%}
-    {% set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) %}
+{%- macro facet_item(facet) -%}
+    {% set url = h.remove_url_param(facet.key, facet.name) if facet.active else h.add_url_param(new_params={key: facet.name}) %}
 
     {%- call ui.util.call(ui.link, href=url) -%}
         <div style="display: flex; justify-content: space-between;">
-            <span>{{ label }}</span>
-            <span>{{ "&times;"|safe if active else count }}</span>
+            <span>{{ facet.display_name }}</span>
+            <span>{{ "&times;"|safe if facet.active else facet.count }}</span>
         </div>
     {%- endcall %}
 

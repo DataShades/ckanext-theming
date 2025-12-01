@@ -6,6 +6,12 @@
     <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
 {%- endmacro %}
 
+{%- macro button_group(content, direction="row") -%}
+    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: {{ direction }}; gap: 0.25rem;">
+        {{- content -}}
+    </div>
+{%- endmacro %}
+
 {%- macro divider() -%}
     <hr {{ ui.util.attrs(kwargs) }}/>
 {%- endmacro %}

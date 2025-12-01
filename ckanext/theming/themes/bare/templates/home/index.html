@@ -37,11 +37,7 @@
                     {{ ui.heading(_('Featured Groups'), level=3) }}
                     {%- set groups = h.get_featured_groups() -%}
                     {%- if groups -%}
-                        {%- call ui.util.call(ui.group_list) -%}
-                            {%- for item in groups -%}
-                                {{ ui.group_item(item) }}
-                            {%- endfor %}
-                        {%- endcall %}
+                        {{ ui.group_list(ui.util.map(ui.group_item, groups)) }}
 
                     {%- else -%}
                         <p>{{ _('A featured group would appear here.') }}</p>
@@ -58,11 +54,7 @@
                     {{ ui.heading(_('Featured Organizations'), level=3) }}
                     {%- set organizations = h.get_featured_organizations() -%}
                     {%- if organizations -%}
-                        {%- call ui.util.call(ui.organization_list) -%}
-                            {%- for item in organizations -%}
-                                {{ ui.organization_item(item) }}
-                            {%- endfor -%}
-                        {%- endcall %}
+                        {{ ui.organization_list(ui.util.map(ui.organization_item, organizations)) }}
 
                     {%- else -%}
                             <p>{{ _('A featured organization would appear here.') }}</p>

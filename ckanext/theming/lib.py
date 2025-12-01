@@ -60,6 +60,7 @@ class Util:
         groups = [
             ("aria", "aria-"),
             ("data", "data-"),
+            ("on", "on"),
             ("attrs", ""),
         ]
 
@@ -94,7 +95,21 @@ class Util:
         """
         return el(caller(), *args, **kwargs)
 
-    def merge(self, *fragments: Markup) -> Markup:
+    def map(self, el: PElement, items: Iterable[Any], /, *args: Any, **kwargs: Any) -> Markup:
+        """Map an element over a collection of items.
+
+        Renders the specified element for each item in the collection and
+        concatenates the results.
+
+        :param el: The element to render for each item.
+        :param items: The collection of items.
+        :param args: Positional arguments to pass to the element.
+        :param kwargs: Named arguments to pass to the element.
+        :return: A Markup object containing the concatenated results.
+        """
+        return self.merge(el(item, *args, **kwargs) for item in items)
+
+    def merge(self, fragments: Iterable[Markup]) -> Markup:
         """Merge multiple Markup fragments into a single Markup object.
 
         :param fragments: Markup fragments to merge.

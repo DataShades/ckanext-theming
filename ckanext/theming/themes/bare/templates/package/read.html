@@ -1,8 +1,6 @@
 {% extends "package/base.html" %}
 {% set _layout = "fullwidth" %}
 
-{%- block subtitle -%}{{ pkg_dict.title }}{%- endblock %}
-
 {%- block content_action %}
     {{ ui.link(_("Manange"), h.url_for(dataset_type ~ ".edit", id=pkg_dict.name)) if h.check_access('package_update', {'id':pkg_dict.id }) }}
 {% endblock -%}
@@ -28,11 +26,7 @@
 
         {%- if pkg_dict.resources %}
             {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
-                {%- call ui.util.call(ui.resource_list) -%}
-                    {%- for res in pkg_dict.resources %}
-                        {{ ui.resource_item(res) }}
-                    {%- endfor %}
-                {%- endcall %}
+                {{ ui.resource_list(ui.util.map(ui.resource_item, pkg_dict.resources)) }}
             {%- endcall %}
         {%- endif %}
 

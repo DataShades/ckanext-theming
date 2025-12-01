@@ -24,12 +24,7 @@
 
     {%- if page.items %}
         <h2>{{ _('Datasets') }}</h2>
-        {%- call ui.util.call(ui.package_list) -%}
-            {%- for item in page.items %}
-                {{ ui.package_item(item) }}
-                <hr/>
-            {%- endfor %}
-        {%- endcall %}
+        {{ ui.package_list(ui.util.map(ui.package_item, page.items)) }}
 
         {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
     {%- else %}
