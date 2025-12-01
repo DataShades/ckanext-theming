@@ -20,7 +20,7 @@
 
     {%- block package_list %}
         {%- if page.items %}
-            {%- call ui.util.call(ui.listing) -%}
+            {%- call ui.util.call(ui.package_list) -%}
                 {%- for item in page.items %}
                     {{ ui.package_item(item) }}
                 {%- endfor %}
@@ -40,7 +40,7 @@
         {%- call ui.util.call(ui.facet_group, facet_titles.get(key, key)) -%}
 
             {% set items = h.get_facet_items_dict(key, search_facets) %}
-            {%- call ui.util.call(ui.listing) -%}
+            {%- call ui.util.call(ui.facet_list) -%}
                 {%- for item in items -%}
                     {{ ui.facet_item(key=key, value=item.name, label=item.display_name, count=item.count, active=item.active) }}
                 {%- endfor %}

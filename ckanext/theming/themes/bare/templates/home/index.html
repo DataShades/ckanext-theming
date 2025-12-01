@@ -35,11 +35,18 @@
             {%- block featured_group %}
                 <div class="featured-group">
                     {{ ui.heading(_('Featured Groups'), level=3) }}
-                    {%- for item in h.get_featured_groups() -%}
-                        {{ ui.group_item(item) }}
-            {%- else -%}
+                    {%- set groups = h.get_featured_groups() -%}
+                    {%- if groups -%}
+                        {%- call ui.util.call(ui.group_list) -%}
+                            {%- for item in groups -%}
+                                {{ ui.group_item(item) }}
+                            {%- endfor %}
+                        {%- endcall %}
+
+                    {%- else -%}
                         <p>{{ _('A featured group would appear here.') }}</p>
-                    {%- endfor %}
+
+                    {%- endif %}
                 </div>
             {%- endblock %}
         {%- endcall %}
@@ -49,11 +56,18 @@
             {%- block featured_organization %}
                 <div class="featured-organization">
                     {{ ui.heading(_('Featured Organizations'), level=3) }}
-                    {%- for item in h.get_featured_organizations() -%}
-                        {{ ui.organization_item(item) }}
-            {%- else -%}
-                        <p>{{ _('A featured organization would appear here.') }}</p>
-                    {%- endfor %}
+                    {%- set organizations = h.get_featured_organizations() -%}
+                    {%- if organizations -%}
+                        {%- call ui.util.call(ui.organization_list) -%}
+                            {%- for item in organizations -%}
+                                {{ ui.organization_item(item) }}
+                            {%- endfor -%}
+                        {%- endcall %}
+
+                    {%- else -%}
+                            <p>{{ _('A featured organization would appear here.') }}</p>
+
+                    {%- endif %}
                 </div>
             {%- endblock %}
         {%- endcall %}

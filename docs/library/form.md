@@ -289,17 +289,3 @@ Renders an HTML range input `<input type="range">` field.
 *   `max` (integer): The maximum value of the range input. Defaults to 100.
 *   `errors` (list): A list of error messages to display. Defaults to `[]`.
 *   `required` (boolean): Whether the range input field is required. Defaults to `false`.
-
-## `toggle_switch`
-
-Renders a toggle switch element.
-
-### Arguments
-
-*   `name` (string): The name attribute for the toggle switch.
-*   `id` (string): The id attribute for the toggle switch. If `name` is provided and `id` is empty, `id` defaults to "field-`name`".
-*   `label` (string): The label text for the toggle switch. Defaults to "".
-*   `value` (string): The value attribute when the switch is on. Defaults to "on".
-*   `checked` (boolean): Whether the toggle switch is initially on. Defaults to `false`.
-*   `errors` (list): A list of error messages to display. Defaults to `[]`.
-*   `required` (boolean): Whether the toggle switch field is required. Defaults to `false`.

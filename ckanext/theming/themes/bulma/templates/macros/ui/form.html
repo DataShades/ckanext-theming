@@ -226,22 +226,3 @@
         {%- endif %}
     </div>
 {%- endmacro %}
-
-{%- macro toggle_switch(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
-
-    <div class="field" {{ ui.util.attrs(kwargs) }}>
-        <div class="control">
-            <label class="checkbox">
-                <input type="checkbox" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }}>
-                <span class="switch"></span>
-                {{ label }}
-            </label>
-        </div>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <p class="help is-danger">{{ error }}</p>
-            {%- endfor %}
-        {%- endif %}
-    </div>
-{%- endmacro %}

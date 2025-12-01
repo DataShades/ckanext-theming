@@ -28,9 +28,11 @@
 
         {%- if pkg_dict.resources %}
             {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
-                {%- for res in pkg_dict.resources %}
-                    {{ ui.resource_item(res) }}
-                {%- endfor %}
+                {%- call ui.util.call(ui.resource_list) -%}
+                    {%- for res in pkg_dict.resources %}
+                        {{ ui.resource_item(res) }}
+                    {%- endfor %}
+                {%- endcall %}
             {%- endcall %}
         {%- endif %}
 

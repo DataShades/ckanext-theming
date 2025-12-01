@@ -53,7 +53,15 @@
         {%- if content -%}
             <p>{{ content }}</p>
         {%- endif %}
-        <input {{ ui.util.attrs(kwargs) }} name="{{ name }}" id="{{ id }}" type="{{ type }}" value="{{ value }}" {{ "required" if required }} placeholder="{{ placeholder }}" />
+        <input
+            {{ ui.util.attrs(kwargs) }}
+            {%- if name %} name="{{ name }}"{% endif %}
+            {%- if id %} id="{{ id }}"{% endif %}
+            {%- if type %} type="{{ type }}"{% endif %}
+            {%- if value %} value="{{ value }}"{% endif %}
+            {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}
+            {%- if required %} required{% endif %}
+        />
         {{ ui.field_errors(errors) }}
     </div>
 {%- endmacro %}
@@ -62,12 +70,42 @@
     <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value }}">
 {%- endmacro %}
 
-{% macro checkbox(content, name, id, label, value="on", checked=false, errors=[], required=false) %}
+{% macro checkbox(content, value="on", checked=false) %}
     {%- if checked -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
     {%- endif %}
-    {{ ui.input(content, name, id=id, label=label, value=value, type="checkbox", errors=errors, required=required, **kwargs) }}
+    {{ ui.input(content, value=value, type="checkbox", **kwargs) }}
 {% endmacro %}
+
+{%- macro radio(content, value="on", checked=false) -%}
+    {%- if checked -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
+    {%- endif %}
+    {{ ui.input(content, value=value, type="radio", **kwargs) }}
+{%- endmacro %}
+
+{%- macro file_input(content, accept, capture, multiple=false) -%}
+    {%- if multiple -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("multiple", true) -%}
+    {%- endif %}
+    {%- if accept -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("accept", accept) -%}
+    {%- endif %}
+    {%- if capture -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("capture", capture) -%}
+    {%- endif %}
+    {{ ui.input(content, type="file", **kwargs) }}
+{%- endmacro %}
+
+{%- macro range_input(content, min_value, max_value) -%}
+    {%- if min_value is defined -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("min", min_value) -%}
+    {%- endif %}
+    {%- if max_value is defined -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("max", max_value) -%}
+    {%- endif %}
+    {{ ui.input(content, type="range", **kwargs) }}
+{%- endmacro %}
 
 {%- macro textarea(content, name, id, label, value, placeholder, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
@@ -79,8 +117,13 @@
         {%- if content -%}
             <p>{{ content }}</p>
         {%- endif %}
-        <textarea {{ ui.util.attrs(kwargs) }} placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" {{ "required" if required }}>{{ value }}</textarea>
-
+        <textarea
+            {{ ui.util.attrs(kwargs) }}
+            {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}
+            {%- if name %} name="{{ name }}"{% endif %}
+            {%- if id %} id="{{ id }}"{% endif %}
+            {%- if required %} required{% endif -%}
+        >{{ value }}</textarea>
         {{ ui.field_errors(errors) }}
     </div>
 {%- endmacro %}
@@ -102,9 +145,15 @@
             <p>{{ content }}</p>
         {%- endif %}
 
-        <textarea {{ ui.util.attrs(kwargs) }} placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" {{ "required" if required }}>{{ value }}</textarea>
-
+        <textarea
+            {{ ui.util.attrs(kwargs) }}
+            {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}
+            {%- if name %} name="{{ name }}"{% endif %}
+            {%- if id %} id="{{ id }}"{% endif %}
+            {%- if required %} required{% endif -%}
+        >{{ value }}</textarea>
         {%- call ui.util.call(ui.popover_content, title=_("Markdown formatting"), id=popover_id) -%}
+            {%- trans -%}
             <p>__Bold text__ or _italic text_</p>
             <p># title
                 <br>## secondary title
@@ -124,21 +173,21 @@
                 <strong>Please note:</strong>
                 HTML tags are stripped out for security reasons
             </p>
+            {%- endtrans %}
         {%- endcall -%}
 
         <span>
-            You can use {{ ui.popover_handler(_("Markdown formatting"), id=popover_id) }} here
+            You can use <strong>{{ ui.popover_handler(_("Markdown formatting"), id=popover_id) }}</strong> here
         </span>
 
         {{ ui.field_errors(errors) }}
     </div>
-
 {%- endmacro %}
 
 {%- macro select_block(content, name, id, label, multiple, errors=[], required=false) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
     <div>
-        {%- if label -%}
+        {%- if label and id -%}
             <label for="{{ id }}">{{ label }}</label>
         {%- endif %}
         {%- if content -%}
@@ -154,7 +203,7 @@
 {%- endmacro %}
 
 {%- macro select(content, name, id, label, selected, multiple, options=[], errors=[], required=false) -%}
-    {% set selected = selected if value is not string and value is iterable else [selected] %}
+    {%- set selected = selected if value is not string and value is iterable else [selected] %}
 
     {%- call ui.select_block(content=content, name=name, id=id, label=label, selected=selected, multiple=multiple, options=options, errors=errors, required=required, **kwargs) -%}
         {%- for option in options %}
@@ -173,61 +222,48 @@
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro radio(content, name, id, label="", value="on", checked=false, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
-
-    {%- if content -%}
-        <p>{{ content }}</p>
-    {%- endif %}
-    <input {{ ui.util.attrs(kwargs) }} type="radio" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }} />
-
-    {%- if label -%}
-        <label for="{{ id }}">{{ label }}</label>
-    {%- endif %}
-
-    {{ ui.field_errors(errors) }}
+{%- macro extra_field(index, data={}, errors={}, name_template='extras__{index}__') -%}
+    {%- set prefix = name_template.format(index=index) -%}
+    <fieldset>
+        <legend>{{ _('Custom Field') }}</legend>
+        {{ ui.input(name=prefix ~ "key", label=_("Key"), value=data.key, errors=errors[prefix~"key"]) }}
+        {{ ui.input(name=prefix ~ "value", label=_("Value"), value=data.value, errors=errors[prefix~"value"]) }}
+        {{ ui.button(_("Remove"), style="danger", attrs={"onclick": "this.closest('fieldset').remove()"}) }}
+    </fieldset>
 {%- endmacro %}
 
-{%- macro file_input(content, name, id, label="", errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
+{%- macro extra_field_multiplicator(index, label=_("Add"), placeholder="TPL") -%}
+    <template id="custom-field-template">
+        {{ ui.extra_field(placeholder) }}
+    </template>
+    {{ ui.button(label, data={"index": index}, attrs={"onclick": "
+const tpl = document.getElementById('custom-field-template').content.cloneNode(true);
+tpl.querySelectorAll('input').forEach(el => {
+  el.name = el.name.replace('TPL', this.dataset.index);
+  el.id = el.id.replace('TPL', this.dataset.index);
+})
+tpl.querySelectorAll('label').forEach(el => {
+  el.setAttribute('for', el.getAttribute('for').replace('TPL', this.dataset.index));
+})
 
-    {%- if content -%}
-        <p>{{ content }}</p>
-    {%- endif %}
-    {%- if label -%}
-        <label for="{{ id }}">{{ label }}</label>
-    {%- endif %}
-
-    <input {{ ui.util.attrs(kwargs) }} type="file" name="{{ name }}" id="{{ id }}" {{ "required" if required }}/>
-
-    {{ ui.field_errors(errors) }}
+++this.dataset.index;
+this.parentNode.insertBefore(tpl, this);
+    "}) }}
 {%- endmacro %}
 
-{%- macro range_input(content, name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
+{%- macro extra_fields_collection(extras=[], errors={}, limit=3) -%}
+    <div data-module="custom-fields">
+        {%- for extra in extras -%}
+            {{ ui.extra_field(index=loop.index0, data=extra, errors=errors) }}
+        {%- endfor %}
 
-    {%- if content -%}
-        <p>{{ content }}</p>
-    {%- endif %}
-    {%- if label -%}
-        <label for="{{ id }}">{{ label }}</label>
-    {%- endif %}
+        {%- set num_extras = extras|count %}
+        {%- set max_extras = [limit - num_extras, 1]|max + num_extras %}
 
-    <input {{ ui.util.attrs(kwargs) }} type="range" name="{{ name }}" id="{{ id }}" value="{{ value }}" min="{{ min }}" max="{{ max }}" {{ "required" if required }}/>
+        {%- for index in range(num_extras, max_extras) -%}
+            {{ ui.extra_field(index=index) }}
+        {%- endfor %}
 
-    {{ ui.field_errors(errors) }}
-{%- endmacro %}
-
-{%- macro toggle_switch(content, name, id, label="", value="on", checked=false, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
-
-    {%- if content -%}
-        <p>{{ content }}</p>
-    {%- endif %}
-    <div class="toggle-switch">
-        <input {{ ui.util.attrs(kwargs) }} type="checkbox" name="{{ name }}" id="{{ id }}" value="{{ value }}" {{ "checked" if checked }} {{ "required" if required }}>
-        <label for="{{ id }}">{{ label }}</label>
+        {{- ui.extra_field_multiplicator(max_extras) }}
     </div>
-
-    {{ ui.field_errors(errors) }}
 {%- endmacro %}

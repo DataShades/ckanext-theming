@@ -30,10 +30,12 @@
 
     {%- block group_list %}
         {%- if page.items %}
-            {%- for item in page.items %}
-                {{ ui.group_item(item) }}
-                <hr/>
-            {%- endfor %}
+            {%- call ui.util.call(ui.group_list) -%}
+                {%- for item in page.items %}
+                    {{ ui.group_item(item) }}
+                {%- endfor %}
+            {%- endcall %}
+
         {%- else %}
             {%- if q %}
                 <p>{{ _('There was an error while searching.') }}</p>

@@ -1,35 +1,50 @@
 {%- macro organization_item(group) -%}
-    {%- do kwargs -%}
     {{ ui.group_item(group, **kwargs) }}
 {%- endmacro %}
 
+{%- macro organization_list(content) -%}
+    {{ ui.listing(content) }}
+{%- endmacro %}
+
 {%- macro group_item(group) -%}
-    {%- do kwargs -%}
     {% set img = group.image_display_url or h.url_for_static('/base/images/placeholder-' ~ ('organization' if group.is_organization else 'group') ~ '.png') %}
     {% set title = group.title or group.name  %}
     {% set body = h.markdown_extract(group.description, 120)|urlize %}
 
-    {{ ui.card(title=title, img=img, body=body, href=h.url_for(('organization' if group.is_organization else 'group') ~ ".read", id=group.name)) }}
+    {{ ui.card(title=title, img=img, body=body, href=h.url_for(('organization' if group.is_organization else 'group') ~ ".read", id=group.name), **kwargs) }}
 {%- endmacro %}
 
 
+{%- macro group_list(content) -%}
+    {{ ui.listing(content) }}
+{%- endmacro %}
+
+
+{%- macro package_list(content) -%}
+    {{ ui.listing(content) }}
+{%- endmacro %}
+
 {%- macro package_item(pkg) -%}
-    {%- do kwargs -%}
     {% set title = pkg.title or pkg.name  %}
     {% set body = h.markdown_extract(pkg.notes, 120)|urlize %}
 
-    {{ ui.card(title=title, body=body, href=h.url_for(pkg.type ~ ".read", id=pkg.name)) }}
+    {{ ui.card(title=title, body=body, href=h.url_for(pkg.type ~ ".read", id=pkg.name), **kwargs) }}
+{%- endmacro %}
+
+{%- macro resource_list(content) -%}
+    {{ ui.listing(content) }}
 {%- endmacro %}
 
 {%- macro resource_item(res) -%}
-    {%- do kwargs -%}
     {% set title = res.name  %}
     {% set body = h.markdown_extract(res.description, 120)|urlize %}
 
-    {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id)) }}
+    {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id), **kwargs) }}
 {%- endmacro %}
 
-
+{%- macro facet_list(content) -%}
+    {{ ui.listing(content) }}
+{%- endmacro %}
 
 {%- macro facet_item(key, value, label, count, active) -%}
     {% set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) %}
@@ -57,7 +72,5 @@
 
 
 {%- macro activity_item(content, activity) -%}
-    <div>
-        {{ content }}
-    </div>
+    {{ ui.listing_item(content) }}
 {%- endmacro %}

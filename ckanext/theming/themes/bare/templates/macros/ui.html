@@ -96,12 +96,18 @@
 {% set radio = radio | default(_form.radio) %}
 {% set file_input = file_input | default(_form.file_input) %}
 {% set range_input = range_input | default(_form.range_input) %}
-{% set toggle_switch = toggle_switch | default(_form.toggle_switch) %}
+{% set extra_field = extra_field | default(_form.extra_field) %}
+{% set extra_field_multiplicator = extra_field_multiplicator | default(_form.extra_field_multiplicator) %}
+{% set extra_fields_collection = extra_fields_collection | default(_form.extra_fields_collection) %}
 
 {% set group_item = group_item | default(component.group_item) %}
+{% set group_list = group_list | default(component.group_list) %}
 {% set organization_item = organization_item | default(component.organization_item) %}
+{% set organization_list = organization_list | default(component.organization_list) %}
 {% set package_item = package_item | default(component.package_item) %}
+{% set package_list = package_list | default(component.package_list) %}
 {% set resource_item = resource_item | default(component.resource_item) %}
+{% set resource_list = resource_list | default(component.resource_list) %}
 {% set search_form = search_form | default(_search.search_form) %}
 {% set search_input = search_input | default(_search.search_input) %}
 {% set search_submit_button = search_submit_button | default(_search.search_submit_button) %}
@@ -111,5 +117,6 @@
 {% set search_advanced_controls = search_advanced_controls | default(_search.search_advanced_controls) %}
 {% set facet_group = facet_group | default(component.facet_group) %}
 {% set facet_item = facet_item | default(component.facet_item) %}
+{% set facet_list = facet_list | default(component.facet_list) %}
 {% set activity_stream = activity_stream | default(component.activity_stream) %}
 {% set activity_item = activity_item | default(component.activity_item) %}

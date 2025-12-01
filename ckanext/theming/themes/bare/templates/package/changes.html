@@ -27,7 +27,10 @@
         {% set changes = h.compare_pkg_dicts(activity_diff.activities[0].data.package, activity.data.package, activity_diff.activities[0].id) %}
         {%- call ui.util.call(ui.listing) -%}
             {% for change in changes %}
-                {% snippet "snippets/changes/{}.html".format(change.type), change=change, pkg_dict=pkg_dict, dataset_type=activity.data.package.type %}
+                {%- call ui.util.call(ui.listing_item) -%}
+                    {% snippet "snippets/changes/{}.html".format(change.type), change=change, pkg_dict=pkg_dict, dataset_type=activity.data.package.type %}
+                {%- endcall %}
+
             {% endfor %}
         {%- endcall %}
 

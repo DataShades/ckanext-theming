@@ -30,7 +30,7 @@
     {%- if active_filters -%}
         {%- call ui.util.call(ui.listing) -%}
             {%- for key, values in active_filters|groupby(0) -%}
-                <div>
+                {%- call ui.util.call(ui.listing_item) -%}
                     <strong>{{ facet_titles.get(key, key) }}:</strong>
                     {%- for _, value in values %}
                         <del>
@@ -39,7 +39,7 @@
                             {%- endwith %}
                         </del>
                     {% endfor %}
-                </div>
+                {%- endcall %}
             {%- endfor %}
         {%- endcall %}
     {%- endif %}
