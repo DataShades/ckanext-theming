@@ -48,10 +48,12 @@
 {% set listing_item = listing_item | default(_container.listing_item) %}
 {% set container = container | default(_container.container) %}
 {% set grid = grid | default(_container.grid) %}
-{% set panel = panel | default(_container.panel) %}
 {% set row = row | default(_container.row) %}
 {% set section = section | default(_container.section) %}
 {% set sidebar_section = sidebar_section | default(_container.sidebar_section) %}
+{% set panel = panel | default(_container.panel) %}
+{% set panel_handle = panel_handle | default(_container.panel_handle) %}
+{% set panel_wrapper = panel_wrapper | default(_container.panel_wrapper) %}
 
 {% set header_block = header_block | default(meta.header_block) %}
 {% set footer_block = footer_block | default(meta.footer_block) %}

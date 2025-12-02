@@ -54,6 +54,8 @@
             {%- for label, endpoint in items %}
                 {{ ui.main_nav_item(label, h.url_for(endpoint), active=request.endpoint == endpoint) }}
             {%- endfor %}
+            {{ ui.main_nav_item(_("Statistics"), h.url_for("stats.index"), active=request.endpoint == "stats.index") if h.plugin_loaded("stats") }}
+
         {%- endcall %}
     {%- endcall %}
 {%- endblock %}

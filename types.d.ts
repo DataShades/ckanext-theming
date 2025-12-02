@@ -39,7 +39,9 @@ declare global {
     /**
      *
      */
-    interface ITooltipParams extends IParams {}
+      interface ITooltipParams extends IParams {
+          position?: "top"|"bottom"|"left"|"right";
+      }
 
     /**
      *

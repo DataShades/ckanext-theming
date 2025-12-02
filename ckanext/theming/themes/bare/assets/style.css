@@ -25,6 +25,9 @@ dialog::backdrop {
 img {
     max-width: 100%;
 }
+.card-image {
+    max-height: 200px;
+}
 
 [data-tooltip] {
     position: relative;
@@ -45,51 +48,68 @@ img {
     box-shadow: 0.25rem 0.25rem 0.25rem;
 }
 
-[data-tooltip][data-tooltip-top]:hover:before {
+[data-tooltip][data-tooltip-position="top"]:hover:before {
     top: 0;
     left: 50%;
     transform: translate(-50%, calc(-100% - 0.5rem));
 }
-[data-tooltip][data-tooltip-top]:hover:after {
+[data-tooltip][data-tooltip-position="top"]:hover:after {
     border-top-color: #fff;
     top: 0;
     left: 50%;
     transform: translate(-50%, calc(-100% + 0.5rem));
 }
-[data-tooltip][data-tooltip-bottom]:hover:before {
+[data-tooltip][data-tooltip-position="bottom"]:hover:before {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, calc(100% + 0.5rem));
 }
-[data-tooltip][data-tooltip-bottom]:hover:after {
+[data-tooltip][data-tooltip-position="bottom"]:hover:after {
     border-bottom-color: #fff;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, calc(100% - 0.5rem));
 }
-[data-tooltip][data-tooltip-left]:hover:before {
+[data-tooltip][data-tooltip-position="left"]:hover:before {
     top: 50%;
     left: 0;
     transform: translate(calc(-100% - 0.5rem), -50%);
 }
-[data-tooltip][data-tooltip-left]:hover:after {
+[data-tooltip][data-tooltip-position="left"]:hover:after {
     border-left-color: #fff;
     top: 50%;
     left: 0;
     transform: translate(calc(-100% + 0.5rem), -50%);
 }
-[data-tooltip][data-tooltip-right]:hover:before {
+[data-tooltip][data-tooltip-position="right"]:hover:before {
     top: 50%;
     right: 0;
     transform: translate(calc(100% + 0.5rem), -50%);
 }
-[data-tooltip][data-tooltip-right]:hover:after {
+[data-tooltip][data-tooltip-position="right"]:hover:after {
     border-right-color: #fff;
     top: 50%;
     right: 0;
     transform: translate(calc(100% - 0.5rem), -50%);
 }
 
+.tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+.tabs > a {
+    display: inline-block;
+    padding: 0.25rem;
+    border-bottom: 2px solid black;
+}
+.tabs > a:hover{
+    background: rgb(230 230 230 / 0.5);
+}
+.tabs > a.active {
+    font-weight: bold;
+}
 
 #account {
     background: var(--account-bg);

@@ -205,11 +205,9 @@
       if (typeof content !== "string") {
         throw "Only string tooltips are supported";
       }
-      const el = document.createElement("span");
-      el.dataset.tooltip = content;
-      target.insertAdjacentElement("afterend", el);
-
-      return new Tooltip(el);
+      target.dataset.tooltip = content;
+      target.dataset.tooltipPosition = props.position || "bottom";
+      return new Tooltip(target);
     },
 
     getTooltip(id) {

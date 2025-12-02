@@ -30,15 +30,16 @@
 {%- macro content_nav_item(content, href, active) -%}{{ ui.tab_item(content, href, active, **kwargs) }}{%- endmacro %}
 
 {%- macro tab_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.25rem;">
+    <div {{ ui.util.attrs(kwargs) }} class="tabs">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro tab_item(content, href, active) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="padding: 0.25rem; border-bottom: 2px solid black; {{ 'font-weight: bold;' if active }}">
-        {{ ui.link(content, href) }}
-    </div>
+    {%- if active -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
+    {%- endif %}
+    {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
 
 {%- macro menu_wrapper(content) -%}

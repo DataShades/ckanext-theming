@@ -108,6 +108,56 @@
     <a {{ ui.util.attrs(kwargs) }} href="#" class="list-group-item list-group-item-action {{ 'active' if active }}">{{ content }}</a>
 {%- endmacro %}
 
+{%- macro column(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="col">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro grid(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="row">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro panel_wrapper(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="accordion">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro panel(content, title, id, open) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button {{ 'collapsed' if not open }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ id or ui.util.id() }}">
+                {{ title }}
+            </button>
+        </h2>
+        <div id="collapse-{{ id or ui.util.id() }}" class="accordion-collapse collapse {{ 'show' if open }}" data-bs-parent="#accordion-{{ caller().__name__|default('accordion') }}">
+            <div class="accordion-body">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro panel_handle(content, id) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="accordion-header">
+        <button class="accordion-button {{ 'collapsed' if not open }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ id or ui.util.id() }}">
+            {{ content }}
+        </button>
+    </div>
+{%- endmacro %}
+
+{%- macro listing_item(content) -%}
+    <div {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro sidebar_section(content, title) -%}
+    <section {{ ui.util.attrs(kwargs) }} class="mb-4">
+        <h4 class="mb-3">{{ title }}</h4>
+        {{ content }}
+    </section>
+{%- endmacro %}
+
 {%- macro listing(content) -%}
     <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
         {{ content }}

@@ -46,23 +46,24 @@
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="grid">
-        {%- if label -%}
-            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- if label and id -%}
+            <label for="{{ id }}">{{ label }}</label>
         {%- endif %}
         {%- if content -%}
-            <small>{{ content }}</small>
+            <div>
+                <sub>{{ content }}</sub>
+            </div>
         {%- endif %}
-        <input type="{{ type }}"
-               name="{{ name }}"
-               id="{{ id }}"
-               value="{{ value }}"
-               class="{{ 'error' if errors }}"
-               {{ "required" if required }} placeholder="{{ placeholder }}"/>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <small class="error">{{ error }}</small>
-            {%- endfor %}
-        {%- endif %}
+        <input
+            {{ ui.util.attrs(kwargs) }}
+            {%- if name %} name="{{ name }}"{% endif %}
+            {%- if id %} id="{{ id }}"{% endif %}
+            {%- if type %} type="{{ type }}"{% endif %}
+            {%- if value %} value="{{ value }}"{% endif %}
+            {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}
+            {%- if required %} required{% endif %}
+        />
+        {{ ui.field_errors(errors) }}
     </div>
 {%- endmacro %}
 
@@ -96,21 +97,21 @@
     {%- set id = id or "field-" ~ name if name else "" -%}
 
     <div {{ ui.util.attrs(kwargs) }} class="grid">
-        {%- if label -%}
-            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- if label and id -%}
+            <label for="{{ id }}">{{ label }}</label>
         {%- endif %}
         {%- if content -%}
-            <small>{{ content }}</small>
+            <div>
+                <sub>{{ content }}</sub>
+            </div>
         {%- endif %}
-        <textarea name="{{ name }}"
-                  id="{{ id }}"
-                  class="{{ 'error' if errors }}"
-                  {{ "required" if required }}>{{ value }}</textarea>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <small class="error">{{ error }}</small>
-            {%- endfor %}
-        {%- endif %}
+        <textarea
+            {{ ui.util.attrs(kwargs) }}
+            {%- if name %} name="{{ name }}"{% endif %}
+            {%- if id %} id="{{ id }}"{% endif %}
+            {%- if required %} required{% endif -%}
+        >{{ value }}</textarea>
+        {{ ui.field_errors(errors) }}
     </div>
 {%- endmacro %}
 
@@ -119,119 +120,122 @@
     {{ ui.button(value, type="submit", **kwargs) }}
 {%- endmacro %}
 
-{%- macro select_block(content, name, id, label="", selected=None, errors=[], required=false) -%}
+{%- macro select_block(content, name, id, label, multiple, required, autocomplete, errors=[]) -%}
     {%- set id = id or "field-" ~ name if name else "" -%}
-
     <div {{ ui.util.attrs(kwargs) }} class="grid">
-        {%- if label -%}
-            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
+        {%- if label and id -%}
+            <label for="{{ id }}">{{ label }}</label>
         {%- endif %}
         {%- if content -%}
-            <small>{{ content }}</small>
+            <div>
+                <sub>{{ content }}</sub>
+            </div>
         {%- endif %}
-        <select name="{{ name }}"
-                id="{{ id }}"
-                class="{{ 'error' if errors }}"
-                {{ "required" if required }}>
+
+        <select name="{{ name }}" id="{{ id }}" {{ "required" if required }} {{ "multiple" if multiple }}>
             {{ caller() }}
         </select>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <small class="error">{{ error }}</small>
-            {%- endfor %}
-        {%- endif %}
+
+        {{ ui.field_errors(errors) }}
     </div>
 {%- endmacro %}
 
-{%- macro select(content, name, id, label="", options=[], selected=None, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
+{%- macro select(content, selected, options=[]) -%}
+    {%- set selected = selected if value is not string and value is iterable else [selected] %}
 
-    <div {{ ui.util.attrs(kwargs) }} class="grid">
-        {%- if label -%}
-            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
-        {%- endif %}
-        {%- if content -%}
-            <small>{{ content }}</small>
-        {%- endif %}
-        <select name="{{ name }}"
-                id="{{ id }}"
-                class="{{ 'error' if errors }}"
-                {{ "required" if required }}>
-            {%- for option in options %}
-                {%- if option is string %}
-                    <option value="{{ option }}" {{ "selected" if option == selected }}>{{ option }}</option>
-                {%- else %}
-                    <option value="{{ option.value }}" {{ "selected" if option.value == selected }}>{{ option.text or option.value }}</option>
-                {%- endif %}
-            {%- endfor %}
-        </select>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <small class="error">{{ error }}</small>
-            {%- endfor %}
-        {%- endif %}
-    </div>
-{%- endmacro %}
+    {%- call ui.select_block(content, selected=selected, options=options, **kwargs) -%}
+        {%- for option in options %}
+            {%- if option is string %}
+                {% set value, text = option, option %}
 
-{%- macro radio(name, id, label="", value="on", checked=false, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
+            {%- else -%}
+                {% set value = option.value %}
+                {% set text = option.text or option.value %}
 
-    <label {{ ui.util.attrs(kwargs) }} class="">
-        <input type="radio"
-               name="{{ name }}"
-               id="{{ id }}"
-               value="{{ value }}"
-               {{ "checked" if checked }}
-               {{ "required" if required }} />
-        {{ label }}{{ '*' if required }}
-    </label>
-    {%- if errors -%}
-        {%- for error in errors -%}
-            <small class="error">{{ error }}</small>
+            {%- endif %}
+
+            <option value="{{ value }}" {{ "selected" if value in selected }}>{{ text }}</option>
         {%- endfor %}
+
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro radio(content, value="on", checked=false) -%}
+    {%- if checked -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
+    {%- endif -%}
+    {{ ui.input(content, value=value, type="radio", **kwargs) }}
+{%- endmacro %}
+
+{%- macro file_input(content, accept, capture, multiple=false) -%}
+    {%- if multiple -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("multiple", true) -%}
     {%- endif %}
+    {%- if accept -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("accept", accept) -%}
+    {%- endif %}
+    {%- if capture -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("capture", capture) -%}
+    {%- endif %}
+    {{ ui.input(content, type="file", **kwargs) }}
 {%- endmacro %}
 
-{%- macro file_input(name, id, label="", errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
+{%- macro range_input(content, min_value, max_value) -%}
+    {%- if min_value is defined -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("min", min_value) -%}
+    {%- endif %}
+    {%- if max_value is defined -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("max", max_value) -%}
+    {%- endif %}
+    {{ ui.input(content, type="range", **kwargs) }}
+{%- endmacro %}
 
-    <div {{ ui.util.attrs(kwargs) }} class="grid">
-        {%- if label -%}
-            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
-        {%- endif %}
-        <input type="file"
-               name="{{ name }}"
-               id="{{ id }}"
-               class="{{ 'error' if errors }}"
-               {{ "required" if required }}/>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <small class="error">{{ error }}</small>
-            {%- endfor %}
-        {%- endif %}
+{%- macro extra_field(index, data={}, errors={}, name_template='extras__{index}__') -%}
+    {%- set prefix = name_template.format(index=index) -%}
+    <fieldset>
+        <legend>{{ _('Custom Field') }}</legend>
+        {{ ui.input(name=prefix ~ "key", label=_("Key"), value=data.key, errors=errors[prefix~"key"]) }}
+        {{ ui.input(name=prefix ~ "value", label=_("Value"), value=data.value, errors=errors[prefix~"value"]) }}
+        {{ ui.button(_("Remove"), style="danger", attrs={"onclick": "this.closest('fieldset').remove()"}) }}
+    </fieldset>
+{%- endmacro %}
+
+{%- macro extra_field_multiplicator(index, label=_("Add"), placeholder="TPL") -%}
+    <template id="custom-field-template">
+        {{ ui.extra_field(placeholder) }}
+    </template>
+    {{ ui.button(label, data={"index": index}, attrs={"onclick": "
+const tpl = document.getElementById('custom-field-template').content.cloneNode(true);
+tpl.querySelectorAll('input').forEach(el => {
+  el.name = el.name.replace('TPL', this.dataset.index);
+  el.id = el.id.replace('TPL', this.dataset.index);
+})
+tpl.querySelectorAll('label').forEach(el => {
+  el.setAttribute('for', el.getAttribute('for').replace('TPL', this.dataset.index));
+})
+
+++this.dataset.index;
+this.parentNode.insertBefore(tpl, this);
+    "}) }}
+{%- endmacro %}
+
+{%- macro extra_fields_collection(extras=[], errors={}, limit=3) -%}
+    <div data-module="custom-fields">
+        {%- for extra in extras -%}
+            {{ ui.extra_field(index=loop.index0, data=extra, errors=errors) }}
+        {%- endfor %}
+
+        {%- set num_extras = extras|count %}
+        {%- set max_extras = [limit - num_extras, 1]|max + num_extras %}
+
+        {%- for index in range(num_extras, max_extras) -%}
+            {{ ui.extra_field(index=index) }}
+        {%- endfor %}
+
+        {{- ui.extra_field_multiplicator(max_extras) }}
     </div>
 {%- endmacro %}
 
-{%- macro range_input(name, id, label="", value=0, min=0, max=100, errors=[], required=false) -%}
-    {%- set id = id or "field-" ~ name if name else "" -%}
-
-    <div {{ ui.util.attrs(kwargs) }} class="grid">
-        {%- if label -%}
-            <label for="{{ id }}">{{ label }}{{ '*' if required }}</label>
-        {%- endif %}
-        <input type="range"
-               name="{{ name }}"
-               id="{{ id }}"
-               value="{{ value }}"
-               min="{{ min }}"
-               max="{{ max }}"
-               class="{{ 'error' if errors }}"
-               {{ "required" if required }} />
-        <output for="{{ id }}">{{ value }}</output>
-        {%- if errors -%}
-            {%- for error in errors -%}
-                <small class="error">{{ error }}</small>
-            {%- endfor %}
-        {%- endif %}
-    </div>
+{%- macro autocomplete(content, source, multiple, param_name="q", param_template="{value}") -%}
+    {{ ui.input(content, **kwargs) }}
 {%- endmacro %}

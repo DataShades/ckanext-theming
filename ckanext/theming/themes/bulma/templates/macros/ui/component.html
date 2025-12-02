@@ -19,24 +19,99 @@
     </div>
 {%- endmacro %}
 
-{%- macro organization_item(organization) -%}
+{%- macro organization_item(group) -%}
+    {{ ui.group_item(group, **kwargs) }}
+{%- endmacro %}
+
+{%- macro organization_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro group_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro package_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro resource_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro user_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro user_item(user) -%}
     <div class="box" {{ ui.util.attrs(kwargs) }}>
         <article class="media">
-            <div class="media-left">
-                <figure class="image is-64x64">
-                    {{ ui.image(organization.image_display_url if organization.image_display_url else h.url_for_static('/base/images/placeholder-organization.png'), alt=organization.title) }}
-                </figure>
-            </div>
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong>{{ ui.link(organization.title or organization.name, href=h.url_for('organization.read', id=organization.name)) }}</strong>
+                        <strong>{{ ui.link(user.display_name, href=h.url_for('user.read', id=user.name)) }}</strong>
                         <br>
-                        <small>{{ h.markdown_extract(organization.description, 180) if organization.description else '' }}</small>
+                        <small>{{ user.about if user.about }}</small>
                     </p>
                 </div>
             </div>
         </article>
+    </div>
+{%- endmacro %}
+
+{%- macro facet_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro facet_item(facet, key) -%}
+    {%- set title = facet.display_name or facet.name %}
+    {%- set count = facet.count %}
+    {%- set href = h.remove_url_param(key, facet.name) if facet.active else h.add_url_param(new_params={key: facet.name}) %}
+
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ ui.link(title ~ ' (' ~ count ~ ')', href=href, class="has-text-weight-normal" if not facet.active else "has-text-weight-normal active") }}
+    </div>
+{%- endmacro %}
+
+{%- macro facet_group(content, title) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>
+        <div class="box-header">
+            <h3 class="title is-5">{{ title }}</h3>
+        </div>
+        <div class="box-body">
+            {{ content }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro activity_stream(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro activity_item(content, activity) -%}
+    <div class="box" {{ ui.util.attrs(kwargs) }}>
+        <div class="content">
+            {{ content }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro license(content, id, url) -%}
+    <a {{ ui.util.attrs(kwargs) }} href="{{ url }}" rel="dc:rights" class="is-size-7">
+        <span>{{ content }}</span>
+    </a>
+{%- endmacro %}
+
+{%- macro content_action_item(content, href) -%}
+    <div class="level is-mobile" {{ ui.util.attrs(kwargs) }}>
+        <div class="level-left">
+            {{ content }}
+        </div>
+        <div class="level-right">
+            <a href="{{ href }}" class="level-item has-text-grey">
+                <i class="fa fa-ellipsis-v"></i>
+            </a>
+        </div>
     </div>
 {%- endmacro %}
 

@@ -148,6 +148,13 @@
     </nav>
 {%- endmacro %}
 
+{%- macro main_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro main_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro account_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro account_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_wrapper(content) -%}{{ ui.tab_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_item(content, href, active) -%}{{ ui.tab_item(content, href, active, **kwargs) }}{%- endmacro %}
+
 {%- macro breadcrumb_divider() -%}
     {%- do kwargs -%}
     <li class="breadcrumb-item active" aria-current="page">/</li>

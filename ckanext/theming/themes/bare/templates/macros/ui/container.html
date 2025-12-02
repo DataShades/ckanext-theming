@@ -15,7 +15,7 @@
 
     <div {{ ui.util.attrs(kwargs) }} style="border: 1px solid gray" >
         {%- if img -%}
-            {{ ui.image(img) }}
+            {{ ui.image(img, attrs={"class": "card-image"}) }}
         {%- endif %}
 
         <strong>
@@ -56,10 +56,29 @@
     </div>
 {%- endmacro %}
 
-{%- macro panel(content, title) -%}
+{%- macro panel_wrapper(content) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("id", ui.util.id())-%}
+    <script>
+     window.addEventListener("hashchange", event => {
+         const hash = window.location.hash.slice(1);
+         const wrapper = document.getElementById("{{ kwargs.attrs.id }}");
+         wrapper.querySelectorAll(`[data-panel]`).forEach(el => el.hidden = hash ? el.dataset.panel !== hash : !el.dataset.panelDefault);
+     })
+     document.addEventListener("DOMContentLoaded", () => window.dispatchEvent(new Event("hashchange")));
+    </script>
     <div {{ ui.util.attrs(kwargs) }}>
         {{ content }}
     </div>
+{%- endmacro %}
+
+{%- macro panel(content, title, id, open) -%}
+    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id }}" {{ 'data-panel-default="true"' if open else "hidden" }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro panel_handle(content, id) -%}
+    {{ ui.link(content, href="#" ~ id, **kwargs) }}
 {%- endmacro %}
 
 {%- macro section(content) -%}

@@ -1,1 +1,127 @@
-{% extends "_layout.html" %}
+{% extends "_page.html" %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_('Statistics'), href=h.url_for("stats.index")) }}
+{%- endblock %}
+
+{% block secondary_content %}
+    {%- call ui.util.call(ui.sidebar_section, title=_('Statistics Menu')) -%}
+        {%- call ui.util.call(ui.listing) -%}
+            {%- call ui.util.call(ui.listing_item) -%}
+                {{ ui.panel_handle(_('Total Number of Datasets'), id="stats-total-datasets") }}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.listing_item) -%}
+                {{ ui.panel_handle(_('Dataset Revisions per Week'), id="stats-dataset-revisions") }}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.listing_item) -%}
+                {{ ui.panel_handle(_('Most Edited Datasets'), id="stats-most-edited") }}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.listing_item) -%}
+                {{ ui.panel_handle(_('Largest Groups'), id="stats-largest-groups") }}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.listing_item) -%}
+                {{ ui.panel_handle(_('Top Tags'), id="stats-top-tags") }}
+            {%- endcall %}
+
+            {% if top_package_creators %}
+                {%- call ui.util.call(ui.listing_item) -%}
+                    {{ ui.panel_handle(_('Users Creating Most Datasets'), id="stats-most-create") }}
+                {%- endcall %}
+            {% endif %}
+        {%- endcall %}
+    {%- endcall %}
+
+{% endblock %}
+
+{%- block primary_content_inner -%}
+
+    {%- call ui.util.call(ui.panel_wrapper) -%}
+        {%- call ui.util.call(ui.panel, open=true, id="stats-total-datasets") -%}
+            {{ ui.heading(_('Total number of Datasets'), level=2) }}
+            {%- call ui.util.call(ui.table, striped=true) -%}
+                {{ ui.table_head(ui.table_row(cells=[_("Date"), _("Total datasets")], heading=true)) }}
+                {%- call ui.util.call(ui.table_body) -%}
+                    {% for row in raw_packages_by_week %}
+                        {{ ui.table_row(cells=[ui.datetime(row.date), row.total_packages]) }}
+                    {% endfor %}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.panel, id="stats-dataset-revisions") -%}
+            {{ ui.heading(_('Dataset Revisions per Week'), level=2) }}
+            {%- call ui.util.call(ui.table, striped=true) -%}
+                {{ ui.table_head(ui.table_row(cells=[_("Date"), _("All dataset revisions"), _("New datasets")], heading=true)) }}
+                {%- call ui.util.call(ui.table_body) -%}
+                    {% for row in raw_all_package_revisions %}
+                        {{ ui.table_row(cells=[ui.datetime(row.date), row.total_revisions, raw_new_datasets[loop.index0].new_packages]) }}
+                    {% endfor %}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.panel, id="stats-most-edited") -%}
+            {{ ui.heading(_('Most Edited Datasets'), level=2) }}
+            {% if most_edited_packages %}
+                {%- call ui.util.call(ui.table, striped=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_('Dataset'), _('Number of edits')], heading=true)) }}
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {% for package, edits in most_edited_packages %}
+                            {{ ui.table_row(cells=[ui.link(package.title or package.name, href=h.url_for('dataset.read', id=package.name)), edits]) }}
+                        {% endfor %}
+                    {%- endcall %}
+                {%- endcall %}
+            {% else %}
+                <p>{{ _('No edited datasets') }}</p>
+            {% endif %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.panel, id="stats-largest-groups") -%}
+            {{ ui.heading(_('Largest Groups'), level=2) }}
+            {% if largest_groups %}
+                {%- call ui.util.call(ui.table, striped=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_('Group'), _('Number of datasets') ], heading=true)) }}
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {% for group, num_packages in largest_groups %}
+                            {{ ui.table_row(cells=[ui.link(group.title or group.name, href=h.url_for(controller=group.type, action='read', id=group.name)), num_packages]) }}
+                        {% endfor %}
+                    {%- endcall %}
+                {%- endcall %}
+            {% else %}
+                <p>{{ _('No groups') }}</p>
+            {% endif %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.panel, id="stats-top-tags") -%}
+            {{ ui.heading(_('Top Tags'), level=2) }}
+            {%- call ui.util.call(ui.table, striped=true) -%}
+                {{ ui.table_head(ui.table_row(cells=[_('Tag Name'), _('Number of Datasets') ], heading=true)) }}
+                {%- call ui.util.call(ui.table_body) -%}
+                    {% for tag, num_packages in top_tags %}
+                        {{ ui.table_row(cells=[ui.link(tag.name, href=h.url_for('dataset.search', tags=tag.name)), num_packages]) }}
+                    {% endfor %}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endcall %}
+
+        {% if top_package_creators %}
+            {%- call ui.util.call(ui.panel, id="stats-most-create") -%}
+                {{ ui.heading(_('Users Creating Most Datasets'), level=2) }}
+                {%- call ui.util.call(ui.table, striped=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_('User'), _('Number of Datasets')], heading=true)) }}
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {% for user, num_packages in top_package_creators %}
+                            {{ ui.table_row(cells=[h.linked_user(user), num_packages]) }}
+                        {% endfor %}
+                    {%- endcall %}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endif -%}
+
+    {%- endcall %}
+{%- endblock %}

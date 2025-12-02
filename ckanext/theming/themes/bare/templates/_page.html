@@ -11,12 +11,10 @@
 
     {%- block zone_toolbar %}
         {%- block breadcrumb %}
-            <div id="breadcrumb">
-                {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-                    {{ ui.breadcrumb_item("Home", h.url_for("home.index"), is_first=true) }}
-                    {%- block breadcrumb_content %}{% endblock %}
-                {%- endcall %}
-            </div>
+            {%- call ui.util.call(ui.breadcrumb_wrapper, attrs={"id": "breadcrumb"}) -%}
+                {{ ui.breadcrumb_item("Home", h.url_for("home.index"), is_first=true) }}
+                {%- block breadcrumb_content %}{% endblock %}
+            {%- endcall %}
         {%- endblock breadcrumb %}
     {%- endblock %}
 
