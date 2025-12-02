@@ -119,6 +119,48 @@
     </a>
 {%- endmacro %}
 
+{%- macro grid(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="columns">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content, span={}) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="column">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro panel_wrapper(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="panel">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro panel(content, title, id, open) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="panel-block">
+        <p class="panel-heading">{{ title }}</p>
+        <div class="{{ 'is-active' if open }}">
+            {{ content }}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro panel_handle(content, id) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="panel-heading">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro listing_item(content) -%}
+    <div {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro sidebar_section(content, title) -%}
+    <section {{ ui.util.attrs(kwargs) }} class="section">
+        <h4 class="title is-4">{{ title }}</h4>
+        {{ content }}
+    </section>
+{%- endmacro %}
+
 {%- macro listing(content) -%}
     <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
         {{ content }}

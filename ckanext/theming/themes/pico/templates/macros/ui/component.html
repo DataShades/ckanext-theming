@@ -16,22 +16,83 @@
     </article>
 {%- endmacro %}
 
-{%- macro organization_item(organization) -%}
+{%- macro organization_item(group) -%}
+    {{ ui.group_item(group, **kwargs) }}
+{%- endmacro %}
+
+{%- macro organization_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro group_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro package_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro resource_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro user_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro user_item(user) -%}
     <article {{ ui.util.attrs(kwargs) }} class="card">
-        <div class="grid">
-            {%- if organization.image_display_url %}
-                <img src="{{ organization.image_display_url }}" alt="{{ organization.title }}" width="64" height="64">
-            {%- else %}
-                <img src="{{ h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ organization.title }}" width="64" height="64">
-            {%- endif %}
-            <div class="flow">
-                <h3>
-                    {{ ui.link(organization.title or organization.name, href=h.url_for('organization.read', id=organization.name)) }}
-                </h3>
-                <p>{{ h.markdown_extract(organization.description, 180) if organization.description else '' }}</p>
-            </div>
+        <div class="flow">
+            <h3>{{ ui.link(user.display_name, href=h.url_for('user.read', id=user.name)) }}</h3>
+            <p>{{ user.about if user.about }}</p>
         </div>
     </article>
+{%- endmacro %}
+
+{%- macro facet_list(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro facet_item(facet, key) -%}
+    {%- set title = facet.display_name or facet.name %}
+    {%- set count = facet.count %}
+    {%- set href = h.remove_url_param(key, facet.name) if facet.active else h.add_url_param(new_params={key: facet.name}) %}
+
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ ui.link(title ~ ' (' ~ count ~ ')', href=href, class="text-decoration-none" if not facet.active else "text-decoration-none active") }}
+    </div>
+{%- endmacro %}
+
+{%- macro facet_group(content, title) -%}
+    <article {{ ui.util.attrs(kwargs) }} class="card">
+        <h3>{{ title }}</h3>
+        <div>{{ content }}</div>
+    </article>
+{%- endmacro %}
+
+{%- macro activity_stream(content) -%}
+    {{ ui.listing(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro activity_item(content, activity) -%}
+    <article {{ ui.util.attrs(kwargs) }} class="card">
+        <div>{{ content }}</div>
+    </article>
+{%- endmacro %}
+
+{%- macro license(content, id, url) -%}
+    <a {{ ui.util.attrs(kwargs) }} href="{{ url }}" rel="dc:rights">
+        <span>{{ content }}</span>
+    </a>
+{%- endmacro %}
+
+{%- macro content_action_item(content, href) -%}
+    <div {{ ui.util.attrs(kwargs) }} style="display: flex; justify-content: space-between; align-items: center;">
+        {{ content }}
+        <a href="{{ href }}" class="secondary" style="margin-left: auto;">
+            <i class="fa fa-ellipsis-v"></i>
+        </a>
+    </div>
 {%- endmacro %}
 
 {%- macro package_item(pkg) -%}
