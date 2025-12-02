@@ -1,17 +1,14 @@
-{% extends "_page.html" %}
+{% extends base_template %}
+
 
 {%- block primary_content_inner %}
-    <h1>{{ _('Resource History') }}</h1>
+    {%- block package_archive_notice -%}
+        {%- call ui.util.call(ui.alert, style="danger") -%}
+            {{ _("You're currently viewing an old version of this dataset. Data files may not match the old version of the metadata.") }}
+            <a href="{{ h.url_for(pkg.type ~ '.read', id=pkg.id) }}">{{ _("View the current version") }}</a>
+        {%- endcall %}
+    {%- endblock %}
 
-    {%- if history %}
-        <ul>
-            {%- for record in history %}
-                <li>{{ record.timestamp }} - {{ record.operation }}</li>
-            {%- endfor %}
-        </ul>
+    {{ super() }}
 
-        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
-    {%- else %}
-        <p>{{ _('No history') }}</p>
-    {%- endif %}
 {%- endblock %}

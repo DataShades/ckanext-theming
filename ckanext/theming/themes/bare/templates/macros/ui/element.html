@@ -26,8 +26,12 @@
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
 {%- endmacro %}
 
-{%- macro image(src, alt="") -%}
-    <img {{ ui.util.attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
+{%- macro image(src, alt, height, width) -%}
+    <img {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ ui.util.attrs(kwargs) }}
+          {%- if alt -%} alt="{{ alt }}"{%- endif %}
+          {%- if height -%} height="{{ height }}"{%- endif %}
+          {%- if width -%} width="{{ width }}"{%- endif -%}
+    />
 {%- endmacro %}
 
 {%- macro link(content, href, style, blank) -%}

@@ -1,0 +1,12 @@
+<div id="search-facets" hx-swap-oob="true" hx-swap="none">
+    {%- for key, facets in search_facets.items() -%}
+        {%- call ui.util.call(ui.facet_group, facet_titles.get(key, key)) -%}
+            {% set items = h.get_facet_items_dict(key, search_facets) %}
+            {%- call ui.util.call(ui.facet_list) -%}
+                {%- for item in items -%}
+                    {{ ui.facet_item(facet=item, key=key) }}
+                {%- endfor %}
+            {%- endcall %}
+        {%- endcall %}
+    {%- endfor %}
+</div>

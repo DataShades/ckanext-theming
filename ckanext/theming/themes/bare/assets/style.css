@@ -26,12 +26,70 @@ img {
     max-width: 100%;
 }
 
-:hover+[data-tooltip]:after {
+[data-tooltip] {
+    position: relative;
+    display: inline-block;
+}
+[data-tooltip]:hover:after {
+    content: " ";
+    border: 0.5rem solid transparent;
+    position: absolute;
+}
+[data-tooltip]:hover:before {
     content: attr(data-tooltip);
     padding: 0.5rem;
     background: #fff;
     position: absolute;
+    max-width: 10rem;
+    width: max-content;
+    box-shadow: 0.25rem 0.25rem 0.25rem;
 }
+
+[data-tooltip][data-tooltip-top]:hover:before {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, calc(-100% - 0.5rem));
+}
+[data-tooltip][data-tooltip-top]:hover:after {
+    border-top-color: #fff;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, calc(-100% + 0.5rem));
+}
+[data-tooltip][data-tooltip-bottom]:hover:before {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(100% + 0.5rem));
+}
+[data-tooltip][data-tooltip-bottom]:hover:after {
+    border-bottom-color: #fff;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(100% - 0.5rem));
+}
+[data-tooltip][data-tooltip-left]:hover:before {
+    top: 50%;
+    left: 0;
+    transform: translate(calc(-100% - 0.5rem), -50%);
+}
+[data-tooltip][data-tooltip-left]:hover:after {
+    border-left-color: #fff;
+    top: 50%;
+    left: 0;
+    transform: translate(calc(-100% + 0.5rem), -50%);
+}
+[data-tooltip][data-tooltip-right]:hover:before {
+    top: 50%;
+    right: 0;
+    transform: translate(calc(100% + 0.5rem), -50%);
+}
+[data-tooltip][data-tooltip-right]:hover:after {
+    border-right-color: #fff;
+    top: 50%;
+    right: 0;
+    transform: translate(calc(100% - 0.5rem), -50%);
+}
+
 
 #account {
     background: var(--account-bg);
@@ -100,6 +158,17 @@ table.table-striped tbody tr:nth-child(2n+1) {
 }
 .dropdown:hover .dropdown-menu {
     display: block;
+}
+
+[data-draggable-resource] {
+    cursor: grab;
+}
+[data-draggable-resource][data-drag-in-progress] {
+    filter: opacity(0.5);
+}
+[data-draggable-resource][data-drop-in-progress] {
+    filter: blur(1px);
+
 }
 
 @media (min-width: 768px) {

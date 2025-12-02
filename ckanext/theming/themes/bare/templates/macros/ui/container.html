@@ -1,20 +1,19 @@
 {%- macro accordion_wrapper(content) -%}
-    {%- do kwargs -%}
-    {{ content }}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
 {%- endmacro %}
 
 {%- macro accordion_item(content, title, open=false) -%}
-    {%- do kwargs -%}
-    <details {{ "open" if open }}>
+    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open }}>
         <summary>{{ title }}</summary>
         {{ content }}
     </details>
 {%- endmacro %}
 
 {%- macro card(content, title, footer, img, href) -%}
-    {%- do kwargs -%}
 
-    <div style="border: 1px solid gray">
+    <div {{ ui.util.attrs(kwargs) }} style="border: 1px solid gray" >
         {%- if img -%}
             {{ ui.image(img) }}
         {%- endif %}
@@ -40,29 +39,27 @@
 {%- endmacro %}
 
 {%- macro container(content, fluid=false) -%}
-    {%- do kwargs -%}
-    <div class="bare-container">
+    <div {{ ui.util.attrs(kwargs) }} class="bare-container">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro grid(content) -%}
-    {%- do kwargs -%}
-    <div class="grid">
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro column(content, span={}) -%}
-    {%- do kwargs -%}
-    <div class="col{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}">
+    <div {{ ui.util.attrs(kwargs) }} class="col{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro panel(content, title) -%}
-    {%- do kwargs -%}
-    {{ content }}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
 {%- endmacro %}
 
 {%- macro section(content) -%}
@@ -72,13 +69,13 @@
 {%- endmacro %}
 
 {%- macro listing(content) -%}
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro listing_item(content) -%}
-    <div>
+    <div {{ ui.util.attrs(kwargs) }}>
         {{ content }}
     </div>
 {%- endmacro %}
@@ -111,7 +108,7 @@
 {%- endmacro %}
 
 {%- macro sidebar_section(content, title) -%}
-    <section>
+    <section {{ ui.util.attrs(kwargs) }}>
         {{ ui.heading(title, level=2) }}
         <div>
             {{ content }}

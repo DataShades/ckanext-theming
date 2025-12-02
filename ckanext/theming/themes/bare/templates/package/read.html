@@ -2,87 +2,98 @@
 
 {%- block primary_content_inner %}
 
-    {%- call ui.util.call(ui.heading, level=1) -%}
-        {{ pkg_dict.title or pkg_dict.name }}
-        {{ ui.badge(_("Private")) if pkg_dict.private }}
-        {{ ui.badge(_("Draft")) if pkg_dict.state == "draft" }}
-        {{ ui.badge(_("Deleted")) if pkg_dict.state == "deleted" }}
-    {%- endcall %}
+    {%- block page_heading -%}
+        {%- call ui.util.call(ui.heading, level=1) -%}
+            {{ pkg_dict.title or pkg_dict.name }}
+            {{ ui.badge(_("Private")) if pkg_dict.private }}
+            {{ ui.badge(_("Draft")) if pkg_dict.state == "draft" }}
+            {{ ui.badge(_("Deleted")) if pkg_dict.state == "deleted" }}
+        {%- endcall %}
+    {%- endblock %}
 
-    {%- if pkg_dict.tags %}
-        <div>
-            {%- for tag  in pkg_dict.tags %}
-                {{ ui.tag(tag.display_name) }}
-            {%- endfor %}
-        </div>
-    {%- endif %}
+    {%- block package_tags -%}
+        {%- if pkg_dict.tags %}
+            <div>
+                {%- for tag  in pkg_dict.tags %}
+                    {{ ui.tag(tag.display_name) }}
+                {%- endfor %}
+            </div>
+        {%- endif %}
+    {%- endblock %}
 
     {%- call ui.util.call(ui.accordion_wrapper) %}
 
-        {%- if pkg_dict.resources %}
-            {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
-                {{ ui.resource_list(ui.util.map(ui.resource_item, pkg_dict.resources)) }}
-            {%- endcall %}
-        {%- endif %}
+        {%- block package_resources -%}
+            {%- if pkg_dict.resources %}
+                {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
+                    {{ ui.resource_list(ui.util.map(ui.resource_item, pkg_dict.resources)) }}
+                {%- endcall %}
+            {%- endif %}
+        {%- endblock %}
 
-        {%- call ui.util.call(ui.accordion_item, title=_("Additional details")) %}
+        {%- block package_additional_info -%}
+            {%- call ui.util.call(ui.accordion_item, title=_("Additional details")) %}
 
-            {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
-                {{ ui.table_head(ui.table_row(cells=[_("Field"), _("Value")], heading=true)) }}
+                {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_("Field"), _("Value")], heading=true)) }}
 
-                {%- call ui.util.call(ui.table_body) -%}
-                    {%- if pkg_dict.url %}
-                        {{ ui.table_row(ui.table_cell(_('Source'), heading=true) ~ ui.table_cell(ui.link(pkg_dict.url))) }}
-                    {%- endif %}
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {%- if pkg_dict.url %}
+                            {{ ui.table_row(ui.table_cell(_('Source'), heading=true) ~ ui.table_cell(ui.link(pkg_dict.url))) }}
+                        {%- endif %}
 
-                    {%- if pkg_dict.author_email %}
-                        {{ ui.table_row(ui.table_cell(_("Author"), heading=true) ~ ui.table_cell(h.mail_to(email_address=pkg_dict.author_email, name=pkg_dict.author))) }}
+                        {%- if pkg_dict.author_email %}
+                            {{ ui.table_row(ui.table_cell(_("Author"), heading=true) ~ ui.table_cell(h.mail_to(email_address=pkg_dict.author_email, name=pkg_dict.author))) }}
 
-                    {%- elif pkg_dict.author %}
-                        {{ ui.table_row(ui.table_cell(_("Author"), heading=true) ~ ui.table_cell(pkg_dict.author)) }}
-                    {%- endif %}
+                        {%- elif pkg_dict.author %}
+                            {{ ui.table_row(ui.table_cell(_("Author"), heading=true) ~ ui.table_cell(pkg_dict.author)) }}
+                        {%- endif %}
 
-                    {%- if pkg_dict.maintainer_email %}
-                        {{ ui.table_row(ui.table_cell(_('Maintainer'), heading=true) ~ ui.table_cell(h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer))) }}
+                        {%- if pkg_dict.maintainer_email %}
+                            {{ ui.table_row(ui.table_cell(_('Maintainer'), heading=true) ~ ui.table_cell(h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer))) }}
 
-                    {%- elif pkg_dict.maintainer %}
-                        {{ ui.table_row(ui.table_cell(_('Maintainer'), heading=true) ~ ui.table_cell(pkg_dict.maintainer)) }}
-                    {%- endif %}
+                        {%- elif pkg_dict.maintainer %}
+                            {{ ui.table_row(ui.table_cell(_('Maintainer'), heading=true) ~ ui.table_cell(pkg_dict.maintainer)) }}
+                        {%- endif %}
 
-                    {%- if pkg_dict.version %}
-                        {{ ui.table_row(ui.table_cell(_("Version"), heading=true) ~ ui.table_cell(pkg_dict.version)) }}
-                    {%- endif %}
+                        {%- if pkg_dict.version %}
+                            {{ ui.table_row(ui.table_cell(_("Version"), heading=true) ~ ui.table_cell(pkg_dict.version)) }}
+                        {%- endif %}
 
-                    {%- if h.check_access('package_update',{'id':pkg_dict.id}) %}
-                        {{ ui.table_row(ui.table_cell(_("State"), heading=true) ~ ui.table_cell(_(pkg_dict.state))) }}
-                    {%- endif %}
+                        {%- if h.check_access('package_update',{'id':pkg_dict.id}) %}
+                            {{ ui.table_row(ui.table_cell(_("State"), heading=true) ~ ui.table_cell(_(pkg_dict.state))) }}
+                        {%- endif %}
 
-                    {%- if pkg_dict.metadata_modified %}
-                        {{ ui.table_row(ui.table_cell(_("Last Updated"), heading=true) ~ ui.table_cell(ui.datetime(pkg_dict.metadata_modified))) }}
-                    {%- endif %}
+                        {%- if pkg_dict.metadata_modified %}
+                            {{ ui.table_row(ui.table_cell(_("Last Updated"), heading=true) ~ ui.table_cell(ui.datetime(pkg_dict.metadata_modified))) }}
+                        {%- endif %}
 
-                    {%- if pkg_dict.metadata_created %}
-                        {{ ui.table_row(ui.table_cell(_("Created"), heading=true) ~ ui.table_cell(ui.datetime(pkg_dict.metadata_created))) }}
-                    {%- endif %}
+                        {%- if pkg_dict.metadata_created %}
+                            {{ ui.table_row(ui.table_cell(_("Created"), heading=true) ~ ui.table_cell(ui.datetime(pkg_dict.metadata_created))) }}
+                        {%- endif %}
 
-                    {%- block extras scoped %}
-                        {%- for extra in h.sorted_extras(pkg_dict.extras) %}
-                            {% set key, value = extra %}
-                            {{ ui.table_row(ui.table_cell(_(key|e), heading=true) ~ ui.table_cell(value)) }}
-                        {%- endfor %}
-                    {%- endblock %}
+                        {%- block extras scoped %}
+                            {%- for extra in h.sorted_extras(pkg_dict.extras) %}
+                                {% set key, value = extra %}
+                                {{ ui.table_row(ui.table_cell(_(key|e), heading=true) ~ ui.table_cell(value)) }}
+                            {%- endfor %}
+                        {%- endblock %}
+
+                    {%- endcall %}
 
                 {%- endcall %}
 
-        {%- endcall %}
 
+            {%- endcall %}
+        {%- endblock %}
 
-        {%- endcall %}
     {%- endcall %}
 
-    {%- if pkg_dict.notes %}
-        {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
-    {%- endif %}
+    {%- block package_notes -%}
+        {%- if pkg_dict.notes %}
+            {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
+        {%- endif %}
+    {%- endblock %}
 
 
 {%- endblock %}

@@ -1,0 +1,22 @@
+<div id="search-results" hx-swap-oob="true" hx-swap="none">
+    {%- set sorting_options = [
+            {"text": _('Relevance'), "value": "score desc, metadata_modified desc"},
+            {"text": _('Name Ascending'), "value": "title_string asc"},
+            {"text": _('Name Descending'), "value": "title_string desc"},
+            {"text": _('Last Modified'), "value": "metadata_modified desc"}
+    ] %}
+
+    {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item, use_htmx=true) }}
+
+    {%- block package_list %}
+        {%- if page.items %}
+            {{ ui.package_list(ui.util.map(ui.package_item, page.items)) }}
+        {%- else %}
+            <p>{{ _('No datasets found.') }}</p>
+        {%- endif %}
+    {%- endblock %}
+
+    {%- block pagination %}
+        {{ ui.pagination(page.page, page.last_page, page._url_generator, hx={"boost": "true"}) }}
+    {%- endblock %}
+</div>

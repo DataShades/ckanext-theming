@@ -1,1 +1,45 @@
 {% extends "package/_base.html" %}
+
+{% set default_group_type = h.default_group_type('group') %}
+{%- set page_title = h.humanize_entity_type('group', default_group_type, 'page title') or _('Groups') -%}
+
+{%- block subtitle -%}
+    {{ page_title }} {{ g.template_title_delimiter }}
+    {{ super() }}
+{%- endblock %}
+
+{% block primary_content_inner %}
+    {{ ui.heading(page_title, level=2) }}
+
+    {% if group_dropdown %}
+        {%- call ui.util.call(ui.form, method="POST") -%}
+            {%- call ui.select_block(name="group_added", autocomplete=true) -%}
+                {% for option in group_dropdown %}
+                    <option value="{{ option[0] }}"> {{ option[1] }}</option>
+                {% endfor %}
+            {%- endcall %}
+
+            {{ ui.form_actions(ui.button(h.humanize_entity_type('group', default_group_type, 'add association link') or _('Add to group'), type="submit")) }}
+        {%- endcall %}
+
+    {% endif %}
+
+    {% if pkg_dict.groups %}
+        {%- call ui.util.call(ui.form, method="POST") -%}
+            {%- call ui.util.call(ui.group_list) -%}
+                {%- for group in pkg_dict.groups -%}
+                    {%- if group.user_member -%}
+                        {% set remove_label = _('Unlink {name} from the dataset').format(name=group.display_name) %}
+                        {%- set remove_btn = ui.tooltip(ui.button(_("Remove"), type="submit", style="danger", attrs={"name": 'group_remove.'~group.id}), tooltip=remove_label) -%}
+                    {%- endif %}
+                    {{ ui.group_item(group, footer=remove_btn) }}
+                {%- endfor %}
+            {%- endcall %}
+        {%- endcall %}
+
+    {% else %}
+        <p>{{ h.humanize_entity_type('group', default_group_type, 'no associated label') or _('There are no groups associated with this dataset') }}</p>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,10 +1,10 @@
-{%- set pkg = pkg or pkg_dict -%}
+{%- set pkg_dict = pkg or pkg_dict -%}
 
 <div id="package-info">
     {% block package_info %}
-        {%- call ui.util.call(ui.sidebar_section, title=h.dataset_display_name(pkg)) -%}
+        {%- call ui.util.call(ui.sidebar_section, title=h.dataset_display_name(pkg_dict)) -%}
             {% block nums %}
-                {% set num_followers = h.follow_count('dataset', pkg.id) %}
+                {% set num_followers = h.follow_count('dataset', pkg_dict.id) %}
 
                 {%- call ui.util.call(ui.table) -%}
                     {%- call ui.util.call(ui.table_head) -%}
@@ -17,12 +17,12 @@
 
                         {%- call ui.util.call(ui.table_row) -%}
                             {{ ui.table_cell(_('Resources'), heading=true)  }}
-                            {{ ui.table_cell(pkg.resources|length) }}
+                            {{ ui.table_cell(pkg_dict.resources|length) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
                             {{ ui.table_cell(ui.link(_('Groups'), href=h.url_for(pkg_dict.type ~ ".groups", id=pkg_dict.name)), heading=true)  }}
-                            {{ ui.table_cell(pkg.groups|length) }}
+                            {{ ui.table_cell(pkg_dict.groups|length) }}
                         {%- endcall %}
 
                     {%- endcall %}
@@ -36,7 +36,7 @@
                         <div>{{ error_message }}</div>
                     {% endif %}
 
-                    {%- with am_following=am_following, obj_type='dataset', obj_id=pkg.id, anchor_type='package' -%}
+                    {%- with am_following=am_following, obj_type='dataset', obj_id=pkg_dict.id, anchor_type='package' -%}
                         {% include 'snippets/follow_button.html' %}
                     {%- endwith %}
 

@@ -1,30 +1,12 @@
-{%- macro alert(message, style="info", dismissible=True) -%}
-    {%- set style_map = {
-        'primary': 'primary',
-        'secondary': 'secondary',
-        'info': 'info',
-        'success': 'success',
-        'warning': 'warning',
-        'danger': 'danger'
-    } %}
-    <div {{ ui.util.attrs(kwargs) }} class="alert alert-{{ style_map.get(style, 'info') }}">
-        {%- if dismissible %}
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {%- endif %}
+{%- macro alert(message, dismissible, style) -%}
+    <div {{ ui.util.attrs(kwargs) }} style="padding: 0.5rem;border: 1px solid;">
         {{ message }}
+        {{ ui.button("&times;"|safe, on={"click": "this.parentNode.remove()"}) if dismissible or 1 }}
     </div>
 {%- endmacro %}
 
-{%- macro toast(message, style="info") -%}
-    {%- set style_map = {
-        'primary': 'primary',
-        'secondary': 'secondary',
-        'info': 'info',
-        'success': 'success',
-        'warning': 'warning',
-        'danger': 'danger'
-    } %}
-    <div {{ ui.util.attrs(kwargs) }} class="toast toast-{{ style_map.get(style, 'info') }}" role="alert">
+{%- macro toast(message, style) -%}
+    <div {{ ui.util.attrs(kwargs) }}>
         {{ message }}
     </div>
 {%- endmacro %}
@@ -70,8 +52,8 @@
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro tooltip(content, tooltip) -%}
-    <span {{ ui.util.attrs(kwargs) }} title="{{ tooltip }}">{{ content }}</span>
+{%- macro tooltip(content, tooltip, position="bottom") -%}
+    <span {{ ui.util.attrs(kwargs) }} data-tooltip="{{ tooltip }}" data-tooltip-{{ position }}>{{ content }}</span>
 {%- endmacro %}
 
 {%- macro popover_content(content, title, id) -%}

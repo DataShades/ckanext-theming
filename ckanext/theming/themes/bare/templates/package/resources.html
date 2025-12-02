@@ -1,23 +1,52 @@
 {% extends "package/_edit_base.html" %}
 
+{%- set drag_id = ui.util.id() -%}
+{%- set wrapper_id = ui.util.id() -%}
+
+
 {% block subtitle %}{{ _('Resources') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
 
 {%- block primary_content_inner %}
-    <h2>{{ _('Resources') }}</h2>
+    {{ ui.heading(_('Resources'), level=2) }}
 
     {%- if pkg_dict.resources %}
-        <ul>
+        {%- call ui.util.call(ui.resource_list, attrs={"id": wrapper_id}) -%}
             {%- for resource in pkg_dict.resources %}
-                <li>
-                    {{ ui.link(resource.name or resource.description or _('Unnamed resource'),
-                              href=h.url_for('dataset_resource.read', id=pkg_dict.name, resource_id=resource.id)) }}
-                    ({{ resource.format or _('Format unknown') }})
-                </li>
+                {%- set kwargs = {
+                    "attrs": {"draggable": "true"},
+                    "data": {"resource-id": resource.id, "draggable-resource": ""},
+                    "on": {
+                        "drop": "this.removeAttribute('data-drop-in-progress'); const incoming = document.getElementById('{{ drag_id }}'); if (!incoming || incoming === this) {return;} this.insertAdjacentElement('afterend', incoming); saveResourceOrder()",
+                        "dragover": "if (event.dataTransfer.types.includes('resource')) {event.preventDefault();} ",
+                        "dragenter": "this.setAttribute('data-drop-in-progress', '')",
+                        "dragleave": "this.removeAttribute('data-drop-in-progress')",
+
+                        "dragstart": "this.setAttribute('data-drag-in-progress', ''); event.dataTransfer.setData('resource', '');this.id = '{{ drag_id }}';",
+                        "dragend": "this.removeAttribute('data-drag-in-progress'); this.removeAttribute('id')",
+
+                    },
+                } -%}
+
+                {{ ui.resource_item(resource, **kwargs) }}
             {%- endfor %}
-        </ul>
+
+        {%- endcall %}
     {%- else %}
         <p>{{ _('No resources') }}</p>
+
     {%- endif %}
 
-    {{ ui.button(_('Add New Resource'), href=h.url_for('dataset_resource.new', id=pkg_dict.name), attrs={"class": "btn btn-primary"}) }}
+    {{ ui.button(_('Add New Resource'), href=h.url_for('dataset_resource.new', id=pkg_dict.name)) }}
+{%- endblock %}
+
+{%- block scripts -%}
+    {{ super() }}
+    <script>
+     function saveResourceOrder() {
+         const wrapper = document.getElementById("{{ wrapper_id }}");
+         const order = Array.from(wrapper.querySelectorAll("[data-resource-id]")).map(el => el.dataset.resourceId)
+         const id = "{{ pkg_dict.id }}";
+         ckan.sandbox().client.call('POST', 'package_resource_reorder', {id, order}, () => console.debug("Resource order updated"))
+     }
+    </script>
 {%- endblock %}

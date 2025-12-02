@@ -3,7 +3,7 @@
 {%- endmacro %}
 
 {%- macro organization_list(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
 {%- macro group_item(group) -%}
@@ -16,12 +16,12 @@
 
 
 {%- macro group_list(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
 
 {%- macro package_list(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
 {%- macro package_item(pkg) -%}
@@ -32,7 +32,7 @@
 {%- endmacro %}
 
 {%- macro resource_list(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
 {%- macro resource_item(res) -%}
@@ -43,21 +43,22 @@
 {%- endmacro %}
 
 {%- macro user_list(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
 {%- macro user_item(user) -%}
+    {%- do kwargs -%}
     {{ h.linked_user(user.name, maxlength=20) }}
 {%- endmacro %}
 
 {%- macro facet_list(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
-{%- macro facet_item(facet) -%}
-    {% set url = h.remove_url_param(facet.key, facet.name) if facet.active else h.add_url_param(new_params={key: facet.name}) %}
-
-    {%- call ui.util.call(ui.link, href=url) -%}
+{%- macro facet_item(facet, key) -%}
+    {%- set url = h.remove_url_param(key, facet.name) if facet.active else h.add_url_param(new_params={key: facet.name}) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("hx-boost", "true") -%}
+    {%- call ui.util.call(ui.link, href=url, **kwargs) -%}
         <div style="display: flex; justify-content: space-between;">
             <span>{{ facet.display_name }}</span>
             <span>{{ "&times;"|safe if facet.active else facet.count }}</span>
@@ -67,7 +68,7 @@
 {%- endmacro %}
 
 {%- macro facet_group(content, title) -%}
-    {%- call ui.util.call(ui.section) -%}
+    {%- call ui.util.call(ui.section, **kwargs) -%}
         {{ ui.heading(title, level=3) }}
         {{ content }}
         {{ ui.divider() }}
@@ -75,21 +76,22 @@
 {%- endmacro %}
 
 {%- macro activity_stream(content) -%}
-    {{ ui.listing(content) }}
+    {{ ui.listing(content, **kwargs) }}
 {%- endmacro %}
 
 
 {%- macro activity_item(content, activity) -%}
-    {{ ui.listing_item(content) }}
+    {{ ui.listing_item(content, **kwargs) }}
 {%- endmacro %}
 
 {% macro license(content, id, url) %}
     {% if url %}
-        {{ ui.link(content, href=url, attrs={"rel": "dc:rights"}) }}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("rel", "dc:rights") -%}
+        {{ ui.link(content, href=url, **kwargs) }}
     {% elif id %}
-        <span property="dc:rights">{{ content }}</span>
+        <span {{ ui.util.attrs(kwargs) }} property="dc:rights">{{ content }}</span>
     {% else %}
-        <span>{{ _('No License Provided') }}</span>
+        <span {{ ui.util.attrs(kwargs) }}>{{ _('No License Provided') }}</span>
     {% endif %}
 {% endmacro %}
 

@@ -1,40 +1,20 @@
 {% extends "package/_base.html" %}
+{%- set _layout = _layout|default("sidebar") -%}
 
 {%- block page_action %}
     {{ ui.link(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}
 {%- endblock %}
 
-{%- block page_header -%}
-    {%- set sorting_options = [
-            {"text": _('Relevance'), "value": "score desc, metadata_modified desc"},
-            {"text": _('Name Ascending'), "value": "title_string asc"},
-            {"text": _('Name Descending'), "value": "title_string desc"},
-            {"text": _('Last Modified'), "value": "metadata_modified desc"}
-    ] %}
-
-    {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item) }}
-
-{%- endblock %}
 
 {%- block primary_content_inner %}
+    {%- with dataset_type=dataset_type, fields_grouped=fields_grouped, search_facets=search_facets, facet_titles=facet_titles, translated_fields=translated_fields, remove_field=remove_field, q=q, sort_by_selected=sort_by_selected, page=page, query_error=query_error, fields=fields -%}
+        {% include "package/snippets/_search_results.html" %}
+    {%- endwith %}
 
-    {%- block package_list %}
-        {%- if page.items %}
-            {{ ui.package_list(ui.util.map(ui.package_item, page.items)) }}
-        {%- else %}
-            <p>{{ _('No datasets found.') }}</p>
-        {%- endif %}
-    {%- endblock %}
-
-    {%- block pagination %}
-        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
-    {%- endblock %}
 {%- endblock %}
 
 {%- block secondary_content -%}
-    {%- for key, facets in search_facets.items() -%}
-        {%- call ui.util.call(ui.facet_group, facet_titles.get(key, key)) -%}
-            {{ ui.facet_list(ui.util.map(ui.facet_item, h.get_facet_items_dict(key, search_facets))) }}
-        {%- endcall %}
-    {%- endfor %}
+    {%- with facet_titles=facet_titles, search_facets=search_facets -%}
+        {%- include "package/snippets/_search_facets.html" -%}
+    {%- endwith %}
 {%- endblock %}
