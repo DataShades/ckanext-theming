@@ -14,8 +14,8 @@
 
 {%- block content_action -%}
     {% if h.check_access('package_update', {'id':pkg_dict.id }) %}
-        {{ ui.link(_('Edit resource'), h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id)) }}
-        {{ ui.link(_('Views'), h.url_for(pkg_dict.type ~ '_resource.views', id=pkg.name, resource_id=resource.id)) }}
+        {{ ui.content_action_item(_('Edit resource'), h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id)) }}
+        {{ ui.content_action_item(_('Views'), h.url_for(pkg_dict.type ~ '_resource.views', id=pkg.name, resource_id=resource.id)) }}
     {% endif %}
 {%- endblock %}
 

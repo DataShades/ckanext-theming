@@ -3,7 +3,7 @@
 {% block subtitle %}{{ _('Edit Collaborator') if user else _('Add Collaborator') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
 
 {%- block content_action -%}
-    {{ ui.link(_('Back to all collaborators'), h.url_for(pkg_dict.type ~ ".collaborators_read", id=pkg_dict.name)) }}
+    {{ ui.content_action_item(_('Back to all collaborators'), h.url_for(pkg_dict.type ~ ".collaborators_read", id=pkg_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner -%}

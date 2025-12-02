@@ -61,6 +61,7 @@ class Util:
             ("aria", "aria-"),
             ("data", "data-"),
             ("on", "on"),
+            ("hx", "hx-"),
             ("attrs", ""),
         ]
 

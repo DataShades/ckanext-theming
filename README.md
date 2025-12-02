@@ -25,14 +25,16 @@ components across CKAN instances.
 
 
 Traditional CKAN Theme Implementation
- - Uses template inheritance with base templates (_base.html, _page.html)
- - Contains inline HTML with CSS framework-specific classes directly in templates
- - Form macros and UI elements are implemented directly as template code with HTML
- - Example: Input elements have direct Bootstrap classes embedded in the macro
 
-ckanext-theming Macro-Based Approach
+ - Uses snippets for complex widgets
+ - Majority of UI elements is implemented directly as template code with HTML
+ - Contains framework-specific HTML with CSS classes directly in templates
+ - Example: Input macros are called with Bootstrap classes as parameters
+
+Suggested macro-based approach
+
  - Creates a collection of UI macros that abstract the underlying CSS framework
- - Developers use semantic calls like {{ ui.button("Click Me", style="primary") }} instead of writing HTML
+ - Developers use semantic calls like `{{ ui.button("Click Me", style="primary") }}` instead of writing HTML
  - Different themes can implement the same macros with different CSS frameworks (Bootstrap 5, Tailwind, Bulma,
    Pico CSS, etc.)
  - The theme system allows switching between completely different CSS frameworks by changing one configuration
@@ -41,16 +43,6 @@ ckanext-theming Macro-Based Approach
    classes
  - Provides a consistent API regardless of the underlying CSS framework
 
-How Users Can Customize Themes with Different CSS Frameworks
-
-1. Theme Registration: Extensions can register new themes by implementing the ITheme interface and providing a
-   Theme object
-1. Macro Implementation: Each theme implements the same set of macros using their chosen CSS framework's
-   classes
-1. Configuration: Users can switch themes by setting ckan.ui.theme = theme-name in their config
-1. Template Usage: Templates use semantic calls like {{ ui.button(...) }} instead of framework-specific HTML
-1. Flexibility: The same CKAN templates can work with different CSS frameworks by simply changing the active
-   theme
 
 The key benefit is the complete separation of content structure from styling. This means users can
 completely change the visual appearance of their CKAN instance (from Bootstrap to Tailwind, for example) by
@@ -68,10 +60,17 @@ To install ckanext-theming:
    pip install ckanext-theming
    ```
 
-2. Add `theming` to the `ckan.plugins` setting in your CKAN config file:
+1. Add `theming` to the `ckan.plugins` setting in your CKAN config file:
 
    ```ini
    ckan.plugins = ... theming
+   ```
+
+1. Specify theme using `ckan.ui.theme` config option. Check available themes
+   using `ckan theme list` CLI command
+
+   ```ini
+   ckan.ui.theme = bare
    ```
 
 ## Usage
@@ -82,28 +81,24 @@ Extensions can register themes by implementing the `ITheme` interface in their
 plugin class:
 
 ```python
-import ckan.plugins as plugins
-from ckanext.theming.lib import MacroUI
+import ckan.plugins as p
+from ckanext.theming.interfaces import ITheme
+from ckanext.theming.lib import Theme
 
-class MyThemePlugin(plugins.SingletonPlugin):
-    plugins.implements(plugins.ITheme, inherit=True)
-
-    def info(self):
-        return {
-            'name': 'my_theme',
-            'title': 'My Theme',
-            'description': 'A custom theme implementation'
-        }
+class MyThemePlugin(ITheme, p.SingletonPlugin):
 
     def get_ui(self):
-        return MacroUI(source="my_extension/themes/my_theme/macros/ui.html")
+        return {
+            "my_theme": Theme("/path/to/my_theme/root"),
+            "extended_my_theme": Theme("/path/to/extended_my_theme/root", parent="my_theme"),
+        }
 ```
 
 ### Using UI Macros
 
 Once a theme is active, UI macros can be used in templates:
 
-```html
+```jinja
 {{ ui.button("Click Me", style="primary", type="button") }}
 {{ ui.card(title="My Card", content="Card content here") }}
 {{ ui.alert("Success message", style="success") }}
@@ -111,9 +106,9 @@ Once a theme is active, UI macros can be used in templates:
 
 ### Creating Custom Themes
 
-For detailed instructions on creating custom themes, see [docs/theme.md](docs/theme.md).
+For detailed instructions on creating custom themes, see [theming guide](https://datashades.github.io/ckanext-theming/theme/).
 
-## Configuration
+## CLI
 
 The extension provides CLI commands for theme management:
 
@@ -127,34 +122,6 @@ ckan theme components
 # Debug theme issues
 ckan theme debug
 ```
-
-## Development
-
-### Installation
-
-To install ckanext-theming for development:
-
-```sh
-git clone https://github.com/DataShades/ckanext-theming.git
-cd ckanext-theming
-pip install -e ".[dev]"
-```
-
-### Running Tests
-
-```sh
-pytest --ckan-ini=test.ini
-```
-
-### Documentation
-
-Documentation is available in the `docs/` directory:
-- [theme.md](docs/theme.md) - Guide to creating and registering themes
-- [library/](docs/library/) - Documentation for individual UI macro components
-
-## Contributing
-
-This extension is designed to be extensible and welcomes contributions. See the individual macro documentation in `docs/library/` for details on the available components and how to extend them.
 
 ## License
 

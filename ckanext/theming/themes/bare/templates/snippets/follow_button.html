@@ -1,0 +1,6 @@
+{% set anchor_type = anchor_type or obj_type %}
+{% if following or am_following %}
+    {{ ui.button(_("Unfollow"), style="danger", hx={"target": "#"~anchor_type~"-info", "post": h.url_for(obj_type + '.unfollow', id=obj_id), "swap": "outerHTML"}) }}
+{% else %}
+    {{ ui.button(_("Follow"), hx={"target": "#"~anchor_type~"-info", "post": h.url_for(obj_type + '.follow', id=obj_id), "swap": "outerHTML" }) }}
+{% endif %}

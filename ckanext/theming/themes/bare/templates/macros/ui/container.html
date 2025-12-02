@@ -3,7 +3,6 @@
     {{ content }}
 {%- endmacro %}
 
-
 {%- macro accordion_item(content, title, open=false) -%}
     {%- do kwargs -%}
     <details {{ "open" if open }}>
@@ -109,4 +108,13 @@
 
 {%- macro list_group_item(content, active=False) -%}
     <div {{ ui.util.attrs(kwargs) }} class="list-group-item {{ 'active' if active }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro sidebar_section(content, title) -%}
+    <section>
+        {{ ui.heading(title, level=2) }}
+        <div>
+            {{ content }}
+        </div>
+    </section>
 {%- endmacro %}

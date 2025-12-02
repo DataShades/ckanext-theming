@@ -3,7 +3,7 @@
 {% block subtitle %}{{ _('Collaborators') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
 
 {%- block content_action -%}
-    {{ ui.link(_('Add Collaborators'), h.url_for(pkg_dict.type ~ ".new_collaborator", id=pkg_dict.name)) if h.check_access('package_collaborator_create', {'id': pkg_dict.id}) }}
+    {{ ui.content_action_item(_('Add Collaborators'), h.url_for(pkg_dict.type ~ ".new_collaborator", id=pkg_dict.name)) if h.check_access('package_collaborator_create', {'id': pkg_dict.id}) }}
 {%- endblock %}
 
 {%- block primary_content_inner -%}

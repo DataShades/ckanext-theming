@@ -42,6 +42,14 @@
     {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id), **kwargs) }}
 {%- endmacro %}
 
+{%- macro user_list(content) -%}
+    {{ ui.listing(content) }}
+{%- endmacro %}
+
+{%- macro user_item(user) -%}
+    {{ h.linked_user(user.name, maxlength=20) }}
+{%- endmacro %}
+
 {%- macro facet_list(content) -%}
     {{ ui.listing(content) }}
 {%- endmacro %}
@@ -84,3 +92,7 @@
         <span>{{ _('No License Provided') }}</span>
     {% endif %}
 {% endmacro %}
+
+{%- macro content_action_item(content, href) -%}
+    {{ ui.button(content, href=href, **kwargs) }}
+{%- endmacro %}

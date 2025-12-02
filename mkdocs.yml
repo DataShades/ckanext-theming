@@ -85,6 +85,7 @@ theme:
 nav:
   - index.md
   - theme.md
+  - Theming Parties: theming-parties.md
   - Component Library:
       - library/component.md
       - library/container.md

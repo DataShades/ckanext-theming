@@ -1,9 +1,8 @@
 {% extends "_layout.html" %}
-{% set _layout = _layout | default("right_sidebar") %}
 
 {%- block subtitle %}
     {%- if pkg_dict -%}
-        {{ pkg_dict.title }} {{ g.template_title_delimiter }}
+        {{ h.dataset_display_name(pkg_dict) }} {{ g.template_title_delimiter }}
     {%- endif %}
     {{ h.humanize_entity_type('package', pkg_dict.type if pkg_dict else dataset_type or 'dataset',  'page title') or _('Datasets') }}
 {% endblock %}
@@ -23,14 +22,13 @@
 {%- endblock %}
 
 {%- block content_action %}
-    {{ ui.link(_("Manange"), h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict and h.check_access('package_update', {'id': pkg_dict.id }) }}
+    {{ ui.content_action_item(_("Manange"), href=h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict and h.check_access('package_update', {'id': pkg_dict.id }) }}
 {% endblock -%}
 
 {%- block content_nav %}
     {%- if pkg_dict -%}
-        {{ ui.content_nav_item(_("Details"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) }}
-        {{ ui.content_nav_item(h.humanize_entity_type('group', h.default_group_type('group'), 'content tab') or _('Groups'), h.url_for(pkg_dict.type ~ ".groups", id=pkg_dict.name)) }}
-        {{ ui.content_nav_item(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) if h.plugin_loaded("activity")}}
+        {{ ui.content_nav_item(_("Details"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name), active=request.endpoint == pkg_dict.type~".read") }}
+        {{ ui.content_nav_item(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name), active=request.endpoint == "activity.package_activity") if h.plugin_loaded("activity")}}
     {%- endif %}
 
 {% endblock -%}
@@ -38,18 +36,27 @@
 
 {%- block secondary_content -%}
     {%- if pkg_dict -%}
-        {{ ui.heading(_("Resources"), level=2) }}
-        {%- call ui.util.call(ui.listing) -%}
-            {%- if pkg_dict.resources %}
-                {%- for res in pkg_dict.resources[:5] %}
-                    {{ ui.link(res.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "_resource.edit", id=pkg_dict.name, resource_id=res.id)) }}
-                {%- endfor %}
+        {%- block package_info -%}
+            {%- with pkg=pkg_dict -%}
+                {%- include "package/snippets/info.html" -%}
+            {%- endwith %}
+        {%- endblock package_info %}
 
-            {%- else %}
-                <p>{{ _('No resources') }}</p>
+        {%- block package_sidebar_resources -%}
+            {%- call ui.util.call(ui.sidebar_section, title=_("Resources")) -%}
+                {%- call ui.util.call(ui.listing) -%}
+                    {%- if pkg_dict.resources %}
+                        {%- for res in pkg_dict.resources[:5] %}
+                            {{ ui.link(res.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "_resource.read", id=pkg_dict.name, resource_id=res.id)) }}
+                        {%- endfor %}
 
-            {%- endif %}
-        {%- endcall %}
+                    {%- else %}
+                        <p>{{ _('No resources') }}</p>
+
+                    {%- endif %}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endblock %}
 
     {%- endif %}
 {%- endblock %}

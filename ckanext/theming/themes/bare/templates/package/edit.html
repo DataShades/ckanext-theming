@@ -13,19 +13,3 @@
 {%- block primary_content_inner %}
     {{- h.snippet(form_snippet, pkg_dict=pkg_dict, **form_vars) -}}
 {%- endblock %}
-
-
-{%- block secondary_content %}
-    {{ ui.heading(_('Resources'), level=2) }}
-    {%- call ui.util.call(ui.listing) -%}
-        {%- if pkg_dict.resources %}
-            {%- for resource in pkg_dict.resources[:5] %}
-                {{ ui.link(resource.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "_resource.edit", id=pkg_dict.name, resource_id=resource.id)) }}
-            {%- endfor %}
-
-        {%- else %}
-            <p>{{ _('No resources') }}</p>
-        {%- endif %}
-    {%- endcall %}
-
-{%- endblock %}
