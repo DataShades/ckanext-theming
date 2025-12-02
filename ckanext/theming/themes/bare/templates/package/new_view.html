@@ -1,20 +1,56 @@
-{% extends "_page.html" %}
+{% extends "package/_resource_edit_base.html" %}
 
-{%- block primary_content_inner %}
-    <h1>{{ _('Add view') }}</h1>
+{% block subtitle %}
+    {{ _('Edit view') if resource_view.id else _('Add view') }} {{ g.template_title_delimiter }}
+    {{ super() }}
+{% endblock %}
 
-    {{ ui.form_start(method="POST", action="", attrs={"class": "resource-view-form"}) }}
-    {{ h.csrf_input() }}
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {%- if resource_view.id -%}
+        {{ ui.breadcrumb_item(_('Edit view'), h.url_for(pkg_dict.type ~ '_resource.edit_view', id=pkg_dict.name, resource_id=resource.id, view_id=resource_view.id)) }}
 
-    {{ ui.input(name="title", id="field-title", label=_('Title'), value=data.title or "", errors=errors.title or []) }}
-    {{ ui.select(name="view_type", id="field-view-type", label=_('View Type'), options=h.get_allowed_view_types(), selected=data.view_type) }}
-    {{ ui.textarea(name="description", id="field-description", label=_('Description'), value=data.description or "", errors=errors.description or []) }}
-    {{ ui.input(name="resource_url", id="field-resource-url", label=_('Resource URL'), value=data.resource_url or "", errors=errors.resource_url or [], type="url") }}
+    {%- else -%}
+        {{ ui.breadcrumb_item(_('Add view'), h.url_for(pkg_dict.type ~ '_resource.edit_view', id=pkg_dict.name, resource_id=resource.id, view_type=resource_view.view_type)) }}
 
-    <div class="form-actions">
-        {{ ui.button(_('Add View'), type="submit", attrs={"class": "btn btn-primary"}) }}
-        {{ ui.button(_('Cancel'), type="button", href=h.url_for('dataset_resource.read', id=dataset.id, resource_id=resource.id), attrs={"class": "btn btn-secondary"}) }}
-    </div>
+    {%- endif %}
+{%- endblock %}
 
-    {{ ui.form_end() }}
+{%- block content_action -%}
+    {{ ui.link(_('All views'), h.url_for(pkg_dict.type ~ '_resource.views', id=pkg_dict.name, resource_id=resource.id)) }}
+    {{ ui.link(_('View view'), h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id, view_id=resource_view.id)) if resource_view.id }}
+{%- endblock %}
+
+
+{%- block primary_content_inner -%}
+    {%- call ui.util.call(ui.form, method="POST") -%}
+
+        {{ ui.form_errors(error_summary) }}
+
+        {{ ui.input(name='title', label=_('Title'), placeholder=_('eg. My View'), value=data.title, errors=errors.title, required=true) }}
+        {{ ui.markdown(name='description', label=_('Description'), placeholder=_('eg. Information about my view'), value=data.description, errors=errors.description) }}
+        {{ ui.hidden_input(name='view_type', value=resource_view.view_type) }}
+
+        {# form template is defined in ResouceView extension point #}
+        {% if form_template %}
+            {% include form_template %}
+        {% endif %}
+
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.button(_('Preview'), type="submit", attrs={"value": true, "name": "preview"}) if h.resource_view_display_preview(data) }}
+            {{ ui.button(_('Update') if resource_view.id else _("Add"), type="submit", attrs={"name": "save", "value": "Save"}) }}
+        {%- endcall %}
+    {%- endcall %}
+
+    {% if to_preview and h.resource_view_display_preview(resource_view) %}
+        <div>
+            {{ ui.heading(_('View preview'), level=2) }}
+            {%- with resource_view=resource_view, resource=resource, package=package, to_preview=True -%}
+                {% include 'package/snippets/_resource_view.html' %}
+            {%- endwith %}
+
+        </div>
+    {% endif %}
+
+
 {%- endblock %}

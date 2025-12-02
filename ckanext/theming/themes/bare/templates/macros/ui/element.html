@@ -25,7 +25,10 @@
     <img {{ ui.util.attrs(kwargs) }} alt="{{ alt }}" src="{{ src }}"/>
 {%- endmacro %}
 
-{%- macro link(content, href) -%}
+{%- macro link(content, href, style, blank) -%}
+    {%- if blank -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("target", "_blank") -%}
+    {%- endif %}
     <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 

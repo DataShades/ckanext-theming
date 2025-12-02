@@ -78,6 +78,12 @@
     </div>
 {%- endmacro %}
 
+{%- macro listing_item(content) -%}
+    <div>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
 {%- macro jumbotron(content, title, subtitle) -%}
     <div {{ ui.util.attrs(kwargs) }} class="jumbotron">
         {%- if title %}

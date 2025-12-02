@@ -1,6 +1,10 @@
 {% extends "package/_edit_base.html" %}
 
-{%- block subtitle %}{{ h.humanize_entity_type('package', dataset_type, 'create title') or _('Create Dataset') }}{% endblock %}
+{%- block subtitle %}
+    {{ h.humanize_entity_type('package', dataset_type, 'create title') or _('Create Dataset') }}
+    {{ g.template_title_delimiter }}
+    {{ super() }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ super() }}

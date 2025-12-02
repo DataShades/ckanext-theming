@@ -1,6 +1,6 @@
-{% extends "package/read.html" %}
+{% extends "package/_base.html" %}
 
-{% block subtitle %}Changes {{ g.template_title_delimiter }} {{ pkg_dict.title }}{% endblock %}
+{% block subtitle %}Changes {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
 
 
 {%- block breadcrumb_content -%}

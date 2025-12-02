@@ -29,20 +29,16 @@
 {%- macro content_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro content_nav_item(content, href, active=false) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 
-
-
 {%- macro tab_wrapper(content) -%}
-    {%- do kwargs -%}
-    {{ content }}
+    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 0.25rem;">
+        {{ content }}
+    </div>
 {%- endmacro %}
 
-{%- macro tab_item(content, href, active=False) -%}
-    {%- do kwargs -%}
-    {%- if active %}
-        <strong>{{ ui.link(content, href) }}</strong>
-    {%- else -%}
+{%- macro tab_item(content, href, active) -%}
+    <div {{ ui.util.attrs(kwargs) }} style="padding: 0.25rem; border-bottom: 2px solid black; {{ 'font-weight: bold;' if active }}">
         {{ ui.link(content, href) }}
-    {%- endif %}
+    </div>
 {%- endmacro %}
 
 {%- macro menu_wrapper(content) -%}
@@ -96,15 +92,15 @@
 
 {%- macro dropdown_wrapper(content, title) -%}
     <div {{ ui.util.attrs(kwargs) }} class="dropdown">
-        {%- if title %}
-            <button class="dropdown-toggle" type="button" data-toggle="dropdown">{{ title }}</button>
-        {%- endif %}
+        {{ ui.button(title) }}
         <ul class="dropdown-menu">{{ content }}</ul>
     </div>
 {%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
-    <li {{ ui.util.attrs(kwargs) }}><a href="{{ href }}">{{ content }}</a></li>
+    <li>
+        {{ ui.link(content, href=href, **kwargs) }}
+    </li>
 {%- endmacro %}
 
 {%- macro sidebar(content) -%}

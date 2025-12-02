@@ -47,7 +47,8 @@
 {%- endmacro %}
 
 {%- macro modal_handler(content, id) -%}
-    {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)}) }}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("onclick", "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)) -%}
+    {{ ui.button(content, **kwargs) }}
 {%- endmacro %}
 
 {%- macro modal_close(content, id) -%}
@@ -81,7 +82,7 @@
 {%- endmacro %}
 
 {%- macro popover_handler(content, id) -%}
-    <span onclick="window['{{ id }}'].togglePopover({source: this})">{{ content }}</span>
+    <span onclick="window['{{ id }}'].togglePopover({source: this})" style="cursor: pointer;">{{ content }}</span>
 {%- endmacro %}
 
 {%- macro progress(value, max=100, label=None) -%}

@@ -74,3 +74,13 @@
 {%- macro activity_item(content, activity) -%}
     {{ ui.listing_item(content) }}
 {%- endmacro %}
+
+{% macro license(content, id, url) %}
+    {% if url %}
+        {{ ui.link(content, href=url, attrs={"rel": "dc:rights"}) }}
+    {% elif id %}
+        <span property="dc:rights">{{ content }}</span>
+    {% else %}
+        <span>{{ _('No License Provided') }}</span>
+    {% endif %}
+{% endmacro %}

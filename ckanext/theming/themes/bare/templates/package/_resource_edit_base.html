@@ -1,0 +1,32 @@
+{% extends "package/_edit_base.html" %}
+
+{%- block subtitle -%}
+    {%- if resource -%}
+        {{ h.resource_display_name(resource) }} {{ g.template_title_delimiter }}
+    {%- endif %}
+
+    {{ super() }}
+{%- endblock %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+
+    {% if resource %}
+        {{ ui.breadcrumb_item(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id)) }}
+    {% endif %}
+
+{%- endblock %}
+
+{%- block content_action %}
+{%- endblock %}
+
+
+{% block content_nav %}
+    {%- if resource -%}
+        {{ ui.content_nav_item(_('View resource'), href=h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.read') }}
+        {{ ui.content_nav_item(_('Edit resource'), href=h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.edit') }}
+        {{ ui.content_nav_item(_('Views'), href=h.url_for(pkg_dict.type ~ '_resource.views', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.views') }}
+
+    {%- endif %}
+
+{% endblock %}

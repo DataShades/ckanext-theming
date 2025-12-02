@@ -1,0 +1,30 @@
+{% import 'macros/form.html' as form %}
+
+{% block resource_view %}
+    {%- set modal_id = ui.util.id() -%}
+
+    {%- call ui.util.call(ui.modal, title=_("Embed resource view"), id=modal_id, dismissible=true) -%}
+        <p>{{ _("You can copy and paste the embed code into a CMS or blog software that supports raw HTML") }}</p>
+        <code>{{ '<iframe title="Data viewer" width="700" height="400" src="{url}" frameBorder="0"></iframe>'.format(url=h.url_for(package.type ~ '_resource.view', id=package.name, resource_id=resource.id, view_id=resource_view.id, qualified=True))|e }}</code>
+    {%- endcall %}
+
+    <div>
+        {%- call ui.util.call(ui.button_group) -%}
+            {{ ui.link(_("Fullscreen"), href=h.url_for(package.type ~ '_resource.view', id=package.name, resource_id=resource.id, view_id=resource_view.id, qualified=True), style="button", blank=true, attrs={"rel": "noreferrer"}) }}
+            {{ ui.modal_handler(_("Embed"), id=modal_id) }}
+        {%- endcall %}
+
+        <p>{{ h.render_markdown(resource_view.description) }}</p>
+
+        <div>
+            {% if not h.resource_view_is_iframed(resource_view) %}
+                {{ h.rendered_resource_view(resource_view, resource, package) }}
+
+            {% else %}
+                <p>{{ _('This resource view is not available at the moment.') }}</p>
+
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

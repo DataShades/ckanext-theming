@@ -84,6 +84,24 @@ table.table-striped tbody tr:nth-child(2n+1) {
     background: var(--table-stripe-bg);
 }
 
+.dropdown {
+    position: relative;
+}
+
+.dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    bottom: 0px;
+    transform: translateY(100%);
+    background: #fff;
+    padding: 0.5rem;
+    margin: 0px;
+    list-style: none;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
 @media (min-width: 768px) {
     #header .bare-container {
         flex-direction: row;

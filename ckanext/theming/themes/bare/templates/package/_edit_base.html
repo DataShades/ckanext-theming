@@ -1,8 +1,7 @@
 {% extends "package/_base.html" %}
 
-{%- block breadcrumb_content %}
-    {{ super() }}
-    {{ ui.breadcrumb_item(_("Edit"), h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict }}
+{%- block content_action %}
+    {{ ui.link(_("View"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) if pkg_dict }}
 {%- endblock %}
 
 {%- block content_nav %}
@@ -14,4 +13,5 @@
             {{ ui.content_nav_item(_('Collaborators'), href=h.url_for(pkg_dict.type ~ '.collaborators_read', id=pkg_dict.name), active=request.endpoint == pkg_dict.type ~ ".collaborators_read") }}
         {%- endif %}
     {%- endif %}
+
 {%- endblock %}

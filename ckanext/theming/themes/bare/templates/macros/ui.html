@@ -37,12 +37,15 @@
 {% set pagination = pagination | default(_nav.pagination) %}
 {% set tab_wrapper = tab_wrapper | default(_nav.tab_wrapper) %}
 {% set tab_item = tab_item | default(_nav.tab_item) %}
+{% set dropdown_wrapper = dropdown_wrapper | default(_nav.dropdown_wrapper) %}
+{% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %}
 
 {% set accordion_wrapper = accordion_wrapper | default(_container.accordion_wrapper) %}
 {% set accordion_item = accordion_item | default(_container.accordion_item) %}
 {% set card = card | default(_container.card) %}
 {% set column = column | default(_container.column) %}
 {% set listing = listing | default(_container.listing) %}
+{% set listing_item = listing_item | default(_container.listing_item) %}
 {% set container = container | default(_container.container) %}
 {% set grid = grid | default(_container.grid) %}
 {% set panel = panel | default(_container.panel) %}
@@ -120,5 +123,6 @@
 {% set facet_group = facet_group | default(component.facet_group) %}
 {% set facet_item = facet_item | default(component.facet_item) %}
 {% set facet_list = facet_list | default(component.facet_list) %}
+{% set license = license | default(component.license) %}
 {% set activity_stream = activity_stream | default(component.activity_stream) %}
 {% set activity_item = activity_item | default(component.activity_item) %}

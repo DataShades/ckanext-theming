@@ -4,8 +4,10 @@
     {{ _("Edit") }} {{ g.template_title_delimiter }} {{ super() }}
 {%- endblock %}
 
-{%- block content_action %}
-    {{ ui.link(_("View"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) }}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Edit"), h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

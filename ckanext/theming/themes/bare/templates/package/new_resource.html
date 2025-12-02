@@ -1,17 +1,12 @@
 {%- extends "package/_resource_edit_base.html" -%}
 
-{% block subtitle %}
-    {{ _('Edit') }} {{ g.template_title_delimiter }}
-    {{ super() }}
-{% endblock %}
+{% block subtitle %}{{ _('Add data to the dataset') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
 
 {% block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Edit'), href=h.url_for(pkg_dict.type ~ "_resource.edit", id=pkg_dict.id, resource_id=resource.id)) }}
+    {{ ui.breadcrumb_item(_('Add New Resource'), href=h.url_for(pkg_dict.type ~ "_resource.new", id=pkg_dict.id)) }}
 {% endblock %}
 
 {% block primary_content_inner %}
-    {{ resource_form_snippet }}
-
     {% snippet resource_form_snippet, data=data, errors=errors, error_summary=error_summary, include_metadata=false, pkg_name=pkg_name, stage=stage, dataset_type=dataset_type %}
 {% endblock %}

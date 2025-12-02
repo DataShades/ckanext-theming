@@ -1,9 +1,4 @@
 {% extends "package/_base.html" %}
-{% set _layout = "fullwidth" %}
-
-{%- block content_action %}
-    {{ ui.link(_("Manange"), h.url_for(dataset_type ~ ".edit", id=pkg_dict.name)) if h.check_access('package_update', {'id':pkg_dict.id }) }}
-{% endblock -%}
 
 {%- block primary_content_inner %}
 
