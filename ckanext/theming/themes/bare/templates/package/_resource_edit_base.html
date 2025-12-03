@@ -18,15 +18,16 @@
 {%- endblock %}
 
 {%- block content_action %}
+    {{ ui.button(_('View resource'), href=h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.read') }}
 {%- endblock %}
 
 
 {% block content_nav %}
     {%- if resource -%}
-        {{ ui.content_nav_item(_('View resource'), href=h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.read') }}
+
         {{ ui.content_nav_item(_('Edit resource'), href=h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.edit') }}
         {{ ui.content_nav_item(_('Views'), href=h.url_for(pkg_dict.type ~ '_resource.views', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.views') }}
-
+        {{ ui.content_nav_item(_('DataStore'), href=h.url_for('datapusher.resource_data', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == 'datapusher.resource_data') if h.plugin_loaded("datapusher") }}
     {%- endif %}
 
 {% endblock %}

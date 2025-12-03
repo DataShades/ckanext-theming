@@ -1,1 +1,89 @@
-{% extends "_layout.html" %}
+{% extends "package/_resource_edit_base.html" %}
+
+
+{% block primary_content_inner %}
+
+    {% set has_error = status.error or status.error.message %}
+    {%- set modal_id = ui.util.id() -%}
+    {%- set form_id = ui.util.id() -%}
+
+
+    {%- call ui.util.call(ui.form, method="POST", action=h.url_for('datapusher.delete_datastore_table', id=pkg_dict.id, resource_id=resource.id), attrs={"id": form_id}) -%}
+        {{ ui.confirm_modal(_('Are you sure you want to delete the DataStore and Data Dictionary?'), id=modal_id, form_id=form_id) }}
+        {{ ui.modal_handler(_('Delete from DataStore'), id=modal_id, style="danger") }}
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.form, method="POST", action=h.url_for('datapusher.resource_data', id=pkg_dict.name, resource_id=resource.id)) -%}
+        {{ ui.button(_('Upload to DataStore'), type="submit") }}
+    {%- endcall %}
+
+    {% if has_error %}
+        {%- call ui.util.call(ui.alert, style="danger") -%}
+            <strong>{{ _('Upload error:') }}</strong>
+            {{ status.error.message }}
+        {%- endcall %}
+
+    {% elif status.task_info and status.task_info.error %}
+        {%- call ui.util.call(ui.alert, style="danger") -%}
+            {% if status.task_info.error is mapping %}
+                <strong>{{ _('Error:') }}</strong> {{ status.task_info.error.message }}
+                {% for error_key, error_value in status.task_info.error.items() %}
+                    {% if error_key != "message" and error_value %}
+                        <br>
+                        <strong>{{ error_key }}</strong>:
+                        {{ error_value }}
+                    {% endif %}
+                {% endfor %}
+            {% elif status.task_info.error is iterable %}
+                <strong>{{ _('Error traceback:') }}</strong>
+                <pre>{{ ''.join(status.task_info.error) }}</pre>
+            {% endif %}
+        {%- endcall %}
+
+    {% endif %}
+
+    {%- call ui.util.call(ui.table) -%}
+        <colgroup>
+            <col width="150">
+            <col>
+        </colgroup>
+
+        {{ ui.table_row(ui.table_cell(_('Status'), heading=true) ~ ui.table_cell(h.datapusher_status_description(status))) }}
+        {{ ui.table_row(ui.table_cell(_('Last updated'), heading=true) ~ ui.table_cell(ui.datetime(status.last_updated) if status.last_updated else _("Never"))) }}
+    {%- endcall %}
+
+    {% if status.status and status.task_info and not has_error %}
+        {{ ui.heading(_('Upload Log'), level=3) }}
+        {%- call ui.util.call(ui.listing) -%}
+            {% for item in status.task_info.logs|sort(attribute='timestamp') %}
+                {% set icon = 'check' if item.level == 'INFO' else 'exclamation' %}
+                {% set class = ' failure' if icon == 'exclamation' else ' success' %}
+                {% set popover_content = 'test' %}
+                {%- call ui.util.call(ui.listing_item) -%}
+                    {% for line in item.message.strip().split('\n') %}
+                        {{ line | urlize }}<br />
+                    {% endfor %}
+                    <span title="{{ h.render_datetime(item.timestamp, with_hours=True) }}">
+                        {{ h.time_ago_from_timestamp(item.timestamp) }}
+                        {%- with popover_id=ui.util.id() -%}
+                            {%- call ui.util.call(ui.popover_content, title=_("Details"), id=popover_id) -%}
+                                {%- call ui.util.call(ui.listing) -%}
+                                    {% for key, value in item.items() %}
+                                        {%- call ui.util.call(ui.listing_item) -%}
+                                            <strong>{{ key }}</strong>: {{ h.clean_html(value|string) }}
+                                        {%- endcall %}
+                                    {% endfor %}
+                                {%- endcall %}
+                            {%- endcall %}
+                            {{ ui.popover_handler(_('Details'), id=popover_id) }}
+                        {%- endwith %}
+                    </span>
+                {%- endcall %}
+
+            {% endfor %}
+
+            {{ ui.listing_item(_('End of log')) }}
+        {%- endcall %}
+    {% endif %}
+
+{% endblock %}
