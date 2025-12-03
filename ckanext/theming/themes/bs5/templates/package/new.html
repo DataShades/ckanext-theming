@@ -1,51 +1,17 @@
-{% extends "package/edit_base.html" %}
+{% extends "package/_edit_base.html" %}
 
-{%- block subtitle %}{{ h.humanize_entity_type('package', dataset_type, 'create title') or _('Create Dataset') }}{% endblock %}
+{%- block subtitle %}
+    {{ h.humanize_entity_type('package', dataset_type, 'create title') or _('Create Dataset') }}
+    {{ g.template_title_delimiter }}
+    {{ super() }}
+{% endblock %}
 
-{%- block primary_content_inner %}
-    {%- if not h.organizations_available('create_dataset')
-      and not h.check_config_permission('ckan.auth.create_unowned_dataset') %}
-
-        {%- block cannot_create_package %}
-            <p>{{ _('You are not authorized to create a package.') }}</p>
-        {%- endblock %}
-
-    {%- else %}
-
-        {%- block form %}
-            {{ ui.form_start(method="POST", action="", attrs={"class": "dataset-form"}) }}
-            {{ h.csrf_input() }}
-
-            {{ ui.input(name="name", id="field-name", label=_('Name'), value=data.name or "", errors=errors.name) }}
-            {{ ui.input(name="title", id="field-title", label=_('Title'), value=data.title or "", errors=errors.title) }}
-            {{ ui.textarea(name="notes", id="field-notes", label=_('Description'), value=data.notes or "", errors=errors.notes) }}
-
-            {{ ui.select(name="license_id", id="field-license",
-                         label=_('License'),
-                         options=h.license_options(),
-                         selected=data.license_id) }}
-
-            <div class="form-actions">
-                {{ ui.button(_('Create Dataset'), type="submit", attrs={"class": "btn btn-primary"}) }}
-                {{ ui.button(_('Cancel'), type="button", href=h.url_for('dataset.search'), attrs={"class": "btn btn-secondary"}) }}
-            </div>
-
-            {{ ui.form_end() }}
-        {%- endblock %}
-    {%- endif %}
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Create"), h.url_for(dataset_type ~ ".new")) }}
 {%- endblock %}
 
-{%- block info_module %}
-    <section class="module module-narrow module-shallow">
-        <h2>{{ _('What are datasets?') }}</h2>
-        <div class="module-content">
-            <p>
-                {% trans %}
-                A CKAN Dataset is a collection of data resources (such as files),
-                together with a description and other information, at a fixed URL.
-                Datasets are what users see when searching for data.
-                {% endtrans %}
-            </p>
-        </div>
-    </section>
+
+{%- block primary_content_inner %}
+    {{- h.snippet(form_snippet, pkg_dict=pkg_dict, **form_vars) -}}
 {%- endblock %}

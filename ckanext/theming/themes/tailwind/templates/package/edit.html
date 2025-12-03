@@ -1,22 +1,15 @@
-{% extends "package/edit_base.html" %}
+{% extends "package/_edit_base.html" %}
+
+{%- block subtitle -%}
+    {{ _("Edit") }} {{ g.template_title_delimiter }} {{ super() }}
+{%- endblock %}
+
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Edit"), h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.form_start(method="POST", action="", attrs={"class": "dataset-form"}) }}
-    {{ h.csrf_input() }}
-
-    {{ ui.input("name", "field-name", label=_('Name'), value=data.name or "", errors=errors.name or []) }}
-    {{ ui.input("title", "field-title", label=_('Title'), value=data.title or "", errors=errors.title or []) }}
-    {{ ui.textarea("notes", "field-notes", label=_('Description'), value=data.notes or "", errors=errors.notes or []) }}
-
-    {{ ui.select(name="license_id", id="field-license",
-                 label=_('License'),
-                 options=h.license_options(),
-                 selected=data.license_id) }}
-
-    <div class="form-actions">
-        {{ ui.button(_('Update Dataset'), type="submit", attrs={"class": "btn btn-primary"}) }}
-        {{ ui.button(_('Cancel'), type="button", href=h.url_for('dataset.read', id=data.id), attrs={"class": "btn btn-secondary"}) }}
-    </div>
-
-    {{ ui.form_end() }}
+    {{- h.snippet(form_snippet, pkg_dict=pkg_dict, **form_vars) -}}
 {%- endblock %}

@@ -1,16 +1,18 @@
-{% extends "page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("fullwidth") -%}
 
-{%- block primary_content_inner %}
-    <h1>{{ _('Confirm Delete') }}</h1>
-    <p>{{ _('Are you sure you want to delete dataset "%s"?', pkg_dict.title or pkg_dict.name) }}</p>
+{% block subtitle %}{{ _("Confirm Delete") }}{% endblock %}
 
-    {{ ui.form_start(method="POST", action="") }}
-    {{ h.csrf_input() }}
 
-    <div class="form-actions">
-        {{ ui.button(_('Confirm Delete'), type="submit", attrs={"class": "btn btn-danger"}) }}
-        {{ ui.button(_('Cancel'), type="button", href=h.url_for('dataset.read', id=pkg_dict.name), attrs={"class": "btn btn-secondary"}) }}
-    </div>
+{%- block primary_content_inner -%}
+    <p>{{ _('Are you sure you want to delete dataset - {name}?').format(name=pkg_dict.title or pkg_dict.name) }}</p>
 
-    {{ ui.form_end() }}
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.submit(value=_("Cancel"), name="cancel") }}
+            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+        {%- endcall %}
+    {%- endcall %}
+
+
 {%- endblock %}

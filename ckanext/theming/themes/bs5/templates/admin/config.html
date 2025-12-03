@@ -1,4 +1,4 @@
-{% extends "admin/base.html" %}
+{% extends "admin/_base.html" %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}
@@ -27,7 +27,7 @@
 
             {{ ui.textarea('ckan.site_custom_css', id='field-ckan-site-custom-css', label=_('Custom CSS'), value=data['ckan.site_custom_css'], errors=errors['ckan.site_custom_css'], placeholder=_('Customisable css inserted into the page header')) }}
 
-            {{ ui.input("ckan.site_logo", label="Site logo URL", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = ''; this.form['clear_logo_upload'].checked = true"}) }}
+            {{ ui.input("ckan.site_logo", label="Site logo URL", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = '';"}) }}
             {{ ui.input("logo_upload", label="Site logo upload", type="file", value=data["logo_upload"], errors=errors["logo_upload"], attrs={"onchange": "this.form['ckan.site_logo'].value = '';"}) }}
 
         {%- endblock %}

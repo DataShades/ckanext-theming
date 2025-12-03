@@ -1,16 +1,16 @@
-{% extends "page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("fullwidth") -%}
 
-{%- block primary_content_inner %}
-    <h1>{{ _('Confirm Delete Resource') }}</h1>
-    <p>{{ _('Are you sure you want to delete resource "%s"?', resource.name or resource.description or _('Unnamed resource')) }}</p>
+{% block subtitle %}{{ _("Confirm Delete") }}{% endblock %}
 
-    {{ ui.form_start(method="POST", action="") }}
-    {{ h.csrf_input() }}
+{%- block primary_content_inner -%}
+    <p>{{ _('Are you sure you want to delete resource - {name}?').format(name=h.resource_display_name(resource_dict)) }}</p>
 
-    <div class="form-actions">
-        {{ ui.button(_('Confirm Delete'), type="submit", attrs={"class": "btn btn-danger"}) }}
-        {{ ui.button(_('Cancel'), type="button", href=h.url_for('dataset_resource.read', id=pkg_dict.name, resource_id=resource.id), attrs={"class": "btn btn-secondary"}) }}
-    </div>
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.submit(value=_("Cancel"), name="cancel") }}
+            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+        {%- endcall %}
+    {%- endcall %}
 
-    {{ ui.form_end() }}
 {%- endblock %}

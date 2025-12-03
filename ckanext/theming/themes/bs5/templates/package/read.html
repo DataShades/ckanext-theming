@@ -1,90 +1,99 @@
-{% extends "_layout.html" %}
-{% set _layout = "fullwidth" %}
+{% extends "package/_base.html" %}
 
-{%- block breadcrumb_content %}
-    {{ super() }}
-    {%- if pkg_dict.organization %}
-        {%- with group_dict=pkg_dict.organization %}
-            {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
-            {{ ui.breadcrumb_item(group_dict.title or group_dict.name, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
-        {%- endwith%}
+{%- block primary_content_inner %}
 
-    {%- else %}
-        {{ ui.breadcrumb_item(h.humanize_entity_type("package", dataset_type, "breadcrumb") or _("Datasets"), h.url_for("dataset.search")) }}
+    {%- block page_heading -%}
+        {%- call ui.util.call(ui.heading, level=1) -%}
+            {{ pkg_dict.title or pkg_dict.name }}
+            {{ ui.badge(_("Private")) if pkg_dict.private }}
+            {{ ui.badge(_("Draft")) if pkg_dict.state == "draft" }}
+            {{ ui.badge(_("Deleted")) if pkg_dict.state == "deleted" }}
+        {%- endcall %}
+    {%- endblock %}
 
-    {%- endif %}
-    {{ ui.breadcrumb_item(pkg_dict.title, h.url_for("dataset.read", id=pkg_dict.name)) }}
+    {%- block package_tags -%}
+        {%- if pkg_dict.tags %}
+            <div>
+                {%- for tag  in pkg_dict.tags %}
+                    {{ ui.tag(tag.display_name) }}
+                {%- endfor %}
+            </div>
+        {%- endif %}
+    {%- endblock %}
+
+    {%- call ui.util.call(ui.accordion_wrapper) %}
+
+        {%- block package_resources -%}
+            {%- if pkg_dict.resources %}
+                {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
+                    {{ ui.resource_list(ui.util.map(ui.resource_item, pkg_dict.resources)) }}
+                {%- endcall %}
+            {%- endif %}
+        {%- endblock %}
+
+        {%- block package_additional_info -%}
+            {%- call ui.util.call(ui.accordion_item, title=_("Additional details")) %}
+
+                {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_("Field"), _("Value")], heading=true)) }}
+
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {%- if pkg_dict.url %}
+                            {{ ui.table_row(ui.table_cell(_('Source'), heading=true) ~ ui.table_cell(ui.link(pkg_dict.url))) }}
+                        {%- endif %}
+
+                        {%- if pkg_dict.author_email %}
+                            {{ ui.table_row(ui.table_cell(_("Author"), heading=true) ~ ui.table_cell(h.mail_to(email_address=pkg_dict.author_email, name=pkg_dict.author))) }}
+
+                        {%- elif pkg_dict.author %}
+                            {{ ui.table_row(ui.table_cell(_("Author"), heading=true) ~ ui.table_cell(pkg_dict.author)) }}
+                        {%- endif %}
+
+                        {%- if pkg_dict.maintainer_email %}
+                            {{ ui.table_row(ui.table_cell(_('Maintainer'), heading=true) ~ ui.table_cell(h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer))) }}
+
+                        {%- elif pkg_dict.maintainer %}
+                            {{ ui.table_row(ui.table_cell(_('Maintainer'), heading=true) ~ ui.table_cell(pkg_dict.maintainer)) }}
+                        {%- endif %}
+
+                        {%- if pkg_dict.version %}
+                            {{ ui.table_row(ui.table_cell(_("Version"), heading=true) ~ ui.table_cell(pkg_dict.version)) }}
+                        {%- endif %}
+
+                        {%- if h.check_access('package_update',{'id':pkg_dict.id}) %}
+                            {{ ui.table_row(ui.table_cell(_("State"), heading=true) ~ ui.table_cell(_(pkg_dict.state))) }}
+                        {%- endif %}
+
+                        {%- if pkg_dict.metadata_modified %}
+                            {{ ui.table_row(ui.table_cell(_("Last Updated"), heading=true) ~ ui.table_cell(ui.datetime(pkg_dict.metadata_modified))) }}
+                        {%- endif %}
+
+                        {%- if pkg_dict.metadata_created %}
+                            {{ ui.table_row(ui.table_cell(_("Created"), heading=true) ~ ui.table_cell(ui.datetime(pkg_dict.metadata_created))) }}
+                        {%- endif %}
+
+                        {%- block extras scoped %}
+                            {%- for extra in h.sorted_extras(pkg_dict.extras) %}
+                                {% set key, value = extra %}
+                                {{ ui.table_row(ui.table_cell(_(key|e), heading=true) ~ ui.table_cell(value)) }}
+                            {%- endfor %}
+                        {%- endblock %}
+
+                    {%- endcall %}
+
+                {%- endcall %}
+
+
+            {%- endcall %}
+        {%- endblock %}
+
+    {%- endcall %}
+
+    {%- block package_notes -%}
+        {%- if pkg_dict.notes %}
+            {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
+        {%- endif %}
+    {%- endblock %}
+
 
 {%- endblock %}
-
-{%- block primary_content %}
-    <div class="row">
-        <div class="col-md-12">
-            {{ ui.heading(pkg_dict.title or pkg_dict.name, level=1, class="mb-3") }}
-
-            {%- if pkg_dict.tags %}
-                <div class="mb-3">
-                    {%- for tag in pkg_dict.tags %}
-                        {{ ui.tag(tag.display_name, id=tag.name, href=h.url_for('dataset.search', tags=tag.name), class="me-1 mb-1") }}
-                    {%- endfor %}
-                </div>
-            {%- endif %}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8">
-            {%- block primary_content_inner %}{% endblock -%}
-        </div>
-        <div class="col-md-4">
-            {%- block secondary_content %}
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ _('Dataset Actions') }}</h5>
-                        <div class="d-grid gap-2">
-                            {%- if h.check_access('package_update', {'id':pkg_dict.id }) %}
-                                {{ ui.button(_('Edit Dataset'), href=h.url_for('dataset.edit', id=pkg_dict.name), style="primary", class="w-100") }}
-                            {%- endif %}
-                            {%- if h.check_access('package_delete', {'id':pkg_dict.id }) %}
-                                {{ ui.button(_('Delete Dataset'), href=h.url_for('dataset.delete', id=pkg_dict.name), style="danger", class="w-100") }}
-                            {%- endif %}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ _('Dataset Information') }}</h5>
-                        <ul class="list-group list-group-flush">
-                            {%- if pkg_dict.author %}
-                                <li class="list-group-item">
-                                    <strong>{{ _('Author') }}:</strong> {{ pkg_dict.author }}
-                                </li>
-                            {%- endif %}
-                            {%- if pkg_dict.maintainer %}
-                                <li class="list-group-item">
-                                    <strong>{{ _('Maintainer') }}:</strong> {{ pkg_dict.maintainer }}
-                                </li>
-                            {%- endif %}
-                            {%- if pkg_dict.version %}
-                                <li class="list-group-item">
-                                    <strong>{{ _('Version') }}:</strong> {{ pkg_dict.version }}
-                                </li>
-                            {%- endif %}
-                            {%- if pkg_dict.metadata_created %}
-                                <li class="list-group-item">
-                                    <strong>{{ _('Created') }}:</strong> {{ ui.datetime(pkg_dict.metadata_created) }}
-                                </li>
-                            {%- endif %}
-                            {%- if pkg_dict.metadata_modified %}
-                                <li class="list-group-item">
-                                    <strong>{{ _('Last Updated') }}:</strong> {{ ui.datetime(pkg_dict.metadata_modified) }}
-                                </li>
-                            {%- endif %}
-                        </ul>
-                    </div>
-                </div>
-            {%- endblock %}
-        </div>
-    </div>
-{%- endblock -%}

@@ -1,21 +1,17 @@
-{% extends "page.html" %}
+{%- extends "package/_resource_edit_base.html" -%}
 
-{%- block primary_content_inner %}
-    <h1>{{ _('Edit Resource') }}</h1>
+{% block subtitle %}
+    {{ _('Edit') }} {{ g.template_title_delimiter }}
+    {{ super() }}
+{% endblock %}
 
-    {{ ui.form_start(method="POST", action="", attrs={"class": "resource-form"}) }}
-    {{ h.csrf_input() }}
+{% block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_('Edit'), href=h.url_for(pkg_dict.type ~ "_resource.edit", id=pkg_dict.id, resource_id=resource.id)) }}
+{% endblock %}
 
-    {{ ui.input("name", "field-name", label=_('Name'), value=data.name or "", errors=errors.name or []) }}
-    {{ ui.textarea("description", "field-description", label=_('Description'), value=data.description or "", errors=errors.description or []) }}
-    {{ ui.input("url", "field-url", label=_('URL'), value=data.url or "", errors=errors.url or [], type="url") }}
-    {{ ui.input("format", "field-format", label=_('Format'), value=data.format or "", errors=errors.format or []) }}
-    {{ ui.input("size", "field-size", label=_('Size'), value=data.size or "", errors=errors.size or [], type="number") }}
+{% block primary_content_inner %}
+    {{ resource_form_snippet }}
 
-    <div class="form-actions">
-        {{ ui.button(_('Update Resource'), type="submit", attrs={"class": "btn btn-primary"}) }}
-        {{ ui.button(_('Cancel'), type="button", href=h.url_for('dataset_resource.read', id=pkg_dict.name, resource_id=resource.id), attrs={"class": "btn btn-secondary"}) }}
-    </div>
-
-    {{ ui.form_end() }}
-{%- endblock %}
+    {% snippet resource_form_snippet, data=data, errors=errors, error_summary=error_summary, include_metadata=false, pkg_name=pkg_name, stage=stage, dataset_type=dataset_type %}
+{% endblock %}

@@ -1,1 +1,17 @@
 {% extends "_layout.html" %}
+{%- set _layout = _layout | default("fullwidth") -%}
+
+{% block subtitle %}{{ _('Confirm Delete') }}{% endblock %}
+
+{%- block primary_content_inner -%}
+    <p>{{ _('Are you sure you want to delete collaborator - {name}?').format(name=user_dict.name) }}</p>
+
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.submit(value=_("Cancel"), name="cancel") }}
+            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+        {%- endcall %}
+    {%- endcall %}
+
+
+{%- endblock %}

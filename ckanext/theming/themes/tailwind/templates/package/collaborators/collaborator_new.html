@@ -1,1 +1,65 @@
-{% extends "_layout.html" %}
+{% extends "package/_edit_base.html" %}
+
+{% block subtitle %}{{ _('Edit Collaborator') if user else _('Add Collaborator') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+
+{%- block content_action -%}
+    {{ ui.content_action_item(_('Back to all collaborators'), h.url_for(pkg_dict.type ~ ".collaborators_read", id=pkg_dict.name)) }}
+{%- endblock %}
+
+{%- block primary_content_inner -%}
+    {{ ui.heading(_('Edit Collaborator') if user else _('Add Collaborator'), level=1) }}
+
+    {%- if user -%}
+        {%- set removal_form_id = ui.util.id() -%}
+
+        {{ ui.form(method="POST", action=h.url_for(pkg_dict.type ~ '.collaborator_delete', id=pkg_dict.id, user_id=user.name), attrs={"id": removal_form_id}) }}
+    {%- endif %}
+
+    {%- call ui.util.call(ui.form, method="POST") -%}
+
+        {% if user %}
+            {{ ui.input(name="username", label=_("Username"), value=user.name, attrs={"readonly": true}) }}
+
+        {% else %}
+
+            {%- call ui.util.call(ui.autocomplete, name="username", label=_('Existing User'), source="/api/2/util/user/autocomplete") -%}
+                {{ _('If you wish to add an existing user, search for their username below.') }}
+            {%- endcall %}
+        {% endif %}
+
+        {{ ui.select(name='capacity', label=_('Role'), options=capacities, selected=user_capacity) }}
+
+        {%- call ui.util.call(ui.form_actions) -%}
+            {% if user %}
+                {%- with modal_id = ui.util.id() -%}
+                    {{ ui.modal_handler(_('Delete'), id=modal_id) }}
+                    {{ ui.confirm_modal(_('Are you sure you want to delete this collaborator?'), id=modal_id, form_id=removal_form_id) }}
+                {%- endwith %}
+
+                {{ ui.button(_('Update  Collaborator'), type="submit") }}
+
+            {% else %}
+                {{ ui.button(_('Add Collaborator'), type="submit") }}
+            {% endif %}
+
+        {%- endcall %}
+
+    {%- endcall %}
+{%- endblock %}
+
+
+{%- block secondary_content %}
+    {{ ui.heading(_('What are the available roles?'), level=2) }}
+    {%- set items = [
+[_("Editor:"), _("Editors can edit the dataset and its resources, as well accessing the dataset if private.")],
+[_("Member:"), _("Members can access the dataset if private, but not edit it.")]
+    ] -%}
+    {% if h.check_config_permission('allow_admin_collaborators') %}
+        {%- set items = [
+[_("Admin:"), _("In addition to managing the dataset, admins can add and remove collaborators from a dataset.")]
+        ] + items -%}
+    {% endif %}
+
+    {{ ui.definition_list(items) }}
+
+{%- endblock %}

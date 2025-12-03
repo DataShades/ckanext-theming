@@ -1,1 +1,62 @@
-{% extends "_layout.html" %}
+{%- set can_delete = form_style == 'edit' and h.check_access('package_delete', {'id': data.id}) and not data.state == 'deleted' -%}
+{%- if can_delete -%}
+    {%- set removal_form_id = ui.util.id() -%}
+    {{ ui.form(method="POST", action=h.url_for(dataset_type ~ ".delete", id=data.id), attrs={"id": removal_form_id}) }}
+{%- endif %}
+
+
+{%- call ui.util.call(ui.form, method="POST") -%}
+
+    {%- block hidden_fields -%}
+        {{ ui.hidden_input("_ckan_phase", "dataset_new_1") }}
+        {{ ui.hidden_input("pkg_name", data.id) }}
+    {%- endblock %}
+
+    {% block errors %}{{ ui.form_errors(error_summary) }}{% endblock %}
+
+    {% block basic_fields %}
+        {% snippet 'package/snippets/_package_basic_fields.html', data=data, errors=errors %}
+    {% endblock %}
+
+    {% block metadata_fields %}
+        {% snippet 'package/snippets/_package_metadata_fields.html', data=data, errors=errors %}
+    {% endblock %}
+
+    {% block form_actions %}
+
+        {%- call ui.util.call(ui.form_actions) -%}
+            {% block delete_button %}
+                {% if can_delete %}
+                    {%- with modal_id=ui.util.id() -%}
+                        {{ ui.modal_handler(_("Delete"), id=modal_id) }}
+                        {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=removal_form_id) -%}
+                            {{ h.humanize_entity_type('package', dataset_type, 'delete confirmation') or _('Are you sure you want to delete this dataset?') }}
+                        {%- endcall %}
+                    {%- endwith %}
+
+                {% endif %}
+            {% endblock %}
+
+            {% block publish_button %}
+                {% if form_style == 'edit' %}
+                    {{ ui.button(_('Unpublish'), type="submit", style="warning", attrs={"name": "save", "value": "go-metadata-unpublish"}) }}
+                {% endif %}
+            {% endblock %}
+
+            {% block save_button %}
+                {%- call ui.util.call(ui.button, type="submit", attrs={"name": "save"})-%}
+                    {%- block save_button_text -%}
+                        {%- if form_style == 'edit' -%}
+                            {{ h.humanize_entity_type('package', pkg_dict.type, 'update label') or _('Update Dataset') }}
+                        {%- else -%}
+                            {{ _('Next: Add Data') }}
+                        {%- endif -%}
+                    {%- endblock -%}
+                {%- endcall %}
+            {% endblock %}
+
+        {%- endcall %}
+
+    {% endblock %}
+
+{%- endcall %}

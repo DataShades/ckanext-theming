@@ -1,22 +1,123 @@
-{% extends "page.html" %}
+{% extends "package/_base.html" %}
+
+{%- block subtitle -%}
+    {{ h.resource_display_name(resource) }}
+    {{ g.template_title_delimiter }}
+    {{ super() }}
+{%- endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ "_resource.read", id=pkg_dict.id, resource_id=resource.id)) }}
+{%- endblock %}
+
+
+{%- block content_action -%}
+    {% if h.check_access('package_update', {'id':pkg_dict.id }) %}
+        {{ ui.content_action_item(_('Edit resource'), h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id)) }}
+        {{ ui.content_action_item(_('Views'), h.url_for(pkg_dict.type ~ '_resource.views', id=pkg.name, resource_id=resource.id)) }}
+    {% endif %}
+{%- endblock %}
+
+{%- block content_nav -%}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    <h1>{{ resource.name or resource.description or _('Unnamed resource') }}</h1>
+    {%- block resource_title -%}
+        {{ ui.heading(h.resource_display_name(resource), level=1) }}
+    {%- endblock %}
 
-    {%- if resource.description %}
-        <p>{{ h.render_markdown(resource.description) }}</p>
-    {%- endif %}
+    {%- block resource_description -%}
+        {{ ui.text(h.render_markdown(resource.description)) if resource.description }}
+    {%- endblock %}
 
-    <div class="resource-info">
-        <p><strong>{{ _('URL') }}:</strong> {{ ui.link(resource.url, href=resource.url) }}</p>
-        <p><strong>{{ _('Format') }}:</strong> {{ resource.format or _('Not specified') }}</p>
-        <p><strong>{{ _('Size') }}:</strong> {{ resource.size or _('Unknown') }}</p>
-        <p><strong>{{ _('Last Modified') }}:</strong> {{ ui.datetime(resource.last_modified) if resource.last_modified }}</p>
-    </div>
+    {%- block resource_url -%}
+        {%- if resource.url -%}
+            <div>
+                {{ ui.link(_('Go to resource'), resource.url) }}
+            </div>
+        {%- endif %}
+    {%- endblock %}
 
-    {{ ui.button(_('Download'), href=resource.url, attrs={"class": "btn btn-primary"}) }}
+    {% block resource_additional_information %}
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {%- call ui.util.call(ui.accordion_item, title=_('Additional Information')) -%}
 
-    {%- if h.check_access('package_update', {'id': pkg_dict.id}) %}
-        {{ ui.button(_('Edit'), href=h.url_for('dataset_resource.edit', id=pkg_dict.name, resource_id=resource.id), attrs={"class": "btn btn-secondary"}) }}
-    {%- endif %}
+                {%- call ui.util.call(ui.table, striped=true, bordered=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell(_('Data last updated'), heading=true) }}
+                            {{ ui.table_cell(h.render_datetime(resource.last_modified) or h.render_datetime(resource.created) or _('unknown')) }}
+                        {%- endcall %}
+
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell(_('Metadata last updated'), heading=true) }}
+                            {{ ui.table_cell(h.render_datetime(resource.metadata_modified) or h.render_datetime(resource.created) or _('unknown')) }}
+                        {%- endcall %}
+
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell(_('Created'), heading=true) }}
+                            {{ ui.table_cell(h.render_datetime(resource.created) or _('unknown')) }}
+                        {%- endcall %}
+
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell(_('Format'), heading=true) }}
+                            {{ ui.table_cell(resource.format or resource.mimetype_inner or resource.mimetype or _('unknown')) }}
+                        {%- endcall %}
+
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell(_('License'), heading=true) }}
+                            {{ ui.table_cell(ui.license(pkg_dict.license_title, id=pkg_dict.license_id, url=pkg_dict.license_url)) }}
+                        {%- endcall %}
+
+                        {% for key, value in h.format_resource_items(resource.items()) if key not in ('created', 'metadata modified', 'last modified', 'format') %}
+
+                            {%- call ui.util.call(ui.table_row) -%}
+                                {{ ui.table_cell(key|capitalize, heading=true) }}
+                                {{ ui.table_cell(value) }}
+                            {%- endcall %}
+
+                        {% endfor %}
+
+                    {%- endcall %}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endcall %}
+    {% endblock %}
+
+
+    {%- block resource_view -%}
+        {% block resource_view_nav %}
+            {%- call ui.util.call(ui.content_nav_wrapper) -%}
+                {%- for view in resource_views -%}
+                    {{ ui.content_nav_item(view.title, h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.id, resource_id=resource.id, view_id=view.id), active=view == current_resource_view) }}
+                {%- endfor %}
+            {%- endcall %}
+        {% endblock %}
+
+        {% block resource_view_content %}
+            <div class="resource-view">
+                {% if current_resource_view in resource_views %}
+                    {%- with resource_view=current_resource_view, resource=resource, package=package -%}
+                        {% include 'package/snippets/_resource_view.html' %}
+                    {%- endwith %}
+
+                {% else %}
+                    <p>{{ _("There are no views created for this resource yet.") }}</p>
+                    {% if h.check_access('resource_view_create', {'resource_id': resource.id}) %}
+                        <p>{{ _('Here are some reasons you may not be seeing expected views:') }}</p>
+                        <ul>
+                            <li>{{ _("No view has been created that is suitable for this resource")}}</li>
+                            <li>{{ _("The site administrators may not have enabled the relevant view plugins")}}</li>
+                            <li>{{ _("If a view requires the DataStore, the DataStore plugin may not be enabled, or the data may not have been pushed to the DataStore, or the DataStore hasn't finished processing the data yet")}}</li>
+                        </ul>
+                    {% endif %}
+
+                {% endif %}
+            </div>
+        {% endblock %}
+
+    {%- endblock resource_view %}
+
 {%- endblock %}
