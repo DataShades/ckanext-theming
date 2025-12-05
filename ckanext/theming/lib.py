@@ -228,11 +228,13 @@ class MacroUI(UI):
 
     @override
     def __getattr__(self, name: str):
-        if config["debug"]:
-            tpl = self.__env.get_template(self.source)
-            mod = tpl.make_module()
-        else:
-            mod = self.__tpl.module
+        # reset macro cache at the beginning of the request in debug mode. This
+        # allows to edit UI macros without restarting the server.
+        if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
+            self.__tpl._module = self.__tpl.make_module()
+            tk.g._ui_compiled = True
+
+        mod = self.__tpl.module
         el: PElement = getattr(mod, name)
         return el
 

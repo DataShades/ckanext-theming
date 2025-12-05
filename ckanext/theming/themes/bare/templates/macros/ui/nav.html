@@ -1,5 +1,5 @@
 {%- macro breadcrumb_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
+    <div {{ ui.util.attrs(kwargs) }} class="breadcrumbs">
         {{ content }}
     </div>
 {%- endmacro %}
@@ -56,21 +56,24 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro pagination(page=1, total_pages=1, url_generator=h.pager_url, padding=2) -%}
-    {%- if total_pages > 1 %}
+{%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=_("Previous"), next_label=_("Next"), padding_label="...") -%}
+    {%- if total > 1 %}
         <div {{ ui.util.attrs(kwargs) }}>
 
-            {%- if page > 1 %}
-                {{ ui.link(_("Previous"), href=url_generator(page=page - 1)) }}
+            {%- if page > 1 and not hide_siblings %}
+                {{ ui.link(previous_label, href=url_generator(page=page - 1)) }}
             {%- endif %}
 
 
             {%- if page - 1 > padding %}
-                {{ ui.link(1, href=url_generator(page=1)) }}
-                <span>...</span>
+                {%- if not hide_edges -%}
+                    {{ ui.link(start_label|default(1), href=url_generator(page=1)) }}
+                {%- endif %}
+
+                <span>{{ padding_label }}</span>
             {%- endif %}
 
-            {%- for i in range([page - padding, 1]|max, [page + padding, total_pages + 1]|min) %}
+            {%- for i in range([page - padding, 1]|max, [page + padding, total]|min + 1) %}
                 {%- if i == page %}
                     <span>{{ i }}</span>
                 {%- else %}
@@ -78,14 +81,16 @@
                 {%- endif %}
             {%- endfor %}
 
-            {%- if total_pages - page > padding %}
-                <span>...</span>
-                {{ ui.link(total_pages, href=url_generator(page=total_pages)) }}
+            {%- if total - page > padding %}
+                <span>{{ padding_label }}</span>
+                {%- if not hide_edges -%}
+                    {{ ui.link(end_label|default(total), href=url_generator(page=total)) }}
+                {%- endif %}
             {%- endif %}
 
 
-            {%- if page < total_pages %}
-                {{ ui.link(_("Next"), href=url_generator(page=page + 1)) }}
+            {%- if page < total and not hide_siblings %}
+                {{ ui.link(next_label, href=url_generator(page=page + 1)) }}
             {%- endif %}
 
         </div>

@@ -1,31 +1,28 @@
-{% extends "_page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("fullwidth") -%}
 
 {%- block subtitle %}{{ gettext('Error %(error_code)s', error_code=code) }}{% endblock %}
 
-{%- block primary_content %}
-    <article class="module">
-        <div class="module-content" id="error-content">
-            {%- if name %}
-                <h1>{{ code }} {{ name }}</h1>
-            {%- endif %}
-            {{ content }}
-        </div>
+{%- block primary_content_inner %}
+    {%- call ui.util.call(ui.section) -%}
+        {{ ui.heading(code ~ " " ~ name, level=1) }}
+        {{ ui.text(content) }}
+
         {%- block login_redirect %}
             {%- if show_login_redirect_link %}
-                <div class="module-content">
+                {%- call ui.util.call(ui.text) -%}
                     {{ _("You might need to login to access this page.") }}
                     {{ ui.link(_("Click here to login"), href=h.url_for('user.login')) }}
-                </div>
+                {%- endcall %}
             {%- endif %}
         {%- endblock %}
-    </article>
+
+    {%- endcall %}
 {%- endblock %}
 
 {%- block breadcrumb %}{% endblock %}
 
-{%- block flash %}
+{%- block notifications_container %}
     {# eat the flash messages caused by the 404 #}
-    {%- set flash_messages = h.get_flashed_messages() %}
+    {%- do h.get_flashed_messages() -%}
 {% endblock %}
-
-{%- block secondary_content %}{% endblock %}

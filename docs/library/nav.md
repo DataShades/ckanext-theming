@@ -265,7 +265,7 @@ Use when content is divided across multiple pages to help users navigate between
 **Example:**
 
 ```
-{{ ui.pagination(page=currentPage, total_pages=totalPages, url_generator=h.pager_url, padding=2) }}
+{{ ui.pagination(page=currentPage, total=totalPages, url_generator=h.pager_url, padding=2) }}
 ```
 
 **Recommendations:**

@@ -72,7 +72,8 @@
 {%- endmacro %}
 
 {%- macro panel(content, title, id, open) -%}
-    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id }}" {{ 'data-panel-default="true"' if open else "hidden" }}>
+    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id }}"
+                                     {% if open %} data-panel-default="true"{% else %} hidden{% endif %}>
         {{ content }}
     </div>
 {%- endmacro %}

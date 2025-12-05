@@ -37,6 +37,19 @@
                 {{ ui.link(_('Go to resource'), resource.url) }}
             </div>
         {%- endif %}
+        {% if h.plugin_loaded("datastore") and resource.datastore_active %}
+
+            {{ ui.modal_handler(_("Data API"), id="api-info-modal") }}
+            {%- include "datastore/snippets/api_info.html" -%}
+
+            {%- call ui.util.call(ui.dropdown_wrapper, title=_("Download as ...")) -%}
+                {{ ui.dropdown_item(_("CSV"), href=h.url_for('datastore.dump', resource_id=resource.id, bom=True)) }}
+                {{ ui.dropdown_item(_("TSV"), href=h.url_for('datastore.dump', resource_id=resource.id, bom=True, format="tsv")) }}
+                {{ ui.dropdown_item(_("JSON"), href=h.url_for('datastore.dump', resource_id=resource.id, format="json")) }}
+                {{ ui.dropdown_item(_("XML"), href=h.url_for('datastore.dump', resource_id=resource.id, format="xml")) }}
+            {%- endcall %}
+        {% endif %}
+
     {%- endblock %}
 
     {% block resource_additional_information %}
@@ -84,6 +97,17 @@
                 {%- endcall %}
             {%- endcall %}
         {%- endcall %}
+
+        {%- if h.plugin_loaded("datastore") and resource.datastore_active -%}
+            {%- call ui.util.call(ui.accordion_item, title=_("Data Dictionary")) -%}
+                {% block resource_data_dictionary %}
+                    {%- with ddict=h.datastore_dictionary(resource.id), res=resource -%}
+                        {% include 'datastore/snippets/_dictionary_view.html' %}
+                    {%- endwith %}
+
+                {% endblock %}
+            {%- endcall %}
+        {%- endif %}
     {% endblock %}
 
 

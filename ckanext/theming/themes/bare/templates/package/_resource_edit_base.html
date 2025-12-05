@@ -28,6 +28,11 @@
         {{ ui.content_nav_item(_('Edit resource'), href=h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.edit') }}
         {{ ui.content_nav_item(_('Views'), href=h.url_for(pkg_dict.type ~ '_resource.views', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.views') }}
         {{ ui.content_nav_item(_('DataStore'), href=h.url_for('datapusher.resource_data', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == 'datapusher.resource_data') if h.plugin_loaded("datapusher") }}
+        {{ ui.content_nav_item(_('DataStore'), href=h.url_for('xloader.resource_data', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == 'xloader.resource_data') if h.plugin_loaded("xloader") and h.is_resource_supported_by_xloader(resource) }}
+        {% if resource.datastore_active %}
+            {{ ui.content_nav_item(_('Data Dictionary'), href=h.url_for('datastore.dictionary', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == 'datastore.dictionary') }}
+        {% endif %}
+
     {%- endif %}
 
 {% endblock %}

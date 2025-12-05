@@ -125,9 +125,9 @@ img {
     gap: 1rem;
 }
 
-#breadcrumb {background: var(--breadcrumb-bg);}
-#breadcrumb > a:not(:first-child):before {content: " / ";}
-#breadcrumb > a:last-child {
+.breadcrumbs {background: var(--breadcrumb-bg);}
+.breadcrumbs > a:not(:first-child):before {content: " / ";}
+.breadcrumbs > a:last-child {
     text-decoration: none;
     pointer-events: none;
     font-weight: bold;
@@ -164,6 +164,7 @@ table.table-striped tbody tr:nth-child(2n+1) {
 
 .dropdown {
     position: relative;
+    display: inline-block;
 }
 
 .dropdown .dropdown-menu {

@@ -1,1 +1,48 @@
-{% extends "_layout.html" %}
+{%- extends "package/_resource_edit_base.html" -%}
+
+{%- set options = [
+        {'name': '', 'value': ''},
+        {'name': 'text', 'value': 'text'},
+        {'name': 'numeric', 'value': 'numeric'},
+        {'name': 'timestamp', 'value': 'timestamp'},
+] -%}
+
+
+{%- block primary_content_inner -%}
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {% block errors %}{{ ui.form_errors(error_summary) }}{% endblock %}
+
+        {% block dictionary_form %}
+            {%- call ui.util.call(ui.accordion_wrapper) -%}
+                {% for field in fields %}
+                    {%- set position = loop.index -%}
+
+                    {%- call ui.util.call(ui.accordion_item, title=_( "Field {num}.").format(num=position) ~ " " ~ field.id ~ " " ~ field.type ~ (", " ~ _("Primary key") if field.schema and field.schema.is_index else "")) -%}
+
+
+
+                        {% block datapusher_xloader_fields scoped %}
+                            {{ ui.select(name='info__' ~ position ~ '__type_override', label=_('Type Override'), options=options, selected=field.get('info', {}).get('type_override', '')) }}
+                        {% endblock %}
+
+                        {% block standard_fields scoped %}
+                            {{ ui.input(name='info__' ~ position ~ '__label', label=_('Label'), value=field.get('info', {}).get('label', ''), classes=['control-full']) }}
+
+                            {{ ui.markdown(name='info__' ~ position ~ '__notes', label=_('Description'), value=field.get('info', {}).get('notes', '')) }}
+                        {% endblock %}
+
+                        {% block additional_fields scoped %}
+                        {% endblock %}
+
+                    {%- endcall %}
+                {% endfor %}
+
+            {%- endcall %}
+        {% endblock %}
+
+        {{ ui.form_actions(ui.button(_("Save"), type="submit")) }}
+
+    {%- endcall %}
+
+
+{%- endblock %}
