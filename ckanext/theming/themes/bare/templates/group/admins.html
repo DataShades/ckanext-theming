@@ -1,1 +1,10 @@
-{% extends "_layout.html" %}
+{% extends "group/read_base.html" %}
+
+{%- block subtitle %}{{ _('Administrators') }} {{ g.template_title_delimiter }} {{ group_dict.title or group_dict.name }}{% endblock %}
+
+{%- block primary_content_inner %}
+    {{ ui.heading(_('Administrators'), level=1, attrs={"class": "hide-heading"}) }}
+    {%- block admins_list %}
+        {{ ui.snippet("user/snippets/followers.html", followers=admins) }}
+    {%- endblock %}
+{%- endblock %}

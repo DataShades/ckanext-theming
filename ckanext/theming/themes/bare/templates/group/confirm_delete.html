@@ -1,1 +1,23 @@
-{% extends "_layout.html" %}
+{% extends "_page.html" %}
+
+{%- block subtitle %}{{ _("Confirm Delete") }}{% endblock %}
+
+{%- block primary_content_inner %}
+    {{ ui.heading(_("Confirm Delete"), level=1) }}
+
+    <div class="module">
+        <div class="module-content">
+            {{ ui.text(_('Are you sure you want to delete group - {name}?').format(name=group_dict.name)) }}
+
+            <div class="form-actions">
+                {{ ui.form_block("POST", action=h.url_for(group_dict.type ~ '.delete', id=group_dict.name)) }}
+                {{ h.csrf_input() }}
+
+                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger") }}
+                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary") }}
+
+                {{ ui.form_end() }}
+            </div>
+        </div>
+    </div>
+{%- endblock %}

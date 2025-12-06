@@ -1,0 +1,27 @@
+{% extends "organization/_base.html" %}
+
+{%- set organization_type = organization_dict.type or 'organization' %}
+{%- set dataset_type = h.default_package_type() %}
+
+{%- block subtitle %}{{ organization_dict.title or organization_dict.name }}{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(organization_dict.title or organization_dict.name, h.url_for(organization_type ~ ".read", id=organization_dict.name)) }}
+{%- endblock %}
+
+{%- block page_header %}
+    {{ ui.heading(organization_dict.title or organization_dict.name, level=1) }}
+
+    {%- if organization_dict.description %}
+        {{ h.render_markdown(organization_dict.description) }}
+    {%- endif %}
+
+    <div class="organization-info">
+        <p><strong>{{ _('Datasets') }}:</strong> {{ organization_dict.package_count }}</p>
+    </div>
+
+    {%- if h.check_access('organization_update', {'id': organization_dict.id}) %}
+        {{ ui.button(_('Edit'), href=h.url_for(organization_type ~ '.edit', id=organization_dict.name)) }}
+    {%- endif %}
+{%- endblock %}

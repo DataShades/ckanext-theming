@@ -1,1 +1,28 @@
-{% extends "_layout.html" %}
+{% extends "user/dashboard.html" %}
+
+{%- set org_type = h.default_group_type('organization') %}
+
+{%- block page_primary_action %}
+    {%- if h.check_access('organization_create') %}
+        {{ ui.link(h.humanize_entity_type('organization', org_type, 'add link') or _('Add Organization'), href=h.url_for(org_type ~ '.new'), attrs={"class": "btn btn-primary"}, icon="plus-square") }}
+    {%- endif %}
+{%- endblock %}
+
+{%- block primary_content_inner %}
+    {{ ui.heading(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), level=2, attrs={"class": "hide-heading"}) }}
+    {%- set organizations = h.organizations_available(permission='manage_group',
+        include_dataset_count=True,
+        include_member_count=True) %}
+    {%- if organizations %}
+        <div class="wide">
+            {{ ui.snippet("organization/snippets/organization_list.html", organizations=organizations, show_capacity=True) }}
+        </div>
+    {%- else %}
+        <p class="empty">
+            {{ h.humanize_entity_type('organization', org_type, 'you not member') or _('You are not a member of any organizations.') }}
+            {%- if h.check_access('organization_create') %}
+                {{ ui.link(_('Create one now?'), href=h.url_for(org_type ~ '.new')) }}
+            {%- endif %}
+        </p>
+    {%- endif %}
+{%- endblock %}

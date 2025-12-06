@@ -1,0 +1,8 @@
+{% extends "group/_base.html" %}
+
+{%- block primary_content_inner %}
+    {{ ui.heading(h.humanize_entity_type('group', group_type, 'form label') or _('Group Form'), level=1) }}
+    {%- block form %}
+        {{ form | safe }}
+    {%- endblock %}
+{%- endblock %}

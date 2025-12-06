@@ -1,0 +1,14 @@
+{% extends "organization/_base.html" %}
+
+{%- block subtitle %}{{ _('Edit') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {%- block breadcrumb_content_inner %}
+        {{ ui.breadcrumb_item(organization.display_name|truncate(35), h.url_for(organization_type~'.read', id=organization.name), title=organization.display_name) }}
+        {{ ui.breadcrumb_item(_('Manage'), h.url_for(organization_type~'.edit', id=organization.name), active=true) }}
+    {%- endblock %}
+{%- endblock %}
+
+{%- block page_heading_class %}hide-heading{% endblock %}
+{%- block page_heading %}{{ h.humanize_entity_type('organization', organization_type, 'edit label') or _('Edit Organization') }}{% endblock %}

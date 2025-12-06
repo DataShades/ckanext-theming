@@ -1,33 +1,30 @@
-{% extends "_page.html" %}
+{% extends "organization/read_base.html" %}
 
-{%- block subtitle %}{{ group_dict.title or group_dict.name }}{% endblock %}
-
-{%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
-    {{ ui.breadcrumb_item(group_dict.title, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
+{%- block primary_content %}
+    {%- call ui.util.call(ui.container, class="module") -%}
+        {%- block page_header -%}
+            {{ super() }}
+        {%- endblock %}
+        {{ ui.snippet("package/snippets/search_results.html",
+            dataset_type=dataset_type,
+            fields_grouped=fields_grouped,
+            search_facets=search_facets,
+            facet_titles=facet_titles,
+            translated_fields=translated_fields,
+            remove_field=remove_field,
+            q=q,
+            sort_by_selected=sort_by_selected,
+            page=page,
+            query_error=query_error,
+            fields=fields
+        ) }}
+    {%- endcall %}
 {%- endblock %}
 
-{%- block primary_content_inner %}
-    <h1>{{ group_dict.title or group_dict.name }}</h1>
-
-    {%- if group_dict.description %}
-        <p>{{ h.render_markdown(group_dict.description) }}</p>
-    {%- endif %}
-
-    <div class="organization-info">
-        <p><strong>{{ _('Packages') }}:</strong> {{ group_dict.package_count }}</p>
-    </div>
-
-    {%- if h.check_access('organization_update', {'id': group_dict.id}) %}
-        {{ ui.button(_('Edit'), href=h.url_for(group_dict.type ~ '.edit', id=group_dict.name), attrs={"class": "btn btn-primary"}) }}
-    {%- endif %}
-
-    {%- if page.items %}
-        <h2>{{ _('Datasets') }}</h2>
-        {{ ui.package_list(ui.util.map(ui.package_item, page.items)) }}
-
-        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
-    {%- else %}
-        <p>{{ _('No datasets in this organization') }}</p>
-    {%- endif %}
+{%- block secondary_content %}
+    {{ super() }}
+    {{ ui.snippet("package/snippets/search_facets.html",
+        facet_titles=facet_titles,
+        search_facets=search_facets
+    ) }}
 {%- endblock %}

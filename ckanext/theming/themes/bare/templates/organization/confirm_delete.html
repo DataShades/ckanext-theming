@@ -1,1 +1,18 @@
-{% extends "_layout.html" %}
+{% extends "_page.html" %}
+
+{%- block subtitle %}{{ _("Confirm Delete") }}{% endblock %}
+
+{%- block primary_content_inner %}
+    <section class="module col-md-6 col-md-offset-3">
+        <div class="module-content">
+            <p>{{ _('Are you sure you want to delete organization - {name}?').format(name=group_dict.name) }}</p>
+            <p class="form-actions">
+                {{ ui.form_block("POST", action=h.url_for(group_type ~ '.delete', id=group_dict.id), id="organization-confirm-delete-form") }}
+                {{ h.csrf_input() }}
+                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger", class="btn btn-danger") }}
+                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary", class="btn btn-primary") }}
+                {{ ui.form_end() }}
+            </p>
+        </div>
+    </section>
+{%- endblock %}

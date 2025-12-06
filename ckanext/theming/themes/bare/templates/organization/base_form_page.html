@@ -1,0 +1,8 @@
+{% extends "organization/_base.html" %}
+
+{%- block primary_content_inner %}
+    {{ ui.heading(h.humanize_entity_type('organization', organization_type, 'form label') or _('Organization Form'), level=1) }}
+    {%- block form %}
+        {{ form | safe }}
+    {%- endblock %}
+{%- endblock %}

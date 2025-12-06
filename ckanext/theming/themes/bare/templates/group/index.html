@@ -1,47 +1,45 @@
-{% extends "group/_base.html" %}
+{% extends "page.html" %}
+
+{%- set group_type = h.default_group_type('group') %}
+
+{%- block subtitle %}{{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), href=h.url_for(group_type ~ '.index')) }}
+{%- endblock %}
+
+{%- block page_header %}{% endblock %}
+
+{%- block page_primary_action %}
+    {%- if h.check_access('group_create') %}
+        {{ ui.link(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new'), class_='btn btn-primary', icon='plus-square') }}
+    {%- endif %}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    {%- block page_primary_action %}
-        {%- if h.check_access('group_create') %}
-            {{ ui.button(_('Add Group'), href=h.url_for('group.new')) }}
-        {%- endif %}
+    {{ ui.heading(h.humanize_entity_type('group', group_type, 'page title') or _('Groups'), level=1, attrs={"class": "hide-heading"}) }}
+    {%- block groups_search_form %}
+        {{ ui.snippet('snippets/search_form.html', form_id='group-search-form', type=group_type, query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder=h.humanize_entity_type('group', group_type, 'search placeholder') or _('Search groups...'), show_empty=True if page.items, sorting=[(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')]) }}
     {%- endblock %}
-
-    {%- block search_form %}
-        {{ ui.form_start(method="GET", action=h.url_for('group.index'), **{"hx-boost": "true", "hx-disinherit": "hx-boost", "class": "search-form"}) }}
-
-        <div {{ ui.util.attrs({"class": "input-group"}) }}>
-            <input type="text" class="form-control" name="q" value="{{ q or '' }}"
-                   placeholder="{{ _('Search groups...') }}"
-                   autocomplete="off">
-            <button type="submit" class="btn btn-primary">{{ _('Search') }}</button>
-        </div>
-
-        <h2>
-            {%- if page.item_count %}
-                {{ ui.pagination_info(page.item_count, page.first_item, last_item) }}
-            {%- else %}
-                {{ _('No groups found') }}
+    {%- block groups_list %}
+        {%- if page.items or request.args %}
+            {%- if page.items %}
+                {{ ui.snippet("group/snippets/group_list.html", groups=page.items) }}
             {%- endif %}
-        </h2>
-
-        {{ ui.form_end() }}
-    {%- endblock %}
-
-    {%- block group_list %}
-        {%- if page.items %}
-            {{ ui.group_list(ui.util.map(ui.group_item, page.items)) }}
-
         {%- else %}
-            {%- if q %}
-                <p>{{ _('There was an error while searching.') }}</p>
-            {%- else %}
-                <p>{{ _('No groups found.') }}</p>
-            {%- endif %}
+            <p class="empty">
+                {{ h.humanize_entity_type('group', group_type, 'no any objects') or _('There are currently no groups for this site') }}.
+                {%- if h.check_access('group_create') %}
+                    {{ ui.link(_('How about creating one?'), href=h.url_for(group_type ~ '.new')) }}
+                {%- endif %}
+            </p>
         {%- endif %}
     {%- endblock %}
-
-    {%- block pagination %}
-        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- block page_pagination %}
+        {{ page.pager(q=q or '', sort=sort_by_selected or '') }}
     {%- endblock %}
+{%- endblock %}
+
+{%- block secondary_content %}
+    {{ ui.snippet("group/snippets/helper.html", group_type=group_type) }}
 {%- endblock %}
