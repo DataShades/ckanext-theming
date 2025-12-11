@@ -1,36 +1,36 @@
 {% extends "organization/_base.html" %}
+{%- set _layout = _layout | default("fullwidth") -%}
+
+{%- block subtitle %}
+    {{ h.humanize_entity_type('organization', group_type, 'page title') or _('Organizations') }}
+{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_type, 'breadcrumb') or _('Organizations'), href=h.url_for(group_type ~ '.index')) }}
+{%- endblock %}
+
+{%- block content_nav -%}
+{%- endblock %}
+
+{%- block page_action %}
+    {{ ui.button(h.humanize_entity_type('organization', group_type, 'add link') or _('Add Organization'), href=h.url_for(group_type ~ '.new')) if h.check_access('organization_create') }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    {%- block page_primary_action %}
-        {%- if h.check_access('organization_create') %}
-            {{ ui.button(_('Add Organization'), href=h.url_for('organization.new')) }}
-        {%- endif %}
-    {%- endblock %}
-
+    {{ ui.heading(h.humanize_entity_type('organization', group_type, 'page title') or _('Organizations'), level=1) }}
     {%- block search_form %}
-        {{ ui.form_start(method="GET", action=h.url_for('organization.index'), **{"hx-boost": "true", "hx-disinherit": "hx-boost", "class": "search-form"}) }}
+        {%- set sorting_options = [
+            {"text": _('Name Ascending'), "value": "title asc"},
+            {"text": _('Name Descending'), "value": "title desc"},
+        ] %}
 
-        <div {{ ui.util.attrs({"class": "input-group"}) }}>
-            <input type="text" class="form-control" name="q" value="{{ q or '' }}"
-                   placeholder="{{ _('Search organizations...') }}"
-                   autocomplete="off">
-            <button type="submit" class="btn btn-primary">{{ _('Search') }}</button>
-        </div>
-
-        <h2>
-            {%- if page.item_count %}
-                {{ ui.pagination_info(page.item_count, page.first_item, last_item) }}
-            {%- else %}
-                {{ _('No organizations found') }}
-            {%- endif %}
-        </h2>
-
-        {{ ui.form_end() }}
+        {{ ui.search_form(query=q, sorting_options=sorting_options, sorting=sort_by_selected, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item) }}
     {%- endblock %}
 
     {%- block organization_list %}
         {%- if page.items %}
             {{ ui.organization_list(ui.util.map(ui.organization_item, page.items)) }}
+
         {%- else %}
             {%- if q %}
                 <p>{{ _('There was an error while searching.') }}</p>

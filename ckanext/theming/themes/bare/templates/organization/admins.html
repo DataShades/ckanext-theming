@@ -1,9 +1,17 @@
-{% extends "organization/read_base.html" %}
+{% extends "organization/_base.html" %}
 
-{%- block subtitle %}{{ _('Administrators') }} {{ g.template_title_delimiter }} {{ group_dict.title or group_dict.name }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Administrators')) }}
+    {{ super() }}
+{% endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Administrators"), h.url_for(group_type ~ '.admins', id=organization_dict.name)) }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(_('Administrators'), level=1, attrs={"class": "hide-heading"}) }}
+    {{ ui.heading(_('Administrators'), level=1, class="hide-heading") }}
     {%- block admins_list %}
         {{ ui.snippet("user/snippets/followers.html", followers=admins) }}
     {%- endblock %}

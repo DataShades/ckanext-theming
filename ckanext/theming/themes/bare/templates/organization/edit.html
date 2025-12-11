@@ -1,27 +1,16 @@
-{% extends "_page.html" %}
+{% extends "organization/_edit_base.html" %}
 
-{%- block subtitle %}{{ _('Edit Organization') }}{% endblock %}
+{%- block subtitle %}
+    {{ _('Edit') }} {{ g.template_title_delimiter }}
+    {{ super() }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_dict.type, 'breadcrumb') or _('Organizations'), h.url_for(group_dict.type ~ '.index')) }}
-    {{ ui.breadcrumb_item(group_dict.title, h.url_for(group_dict.type ~ ".read", id=group_dict.name)) }}
-    {{ ui.breadcrumb_item(_('Edit'), h.url_for(group_dict.type ~ ".edit", id=group_dict.name)) }}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_('Edit'), h.url_for(group_type~'.edit', id=organization_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    <h1>{{ _('Edit Organization') }}</h1>
-
-    {{ ui.form_start(method="POST", action="", attrs={"class": "organization-form"}) }}
-    {{ h.csrf_input() }}
-
-    {{ ui.input("name", "field-name", label=_('Name'), value=data.name or "", errors=errors.name or []) }}
-    {{ ui.input("title", "field-title", label=_('Title'), value=data.title or "", errors=errors.title or []) }}
-    {{ ui.textarea("description", "field-description", label=_('Description'), value=data.description or "", errors=errors.description or []) }}
-
-    <div class="form-actions">
-        {{ ui.button(_('Update Organization'), type="submit", attrs={"class": "btn btn-primary"}) }}
-        {{ ui.button(_('Cancel'), type="button", href=h.url_for(group_dict.type ~ '.read', id=group_dict.name), attrs={"class": "btn btn-secondary"}) }}
-    </div>
-
-    {{ ui.form_end() }}
+    {{ ui.heading(_('Edit Organization'), level=1) }}
+    {{ form | safe }}
 {%- endblock %}

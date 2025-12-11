@@ -1,0 +1,16 @@
+{%- extends "organization/_base.html" -%}
+
+{% block content_action %}
+    {{ ui.content_action_item(_("View"), h.url_for(organization_dict.type+'.read', id=organization_dict.name)) if organization_dict and h.check_access('organization_update', {'id': organization_dict.id}) }}
+{% endblock %}
+
+{% block content_nav %}
+    {%- if organization_dict -%}
+
+        {{ ui.content_nav_item(_('Edit'), href=h.url_for(organization_dict.type + '.edit', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.edit') }}
+        {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), href=h.url_for(organization_dict.type + '.bulk_process', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.bulk_process') }}
+        {{ ui.content_nav_item(_('Members'), href=h.url_for(organization_dict.type + '.manage_members', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.manage_members') }}
+        {{ ui.content_nav_item(_('Admins'), href=h.url_for(organization_dict.type + '.admins', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.admins') }}
+    {%- endif %}
+
+{% endblock %}

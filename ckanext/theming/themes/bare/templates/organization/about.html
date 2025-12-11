@@ -1,15 +1,31 @@
-{% extends "organization/read_base.html" %}
+{% extends "organization/_base.html" %}
 
-{%- block subtitle %}{{ _('About') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+{%- block subtitle %}{{ ui.subtitle_item(_('About')) }} {{ super() }}{% endblock %}
 
 {%- block primary_content_inner %}
-    <h1>{% block page_heading %}{{ group_dict.display_name }}{% endblock %}</h1>
+    {% block page_heading %}
+        {{ ui.heading(organization_dict.display_name, level=1) }}
+    {% endblock %}
+
     {%- block organization_description %}
-        {%- if group_dict.description %}
-            {{ h.render_markdown(group_dict.description) }}
-        {%- endif %}
+        {{ ui.text(h.render_markdown(organization_dict.description)) if organization_dict.description }}
     {%- endblock %}
+
     {%- block organization_extras %}
-        {{ ui.snippet('snippets/additional_info.html', extras=h.sorted_extras(group_dict.extras)) }}
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {%- call ui.util.call(ui.accordion_item, title=_('Additional Info')) -%}
+                {%- call ui.util.call(ui.table, striped=true, bordered=true) -%}
+                    {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
+
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {% for key, value in h.sorted_extras(organization_dict.extras) %}
+                            {{ ui.table_row(ui.table_cell(_(key|e), heading=true) ~ ui.table_cell(_(value))) }}
+                        {% endfor %}
+                    {%- endcall %}
+
+                {%- endcall %}
+            {%- endcall %}
+        {%- endcall %}
+
     {%- endblock %}
 {%- endblock %}

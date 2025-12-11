@@ -1,1 +1,1 @@
-<input type="hidden" name="{{ g.csrf_field_name }}" value="{{ csrf_token() }}"/>
+{{ ui.hidden_input(name=g.csrf_field_name, value=csrf_token()) }}

@@ -1,19 +1,18 @@
-{% extends "_page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout | default("fullwidth") -%}
 
 {%- block subtitle %}{{ _("Confirm Delete") }}{% endblock %}
 
 {%- block primary_content_inner %}
-    <section class="module col-md-6 col-md-offset-3">
-        <div class="module-content">
+    {%- call ui.util.call(ui.container, class="col-md-6 col-md-offset-3") -%}
+        {%- call ui.util.call(ui.panel) -%}
             <p>{{ _('Are you sure you want to delete member - {name}?').format(name=user_dict.name) }}</p>
-            <div class="form-actions">
-                {{ ui.form_block("POST", action=h.url_for(group_type ~ '.member_delete', id=group_id, user=user_id)) }}
+            {%- call ui.util.call(ui.form, method="POST", action=h.url_for(group_type ~ '.member_delete', id=organization_id, user=user_id)) -%}
                 {{ h.csrf_input() }}
                 {{ ui.hidden_input("user", value=user_id) }}
-                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger", class="btn btn-danger") }}
-                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary", class="btn btn-primary") }}
-                {{ ui.form_end() }}
-            </div>
-        </div>
-    </section>
+                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger") }}
+                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary") }}
+            {%- endcall -%}
+        {%- endcall -%}
+    {%- endcall -%}
 {%- endblock %}

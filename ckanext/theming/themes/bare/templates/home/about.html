@@ -1,6 +1,10 @@
 {% extends "_layout.html" %}
 {% set _layout = "fullwidth" %}
 
+{%- block subtitle -%}
+    {{ _("About") }}
+{%- endblock %}
+
 {%- block breadcrumb_content %}
     {{ super() }}
     {{ ui.breadcrumb_item("About", h.url_for("home.about")) }}
