@@ -15,7 +15,7 @@
 
 {%- block primary_content_inner -%}
     {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
-        {{ ui.modal_handler(_('Purge all'), id=modal_id) }}
+        {{ ui.modal_handle(_('Purge all'), id=modal_id) }}
         {{ ui.form(ui.hidden_input("action", "all"), method="POST", attrs={"id": form_id}) }}
         {{ ui.confirm_modal(_('Are you sure you want to purge everything?'), id=modal_id, form_id=form_id) }}
     {%- endwith %}
@@ -27,7 +27,7 @@
             {%- call ui.util.call(ui.accordion_item, title=titles[ent_type]) -%}
 
                 {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
-                    {{ ui.modal_handler(_('Purge'), id=modal_id) }}
+                    {{ ui.modal_handle(_('Purge'), id=modal_id) }}
                     {{ ui.form(ui.hidden_input("action", ent_type), method="POST", attrs={"id": form_id}) }}
                     {{ ui.confirm_modal(_('Are you sure you want to purge everything?'), id=modal_id, form_id=form_id) }}
                 {%- endwith %}

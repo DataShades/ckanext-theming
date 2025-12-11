@@ -18,10 +18,6 @@ body {
     flex-direction: column;
 }
 
-dialog::backdrop {
-    backdrop-filter: brightness(0.8) blur(3px);
-}
-
 img {
     max-width: 100%;
 }
@@ -29,10 +25,57 @@ img {
     max-height: 200px;
 }
 
+#account {
+    background: var(--account-bg);
+    text-align: right;
+}
+
+#header {background: var(--header-bg);}
+#header .bare-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+#footer {background: var(--footer-bg);}
+
+#sidebar {background: var(--sidebar-bg);}
+
+#main {
+    flex-grow: 1;
+    background: var(--main-bg);
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.breadcrumbs {background: var(--breadcrumb-bg);}
+.breadcrumbs > a:not(:first-child):before {content: " / ";}
+.breadcrumbs > a:last-child {
+    text-decoration: none;
+    pointer-events: none;
+    font-weight: bold;
+}
+
+.bare-container {
+    padding: 0 1rem;
+}
+
+
+/* modal *********************************************************************/
+dialog::backdrop {backdrop-filter: brightness(0.8) blur(3px);}
+
+/* tooltips ******************************************************************/
 [data-tooltip] {
     position: relative;
     display: inline-block;
 }
+[data-tooltip]:before, [data-tooltip]:after {z-index: 10;}
 [data-tooltip]:hover:after {
     content: " ";
     border: 0.5rem solid transparent;
@@ -47,7 +90,6 @@ img {
     width: max-content;
     box-shadow: 0.25rem 0.25rem 0.25rem;
 }
-
 [data-tooltip][data-tooltip-position="top"]:hover:before {
     top: 0;
     left: 50%;
@@ -93,6 +135,7 @@ img {
     transform: translate(calc(100% - 0.5rem), -50%);
 }
 
+/* tab navigation ************************************************************/
 .tabs {
     display: flex;
     flex-direction: row;
@@ -104,55 +147,10 @@ img {
     padding: 0.25rem;
     border-bottom: 2px solid black;
 }
-.tabs > a:hover{
-    background: rgb(230 230 230 / 0.5);
-}
-.tabs > a.active {
-    font-weight: bold;
-}
+.tabs > a:hover{background: rgb(230 230 230 / 0.5);}
+.tabs > a.active {font-weight: bold;}
 
-#account {
-    background: var(--account-bg);
-    text-align: right;
-}
-
-#header {background: var(--header-bg);}
-#header .bare-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-
-.breadcrumbs {background: var(--breadcrumb-bg);}
-.breadcrumbs > a:not(:first-child):before {content: " / ";}
-.breadcrumbs > a:last-child {
-    text-decoration: none;
-    pointer-events: none;
-    font-weight: bold;
-}
-
-#footer {background: var(--footer-bg);}
-
-#sidebar {background: var(--sidebar-bg);}
-
-#main {
-    flex-grow: 1;
-    background: var(--main-bg);
-}
-
-#content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-
-.bare-container {
-    padding: 0 1rem;
-}
-
+/* tables ********************************************************************/
 table.table-bordered, table.table-bordered td, table.table-bordered th {
     border: 1px solid var(--table-bd-color);
     border-collapse: collapse;
@@ -162,11 +160,11 @@ table.table-striped tbody tr:nth-child(2n+1) {
     background: var(--table-stripe-bg);
 }
 
+/* dropdown menu *************************************************************/
 .dropdown {
     position: relative;
     display: inline-block;
 }
-
 .dropdown .dropdown-menu {
     display: none;
     position: absolute;
@@ -177,21 +175,14 @@ table.table-striped tbody tr:nth-child(2n+1) {
     margin: 0px;
     list-style: none;
 }
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
+.dropdown:hover .dropdown-menu {display: block;}
 
-[data-draggable-resource] {
-    cursor: grab;
-}
-[data-draggable-resource][data-drag-in-progress] {
-    filter: opacity(0.5);
-}
-[data-draggable-resource][data-drop-in-progress] {
-    filter: blur(1px);
+/* resource reorder **********************************************************/
+[data-draggable-resource] {cursor: grab;}
+[data-draggable-resource][data-drag-in-progress] {filter: opacity(0.5);}
+[data-draggable-resource][data-drop-in-progress] {filter: blur(1px);}
 
-}
-
+/* responsive styles *********************************************************/
 @media (min-width: 768px) {
     #header .bare-container {
         flex-direction: row;

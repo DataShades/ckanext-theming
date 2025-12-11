@@ -1,0 +1,15 @@
+{%- extends "group/_base.html" -%}
+
+{% block content_action %}
+    {{ ui.content_action_item(_("View"), h.url_for(group_dict.type+'.read', id=group_dict.name)) if group_dict }}
+{% endblock %}
+
+{% block content_nav %}
+    {%- if group_dict -%}
+
+        {{ ui.content_nav_item(_('Edit'), href=h.url_for(group_dict.type + '.edit', id=group_dict.name), active=request.endpoint == group_dict.type + '.edit') }}
+        {{ ui.content_nav_item(_('Members'), href=h.url_for(group_dict.type + '.manage_members', id=group_dict.name), active=request.endpoint == group_dict.type + '.manage_members') }}
+        {{ ui.content_nav_item(_('Admins'), href=h.url_for(group_dict.type + '.admins', id=group_dict.name), active=request.endpoint == group_dict.type + '.admins') }}
+    {%- endif %}
+
+{% endblock %}

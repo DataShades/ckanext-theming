@@ -1,45 +1,46 @@
-{% extends "page.html" %}
+{% extends "group/_base.html" %}
+{%- set _layout = _layout | default("fullwidth") -%}
 
-{%- set group_type = h.default_group_type('group') %}
-
-{%- block subtitle %}{{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+{%- block subtitle %}
+    {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), href=h.url_for(group_type ~ '.index')) }}
 {%- endblock %}
 
-{%- block page_header %}{% endblock %}
+{%- block content_nav -%}
+{%- endblock %}
 
-{%- block page_primary_action %}
-    {%- if h.check_access('group_create') %}
-        {{ ui.link(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new'), class_='btn btn-primary', icon='plus-square') }}
-    {%- endif %}
+{%- block page_action %}
+    {{ ui.button(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(h.humanize_entity_type('group', group_type, 'page title') or _('Groups'), level=1, attrs={"class": "hide-heading"}) }}
-    {%- block groups_search_form %}
-        {{ ui.snippet('snippets/search_form.html', form_id='group-search-form', type=group_type, query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder=h.humanize_entity_type('group', group_type, 'search placeholder') or _('Search groups...'), show_empty=True if page.items, sorting=[(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')]) }}
+    {{ ui.heading(h.humanize_entity_type('group', group_type, 'page title') or _('Groups'), level=1) }}
+    {%- block search_form %}
+        {%- set sorting_options = [
+            {"text": _('Name Ascending'), "value": "title asc"},
+            {"text": _('Name Descending'), "value": "title desc"},
+        ] %}
+
+        {{ ui.search_form(query=q, sorting_options=sorting_options, sorting=sort_by_selected, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item) }}
     {%- endblock %}
-    {%- block groups_list %}
-        {%- if page.items or request.args %}
-            {%- if page.items %}
-                {{ ui.snippet("group/snippets/group_list.html", groups=page.items) }}
-            {%- endif %}
+
+    {%- block group_list %}
+        {%- if page.items %}
+            {{ ui.group_list(ui.util.map(ui.group_item, page.items)) }}
+
         {%- else %}
-            <p class="empty">
-                {{ h.humanize_entity_type('group', group_type, 'no any objects') or _('There are currently no groups for this site') }}.
-                {%- if h.check_access('group_create') %}
-                    {{ ui.link(_('How about creating one?'), href=h.url_for(group_type ~ '.new')) }}
-                {%- endif %}
-            </p>
+            {%- if q %}
+                <p>{{ _('There was an error while searching.') }}</p>
+            {%- else %}
+                <p>{{ _('No groups found.') }}</p>
+            {%- endif %}
         {%- endif %}
     {%- endblock %}
-    {%- block page_pagination %}
-        {{ page.pager(q=q or '', sort=sort_by_selected or '') }}
-    {%- endblock %}
-{%- endblock %}
 
-{%- block secondary_content %}
-    {{ ui.snippet("group/snippets/helper.html", group_type=group_type) }}
+    {%- block pagination %}
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+    {%- endblock %}
 {%- endblock %}

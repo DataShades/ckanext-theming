@@ -34,3 +34,7 @@
         {{ ui.container(content) }}
     </header>
 {%- endmacro %}
+
+{%- macro subtitle_item(content, initial) -%}
+    {{ content }} {{ g.template_title_delimiter if not initial }}
+{%- endmacro %}

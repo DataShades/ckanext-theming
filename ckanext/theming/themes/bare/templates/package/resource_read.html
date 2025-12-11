@@ -39,7 +39,7 @@
         {%- endif %}
         {% if h.plugin_loaded("datastore") and resource.datastore_active %}
 
-            {{ ui.modal_handler(_("Data API"), id="api-info-modal") }}
+            {{ ui.modal_handle(_("Data API"), id="api-info-modal") }}
             {%- include "datastore/snippets/api_info.html" -%}
 
             {%- call ui.util.call(ui.dropdown_wrapper, title=_("Download as ...")) -%}

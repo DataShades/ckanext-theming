@@ -1,18 +1,18 @@
-{% extends "group/base_form_page.html" %}
+{% extends "group/_edit_base.html" %}
 
-{%- set label = h.humanize_entity_type('group', group_type, 'create title') or _('Create a Group') %}
+{% set label = h.humanize_entity_type('group', group_type, 'create title') or _('Create a Group') %}
 
-{%- block subtitle %}{{ label }}{% endblock %}
-
-{%- block page_heading %}{{ label }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(label) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), h.url_for(group_type ~ '.index')) }}
-    {{ ui.breadcrumb_item(label, h.url_for(group_type ~ '.new'), active=true) }}
+    {{ super() }}
+    {{ ui.breadcrumb_item(label, h.url_for(group_type~'.new')) }}
 {%- endblock %}
 
-{%- block page_header %}{% endblock %}
-
-{%- block secondary_content %}
-    {{ ui.snippet("group/snippets/helper.html", group_type=group_type) }}
+{%- block primary_content_inner %}
+    {{ ui.heading(label, level=1) }}
+    {{ form | safe }}
 {%- endblock %}

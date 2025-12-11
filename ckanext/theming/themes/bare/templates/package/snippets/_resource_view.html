@@ -11,7 +11,7 @@
     <div>
         {%- call ui.util.call(ui.button_group) -%}
             {{ ui.link(_("Fullscreen"), href=h.url_for(package.type ~ '_resource.view', id=package.name, resource_id=resource.id, view_id=resource_view.id, qualified=True), style="button", blank=true, attrs={"rel": "noreferrer"}) }}
-            {{ ui.modal_handler(_("Embed"), id=modal_id) }}
+            {{ ui.modal_handle(_("Embed"), id=modal_id) }}
         {%- endcall %}
 
         <p>{{ h.render_markdown(resource_view.description) }}</p>

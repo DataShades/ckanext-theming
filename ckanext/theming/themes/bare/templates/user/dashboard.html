@@ -1,4 +1,4 @@
-{% extends "_page.html" %}
+{% extends "user/edit_base.html" %}
 
 {%- set user = current_user %}
 {%- set org_type = h.default_group_type('organization') %}
@@ -6,32 +6,33 @@
 {%- set dataset_type = h.default_package_type() %}
 
 {%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_('Users'), h.url_for('user.index')) }}
     {{ ui.breadcrumb_item(_('Dashboard'), h.url_for('dashboard.datasets')) }}
 {%- endblock %}
 
-{%- block primary_content_inner %}
-    <div {{ ui.util.attrs(kwargs) }} class="module">
-        <header class="module-content page-header hug">
-            <div class="content_action">
-                {{ ui.link(_('Profile settings'), href=h.url_for('user.edit', id=user.name), class_='btn btn-secondary', attrs={"icon": "cog"}) }}
-            </div>
+{%- block page_header %}
+    <header class="module-content page-header hug">
+        <div class="content_action">
+            {{ ui.link(_('Profile settings'), href=h.url_for('user.edit', id=user.name), class_='btn btn-secondary', icon='cog') }}
+        </div>
 
-            <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs">
+            {%- block dashboard_nav_links %}
                 {{ ui.nav_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), href=h.url_for('dashboard.datasets'), active=true) }}
                 {{ ui.nav_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), href=h.url_for('dashboard.organizations'), active=false) }}
                 {{ ui.nav_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), href=h.url_for('dashboard.groups'), active=false) }}
-            </ul>
-        </header>
+            {%- endblock %}
+        </ul>
+    </header>
+{%- endblock %}
 
-        <div class="module-content">
-            {% if self.page_primary_action() | trim %}
-                <div class="page_primary_action">
-                    {% block page_primary_action %}{% endblock %}
-                </div>
-            {% endif %}
-            {% block primary_content_inner_page %}
-                {# Default content would be here #}
-            {% endblock %}
+{%- block primary_content_inner %}
+    {%- if self.page_primary_action() | trim %}
+        <div class="page_primary_action">
+            {% block page_primary_action %}{% endblock %}
         </div>
-    </div>
+    {% endif %}
+    {% block primary_content_inner_page %}
+        {# Default content would be here #}
+    {% endblock %}
 {%- endblock %}

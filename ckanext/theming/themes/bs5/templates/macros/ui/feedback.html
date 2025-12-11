@@ -60,7 +60,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro modal_handler(content, id) -%}
+{%- macro modal_handle(content, id) -%}
     {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)}) }}
 {%- endmacro %}
 
@@ -98,7 +98,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro popover_handler(content, id) -%}
+{%- macro popover_handle(content, id) -%}
     <span {{ ui.util.attrs(kwargs) }} class="d-inline-block" data-bs-toggle="popover" data-bs-target="#{{ id }}">{{ content }}</span>
 {%- endmacro %}
 

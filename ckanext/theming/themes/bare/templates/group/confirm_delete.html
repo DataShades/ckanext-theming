@@ -1,23 +1,15 @@
-{% extends "_page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout | default("fullwidth") -%}
 
-{%- block subtitle %}{{ _("Confirm Delete") }}{% endblock %}
+{% block subtitle %}{{ _('Confirm Delete') }}{% endblock %}
 
-{%- block primary_content_inner %}
-    {{ ui.heading(_("Confirm Delete"), level=1) }}
+{%- block primary_content_inner -%}
+    <p>{{ _('Are you sure you want to delete group - {name}?').format(name=group_dict.name) }}</p>
 
-    <div class="module">
-        <div class="module-content">
-            {{ ui.text(_('Are you sure you want to delete group - {name}?').format(name=group_dict.name)) }}
-
-            <div class="form-actions">
-                {{ ui.form_block("POST", action=h.url_for(group_dict.type ~ '.delete', id=group_dict.name)) }}
-                {{ h.csrf_input() }}
-
-                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger") }}
-                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary") }}
-
-                {{ ui.form_end() }}
-            </div>
-        </div>
-    </div>
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.submit(value=_("Cancel"), name="cancel") }}
+            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+        {%- endcall %}
+    {%- endcall %}
 {%- endblock %}

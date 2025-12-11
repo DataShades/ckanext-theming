@@ -25,6 +25,10 @@
 
                             {%- if activity.activity_type == "changed package" -%}
                                 {{ ui.link(_("Changes"), h.url_for("activity.package_changes", id=activity.id)) }}
+
+                            {%- elif activity.activity_type == "changed group" -%}
+                                {{ ui.link(_("Changes"), h.url_for("activity.group_changes", id=activity.id)) }}
+
                             {%- endif %}
 
                         {%- endcall %}

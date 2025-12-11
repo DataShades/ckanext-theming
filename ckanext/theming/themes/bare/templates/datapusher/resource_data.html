@@ -10,7 +10,7 @@
 
     {%- call ui.util.call(ui.form, method="POST", action=h.url_for('datapusher.delete_datastore_table', id=pkg_dict.id, resource_id=resource.id), attrs={"id": form_id}) -%}
         {{ ui.confirm_modal(_('Are you sure you want to delete the DataStore and Data Dictionary?'), id=modal_id, form_id=form_id) }}
-        {{ ui.modal_handler(_('Delete from DataStore'), id=modal_id, style="danger") }}
+        {{ ui.modal_handle(_('Delete from DataStore'), id=modal_id, style="danger") }}
     {%- endcall %}
 
     {%- call ui.util.call(ui.form, method="POST", action=h.url_for('datapusher.resource_data', id=pkg_dict.name, resource_id=resource.id)) -%}
@@ -75,7 +75,7 @@
                                     {% endfor %}
                                 {%- endcall %}
                             {%- endcall %}
-                            {{ ui.popover_handler(_('Details'), id=popover_id) }}
+                            {{ ui.popover_handle(_('Details'), id=popover_id) }}
                         {%- endwith %}
                     </span>
                 {%- endcall %}

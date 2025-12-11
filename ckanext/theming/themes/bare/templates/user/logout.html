@@ -1,7 +1,12 @@
-{% extends "_layout.html" %}
-{% set _layout = "fullwidth" %}
+{% extends "_page.html" %}
 
+{%- block subtitle %}{{ _('Logged Out') }}{% endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.text(_("You are now logged out.")) }}
+    <section {{ ui.util.attrs(kwargs) }} class="module">
+        <div class="module-content">
+            {{ ui.heading(_('Logged Out'), level=1, attrs={"class": "page-heading"}) }}
+            <p>{{ _('You are now logged out.') }}</p>
+        </div>
+    </section>
 {%- endblock %}

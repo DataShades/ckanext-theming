@@ -24,7 +24,7 @@
                             {{ ui.link(_("Edit role"), h.url_for(pkg_dict.type ~ '.new_collaborator', id=pkg_dict.name, user_id=user_id)) }}
 
                             {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
-                                {{ ui.modal_handler(_('Delete collaborator'), id=modal_id) }}
+                                {{ ui.modal_handle(_('Delete collaborator'), id=modal_id) }}
                                 {{ ui.form(method="POST", action=h.url_for(pkg_dict.type ~ '.collaborator_delete', id=pkg_dict.name, user_id=user_id), attrs={"id": form_id}) }}
                                 {{ ui.confirm_modal(_('Are you sure you want to delete this collaborator?'), id=modal_id, form_id=form_id) }}
                             {%- endwith %}

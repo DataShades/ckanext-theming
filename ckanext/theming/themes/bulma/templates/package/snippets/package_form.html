@@ -28,7 +28,7 @@
             {% block delete_button %}
                 {% if can_delete %}
                     {%- with modal_id=ui.util.id() -%}
-                        {{ ui.modal_handler(_("Delete"), id=modal_id) }}
+                        {{ ui.modal_handle(_("Delete"), id=modal_id) }}
                         {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=removal_form_id) -%}
                             {{ h.humanize_entity_type('package', dataset_type, 'delete confirmation') or _('Are you sure you want to delete this dataset?') }}
                         {%- endcall %}

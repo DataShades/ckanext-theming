@@ -1,1 +1,53 @@
-{% extends "_layout.html" %}
+{%- set can_delete = action == 'edit' and h.check_access('group_delete', {'id': data.id}) -%}
+{%- if can_delete -%}
+    {%- set removal_form_id = ui.util.id() -%}
+    {{ ui.form(method="POST", action=h.url_for(dataset_type ~ ".delete", id=data.id), attrs={"id": removal_form_id}) }}
+{%- endif %}
+
+{%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") -%}
+    {% block errors %}{{ ui.form_errors(error_summary) }}{% endblock %}
+
+    {% block basic_fields %}
+        {{ ui.input(name='title', label=_('Name'), placeholder=h.humanize_entity_type('group', group_type, 'name placeholder') or _('My Group'), value=data.title, errors=errors.title) }}
+        {{ ui.input(name='name', label=_('URL'), placeholder=_('my-' + group_type), value=data.name, errors=errors.name, required=true) }}
+        {{ ui.markdown(name='description', label=_('Description'), placeholder=h.humanize_entity_type('group', group_type, 'description placeholder') or _('A little information about my group...'), value=data.description, errors=errors.description) }}
+
+        {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
+        {% set is_url = data.image_url and data.image_url.startswith('http') %}
+
+        {{ ui.input(name="image_url", label="Image URL", value=data["image_url"], errors=errors["image_url"], attrs={"onchange": "this.form['image_upload'].value = '';"}) }}
+        {{ ui.input(name="image_upload", label="Image", type="file", value=data["image_upload"], errors=errors["image_upload"], attrs={"onchange": "this.form['image_url'].value = '';"}) }}
+
+    {% endblock %}
+
+
+    {%- block custom_fields -%}
+        {{ ui.extra_fields_collection(extras=data.extras, errors=errors, limit=3) }}
+    {%- endblock %}
+
+    {%- call ui.util.call(ui.form_actions) -%}
+        {% block delete_button %}
+            {% if can_delete %}
+                {%- with modal_id=ui.util.id() -%}
+                    {{ ui.modal_handle(_("Delete"), id=modal_id) }}
+                    {%- call ui.util.call(ui.confirm_modal, id=modal_id, form_id=removal_form_id) -%}
+                        {{ h.humanize_entity_type('group', group_type, 'delete confirmation') or _('Are you sure you want to delete this Group?') }}
+                    {%- endcall %}
+                {%- endwith %}
+            {% endif %}
+        {% endblock %}
+
+        {%- call ui.util.call(ui.button, type="submit", attrs={"name": "save"})-%}
+            {%- block save_button_text -%}
+                {%- if action == "edit" -%}
+                    {{ h.humanize_entity_type('group', group_type, 'update label') or _('Update Group') }}
+                {%- else -%}
+                    {{ h.humanize_entity_type('group', group_type, 'create label') or _('Create Group') }}
+                {%- endif -%}
+            {%- endblock -%}
+        {%- endcall %}
+
+    {%- endcall %}
+
+
+{%- endcall %}

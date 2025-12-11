@@ -1,16 +1,24 @@
-{% extends "group/read_base.html" %}
+{% extends "group/_base.html" %}
 
-{%- block subtitle %}{{ _('Members') }} ~ {{ group_dict.display_name }} ~ {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
-
-{%- block page_primary_action %}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Members')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block primary_content_inner %}
     {{ ui.heading(_('{0} members'.format(members|length)), level=3) }}
-    {{ ui.table_start(attrs={"class": "table table-header table-hover table-bordered", "id": "member-table"}) }}
+
+    {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
         {{ ui.table_head(ui.table_row(cells=[_('User'), _('Role')], heading=true)) }}
-        {{ ui.table_body(ui.util.map(ui.table_row, [
-            ui.table_cell(h.linked_user(user_id, maxlength=20)) + ui.table_cell(role)
-            for user_id, user, role in members
-        ])) }}
-    {{ ui.table_end() }}
+
+        {%- call ui.util.call(ui.table_body) -%}
+
+            {%- for user_id, user, role in members -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell(h.linked_user(user_id, maxlength=20)) }}
+                    {{ ui.table_cell(role) }}
+                {%- endcall %}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endcall %}
 {%- endblock %}

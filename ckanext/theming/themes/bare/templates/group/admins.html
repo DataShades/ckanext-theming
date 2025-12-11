@@ -1,10 +1,13 @@
-{% extends "group/read_base.html" %}
+{% extends "group/_edit_base.html" %}
 
-{%- block subtitle %}{{ _('Administrators') }} {{ g.template_title_delimiter }} {{ group_dict.title or group_dict.name }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Administrators')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(_('Administrators'), level=1, attrs={"class": "hide-heading"}) }}
+    {{ ui.heading(_('Administrators'), level=1) }}
     {%- block admins_list %}
-        {{ ui.snippet("user/snippets/followers.html", followers=admins) }}
+        {{ ui.user_list(ui.util.map(ui.user_item, admins)) }}
     {%- endblock %}
 {%- endblock %}

@@ -33,7 +33,7 @@
         {%- endblock %}
 
         {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.modal_handler(_('Reset'), id=modal_id) }}
+            {{ ui.modal_handle(_('Reset'), id=modal_id) }}
             {{ ui.submit(_('Update Config'), name="save") }}
         {%- endcall %}
     {%- endcall %}

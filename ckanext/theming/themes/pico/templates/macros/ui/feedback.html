@@ -52,7 +52,7 @@
     </dialog>
 {%- endmacro %}
 
-{%- macro modal_handler(content, id) -%}
+{%- macro modal_handle(content, id) -%}
     {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)}) }}
 {%- endmacro %}
 
@@ -85,7 +85,7 @@
     <div class="tooltip" id="{{ id }}" {{ ui.util.attrs(kwargs) }}>{{ content or title }}</div>
 {%- endmacro %}
 
-{%- macro popover_handler(content, id) -%}
+{%- macro popover_handle(content, id) -%}
     <span class="tooltip-target" data-tooltip-target="#{{ id }}" {{ ui.util.attrs(kwargs) }}>{{ content }}</span>
 {%- endmacro %}
 

@@ -58,6 +58,8 @@
 {% set header_block = header_block | default(meta.header_block) %}
 {% set footer_block = footer_block | default(meta.footer_block) %}
 {% set account_block = account_block | default(meta.account_block) %}
+{% set subtitle_item = subtitle_item | default(meta.subtitle_item) %}
+
 
 {% set datetime = datetime | default(misc.datetime) %}
 {% set pagination_info = pagination_info | default(misc.pagination_info) %}
@@ -65,12 +67,12 @@
 {% set alert = alert | default(feedback.alert) %}
 {% set toast = toast | default(feedback.toast) %}
 {% set modal = modal | default(feedback.modal) %}
-{% set modal_handler = modal_handler | default(feedback.modal_handler) %}
+{% set modal_handle = modal_handle | default(feedback.modal_handle) %}
 {% set modal_close = modal_close | default(feedback.modal_close) %}
 {% set confirm_modal = confirm_modal | default(feedback.confirm_modal) %}
 {% set tooltip = tooltip | default(feedback.tooltip) %}
 {% set popover_content = popover_content | default(feedback.popover_content) %}
-{% set popover_handler = popover_handler | default(feedback.popover_handler) %}
+{% set popover_handle = popover_handle | default(feedback.popover_handle) %}
 {% set progress = progress | default(feedback.progress) %}
 {% set spinner = spinner | default(feedback.spinner) %}
 

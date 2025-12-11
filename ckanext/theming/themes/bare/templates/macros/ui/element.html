@@ -4,7 +4,7 @@
 
 {%- macro button(content, href, style="primary", type="button") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" style="display: inline-block;padding: 2px 6px;background: #eee;border: 1px solid black;text-decoration: none; color: #000;">{{ content }}</a>
+        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" style="display: inline-block;padding: 2px 6px;background: #eee;border: 1px solid black;text-decoration: none; color: #000;font-family: sans-serif;font-size:0.83rem;">{{ content }}</a>
     {%- else -%}
         <button {{ ui.util.attrs(kwargs) }} type="{{ type }}">{{ content }}</button>
     {%- endif %}

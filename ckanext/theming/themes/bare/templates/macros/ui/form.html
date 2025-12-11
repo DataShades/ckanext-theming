@@ -173,7 +173,7 @@
         {%- endif %}
         <div>
             <sub>
-                You can use <strong>{{ ui.popover_handler(_("Markdown formatting"), id=popover_id) }}</strong> here
+                You can use <strong>{{ ui.popover_handle(_("Markdown formatting"), id=popover_id) }}</strong> here
             </sub>
         </div>
         <textarea
@@ -215,7 +215,7 @@
 {%- endmacro %}
 
 {%- macro select(content, selected, options=[]) -%}
-    {%- set selected = selected if value is not string and value is iterable else [selected] %}
+    {%- set selected = selected if selected is not string and selected is iterable else [selected] %}
 
     {%- call ui.select_block(content, selected=selected, options=options, **kwargs) -%}
         {%- for option in options %}

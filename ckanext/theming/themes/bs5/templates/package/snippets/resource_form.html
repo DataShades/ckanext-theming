@@ -46,7 +46,7 @@
 
                 {% if can_delete %}
                     {%- with modal_id=ui.util.id() -%}
-                        {%- call ui.util.call(ui.modal_handler, id=modal_id, style="danger") -%}
+                        {%- call ui.util.call(ui.modal_handle, id=modal_id, style="danger") -%}
                             {% block delete_button_text %}{{ _('Delete') }}{% endblock %}
                         {%- endcall %}
 

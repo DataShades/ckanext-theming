@@ -1,10 +1,21 @@
-{% extends "group/read_base.html" %}
+{% extends "group/_base.html" %}
 
-{%- block subtitle %}{{ _('Followers') }} {{ g.template_title_delimiter }} {{ group_dict.title or group_dict.name }}{% endblock %}
+{%- block subtitle -%}
+    {{ ui.subtitle_item(_("Followers")) }}
+    {{ super() }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(_('Followers'), level=1, attrs={"class": "hide-heading"}) }}
-    {%- block followers_list %}
-        {{ ui.snippet("user/snippets/followers.html", followers=followers) }}
+    {{ ui.heading(_('Followers'), level=1) }}
+
+    {%- block followers_list -%}
+        {%- if followers -%}
+            {{ ui.user_list(ui.util.map(ui.user_item, followers)) }}
+
+        {%- else -%}
+            <p>{{ _('No followers') }}</p>
+
+        {%- endif %}
     {%- endblock %}
+
 {%- endblock %}
