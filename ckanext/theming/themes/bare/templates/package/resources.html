@@ -4,7 +4,10 @@
 {%- set wrapper_id = ui.util.id() -%}
 
 
-{% block subtitle %}{{ _('Resources') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Resources')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block primary_content_inner %}
     {{ ui.heading(_('Resources'), level=2) }}

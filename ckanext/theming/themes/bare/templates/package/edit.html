@@ -1,7 +1,8 @@
 {% extends "package/_edit_base.html" %}
 
 {%- block subtitle -%}
-    {{ _("Edit") }} {{ g.template_title_delimiter }} {{ super() }}
+    {{ ui.subtitle_item(_('Edit')) }}
+    {{ super() }}
 {%- endblock %}
 
 

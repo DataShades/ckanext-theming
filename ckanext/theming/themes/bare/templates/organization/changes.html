@@ -1,6 +1,9 @@
 {% extends "organization/read_base.html" %}
 
-{%- block subtitle %}{{ group_dict.name }} {{ g.template_title_delimiter }} Changes {{ g.template_title_delimiter }} {{ super() }}{% endblock -%}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_("Changes")) }}
+    {{ super() }}
+{% endblock -%}
 
 {%- block breadcrumb_content_selected %}{% endblock %}
 

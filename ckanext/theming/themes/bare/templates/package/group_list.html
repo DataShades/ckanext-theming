@@ -4,7 +4,7 @@
 {%- set page_title = h.humanize_entity_type('group', default_group_type, 'page title') or _('Groups') -%}
 
 {%- block subtitle -%}
-    {{ page_title }} {{ g.template_title_delimiter }}
+    {{ ui.subtitle_item(page_title) }}
     {{ super() }}
 {%- endblock %}
 

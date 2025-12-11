@@ -1,6 +1,9 @@
 {% extends "package/_base.html" %}
 
-{% block subtitle %}Changes {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Changes')) }}
+    {{ super() }}
+{% endblock %}
 
 
 {%- block breadcrumb_content -%}

@@ -2,7 +2,7 @@
 
 {%- block subtitle -%}
     {%- if resource -%}
-        {{ h.resource_display_name(resource) }} {{ g.template_title_delimiter }}
+        {{ ui.subtitle_item(h.resource_display_name(resource)) }}
     {%- endif %}
 
     {{ super() }}

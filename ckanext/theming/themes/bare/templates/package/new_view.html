@@ -1,7 +1,7 @@
 {% extends "package/_resource_edit_base.html" %}
 
-{% block subtitle %}
-    {{ _('Edit view') if resource_view.id else _('Add view') }} {{ g.template_title_delimiter }}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Edit view') if resource_view.id else _('Add view')) }}
     {{ super() }}
 {% endblock %}
 

@@ -1,7 +1,7 @@
 {%- extends "package/_resource_edit_base.html" -%}
 
-{% block subtitle %}
-    {{ _('Edit') }} {{ g.template_title_delimiter }}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Edit')) }}
     {{ super() }}
 {% endblock %}
 
