@@ -34,7 +34,7 @@
     <div>
         {{ ui.heading(_('Promote user to Sysadmin'), level=2) }}
         {%- call ui.form_block("POST", action=h.url_for('user.sysadmin')) -%}
-            {{ ui.input("username", label=_('Username'), placeholder=_('Username'),
+            {{ ui.input(name="username", label=_('Username'), placeholder=_('Username'),
                     data={"module": "autocomplete", "module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}
             ) }}
             <input type="hidden" value="1" name="status" />

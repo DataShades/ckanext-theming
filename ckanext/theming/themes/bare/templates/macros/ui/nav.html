@@ -5,8 +5,14 @@
 {%- endmacro %}
 
 {%- macro breadcrumb_item(content, href, is_first) -%}
+    {{ ui.breadcrumb_divider() if not is_first }}
     {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
+
+{%- macro breadcrumb_divider(content="/") -%}
+    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">{{ content }}</span>
+{%- endmacro %}
+
 
 {%- macro nav_wrapper(content) -%}
     <nav {{ ui.util.attrs(kwargs) }}>{{ content }}</nav>
@@ -88,7 +94,6 @@
                 {%- endif %}
             {%- endif %}
 
-
             {%- if page < total and not hide_siblings %}
                 {{ ui.link(next_label, href=url_generator(page=page + 1)) }}
             {%- endif %}
@@ -105,9 +110,7 @@
 {%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
-    <li>
-        {{ ui.link(content, href=href, **kwargs) }}
-    </li>
+    <li>{{ ui.link(content, href=href, **kwargs) }}</li>
 {%- endmacro %}
 
 {%- macro sidebar(content) -%}
@@ -119,8 +122,4 @@
         <div class="navbar-brand">{{ brand }}</div>
         <div class="navbar-nav">{{ items }}</div>
     </nav>
-{%- endmacro %}
-
-{%- macro breadcrumb_divider() -%}
-    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">/</span>
 {%- endmacro %}

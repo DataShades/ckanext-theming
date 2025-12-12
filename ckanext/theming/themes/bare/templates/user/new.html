@@ -15,12 +15,12 @@
 
         {{ ui.form_errors(error_summary) }}
 
-        {{ ui.input("name", label=_('Username'), value=data.name or "", errors=errors.name or []) }}
-        {{ ui.input("email", label=_('Email'), value=data.email or "", errors=errors.email or [], type="email") }}
-        {{ ui.input("fullname", label=_('Full Name'), value=data.fullname or "", errors=errors.fullname or []) }}
+        {{ ui.input(name="name", label=_('Username'), value=data.name or "", errors=errors.name or []) }}
+        {{ ui.input(name="email", label=_('Email'), value=data.email or "", errors=errors.email or [], type="email") }}
+        {{ ui.input(name="fullname", label=_('Full Name'), value=data.fullname or "", errors=errors.fullname or []) }}
 
-        {{ ui.input("password1", label=_('Password'), type="password", errors=errors.password1 or []) }}
-        {{ ui.input("password2", label=_('Confirm Password'), type="password", errors=errors.password2 or []) }}
+        {{ ui.input(name="password1", label=_('Password'), type="password", errors=errors.password1 or []) }}
+        {{ ui.input(name="password2", label=_('Confirm Password'), type="password", errors=errors.password2 or []) }}
 
         {%- call ui.util.call(ui.form_actions) -%}
             {{ ui.button(_('Register'), type="submit") }}

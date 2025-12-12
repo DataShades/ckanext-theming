@@ -15,20 +15,20 @@
 
     {%- call ui.form_block("POST", enctype="multipart/form-data") -%}
         {%- block admin_form -%}
-            {{ ui.input('ckan.site_title', id='field-ckan-site-title', label=_('Site Title'), value=data['ckan.site_title'], errors=errors["ckan.site_title"]) }}
+            {{ ui.input(id='field-ckan-site-title', label=_('Site Title'), name='ckan.site_title', value=data['ckan.site_title'], errors=errors["ckan.site_title"]) }}
 
-            {{ ui.input('ckan.theme', id='field-theme', label=_('Custom Stylesheet'), value=data['ckan.theme'], errors=errors['ckan.theme']) }}
+            {{ ui.input(id='field-theme', label=_('Custom Stylesheet'), name='ckan.theme', value=data['ckan.theme'], errors=errors['ckan.theme']) }}
 
-            {{ ui.input('ckan.site_description', id='field-ckan-site-description', label=_('Site Tag Line'), value=data['ckan.site_description'], errors=errors['ckan.site_description']) }}
+            {{ ui.input(id='field-ckan-site-description', label=_('Site Tag Line'), name='ckan.site_description', value=data['ckan.site_description'], errors=errors['ckan.site_description']) }}
 
-            {{ ui.markdown('ckan.site_about', id='field-ckan-site-about', label=_('About'), value=data['ckan.site_about'], errors=errors['ckan.site_about'], placeholder=_('About page text')) }}
+            {{ ui.markdown(id='field-ckan-site-about', label=_('About'), name='ckan.site_about', value=data['ckan.site_about'], errors=errors['ckan.site_about'], placeholder=_('About page text')) }}
 
-            {{ ui.markdown('ckan.site_intro_text', id='field-ckan-site-intro-text', label=_('Intro Text'), value=data['ckan.site_intro_text'], errors=errors['ckan.site_intro_text'], placeholder=_('Text on home page')) }}
+            {{ ui.markdown(id='field-ckan-site-intro-text', label=_('Intro Text'), name='ckan.site_intro_text', value=data['ckan.site_intro_text'], errors=errors['ckan.site_intro_text'], placeholder=_('Text on home page')) }}
 
-            {{ ui.textarea('ckan.site_custom_css', id='field-ckan-site-custom-css', label=_('Custom CSS'), value=data['ckan.site_custom_css'], errors=errors['ckan.site_custom_css'], placeholder=_('Customisable css inserted into the page header')) }}
+            {{ ui.textarea(id='field-ckan-site-custom-css', label=_('Custom CSS'), name='ckan.site_custom_css', value=data['ckan.site_custom_css'], errors=errors['ckan.site_custom_css'], placeholder=_('Customisable css inserted into the page header')) }}
 
-            {{ ui.input("ckan.site_logo", label="Site logo URL", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = '';"}) }}
-            {{ ui.input("logo_upload", label="Site logo upload", type="file", value=data["logo_upload"], errors=errors["logo_upload"], attrs={"onchange": "this.form['ckan.site_logo'].value = '';"}) }}
+            {{ ui.input(label="Site logo URL", name="ckan.site_logo", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = '';"}) }}
+            {{ ui.input(label="Site logo upload", name="logo_upload", type="file", value=data["logo_upload"], errors=errors["logo_upload"], attrs={"onchange": "this.form['ckan.site_logo'].value = '';"}) }}
 
         {%- endblock %}
 

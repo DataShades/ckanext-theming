@@ -21,7 +21,7 @@
             {%- block search %}
                 {{ ui.heading(_('Discover Datasets'), level=3) }}
                 {%- call ui.form_block(action=h.url_for('dataset.search')) -%}
-                    {{ ui.input("q", attrs={"placeholder": _('Search datasets...'), "autocomplete": "off"}) }}
+                    {{ ui.input(name="q", attrs={"placeholder": _('Search datasets...'), "autocomplete": "off"}) }}
                     {{ ui.button(_("Search"), type="submit") }}
                 {%- endcall %}
             {%- endblock %}

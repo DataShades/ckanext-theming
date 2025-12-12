@@ -4,18 +4,17 @@
     </div>
 {%- endmacro %}
 
-{%- macro accordion_item(content, title, open=false) -%}
-    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open }}>
+{%- macro accordion_item(content, title, open) -%}
+    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open or false }}>
         <summary>{{ title }}</summary>
         {{ content }}
     </details>
 {%- endmacro %}
 
 {%- macro card(content, title, footer, img, href) -%}
-
-    <div {{ ui.util.attrs(kwargs) }} style="border: 1px solid gray" >
+    <div {{ ui.util.attrs(kwargs) }} style="border: 1px solid gray">
         {%- if img -%}
-            {{ ui.image(img, attrs={"class": "card-image"}) }}
+            {{ ui.image(img, **kwargs) }}
         {%- endif %}
 
         <strong>
@@ -33,15 +32,11 @@
         {%- if footer -%}
             <div>{{ footer }}</div>
         {%- endif %}
-
     </div>
-
 {%- endmacro %}
 
-{%- macro container(content, fluid=false) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="bare-container">
-        {{ content }}
-    </div>
+{%- macro container(content, fluid) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="bare-container {{ 'container-fluid' if fluid }}">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro grid(content) -%}
@@ -50,8 +45,8 @@
     </div>
 {%- endmacro %}
 
-{%- macro column(content, span={}) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="col{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}">
+{%- macro column(content, span) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="col{% if span %}{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}{% endif %}">
         {{ content }}
     </div>
 {%- endmacro %}
@@ -72,7 +67,7 @@
 {%- endmacro %}
 
 {%- macro panel(content, title, id, open) -%}
-    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id }}"
+    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id or ui.util.id() }}"
                                      {% if open %} data-panel-default="true"{% else %} hidden{% endif %}>
         {{ content }}
     </div>
@@ -123,7 +118,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro list_group_item(content, active=False) -%}
+{%- macro list_group_item(content, active) -%}
     <div {{ ui.util.attrs(kwargs) }} class="list-group-item {{ 'active' if active }}">{{ content }}</div>
 {%- endmacro %}
 
