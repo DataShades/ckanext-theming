@@ -1,0 +1,114 @@
+/* Base styles for HTML elements */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+$breakpoint-xs: 0 !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+$breakpoint-xxl: 1400px !default;
+
+/* CSS Custom Properties (Variables) - Define design tokens */
+:root {
+  /* Colors */
+  --color-primary: #007bff;
+  --color-primary-dark: #0069d9;
+  --color-primary-light: #daeaff;
+  --color-primary-rgb: 0, 123, 255;
+  --color-secondary: #6c757d;
+  --color-secondary-rgb: 108, 117, 125;
+  --color-success: #28a745;
+  --color-success-rgb: 40, 167, 69;
+  --color-info: #17a2b8;
+  --color-info-rgb: 23, 162, 184;
+  --color-warning: #ffc107;
+  --color-warning-rgb: 255, 193, 7;
+  --color-danger: #dc3545;
+  --color-danger-rgb: 220, 53, 69;
+  --color-light: #f8f9fa;
+  --color-light-rgb: 248, 249, 250;
+  --color-dark: #343a40;
+  --color-dark-rgb: 52, 58, 64;
+  --color-white: #fff;
+  --color-black: #000;
+
+  /* Text colors */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #6c757d;
+  --text-white: #fff;
+  --text-link: var(--color-primary);
+  --text-disabled: #6c757d;
+
+  /* Background colors */
+  --bg-body: #cef;
+  --bg-card: #fff;
+  --bg-input: #fff;
+  --bg-input-disabled: #e9ecef;
+  --bg-sidebar: #f8f9fa;
+  --bg-header: #8e8;
+  --bg-account: #fce;
+  --bg-footer: #f8f9fa;
+  --bg-breadcrumb: #fec;
+  --bg-table: #fff;
+  --bg-table-striped: #f2f2f2;
+
+  /* Border colors */
+  --border-color: #dee2e6;
+  --border-color-focus: var(--color-primary);
+  --border-width: 1px;
+  --border-radius: 0.25rem;
+  --border-radius-sm: 0.2rem;
+  --border-radius-lg: 0.3rem;
+
+  /* Typography */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --line-height-base: 1.5;
+  --line-height-heading: 1.2;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Shadows */
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  --box-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+
+  /* Components */
+  --border-radius: 0.25rem;
+  --border-radius-sm: 0.2rem;
+  --border-radius-lg: 0.3rem;
+  --transition-base: all 0.2s ease-in-out;
+  --transition-fade: opacity 0.15s linear;
+  --transition-collapse: height 0.35s ease;
+
+  /* Focus */
+  --focus-width: 0.2rem;
+  --focus-style: solid;
+  --focus-color: rgba(51, 102, 204, 0.25);
+  --focus-box-shadow: 0 0 0 var(--focus-width) var(--focus-color);
+
+  /* Breakpoints */
+  --breakpoint-xs: $breakpoint-xs;
+  --breakpoint-sm: $breakpoint-sm;
+  --breakpoint-md: $breakpoint-md;
+  --breakpoint-lg: $breakpoint-lg;
+  --breakpoint-xl: $breakpoint-xl;
+  --breakpoint-xxl: $breakpoint-xxl;
+}

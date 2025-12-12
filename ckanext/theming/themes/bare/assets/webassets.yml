@@ -19,5 +19,4 @@ scripts:
 styles:
   output: ckanext-theming/%(version)s-bare.css
   contents:
-    - grid.css
     - style.css

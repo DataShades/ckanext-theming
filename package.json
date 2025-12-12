@@ -4,6 +4,7 @@
     "@tailwindcss/cli": "^4.1.17",
     "bootstrap": "^5.3.8",
     "bulma": "^1.0.4",
+    "sass": "^1.96.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"
   },
