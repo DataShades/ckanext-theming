@@ -2,28 +2,28 @@
     <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}
 
-{%- macro button(content, href, type, style) -%}
+{%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" style="display: inline-block;padding: 2px 6px;background: #eee;border: 1px solid black;text-decoration: none; color: #000;font-family: sans-serif;font-size:0.83rem;">{{ content }}</a>
+        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn-{{ style }}">{{ content }}</a>
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs) }} type="{{ type or "button" }}">{{ content }}</button>
+        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">{{ content }}</button>
     {%- endif %}
 
 {%- endmacro %}
 
-{%- macro button_group(content, direction) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: {{ direction or "row" }}; gap: 0.25rem;">
+{%- macro button_group(content, direction="row") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="btn-group btn-group-{{ direction }}">
         {{- content -}}
     </div>
 {%- endmacro %}
 
 {%- macro divider(content) -%}
     {%- if content -%}
-        <div {{ ui.util.attrs(kwargs) }} class="divider-with-content">
+        <div {{ ui.util.attrs(kwargs) }} class="divider divider-with-content">
             <hr><span>{{ content }}</span><hr>
         </div>
     {%- else -%}
-        <hr {{ ui.util.attrs(kwargs) }}>
+        <hr {{ ui.util.attrs(kwargs) }} class="divider">
     {%- endif %}
 {%- endmacro %}
 
