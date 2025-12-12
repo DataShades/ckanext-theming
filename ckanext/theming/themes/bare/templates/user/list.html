@@ -1,31 +1,28 @@
-{% extends "page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("fullwidth") -%}
 
 {%- block subtitle %}{{ _('All Users') }}{% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ ui.nav_item(_('Users'), href=h.url_for('user.index'), active=true) }}
+    {{ ui.breadcrumb_item(_('Users'), href=h.url_for('user.index')) }}
 {%- endblock %}
 
-{%- block primary_content %}
-    <article {{ ui.util.attrs(kwargs) }} class="module">
-        <div class="module-content">
-            <h1 class="page-heading">
-                {%- block page_heading %}{{ _('Users') }}{%- endblock %}
-            </h1>
-            {%- block users_list %}
-                <ul class="user-list">
-                    {%- block users_list_inner %}
-                        {%- for user in page.items %}
-                            <li>{{ h.linked_user(user.name, maxlength=20) }}</li>
-                        {%- endfor %}
-                    {%- endblock %}
-                </ul>
+{%- block primary_content_inner %}
+    {{ ui.heading(_('Users'), level=1) }}
+    {%- block users_list %}
+        <!-- Using a simple list for now, could be updated to use user_list macro -->
+        <ul class="user-list">
+            {%- block users_list_inner %}
+                {%- for user in page.items %}
+                    <li>{{ h.linked_user(user.name, maxlength=20) }}</li>
+                {%- endfor %}
             {%- endblock %}
-        </div>
-        {%- block page_pagination %}
-            {{ page.pager(q=q, order_by=order_by) }}
-        {%- endblock %}
-    </article>
+        </ul>
+    {%- endblock %}
+
+    {%- block page_pagination %}
+        {{ page.pager(q=q, order_by=order_by) }}
+    {%- endblock %}
 {%- endblock %}
 
 {%- block secondary_content %}

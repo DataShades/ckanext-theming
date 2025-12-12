@@ -1,20 +1,35 @@
-{% extends "_page.html" %}
+{% extends "user/read_base.html" %}
+
+{%- set _layout = _layout | default("sidebar") -%}
+
+{%- block subtitle %}
+    {{ ui.subtitle_item(user_dict.display_name or user_dict.name) }}
+    {{ super() }}
+{% endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(user_dict.display_name or user_dict.name, href=h.url_for('user.read', id=user_dict.name)) }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    <h1>{{ user_dict.display_name or user_dict.name }}</h1>
+    {{ ui.heading(user_dict.display_name or user_dict.name, level=1) }}
 
     {%- if user_dict.about %}
-        <p>{{ h.render_markdown(user_dict.about) }}</p>
+        {{ ui.text(h.render_markdown(user_dict.about)) }}
     {%- endif %}
 
-    <div class="user-info">
-        <p><strong>{{ _('Username') }}:</strong> {{ user_dict.name }}</p>
-        <p><strong>{{ _('Member since') }}:</strong> {{ ui.datetime(user_dict.created) }}</p>
-        <p><strong>{{ _('Number of datasets') }}:</strong> {{ user_dict.number_created_packages }}</p>
-        <p><strong>{{ _('Number of followers') }}:</strong> {{ user_dict.number_of_followers }}</p>
-    </div>
+    {%- call ui.util.call(ui.table) -%}
+        {{ ui.table_head(ui.table_row(cells=[_('User Info'), ''], heading=true)) }}
+        {%- call ui.util.call(ui.table_body) -%}
+            {{ ui.table_row(cells=[_('Username'), user_dict.name]) }}
+            {{ ui.table_row(cells=[_('Member since'), ui.datetime(user_dict.created)]) }}
+            {{ ui.table_row(cells=[_('Number of datasets'), user_dict.number_created_packages]) }}
+            {{ ui.table_row(cells=[_('Number of followers'), user_dict.number_of_followers]) }}
+        {%- endcall -%}
+    {%- endcall -%}
 
     {%- if h.check_access('user_update', {'id': user_dict.id}) %}
-        {{ ui.button(_('Edit Profile'), href=h.url_for('user.edit', id=user_dict.name), attrs={"class": "btn btn-primary"}) }}
+        {{ ui.button(_('Edit Profile'), href=h.url_for('user.edit', id=user_dict.name)) }}
     {%- endif %}
 {%- endblock %}

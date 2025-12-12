@@ -1,15 +1,23 @@
 {% extends "user/read_base.html" %}
 
-{%- block page_primary_action %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('API Tokens')) }}
+    {{ super() }}
+{% endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_('API Tokens'), h.url_for('user.api_tokens', id=user.name)) }}
+{%- endblock %}
+
+{%- block page_action %}
     {%- if h.check_access('api_token_create', {'user': user['name']}) %}
-        {{ ui.snippet('user/snippets/api_token_create_form.html', data=data, errors=errors, user=user) }}
+        {{ ui.button(_('Add API Token'), href=h.url_for('api_token.create', user=user.name)) }}
     {%- endif %}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    <h2 class="hide-heading">
-        {%- block page_heading %}{{ _('API Tokens') }}{%- endblock %}
-    </h2>
+    {{ ui.heading(_('API Tokens'), level=2) }}
 
     {%- block token_list %}
         {{ ui.snippet('user/snippets/api_token_list.html', tokens=tokens, user=user) }}

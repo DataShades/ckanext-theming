@@ -5,34 +5,30 @@
 {%- set group_type = h.default_group_type('group') %}
 {%- set dataset_type = h.default_package_type() %}
 
+{%- set _layout = _layout|default("fullwidth") -%}
+
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Dashboard')) }}
+    {{ super() }}
+{% endblock %}
+
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(_('Users'), h.url_for('user.index')) }}
+    {{ super() }}
     {{ ui.breadcrumb_item(_('Dashboard'), h.url_for('dashboard.datasets')) }}
 {%- endblock %}
 
-{%- block page_header %}
-    <header class="module-content page-header hug">
-        <div class="content_action">
-            {{ ui.link(_('Profile settings'), href=h.url_for('user.edit', id=user.name), class_='btn btn-secondary', icon='cog') }}
-        </div>
+{%- block content_action %}
+    {{ ui.content_action_item(_('Profile settings'), href=h.url_for('user.edit', id=user.name)) }}
+{%- endblock %}
 
-        <ul class="nav nav-tabs">
-            {%- block dashboard_nav_links %}
-                {{ ui.nav_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), href=h.url_for('dashboard.datasets'), active=true) }}
-                {{ ui.nav_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), href=h.url_for('dashboard.organizations'), active=false) }}
-                {{ ui.nav_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), href=h.url_for('dashboard.groups'), active=false) }}
-            {%- endblock %}
-        </ul>
-    </header>
+{%- block content_nav %}
+    {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), href=h.url_for('dashboard.datasets'), active=true) }}
+    {{ ui.content_nav_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), href=h.url_for('dashboard.organizations'), active=false) }}
+    {{ ui.content_nav_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), href=h.url_for('dashboard.groups'), active=false) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {%- if self.page_primary_action() | trim %}
-        <div class="page_primary_action">
-            {% block page_primary_action %}{% endblock %}
-        </div>
-    {% endif %}
-    {% block primary_content_inner_page %}
+    {% block dashboard_content %}
         {# Default content would be here #}
     {% endblock %}
 {%- endblock %}

@@ -1,22 +1,30 @@
 {% extends "user/dashboard.html" %}
 {%- set dataset_type = h.default_package_type() %}
 
-{%- block page_primary_action %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets')) }}
+    {{ super() }}
+{% endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), h.url_for('dashboard.datasets')) }}
+{%- endblock %}
+
+{%- block page_action %}
     {%- if h.check_access('package_create') %}
-        {{ ui.snippet('snippets/add_dataset.html') }}
+        {{ ui.button(_('Add Dataset'), href=h.url_for(dataset_type ~ '.new')) }}
     {%- endif %}
 {%- endblock %}
 
-{%- block primary_content_inner %}
-    {{ ui.heading(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), level=2, attrs={"class": "hide-heading"}) }}
+{%- block dashboard_content %}
+    {{ ui.heading(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), level=2) }}
     {%- if user_dict.datasets %}
         {{ ui.snippet('snippets/package_list.html', packages=user_dict.datasets) }}
     {%- else %}
-        <p class="empty">
-            {{ _('You haven\'t created any datasets.') }}
-            {%- if h.check_access('package_create') %}
-                {{ ui.link(_('Create one now?'), href=h.url_for(dataset_type ~ '.new')) }}
-            {%- endif %}
-        </p>
+        {{ ui.text(_('You haven\'t created any datasets.')) }}
+        {%- if h.check_access('package_create') %}
+            {{ ui.link(_('Create one now?'), href=h.url_for(dataset_type ~ '.new')) }}
+        {%- endif %}
     {%- endif %}
 {%- endblock %}

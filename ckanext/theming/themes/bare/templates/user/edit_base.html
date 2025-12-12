@@ -1,11 +1,25 @@
-{% extends "_page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("fullwidth") -%}
 
-{%- block subtitle %}{{ _('Manage') }} {{ g.template_title_delimiter }} {{ user_dict.display_name }} {{ g.template_title_delimiter }} {{ _('Users') }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Manage')) }}
+    {{ super() }}
+{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_('Manage'), href=h.url_for('user.edit', id=user_dict.name)) }}
+{%- endblock %}
+
+{%- block content_action %}
+    {{ ui.content_action_item(_('View Profile'), href=h.url_for('user.read', id=user_dict.name)) }}
+{%- endblock %}
+
+{%- block content_nav %}
+    {{ ui.content_nav_item(_('Profile'), href=h.url_for('user.edit', id=user_dict.name), active=true) }}
+    {{ ui.content_nav_item(_('API Tokens'), href=h.url_for('user.api_tokens', id=user_dict.name), active=request.endpoint == 'user.api_tokens') }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    {%- call ui.util.call(ui.container, class="module") -%}
-        <div class="module-content">
-            {%- block primary_content_inner_page %}{%- endblock %}
-        </div>
-    {%- endcall %}
+    {%- block primary_content_page %}{%- endblock %}
 {%- endblock %}

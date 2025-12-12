@@ -1,11 +1,17 @@
-{% extends "user/read.html" %}
+{% extends "user/read_base.html" %}
 
-{%- block subtitle %}{{ _('Followers') }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Followers')) }}
+    {{ super() }}
+{% endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Followers"), h.url_for('user.followers', id=user.name)) }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
-    <h2 class="hide-heading">
-        {%- block page_heading %}{{ _('Followers') }}{%- endblock %}
-    </h2>
+    {{ ui.heading(_('Followers'), level=1) }}
     {%- block followers_list %}
         {{ ui.snippet("user/snippets/followers.html", followers=followers) }}
     {%- endblock %}
