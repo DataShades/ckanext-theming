@@ -33,10 +33,13 @@
 {%- endmacro %}
 
 {%- macro image(src, alt, height, width) -%}
+    {%- if not alt -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("role", "presentation") -%}
+    {%- endif -%}
     <img
         {{ ui.util.attrs(kwargs) }}
         src="{{ src }}"
-        {%- if alt %} alt="{{ alt }}"{% endif %}
+        alt="{{ alt or "" }}"
         {%- if height %} height="{{ height }}"{% endif %}
         {%- if width %} width="{{ width }}"{% endif %}
     >
@@ -45,6 +48,7 @@
 {%- macro link(content, href, blank) -%}
     {%- if blank -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("target", "_blank") -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("rel", "noopener noreferrer") -%}
     {%- endif %}
     <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
@@ -71,14 +75,13 @@
         {%- do kwargs.attrs.setdefault("height", 100) -%}
     {%- endif -%}
 
-    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt) }}
+    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
 {%- endmacro %}
 
 {%- macro icon(name, size) -%}
-    {%- do kwargs -%}
-    <i class="icon-{{ name }} icon-{{ size or "md" }}"></i>
+    <i {{ ui.util.attrs(kwargs) }} class="icon-{{ name }} icon-{{ size or "md" }}"></i>
 {%- endmacro %}
 
-{%- macro label(text, for_id) -%}
-    <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}">{{ text }}</label>
+{%- macro label(content, for_id) -%}
+    <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}">{{ content }}</label>
 {%- endmacro %}

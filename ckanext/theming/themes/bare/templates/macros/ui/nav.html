@@ -15,7 +15,7 @@
 
 
 {%- macro nav_wrapper(content) -%}
-    <nav {{ ui.util.attrs(kwargs) }}>{{ content }}</nav>
+    <nav {{ ui.util.attrs(kwargs) }} role="navigation">{{ content }}</nav>
 {%- endmacro %}
 
 {%- macro nav_item(content, href, active) -%}
@@ -36,15 +36,17 @@
 {%- macro content_nav_item(content, href, active) -%}{{ ui.tab_item(content, href, active, **kwargs) }}{%- endmacro %}
 
 {%- macro tab_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="tabs">
+    <div {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro tab_item(content, href, active) -%}
     {%- if active -%}
+        {%- do kwargs.setdefault("aria", {}).setdefault("selected", "true") -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
     {%- endif %}
+    {%- do kwargs.setdefault("aria", {}).setdefault("controls", href) -%}
     {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
 
@@ -64,53 +66,57 @@
 
 {%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=_("Previous"), next_label=_("Next"), padding_label="...") -%}
     {%- if total > 1 %}
-        <div {{ ui.util.attrs(kwargs) }}>
+        <nav {{ ui.util.attrs(kwargs) }} role="navigation" aria-label="{{ _('Pagination') }}">
 
             {%- if page > 1 and not hide_siblings %}
-                {{ ui.link(previous_label, href=url_generator(page=page - 1)) }}
+                {{ ui.link(previous_label, href=url_generator(page=page - 1), aria={"label": _("Go to previous page")}) }}
             {%- endif %}
 
 
             {%- if page - 1 > padding %}
                 {%- if not hide_edges -%}
-                    {{ ui.link(start_label|default(1), href=url_generator(page=1)) }}
+                    {{ ui.link((start_label or 1), href=url_generator(page=1), aria={"label": _("Go to first page")}) }}
                 {%- endif %}
 
-                <span>{{ padding_label }}</span>
+                <span aria-hidden="true">{{ padding_label }}</span>
             {%- endif %}
 
             {%- for i in range([page - padding, 1]|max, [page + padding, total]|min + 1) %}
                 {%- if i == page %}
-                    <span>{{ i }}</span>
+                    <span aria-current="page">{{ i }}</span>
                 {%- else %}
-                    {{ ui.link(i, href=url_generator(page=i)) }}
+                    {{ ui.link(i, href=url_generator(page=i), aria={"label": _("Go to page {num}".format(num=i))}) }}
                 {%- endif %}
             {%- endfor %}
 
             {%- if total - page > padding %}
-                <span>{{ padding_label }}</span>
+                <span aria-hidden="true">{{ padding_label }}</span>
                 {%- if not hide_edges -%}
-                    {{ ui.link(end_label|default(total), href=url_generator(page=total)) }}
+                    {{ ui.link((end_label or total), href=url_generator(page=total), aria={"label": _("Go to last page")}) }}
                 {%- endif %}
             {%- endif %}
 
             {%- if page < total and not hide_siblings %}
-                {{ ui.link(next_label, href=url_generator(page=page + 1)) }}
+                {{ ui.link(next_label, href=url_generator(page=page + 1), aria={"label": _("Go to next page")}) }}
             {%- endif %}
 
-        </div>
+        </nav>
     {%- endif %}
 {%- endmacro %}
 
 {%- macro dropdown_wrapper(content, title) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="dropdown">
-        {{ ui.button(title) }}
-        <ul class="dropdown-menu">{{ content }}</ul>
+    <div {{ ui.util.attrs(kwargs) }} class="dropdown" role="menu" aria-haspopup="true">
+        {{ ui.button(title, aria={"haspopup": "true"}) }}
+        <ul class="dropdown-menu" role="menu">
+            <li role="none">{{ content }}</li>
+        </ul>
     </div>
 {%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
-    <li>{{ ui.link(content, href=href, **kwargs) }}</li>
+    <li role="none">
+        {{ ui.link(content, href=href, role="menuitem", **kwargs) }}
+    </li>
 {%- endmacro %}
 
 {%- macro sidebar(content) -%}

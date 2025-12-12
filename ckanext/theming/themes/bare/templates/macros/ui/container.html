@@ -1,18 +1,18 @@
 {%- macro accordion_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
+    <div {{ ui.util.attrs(kwargs) }} role="region" aria-label="{{ _('Accordion') }}">
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro accordion_item(content, title, open) -%}
-    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open or false }}>
-        <summary>{{ title }}</summary>
-        {{ content }}
+    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open}}>
+        <summary role="button" aria-expanded="{{ 'true' if open else 'false' }}">{{ title }}</summary>
+        <div role="region" aria-labelledby="{{ kwargs.attrs.id if kwargs.attrs and kwargs.attrs.id else '' }}">{{ content }}</div>
     </details>
 {%- endmacro %}
 
 {%- macro card(content, title, footer, img, href) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="border: 1px solid gray">
+    <div {{ ui.util.attrs(kwargs) }} role="article" aria-label="{{ title if title else _('Card') }}" style="border: 1px solid gray">
         {%- if img -%}
             {{ ui.image(img, **kwargs) }}
         {%- endif %}
@@ -123,10 +123,10 @@
 {%- endmacro %}
 
 {%- macro sidebar_section(content, title) -%}
-    <section {{ ui.util.attrs(kwargs) }}>
-        {{ ui.heading(title, level=2) }}
+    <aside {{ ui.util.attrs(kwargs) }} role="complementary" aria-labelledby="sidebar-title-{{ ui.util.id() }}">
+        <h2 id="sidebar-title-{{ ui.util.id() }}">{{ title }}</h2>
         <div>
             {{ content }}
         </div>
-    </section>
+    </aside>
 {%- endmacro %}
