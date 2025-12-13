@@ -5,14 +5,12 @@
   {%- if created %}hx-on:htmx:after-settle="document.getElementById('token-{{ created.id }}').scrollIntoView(false)"{%- endif %}>
   {{ h.csrf_input() }}
   {%- block base_fields %}
-    <div class="form-group">
-        {{ form.input('name', label=_('Name'), is_required=True, value=data.name, error=errors.name) }}
-    </div>
+      <div class="form-group">
+          {{ form.input('name', label=_('Name'), is_required=True, value=data.name, error=errors.name) }}
+      </div>
   {%- endblock %}
   {%- block form_actions %}
-    <button class="btn btn-primary" type="submit" value="create">
-      {{ _('Create API Token') }}
-    </button>
+      {{ ui.button(_('Create API Token'), type="submit") }}
   {%- endblock %}
 </form>
 
@@ -30,12 +28,11 @@
               </code>
             </label>
           </div>
-          {%- set copy_button %}<button class="btn btn-secondary btn-xs" data-module="copy-into-buffer" data-module-copy-value="{{ created.token }}" type="button"><i class="fa fa-copy"></i></button>{% endset %}
           {{ _("API Token created: <code style=\"word-break:break-all;\">"
-               "{token}</code> {copy}<br>"
+               "{token}</code> <br>"
                "Make sure to copy it now, "
                "you won't be able to see it again!").format(
-               token=created.token, copy=copy_button) }}
+               token=created.token) }}
         </td>
       </tr>
     </tbody>

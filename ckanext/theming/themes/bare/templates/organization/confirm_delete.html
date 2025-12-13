@@ -6,8 +6,8 @@
 {%- block primary_content_inner %}
     {%- call ui.util.call(ui.container, class="col-md-6 col-md-offset-3") -%}
         {%- call ui.util.call(ui.panel) -%}
-            <p>{{ _('Are you sure you want to delete organization - {name}?').format(name=organization_dict.name) }}</p>
-            {%- call ui.util.call(ui.form, method="POST", action=h.url_for(group_type ~ '.delete', id=organization_dict.id), id="organization-confirm-delete-form") -%}
+            <p>{{ _('Are you sure you want to delete organization - {name}?').format(name=group_dict.name) }}</p>
+            {%- call ui.util.call(ui.form, method="POST", action=h.url_for(group_type ~ '.delete', id=group_dict.id), id="organization-confirm-delete-form") -%}
                 {{ h.csrf_input() }}
                 {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger") }}
                 {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary") }}

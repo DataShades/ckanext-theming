@@ -46,7 +46,6 @@
         {%- do kwargs.setdefault("aria", {}).setdefault("selected", "true") -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
     {%- endif %}
-    {%- do kwargs.setdefault("aria", {}).setdefault("controls", href) -%}
     {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
 

@@ -1,4 +1,4 @@
-{% extends "organization/read_base.html" %}
+{% extends "organization/_base.html" %}
 
 {%- set _layout = _layout | default("sidebar") -%}
 
@@ -10,9 +10,9 @@
 {%- endblock %}
 
 {%- block secondary_content -%}
-    {%- if organization_dict -%}
+    {%- if group_dict -%}
         {%- block organization_info -%}
-            {%- with organization=organization_dict -%}
+            {%- with organization=group_dict -%}
                 {%- include "organization/snippets/info.html" -%}
             {%- endwith %}
         {%- endblock organization_info %}

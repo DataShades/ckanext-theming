@@ -1,4 +1,4 @@
-<div id="search-facets" hx-swap-oob="true" hx-swap="none">
+<div id="search-facets"{%- if not disable_htmx -%} hx-swap-oob="true" hx-swap="none"{%- endif %}>
     {%- for key, facets in search_facets.items() -%}
         {%- call ui.util.call(ui.facet_group, facet_titles.get(key, key)) -%}
             {% set items = h.get_facet_items_dict(key, search_facets) %}

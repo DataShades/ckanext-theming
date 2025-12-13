@@ -17,7 +17,6 @@
   --input-border-color: var(--border-color);
   --input-border-radius: var(--border-radius);
   --input-box-shadow: var(--box-shadow-inset);
-  --input-transition: var(--transition-base);
   --input-focus-color: var(--input-color);
   --input-focus-bg: var(--input-bg);
   --input-focus-border-color: var(--color-primary);
@@ -42,7 +41,6 @@
   background-clip: padding-box;
   border: var(--input-border-width) solid var(--input-border-color);
   border-radius: var(--input-border-radius);
-  transition: var(--input-transition);
 }
 
 .input:focus {

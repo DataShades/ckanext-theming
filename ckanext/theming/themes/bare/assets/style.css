@@ -85,9 +85,6 @@
   --border-radius: 0.25rem;
   --border-radius-sm: 0.2rem;
   --border-radius-lg: 0.3rem;
-  --transition-base: all 0.2s ease-in-out;
-  --transition-fade: opacity 0.15s linear;
-  --transition-collapse: height 0.35s ease;
   /* Focus */
   --focus-width: 0.2rem;
   --focus-style: solid;
@@ -126,7 +123,6 @@ body {
   background-color: var(--bg-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.2s ease;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -513,16 +509,6 @@ progress {
   }
   a {
     text-decoration: underline !important;
-  }
-}
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }
 /* Screen reader only content */
@@ -1047,7 +1033,6 @@ input[type=button]:focus {
   border: var(--btn-border-width) solid var(--btn-border-color);
   border-radius: var(--btn-border-radius);
   background-color: var(--btn-bg);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn:hover {
@@ -1322,7 +1307,6 @@ fieldset:disabled .btn {
   --input-border-color: var(--border-color);
   --input-border-radius: var(--border-radius);
   --input-box-shadow: var(--box-shadow-inset);
-  --input-transition: var(--transition-base);
   --input-focus-color: var(--input-color);
   --input-focus-bg: var(--input-bg);
   --input-focus-border-color: var(--color-primary);
@@ -1346,7 +1330,6 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: var(--input-border-width) solid var(--input-border-color);
   border-radius: var(--input-border-radius);
-  transition: var(--input-transition);
 }
 
 .input:focus {

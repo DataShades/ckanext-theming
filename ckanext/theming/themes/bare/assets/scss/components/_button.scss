@@ -38,7 +38,6 @@
   border: var(--btn-border-width) solid var(--btn-border-color);
   border-radius: var(--btn-border-radius);
   background-color: var(--btn-bg);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn:hover {

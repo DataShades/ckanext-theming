@@ -4,9 +4,7 @@
 {% set dataset_type = h.default_package_type() %}
 
 {%- block subtitle %}
-    {%- if group_dict -%}
-        {{ group_dict.display_name }} {{ g.template_title_delimiter }}
-    {%- endif %}
+    {{ ui.subtitle_item(group_dict.display_name) if group_dict }}
     {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}
 {% endblock %}
 

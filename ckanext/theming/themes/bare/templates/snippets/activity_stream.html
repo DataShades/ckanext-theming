@@ -29,6 +29,9 @@
                             {%- elif activity.activity_type == "changed group" -%}
                                 {{ ui.link(_("Changes"), h.url_for("activity.group_changes", id=activity.id)) }}
 
+                            {%- elif activity.activity_type == "changed organization" -%}
+                                {{ ui.link(_("Changes"), h.url_for("activity.organization_changes", id=activity.id)) }}
+
                             {%- endif %}
 
                         {%- endcall %}

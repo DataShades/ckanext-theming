@@ -1,4 +1,6 @@
 {% extends "organization/_edit_base.html" %}
+{%- set _layout = _layout | default("sidebar") -%}
+
 {%- set dataset_type = h.default_package_type() %}
 
 {%- block subtitle %}
@@ -7,93 +9,54 @@
 {% endblock %}
 
 {%- block page_action %}
-    {{ ui.button(_('Add Dataset'), href=h.url_for('dataset.new', group=organization_dict.id)) }}
+    {{ ui.button(_('Add Dataset'), href=h.url_for('dataset.new', group=group_dict.id)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(h.humanize_entity_type('package', dataset_type, 'edit label') or _('Edit datasets'), level=1, attrs={"class": "hide-heading"}) }}
 
-    {{ ui.heading(
-        {%- if page.item_count -%}
-            {{ page.item_count }} datasets{{ _(" found for \"{query}\"").format(query=q) if q }}
-        {%- elif request.args -%}
-            {{ _('Sorry no datasets found for "{query}"').format(query=q) }}
-        {%- else -%}
-            {{ _('Datasets') }}
-        {%- endif -%}, level=3, class="page-heading"
-    ) }}
-
-    {%- block search_form %}
+    <div id="search-results">
         {%- set sorting_options = [
+            {"text": _('Relevance'), "value": "score desc, metadata_modified desc"},
             {"text": _('Name Ascending'), "value": "title_string asc"},
             {"text": _('Name Descending'), "value": "title_string desc"},
             {"text": _('Last Modified'), "value": "metadata_modified desc"}
         ] %}
-        {{ ui.search_form(query=q, sorting_options=sorting_options, sorting=sort_by_selected, item_count=page.item_count, search_class=' ') }}
-    {%- endblock %}
 
-    {%- block form %}
-        {%- if page.items %}
-            {%- call ui.util.call(ui.form, method="POST", attrs={"data-module": "basic-form"}) -%}
-                {{ h.csrf_input() }}
+        {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item, use_htmx=false) }}
 
-                {%- call ui.util.call(ui.table,
-                    attrs={
-                        "class": "table table-bordered table-header table-hover table-bulk-edit table-edit-hover",
-                        "data-module": "table-selectable-rows"
-                    }
-                ) -%}
-                    <col width="8">
-                    <col width="120">
+        {%- block package_list %}
+            {%- if page.items %}
+                {%- call ui.util.call(ui.form, method="POST") -%}
 
-                    {{ ui.table_head(ui.table_row(
-                        cells=[
-                            "",
-                            ui.util.merge([
-                                ui.button_group([
-                                    ui.button(_('Make public'), name="bulk_action.public", value="public", type="submit", icon="eye", style="secondary"),
-                                    ui.button(_('Make private'), name="bulk_action.private", value="private", type="submit", icon="eye-slash", style="secondary")
-                                ]),
-                                ui.button_group([
-                                    ui.button(_('Delete'), name="bulk_action.delete", value="delete", type="submit", icon="times", style="danger")
-                                ])
-                            ]) | ui.table_cell(attrs={"class": "table-actions"})
-                        ],
-                        heading=true
-                    )) }}
+                    {%- call ui.util.call(ui.button_group) -%}
+                        {{ ui.button(_('Make public'), type="submit", attrs={"name": "bulk_action.public", "value": "public"}) }}
+                        {{ ui.button(_('Make private'), type="submit", attrs={"name": "bulk_action.private", "value": "private"}) }}
+                        {{ ui.button(_('Delete'), type="submit", style="danger", attrs={"name": "bulk_action.delete", "value": "delete"}) }}
 
-                    {%- call ui.util.call(ui.table_body) -%}
-                        {%- for package in packages -%}
-                            {{ ui.table_row(cells=[
-                                ui.input("", type="checkbox", name="dataset_" ~ package.id) | ui.table_cell,
-                                ui.util.merge([
-                                    ui.link(_('Edit'), href=h.url_for(package.type ~ '.edit', id=package.name), attrs={"class": "pull-right"}),
-                                    ui.heading(
-                                        (package.title or package.name)|truncate(80),
-                                        level=3,
-                                        content=ui.link(
-                                            (package.title or package.name)|truncate(80),
-                                            href=h.url_for(package.type ~ '.read', id=package.name),
-                                            attrs={"aria-label": _("Open details page for dataset - {title}").format(title=(package.title or package.name)|truncate(80))}
-                                        )
-                                    )
-                                ]) | ui.table_cell
-                            ])}}
-                        {%- endfor -%}
-                    {%- endcall -%}
-                {%- endcall -%}
-            {%- endcall -%}
-        {%- else %}
-            <p class="empty">{{ _('This organization has no datasets associated to it') }}</p>
-        {%- endif %}
-    {%- endblock %}
+                    {%- endcall %}
 
-    {{ page.pager() }}
+                    {%- call ui.util.call(ui.package_list) -%}
+                        {%- for package in page.items -%}
+                            {{ ui.checkbox(name="dataset_" ~ package.id, label=ui.link(package.title, href=h.url_for(package.type ~ ".read", id=package.name))) }}
+                        {%- endfor %}
+                    {%- endcall %}
+                {%- endcall %}
+
+            {%- else %}
+                <p>{{ _('No datasets found.') }}</p>
+
+            {%- endif %}
+        {%- endblock %}
+
+        {%- block pagination %}
+            {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
+        {%- endblock %}
+    </div>
+
 {%- endblock %}
 
-{%- block secondary_content %}
-    {{ super() }}
-    {%- for facet in c.facet_titles %}
-        {{ ui.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet, extras={'id': organization_dict.id}, search_facets=search_facets) }}
-    {%- endfor %}
+{%- block secondary_content -%}
+    {%- with facet_titles=facet_titles, search_facets=search_facets, disable_htmx=true -%}
+        {%- include "package/snippets/_search_facets.html" -%}
+    {%- endwith %}
 {%- endblock %}

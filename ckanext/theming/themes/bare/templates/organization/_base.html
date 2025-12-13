@@ -4,27 +4,25 @@
 {% set dataset_type = h.default_package_type() %}
 
 {%- block subtitle %}
-    {%- if organization_dict -%}
-        {{ organization_dict.display_name }} {{ g.template_title_delimiter }}
-    {%- endif %}
+    {{ ui.subtitle_item(group_dict.display_name) if group_dict }}
     {{ h.humanize_entity_type('organization', group_type, 'page title') or _('Organizations') }}
 {% endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(h.humanize_entity_type('organization', group_type, 'breadcrumb') or _('Organizations'), h.url_for(group_type ~ '.index')) }}
-    {{ ui.breadcrumb_item(organization_dict.display_name|truncate(35), h.url_for(organization_dict.type ~ '.read', id=organization_dict.name)) if organization_dict }}
+    {{ ui.breadcrumb_item(group_dict.display_name|truncate(35), h.url_for(group_dict.type ~ '.read', id=group_dict.name)) if group_dict }}
 {%- endblock %}
 
 {% block content_action %}
-    {{ ui.content_action_item(_("Manage"), h.url_for(group_type+'.edit', id=organization_dict.name)) if organization_dict and h.check_access('organization_update', {'id': organization_dict.id}) }}
+    {{ ui.content_action_item(_("Manage"), h.url_for(group_type+'.edit', id=group_dict.name)) if group_dict and h.check_access('organization_update', {'id': group_dict.id}) }}
 {% endblock %}
 
 {% block content_nav %}
-    {%- if organization_dict -%}
-        {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), h.url_for(group_type + '.read', id=organization_dict.name), active=request.endpoint == group_type ~ ".read") }}
-        {{ ui.content_nav_item(_('Members'), h.url_for(group_type + '.members', id=organization_dict.name), active=request.endpoint == group_type ~ ".members") }}
-        {{ ui.content_nav_item(_('About'), h.url_for(group_type + '.about', id=organization_dict.name), active=request.endpoint == group_type ~ ".about") }}
-        {{ ui.content_nav_item(_("Activity Stream"), h.url_for("activity.organization_activity", id=organization_dict.name), active=request.endpoint == "activity.organization_activity") if h.plugin_loaded("activity")}}
+    {%- if group_dict -%}
+        {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), h.url_for(group_type + '.read', id=group_dict.name), active=request.endpoint == group_type ~ ".read") }}
+        {{ ui.content_nav_item(_('Members'), h.url_for(group_type + '.members', id=group_dict.name), active=request.endpoint == group_type ~ ".members") }}
+        {{ ui.content_nav_item(_('About'), h.url_for(group_type + '.about', id=group_dict.name), active=request.endpoint == group_type ~ ".about") }}
+        {{ ui.content_nav_item(_("Activity Stream"), h.url_for("activity.organization_activity", id=group_dict.name), active=request.endpoint == "activity.organization_activity") if h.plugin_loaded("activity")}}
     {%- endif %}
 
 {% endblock %}

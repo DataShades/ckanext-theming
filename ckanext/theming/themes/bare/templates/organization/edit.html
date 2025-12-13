@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Edit'), h.url_for(group_type~'.edit', id=organization_dict.name)) }}
+    {{ ui.breadcrumb_item(_('Edit'), h.url_for(group_type~'.edit', id=group_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

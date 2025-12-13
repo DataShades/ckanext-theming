@@ -1,16 +1,17 @@
 {%- extends "organization/_base.html" -%}
 
 {% block content_action %}
-    {{ ui.content_action_item(_("View"), h.url_for(organization_dict.type+'.read', id=organization_dict.name)) if organization_dict and h.check_access('organization_update', {'id': organization_dict.id}) }}
+    {{ ui.content_action_item(_("View"), h.url_for(group_dict.type+'.read', id=group_dict.name)) if group_dict }}
 {% endblock %}
 
 {% block content_nav %}
-    {%- if organization_dict -%}
+    {%- if group_dict -%}
 
-        {{ ui.content_nav_item(_('Edit'), href=h.url_for(organization_dict.type + '.edit', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.edit') }}
-        {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), href=h.url_for(organization_dict.type + '.bulk_process', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.bulk_process') }}
-        {{ ui.content_nav_item(_('Members'), href=h.url_for(organization_dict.type + '.manage_members', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.manage_members') }}
-        {{ ui.content_nav_item(_('Admins'), href=h.url_for(organization_dict.type + '.admins', id=organization_dict.name), active=request.endpoint == organization_dict.type + '.admins') }}
+        {{ ui.content_nav_item(_('Edit'), href=h.url_for(group_dict.type + '.edit', id=group_dict.name), active=request.endpoint == group_dict.type + '.edit') }}
+        {{ ui.content_nav_item(_('Members'), href=h.url_for(group_dict.type + '.manage_members', id=group_dict.name), active=request.endpoint == group_dict.type + '.manage_members') }}
+        {{ ui.content_nav_item(_('Admins'), href=h.url_for(group_dict.type + '.admins', id=group_dict.name), active=request.endpoint == group_dict.type + '.admins') }}
+        {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), href=h.url_for(group_dict.type + '.bulk_process', id=group_dict.name), active=request.endpoint == group_dict.type + '.bulk_process') }}
+
     {%- endif %}
 
 {% endblock %}

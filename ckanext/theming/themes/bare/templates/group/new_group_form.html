@@ -1,7 +1,7 @@
 {%- set can_delete = action == 'edit' and h.check_access('group_delete', {'id': data.id}) -%}
 {%- if can_delete -%}
     {%- set removal_form_id = ui.util.id() -%}
-    {{ ui.form(method="POST", action=h.url_for(dataset_type ~ ".delete", id=data.id), attrs={"id": removal_form_id}) }}
+    {{ ui.form(method="POST", action=h.url_for(data.type ~ ".delete", id=data.id), attrs={"id": removal_form_id}) }}
 {%- endif %}
 
 {%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") -%}

@@ -4,11 +4,11 @@
 
 {%- block primary_content_inner %}
     {% block page_heading %}
-        {{ ui.heading(organization_dict.display_name, level=1) }}
+        {{ ui.heading(group_dict.display_name, level=1) }}
     {% endblock %}
 
     {%- block organization_description %}
-        {{ ui.text(h.render_markdown(organization_dict.description)) if organization_dict.description }}
+        {{ ui.text(h.render_markdown(group_dict.description)) if group_dict.description }}
     {%- endblock %}
 
     {%- block organization_extras %}
@@ -18,7 +18,7 @@
                     {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
 
                     {%- call ui.util.call(ui.table_body) -%}
-                        {% for key, value in h.sorted_extras(organization_dict.extras) %}
+                        {% for key, value in h.sorted_extras(group_dict.extras) %}
                             {{ ui.table_row(ui.table_cell(_(key|e), heading=true) ~ ui.table_cell(_(value))) }}
                         {% endfor %}
                     {%- endcall %}
