@@ -8,7 +8,7 @@
 
 
 {%- block primary_content_inner -%}
-    {%- call ui.form_block("POST") -%}
+    {%- call ui.uitl.call(ui.form, method="POST") -%}
         <p>
             {{ _(messages.confirm[ent_type]) }}
         </p>

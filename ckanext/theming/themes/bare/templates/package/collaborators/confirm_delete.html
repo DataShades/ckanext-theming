@@ -1,7 +1,10 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout | default("fullwidth") -%}
 
-{% block subtitle %}{{ _('Confirm Delete') }}{% endblock %}
+{% block subtitle %}
+    {{ ui.subtitle_item(_('Confirm Delete')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block primary_content_inner -%}
     <p>{{ _('Are you sure you want to delete collaborator - {name}?').format(name=user_dict.name) }}</p>

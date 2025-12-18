@@ -9,7 +9,7 @@
 {% endblock %}
 
 {%- block page_action %}
-    {{ ui.button(_('Add Dataset'), href=h.url_for('dataset.new', group=group_dict.id)) }}
+    {{ ui.page_action_item(_('Add Dataset'), href=h.url_for('dataset.new', group=group_dict.id)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

@@ -17,7 +17,7 @@
                 {%- call ui.util.call(ui.table_row) -%}
                     {{ ui.table_cell(h.linked_user(user)) }}
                     {%- call ui.util.call(ui.table_cell) -%}
-                        {%- call ui.form_block("POST", action=h.url_for('user.sysadmin')) -%}
+                        {%- call ui.util.call(ui.form, method="POST", action=h.url_for('user.sysadmin')) -%}
                             <input type="hidden" value="{{ user }}" name="username" />
                             <input type="hidden" value="0" name="status" />
                             {{ ui.button(_('Revoke'), type="submit", stye="danger") }}
@@ -33,7 +33,7 @@
 
     <div>
         {{ ui.heading(_('Promote user to Sysadmin'), level=2) }}
-        {%- call ui.form_block("POST", action=h.url_for('user.sysadmin')) -%}
+        {%- call ui.uitl.call(ui.form, method="POST", action=h.url_for('user.sysadmin')) -%}
             {{ ui.input(name="username", label=_('Username'), placeholder=_('Username'),
                     data={"module": "autocomplete", "module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}
             ) }}

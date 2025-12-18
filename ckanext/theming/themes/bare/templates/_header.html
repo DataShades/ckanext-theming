@@ -21,10 +21,7 @@
                     {%- block header_account_log_out_link -%}
 
                         {{ ui.button(_('Log out'), type="submit", attrs={"form": "form-logout"}) -}}
-                        <div hidden="">
-                            {%- call ui.form_block("POST", action=h.url_for('user.logout'), attrs={"id": "form-logout"}) %}
-                            {%- endcall %}
-                        </div>
+                        {{ ui.form(method="POST", action=h.url_for('user.logout'), attrs={"id": "form-logout", "hidden": ""}) }}
                     {%- endblock %}
 
                 {%- endblock %}

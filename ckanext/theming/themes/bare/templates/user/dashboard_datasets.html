@@ -12,15 +12,13 @@
 {%- endblock %}
 
 {%- block page_action %}
-    {%- if h.check_access('package_create') %}
-        {{ ui.button(_('Add Dataset'), href=h.url_for(dataset_type ~ '.new')) }}
-    {%- endif %}
+    {{ ui.page_action_item(_('Add Dataset'), href=h.url_for(dataset_type ~ '.new')) if h.check_access('package_create') }}
 {%- endblock %}
 
 {%- block dashboard_content %}
     {{ ui.heading(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), level=2) }}
     {%- if user_dict.datasets %}
-        {{ ui.snippet('snippets/package_list.html', packages=user_dict.datasets) }}
+        {{ ui.package_list(ui.util.map(ui.package_item, user_dict.datasets)) }}
     {%- else %}
         {{ ui.text(_('You haven\'t created any datasets.')) }}
         {%- if h.check_access('package_create') %}

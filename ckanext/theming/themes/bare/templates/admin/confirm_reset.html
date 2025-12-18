@@ -8,7 +8,7 @@
 
 
 {%- block primary_content_inner -%}
-    {%- call ui.form_block("POST") -%}
+    {%- call ui.util.call(ui.form, method="POST") -%}
         <p>{{ _('Are you sure you want to reset the config?') }}</p>
 
         {%- call ui.util.call(ui.form_actions) -%}

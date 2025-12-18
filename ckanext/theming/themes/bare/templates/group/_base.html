@@ -5,7 +5,8 @@
 
 {%- block subtitle %}
     {{ ui.subtitle_item(group_dict.display_name) if group_dict }}
-    {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}
+    {{ ui.subtitle_item(h.humanize_entity_type('group', group_type, 'page title') or _('Groups')) }}
+    {{ super() }}
 {% endblock %}
 
 {%- block breadcrumb_content %}

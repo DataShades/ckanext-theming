@@ -13,7 +13,7 @@
 
     {{ ui.form_errors(error_summary) }}
 
-    {%- call ui.form_block("POST", enctype="multipart/form-data") -%}
+    {%- call ui.uitl.call(ui.form, method="POST", enctype="multipart/form-data") -%}
         {%- block admin_form -%}
             {{ ui.input(id='field-ckan-site-title', label=_('Site Title'), name='ckan.site_title', value=data['ckan.site_title'], errors=errors["ckan.site_title"]) }}
 

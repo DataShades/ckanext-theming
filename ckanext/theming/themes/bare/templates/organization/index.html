@@ -2,7 +2,8 @@
 {%- set _layout = _layout | default("fullwidth") -%}
 
 {%- block subtitle %}
-    {{ h.humanize_entity_type('organization', group_type, 'page title') or _('Organizations') }}
+    {{ ui.subtitle_item(h.humanize_entity_type('organization', group_type, 'page title') or _('Organizations')) }}
+    {{ super() }}
 {% endblock %}
 
 {%- block breadcrumb_content %}
@@ -13,7 +14,7 @@
 {%- endblock %}
 
 {%- block page_action %}
-    {{ ui.button(h.humanize_entity_type('organization', group_type, 'add link') or _('Add Organization'), href=h.url_for(group_type ~ '.new')) if h.check_access('organization_create') }}
+    {{ ui.page_action_item(h.humanize_entity_type('organization', group_type, 'add link') or _('Add Organization'), href=h.url_for(group_type ~ '.new')) if h.check_access('organization_create') }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

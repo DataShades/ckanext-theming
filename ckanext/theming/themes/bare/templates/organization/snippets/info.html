@@ -1,14 +1,13 @@
-{%- set group_dict = group or group_dict -%}
+{%- set group_dict = group_dict or organization  -%}
 {% set dataset_type = h.default_package_type() %}
 
 <div id="organization-info">
     {% block organization_info %}
         {%- call ui.util.call(ui.sidebar_section, title=group_dict.display_name) -%}
             {% block nums %}
-                {% set num_followers = h.follow_count('organization', group_dict.id) %}
+                {% set num_followers = h.follow_count('group', group_dict.id) %}
 
                 {%- call ui.util.call(ui.table) -%}
-                    {%- call ui.util.call(ui.table_head) -%}
 
                         {%- call ui.util.call(ui.table_row) -%}
                             {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for(group_dict.type ~ ".followers", id=group_dict.name)), heading=true) }}
@@ -26,7 +25,6 @@
                             {{ ui.table_cell(h.member_count(group_dict.id)) }}
                         {%- endcall %}
 
-                    {%- endcall %}
                 {%- endcall %}
 
             {% endblock %}

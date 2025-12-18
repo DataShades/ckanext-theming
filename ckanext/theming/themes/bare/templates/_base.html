@@ -16,11 +16,8 @@
 
             <title>
                 {%- block title %}
-                    {%- set subtitle %}
-                        {%- block subtitle %}{% endblock %}
-                    {%- endset %}
-                    {%- if subtitle|trim %}{{ subtitle|trim }} {{ g.template_title_delimiter }} {% endif %}
-                    {{- g.site_title }}
+                    {%- block subtitle %}{% endblock %}
+                    {{- ui.subtitle_item(g.site_title, initial=true) }}
                 {%- endblock title -%}
             </title>
 

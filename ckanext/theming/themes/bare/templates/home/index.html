@@ -1,7 +1,10 @@
 {% extends "_layout.html" %}
 {% set _layout = _layout | default("fullwidth") %}
 
-{%- block subtitle %}{{ _("Welcome") }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_("Welcome")) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block toolbar %}{% endblock %}
 

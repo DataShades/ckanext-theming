@@ -1,13 +1,14 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout|default("fullwidth") -%}
 
-{%- block subtitle %}{{ _('Logged Out') }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Logged Out')) }}
+    {{ super() }}
+{% endblock %}
 
-{%- block primary_content_inner %}
-    {%- call ui.util.call(ui.container, class="module") -%}
-        {%- call ui.util.call(ui.panel) -%}
-            {{ ui.heading(_('Logged Out'), level=1) }}
-            {{ ui.text(_('You are now logged out.')) }}
-        {%- endcall -%}
+{%- block primary_content %}
+    {%- call ui.util.call(ui.section) -%}
+        {{ ui.heading(_('Logged Out'), level=1) }}
+        {{ ui.text(_('You are now logged out.')) }}
     {%- endcall %}
 {%- endblock %}

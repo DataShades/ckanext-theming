@@ -1,16 +1,19 @@
-{% extends "_page.html" %}
+{% extends "user/_base.html" %}
 
-{%- block subtitle %}{{ _('Login') }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Login')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Login'), h.url_for("user.login")) }}
+    {{ ui.breadcrumb_item(_('Login'), href=h.url_for("user.login")) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
     {{ ui.heading(_('Login'), level=1) }}
 
-    {%- call ui.form_block("POST") %}
+    {%- call ui.util.call(ui.form, method="POST") %}
         {{ ui.form_errors(error_summary) }}
 
         {{ ui.input(name='login', label=_("Username or Email")) }}
@@ -39,7 +42,7 @@
     {%- endif %}
 
     {%- call ui.util.call(ui.sidebar_section, title=_('Forgotten your password?')) -%}
-        <p>{% trans %}No problem, use our password recovery form to reset it.{% endtrans %}</p>
+        <p>{{ _("No problem, use our password recovery form to reset it.") }}</p>
         {{ ui.button(_('Forgot your password?'), href=h.url_for('user.request_reset')) }}
     {%- endcall %}
 

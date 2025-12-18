@@ -1,0 +1,41 @@
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("content_control") -%}
+
+{%- set dataset_type = h.default_package_type() %}
+{%- set org_type = h.default_group_type('organization') %}
+{%- set group_type = h.default_group_type('group') %}
+
+{%- block subtitle %}
+    {{ ui.subtitle_item(user_dict.display_name) if user_dict }}
+    {{ ui.subtitle_item(_('Users')) }}
+{% endblock %}
+
+{%- block breadcrumb_content %}
+    {{ ui.breadcrumb_item(_('Users'), href=h.url_for('user.index')) }}
+    {{ ui.breadcrumb_item(user_dict.display_name, href=h.url_for('user.read', id=user_dict.name)) if user_dict }}
+{%- endblock %}
+
+{%- block content_action %}
+    {% if user_dict %}
+        {{ ui.content_action_item(_('Manage'), href=h.url_for('user.edit', id=user_dict.name)) if h.check_access('user_update', user_dict) }}
+
+    {%- endif %}
+{%- endblock %}
+
+{%- block content_nav %}
+    {%- if user_dict -%}
+        {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), href=h.url_for('user.read', id=user_dict.name), active=request.endpoint == "user.read") }}
+        {{ ui.content_nav_item(h.humanize_entity_type('organization', org_type, 'content tab') or _('Organizations'), href=h.url_for('user.read_organizations', id=user_dict.name), active=request.endpoint == 'user.read_organizations') }}
+        {{ ui.content_nav_item(h.humanize_entity_type('group', group_type, 'content tab') or _('Groups'), href=h.url_for('user.read_groups', id=user_dict.name), active=request.endpoint == 'user.read_groups') }}
+        {{ ui.content_nav_item(_('API Tokens'), href=h.url_for('user.api_tokens', id=user_dict.name), active=request.endpoint == 'user.api_tokens') if h.check_access('api_token_list', {'user': user_dict.name}) }}
+        {{ ui.content_nav_item(_('Activity Stream'), href=h.url_for('activity.user_activity', id=user_dict.name), active=request.endpoint == 'activity.user_activity') if h.plugin_loaded("activity") }}
+
+    {%- endif %}
+
+{%- endblock %}
+
+{%- block secondary_content %}
+    {%- with user_dict=user_dict, is_myself=is_myself, is_sysadmin=is_sysadmin, dataset_type=dataset_type, org_type=org_type, group_type=group_type, am_following=am_following -%}
+        {%- include "user/snippets/info.html" -%}
+    {%- endwith %}
+{%- endblock %}

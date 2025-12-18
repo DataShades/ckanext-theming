@@ -50,10 +50,15 @@
                             <main id="main">
                                 <article>
                                     {%- block primary_content %}
-                                        {%- block page_action %}{% endblock -%}
+                                        {%- call ui.util.call(ui.page_action_wrapper) -%}
+                                            {%- block page_action %}{% endblock -%}
+                                        {%- endcall %}
+
 
                                         {%- block page_header %}
-                                            {%- block content_action %}{% endblock -%}
+                                            {%- call ui.util.call(ui.content_action_wrapper) -%}
+                                                {%- block content_action %}{% endblock -%}
+                                            {%- endcall %}
 
                                             {%- call ui.util.call(ui.content_nav_wrapper) -%}
                                                 {%- block content_nav %}{% endblock -%}

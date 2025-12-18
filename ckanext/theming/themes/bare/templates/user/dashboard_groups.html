@@ -13,9 +13,7 @@
 {%- endblock %}
 
 {%- block page_action %}
-    {%- if h.check_access('group_create') %}
-        {{ ui.button(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) }}
-    {%- endif %}
+    {{ ui.page_action_item(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
 {%- endblock %}
 
 {%- block dashboard_content %}

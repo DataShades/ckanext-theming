@@ -644,7 +644,7 @@ def create_theme_cmd(theme_name: str, parent: str):
     base_content = """{% extends "_layout.html" %}
 {%- set _layout = _layout|default("sidebar") -%}
 
-{%- block subtitle %}{{ g.site_title }}{% endblock %}
+{%- block subtitle %}{{ ui.subtitle_item(g.site_title, initial=true) }}{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(h.humanize_entity_type('home', 'page', 'breadcrumb') or _('Home'), h.url_for('home.index')) }}

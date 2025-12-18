@@ -1,10 +1,7 @@
 {% extends "package/_edit_base.html" %}
 
 {%- block subtitle -%}
-    {%- if resource -%}
-        {{ ui.subtitle_item(h.resource_display_name(resource)) }}
-    {%- endif %}
-
+    {{ ui.subtitle_item(h.resource_display_name(resource)) if resource }}
     {{ super() }}
 {%- endblock %}
 

@@ -2,7 +2,8 @@
 {% set _layout = "fullwidth" %}
 
 {%- block subtitle -%}
-    {{ _("About") }}
+    {{ ui.subtitle_item(_("About")) }}
+    {{ super() }}
 {%- endblock %}
 
 {%- block breadcrumb_content %}

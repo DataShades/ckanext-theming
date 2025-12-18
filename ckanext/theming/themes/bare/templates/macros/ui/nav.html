@@ -35,6 +35,12 @@
 {%- macro content_nav_wrapper(content) -%}{{ ui.tab_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro content_nav_item(content, href, active) -%}{{ ui.tab_item(content, href, active, **kwargs) }}{%- endmacro %}
 
+{%- macro page_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro page_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
+
+{%- macro content_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro content_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
+
 {%- macro tab_wrapper(content) -%}
     <div {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">
         {{ content }}

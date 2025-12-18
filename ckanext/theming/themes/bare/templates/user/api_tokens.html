@@ -11,9 +11,7 @@
 {%- endblock %}
 
 {%- block page_action %}
-    {%- if h.check_access('api_token_create', {'user': user['name']}) %}
-        {{ ui.button(_('Add API Token'), href=h.url_for('api_token.create', user=user.name)) }}
-    {%- endif %}
+    {{ ui.page_action_item(_('Add API Token'), href=h.url_for('api_token.create', user=user.name)) if h.check_access('api_token_create', {'user': user['name']}) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

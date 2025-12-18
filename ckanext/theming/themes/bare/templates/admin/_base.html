@@ -1,6 +1,9 @@
 {% extends "_layout.html" %}
 
-{%- block subtitle %}{{ _('Admin') }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Admin')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ super() }}

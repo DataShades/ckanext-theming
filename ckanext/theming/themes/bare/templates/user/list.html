@@ -1,7 +1,10 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout|default("fullwidth") -%}
 
-{%- block subtitle %}{{ _('All Users') }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('All Users')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb_item(_('Users'), href=h.url_for('user.index')) }}

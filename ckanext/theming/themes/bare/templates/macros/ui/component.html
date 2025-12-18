@@ -97,7 +97,3 @@
         <span {{ ui.util.attrs(kwargs) }}>{{ _('No License Provided') }}</span>
     {% endif %}
 {% endmacro %}
-
-{%- macro content_action_item(content, href) -%}
-    {{ ui.button(content, href=href, **kwargs) }}
-{%- endmacro %}

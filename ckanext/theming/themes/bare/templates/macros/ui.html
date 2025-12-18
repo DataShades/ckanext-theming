@@ -40,6 +40,10 @@
 {% set tab_item = tab_item | default(_nav.tab_item) %}
 {% set dropdown_wrapper = dropdown_wrapper | default(_nav.dropdown_wrapper) %}
 {% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %}
+{% set content_action_wrapper = content_action_wrapper | default(_nav.content_action_wrapper) %}
+{% set content_action_item = content_action_item | default(_nav.content_action_item) %}
+{% set page_action_wrapper = page_action_wrapper | default(_nav.page_action_wrapper) %}
+{% set page_action_item = page_action_item | default(_nav.page_action_item) %}
 
 {% set accordion_wrapper = accordion_wrapper | default(_container.accordion_wrapper) %}
 {% set accordion_item = accordion_item | default(_container.accordion_item) %}
@@ -134,4 +138,3 @@
 {% set activity_item = activity_item | default(component.activity_item) %}
 {% set user_list = user_list | default(component.user_list) %}
 {% set user_item = user_item | default(component.user_item) %}
-{% set content_action_item = content_action_item | default(component.content_action_item) %}

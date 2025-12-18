@@ -3,10 +3,9 @@
 
 
 {%- block subtitle %}
-    {%- if pkg_dict -%}
-        {{ h.dataset_display_name(pkg_dict) }} {{ g.template_title_delimiter }}
-    {%- endif %}
-    {{ h.humanize_entity_type('package', pkg_dict.type if pkg_dict else dataset_type or 'dataset',  'page title') or _('Datasets') }}
+    {{ ui.subtitle_item(h.dataset_display_name(pkg_dict)) if pkg_dict }}
+    {{ ui.subtitle_item(h.humanize_entity_type('package', pkg_dict.type if pkg_dict else dataset_type or 'dataset',  'page title') or _('Datasets')) }}
+    {{ super() }}
 {% endblock %}
 
 {%- block breadcrumb_content %}

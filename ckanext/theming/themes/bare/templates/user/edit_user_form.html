@@ -1,0 +1,76 @@
+{%- set modal_id = ui.util.id() -%}
+{{ ui.confirm_modal(_('Are you sure you want to delete this user?'), href=h.url_for("user.delete", id=data.id), id=modal_id) }}
+
+{%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") %}
+    {{ ui.form_errors(error_summary) }}
+
+    {% block core_fields %}
+
+        {{ ui.input(name="name", label=_("Username"), value=data.name, error=errors.name, attrs={"readonly": ""}) }}<br/>
+        {{ ui.input(name="fullname", label=_("Full Name"), value=data.fullname, errors=errors.fullname) }}<br/>
+        {{ ui.input(name="email", label=_("Email"), type="email", value=data.email, errors=errors.email, required=true) }}<br/>
+
+        {{ ui.markdown(name='about', label=_('About'), value=data.about, errors=errors.about, placeholder=_('A little information about yourself')) }}
+
+        {{ ui.input(name="image_url", label=_("Profile picture URL"), type="url", value=data.image_url, error=errors.image_url) }}<br/>
+        {%- if h.uploads_enabled() %}
+            {{ ui.input(name="image_upload", label=_("Profile picture"), type="file") }} <br/>
+            {%- if data.image_url and not data.image_url.startswith('http') %}
+                {{ ui.checkbox("clear_upload", label=_('Clear Upload'))  }} <br/>
+            {%- endif %}
+        {%- endif %}
+
+    {%- endblock %}
+
+    {% block extra_fields %}
+        {% if g.userobj.sysadmin and data.state == 'deleted' %}
+            {% call form.checkbox('activate_user', label=_('Reactivate User'), id='activate_user', value=True, checked=false) %}
+                {% set helper_text = _('This account is deactivated, if you want to reactivate it, please click on checkbox.') %}
+                {{ form.info(helper_text, classes='info-help-tight') }}
+            {% endcall %}
+        {% endif %}
+    {% endblock %}
+
+    {% if is_sysadmin and current_user.name != data.name %}
+        {% block sysadmin_password %}
+            <fieldset>
+                <legend>{{ _('Change password') }}</legend>
+                {{ ui.input(name='password1', type='password', label=_('Password'), value=data.password1, errors=errors.password1) }}
+                {{ ui.input(name='password2', type='password', label=_('Confirm Password'), value=data.password2, errors=errors.password2) }}
+            </fieldset>
+        {% endblock %}
+
+        {% block sysadmin_old_password %}
+            <fieldset>
+                <legend>{{ _('Sysadmin password') }}</legend>
+                {{ form.input(name='old_password', type='password', label=_('Sysadmin Password'), value=data.oldpassword, errors=errors.oldpassword) }}
+            </fieldset>
+        {% endblock %}
+
+    {% else %}
+        {% block change_password %}
+            <fieldset>
+                <legend>{{ _('Change password') }}</legend>
+                {{ ui.input(name='old_password', type='password', label=_('Old Password'), value=data.oldpassword, errors=errors.oldpassword) }}
+                {{ ui.input(name='password1', type='password', label=_('Password'), value=data.password1, errors=errors.password1) }}
+                {{ ui.input(name='password2', type='password', label=_('Confirm Password'), value=data.password2, errors=errors.password2) }}
+            </fieldset>
+        {% endblock %}
+    {% endif %}
+
+
+
+    {%- call ui.util.call(ui.form_actions) -%}
+        {% set is_deleted = data.state == 'deleted' %}
+
+        {% if not is_deleted %}
+            {% block delete_button %}
+                {{ ui.modal_handle(_('Delete'), id=modal_id, style="danger") if h.check_access('user_delete', {'id': data.id}) }}
+            {% endblock %}
+        {% endif %}
+
+        {{ ui.button(_('Reactivate Profile') if is_deleted else _('Update Profile'), type="submit", attrs={"name": "save"}) }}
+
+    {%- endcall %}
+
+{%- endcall %}

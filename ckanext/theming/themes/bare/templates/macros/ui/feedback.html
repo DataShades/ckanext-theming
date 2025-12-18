@@ -40,8 +40,7 @@
 {%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label, href) -%}
     {%- if not form_id -%}
         {% set form_id = ui.util.id() %}
-        {%- call ui.form_block("POST", attrs={"id": form_id}, action=href) -%}
-        {%- endcall %}
+        {{ ui.form(method="POST", attrs={"id": form_id}, action=href) }}
     {%- endif %}
 
     {%- set close_button = ui.modal_close(cancel_label or _("Close"), id=id) %}

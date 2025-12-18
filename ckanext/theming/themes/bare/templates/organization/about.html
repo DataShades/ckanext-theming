@@ -1,6 +1,9 @@
 {% extends "organization/_base.html" %}
 
-{%- block subtitle %}{{ ui.subtitle_item(_('About')) }} {{ super() }}{% endblock %}
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('About')) }}
+    {{ super() }}
+{% endblock %}
 
 {%- block primary_content_inner %}
     {% block page_heading %}

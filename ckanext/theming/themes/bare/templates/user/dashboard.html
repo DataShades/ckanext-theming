@@ -1,11 +1,10 @@
-{% extends "user/edit_base.html" %}
+{% extends "user/_base.html" %}
+{%- set _layout = _layout|default("content_focus") -%}
 
 {%- set user = current_user %}
 {%- set org_type = h.default_group_type('organization') %}
 {%- set group_type = h.default_group_type('group') %}
 {%- set dataset_type = h.default_package_type() %}
-
-{%- set _layout = _layout|default("fullwidth") -%}
 
 {%- block subtitle %}
     {{ ui.subtitle_item(_('Dashboard')) }}
