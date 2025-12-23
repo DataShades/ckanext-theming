@@ -7,8 +7,8 @@
 {% endblock %}
 
 {%- block primary_content_inner %}
-    {%- call ui.util.call(ui.section) -%}
-        {{ ui.heading(code ~ " " ~ name, level=1) }}
+    {{ ui.heading(title=code ~ " " ~ name, level=1) }}
+    <div>
         {{ ui.text(content) }}
 
         {%- block login_redirect %}
@@ -19,8 +19,7 @@
                 {%- endcall %}
             {%- endif %}
         {%- endblock %}
-
-    {%- endcall %}
+    </div>
 {%- endblock %}
 
 {%- block breadcrumb %}{% endblock %}

@@ -77,9 +77,12 @@
     {{ ui.link(content, href="#" ~ id, **kwargs) }}
 {%- endmacro %}
 
-{%- macro section(content) -%}
+{%- macro section(content, title, level=2) -%}
     <section {{ ui.util.attrs(kwargs) }}>
-        {{ content }}
+        {{ ui.heading(title, level=2) if title }}
+        <div>
+            {{ content }}
+        </div>
     </section>
 {%- endmacro %}
 
@@ -123,8 +126,9 @@
 {%- endmacro %}
 
 {%- macro sidebar_section(content, title) -%}
-    <aside {{ ui.util.attrs(kwargs) }} role="complementary" aria-labelledby="sidebar-title-{{ ui.util.id() }}">
-        <h2 id="sidebar-title-{{ ui.util.id() }}">{{ title }}</h2>
+    {%- set id = ui.util.id() -%}
+    <aside {{ ui.util.attrs(kwargs) }} role="complementary" aria-labelledby="section-title-{{ id }}">
+        {{ ui.heading(title, level=2, attrs={"id": "section-title-" ~ id}) }}
         <div>
             {{ content }}
         </div>

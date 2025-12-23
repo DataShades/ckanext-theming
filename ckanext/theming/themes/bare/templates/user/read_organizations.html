@@ -1,27 +1,25 @@
-{% extends "user/read_base.html" %}
+{% extends "user/_base.html" %}
 
-{%- set user = user_dict %}
-{%- set org_type = h.default_group_type('organization') %}
-{%- set orgs_available = h.organizations_available(permission='manage_group',
-    include_dataset_count=True,
-    include_member_count=True,
-    user=user['id'])
-%}
+{%- set orgs_available = h.organizations_available(permission='manage_group', include_dataset_count=True, include_member_count=True, user=user_dict.id) %}
 
 {%- block subtitle %}
-    {{ ui.subtitle_item(h.humanize_entity_type('organization', org_type, 'facet label') or _('Organizations')) }}
+    {{ ui.subtitle_item(h.humanize_entity_type('organization', org_type, 'page title') or _('Organizations')) }}
     {{ super() }}
 {% endblock %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', org_type, 'facet label') or _('Organizations'), h.url_for('user.read_organizations', id=user.name)) }}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', org_type, 'breadcrumb') or _('Groups'), h.url_for('user.read_groups', id=user_dict.name)) }}
+{%- endblock %}
+
+{%- block page_action -%}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(h.humanize_entity_type('organization', org_type, 'facet label') or _('Organizations'), level=2) }}
+    {{ ui.heading(h.humanize_entity_type('organization', org_type, 'page title') or _('Organizations'), level=1) }}
     {%- if orgs_available %}
-        {{ ui.snippet("organization/snippets/organization_list.html", organizations=orgs_available, show_capacity=True) }}
+        {{ ui.organization_list(ui.util.map(ui.organization_item, orgs_available)) }}
+
     {%- else %}
         {{ ui.text(
             h.humanize_entity_type('organization', org_type, 'you not member') or _('You are not a member of any organizations.') if is_myself

@@ -260,7 +260,7 @@ Use to create distinct sections of content that have a common purpose or theme, 
 **Example:**
 
 ```
-{{ ui.section("Content for this section goes here") }}
+{{ ui.section("Content for this section goes here", title="Heading for the section") }}
 ```
 
 **Recommendations:**

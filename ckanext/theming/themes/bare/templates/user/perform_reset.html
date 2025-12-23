@@ -1,1 +1,38 @@
-{% extends "_layout.html" %}
+{% extends "user/_edit_base.html" %}
+
+{% block subtitle %}
+    {{ ui.subtitle_item(_('Reset your password')) }}
+    {{ super() }}
+{% endblock %}
+
+{% block breadcrumb_content %}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_('Password Reset'), href=h.url_for("user.request_reset")) }}
+{% endblock %}
+
+
+{% block primary_content_inner %}
+    {{ ui.heading(_('Reset your password'), level=1) }}
+    {% block form %}
+        {%- call ui.util.call(ui.form, method="POST") -%}
+
+            {{ ui.form_errors(error_summary) }}
+
+            {% if user_dict['state'] == 'pending' %}
+                <p>{{ _('You can also change username. It can not be modified later.') }}</p>
+                {{ ui.input(name="name", label=_("Username"), value=user_dict.name, errors=errors.name) }}
+            {% endif %}
+
+            {{ ui.input(name="password1", label=_("Password"), type="password", value='', errors=errors.password1) }}
+            {{ ui.input(name="password2", label=_("Confirm"), type="password", value='', errors=errors.password2) }}
+
+            {%- call ui.util.call(ui.form_actions) -%}
+                {% block login_button %}
+                    {{ ui.button(_("Update Password"), type="submit") }}
+                {% endblock %}
+            {%- endcall %}
+        {%- endcall %}
+
+    {% endblock %}
+
+{% endblock %}

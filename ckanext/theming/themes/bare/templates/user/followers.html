@@ -1,4 +1,4 @@
-{% extends "user/read_base.html" %}
+{% extends "user/_base.html" %}
 
 {%- block subtitle %}
     {{ ui.subtitle_item(_('Followers')) }}
@@ -7,12 +7,20 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Followers"), h.url_for('user.followers', id=user.name)) }}
+    {{ ui.breadcrumb_item(_("Followers"), h.url_for('user.followers', id=user_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
     {{ ui.heading(_('Followers'), level=1) }}
-    {%- block followers_list %}
-        {{ ui.snippet("user/snippets/followers.html", followers=followers) }}
+
+    {%- block followers_list -%}
+        {%- if followers -%}
+            {{ ui.user_list(ui.util.map(ui.user_item, followers)) }}
+
+        {%- else -%}
+            <p>{{ _('No followers') }}</p>
+
+        {%- endif %}
     {%- endblock %}
+
 {%- endblock %}

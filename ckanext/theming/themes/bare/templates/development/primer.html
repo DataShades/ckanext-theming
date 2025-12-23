@@ -4,8 +4,7 @@
 {%- endblock %}
 
 {% block primary_content_inner %}
-    {%- call ui.util.call(ui.section) -%}
-        {{ ui.heading("Breadcrumbs", level=2) }}
+    {%- call ui.util.call(ui.section, title=_("Breadcrumbs")) -%}
         {%- for size in range(1, 4) -%}
             {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
                 {%- for _ in range(size) -%}
@@ -15,8 +14,7 @@
         {%- endfor %}
     {%- endcall %}
 
-    {%- call ui.util.call(ui.section) -%}
-        {{ ui.heading("Pagination", level=2) }}
+    {%- call ui.util.call(ui.section, title=_("Pagination")) -%}
         {{ ui.pagination(page=1, total=2) }}
         {{ ui.pagination(page=3, total=3) }}
         {{ ui.pagination(page=5, total=10) }}

@@ -1,33 +1,27 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("fullwidth") -%}
+{% extends "user/_base.html" %}
 
 {%- block subtitle %}
     {{ ui.subtitle_item(_('All Users')) }}
     {{ super() }}
 {% endblock %}
 
-{%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(_('Users'), href=h.url_for('user.index')) }}
-{%- endblock %}
-
 {%- block primary_content_inner %}
     {{ ui.heading(_('Users'), level=1) }}
     {%- block users_list %}
-        <!-- Using a simple list for now, could be updated to use user_list macro -->
-        <ul class="user-list">
-            {%- block users_list_inner %}
-                {%- for user in page.items %}
-                    <li>{{ h.linked_user(user.name, maxlength=20) }}</li>
-                {%- endfor %}
-            {%- endblock %}
-        </ul>
+        {{ ui.user_list(ui.util.map(ui.user_item, page.items)) }}
     {%- endblock %}
 
     {%- block page_pagination %}
-        {{ page.pager(q=q, order_by=order_by) }}
+        {{ ui.pagination(page.page, page.last_page, page._url_generator) }}
     {%- endblock %}
 {%- endblock %}
 
 {%- block secondary_content %}
-    {{ ui.snippet('user/snippets/user_search.html', q=q) }}
+
+    {%- call ui.util.call(ui.sidebar_section, title=_("Users")) -%}
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.input(name="q", value=q, placeholder=_("Search"), label=_("Search users")) }}
+            {{ ui.form_actions(ui.button(_("Search"), type="submit")) }}
+        {%- endcall %}
+    {%- endcall %}
 {%- endblock %}

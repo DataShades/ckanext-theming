@@ -42,9 +42,9 @@
 {%- macro content_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
 
 {%- macro tab_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">
+    <nav {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">
         {{ content }}
-    </div>
+    </nav>
 {%- endmacro %}
 
 {%- macro tab_item(content, href, active) -%}

@@ -1,25 +1,14 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("fullwidth") -%}
-
-{%- block subtitle %}
-    {{ ui.subtitle_item(_('Manage')) }}
-    {{ super() }}
-{% endblock %}
-
-{%- block breadcrumb_content %}
-    {{ super() }}
-    {{ ui.breadcrumb_item(_('Manage'), href=h.url_for('user.edit', id=user_dict.name)) }}
-{%- endblock %}
+{% extends "user/_base.html" %}
 
 {%- block content_action %}
-    {{ ui.content_action_item(_('View Profile'), href=h.url_for('user.read', id=user_dict.name)) }}
 {%- endblock %}
 
 {%- block content_nav %}
-    {{ ui.content_nav_item(_('Profile'), href=h.url_for('user.edit', id=user_dict.name), active=true) }}
-    {{ ui.content_nav_item(_('API Tokens'), href=h.url_for('user.api_tokens', id=user_dict.name), active=request.endpoint == 'user.api_tokens') }}
+    {%- if user_dict -%}
+        {{ ui.content_nav_item(_('Profile'), href=h.url_for('user.edit', id=user_dict.name), active=request.endpoint == "user.read") }}
+        {{ ui.content_nav_item(_('API Tokens'), href=h.url_for('user.api_tokens', id=user_dict.name), active=request.endpoint == 'user.api_tokens') }}
+    {%- endif %}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {%- block primary_content_page %}{%- endblock %}
 {%- endblock %}

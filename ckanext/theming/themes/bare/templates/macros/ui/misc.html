@@ -1,6 +1,6 @@
-{%- macro datetime(dt, date_format, with_hours) -%}
+{%- macro datetime(dt, date_format, with_hours, empty="") -%}
     <time {{ ui.util.attrs(kwargs) }} datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
-        {{- h.render_datetime(dt, date_format=date_format, with_hours=with_hours) -}}
+        {{- h.render_datetime(dt, date_format=date_format, with_hours=with_hours) or empty -}}
     </time>
 {%- endmacro %}
 

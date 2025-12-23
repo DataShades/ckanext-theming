@@ -44,7 +44,7 @@
     {%- endif %}
 
     {%- set close_button = ui.modal_close(cancel_label or _("Close"), id=id) %}
-    {%- set confirm_button = ui.button(confirm_label or _("Confirm"), attrs={"onclick": "window['{form_id}'].submit()".format(form_id=form_id)}) %}
+    {%- set confirm_button = ui.button(confirm_label or _("Confirm"), attrs={"onclick": "const form = window['{form_id}']; (form.getAttribute('hx-post')||form.getAttribute('hx-get')) ? form.dispatchEvent(new Event('submit')) : form.submit(); ckan.sandbox().ui.getModal('{id}').close();".format(form_id=form_id, id=id)}) %}
 
     {%- call ui.util.call(ui.modal, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) -%}
         {{ content }}

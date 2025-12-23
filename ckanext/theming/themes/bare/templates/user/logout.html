@@ -1,5 +1,5 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("fullwidth") -%}
+{% extends "user/_base.html" %}
+{%- set _layout = _layout|default("content_focus") -%}
 
 {%- block subtitle %}
     {{ ui.subtitle_item(_('Logged Out')) }}
@@ -7,8 +7,6 @@
 {% endblock %}
 
 {%- block primary_content %}
-    {%- call ui.util.call(ui.section) -%}
-        {{ ui.heading(_('Logged Out'), level=1) }}
-        {{ ui.text(_('You are now logged out.')) }}
-    {%- endcall %}
+    {{ ui.heading(_('Logged Out'), level=1) }}
+    {{ ui.text(_('You are now logged out.')) }}
 {%- endblock %}

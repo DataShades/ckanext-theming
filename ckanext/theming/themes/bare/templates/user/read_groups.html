@@ -1,31 +1,32 @@
-{% extends "user/read_base.html" %}
+{% extends "user/_base.html" %}
 
-{%- set user = user_dict %}
-{%- set group_type = h.default_group_type('group') %}
-{%- set groups_available = h.groups_available(am_member=True,
-    include_dataset_count=True,
-    include_member_count=True,
-    user=user['id'])
-%}
+{%- set groups_available = h.groups_available(am_member=true, include_dataset_count=True, include_member_count=True, user=user_dict.id) %}
 
 {%- block subtitle %}
-    {{ ui.subtitle_item(h.humanize_entity_type('group', group_type, 'facet label') or _('Groups')) }}
+    {{ ui.subtitle_item(h.humanize_entity_type('group', group_type, 'page title') or _('Groups')) }}
     {{ super() }}
 {% endblock %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'facet label') or _('Groups'), h.url_for('user.read_groups', id=user.name)) }}
+    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), h.url_for('user.read_groups', id=user_dict.name)) }}
+{%- endblock %}
+
+{%- block page_action -%}
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {{ ui.heading(h.humanize_entity_type('group', group_type, 'facet label') or _('Groups'), level=2) }}
+    {{ ui.heading(h.humanize_entity_type('group', group_type, 'facet label') or _('Groups'), level=1) }}
+
     {%- if groups_available %}
-        {{ ui.snippet("group/snippets/group_list.html", groups=groups_available, show_capacity=True) }}
-    {%- else %}
-        {{ ui.text(
-            h.humanize_entity_type('group', group_type, 'you not member') or _('You are not a member of any groups.') if is_myself
-            else h.humanize_entity_type('group', group_type, 'user not member') or _('User isn\'t a member of any groups.')
-        )}}
+        {{ ui.group_list(ui.util.map(ui.group_item, groups_available)) }}
+
+    {%- elif is_myself %}
+        {{ ui.text(h.humanize_entity_type('group', group_type, 'you not member') or _('You are not a member of any groups.')) }}
+
+    {%- else -%}
+        {{ ui.text(h.humanize_entity_type('group', group_type, 'user not member') or _('User isn\'t a member of any groups.')) }}
+
     {%- endif %}
+
 {%- endblock %}

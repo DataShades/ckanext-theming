@@ -1,11 +1,6 @@
 {% extends "user/_base.html" %}
 {%- set _layout = _layout|default("content_focus") -%}
 
-{%- set user = current_user %}
-{%- set org_type = h.default_group_type('organization') %}
-{%- set group_type = h.default_group_type('group') %}
-{%- set dataset_type = h.default_package_type() %}
-
 {%- block subtitle %}
     {{ ui.subtitle_item(_('Dashboard')) }}
     {{ super() }}
@@ -17,17 +12,19 @@
 {%- endblock %}
 
 {%- block content_action %}
-    {{ ui.content_action_item(_('Profile settings'), href=h.url_for('user.edit', id=user.name)) }}
 {%- endblock %}
 
 {%- block content_nav %}
-    {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), href=h.url_for('dashboard.datasets'), active=true) }}
-    {{ ui.content_nav_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), href=h.url_for('dashboard.organizations'), active=false) }}
-    {{ ui.content_nav_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), href=h.url_for('dashboard.groups'), active=false) }}
+    {{ ui.content_nav_item(_('News feed'), href=h.url_for('activity.dashboard'), active=request.endpoint=='activity.dashboard') if h.plugin_loaded("activity") }}
+    {{ ui.content_nav_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), href=h.url_for('dashboard.datasets'), active=request.endpoint=='dashboard.datasets') }}
+    {{ ui.content_nav_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), href=h.url_for('dashboard.organizations'), active=request.endpoint=='dashboard.organizations') }}
+    {{ ui.content_nav_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), href=h.url_for('dashboard.groups'), active=request.endpoint=='dashboard.groups') }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
     {% block dashboard_content %}
-        {# Default content would be here #}
+        {%- if h.plugin_loaded("activity") -%}
+            {% include 'user/snippets/news_feed.html' %}
+        {%- endif %}
     {% endblock %}
 {%- endblock %}

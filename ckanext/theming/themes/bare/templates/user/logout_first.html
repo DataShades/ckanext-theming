@@ -1,1 +1,13 @@
-{% extends "_layout.html" %}
+{% extends "user/login.html" %}
+
+{%- block primary_content_inner %}
+    {{ ui.alert(_("You're already logged in as {user}.").format(user=current_user.name), style="danger") }}
+    {{ ui.button(_('Log out'), type="submit", attrs={"form": "form-logout"}) -}}
+{%- endblock %}
+
+{%- block secondary_content %}
+    {%- call ui.util.call(ui.sidebar_section, title=_("You're already logged in")) -%}
+        <p>{{ _("You need to log out before you can log in with another account.") }}</p>
+        {{ ui.button(_('Log out now'), type="submit", attrs={"form": "form-logout"}) -}}
+    {%- endcall %}
+{%- endblock %}

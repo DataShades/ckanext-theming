@@ -1,7 +1,5 @@
 {% extends "user/dashboard.html" %}
 
-{%- set org_type = h.default_group_type('organization') %}
-
 {%- block subtitle %}
     {{ ui.subtitle_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations')) }}
     {{ super() }}
@@ -18,15 +16,13 @@
 
 {%- block dashboard_content %}
     {{ ui.heading(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), level=2) }}
-    {%- set organizations = h.organizations_available(permission='manage_group',
-        include_dataset_count=True,
-        include_member_count=True) %}
+
+    {%- set organizations = h.organizations_available(permission='manage_group', include_dataset_count=True, include_member_count=True) %}
     {%- if organizations %}
-        {{ ui.snippet("organization/snippets/organization_list.html", organizations=organizations, show_capacity=True) }}
+        {{ ui.organization_list(ui.util.map(ui.organization_item, organizations)) }}
+
     {%- else %}
         {{ ui.text(h.humanize_entity_type('organization', org_type, 'you not member') or _('You are not a member of any organizations.')) }}
-        {%- if h.check_access('organization_create') %}
-            {{ ui.link(_('Create one now?'), href=h.url_for(org_type ~ '.new')) }}
-        {%- endif %}
+        {{ ui.link(_('Create one now?'), href=h.url_for(org_type ~ '.new')) if h.check_access('organization_create') }}
     {%- endif %}
 {%- endblock %}

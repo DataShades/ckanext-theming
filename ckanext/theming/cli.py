@@ -651,7 +651,6 @@ def create_theme_cmd(theme_name: str, parent: str):
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {% block primary_content_page %}{% endblock %}
 {%- endblock %}
 """
 
@@ -661,8 +660,7 @@ def create_theme_cmd(theme_name: str, parent: str):
 
     page_content = """{% extends "_base.html" %}
 
-{%- block primary_content_page %}
-    {% block primary_content_inner %}{% endblock %}
+{%- block primary_content_inner %}
 {%- endblock %}
 """
 

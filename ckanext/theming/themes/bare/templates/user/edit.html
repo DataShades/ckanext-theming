@@ -10,7 +10,7 @@
     {{ ui.breadcrumb_item(_('Edit Profile'), href=h.url_for('user.edit', id=user_dict.name)) }}
 {%- endblock %}
 
-{%- block primary_content_page %}
+{%- block primary_content_inner %}
     {{ ui.heading(_('Edit Profile'), level=1) }}
     {{ form | safe }}
 {%- endblock %}

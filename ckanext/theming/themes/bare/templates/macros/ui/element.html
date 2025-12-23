@@ -28,7 +28,7 @@
 {%- endmacro %}
 
 {%- macro heading(content, level) -%}
-    {%- set tag =  "h" ~ (level or 1) %}
+    {%- set tag =  "h" ~ level %}
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
 {%- endmacro %}
 

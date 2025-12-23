@@ -1,5 +1,4 @@
 {% extends "user/dashboard.html" %}
-{%- set dataset_type = h.default_package_type() %}
 
 {%- block subtitle %}
     {{ ui.subtitle_item(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets')) }}
@@ -20,9 +19,7 @@
     {%- if user_dict.datasets %}
         {{ ui.package_list(ui.util.map(ui.package_item, user_dict.datasets)) }}
     {%- else %}
-        {{ ui.text(_('You haven\'t created any datasets.')) }}
-        {%- if h.check_access('package_create') %}
-            {{ ui.link(_('Create one now?'), href=h.url_for(dataset_type ~ '.new')) }}
-        {%- endif %}
+        {{ ui.text(_("You haven't created any datasets.")) }}
+        {{ ui.link(_('Create one now?'), href=h.url_for(dataset_type ~ '.new')) if h.check_access('package_create') }}
     {%- endif %}
 {%- endblock %}

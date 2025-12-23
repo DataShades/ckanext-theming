@@ -5,13 +5,12 @@
     {{ super() }}
 {% endblock %}
 
-{%- block primary_content_inner %}
-    <h1 class="hide-heading">
-        {%- block page_heading -%}
-            {{ _('Activity Stream') }}
-        {%- endblock %}
-    </h1>
-    {{ ui.snippet('snippets/stream.html', activity_stream=activity_stream, id=id, object_type='user') }}
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{ ui.breadcrumb_item(_("Activity Stream"), h.url_for("activity.user_activity", id=user_dict.name)) }}
+{%- endblock %}
 
-    {{ ui.snippet('snippets/pagination.html', newer_activities_url=newer_activities_url, older_activities_url=older_activities_url) }}
+
+{%- block primary_content_inner %}
+    {%- include "snippets/activity_stream.html" -%}
 {%- endblock %}

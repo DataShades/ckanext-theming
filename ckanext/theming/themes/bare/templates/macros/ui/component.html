@@ -71,11 +71,13 @@
 {%- endmacro %}
 
 {%- macro facet_group(content, title) -%}
-    {%- call ui.util.call(ui.section, **kwargs) -%}
+    <section {{ ui.util.attrs(kwargs) }}>
         {{ ui.heading(title, level=3) }}
-        {{ content }}
+        <div>
+            {{ content }}
+        </div>
         {{ ui.divider() }}
-    {%- endcall %}
+    </section>
 {%- endmacro %}
 
 {%- macro activity_stream(content) -%}

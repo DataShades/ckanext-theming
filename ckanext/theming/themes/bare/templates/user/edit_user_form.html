@@ -23,12 +23,7 @@
     {%- endblock %}
 
     {% block extra_fields %}
-        {% if g.userobj.sysadmin and data.state == 'deleted' %}
-            {% call form.checkbox('activate_user', label=_('Reactivate User'), id='activate_user', value=True, checked=false) %}
-                {% set helper_text = _('This account is deactivated, if you want to reactivate it, please click on checkbox.') %}
-                {{ form.info(helper_text, classes='info-help-tight') }}
-            {% endcall %}
-        {% endif %}
+        {{ ui.checkbox(_('This account is deactivated, if you want to reactivate it, please click on checkbox.'), name='activate_user', label=_('Reactivate User'), checked=false) if current_user.sysadmin and data.state == 'deleted' }}
     {% endblock %}
 
     {% if is_sysadmin and current_user.name != data.name %}
@@ -43,7 +38,7 @@
         {% block sysadmin_old_password %}
             <fieldset>
                 <legend>{{ _('Sysadmin password') }}</legend>
-                {{ form.input(name='old_password', type='password', label=_('Sysadmin Password'), value=data.oldpassword, errors=errors.oldpassword) }}
+                {{ ui.input(name='old_password', type='password', label=_('Sysadmin Password'), value=data.oldpassword, errors=errors.oldpassword) }}
             </fieldset>
         {% endblock %}
 
@@ -57,8 +52,6 @@
             </fieldset>
         {% endblock %}
     {% endif %}
-
-
 
     {%- call ui.util.call(ui.form_actions) -%}
         {% set is_deleted = data.state == 'deleted' %}
