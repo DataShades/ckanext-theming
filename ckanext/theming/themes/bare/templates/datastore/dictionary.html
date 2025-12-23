@@ -26,7 +26,7 @@
                         {% endblock %}
 
                         {% block standard_fields scoped %}
-                            {{ ui.input(name='info__' ~ position ~ '__label', label=_('Label'), value=field.get('info', {}).get('label', ''), classes=['control-full']) }}
+                            {{ ui.input(name='info__' ~ position ~ '__label', label=_('Label'), value=field.get('info', {}).get('label', '')) }}
 
                             {{ ui.markdown(name='info__' ~ position ~ '__notes', label=_('Description'), value=field.get('info', {}).get('notes', '')) }}
                         {% endblock %}

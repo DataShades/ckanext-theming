@@ -1,4 +1,5 @@
-@use "base/_variables" as v;
+@use "variables" as v;
+@use "mixins" as m;
 
 /* GRID WRAPPER */
 .grid {
@@ -25,7 +26,7 @@
 .col-12 { grid-column: span 12; }
 
 /* BREAKPOINTS */
-@media (min-width: v.$breakpoint-sm) { /* sm */
+@include m.breakpoint(sm) { /* sm */
   .col-sm-1  { grid-column: span 1; }
   .col-sm-2  { grid-column: span 2; }
   .col-sm-3  { grid-column: span 3; }
@@ -40,7 +41,7 @@
   .col-sm-12 { grid-column: span 12; }
 }
 
-@media (min-width: v.$breakpoint-md) { /* md */
+@include m.breakpoint(md) { /* md */
   .col-md-1  { grid-column: span 1; }
   .col-md-2  { grid-column: span 2; }
   .col-md-3  { grid-column: span 3; }
@@ -55,7 +56,7 @@
   .col-md-12 { grid-column: span 12; }
 }
 
-@media (min-width: v.$breakpoint-lg) { /* lg */
+@include m.breakpoint(lg) { /* lg */
   .col-lg-1  { grid-column: span 1; }
   .col-lg-2  { grid-column: span 2; }
   .col-lg-3  { grid-column: span 3; }
@@ -70,7 +71,7 @@
   .col-lg-12 { grid-column: span 12; }
 }
 
-@media (min-width: v.$breakpoint-xl) { /* xl */
+@include m.breakpoint(xl) { /* xl */
   .col-xl-1  { grid-column: span 1; }
   .col-xl-2  { grid-column: span 2; }
   .col-xl-3  { grid-column: span 3; }
@@ -85,7 +86,7 @@
   .col-xl-12 { grid-column: span 12; }
 }
 
-@media (min-width: v.$breakpoint-xxl) { /* xxl */
+@include m.breakpoint(xxl) { /* xxl */
   .col-xxl-1  { grid-column: span 1; }
   .col-xxl-2  { grid-column: span 2; }
   .col-xxl-3  { grid-column: span 3; }

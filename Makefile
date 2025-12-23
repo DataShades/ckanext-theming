@@ -17,26 +17,30 @@ test-server:  ## start server for frontend testing
 	yes | ckan -ctest.ini sysadmin add admin password=password123 email=admin@test.net
 	ckan -c test.ini run -t
 
+# vendor-tailwind:  ## compile tailwind theme
+# 	 npx @tailwindcss/cli -o ckanext/theming/themes/tailwind/assets/style.css
 
-vendor-tailwind:  ## compile tailwind theme
-	 npx @tailwindcss/cli -o ckanext/theming/themes/tailwind/assets/style.css
+# vendor-bulma:  ## update bulma theme
+# 	 cp node_modules/bulma/css/bulma.css ckanext/theming/themes/bulma/assets/style.css
 
-vendor-bulma:  ## update bulma theme
-	 cp node_modules/bulma/css/bulma.css ckanext/theming/themes/bulma/assets/style.css
+# vendor-pico:  ## update pico theme
+# 	 cp node_modules/@picocss/pico/css/pico.min.css ckanext/theming/themes/pico/assets/style.css
 
-vendor-pico:  ## update pico theme
-	 cp node_modules/@picocss/pico/css/pico.min.css ckanext/theming/themes/pico/assets/style.css
+# vendor-bs5:  ## update bootstrap5 theme
+# 	cp node_modules/bootstrap/dist/js/bootstrap.bundle.js ckanext/theming/themes/bs5/assets/vendor.js
+# 	cp node_modules/bootstrap/dist/css/bootstrap.min.css ckanext/theming/themes/bs5/assets/vendor.css
 
-vendor-bs5:  ## update bootstrap5 theme
-	cp node_modules/bootstrap/dist/js/bootstrap.bundle.js ckanext/theming/themes/bs5/assets/vendor.js
-	cp node_modules/bootstrap/dist/css/bootstrap.min.css ckanext/theming/themes/bs5/assets/vendor.css
+# vendor: vendor-tailwind vendor-bulma vendor-pico vendor-bs5 ## update all vendor files
 
+watch-bare-scripts:  ## watch bare theme scripts
+	cd ckanext/theming/themes/bare; \
+	npm run watch-scripts
 
+watch-bare-styles:  ## watch bare theme styles
+	cd ckanext/theming/themes/bare; \
+	npm run watch-styles
 
-vendor: vendor-tailwind vendor-bulma vendor-pico vendor-bs5 ## update all vendor files
-
-watch-theme-bare:
-	npx sass ckanext/theming/themes/bare/assets/scss/style.scss ckanext/theming/themes/bare/assets/style.css -w
-
-watch-script-%:  ## track and compile changes in typescript of specified theme
-	npx tsc -p tsconfig.$*.json -w
+compile-bare-assets:  ## compile bare theme assets
+	cd ckanext/theming/themes/bare; \
+	npm run scripts; \
+	npm run styles;

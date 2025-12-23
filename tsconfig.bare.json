@@ -1,8 +1,0 @@
-{
-    "extends": "./tsconfig.json",
-    "include": [
-        "ckanext/theming/themes/bare/assets/*.ts"
-    ],
-    "compilerOptions": {
-    }
-}

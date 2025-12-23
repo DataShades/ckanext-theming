@@ -253,4 +253,3 @@ declare global {
   }
 }
 export {};
-//# sourceMappingURL=script.d.ts.map

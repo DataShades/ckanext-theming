@@ -294,8 +294,7 @@ def validate_theme(theme_name: str | None):
 
 
 @theme.command("list-templates")
-@click.option("--usage-freq", is_flag=True, help="Show templates ordered by usage frequency")
-def list_templates(usage_freq: bool):
+def list_templates():
     """List all core CKAN templates that themes should be prepared to handle."""
     # Common CKAN templates in order of importance
     common_templates = [
@@ -357,103 +356,9 @@ def list_templates(usage_freq: bool):
         "tracking.html",
     ]
 
-    if usage_freq:
-        # Simulated usage frequencies (in a real implementation, this would come from CKAN analysis)
-        usage_frequency = {
-            "home/index.html": 100,
-            "package/search.html": 95,
-            "package/read.html": 90,
-            "_base.html": 85,
-            "_page.html": 80,
-            "organization/read.html": 75,
-            "group/read.html": 70,
-            "user/read.html": 65,
-            "dataset/search.html": 60,
-            "dataset/read.html": 55,
-            "admin/index.html": 50,
-            "organization/index.html": 45,
-            "group/index.html": 40,
-            "user/edit.html": 35,
-            "user/login.html": 30,
-            "package/edit.html": 25,
-            "organization/edit.html": 20,
-            "group/edit.html": 15,
-            "user/index.html": 10,
-        }
-
-        # Sort by frequency
-        sorted_templates = sorted(common_templates, key=lambda x: usage_frequency.get(x, 0), reverse=True)
-
-        click.secho("CKAN Templates by Usage Frequency (estimated):", fg="green")
-        for template in sorted_templates:
-            freq = usage_frequency.get(template, 0)
-            if freq > 0:
-                click.echo(f"{freq:3d} | {template}")
-            else:
-                click.echo(f"  0 | {template}")
-    else:
-        click.secho("Common CKAN Templates:", fg="green")
-        for template in common_templates:
-            click.echo(f"- {template}")
-
-
-@theme.command("list-macros")
-@click.option(
-    "--classification",
-    type=click.Choice(["all", "essential", "optional", "desired"]),
-    default="all",
-    help="Filter macros by classification",
-)
-def list_macros(classification: str):
-    """List all UI macros categorized by importance."""
-    essential_macros = {
-        "button": 'content, href=None, type="button", style="primary"',
-        "link": "content, href, blank=False",
-        "input": 'content=None, name=None, id=None, label=None, value="", required=False, placeholder=None, type="text", errors=[]',
-        "heading": "content, level=1",
-        "container": "content, fluid=False",
-        "form": 'content, method="POST", action=None, enctype=None, include_csrf=True',
-        "form_start": 'method="POST", action=None, enctype=None',
-        "form_end": "",
-        "table": "content",
-        "list": 'content, type="unordered"',
-    }
-
-    optional_macros = {
-        "card": "content, title=None, footer=None, img=None, href=None",
-        "panel": "content, title=None, collapsible=False, open=False",
-        "nav": 'content, style="tabs"',
-        "pagination": "page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=False, hide_siblings=False",
-        "modal": "content, title=None, id=None, open=False",
-        "alert": 'content, style="info"',
-        "badge": "content",
-    }
-
-    desired_macros = {
-        "image": "src, alt=None, height=None, width=None",
-        "icon": 'name, size="md"',
-        "avatar": "src=None, alt=None",
-        "breadcrumb": "content",
-        "dropdown": "content, title",
-        "sidebar_section": "content, title",
-    }
-
-    click.secho("UI Macro Signatures:", fg="green")
-
-    if classification in ["all", "essential"]:
-        click.echo("\n" + click.style("Essential Macros (required):", fg="red"))
-        for name, sig in essential_macros.items():
-            click.echo(f"  {name}({sig})")
-
-    if classification in ["all", "optional"]:
-        click.echo("\n" + click.style("Optional Macros (enhancement):", fg="yellow"))
-        for name, sig in optional_macros.items():
-            click.echo(f"  {name}({sig})")
-
-    if classification in ["all", "desired"]:
-        click.echo("\n" + click.style("Desired Macros (recommended):", fg="blue"))
-        for name, sig in desired_macros.items():
-            click.echo(f"  {name}({sig})")
+    click.secho("Common CKAN Templates:", fg="green")
+    for template in common_templates:
+        click.echo(f"- {template}")
 
 
 @theme.command("inspect-template")

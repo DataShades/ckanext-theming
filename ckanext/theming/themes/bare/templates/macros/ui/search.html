@@ -54,8 +54,8 @@
         {%- do kwargs.setdefault("hx", {"boost": "true", "disinherit": "hx-boost", "trigger": "change, submit"}) -%}
     {%- endif %}
     {%- call ui.util.call(ui.form, **kwargs) -%}
-        <div class="search-container">
-            <div class="search-input-section">
+        <div>
+            <div>
                 {{ ui.search_input(name=query_name, value=query) }}
                 {{ ui.search_submit_button() }}
             </div>
@@ -66,19 +66,19 @@
                 {%- endfor %}
             {%- endif %}
 
-            <div class="search-sort-section">
+            <div>
                 {{ ui.search_sort_control(name=sorting_name, selected=sorting, options=sorting_options) }}
             </div>
 
-            <div class="search-results-header">
+            <div>
                 {{ ui.search_results_header(item_count=item_count, first_item_position=first_item_position, last_item_position=last_item_position, query_error=query_error) }}
             </div>
 
-            <div class="search-filters-section">
+            <div>
                 {{ ui.search_active_filters(active_filters=active_filters, facet_titles=facet_titles, facets=facets, use_htmx=use_htmx) }}
             </div>
 
-            <div class="search-advanced-section">
+            <div>
                 {{ ui.search_advanced_controls() }}
             </div>
         </div>
