@@ -19,7 +19,6 @@
 {% set link = link | default(element.link) %}
 {% set tag = tag | default(element.tag) %}
 {% set text = text | default(element.text) %}
-{% set text_block = text_block | default(element.text_block) %}
 {% set video = video | default(element.video) %}
 
 {% set breadcrumb_item = breadcrumb_item | default(_nav.breadcrumb_item) %}
@@ -53,7 +52,6 @@
 {% set listing_item = listing_item | default(_container.listing_item) %}
 {% set container = container | default(_container.container) %}
 {% set grid = grid | default(_container.grid) %}
-{% set row = row | default(_container.row) %}
 {% set section = section | default(_container.section) %}
 {% set sidebar_section = sidebar_section | default(_container.sidebar_section) %}
 {% set panel = panel | default(_container.panel) %}
@@ -107,6 +105,7 @@
 {% set markdown = markdown | default(_form.markdown) %}
 {% set select = select | default(_form.select) %}
 {% set select_block = select_block | default(_form.select_block) %}
+{% set select_option = select_option | default(_form.select_option) %}
 {% set radio = radio | default(_form.radio) %}
 {% set file_input = file_input | default(_form.file_input) %}
 {% set range_input = range_input | default(_form.range_input) %}

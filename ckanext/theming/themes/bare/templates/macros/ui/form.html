@@ -259,10 +259,14 @@
 
             {%- endif %}
 
-            <option value="{{ value }}" {{ "selected" if value in selected_values }}>{{ text }}</option>
+            {{ ui.select_option(text, value, selected=value in selected_values) }}
         {%- endfor %}
 
     {%- endcall %}
+{%- endmacro %}
+
+{%- macro select_option(content, value, selected) -%}
+    <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
 {%- endmacro %}
 
 {%- macro extra_field(index, data={}, errors={}, name_template='extras__{index}__') -%}

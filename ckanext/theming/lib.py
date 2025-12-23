@@ -24,11 +24,12 @@ from collections import defaultdict
 from collections.abc import Iterable, Iterator
 from typing import Any, Protocol
 
+from flask import current_app
 from jinja2.runtime import Macro
 from markupsafe import Markup
 from typing_extensions import override
+from werkzeug.local import LocalProxy
 
-import ckan
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 from ckan import types
@@ -285,12 +286,12 @@ def get_theme(name: str):
     return themes[name]
 
 
-def collect_themes():
+def collect_themes() -> dict[str, Theme]:
     """Collect available themes from core and plugins."""
-    ckan_root = os.path.dirname(os.path.abspath(ckan.__file__))
-    themes = {
-        "classic": Theme(os.path.join(ckan_root, "templates")),
-        "midnight-blue": Theme(os.path.join(ckan_root, "templates-midnight-blue")),
+    # ckan_root = os.path.dirname(os.path.abspath(ckan.__file__))
+    themes: dict[str, Theme] = {
+        # "classic": Theme(os.path.join(ckan_root, "templates")),
+        # "midnight-blue": Theme(os.path.join(ckan_root, "templates-midnight-blue")),
     }
     for plugin in p.PluginImplementations(ITheme):
         themes.update(plugin.register_themes())
@@ -313,12 +314,11 @@ def resolve_paths(theme: str | None) -> list[str]:
     return paths
 
 
-def switch_theme(name: str, config: Any):
-    """Switch to the specified theme by updating the CKAN configuration.
+def enable_theme(name: str, config: Any):
+    """Enable the specified theme.
 
-    This function updates the CKAN configuration to use the specified theme. It
-    updates the template paths and static asset paths based on the theme's
-    definition.
+    This function updates the CKAN configuration to include template and
+    static file directories from the specified theme and its parent themes.
 
     :param name: The name of the theme to switch to.
     :param config: The CKAN configuration dictionary.
@@ -354,3 +354,30 @@ def switch_theme(name: str, config: Any):
     else:
         msg = f"Theme '{next_name}' is not recognised."
         raise CkanConfigurationException(msg)
+
+    UIManager.reset()
+
+
+class UIManager:
+    ui: UI | None = None
+
+    @classmethod
+    def get(cls):
+        """Get the current UI instance. Creates one if it doesn't exist."""
+        if cls.ui is None:
+            cls.set(tk.config["ckan.ui.theme"])
+
+        return cls.ui
+
+    @classmethod
+    def set(cls, theme: str):
+        """Set the UI instance to a new theme."""
+        cls.ui = get_theme(theme).build_ui(current_app)
+
+    @classmethod
+    def reset(cls):
+        """Reset the UI instance to None."""
+        cls.ui = None
+
+
+ui = LocalProxy(UIManager.get)
