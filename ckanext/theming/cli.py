@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import inspect
 import logging
 import os
@@ -12,8 +13,10 @@ from jinja2.runtime import Macro
 
 import ckan.plugins.toolkit as tk
 from ckan.common import config
+from ckan.lib.helpers import defaultdict
 
 from . import lib as lib_theme
+from . import reference
 
 log = logging.getLogger(__name__)
 
@@ -23,6 +26,31 @@ __all__ = ["theme"]
 @click.group(name="theme", short_help="Theme related commands.")
 def theme():
     pass
+
+
+def theme_callback(ctx: click.Context, param: click.Parameter, name: str | None):
+    if not name:
+        name = config["ckan.ui.theme"]
+
+    if not name:
+        tk.error_shout("Theme is not configured")
+        raise click.Abort
+
+    try:
+        return lib_theme.get_theme(name)
+    except KeyError as err:
+        tk.error_shout(f"Theme {name} is not registered")
+        raise click.Abort from err
+
+
+theme_option = click.option("-t", "--theme", callback=theme_callback)
+
+
+@contextlib.contextmanager
+def _make_ui(ctx: click.Context, theme: lib_theme.Theme):
+    """Context manager to build the UI for a theme within a Flask app context."""
+    with ctx.meta["flask_app"].app_context() as app_context:
+        yield theme.build_ui(app_context.app)
 
 
 @theme.command("list")
@@ -53,17 +81,10 @@ def component():
 
 @component.command("list")
 @click.pass_context
-def component_list(ctx: click.Context):
+@theme_option
+def component_list(ctx: click.Context, theme: lib_theme.Theme):
     """List available components."""
-    name = config["ckan.ui.theme"]
-    if not name:
-        tk.error_shout("Theme is not configured")
-        return
-
-    info = lib_theme.get_theme(name)
-
-    with ctx.meta["flask_app"].app_context() as app_context:
-        ui = info.build_ui(app_context.app)
+    with _make_ui(ctx, theme) as ui:
         for item in ui:
             el = getattr(ui, item)
             if not el:
@@ -71,31 +92,25 @@ def component_list(ctx: click.Context):
             click.echo(f"  {item}: {el}")
 
 
-# TODO: review
 @component.command("analyze")
 @click.pass_context
+@theme_option
 @click.argument("name", required=False)
 @click.option("--with-docs", is_flag=True)
-def component_analyze(ctx: click.Context, name: str | None, with_docs: bool):  # noqa: C901
+def component_analyze(ctx: click.Context, name: str | None, with_docs: bool, theme: lib_theme.Theme):  # noqa: C901
     """Analyze UI components and their implementations."""
-    theme_name = config["ckan.ui.theme"]
-    if not theme_name:
-        tk.error_shout("Theme is not configured")
-        return
-
-    info = lib_theme.get_theme(theme_name)
-
-    with ctx.meta["flask_app"].app_context() as app_context:
-        ui = info.build_ui(app_context.app)
-
+    with _make_ui(ctx, theme) as ui:
         if name:
             components = [name]
+
         else:
             components = sorted(ui)
-            click.secho(f"Available UI components({len(components)}):", fg="yellow")
+            click.secho(f"Available UI components({len(components)}):")
 
         for component in components:
             comp_func = getattr(ui, component)
+            ref = reference.components[component]
+
             # Try to get the source or signature information
             if isinstance(comp_func, Macro):
                 sig = ", ".join(comp_func.arguments)
@@ -114,9 +129,9 @@ def component_analyze(ctx: click.Context, name: str | None, with_docs: bool):  #
                 comp_type = type(comp_func).__name__
 
             click.secho(f"\n{component}", bold=True)
-            click.secho(click.style("Signature: ", fg="yellow") + sig)
             click.secho(click.style("Type: ", fg="yellow") + comp_type)
-            click.secho(click.style("Category: ", fg="yellow") + "❗Custom")
+            click.secho(click.style("Category: ", fg="yellow") + ref.category.name)
+            click.secho(click.style("Signature: ", fg="yellow") + sig)
 
             if with_docs:
                 doc = pydoc.getdoc(comp_func)
@@ -125,67 +140,38 @@ def component_analyze(ctx: click.Context, name: str | None, with_docs: bool):  #
                 click.secho(click.style("Documentation: ", fg="yellow") + doc)
 
 
-@component.command("verify")
-@click.argument("theme_name", required=False)
+@component.command("check")
+@theme_option
 @click.pass_context
-def component_verify(ctx: click.Context, theme_name: str | None):
+def component_check(ctx: click.Context, theme: lib_theme.Theme):
     """Verify that a theme implements all required UI components."""
-    theme_name = config["ckan.ui.theme"]
-    if not theme_name:
-        tk.error_shout("Theme is not configured")
-        return
+    categorized: dict[reference.Category, set[str]] = defaultdict(set)
+    for name, info in reference.components.items():
+        categorized[info.category].add(name)
 
-    info = lib_theme.get_theme(theme_name)
-
-    with ctx.meta["flask_app"].app_context() as app_context:
-        ui = info.build_ui(app_context.app)
-
-        click.secho(f"Verifying theme: {theme_name}", fg="green")
-
+    with _make_ui(ctx, theme) as ui:
         # Get all components from this theme
         theme_components = set(ui)
+        missing_components = {name: sorted(items - theme_components) for name, items in categorized.items()}
 
-        # Get all components from base themes to compare against
-        all_themes = lib_theme.collect_themes()
-        base_theme = "bare"  # Use bare as the reference base theme
-        if base_theme in all_themes:
-            base_ui = all_themes[base_theme].build_ui(app_context.app)
-            base_components = set(base_ui)
-        else:
-            # Fallback: get from currently active theme if bare doesn't exist
-            base_ui = ui
-            base_components = set(base_ui)
+        extra_components = sorted(theme_components.difference(reference.components))
 
-        # Find missing components
-        missing_components = base_components - theme_components
-        extra_components = theme_components - base_components
-        common_components = theme_components & base_components
+        click.echo(f"Theme implements {len(theme_components)} components")
 
-        click.echo(f"Reference components (from '{base_theme}'): {len(base_components)}")
-        click.echo(f"Theme components implemented: {len(common_components)}")
+        for category in categorized:
+            if missing_components[category]:
+                click.secho(
+                    f"  Missing {len(missing_components[category])} out of"
+                    + f" {len(categorized[category])} in category {category.name}",
+                    fg="yellow",
+                )
+                click.secho("    " + ", ".join(missing_components[category]), fg="red")
 
-        if missing_components:
-            click.secho(f"\nMissing components ({len(missing_components)}):", fg="red")
-            for comp in sorted(missing_components):
-                click.echo(f"  ✗ {comp}")
-        else:
-            click.secho("\n✓ All reference components are implemented", fg="green")
-
+            else:
+                click.secho(f"  All components in category {category.name} are implemented", fg="green")
         if extra_components:
-            click.secho(f"\nExtra components ({len(extra_components)}):", fg="blue")
-            for comp in sorted(extra_components):
-                click.echo(f"  + {comp}")
-
-        click.secho(f"\nVerification summary for '{theme_name}':", fg="green")
-        click.echo(f"  Missing: {len(missing_components)}")
-        click.echo(f"  Implemented: {len(common_components)}")
-        click.echo(f"  Extra: {len(extra_components)}")
-
-        if missing_components:
-            tk.error_shout("Status: FAILED - Some required components are missing")
-            raise click.Abort
-
-        click.echo(click.style("Status: PASSED - All required components implemented", fg="green"))
+            click.secho(f"  Extra components ({len(extra_components)})", fg="yellow")
+            click.secho("    " + ", ".join(extra_components), fg="blue")
 
 
 @theme.command("validate")
