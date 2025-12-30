@@ -1,0 +1,1 @@
+routes = ("stats.index",)

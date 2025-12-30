@@ -1,21 +1,19 @@
 {% extends "package/_edit_base.html" %}
 
 {%- block subtitle -%}
-    {{ ui.subtitle_item(h.resource_display_name(resource)) if resource }}
-    {{ super() }}
+  {{ ui.subtitle_item(h.resource_display_name(resource)) if resource }}
+  {{ super() }}
 {%- endblock %}
 
 {%- block breadcrumb_content %}
-    {{ super() }}
+  {{ super() }}
 
-    {% if resource %}
-        {{ ui.breadcrumb_item(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id)) }}
-    {% endif %}
+  {{ ui.breadcrumb_item(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id)) if resource }}
 
 {%- endblock %}
 
 {%- block content_action %}
-    {{ ui.button(_('View resource'), href=h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.read') }}
+  {{ ui.button(_('View resource'), href=h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id), active=request.endpoint == pkg_dict.type ~ '_resource.read') if resource }}
 {%- endblock %}
 
 

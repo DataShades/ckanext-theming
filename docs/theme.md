@@ -1,4 +1,4 @@
-# Creating and Registering CKAN Themes
+# Creating CKAN themes
 
 A CKAN theme allows you to customize the look and feel of your CKAN instance by providing a set of UI macros that can be used consistently across your site. The theming system works by providing a collection of macros that replace or augment the default UI elements.
 

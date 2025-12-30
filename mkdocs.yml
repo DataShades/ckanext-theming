@@ -84,9 +84,8 @@ theme:
 
 nav:
   - index.md
-  - theme.md
-  - Theming Parties: theming-parties.md
-  - Component Library:
+  - theming-parties.md
+  - Component library:
       - library/component.md
       - library/container.md
       - library/data.md
@@ -96,3 +95,5 @@ nav:
       - library/meta.md
       - library/misc.md
       - library/nav.md
+  - theme.md
+  - cli.md

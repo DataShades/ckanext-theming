@@ -108,21 +108,6 @@ Once a theme is active, UI macros can be used in templates:
 
 For detailed instructions on creating custom themes, see [theming guide](https://datashades.github.io/ckanext-theming/theme/).
 
-## CLI
-
-The extension provides CLI commands for theme management:
-
-```bash
-# List available themes
-ckan theme list
-
-# Show theme components
-ckan theme components
-
-# Debug theme issues
-ckan theme debug
-```
-
 ## License
 
 [AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html)

@@ -1,0 +1,16 @@
+routes = (
+    "activity.dashboard",
+    "activity.dashboard_testing",
+    "activity.group_activity",
+    "activity.group_changes",
+    "activity.group_changes_multiple",
+    "activity.organization_activity",
+    "activity.organization_changes",
+    "activity.organization_changes_multiple",
+    "activity.package_activity",
+    "activity.package_changes",
+    "activity.package_changes_multiple",
+    "activity.package_history",
+    "activity.resource_history",
+    "activity.user_activity",
+)

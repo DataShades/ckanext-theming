@@ -2,19 +2,18 @@
 {%- set _layout = _layout | default("fullwidth") -%}
 
 {%- block subtitle %}
-    {{ ui.subtitle_item(_("Confirm Delete")) }}
-    {{ super() }}
+  {{ ui.subtitle_item(_("Confirm Delete")) }}
+  {{ super() }}
 {% endblock %}
 
-{%- block primary_content_inner %}
-    {%- call ui.util.call(ui.container, class="col-md-6 col-md-offset-3") -%}
-        {%- call ui.util.call(ui.panel) -%}
-            <p>{{ _('Are you sure you want to delete organization - {name}?').format(name=group_dict.name) }}</p>
-            {%- call ui.util.call(ui.form, method="POST", action=h.url_for(group_type ~ '.delete', id=group_dict.id), id="organization-confirm-delete-form") -%}
-                {{ h.csrf_input() }}
-                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger") }}
-                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary") }}
-            {%- endcall -%}
-        {%- endcall -%}
-    {%- endcall -%}
+{%- block primary_content_inner -%}
+  <p>{{ _('Are you sure you want to delete organization - {name}?').format(name=group_dict.name) }}</p>
+
+  {%- call ui.util.call(ui.form, method="POST") -%}
+    {%- call ui.util.call(ui.form_actions) -%}
+      {{ ui.button(_("Cancel"), href=h.url_for(group_dict.type ~ ".edit", id=group_dict.name)) }}
+      {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+    {%- endcall %}
+  {%- endcall %}
+
 {%- endblock %}

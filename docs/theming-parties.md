@@ -1,4 +1,4 @@
-# Theming parties and their roles
+# Theming parties
 
 Theming in CKAN can be approached by three different types of users, each with different levels of knowledge and constraints. Understanding these roles helps in making better decisions about when to use raw HTML vs. themed components.
 

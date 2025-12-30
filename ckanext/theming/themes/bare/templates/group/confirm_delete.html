@@ -2,17 +2,17 @@
 {%- set _layout = _layout | default("fullwidth") -%}
 
 {% block subtitle %}
-    {{ ui.subtitle_item(_('Confirm Delete')) }}
-    {{ super() }}
+  {{ ui.subtitle_item(_('Confirm Delete')) }}
+  {{ super() }}
 {% endblock %}
 
 {%- block primary_content_inner -%}
-    <p>{{ _('Are you sure you want to delete group - {name}?').format(name=group_dict.name) }}</p>
+  <p>{{ _('Are you sure you want to delete group - {name}?').format(name=group_dict.name) }}</p>
 
-    {%- call ui.util.call(ui.form, method="POST") -%}
-        {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.submit(value=_("Cancel"), name="cancel") }}
-            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
-        {%- endcall %}
+  {%- call ui.util.call(ui.form, method="POST") -%}
+    {%- call ui.util.call(ui.form_actions) -%}
+      {{ ui.button(_("Cancel"), href=h.url_for(group_dict.type ~ ".edit", id=group_dict.name)) }}
+      {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
     {%- endcall %}
+  {%- endcall %}
 {%- endblock %}

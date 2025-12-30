@@ -50,9 +50,11 @@ const build = () =>
       if_(
         isDev,
         sourcemaps.write(),
+        // minify and optimize CSS for production use
         cleanCSS({
           level: 2,
           format: {
+            // add line breaks for better readability of minified CSS
             breaks: {
               afterProperty: true,
               afterRuleBegins: true,

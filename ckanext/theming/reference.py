@@ -5,6 +5,9 @@ from __future__ import annotations
 import dataclasses
 import enum
 from collections import defaultdict
+from collections.abc import Callable
+
+import ckan.plugins.toolkit as tk
 
 
 class Category(enum.Enum):
@@ -31,6 +34,7 @@ components.update(
         "accordion": Component(Category.RECOMMENDED),
     }
 )
+
 
 templates: dict[str, Template] = defaultdict(Template)
 templates.update(
@@ -164,5 +168,116 @@ templates.update(
         "organization/manage_members.html": Template(Category.ESSENTIAL),
         "organization/_edit_base.html": Template(Category.RECOMMENDED),
         "organization/snippets/info.html": Template(Category.ESSENTIAL),
+    }
+)
+
+
+@dataclasses.dataclass(frozen=True)
+class Route:
+    plugin: str | None = None
+    endpoint: str | None = None
+    check_availability: Callable[[], bool] = lambda: True
+    view_args: set[str] = dataclasses.field(default_factory=set)
+    authenticated: bool = True
+
+
+routes: dict[str, Route] = defaultdict(Route)
+routes.update(
+    {
+        "activity.dashboard": Route(plugin="activity"),
+        "activity.dashboard_testing": Route(plugin="activity"),
+        "activity.group_activity": Route(plugin="activity"),
+        "activity.group_changes": Route(plugin="activity"),
+        "activity.group_changes_multiple": Route(plugin="activity"),
+        "activity.organization_activity": Route(plugin="activity"),
+        "activity.organization_changes": Route(plugin="activity"),
+        "activity.organization_changes_multiple": Route(plugin="activity"),
+        "activity.package_activity": Route(plugin="activity"),
+        "activity.package_changes": Route(plugin="activity"),
+        "activity.package_changes_multiple": Route(plugin="activity"),
+        "activity.package_history": Route(plugin="activity"),
+        "activity.resource_history": Route(plugin="activity"),
+        "activity.user_activity": Route(plugin="activity"),
+        "admin.config": Route(),
+        "admin.index": Route(),
+        "admin.reset_config": Route(),
+        "admin.trash": Route(),
+        "dashboard.datasets": Route(),
+        "dashboard.groups": Route(),
+        "dashboard.organizations": Route(),
+        "dataset.collaborator_delete": Route(
+            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"]
+        ),
+        "dataset.collaborators_read": Route(
+            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"]
+        ),
+        "dataset.delete": Route(view_args={"id"}),
+        "dataset.edit": Route(view_args={"id"}),
+        "dataset.followers": Route(view_args={"id"}),
+        "dataset.groups": Route(view_args={"id"}),
+        "dataset.new": Route(),
+        "dataset.new_collaborator": Route(
+            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"]
+        ),
+        "dataset.read": Route(view_args={"id"}),
+        "dataset.resources": Route(view_args={"id"}),
+        "dataset.search": Route(),
+        "datastore.api_info": Route(plugin="datastore"),
+        "datastore.dictionary": Route(plugin="datastore"),
+        "group.about": Route(view_args={"id"}),
+        "group.admins": Route(view_args={"id"}),
+        "group.delete": Route(view_args={"id"}),
+        "group.edit": Route(view_args={"id"}),
+        "group.followers": Route(view_args={"id"}),
+        "group.index": Route(),
+        "group.manage_members": Route(view_args={"id"}),
+        "group.member_new": Route(view_args={"id"}),
+        "group.members": Route(view_args={"id"}),
+        "group.new": Route(),
+        "group.read": Route(view_args={"id"}),
+        "organization.about": Route(view_args={"id"}),
+        "organization.admins": Route(view_args={"id"}),
+        "organization.bulk_process": Route(view_args={"id"}),
+        "organization.delete": Route(view_args={"id"}),
+        "organization.edit": Route(view_args={"id"}),
+        "organization.followers": Route(view_args={"id"}),
+        "organization.index": Route(),
+        "organization.manage_members": Route(view_args={"id"}),
+        "organization.member_new": Route(view_args={"id"}),
+        "organization.members": Route(view_args={"id"}),
+        "organization.new": Route(),
+        "organization.read": Route(view_args={"id"}),
+        "home.index": Route(),
+        "home.about": Route(),
+        "resource.delete": Route(view_args={"id", "resource_id"}),
+        "resource.edit": Route(view_args={"id", "resource_id"}),
+        "resource.edit_view": Route(view_args={"id", "resource_id"}),
+        "resource.edit_view:view_selected": Route(
+            endpoint="resource.edit_view", view_args={"id", "resource_id", "view_id"}
+        ),
+        "resource.new": Route(view_args={"id"}),
+        "resource.read": Route(view_args={"id", "resource_id"}),
+        "resource.view": Route(view_args={"id", "resource_id"}),
+        "resource.view:view_selected": Route(endpoint="resource.view", view_args={"id", "resource_id", "view_id"}),
+        "resource.views": Route(view_args={"id", "resource_id"}),
+        "stats.index": Route(plugin="stats"),
+        "user.api_tokens": Route(view_args={"id"}),
+        "user.delete": Route(view_args={"id"}),
+        "user.edit": Route(view_args={"id"}),
+        "user.followers": Route(view_args={"id"}),
+        "user.index": Route(),
+        "user.logged_out_page": Route(),
+        "user.login": Route(authenticated=False),
+        "user.login:authenticated": Route(endpoint="user.login"),
+        "user.logout": Route(authenticated=False),
+        "user.logout:authenticated": Route(endpoint="user.logout"),
+        "user.me": Route(),
+        "user.perform_reset": Route(view_args={"id"}, authenticated=False),
+        "user.read": Route(view_args={"id"}),
+        "user.read_groups": Route(view_args={"id"}),
+        "user.read_organizations": Route(view_args={"id"}),
+        "user.register": Route(authenticated=False),
+        "user.request_reset": Route(authenticated=False),
+        "util.primer": Route(),
     }
 )

@@ -105,10 +105,7 @@ def theme_create(name: str, location: str):
             raise click.Abort
     bare = lib.get_theme("bare")
 
-    shutil.copytree(bare.path, os.path.join(location, name), ignore=lambda d, f: ["node_modules"])
-    # Create directory structure
-    # os.makedirs(os.path.join(theme_dir, "templates", "macros", "ui"), exist_ok=True)
-    # os.makedirs(os.path.join(theme_dir, "assets"), exist_ok=True)
+    shutil.copytree(bare.path, os.path.join(location, name), ignore=lambda d, f: ["node_modules", "package-lock.json"])
 
 
 @theme.group()
@@ -263,11 +260,10 @@ def template_check(theme: lib.Theme):
 @theme_option
 @click.argument("templates", nargs=-1)
 @click.option("--relative-filename", is_flag=True)
-@click.option("--with-all-blocks", is_flag=True)
 def template_analyze(  # noqa: C901
-    ctx: click.Context, templates: Collection[str], with_all_blocks: bool, theme: lib.Theme, relative_filename: bool
+    ctx: click.Context, templates: Collection[str], theme: lib.Theme, relative_filename: bool
 ):
-    """Analyze UI components and their implementations."""
+    """Analyze theme templates."""
     root = theme.template_path()
     if not templates:
         templates = {
