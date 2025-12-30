@@ -21,6 +21,9 @@ log = logging.getLogger(__name__)
 class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
     @override
     def update_config(self, config: Any):
+        if config["testing"]:
+            tk.add_template_directory(config, "templates")
+
         if config["ckan.ui.theme"]:
             enable_theme(config["ckan.ui.theme"], config)
 

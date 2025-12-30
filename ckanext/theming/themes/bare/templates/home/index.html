@@ -10,6 +10,8 @@
 
 {%- block primary_content_inner %}
 
+    {{ ui.activity_item("hello", a=1, b=2) }}
+
     {%- call ui.util.call(ui.grid) -%}
         {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
             {%- block promoted %}

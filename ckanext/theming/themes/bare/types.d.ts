@@ -1,1 +1,1 @@
-../../../../types.ts
+/// <reference path="../../../../types.ts" />

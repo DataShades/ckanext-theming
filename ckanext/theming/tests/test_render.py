@@ -29,6 +29,7 @@ def render(name: str, title: str, content: str):
     )
 
 
+@pytest.mark.benchmark
 @pytest.mark.parametrize(
     "name",
     [
@@ -46,6 +47,7 @@ def test_single(benchmark: BenchmarkFixture, name: str):
     benchmark(render, name=name, title=title, content=content)
 
 
+@pytest.mark.benchmark
 @pytest.mark.parametrize(
     "name",
     [
@@ -63,6 +65,7 @@ def test_repeat(benchmark: BenchmarkFixture, name: str):
     benchmark(render, name=name, title=title, content=content)
 
 
+@pytest.mark.benchmark
 @pytest.mark.parametrize(
     "name",
     [

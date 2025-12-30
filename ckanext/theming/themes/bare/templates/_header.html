@@ -15,7 +15,7 @@
                     {%- endblock %}
 
                     {%- block header_account_settings_link -%}
-                        {{ ui.account_nav_item(ui.util.merge([h.user_image(current_user.id, 12), _('Profile settings')]), h.url_for("user.edit", id=c.userobj.name)) }}
+                        {{ ui.account_nav_item(h.user_image(current_user.id, 12) ~ _('Profile settings'), h.url_for("user.edit", id=c.userobj.name)) }}
                     {%- endblock %}
 
                     {%- block header_account_log_out_link -%}

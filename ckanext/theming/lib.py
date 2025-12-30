@@ -16,6 +16,7 @@ Example usage::
 from __future__ import annotations
 
 import abc
+import dataclasses
 import datetime
 import logging
 import os
@@ -50,6 +51,7 @@ class PElement(Protocol):
 
 class Util:
     ui: UI
+    _storage_key = "ui_storage"
 
     def __init__(self, ui: UI):
         self.ui = ui
@@ -109,15 +111,7 @@ class Util:
         :param kwargs: Named arguments to pass to the element.
         :return: A Markup object containing the concatenated results.
         """
-        return self.merge(el(item, *args, **kwargs) for item in items)
-
-    def merge(self, fragments: Iterable[Markup]) -> Markup:
-        """Merge multiple Markup fragments into a single Markup object.
-
-        :param fragments: Markup fragments to merge.
-        :return: A single Markup object containing all fragments.
-        """
-        return Markup().join(fragments)
+        return Markup().join(el(item, *args, **kwargs) for item in items)
 
     def now(self, tz: datetime.timezone = datetime.timezone.utc):
         """Get the current UTC datetime.
@@ -133,11 +127,11 @@ class Util:
         If `value` is provided, a UUID5 based on the value is generated,
         otherwise a random UUID4 is generated.
 
-        Useful for generating HTML element IDs.
+        Useful for generating unique HTML element IDs.
 
         :param value: Optional value to base the UUID5 on.
         :param prefix: Prefix to prepend to the identifier.
-        :return: A unique identifier string.
+        :return: An identifier string.
         """
         result = uuid.uuid5(NAMESPACE_UI, value) if value else uuid.uuid4()
         return f"{prefix}{result.hex}"
@@ -153,28 +147,32 @@ class Util:
         :param key: The key for the item.
         :param value: The item to store.
         """
-        storage = tk.g.setdefault("ui_storage", defaultdict(dict))
+        storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
         storage[category][key] = value
 
-    def pop_items(self, category: str, key: str | None = None) -> dict[str, Any] | Any:
+    def pop_items(self, category: str, key: str | None = None, default: Any = None) -> dict[str, Any] | Any:
         """Pop items from the UI storage under the specified category.
 
         :param category: The category from which to pop items.
         :param key: Optional key of the item to pop. If not provided, all items
                     under the category are popped.
-        :return: A list of items stored under the category.
+        :param default: Default value to return if the key is not found.
+        :return: The popped item(s) from the UI storage.
         """
-        storage = tk.g.setdefault("ui_storage", defaultdict(list))
-        return storage[category].pop(key, None) if key else storage.pop(category)
+        storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
+        return storage[category].pop(key, default) if key else storage.pop(category)
 
-    def get_items(self, category: str, key: str | None = None) -> list[Any]:
+    def get_items(self, category: str, key: str | None = None, default: Any = None) -> dict[str, Any] | Any:
         """Get all items stored under the specified category in the UI storage.
 
         :param category: The category from which to get items.
-        :return: A list of items stored under the category.
+        :param key: Optional key of the item to get. If not provided, all items
+                    under the category are returned.
+        :param default: Default value to return if the key is not found.
+        :return: The requested item(s) from the UI storage.
         """
-        storage = tk.g.setdefault("ui_storage", defaultdict(list))
-        return storage[category].get(key, None) if key else storage[category]
+        storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
+        return storage[category].get(key, default) if key else storage[category]
 
 
 class UI(Iterable[str], abc.ABC):
@@ -185,29 +183,34 @@ class UI(Iterable[str], abc.ABC):
 
     Util: type[Util] = Util
     util: Util
+    inv: dict[str, PElement]
 
     def __init__(self, app: types.CKANApp):
         """Initialize the UI with the CKAN application instance.
 
         :param app: The CKAN application instance.
         """
+        self.inv = {}
         self.util = self.Util(self)
 
     @override
-    @abc.abstractmethod
     def __iter__(self) -> Iterator[str]:
         """Return an iterable of element names provided by this UI.
 
         :return: An iterable of element names.
         """
+        return iter(self.inv)
 
-    @abc.abstractmethod
     def __getattr__(self, name: str) -> PElement:
         """Get an element factory by name.
 
         :param name: The name of the element.
         :return: A callable that produces the element.
         """
+        if name not in self.inv:
+            raise AttributeError(name)
+
+        return self.inv[name]
 
 
 class MacroUI(UI):
@@ -226,6 +229,11 @@ class MacroUI(UI):
         super().__init__(app)
         self.__env = app.jinja_env
         self.__tpl = app.jinja_env.get_template(self.source)
+        self._fill_inventory()
+
+    def _fill_inventory(self):
+        mod = self.__tpl.module
+        self.inv: dict[str, PElement] = {name: getattr(mod, name) for name in dir(mod) if not name.startswith("_")}
 
     @override
     def __getattr__(self, name: str):
@@ -234,19 +242,12 @@ class MacroUI(UI):
         if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
             self.__tpl._module = self.__tpl.make_module()
             tk.g._ui_compiled = True
+            self._fill_inventory()
 
-        mod = self.__tpl.module
-        el: PElement = getattr(mod, name)
-        return el
-
-    @override
-    def __iter__(self) -> Iterator[str]:
-        for name in dir(self.__tpl.module):
-            if name.startswith("_"):
-                continue
-            yield name
+        return super().__getattr__(name)
 
 
+@dataclasses.dataclass
 class Theme:
     """Information about a theme.
 
@@ -255,26 +256,29 @@ class Theme:
     """
 
     path: str
-    parent: str | None
+    parent: str | None = None
 
-    UI: type[UI] = MacroUI
-    _ui: UI | None = None
-
-    def __init__(self, path: str, parent: str | None = None):
-        self.path = path
-        self.parent = parent
+    ui_factory: type[UI] = MacroUI
 
     def build_ui(self, app: types.CKANApp) -> UI:
         """Build a UI instance for this theme.
 
-        The default implementation returns a MacroUI instance that loads
-        macros from "macros/ui.html" in the theme's template directory.
-
         :param app: The CKAN application instance.
         :return: A UI instance.
         """
-        self._ui = self.UI(app)
-        return self._ui
+        return self.ui_factory(app)
+
+    def template_path(self):
+        """Get the path to the theme's templates directory."""
+        return os.path.join(self.path, "templates")
+
+    def public_path(self):
+        """Get the path to the theme's public directory."""
+        return os.path.join(self.path, "public")
+
+    def asset_path(self):
+        """Get the path to the theme's assets directory."""
+        return os.path.join(self.path, "assets")
 
 
 def get_theme(name: str):
@@ -329,17 +333,17 @@ def enable_theme(name: str, config: Any):
 
     next_name = name
     enabled_themes = {next_name}
+    here = os.path.dirname(__file__)
+
     while theme := themes.get(next_name):
-        relpath = os.path.relpath(theme.path, os.path.dirname(__file__))
+        if os.path.isdir(theme.template_path()):
+            tk.add_template_directory(config, os.path.relpath(theme.template_path(), here))
 
-        if os.path.isdir(os.path.join(theme.path, "templates")):
-            tk.add_template_directory(config, os.path.join(relpath, "templates"))
+        if os.path.isdir(theme.asset_path()):
+            tk.add_resource(os.path.relpath(theme.asset_path(), here), f"theming/{next_name}")
 
-        if os.path.isdir(os.path.join(theme.path, "assets")):
-            tk.add_resource(os.path.join(relpath, "assets"), f"theming/{next_name}")
-
-        if os.path.isdir(os.path.join(theme.path, "public")):
-            tk.add_public_directory(config, os.path.join(relpath, "public"))
+        if os.path.isdir(theme.public_path()):
+            tk.add_public_directory(config, os.path.relpath(theme.public_path(), here))
 
         next_name = theme.parent
         if not next_name:
