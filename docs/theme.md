@@ -1,10 +1,8 @@
-# Creating CKAN themes
-
-A CKAN theme allows you to customize the look and feel of your CKAN instance by providing a set of UI macros that can be used consistently across your site. The theming system works by providing a collection of macros that replace or augment the default UI elements.
+# Creating CKAN Themes
 
 ## Theme Structure
 
-A CKAN theme should be organized in a specific directory structure:
+A CKAN theme should be organized in the following directory structure:
 
 ```
 your_theme/
@@ -14,14 +12,15 @@ your_theme/
  │       └── ui.html
  │
  ├── assets/
- │   └── webassets.yml
+ │   └── (CSS, JS, and other assets)
  │
  └── public/
+     └── (static files served directly)
 ```
 
 ## Registering a Theme
 
-### 1. Implement the ITheme Interface in Your Plugin
+### 1. Implement the `ITheme` Interface
 
 In your extension's `plugin.py` file, implement the `ITheme` interface. The key method is `register_themes()` which returns a dictionary mapping theme names to `Theme` objects:
 
@@ -45,7 +44,24 @@ class YourExtensionPlugin(ITheme, p.SingletonPlugin):
         }
 ```
 
-### 2. Custom UI Implementation (Optional)
+### 2. Theme Inheritance
+
+Themes can inherit from parent themes to build upon existing functionality:
+
+```python
+def register_themes(self):
+    root = os.path.dirname(os.path.abspath(__file__))
+    return {
+        'child_theme': Theme(
+            os.path.join(root, 'themes/child_theme'),
+            parent='parent_theme_name'  # Inherits from another theme
+        ),
+    }
+```
+
+Child themes inherit all macros and templates from the parent, but can selectively override only the components they want to customize. Unimplemented macros fall back to the parent theme.
+
+### 3. Custom UI Implementation (Optional)
 
 You can customize the macro loading mechanism by setting a custom UI class on the Theme. This allows you to customize how macros are loaded:
 
@@ -67,25 +83,26 @@ def register_themes(self):
     from .theme import YourThemeUI  # Import your custom UI class
 
     root = os.path.dirname(os.path.abspath(__file__))
-    theme = Theme(os.path.join(root, 'themes/your_theme'))
-    theme.UI = YourThemeUI  # Set custom UI class
-
     return {
-        'your_theme': theme,
+        'your_theme': Theme(
+            os.path.join(root, 'themes/your_theme'),
+            ui_factory=YourThemeUI,  # Set custom UI class
+        ),
     }
 ```
 
-### 3. Create the Main Macros Entry Point
+## Creating UI Macros
 
-Create `themes/your_theme/macros/ui.html` with definition of all the
-macros. You can define macro elsewhere and re-export it by creating global
-template variable.
+### 1. Create the Main Macros Entry Point
+
+Create `themes/your_theme/templates/macros/ui.html` with definitions of all the macros. You can define macros elsewhere and re-export them by creating global template variables:
 
 ```html
 {% import "macros/ui/element.html" as element %}
 
 {# Re-export macro #}
 {% set button = element.button %}
+{% set card = element.card %}
 
 {# Define new macro #}
 {% macro input() %}
@@ -93,17 +110,55 @@ template variable.
 {% endmacro %}
 ```
 
-### 4. Implement Individual Macro Files
+/// note | Flexible themes
+
+When macros created directly inside `ui.html` or unconditionaly re-exported as
+in example above, child theme cannot override these macros using the following
+code:
+
+```html
+{% ckan_extends %}
+
+{# Override macro #}
+{% set button = my_custom_button %}
+```
+
+Jinja2 processes template hierarchy in a reverse order, so the original
+`button` macro will take precedence over the custom one. To make such overrides
+possible, never define macros directly inside `ui.html` and always use
+re-export with the default fallback:
+
+```html
+{% import "macros/ui/element.html" as element %}
+
+{# keep definition from the child template or fallback to the original implementation #}
+{% set button = button | default(element.button) %}
+{% set card = card |default(element.card) %}
+
+{# use the same fallback-strategy for macros defined in the current file. Give
+the child template an opportunity to define its own `input` macro and, when
+such macro is not defined, use the original `_input` as a fallback implementation #}
+{% macro _input() %}
+    ...
+{% endmacro %}
+{% set input = input | default(_input)%}
+
+```
+
+///
+
+### 2. Implement Individual Macro Files
 
 Each macro file should contain actual implementations that use appropriate CSS classes for your chosen framework. When implementing macros, follow these conventions:
 
 #### Parameter Order Consistency
 All macros follow the same parameter convention:
+
 - `content` is the first positional parameter (and often the only one when needed)
 - All other parameters use named parameters with appropriate defaults
-- Use `**kwargs` for extra attributes that will be passed to the element
+- Always use `kwargs` for extra attributes that may be passed to the element.
 
-Example `themes/your_theme/macros/ui/element.html` (using Bootstrap classes):
+Example `themes/your_theme/templates/macros/ui/element.html` (using Bootstrap classes):
 
 ```html
 {%- macro button(content, href, type="button", style="primary") -%}
@@ -143,13 +198,34 @@ Example `themes/your_theme/macros/ui/element.html` (using Bootstrap classes):
 {%- endmacro %}
 ```
 
-/// note
+### 3. UI Utilities
 
-All macros should accept arbitrary keyword arguments. If a macro doesn't
-reference `kwargs` directly in its body, add `{%- do kwargs -%}` as the first
-line. If it uses attributes, use `{{ ui.util.attrs(kwargs) }}`.
+The theming system provides utility functions accessible via `ui.util`:
 
-///
+- `ui.util.attrs(kwargs)`: Helper to render HTML attributes from a dictionary
+- `ui.util.call(element, *args, **kwargs)`: Call an inline element as a block element
+- `ui.util.map(element, items, *args, **kwargs)`: Map an element over a collection
+- `ui.util.now()`: Get the current UTC datetime
+- `ui.util.id(value, prefix="id-")`: Generate a unique identifier
+- `ui.util.keep_item(category, key, value)`: Store items in UI storage
+- `ui.util.pop_items(category, key=None)`: Retrieve and remove items from UI storage
+- `ui.util.get_items(category, key=None)`: Get items from UI storage
+
+Example usage of utilities:
+
+```html
+{%- macro button_group(items) -%}
+    <div class="btn-group">
+        {{ ui.util.map(ui.button, items) }}
+    </div>
+{%- endmacro %}
+
+{# Using call with util.call #}
+{% call ui.util.call(ui.button, style="primary") %}
+    <i class="icon"></i>
+    Click me!
+{% endcall %}
+```
 
 ### Accessibility Considerations
 
@@ -206,75 +282,106 @@ When implementing theme components, ensure proper accessibility support by using
 
 Use proper ARIA attributes (`aria-label`, `aria-describedby`, `aria-invalid`, `aria-hidden`, etc.), semantic HTML elements, and ensure keyboard navigation support.
 
-### CLI Tool Integration
+## Using UI Macros in Templates
 
-This theming system integrates with CKAN's CLI tools for theme development and management:
+Once a theme is active, UI macros can be used in templates:
 
+```jinja
+{{ ui.button("Click Me", style="primary", type="button") }}
+{{ ui.card(title="My Card", content="Card content here") }}
+{{ ui.alert("Success message", style="success") }}
+{{ ui.link("Visit CKAN", href="https://ckan.org", blank=True) }}
+```
+
+All parameters except for `content` must be passed to macro by name. This
+simplifies transition between themes, when macros expect different set of
+arguments or define them in different order. `content` always comes first when
+it's present, that's why it's safe to pass it without name, but all other
+arguments have no recommended order and every theme is free to choose according
+to its preferences.
+
+## CLI Tools for Theme Development
+
+The theming system provides comprehensive CLI tools for theme development and management:
+
+### Theme Management
 ```bash
 # List available themes
 ckan theme list
 
-# Check theme components
-ckan theme components
+# Create a new theme with all required structure
+ckan theme create mytheme
 
-# Validate theme implementation
-ckan theme validate <theme-name>
-
-# Debug theme issues
-ckan theme debug
-
-# Generate new theme scaffolding
-ckan theme create <theme-name>
-
-# Analyze theme structure
-ckan theme analyze <theme-name>
-```
-### 5. Provide Template Overrides (Optional)
-
-Create custom templates in `themes/your_theme/templates/` to override CKAN's
-default templates. Common templates to override include:
-
-- `_base.html` - The main base template
-- `home/index.html` - Home page template
-- `package/search.html` - Dataset search page template
-
-
-### 6. Theme Inheritance
-
-Themes can inherit from parent themes to build upon existing functionality:
-
-```python
-def register_themes(self):
-    root = os.path.dirname(os.path.abspath(__file__))
-    return {
-        'child_theme': Theme(
-            os.path.join(root, 'themes/child_theme'),
-            parent='parent_theme_name'  # Inherits from another theme
-        ),
-    }
+# Create a new theme in a specific location
+ckan theme create mytheme /path/to/themes
 ```
 
-Child themes inherit all macros and templates from the parent, but can selectively override only the components they want to customize. Unimplemented macros fall back to the parent theme.
+### Component Management
+```bash
+# List available components for the configured theme
+ckan theme component list
 
-### 7. Add Assets
+# List available components for a specific theme
+ckan theme component list -t mytheme
 
-Include CSS, JavaScript, and image assets in `themes/your_theme/assets/` to
-style and enhance your theme.
+# Analyze UI components and their implementations
+ckan theme component analyze
+ckan theme component analyze link button card
 
-## Using the Theme
+# Check if a theme implements all required UI components
+ckan theme component check
+ckan theme component check -t mytheme
+```
 
-Once your theme is properly registered:
+### Template Management
+```bash
+# List template files in a theme
+ckan theme template list
+ckan theme template list -t mytheme
 
-1. Install your extension: `pip install -e .`
-2. Add your plugin alongside with `theming` to CKAN's configuration:
-   `ckan.plugins = ... your_extension theming`
-3. Configure the theme in your CKAN configuration: `ckan.ui.theme = your_theme`
-4. The theme will be available and can be used throughout CKAN templates via
-   the UI macros
+# Verify that a theme contains all required templates
+ckan theme template check
+ckan theme template check -t mytheme
+
+# Analyze theme templates and their structure
+ckan theme template analyze
+ckan theme template analyze _header.html _footer.html
+ckan theme template analyze --relative-filename
+```
+
+### Endpoint Analysis
+```bash
+# List registered Flask endpoints
+ckan theme endpoint list
+
+# List variants of Flask endpoints
+ckan theme endpoint variants
+ckan theme endpoint variants dataset.search dataset.read
+
+# Observe the template and context variables used by a Flask endpoint
+ckan theme endpoint observe dataset.search
+ckan theme endpoint observe dataset.read id=my-dataset -v
+ckan theme endpoint observe dataset.read --auth-user admin id=my-dataset
+
+# Dump templates and context variables used by Flask endpoints in JSON format
+ckan theme endpoint dump --auth-user admin --user testuser --package testpkg --resource testres --resource-view testview --organization testorg --group testgroup
+```
+
+## Configuration
+
+To use a theme, configure it in your CKAN configuration:
+
+```ini
+ckan.plugins = ... theming
+ckan.ui.theme = your_theme
+```
 
 ## Reference Implementation
 
-The `bare`, `bulma`, `tailwind`, and `bs5` themes in this extension
-serve as reference implementations showing how different CSS frameworks can be
-integrated with the theming system. You can use them as starting points for
-building your own themes.
+The `bare` theme in this extension serves as a reference implementation showing the minimal structure needed for a theme. You can use it as a starting point for building your own themes by running:
+
+```bash
+ckan theme create mytheme
+```
+
+This creates a new theme based on the bare theme structure with all required components.

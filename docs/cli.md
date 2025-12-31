@@ -149,6 +149,9 @@ ckan theme template analyze -t mytheme
 
 # Show relative filenames
 ckan theme template analyze --relative-filename
+
+# Include all blocks in the analysis
+ckan theme template analyze --with-all-blocks
 ```
 
 Output includes:
@@ -166,6 +169,7 @@ Options:
 
 - `-t, --theme`: Specify the theme to analyze (defaults to configured theme)
 - `--relative-filename`: Show relative file paths instead of absolute paths
+- `--with-all-blocks`: Include all blocks in the output
 
 ## `ckan theme endpoint list`
 
@@ -199,6 +203,80 @@ Output includes:
 Arguments:
 
 - `endpoints` (optional): Specific endpoints to analyze (defaults to all endpoints)
+
+## `ckan theme endpoint observe`
+
+Observes the template and context variables used by a specific Flask endpoint.
+
+```bash
+# Observe a specific endpoint
+ckan theme endpoint observe dataset.search
+
+# Observe an endpoint with parameters
+ckan theme endpoint observe dataset.read id=my-dataset
+
+# Observe an endpoint with verbose output
+ckan theme endpoint observe dataset.read id=my-dataset -v
+
+# Observe an endpoint with authentication
+ckan theme endpoint observe dataset.read --auth-user admin id=my-dataset
+
+# Observe an endpoint with different HTTP method
+ckan theme endpoint observe dataset.read --method post id=my-dataset
+```
+
+Output includes:
+
+- Template name used by the endpoint
+- Context variable types
+- (with `-v`) Full context variable values
+
+Arguments:
+
+- `endpoint`: The Flask endpoint to observe
+- Additional arguments to pass to the endpoint (format: NAME=VALUE)
+
+Options:
+
+- `-v, --verbose`: Show full context variables instead of just their types
+- `--auth-user`: Authenticate as the specified user
+- `--method`: HTTP method to use (default: get)
+- `--ignore`: Context variables to ignore (can be specified multiple times)
+
+## `ckan theme endpoint dump`
+
+Dumps templates and context variables used by Flask endpoints in JSON format.
+
+```bash
+# Dump all endpoints with required data
+ckan theme endpoint dump --auth-user admin --user testuser --package testpkg --resource testres --resource-view testview --organization testorg --group testgroup
+
+# Dump specific endpoints
+ckan theme endpoint dump --auth-user admin --user testuser --package testpkg --resource testres --resource-view testview --organization testorg --group testgroup --endpoints=dataset.search --endpoints=dataset.read
+
+# Dump with verbose output
+ckan theme endpoint dump --auth-user admin --user testuser --package testpkg --resource testres --resource-view testview --organization testorg --group testgroup -v
+```
+
+Output includes:
+
+- JSON object with endpoint names as keys
+- Template name used by each endpoint
+- Context variable types
+- (with `-v`) Full context variable values
+
+Options:
+
+- `--auth-user`: Authenticate as the specified user (required)
+- `--user`: User ID to use for endpoint parameters (required)
+- `--package`: Package ID to use for endpoint parameters (required)
+- `--resource`: Resource ID to use for endpoint parameters (required)
+- `--resource-view`: Resource view ID to use for endpoint parameters (required)
+- `--organization`: Organization ID to use for endpoint parameters (required)
+- `--group`: Group ID to use for endpoint parameters (required)
+- `--ignore`: Context variables to ignore (can be specified multiple times)
+- `--endpoints`: Specific endpoints to dump (can be specified multiple times)
+- `-v, --verbose`: Show full context variables instead of just their types
 
 ## Common Options
 

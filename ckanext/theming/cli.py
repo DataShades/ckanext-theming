@@ -234,7 +234,7 @@ def template_list(theme: lib.Theme):
 @template.command("check")
 @theme_option
 def template_check(theme: lib.Theme):
-    """Validate theme implementation against core CKAN templates."""
+    """Verify that a theme contains all required templates."""
     categorized: dict[reference.Category, set[str]] = defaultdict(set)
     for name, info in reference.templates.items():
         categorized[info.category].add(name)
