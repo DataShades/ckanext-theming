@@ -26,6 +26,15 @@ class Template:
     category: Category = dataclasses.field(default=Category.CUSTOM)
 
 
+@dataclasses.dataclass(frozen=True)
+class Route:
+    plugin: str | None = None
+    endpoint: str | None = None
+    check_availability: Callable[[], bool] = lambda: True
+    view_args: set[str] = dataclasses.field(default_factory=set)
+    authenticated: bool = True
+
+
 components: dict[str, Component] = defaultdict(Component)
 
 components.update(
@@ -170,15 +179,6 @@ templates.update(
         "organization/snippets/info.html": Template(Category.ESSENTIAL),
     }
 )
-
-
-@dataclasses.dataclass(frozen=True)
-class Route:
-    plugin: str | None = None
-    endpoint: str | None = None
-    check_availability: Callable[[], bool] = lambda: True
-    view_args: set[str] = dataclasses.field(default_factory=set)
-    authenticated: bool = True
 
 
 routes: dict[str, Route] = defaultdict(Route)

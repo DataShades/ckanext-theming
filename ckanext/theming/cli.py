@@ -4,16 +4,22 @@ import contextlib
 import inspect
 import logging
 import os
+import pprint
 import re
 import shutil
 from collections import defaultdict
-from collections.abc import Collection
+from collections.abc import Callable, Collection
+from typing import Any
 
 import click
+import flask.signals
 from jinja2 import TemplateNotFound
 from jinja2.runtime import Macro
+from werkzeug.exceptions import NotFound
+from werkzeug.routing import BuildError
 
 import ckan.plugins.toolkit as tk
+from ckan import types
 from ckan.common import config
 
 from . import lib, reference
@@ -330,3 +336,97 @@ def template_analyze(  # noqa: C901
             click.secho(click.style("All blocks: ", fg="yellow") + ", ".join(sorted(blocks)))
 
         click.echo()
+
+
+@theme.group()
+def endpoint():
+    """Endpoint-level commands."""
+
+
+@endpoint.command("list")
+@click.pass_context
+def endpoint_list(ctx: click.Context):
+    """List registered Flask endpoints."""
+    app = ctx.meta["flask_app"]
+    for name in app.view_functions:
+        click.echo(name)
+
+
+@endpoint.command("variants")
+@click.pass_context
+@click.argument("endpoints", nargs=-1)
+def endpoint_variants(ctx: click.Context, endpoints: Collection[str]):
+    """List variants of Flask endpoints."""
+    app = ctx.meta["flask_app"]
+    grouped = app.url_map._rules_by_endpoint
+    if not endpoints:
+        endpoints = tuple(grouped)
+
+    for name in endpoints:
+        if name not in grouped:
+            tk.error_shout(f"Endpoint {name} does not exist")
+            continue
+
+        click.secho(name, bold=True)
+        for variant in grouped[name]:
+            click.secho(click.style("Rule: ", fg="yellow") + variant.rule)
+            click.secho(click.style("Methods: ", fg="yellow") + ", ".join(variant.methods))
+            if variant.arguments:
+                click.secho(click.style("Arguments: ", fg="yellow") + ", ".join(variant.arguments))
+            if variant.defaults:
+                click.secho(click.style("Defaults: ", fg="yellow") + repr(variant.defaults))
+            click.echo()
+
+
+class RenderInterceptionError(Exception):
+    """Exception raised to intercept Jinja2 template rendering."""
+
+
+def _render_intercept(condition: Callable[[dict[str, Any]], bool] = lambda kwargs: True):
+    """Create a Jinja2 render interceptor that raises an exception when a condition is met."""
+
+    def interceptor(sender: types.CKANApp, **kwargs: Any):
+        if condition(kwargs):
+            raise RenderInterceptionError(kwargs)
+
+    return interceptor
+
+
+@endpoint.command("observe", context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
+@click.pass_context
+@click.argument("endpoint")
+@click.option("-v", "--verbose", is_flag=True, help="Show full context variables.")
+def endpoint_observe(ctx: click.Context, endpoint: str, verbose: bool):
+    """Observe the template and context variables used by a Flask endpoint."""
+    app = ctx.meta["flask_app"]
+    with app.app_context():
+        try:
+            params = dict(arg.split("=") for arg in ctx.args)
+        except ValueError as err:
+            tk.error_shout("Extra arguments must follow the format: NAME=VALUE")
+            raise click.Abort from err
+
+        try:
+            url = tk.url_for(endpoint, **params)
+        except BuildError as err:
+            tk.error_shout(err)
+            raise click.Abort from err
+
+        with app.test_request_context(url), flask.signals.before_render_template.connected_to(_render_intercept()):
+            try:
+                app.view_functions[endpoint](**params)
+
+            except NotFound as err:
+                tk.error_shout(err)
+                raise click.Abort
+
+            except RenderInterceptionError as err:
+                click.secho(click.style("Template: ", fg="yellow") + err.args[0]["template"].name)
+                click.secho(
+                    click.style("Context types(use `-v` to see values): ", fg="yellow")
+                    + pprint.pformat({key: type(value) for key, value in err.args[0]["context"].items()})
+                )
+                if verbose:
+                    click.secho(
+                        click.style("Context variables: ", fg="yellow") + pprint.pformat(err.args[0]["context"])
+                    )

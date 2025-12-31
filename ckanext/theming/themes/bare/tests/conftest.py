@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
 import pytest
@@ -18,7 +19,15 @@ def browser_context_args(browser_context_args: dict[str, Any], ckan_config: dict
 
 @pytest.fixture
 def token_login(api_token_factory: Any, page: Page):
-    """Provides a function for authentication using API token."""
+    """Provides a function for authentication using API token.
+
+    Usage:
+        def test_example(page: Page, token_login):
+            token_login("myuser")
+
+    This will set the Authorization header for subsequent requests made by the page. To
+    log out, call token_login with `None` or empty string, e.g., `token_login(None)`.
+    """
 
     def authenticator(user: str | dict[str, Any], _page: Page | None = None):
         if _page is None:
@@ -36,7 +45,16 @@ def token_login(api_token_factory: Any, page: Page):
 
 @pytest.fixture
 def login(page: Page, context: BrowserContext, ckan_config: types.FixtureCkanConfig, with_request_context: Any):
-    """Provides a function for authentication by setting the remember cookie."""
+    """Provides a function for authentication by setting the remember cookie.
+
+    Usage:
+        def test_example(page: Page, login):
+            login("testuser")
+            page.goto("http://example.com/protected")
+
+    This will set the remember cookie for 'testuser', allowing access to protected pages. To
+    log out, call login with `None` or empty string, e.g., `login(None)`.
+    """
 
     def authenticator(user: str | dict[str, Any], _page: Page | None = None):
         if _page is None:
@@ -58,7 +76,16 @@ def login(page: Page, context: BrowserContext, ckan_config: types.FixtureCkanCon
 
 @pytest.fixture
 def screenshot(page: Page, request: pytest.FixtureRequest):
-    """Fixture to take screenshots at in a test."""
+    """Fixture to take screenshots during a test.
+
+    Usage:
+        def test_example(page: Page, screenshot):
+            page.goto("http://example.com")
+            screenshot("homepage")
+
+    This will save a screenshot to 'screenshots/{test_name}__0001_homepage.jpeg'. Each
+    subsequent call to screenshot within the same test will increment the step number.
+    """
     step = 1
 
     def func(name: str, _page: Page | None = None, **kwargs: Any):
@@ -74,3 +101,25 @@ def screenshot(page: Page, request: pytest.FixtureRequest):
         return _page.screenshot(**kwargs, full_page=True)
 
     return func
+
+
+@pytest.fixture
+def title_builder(ckan_config: types.FixtureCkanConfig):
+    """Provides a function to build page titles based on CKAN configuration.
+
+    Usage:
+        def test_example(page: Page, title_builder):
+            expected_title = title_builder("Section", "Page")
+            assert page.title() == expected_title
+
+    """
+    delimiter = " " + ckan_config["ckan.template_title_delimiter"] + " "
+
+    def builder(*parts: str, pattern: bool = False):
+        value = delimiter.join(parts + (ckan_config["ckan.site_title"],))
+        if pattern:
+            value = re.compile(value)
+
+        return value
+
+    return builder
