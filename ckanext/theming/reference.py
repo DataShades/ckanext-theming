@@ -6,6 +6,7 @@ import dataclasses
 import enum
 from collections import defaultdict
 from collections.abc import Callable
+from typing import Any
 
 import ckan.plugins.toolkit as tk
 
@@ -26,13 +27,55 @@ class Template:
     category: Category = dataclasses.field(default=Category.CUSTOM)
 
 
+def _true():
+    return True
+
+
 @dataclasses.dataclass(frozen=True)
 class Route:
     plugin: str | None = None
     endpoint: str | None = None
-    check_availability: Callable[[], bool] = lambda: True
+    check_availability: Callable[[], bool] = _true
     view_args: set[str] = dataclasses.field(default_factory=set)
     authenticated: bool = True
+
+    def make_params(self, endpoint: str, data: dict[str, Any]):  # noqa: C901
+        params: dict[str, Any] = {}
+        if "resource_id" in self.view_args:
+            params["resource_id"] = data["resource"]["id"]
+
+        if "user_id" in self.view_args:
+            params["user_id"] = data["user"]["id"]
+
+        if "view_id" in self.view_args:
+            params["view_id"] = data["resource_view"]["id"]
+
+        if "id" in self.view_args:
+            if endpoint.startswith(("dataset", "resource", "datastore")):
+                params["id"] = data["package"]["name"]
+
+            elif endpoint.startswith("group"):
+                params["id"] = data["group"]["name"]
+
+            elif endpoint.startswith("organization"):
+                params["id"] = data["organization"]["name"]
+
+            elif endpoint.startswith("user"):
+                params["id"] = data["user"]["name"]
+
+            elif endpoint.endswith(("user_activity", "user_changes")):
+                params["id"] = data["user"]["id"]
+
+            elif endpoint.endswith(("group_activity", "group_changes")):
+                params["id"] = data["group"]["id"]
+
+            elif endpoint.endswith(("package_activity", "package_changes")):
+                params["id"] = data["package"]["id"]
+
+            elif endpoint.endswith(("organization_activity", "organization_changes")):
+                params["id"] = data["organization"]["id"]
+
+        return params
 
 
 components: dict[str, Component] = defaultdict(Component)
@@ -186,18 +229,13 @@ routes.update(
     {
         "activity.dashboard": Route(plugin="activity"),
         "activity.dashboard_testing": Route(plugin="activity"),
-        "activity.group_activity": Route(plugin="activity"),
-        "activity.group_changes": Route(plugin="activity"),
-        "activity.group_changes_multiple": Route(plugin="activity"),
-        "activity.organization_activity": Route(plugin="activity"),
-        "activity.organization_changes": Route(plugin="activity"),
-        "activity.organization_changes_multiple": Route(plugin="activity"),
-        "activity.package_activity": Route(plugin="activity"),
-        "activity.package_changes": Route(plugin="activity"),
-        "activity.package_changes_multiple": Route(plugin="activity"),
-        "activity.package_history": Route(plugin="activity"),
-        "activity.resource_history": Route(plugin="activity"),
-        "activity.user_activity": Route(plugin="activity"),
+        "activity.group_activity": Route(plugin="activity", view_args={"id"}),
+        "activity.group_changes": Route(plugin="activity", view_args={"id"}),
+        "activity.organization_activity": Route(plugin="activity", view_args={"id"}),
+        "activity.organization_changes": Route(plugin="activity", view_args={"id"}),
+        "activity.package_activity": Route(plugin="activity", view_args={"id"}),
+        "activity.package_changes": Route(plugin="activity", view_args={"id"}),
+        "activity.user_activity": Route(plugin="activity", view_args={"id"}),
         "admin.config": Route(),
         "admin.index": Route(),
         "admin.reset_config": Route(),
@@ -206,10 +244,12 @@ routes.update(
         "dashboard.groups": Route(),
         "dashboard.organizations": Route(),
         "dataset.collaborator_delete": Route(
-            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"]
+            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"],
+            view_args={"id", "user_id"},
         ),
         "dataset.collaborators_read": Route(
-            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"]
+            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"],
+            view_args={"id", "user_id"},
         ),
         "dataset.delete": Route(view_args={"id"}),
         "dataset.edit": Route(view_args={"id"}),
@@ -217,13 +257,14 @@ routes.update(
         "dataset.groups": Route(view_args={"id"}),
         "dataset.new": Route(),
         "dataset.new_collaborator": Route(
-            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"]
+            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"],
+            view_args={"id"},
         ),
         "dataset.read": Route(view_args={"id"}),
         "dataset.resources": Route(view_args={"id"}),
         "dataset.search": Route(),
-        "datastore.api_info": Route(plugin="datastore"),
-        "datastore.dictionary": Route(plugin="datastore"),
+        "datastore.api_info": Route(plugin="datastore", view_args={"resource_id"}),
+        "datastore.dictionary": Route(plugin="datastore", view_args={"id", "resource_id"}),
         "group.about": Route(view_args={"id"}),
         "group.admins": Route(view_args={"id"}),
         "group.delete": Route(view_args={"id"}),
@@ -266,12 +307,9 @@ routes.update(
         "user.edit": Route(view_args={"id"}),
         "user.followers": Route(view_args={"id"}),
         "user.index": Route(),
-        "user.logged_out_page": Route(),
+        "user.logged_out_page": Route(authenticated=False),
         "user.login": Route(authenticated=False),
         "user.login:authenticated": Route(endpoint="user.login"),
-        "user.logout": Route(authenticated=False),
-        "user.logout:authenticated": Route(endpoint="user.logout"),
-        "user.me": Route(),
         "user.perform_reset": Route(view_args={"id"}, authenticated=False),
         "user.read": Route(view_args={"id"}),
         "user.read_groups": Route(view_args={"id"}),

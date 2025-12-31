@@ -167,6 +167,39 @@ Options:
 - `-t, --theme`: Specify the theme to analyze (defaults to configured theme)
 - `--relative-filename`: Show relative file paths instead of absolute paths
 
+## `ckan theme endpoint list`
+
+Lists all registered Flask endpoints in the application.
+
+```bash
+# List all registered Flask endpoints
+ckan theme endpoint list
+```
+
+## `ckan theme endpoint variants`
+
+Lists variants of Flask endpoints, showing URL rules, methods, arguments, and defaults.
+
+```bash
+# List variants for all endpoints
+ckan theme endpoint variants
+
+# List variants for specific endpoints
+ckan theme endpoint variants dataset.search dataset.read
+```
+
+Output includes:
+
+- Endpoint name
+- URL rule
+- HTTP methods
+- Arguments
+- Defaults
+
+Arguments:
+
+- `endpoints` (optional): Specific endpoints to analyze (defaults to all endpoints)
+
 ## Common Options
 
 Most theme commands support the `--theme` option to specify which theme to operate on:

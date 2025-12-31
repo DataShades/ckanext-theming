@@ -47,22 +47,17 @@ class TestPages:
 
             login(sysadmin if route.authenticated else "")
 
-            params = {}
-            if "resource_id" in route.view_args:
-                params["resource_id"] = resources[0]["id"]
-
-            if "view_id" in route.view_args:
-                params["view_id"] = views[0]["id"]
-
-            if "id" in route.view_args:
-                if name.startswith(("dataset", "resource")):
-                    params["id"] = packages[0]["name"]
-                if name.startswith("group"):
-                    params["id"] = groups[0]["name"]
-                if name.startswith("organization"):
-                    params["id"] = organizations[0]["name"]
-                if name.startswith("user"):
-                    params["id"] = users[0]["id"]
+            params = route.make_params(
+                name,
+                {
+                    "resource": resources[0],
+                    "package": packages[0],
+                    "resource_view": views[0],
+                    "group": groups[0],
+                    "organization": organizations[0],
+                    "user": users[0],
+                },
+            )
 
             url = tk.url_for(route.endpoint or name, **params)
             page.goto(url)

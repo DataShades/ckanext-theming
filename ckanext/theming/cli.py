@@ -19,8 +19,9 @@ from werkzeug.exceptions import NotFound
 from werkzeug.routing import BuildError
 
 import ckan.plugins.toolkit as tk
-from ckan import types
-from ckan.common import config
+from ckan import model, types
+from ckan.common import json
+from ckan.plugins import plugin_loaded
 
 from . import lib, reference
 
@@ -56,7 +57,7 @@ def theme():
 
 def theme_callback(ctx: click.Context, param: click.Parameter, name: str | None):
     if not name:
-        name = config["ckan.ui.theme"]
+        name = tk.config["ckan.ui.theme"]
 
     if not name:
         tk.error_shout("Theme is not configured")
@@ -392,13 +393,60 @@ def _render_intercept(condition: Callable[[dict[str, Any]], bool] = lambda kwarg
     return interceptor
 
 
+def _observe_endpoint(
+    endpoint: str,
+    params: dict[str, Any],
+    app: types.CKANApp,
+    user: model.User | None = None,
+    method: str = "get",
+) -> dict[str, Any]:
+    """Observe the template and context variables used by a Flask endpoint."""
+    try:
+        url = tk.url_for(endpoint, **params)
+    except BuildError as err:
+        tk.error_shout(err)
+        raise click.Abort from err
+
+    with (
+        app.test_request_context(url, method=method),
+        flask.signals.before_render_template.connected_to(_render_intercept()),
+    ):
+        if user:
+            tk.login_user(user)
+
+        try:
+            app.full_dispatch_request()
+
+        except NotFound as err:
+            tk.error_shout(err)
+            raise click.Abort from err
+
+        except RenderInterceptionError as err:
+            return err.args[0]
+
+        tk.error_shout(f"Endpoint {endpoint} did not render any template")
+        raise click.Abort
+
+
 @endpoint.command("observe", context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
 @click.pass_context
 @click.argument("endpoint")
+@click.option("--auth-user")
+@click.option("--method", default="get")
 @click.option("-v", "--verbose", is_flag=True, help="Show full context variables.")
-def endpoint_observe(ctx: click.Context, endpoint: str, verbose: bool):
+@click.option("--ignore", default=("request", "session", "g", "csrf_token", "current_user"), multiple=True)
+def endpoint_observe(  # noqa: PLR0913
+    ctx: click.Context,
+    endpoint: str,
+    auth_user: str,
+    verbose: bool,
+    ignore: tuple[str, ...],
+    method: str,
+):
     """Observe the template and context variables used by a Flask endpoint."""
     app = ctx.meta["flask_app"]
+    user = model.User.get(auth_user)
+
     with app.app_context():
         try:
             params = dict(arg.split("=") for arg in ctx.args)
@@ -406,27 +454,100 @@ def endpoint_observe(ctx: click.Context, endpoint: str, verbose: bool):
             tk.error_shout("Extra arguments must follow the format: NAME=VALUE")
             raise click.Abort from err
 
-        try:
-            url = tk.url_for(endpoint, **params)
-        except BuildError as err:
-            tk.error_shout(err)
-            raise click.Abort from err
+        data = _observe_endpoint(endpoint, params, app, user=user, method=method)
 
-        with app.test_request_context(url), flask.signals.before_render_template.connected_to(_render_intercept()):
-            try:
-                app.view_functions[endpoint](**params)
+        click.secho(click.style("Template: ", fg="yellow") + data["template"].name)
+        click.secho(
+            click.style("Context types(use `-v` to see values): ", fg="yellow")
+            + pprint.pformat({key: type(value) for key, value in data["context"].items() if key not in ignore})
+        )
+        if verbose:
+            click.secho(
+                click.style("Context variables: ", fg="yellow")
+                + pprint.pformat({key: value for key, value in data["context"].items() if key not in ignore})
+            )
 
-            except NotFound as err:
-                tk.error_shout(err)
-                raise click.Abort
 
-            except RenderInterceptionError as err:
-                click.secho(click.style("Template: ", fg="yellow") + err.args[0]["template"].name)
-                click.secho(
-                    click.style("Context types(use `-v` to see values): ", fg="yellow")
-                    + pprint.pformat({key: type(value) for key, value in err.args[0]["context"].items()})
-                )
-                if verbose:
-                    click.secho(
-                        click.style("Context variables: ", fg="yellow") + pprint.pformat(err.args[0]["context"])
-                    )
+def _dump_encoder(value: Any):
+    return f"<INVALID JSON: {value}>"
+
+
+@endpoint.command("dump")
+@click.pass_context
+@click.option("--auth-user", required=True)
+@click.option("--user", required=True)
+@click.option("--package", required=True)
+@click.option("--resource", required=True)
+@click.option("--resource-view", required=True)
+@click.option("--organization", required=True)
+@click.option("--group", required=True)
+@click.option("--ignore", default=("request", "session", "g", "csrf_token", "current_user"), multiple=True)
+@click.option("--endpoints", multiple=True)
+@click.option("-v", "--verbose", is_flag=True)
+def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
+    ctx: click.Context,
+    auth_user: str,
+    user: str,
+    package: str,
+    resource: str,
+    resource_view: str,
+    organization: str,
+    group: str,
+    ignore: tuple[str, ...],
+    endpoints: tuple[str, ...],
+    verbose: bool,
+):
+    """Dump templates and context variables used by Flask endpoints in JSON format."""
+    app = ctx.meta["flask_app"]
+
+    if not (auth_obj := model.User.get(auth_user)):
+        tk.error_shout("Object specified by `--auth` does not exist")
+        raise click.Abort
+
+    user_dict = tk.get_action("user_show")({"ignore_auth": True}, {"id": user})
+    package_dict = tk.get_action("package_show")({"ignore_auth": True}, {"id": package})
+    resource_dict = tk.get_action("resource_show")({"ignore_auth": True}, {"id": resource})
+    resource_view_dict = tk.get_action("resource_view_show")({"ignore_auth": True}, {"id": resource_view})
+    group_dict = tk.get_action("group_show")({"ignore_auth": True}, {"id": group})
+    organization_dict = tk.get_action("organization_show")({"ignore_auth": True}, {"id": organization})
+
+    result = {}
+    with app.app_context():
+        for name, route in reference.routes.items():
+            if endpoints and name not in endpoints:
+                continue
+
+            if route.plugin and not plugin_loaded(route.plugin):
+                continue
+
+            if not route.check_availability():
+                continue
+
+            params = route.make_params(
+                name,
+                {
+                    "resource": resource_dict,
+                    "package": package_dict,
+                    "resource_view": resource_view_dict,
+                    "group": group_dict,
+                    "organization": organization_dict,
+                    "user": user_dict,
+                },
+            )
+
+            data = _observe_endpoint(
+                route.endpoint or name, params, app, user=auth_obj if route.authenticated else None
+            )
+
+            result[name] = {
+                "template": data["template"].name,
+                "context_types": {
+                    key: type(value).__name__ for key, value in data["context"].items() if key not in ignore
+                },
+            }
+            if verbose:
+                result[name]["context_variables"] = {
+                    key: value for key, value in data["context"].items() if key not in ignore
+                }
+
+    click.echo(json.dumps(result, default=_dump_encoder))
