@@ -1,23 +1,37 @@
-{% extends "_page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout | default("content_control") -%}
 
 {%- block secondary_content -%}
-{%- endblock %}
-
-{% block primary_content_inner %}
-    {%- call ui.util.call(ui.section, title=_("Breadcrumbs")) -%}
-        {%- for size in range(1, 4) -%}
-            {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-                {%- for _ in range(size) -%}
-                    {{ ui.breadcrumb(lipsum(1, false, 1, 3), "#") }}
-                {%- endfor %}
-            {%- endcall %}
-        {%- endfor %}
+    {%- call ui.util.call(ui.list) -%}
+        {{ ui.list_item(ui.link(_("Accordion"), href="#accordion")) }}
     {%- endcall %}
+{%- endblock %}
+{% block primary_content_inner %}
 
-    {%- call ui.util.call(ui.section, title=_("Pagination")) -%}
-        {{ ui.pagination(page=1, total=2) }}
-        {{ ui.pagination(page=3, total=3) }}
-        {{ ui.pagination(page=5, total=10) }}
+    {%- call ui.util.call(ui.section, title=_("Container components")) -%}
+        {{ ui.heading(_("Accordion"), level=3, attrs={"id": "accordion"}) }}
+
+        {{ ui.heading(_("Simple accordion"), level=4) }}
+        {%- call ui.util.call(ui.code) -%}
+{%- raw -%}
+{%- call ui.util.call(ui.accordion, title="More Information") -%}
+    Detailed information about this section
+{%- endcall %}
+{%- endraw %}
+        {%- endcall %}
+
+        {{ ui.accordion(content="Detailed information about this section", title="More Information") }}
+        {{ ui.divider() }}
+
+        {{ ui.heading(_("Open accordion by default"), level=4) }}
+        {%- call ui.util.call(ui.code) -%}
+{%- raw -%}
+{{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
+{%- endraw %}
+        {%- endcall -%}
+        {{ ui.accordion(content="This content is visible by default", title="Default Open", open=True) }}
+        {{ ui.divider() }}
+
     {%- endcall %}
 
 {% endblock %}

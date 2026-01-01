@@ -20,9 +20,9 @@
     </section>
 {%- endmacro %}
 
-{%- macro section(content, title) -%}
+{%- macro section(content, title, level=2) -%}
     <section {{ ui.util.attrs(kwargs) }}>
-        {{ ui.heading(title, level=2) if title }}
+        {{ ui.heading(title, level) if title }}
         <div>
             {{ content }}
         </div>

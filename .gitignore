@@ -2,6 +2,7 @@
 .ropeproject
 node_modules
 bower_components
+types.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

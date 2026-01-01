@@ -1,21 +1,31 @@
 # Container Components
 
-Container components provide structural elements for organizing and grouping content. These components are essential for creating layouts and organizing information hierarchically.
-
-## Overview
-
-Container components form the building blocks of page layouts, providing structure and organization for other UI elements. They help create visual hierarchy and group related content together. Many container components work in pairs - for example, `list` containers work with `list_item` elements, and `grid` containers work with `column` elements.
+Container components form the building blocks of page layouts, providing
+structure and organization for other UI elements. They help create visual
+hierarchy and group related content together. Many container components work in
+pairs - for example, `list` containers work with `list_item` elements, and
+`grid` containers work with `column` elements.
 
 ## Accordion Component
 
-The `accordion` component creates collapsible content sections that allow users to expand and collapse content as needed. This component is particularly useful for organizing large amounts of information in a space-efficient manner, allowing users to focus on relevant sections while keeping the interface uncluttered.
+The `accordion` component creates collapsible content sections that allow users
+to expand and collapse content as needed. This component is particularly useful
+for organizing large amounts of information in a space-efficient manner,
+allowing users to focus on relevant sections while keeping the interface
+uncluttered.
 
-Accordions are commonly used for FAQ sections, detailed metadata displays, and any content that benefits from progressive disclosure. The component typically includes a header that serves as the toggle control and a content area that expands or collapses. It works with `accordion_wrapper` to provide consistent grouping of multiple accordion sections.
+Accordions are commonly used for FAQ sections, detailed metadata displays, and
+any content that benefits from progressive disclosure. The component typically
+includes a header that serves as the toggle control and a content area that
+expands or collapses. It works with `accordion_wrapper` to provide consistent
+grouping of multiple accordion sections.
 
 /// admonition | Relationship
     type: info
 
-The `accordion` component works with `accordion_wrapper` to create organized accordion groups. While individual accordions handle single collapsible sections, the wrapper provides the container for multiple accordions.
+The `accordion` component works with `accordion_wrapper` to create organized
+accordion groups. While individual accordions handle single collapsible
+sections, the wrapper provides the container for multiple accordions.
 ///
 
 /// details | Usage Example
@@ -23,31 +33,31 @@ The `accordion` component works with `accordion_wrapper` to create organized acc
 
 ```jinja2
 <!-- Simple accordion -->
-{{ ui.accordion(content="Detailed information about this section", title="More Information") }}
+{%- call ui.util.call(ui.accordion, title="More Information") -%}
+    Detailed information about this section
+{%- endcall %}
 
 <!-- Open accordion by default -->
-{{ ui.accordion(content="This content is visible by default", title="Default Open", open=True) }}
-
-<!-- Accordion with attributes -->
-{{ ui.accordion(content="Content with custom styling", title="Styled Accordion", attrs={"class": "custom-accordion"}) }}
+{{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
 ```
 ///
 
 ### Parameters
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The content to display when the accordion is expanded. |
-| `title` | string | - | The title displayed in the accordion header. |
-| `open` | bool | - | Whether the accordion should be open by default. |
+| Parameter | Type   | Default | Description                                            |
+|-----------|--------|---------|--------------------------------------------------------|
+| `content` | string | -       | The content to display when the accordion is expanded. |
+| `title`   | string | -       | The title displayed in the accordion header.           |
+| `open`    | bool   | -       | Whether the accordion should be open by default.       |
 
 #### Theme-Specific Parameters
 
 Different themes may support additional parameters for styling and behavior:
 
-- `variant` (string): Style variant (e.g., "primary", "secondary") - theme-dependent
-- `flush` (bool): Whether to remove borders and rounded corners - theme-dependent
-- `always_open` (bool): Whether the accordion should remain open and not be collapsible - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary")
+- `flush` (bool): Whether to remove borders and rounded corners
+- `independent` (bool): Whether the accordion should remain openwhen sibling
+  accordion is opened
 
 
 ## Button Group Component
@@ -82,10 +92,10 @@ Button groups help users understand the relationship between different actions a
 
 Different themes may support additional parameters for styling and layout:
 
-- `size` (string): Size of the button group (e.g., "sm", "lg") - theme-dependent
-- `vertical` (bool): Whether to stack buttons vertically - theme-dependent
-- `toolbar` (bool): Whether to use toolbar styling - theme-dependent
-- `justified` (bool): Whether to make buttons equal width - theme-dependent
+- `size` (string): Size of the button group (e.g., "sm", "lg")
+- `vertical` (bool): Whether to stack buttons vertically
+- `toolbar` (bool): Whether to use toolbar styling
+- `justified` (bool): Whether to make buttons equal width
 
 
 ## Card Component
@@ -126,11 +136,11 @@ Cards are particularly effective for displaying collections of related informati
 
 Different themes may support additional parameters for styling and functionality:
 
-- `variant` (string): Style variant (e.g., "primary", "secondary", "outline") - theme-dependent
-- `size` (string): Size of the card (e.g., "sm", "lg") - theme-dependent
-- `outline` (bool): Whether to use outline style - theme-dependent
-- `clickable` (bool): Whether the card should have hover effects indicating clickability - theme-dependent
-- `shadow` (string): Shadow level (e.g., "none", "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary", "outline")
+- `size` (string): Size of the card (e.g., "sm", "lg")
+- `outline` (bool): Whether to use outline style
+- `clickable` (bool): Whether the card should have hover effects indicating clickability
+- `shadow` (string): Shadow level (e.g., "none", "sm", "lg")
 
 ## Column Component
 
@@ -164,10 +174,10 @@ The column component typically accepts parameters for responsive behavior, allow
 
 Different themes may support additional parameters for grid behavior:
 
-- `offset` (dict): Offset configuration for pushing/pulling columns - theme-dependent
-- `order` (dict): Order configuration for reordering columns - theme-dependent
-- `align_self` (string): Self-alignment (e.g., "start", "center", "end") - theme-dependent
-- `no_gutters` (bool): Whether to remove gutters between columns - theme-dependent
+- `offset` (dict): Offset configuration for pushing/pulling columns
+- `order` (dict): Order configuration for reordering columns
+- `align_self` (string): Self-alignment (e.g., "start", "center", "end")
+- `no_gutters` (bool): Whether to remove gutters between columns
 
 /// admonition | Relationship
     type: info
@@ -207,10 +217,10 @@ Container components are essential for maintaining visual consistency across dif
 
 Different themes may support additional parameters for layout behavior:
 
-- `size` (string): Container size (e.g., "sm", "md", "lg", "xl") - theme-dependent
-- `centered` (bool): Whether to center the container - theme-dependent
-- `padding` (string): Padding level (e.g., "sm", "md", "lg") - theme-dependent
-- `gutter` (string): Gutter size for responsive spacing - theme-dependent
+- `size` (string): Container size (e.g., "sm", "md", "lg", "xl")
+- `centered` (bool): Whether to center the container
+- `padding` (string): Padding level (e.g., "sm", "md", "lg")
+- `gutter` (string): Gutter size for responsive spacing
 
 ## Grid Component
 
@@ -240,11 +250,11 @@ Grid layouts are particularly useful for displaying collections of similar conte
 
 Different themes may support additional parameters for grid behavior:
 
-- `gap` (string): Gap between grid items (e.g., "sm", "md", "lg") - theme-dependent
-- `align_items` (string): Alignment of items (e.g., "start", "center", "end") - theme-dependent
-- `justify_content` (string): Justification of content (e.g., "start", "center", "end") - theme-dependent
-- `direction` (string): Direction of the grid (e.g., "row", "column") - theme-dependent
-- `reverse` (bool): Whether to reverse the direction - theme-dependent
+- `gap` (string): Gap between grid items (e.g., "sm", "md", "lg")
+- `align_items` (string): Alignment of items (e.g., "start", "center", "end")
+- `justify_content` (string): Justification of content (e.g., "start", "center", "end")
+- `direction` (string): Direction of the grid (e.g., "row", "column")
+- `reverse` (bool): Whether to reverse the direction
 
 /// admonition | Relationship
     type: info
@@ -280,11 +290,11 @@ List components are fundamental for displaying collections of related items, nav
 
 Different themes may support additional parameters for list styling:
 
-- `ordered` (bool): Whether to use ordered list (numbers) instead of unordered - theme-dependent
-- `variant` (string): Style variant (e.g., "flush", "inline") - theme-dependent
-- `size` (string): Size of the list (e.g., "sm", "lg") - theme-dependent
-- `divider` (bool): Whether to show dividers between items - theme-dependent
-- `horizontal` (bool): Whether to display items horizontally - theme-dependent
+- `ordered` (bool): Whether to use ordered list (numbers) instead of unordered
+- `variant` (string): Style variant (e.g., "flush", "inline")
+- `size` (string): Size of the list (e.g., "sm", "lg")
+- `divider` (bool): Whether to show dividers between items
+- `horizontal` (bool): Whether to display items horizontally
 
 /// admonition | Relationship
     type: info
@@ -323,10 +333,10 @@ List items are essential for creating organized content displays, navigation men
 
 Different themes may support additional parameters for list item styling:
 
-- `active` (bool): Whether the item is currently active/selected - theme-dependent
-- `disabled` (bool): Whether the item is disabled - theme-dependent
-- `variant` (string): Style variant (e.g., "primary", "secondary") - theme-dependent
-- `action` (bool): Whether the item is an action item - theme-dependent
+- `active` (bool): Whether the item is currently active/selected
+- `disabled` (bool): Whether the item is disabled
+- `variant` (string): Style variant (e.g., "primary", "secondary")
+- `action` (bool): Whether the item is an action item
 
 /// admonition | Relationship
     type: info
@@ -368,10 +378,10 @@ Panels work well for displaying forms, detailed information sections, or any con
 
 Different themes may support additional parameters for panel styling and behavior:
 
-- `variant` (string): Style variant (e.g., "primary", "secondary", "success") - theme-dependent
-- `collapsible` (bool): Whether the panel can be collapsed - theme-dependent
-- `flush` (bool): Whether to remove borders and rounded corners - theme-dependent
-- `outline` (bool): Whether to use outline style - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary", "success")
+- `collapsible` (bool): Whether the panel can be collapsed
+- `flush` (bool): Whether to remove borders and rounded corners
+- `outline` (bool): Whether to use outline style
 
 /// admonition | Relationship
     type: info

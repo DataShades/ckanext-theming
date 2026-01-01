@@ -86,17 +86,17 @@ nav:
   - index.md
   - theming-parties.md
   - Component library:
-      - library/wrappers.md
-      - library/content.md
       - library/containers.md
-      - library/sections.md
-      - library/feedback.md
-      - library/elements.md
+      - library/content.md
       - library/data.md
+      - library/elements.md
+      - library/feedback.md
       - library/form.md
       - library/handles.md
       - library/meta.md
       - library/navigation.md
       - library/search.md
+      - library/sections.md
+      - library/wrappers.md
   - theme.md
   - cli.md

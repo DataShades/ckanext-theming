@@ -342,23 +342,21 @@ The `link` component creates hyperlinks that allow users to navigate between pag
 
 Link components handle various states including normal, hover, visited, and active states to provide clear visual feedback about link status and interactivity. The component ensures proper accessibility attributes and consistent styling that makes links easily identifiable while maintaining visual harmony with the overall design.
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The text to display in the link. |
 | `href` | string | - | The URL or path that the link points to. |
 | `blank` | bool | - | Whether to open the link in a new tab/window. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and behavior:
-
-- `variant` (string): Style variant (e.g., "primary", "secondary", "link") - theme-dependent
-- `underline` (string): Underline behavior (e.g., "always", "hover", "never") - theme-dependent
-- `disabled` (bool): Whether the link is disabled - theme-dependent
-- `external` (bool): Whether to add external link indicators - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary", "link")
+- `underline` (string): Underline behavior (e.g., "always", "hover", "never")
+- `disabled` (bool): Whether the link is disabled
+- `external` (bool): Whether to add external link indicators
 - `download` (bool): Whether the link is for downloading - HTML attribute
+///
 
 /// details | Usage Example
     type: example

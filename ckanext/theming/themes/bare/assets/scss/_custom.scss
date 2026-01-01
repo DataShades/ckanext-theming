@@ -176,3 +176,10 @@ table.table-striped tbody tr:nth-child(2n+1) {
 [data-draggable-resource] {cursor: grab;}
 [data-draggable-resource][data-drag-in-progress] {filter: opacity(0.5);}
 [data-draggable-resource][data-drop-in-progress] {filter: blur(1px);}
+
+.code {
+    padding: 10px;
+    background: linear-gradient(-90deg, rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(-90deg, rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(transparent 3px, transparent 3px, transparent 78px, transparent 78px), linear-gradient(-90deg, transparent 1px, transparent 1px), linear-gradient(-90deg, transparent 3px, transparent 3px, transparent 78px, transparent 78px), linear-gradient(transparent 1px, transparent 1px), transparent;
+    background-size: 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px;
+    background-color: #f8f8f8;
+}

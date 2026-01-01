@@ -9,7 +9,7 @@
 {%- endmacro %}
 
 {%- macro code(content, language="text") -%}
-    <pre {{ ui.util.attrs(kwargs) }}><code class="language-{{ language }}">{{ content }}</code></pre>
+    <pre {{ ui.util.attrs(kwargs)}} class="code"><code class="language-{{ language }}">{{ content }}</code></pre>
 {%- endmacro %}
 
 {%- macro definition_list(items) -%}
