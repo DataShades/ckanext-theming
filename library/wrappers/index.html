@@ -1,0 +1,1557 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/library/wrappers/">
+      
+      
+        <link rel="prev" href="../../theming-parties/">
+      
+      
+        <link rel="next" href="../content/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+    
+    
+      
+        <title>Wrapper Components - ckanext-theming</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wrapper-components" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ckanext-theming" class="md-header__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ckanext-theming
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Wrapper Components
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/datashades/ckanext-theming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ckanext-theming" class="md-nav__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ckanext-theming
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/datashades/ckanext-theming" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theming-parties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Theming Parties
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Component library
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Component library
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Wrapper Components
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Wrapper Components
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accordion-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accordion Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#account-navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activity Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breadcrumb-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breadcrumb Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-action-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Action Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dropdown-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dropdown Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#facet-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Facet Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menu-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Menu Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organization-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organization Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#page-action-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page Action Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tab-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tab Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Content Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../containers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Container Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sections/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Section Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Element Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Form Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Handle Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Meta Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigation Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search Components
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Creating CKAN Themes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#accordion-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accordion Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#account-navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Account Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activity Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breadcrumb-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breadcrumb Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-action-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Action Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dropdown-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dropdown Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#facet-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Facet Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menu-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Menu Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Navigation Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organization-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organization Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#page-action-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page Action Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#panel-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resource-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resource Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tab-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tab Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-wrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Wrapper
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="wrapper-components">Wrapper Components</h1>
+<p>Wrapper components are used to provide consistent structural patterns for
+different types of content and UI elements. They typically don't have visible
+output themselves but provide the structural foundation for other
+components. These components work in conjunction with their content
+counterparts - for example, <code>accordion_wrapper</code> works with <code>accordion</code>
+components, and <code>panel_wrapper</code> works with <code>panel</code> components.</p>
+<h2 id="accordion-wrapper">Accordion Wrapper</h2>
+<p>The <code>accordion_wrapper</code> component provides the structural container for accordion elements. It establishes the base styling and behavior for accordion groups, ensuring consistent appearance and interaction patterns across different themes. This wrapper works in conjunction with the <code>accordion</code> component to create collapsible content sections.</p>
+<div class="admonition info">
+<p class="admonition-title">Relationship</p>
+<p>The <code>accordion_wrapper</code> component is designed to work with <code>accordion</code> components. While the accordion component defines the individual collapsible sections, the wrapper provides the container that holds multiple accordions together.</p>
+</div>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic accordion wrapper --&gt;
+{% call ui.util.call(ui.accordion_wrapper) %}
+    {{ ui.accordion(&quot;First section content&quot;, title=&quot;First Section&quot;) }}
+    {{ ui.accordion(&quot;Second section content&quot;, title=&quot;Second Section&quot;) }}
+{% endcall %}
+
+&lt;!-- Accordion wrapper with attributes --&gt;
+{% call ui.util.call(ui.accordion_wrapper, attrs={&quot;class&quot;: &quot;faq-accordions&quot;}) %}
+    {{ ui.accordion(&quot;FAQ content&quot;, title=&quot;Frequently Asked Questions&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="account-navigation-wrapper">Account Navigation Wrapper</h2>
+<p>The <code>account_nav_wrapper</code> component creates a consistent container for account-related navigation elements. It ensures that user account navigation maintains a uniform appearance and structure across different themes and pages. This component typically wraps <code>account_nav_item</code> elements to provide proper spacing and styling.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic account navigation wrapper --&gt;
+{% call ui.util.call(ui.account_nav_wrapper) %}
+    {{ ui.account_nav_item(&quot;Profile&quot;, href=&quot;/profile&quot;) }}
+    {{ ui.account_nav_item(&quot;Settings&quot;, href=&quot;/settings&quot;) }}
+{% endcall %}
+
+&lt;!-- Account navigation wrapper with attributes --&gt;
+{% call ui.util.call(ui.account_nav_wrapper, attrs={&quot;class&quot;: &quot;account-menu&quot;}) %}
+    {{ ui.account_nav_item(&quot;Dashboard&quot;, href=&quot;/dashboard&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="activity-wrapper">Activity Wrapper</h2>
+<p>The <code>activity_wrapper</code> component provides a structural container for activity stream content. It ensures that activity entries are properly formatted and styled consistently. This wrapper works with the <code>activity</code> component to display user actions and system events in a structured format.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic activity wrapper --&gt;
+{% call ui.util.call(ui.activity_wrapper) %}
+    {{ ui.activity(&quot;User created a dataset&quot;, activity=activity_data) }}
+    {{ ui.activity(&quot;User updated profile&quot;, activity=activity_data2) }}
+{% endcall %}
+
+&lt;!-- Activity wrapper with attributes --&gt;
+{% call ui.util.call(ui.activity_wrapper, attrs={&quot;class&quot;: &quot;activity-stream&quot;}) %}
+    {{ ui.activity(&quot;Recent activity&quot;, activity=recent_activity) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="breadcrumb-wrapper">Breadcrumb Wrapper</h2>
+<p>The <code>breadcrumb_wrapper</code> component creates a container for breadcrumb navigation elements. It ensures proper spacing and styling for breadcrumb trails, working in conjunction with <code>breadcrumb</code> and <code>breadcrumb_divider</code> components to create a cohesive navigation experience.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic breadcrumb wrapper --&gt;
+{% call ui.util.call(ui.breadcrumb_wrapper) %}
+    {{ ui.breadcrumb(&quot;Home&quot;, href=&quot;/&quot;, is_first=True) }}
+    {{ ui.breadcrumb(&quot;Datasets&quot;, href=&quot;/datasets&quot;, is_first=False) }}
+    {{ ui.breadcrumb(&quot;Dataset&quot;, href=&quot;/dataset&quot;, is_first=False) }}
+{% endcall %}
+
+&lt;!-- Breadcrumb wrapper with attributes --&gt;
+{% call ui.util.call(ui.breadcrumb_wrapper, attrs={&quot;class&quot;: &quot;custom-breadcrumbs&quot;}) %}
+    {{ ui.breadcrumb(&quot;Home&quot;, href=&quot;/&quot;, is_first=True) }}
+    {{ ui.breadcrumb(&quot;Section&quot;, href=&quot;/section&quot;, is_first=False) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="content-action-wrapper">Content Action Wrapper</h2>
+<p>The <code>content_action_wrapper</code> component provides a container for content-specific action buttons and links. It ensures that actions related to specific content items (like edit, delete, or share buttons) are consistently positioned and styled. This component typically wraps <code>content_action</code> elements.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic content action wrapper --&gt;
+{% call ui.util.call(ui.content_action_wrapper) %}
+    {{ ui.content_action(&quot;Edit&quot;, href=&quot;/edit&quot;) }}
+    {{ ui.content_action(&quot;Delete&quot;, href=&quot;/delete&quot;) }}
+{% endcall %}
+
+&lt;!-- Content action wrapper with attributes --&gt;
+{% call ui.util.call(ui.content_action_wrapper, attrs={&quot;class&quot;: &quot;content-actions&quot;}) %}
+    {{ ui.content_action(&quot;Share&quot;, href=&quot;/share&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="content-navigation-wrapper">Content Navigation Wrapper</h2>
+<p>The <code>content_nav_wrapper</code> component creates a container for navigation elements related to specific content. It provides consistent styling and positioning for content navigation, typically wrapping <code>content_nav_item</code> components to maintain a uniform appearance.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic content navigation wrapper --&gt;
+{% call ui.util.call(ui.content_nav_wrapper) %}
+    {{ ui.content_nav_item(&quot;Info&quot;, href=&quot;/info&quot;) }}
+    {{ ui.content_nav_item(&quot;Resources&quot;, href=&quot;/resources&quot;) }}
+{% endcall %}
+
+&lt;!-- Content navigation wrapper with attributes --&gt;
+{% call ui.util.call(ui.content_nav_wrapper, attrs={&quot;class&quot;: &quot;content-nav&quot;}) %}
+    {{ ui.content_nav_item(&quot;Settings&quot;, href=&quot;/settings&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="dropdown-wrapper">Dropdown Wrapper</h2>
+<p>The <code>dropdown_wrapper</code> component provides the structural foundation for dropdown menus. It ensures proper positioning, styling, and behavior for dropdown components. This wrapper works with dropdown-related components to create consistent menu experiences across different themes.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic dropdown wrapper --&gt;
+{% call ui.util.call(ui.dropdown_wrapper) %}
+    {{ ui.dropdown_item(&quot;Option 1&quot;, href=&quot;/option1&quot;) }}
+    {{ ui.dropdown_item(&quot;Option 2&quot;, href=&quot;/option2&quot;) }}
+{% endcall %}
+
+&lt;!-- Dropdown wrapper with attributes --&gt;
+{% call ui.util.call(ui.dropdown_wrapper, attrs={&quot;class&quot;: &quot;dropdown-menu&quot;}) %}
+    {{ ui.dropdown_item(&quot;Settings&quot;, href=&quot;/settings&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="facet-wrapper">Facet Wrapper</h2>
+<p>The <code>facet_wrapper</code> component creates a container for facet filter elements, which are crucial for search and filtering functionality in CKAN. It works with <code>facet</code> and <code>facet_section</code> components to provide a consistent interface for filtering datasets and other content.</p>
+<div class="admonition info">
+<p class="admonition-title">Relationship</p>
+<p>The <code>facet_wrapper</code> component is closely related to <code>facet</code> and <code>facet_section</code> components. While the wrapper provides the container structure, the facet components provide the actual filter controls and display elements.</p>
+</div>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic facet wrapper --&gt;
+{% call ui.util.call(ui.facet_wrapper) %}
+    {{ ui.facet(&quot;Organization&quot;, key=&quot;org&quot;, value=&quot;Government&quot;, count=15, active=False) }}
+    {{ ui.facet(&quot;Format&quot;, key=&quot;format&quot;, value=&quot;CSV&quot;, count=8, active=False) }}
+{% endcall %}
+
+&lt;!-- Facet wrapper with attributes --&gt;
+{% call ui.util.call(ui.facet_wrapper, attrs={&quot;class&quot;: &quot;facet-container&quot;}) %}
+    {{ ui.facet(&quot;License&quot;, key=&quot;license&quot;, value=&quot;Open&quot;, count=12, active=False) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<p>///</p>
+<h2 id="group-wrapper">Group Wrapper</h2>
+<p>The <code>group_wrapper</code> component provides a structural container for group-related content. It ensures that group information, listings, and related elements maintain consistent styling and layout. This wrapper works with <code>group</code> components to display organizational structures within CKAN.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic group wrapper --&gt;
+{% call ui.util.call(ui.group_wrapper) %}
+    {{ ui.group(group_data) }}
+{% endcall %}
+
+&lt;!-- Group wrapper with attributes --&gt;
+{% call ui.util.call(ui.group_wrapper, attrs={&quot;class&quot;: &quot;group-listing&quot;}) %}
+    {{ ui.group(another_group) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="main-navigation-wrapper">Main Navigation Wrapper</h2>
+<p>The <code>main_nav_wrapper</code> component creates a container for the primary site navigation. It ensures that the main navigation maintains consistent styling and behavior across different pages and themes. This component typically wraps <code>main_nav_item</code> elements.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic main navigation wrapper --&gt;
+{% call ui.util.call(ui.main_nav_wrapper) %}
+    {{ ui.main_nav_item(&quot;Datasets&quot;, href=&quot;/datasets&quot;) }}
+    {{ ui.main_nav_item(&quot;Organizations&quot;, href=&quot;/organizations&quot;) }}
+{% endcall %}
+
+&lt;!-- Main navigation wrapper with attributes --&gt;
+{% call ui.util.call(ui.main_nav_wrapper, attrs={&quot;class&quot;: &quot;main-navigation&quot;}) %}
+    {{ ui.main_nav_item(&quot;Groups&quot;, href=&quot;/groups&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="menu-wrapper">Menu Wrapper</h2>
+<p>The <code>menu_wrapper</code> component provides a general container for menu structures throughout the application. It works with <code>menu_item</code> components to create consistent menu experiences, whether for dropdowns, navigation, or other menu-based interfaces.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic menu wrapper --&gt;
+{% call ui.util.call(ui.menu_wrapper) %}
+    {{ ui.menu_item(&quot;Option 1&quot;, href=&quot;/option1&quot;) }}
+    {{ ui.menu_item(&quot;Option 2&quot;, href=&quot;/option2&quot;) }}
+{% endcall %}
+
+&lt;!-- Menu wrapper with attributes --&gt;
+{% call ui.util.call(ui.menu_wrapper, attrs={&quot;class&quot;: &quot;custom-menu&quot;}) %}
+    {{ ui.menu_item(&quot;Settings&quot;, href=&quot;/settings&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="navigation-wrapper">Navigation Wrapper</h2>
+<p>The <code>nav_wrapper</code> component serves as a general container for navigation elements. It provides the structural foundation for various navigation patterns and works with different navigation item components to ensure consistency.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic navigation wrapper --&gt;
+{% call ui.util.call(ui.nav_wrapper) %}
+    {{ ui.nav_item(&quot;Home&quot;, href=&quot;/&quot;) }}
+    {{ ui.nav_item(&quot;About&quot;, href=&quot;/about&quot;) }}
+{% endcall %}
+
+&lt;!-- Navigation wrapper with attributes --&gt;
+{% call ui.util.call(ui.nav_wrapper, attrs={&quot;class&quot;: &quot;nav-container&quot;}) %}
+    {{ ui.nav_item(&quot;Contact&quot;, href=&quot;/contact&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="organization-wrapper">Organization Wrapper</h2>
+<p>The <code>organization_wrapper</code> component creates a container for organization-related content. It works with <code>organization</code> components to provide consistent display of organizational information, members, and related content within CKAN.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic organization wrapper --&gt;
+{% call ui.util.call(ui.organization_wrapper) %}
+    {{ ui.organization(org_data) }}
+{% endcall %}
+
+&lt;!-- Organization wrapper with attributes --&gt;
+{% call ui.util.call(ui.organization_wrapper, attrs={&quot;class&quot;: &quot;org-listing&quot;}) %}
+    {{ ui.organization(another_org) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="package-wrapper">Package Wrapper</h2>
+<p>The <code>package_wrapper</code> component provides a structural container for package (dataset) related content. It ensures that dataset information, resources, and related elements maintain consistent styling and layout. This wrapper works with <code>package</code> components to display dataset information effectively.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic package wrapper --&gt;
+{% call ui.util.call(ui.package_wrapper) %}
+    {{ ui.package(dataset_data) }}
+{% endcall %}
+
+&lt;!-- Package wrapper with attributes --&gt;
+{% call ui.util.call(ui.package_wrapper, attrs={&quot;class&quot;: &quot;dataset-listing&quot;}) %}
+    {{ ui.package(another_dataset) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="page-action-wrapper">Page Action Wrapper</h2>
+<p>The <code>page_action_wrapper</code> component creates a container for page-specific action elements. It ensures that actions like "Add Dataset" or "Create Group" are consistently positioned and styled across different pages. This component typically wraps <code>page_action</code> elements.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic page action wrapper --&gt;
+{% call ui.util.call(ui.page_action_wrapper) %}
+    {{ ui.page_action(&quot;Add Dataset&quot;, href=&quot;/dataset/new&quot;) }}
+{% endcall %}
+
+&lt;!-- Page action wrapper with attributes --&gt;
+{% call ui.util.call(ui.page_action_wrapper, attrs={&quot;class&quot;: &quot;page-actions&quot;}) %}
+    {{ ui.page_action(&quot;Create Group&quot;, href=&quot;/group/new&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="panel-wrapper">Panel Wrapper</h2>
+<p>The <code>panel_wrapper</code> component provides the structural container for panel components. It establishes the base styling and behavior for panels, working in conjunction with <code>panel</code> and <code>panel_handle</code> components to create expandable content sections.</p>
+<div class="admonition info">
+<p class="admonition-title">Relationship</p>
+<p>The <code>panel_wrapper</code> component works closely with <code>panel</code> and <code>panel_handle</code> components. The wrapper provides the container, the panel contains the content, and the handle provides the interactive element for controlling the panel.</p>
+</div>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic panel wrapper --&gt;
+{% call ui.util.call(ui.panel_wrapper) %}
+    {{ ui.panel(&quot;Panel content&quot;, title=&quot;Panel Title&quot;) }}
+{% endcall %}
+
+&lt;!-- Panel wrapper with attributes --&gt;
+{% call ui.util.call(ui.panel_wrapper, attrs={&quot;class&quot;: &quot;panel-container&quot;}) %}
+    {{ ui.panel(&quot;Styled panel&quot;, active=True) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<p>///</p>
+<h2 id="resource-wrapper">Resource Wrapper</h2>
+<p>The <code>resource_wrapper</code> component creates a container for resource-related content. It ensures that resource information, download links, and related elements maintain consistent styling and layout. This wrapper works with <code>resource</code> components to display resource information effectively.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic resource wrapper --&gt;
+{% call ui.util.call(ui.resource_wrapper) %}
+    {{ ui.resource(resource_data) }}
+{% endcall %}
+
+&lt;!-- Resource wrapper with attributes --&gt;
+{% call ui.util.call(ui.resource_wrapper, attrs={&quot;class&quot;: &quot;resource-listing&quot;}) %}
+    {{ ui.resource(another_resource) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="tab-wrapper">Tab Wrapper</h2>
+<p>The <code>tab_wrapper</code> component provides the structural container for tab-based interfaces. It works with <code>tab_handle</code> components to create consistent tab navigation and content switching experiences across different themes.</p>
+<div class="admonition info">
+<p class="admonition-title">Relationship</p>
+<p>The <code>tab_wrapper</code> component is designed to work with <code>tab_handle</code> components. The wrapper provides the container structure, while the handles provide the interactive elements for switching between tab content.</p>
+</div>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic tab wrapper --&gt;
+{% call ui.util.call(ui.tab_wrapper) %}
+    {{ ui.tab_handle(&quot;Tab 1&quot;, href=&quot;/tab1&quot;) }}
+    {{ ui.tab_handle(&quot;Tab 2&quot;, href=&quot;/tab2&quot;, active=True) }}
+{% endcall %}
+
+&lt;!-- Tab wrapper with attributes --&gt;
+{% call ui.util.call(ui.tab_wrapper, attrs={&quot;class&quot;: &quot;tab-container&quot;}) %}
+    {{ ui.tab_handle(&quot;Settings&quot;, href=&quot;/settings&quot;) }}
+{% endcall %}
+</code></pre></div>
+</details>
+<h2 id="user-wrapper">User Wrapper</h2>
+<p>The <code>user_wrapper</code> component creates a container for user-related content. It ensures that user profiles, activity, and related information maintain consistent styling and layout. This wrapper works with <code>user</code> components to display user information effectively.</p>
+<details class="example">
+<summary>Usage Example</summary>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic user wrapper --&gt;
+{% call ui.util.call(ui.user_wrapper) %}
+    {{ ui.user(user_data) }}
+{% endcall %}
+
+&lt;!-- User wrapper with attributes --&gt;
+{% call ui.util.call(ui.user_wrapper, attrs={&quot;class&quot;: &quot;user-profile&quot;}) %}
+    {{ ui.user(another_user) }}
+{% endcall %}
+</code></pre></div>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../theming-parties/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Theming Parties">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Theming Parties
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../content/" class="md-footer__link md-footer__link--next" aria-label="Next: Content Components">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Content Components
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.footer", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tooltips", "content.footnote.tooltips"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
