@@ -12,6 +12,21 @@ The `alert` component displays notification and alert messages to users, providi
 
 Alerts typically come in different styles to indicate different types of information: success messages for completed actions, warnings for cautionary information, errors for problems that need attention, and informational messages for general notifications. The component handles consistent styling and positioning to ensure messages are clearly visible and appropriately styled based on their importance and type.
 
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic alert -->
+{{ ui.alert("Operation completed successfully") }}
+
+<!-- Dismissible alert -->
+{{ ui.alert("This message can be dismissed", dismissible=True) }}
+
+<!-- Alert with custom styling -->
+{{ ui.alert("Warning: Check your input", attrs={"class": "alert-warning"}) }}
+```
+///
+
 ## Confirm Modal Component
 
 The `confirm_modal` component creates confirmation dialog modals that require user acknowledgment before proceeding with potentially important or destructive actions. These modals are essential for preventing accidental data loss or unintended operations by requiring explicit user confirmation.
@@ -29,6 +44,21 @@ The `confirm_modal` component works with `modal_handle` components to create int
 The `modal` component creates modal dialog containers that overlay the main content to focus user attention on specific tasks or information. Modals are used for forms, detailed views, settings, and any content that requires focused user attention without navigating away from the current page.
 
 Modal components handle overlay backgrounds, positioning, and interaction patterns to ensure they capture user attention appropriately while remaining accessible. They typically include close mechanisms and may prevent interaction with the background content until dismissed. The component works with `modal_handle` and `modal_close_handle` components to provide complete modal interaction experiences.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic modal -->
+{{ ui.modal("Modal content goes here", title="Modal Title", id="my-modal") }}
+
+<!-- Modal with footer -->
+{{ ui.modal("Content with footer", title="Modal with Actions", footer=ui.button("Close") ~ ui.button("Save", style="primary"), id="modal-with-footer") }}
+
+<!-- Dismissible modal -->
+{{ ui.modal("Dismissible content", title="Dismissible Modal", dismissible=True, id="dismissible-modal") }}
+```
+///
 
 /// admonition | Relationship
     type: info
@@ -60,6 +90,21 @@ The `spinner` component displays loading spinners that indicate ongoing operatio
 
 Spinner components are typically small, animated elements that can be placed inline with content or used as full-page overlays. They provide visual confirmation that the system is active and processing, helping maintain user confidence during operations that might otherwise appear to hang or freeze.
 
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic spinner -->
+{{ ui.spinner() }}
+
+<!-- Spinner with size -->
+{{ ui.spinner(size="lg") }}
+
+<!-- Spinner with attributes -->
+{{ ui.spinner(attrs={"class": "loading-spinner"}) }}
+```
+///
+
 ## Toast Component
 
 The `toast` component displays toast notification messages that appear briefly to provide feedback about operations or system events. Toast notifications are less intrusive than alerts and typically disappear automatically after a short period, making them ideal for non-critical information that doesn't require user action.
@@ -71,3 +116,18 @@ Toast components are often used for confirming successful operations, providing 
 The `tooltip` component displays tooltips that provide additional information about elements when users hover over or focus on them. Tooltips are essential for providing contextual help, explaining abbreviations, or offering brief descriptions without cluttering the main interface.
 
 Tooltip components handle positioning to ensure they remain visible and readable, often appearing above, below, or to the side of the target element. They provide a non-intrusive way to offer additional information that enhances user understanding without requiring dedicated interface space.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic tooltip -->
+{{ ui.tooltip("Button", tooltip="Click to submit the form") }}
+
+<!-- Tooltip with position -->
+{{ ui.tooltip("Info", tooltip="Additional information", position="top") }}
+
+<!-- Tooltip with attributes -->
+{{ ui.tooltip(ui.icon("help"), tooltip="Help information", attrs={"class": "help-tooltip"}) }}
+```
+///

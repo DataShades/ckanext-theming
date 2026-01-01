@@ -12,6 +12,18 @@ The `activity` component displays individual activity stream entries, showing us
 
 Activity components are essential for showing the dynamic nature of a CKAN instance, allowing users to track changes, updates, and interactions with datasets and other content. The component handles various types of activities such as dataset creation, updates, and user interactions.
 
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic activity component -->
+{{ ui.activity("User created a new dataset", activity=activity_data) }}
+
+<!-- Activity with attributes -->
+{{ ui.activity("User updated profile", activity=activity_data, attrs={"class": "activity-item"}) }}
+```
+///
+
 /// admonition | Relationship
     type: info
 
@@ -30,11 +42,35 @@ The facet component typically displays the filter name, available options, and s
 The `facet` component is closely related to `facet_wrapper` and `facet_section` components. The facet component displays individual filter options, while the wrapper and section components provide the structural container.
 ///
 
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic facet component -->
+{{ ui.facet("Organization", key="org", value="Government", count=15, active=False) }}
+
+<!-- Active facet component -->
+{{ ui.facet("Format", key="format", value="CSV", count=8, active=True) }}
+```
+///
+
 ## License Component
 
 The `license` component displays license information for datasets and other content. It presents licensing terms in a clear and accessible way, helping users understand the terms under which they can use, share, and modify the data. The component typically shows license name, URL, and description.
 
 License components are important for data governance and compliance, ensuring that users understand the permissions and restrictions associated with datasets. Different themes may present license information differently, but the component interface remains consistent across implementations.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic license component -->
+{{ ui.license("Creative Commons Attribution", id="cc-by", url="https://creativecommons.org/licenses/by/4.0/") }}
+
+<!-- License with attributes -->
+{{ ui.license("Open Data Commons", id="odc", attrs={"class": "license-info"}) }}
+```
+///
 
 ## Group Component
 
@@ -46,6 +82,19 @@ The group component often includes links to view group details, browse datasets 
     type: info
 
 The `group` component is typically wrapped by `group_wrapper` components to provide consistent styling and layout when displaying multiple groups together.
+///
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic group component -->
+{{ ui.group(group_data) }}
+
+<!-- Group with attributes -->
+{{ ui.group(another_group, attrs={"class": "group-item"}) }}
+```
+///
 ///
 
 ## Organization Component
@@ -60,6 +109,19 @@ The organization component typically includes information about the organization
 The `organization` component is typically wrapped by `organization_wrapper` components to provide consistent styling and layout when displaying multiple organizations together.
 ///
 
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic organization component -->
+{{ ui.organization(org_data) }}
+
+<!-- Organization with attributes -->
+{{ ui.organization(another_org, attrs={"class": "org-item"}) }}
+```
+///
+///
+
 ## Package Component
 
 The `package` component displays information about CKAN packages (datasets), which are the core content items in CKAN. It presents dataset metadata including title, description, resources, tags, and other relevant information. The package component is central to CKAN's data discovery functionality.
@@ -70,6 +132,19 @@ The component handles complex dataset information including multiple resources, 
     type: info
 
 The `package` component is typically wrapped by `package_wrapper` components to provide consistent styling and layout when displaying multiple packages together.
+///
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic package component -->
+{{ ui.package(dataset_data) }}
+
+<!-- Package with attributes -->
+{{ ui.package(another_dataset, attrs={"class": "dataset-item"}) }}
+```
+///
 ///
 
 ## Resource Component

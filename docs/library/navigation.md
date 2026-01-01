@@ -12,6 +12,22 @@ The `breadcrumb` component creates breadcrumb navigation trails that show users 
 
 Breadcrumb components typically display a series of linked navigation items that represent the path from the site root to the current page. They work with `breadcrumb_wrapper` and `breadcrumb_divider` components to create complete breadcrumb experiences with proper visual separation and structural organization. Breadcrumbs are particularly valuable for sites with deep hierarchical structures where users might navigate several levels deep.
 
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic breadcrumb -->
+{{ ui.breadcrumb(content="Home", href="/") }}
+{{ ui.breadcrumb(content="Datasets", href="/datasets", is_first=False) }}
+{{ ui.breadcrumb(content="Dataset Name", is_first=False) }}
+
+<!-- Breadcrumb with dividers -->
+{{ ui.breadcrumb(content="Home", href="/") }}
+{{ ui.breadcrumb_divider() }}
+{{ ui.breadcrumb(content="Section", href="/section", is_first=False) }}
+```
+///
+
 /// admonition | Relationship
     type: info
 
@@ -23,6 +39,21 @@ The `breadcrumb` component works with `breadcrumb_wrapper` and `breadcrumb_divid
 The `nav_item` component creates navigation menu items that serve as individual elements within navigation structures. These components are the fundamental building blocks of navigation menus, providing the clickable elements that allow users to move between different sections of the site.
 
 Nav item components handle proper styling, active state indication, and accessibility attributes to ensure navigation is both visually clear and functionally accessible. They can contain various types of content including text, icons, or other components, making them flexible for different navigation requirements. The component ensures consistent appearance and behavior across different navigation contexts.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic navigation item -->
+{{ ui.nav_item("Home", href="/") }}
+
+<!-- Active navigation item -->
+{{ ui.nav_item("Datasets", href="/datasets", active=True) }}
+
+<!-- Navigation item with icon -->
+{{ ui.nav_item(ui.icon("home") ~ " Home", href="/") }}
+```
+///
 
 ## Main Nav Item Component
 
@@ -47,6 +78,21 @@ Content nav items are context-sensitive and typically appear on content-specific
 The `page_action` component creates page-specific action items that provide quick access to actions related to the current page or context. These components typically appear as buttons or links that allow users to perform actions like "Add Dataset", "Create Group", or other page-specific functions.
 
 Page action components are context-sensitive and provide immediate access to the most relevant actions for the current page. They're typically positioned prominently to ensure users can easily find and access important actions without having to navigate to other sections of the site. The component ensures these actions are clearly visible and appropriately styled for their importance.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Add dataset action -->
+{{ ui.page_action(content="Add Dataset", href="/dataset/new") }}
+
+<!-- Page action with attributes -->
+{{ ui.page_action(content="Create Group", href="/group/new", attrs={"class": "btn btn-primary"}) }}
+
+<!-- Conditional page action -->
+{{ ui.page_action(content="Add Organization", href="/organization/new") if h.check_access('organization_create') }}
+```
+///
 
 ## Content Action Component
 
@@ -77,6 +123,21 @@ Menu item components handle proper styling, active state indication, and accessi
 The `pagination` component creates pagination controls that allow users to navigate through multiple pages of content. Pagination is essential for content-heavy sections where displaying all items on a single page would be impractical or overwhelming.
 
 Pagination components handle complex navigation patterns including page numbers, next/previous controls, and page size selection. They provide clear indication of current page position and total content extent, helping users understand their position within larger content collections. The component ensures pagination controls are clearly visible and easily accessible while maintaining appropriate styling and positioning.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic pagination -->
+{{ ui.pagination(page=1, total=10, url_generator=h.pager_url) }}
+
+<!-- Pagination with custom parameters -->
+{{ ui.pagination(page=3, total=20, url_generator=h.pager_url, padding=3) }}
+
+<!-- Pagination with attributes -->
+{{ ui.pagination(page=2, total=15, url_generator=h.pager_url, attrs={"class": "custom-pagination"}) }}
+```
+///
 
 ## Dropdown Item Component
 
