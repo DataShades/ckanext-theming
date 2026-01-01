@@ -24,6 +24,25 @@ Active filters are typically displayed as removable tags or badges that show the
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `active_filters` | dict | - | Dictionary of currently active filters. |
+| `facet_titles` | dict | - | Dictionary mapping filter keys to display titles. |
+| `facets` | dict | - | Available facet information. |
+| `use_htmx` | bool | - | Whether to use HTMX for enhanced functionality. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `variant` (string): Style variant (e.g., "inline", "stacked") - theme-dependent
+- `show_clear_all` (bool): Whether to show clear all button - theme-dependent
+- `collapsible` (bool): Whether filters can be collapsed - theme-dependent
+- `limit` (int): Maximum number of filters to display - theme-dependent
+- `show_counts` (bool): Whether to show filter counts - theme-dependent
+
 ## Search Advanced Controls Component
 
 The `search_advanced_controls` component provides advanced search controls that offer additional search functionality beyond basic keyword searching. These controls typically include options for field-specific searching, date ranges, complex query building, or other sophisticated search capabilities.
@@ -60,6 +79,32 @@ Search form components work with several related elements including `search_inpu
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `query` | string | - | The current search query. |
+| `item_count` | int | - | Total number of search results. |
+| `first_item_position` | int | - | Position of the first item in the current page. |
+| `last_item_position` | int | - | Position of the last item in the current page. |
+| `sorting` | string | - | Current sorting option. |
+| `sorting_options` | list | - | Available sorting options. |
+| `query_error` | string | - | Error message if query is invalid. |
+| `facets` | dict | - | Available facet filters. |
+| `facet_titles` | dict | - | Titles for facet filters. |
+| `active_filters` | dict | - | Currently active filters. |
+| `use_htmx` | bool | - | Whether to use HTMX for enhanced functionality. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `variant` (string): Style variant (e.g., "simple", "advanced") - theme-dependent
+- `inline` (bool): Whether to display as inline form - theme-dependent
+- `large` (bool): Whether to use larger input field - theme-dependent
+- `placeholder` (string): Placeholder text for search input - theme-dependent
+- `button_position` (string): Position of search button (e.g., "after", "before") - theme-dependent
+
 /// admonition | Relationship
     type: info
 
@@ -87,6 +132,25 @@ Search input components are fundamental to the search experience, providing the 
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `name` | string | "q" | Name attribute for the search input field. |
+| `value` | string | - | Current value of the search input. |
+| `placeholder` | string | "Search..." | Placeholder text for the search input. |
+| `label` | string | - | Label text for the search input. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `size` (string): Size of the input (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
+- `icon` (string): Icon to display in the input - theme-dependent
+- `clearable` (bool): Whether to show clear button - theme-dependent
+- `search_button` (bool): Whether to include search button inside input - theme-dependent
+
 /// admonition | Relationship
     type: info
 
@@ -111,6 +175,25 @@ Pagination info components typically display text like "Showing 1-10 of 127 resu
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `total` | int | - | Total number of search results. |
+| `first` | int | - | Position of the first item in the current page. |
+| `last` | int | - | Position of the last item in the current page. |
+| `template` | string | - | Template string for formatting the pagination information. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and presentation:
+
+- `variant` (string): Style variant (e.g., "short", "detailed") - theme-dependent
+- `show_total` (bool): Whether to show total count - theme-dependent
+- `show_range` (bool): Whether to show item range - theme-dependent
+- `format` (string): Format for number display (e.g., "numeric", "words") - theme-dependent
+- `loading` (bool): Whether to show loading state - theme-dependent
+
 ## Search Results Header Component
 
 The `search_results_header` component creates headers for search results displays, providing context and organization for the search results. This component typically includes information about the search query, result counts, and controls for managing or refining the search results.
@@ -129,6 +212,25 @@ Search results headers are important for orienting users and providing context a
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `item_count` | int | - | Total number of search results. |
+| `first_item_position` | int | - | Position of the first item in the current page. |
+| `last_item_position` | int | - | Position of the last item in the current page. |
+| `query_error` | string | - | Error message if the search query is invalid. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and presentation:
+
+- `variant` (string): Style variant (e.g., "compact", "detailed") - theme-dependent
+- `show_count` (bool): Whether to show result count - theme-dependent
+- `show_range` (bool): Whether to show item range - theme-dependent
+- `template` (string): Custom template for header display - theme-dependent
+- `loading` (bool): Whether to show loading state - theme-dependent
+
 ## Search Sort Control Component
 
 The `search_sort_control` component provides controls for sorting search results in different ways, allowing users to organize their results by relevance, date, name, or other criteria. Sorting controls are essential for helping users find the most relevant results quickly.
@@ -146,6 +248,25 @@ Sort control components typically include dropdown menus or other interface elem
 {{ ui.search_sort_control(name="sort", selected="title", options=[{"text": "Title A-Z", "value": "title_asc"}, {"text": "Title Z-A", "value": "title_desc"}], attrs={"class": "sort-control"}) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `name` | string | "sort" | Name attribute for the sort control. |
+| `selected` | string | - | Currently selected sort option. |
+| `options` | list | - | Available sort options as [{"text": "...", "value": "..."}] format. |
+| `label` | string | "Order by" | Label text for the sort control. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `size` (string): Size of the control (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
+- `inline` (bool): Whether to display inline - theme-dependent
+- `disabled` (bool): Whether the control is disabled - theme-dependent
+- `searchable` (bool): Whether to make the select searchable - theme-dependent
 
 ## Search Submit Button Component
 
@@ -167,6 +288,22 @@ Search submit buttons handle the form submission functionality for search operat
 {{ ui.search_submit_button("Find", attrs={"class": "btn btn-primary"}) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | "Search" | The text to display on the button. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `size` (string): Size of the button (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary", "outline") - theme-dependent
+- `icon` (string): Icon to display on the button - theme-dependent
+- `loading` (bool): Whether to show loading state - theme-dependent
+- `full_width` (bool): Whether to make button full-width - theme-dependent
 
 /// admonition | Relationship
     type: info

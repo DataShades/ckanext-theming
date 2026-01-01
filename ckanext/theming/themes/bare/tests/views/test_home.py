@@ -7,6 +7,8 @@ from playwright.sync_api import Page, expect
 
 import ckan.plugins.toolkit as tk
 
+from .conftest import ElementLocator
+
 
 @pytest.mark.usefixtures("with_plugins")
 class TestAbout:
@@ -17,6 +19,13 @@ class TestAbout:
         page.goto(tk.url_for("home.about"))
         expected = title_builder("About")
         expect(page).to_have_title(expected)
+
+    def test_breadcrumbs(self, locator: ElementLocator, page: Page):
+        """Test the breadcrumbs of the About page."""
+        page.goto(tk.url_for("home.about"))
+        breadcrumb = locator.locate_breadcrumbs()
+        expect(breadcrumb).to_contain_text("Home")
+        expect(breadcrumb).to_contain_text("About")
 
 
 @pytest.mark.usefixtures("with_plugins")

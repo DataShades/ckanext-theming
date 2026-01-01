@@ -318,6 +318,30 @@ Input components handle various input types such as text, email, password, and n
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | Help text or description for the input. |
+| `name` | string | - | Name attribute for the input field. |
+| `id` | string | - | ID attribute for the input field. |
+| `label` | string | - | Label text for the input field. |
+| `value` | string | - | Value of the input field. |
+| `required` | bool | - | Whether the field is required. |
+| `placeholder` | string | - | Placeholder text for the input field. |
+| `type` | string | "text" | Input type (e.g., "text", "email", "password", "number"). |
+| `errors` | list | [] | List of error messages to display. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `size` (string): Size of the input (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
+- `helper_text` (string): Additional helper text below the input - theme-dependent
+- `disabled` (bool): Whether the input is disabled - theme-dependent
+- `readonly` (bool): Whether the input is read-only - theme-dependent
+
 ## Markdown Component
 
 The `markdown` component creates markdown editor inputs that allow users to write content using markdown syntax. This component is particularly useful for forms where users need to create formatted content without dealing with complex WYSIWYG editors.
@@ -392,6 +416,31 @@ Select components handle option display, selection management, and accessibility
 {{ ui.select(name="country", label="Country", options=[{"value": "us", "text": "United States"}, {"value": "ca", "text": "Canada"}]) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | Help text or description for the select. |
+| `name` | string | - | Name attribute for the select field. |
+| `id` | string | - | ID attribute for the select field. |
+| `label` | string | - | Label text for the select field. |
+| `selected` | string/list | - | Value(s) that should be selected by default. |
+| `options` | list | - | List of options to display in the select. |
+| `multiple` | bool | - | Whether multiple options can be selected. |
+| `required` | bool | - | Whether the field is required. |
+| `autocomplete` | string | - | Autocomplete behavior for the select. |
+| `errors` | list | [] | List of error messages to display. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `size` (string): Size of the select (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
+- `helper_text` (string): Additional helper text below the select - theme-dependent
+- `disabled` (bool): Whether the select is disabled - theme-dependent
+- `native` (bool): Whether to use native browser select - theme-dependent
 
 /// admonition | Relationship
     type: info
@@ -488,3 +537,28 @@ Textarea components handle appropriate sizing, scrolling behavior, and accessibi
 {{ ui.textarea(name="comment", label="Comment", errors=["Comment is required"]) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | Help text or description for the textarea. |
+| `name` | string | - | Name attribute for the textarea field. |
+| `id` | string | - | ID attribute for the textarea field. |
+| `label` | string | - | Label text for the textarea field. |
+| `value` | string | - | Value of the textarea field. |
+| `required` | bool | - | Whether the field is required. |
+| `placeholder` | string | - | Placeholder text for the textarea field. |
+| `rows` | int | - | Number of visible text rows. |
+| `cols` | int | - | Number of visible text columns. |
+| `errors` | list | [] | List of error messages to display. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `size` (string): Size of the textarea (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
+- `helper_text` (string): Additional helper text below the textarea - theme-dependent
+- `disabled` (bool): Whether the textarea is disabled - theme-dependent
+- `readonly` (bool): Whether the textarea is read-only - theme-dependent

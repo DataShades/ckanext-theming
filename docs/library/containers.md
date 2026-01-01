@@ -33,6 +33,22 @@ The `accordion` component works with `accordion_wrapper` to create organized acc
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display when the accordion is expanded. |
+| `title` | string | - | The title displayed in the accordion header. |
+| `open` | bool | - | Whether the accordion should be open by default. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and behavior:
+
+- `variant` (string): Style variant (e.g., "primary", "secondary") - theme-dependent
+- `flush` (bool): Whether to remove borders and rounded corners - theme-dependent
+- `always_open` (bool): Whether the accordion should remain open and not be collapsible - theme-dependent
+
 
 ## Button Group Component
 
@@ -55,6 +71,22 @@ Button groups help users understand the relationship between different actions a
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The buttons to group together. |
+| `direction` | string | "row" | The direction of the button group ("row" for horizontal, "column" for vertical). |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and layout:
+
+- `size` (string): Size of the button group (e.g., "sm", "lg") - theme-dependent
+- `vertical` (bool): Whether to stack buttons vertically - theme-dependent
+- `toolbar` (bool): Whether to use toolbar styling - theme-dependent
+- `justified` (bool): Whether to make buttons equal width - theme-dependent
+
 
 ## Card Component
 
@@ -67,18 +99,38 @@ Cards are particularly effective for displaying collections of related informati
 
 ```jinja2
 <!-- Basic card -->
-{{ ui.card(title="Dataset Title", content="Dataset description goes here") }}
+{{ ui.card(content="Dataset description goes here", title="Dataset Title") }}
 
 <!-- Card with image -->
-{{ ui.card(title="Dataset Title", content="Description", img="/path/to/image.jpg") }}
+{{ ui.card(content="Description", title="Dataset Title", img="/path/to/image.jpg") }}
 
 <!-- Card with link -->
-{{ ui.card(title="Dataset Title", content="Description", href="/dataset/123") }}
+{{ ui.card(content="Description", title="Dataset Title", href="/dataset/123") }}
 
 <!-- Card with footer -->
-{{ ui.card(title="Dataset Title", content="Description", footer="Updated: 2023-01-01") }}
+{{ ui.card(content="Description", title="Dataset Title", footer="Updated: 2023-01-01") }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The main content of the card. |
+| `title` | string | - | The title displayed in the card header. |
+| `footer` | string | - | Content for the card footer. |
+| `img` | string | - | URL to an image to display in the card. |
+| `href` | string | - | URL to link the entire card to. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and functionality:
+
+- `variant` (string): Style variant (e.g., "primary", "secondary", "outline") - theme-dependent
+- `size` (string): Size of the card (e.g., "sm", "lg") - theme-dependent
+- `outline` (bool): Whether to use outline style - theme-dependent
+- `clickable` (bool): Whether the card should have hover effects indicating clickability - theme-dependent
+- `shadow` (string): Shadow level (e.g., "none", "sm", "lg") - theme-dependent
 
 ## Column Component
 
@@ -100,6 +152,22 @@ The column component typically accepts parameters for responsive behavior, allow
 {{ ui.column(content="Styled column", span={"xs": 12, "md": 8}, attrs={"class": "custom-column"}) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display in the column. |
+| `span` | dict | - | Responsive span configuration with breakpoints (e.g., {"xs": 12, "md": 6}). |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for grid behavior:
+
+- `offset` (dict): Offset configuration for pushing/pulling columns - theme-dependent
+- `order` (dict): Order configuration for reordering columns - theme-dependent
+- `align_self` (string): Self-alignment (e.g., "start", "center", "end") - theme-dependent
+- `no_gutters` (bool): Whether to remove gutters between columns - theme-dependent
 
 /// admonition | Relationship
     type: info
@@ -128,6 +196,22 @@ Container components are essential for maintaining visual consistency across dif
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display within the container. |
+| `fluid` | bool | - | Whether to make the container full-width without max-width constraints. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for layout behavior:
+
+- `size` (string): Container size (e.g., "sm", "md", "lg", "xl") - theme-dependent
+- `centered` (bool): Whether to center the container - theme-dependent
+- `padding` (string): Padding level (e.g., "sm", "md", "lg") - theme-dependent
+- `gutter` (string): Gutter size for responsive spacing - theme-dependent
+
 ## Grid Component
 
 The `grid` component creates structured grid layouts that organize content in rows and columns. It works with `column` components to define the overall layout structure, providing responsive behavior and consistent spacing between elements. Grid components are fundamental to creating modern, flexible layouts that adapt to different screen sizes.
@@ -145,6 +229,22 @@ Grid layouts are particularly useful for displaying collections of similar conte
 {{ ui.grid(content="Grid content", attrs={"class": "custom-grid"}) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display within the grid (typically columns). |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for grid behavior:
+
+- `gap` (string): Gap between grid items (e.g., "sm", "md", "lg") - theme-dependent
+- `align_items` (string): Alignment of items (e.g., "start", "center", "end") - theme-dependent
+- `justify_content` (string): Justification of content (e.g., "start", "center", "end") - theme-dependent
+- `direction` (string): Direction of the grid (e.g., "row", "column") - theme-dependent
+- `reverse` (bool): Whether to reverse the direction - theme-dependent
 
 /// admonition | Relationship
     type: info
@@ -169,6 +269,22 @@ List components are fundamental for displaying collections of related items, nav
 {{ ui.list(content=ui.list_item("Styled item"), attrs={"class": "custom-list"}) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display in the list (typically list items). |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for list styling:
+
+- `ordered` (bool): Whether to use ordered list (numbers) instead of unordered - theme-dependent
+- `variant` (string): Style variant (e.g., "flush", "inline") - theme-dependent
+- `size` (string): Size of the list (e.g., "sm", "lg") - theme-dependent
+- `divider` (bool): Whether to show dividers between items - theme-dependent
+- `horizontal` (bool): Whether to display items horizontally - theme-dependent
 
 /// admonition | Relationship
     type: info
@@ -197,6 +313,21 @@ List items are essential for creating organized content displays, navigation men
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display in the list item. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for list item styling:
+
+- `active` (bool): Whether the item is currently active/selected - theme-dependent
+- `disabled` (bool): Whether the item is disabled - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary") - theme-dependent
+- `action` (bool): Whether the item is an action item - theme-dependent
+
 /// admonition | Relationship
     type: info
 
@@ -223,6 +354,24 @@ Panels work well for displaying forms, detailed information sections, or any con
 {{ ui.panel(content="Panel with ID", id="my-panel", active=True) }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The content to display in the panel. |
+| `title` | string | - | The title displayed in the panel header. |
+| `id` | string | - | Unique identifier for the panel. |
+| `active` | bool | - | Whether the panel is active/visible by default. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for panel styling and behavior:
+
+- `variant` (string): Style variant (e.g., "primary", "secondary", "success") - theme-dependent
+- `collapsible` (bool): Whether the panel can be collapsed - theme-dependent
+- `flush` (bool): Whether to remove borders and rounded corners - theme-dependent
+- `outline` (bool): Whether to use outline style - theme-dependent
 
 /// admonition | Relationship
     type: info

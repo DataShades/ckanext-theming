@@ -45,15 +45,32 @@ Nav item components handle proper styling, active state indication, and accessib
 
 ```jinja2
 <!-- Basic navigation item -->
-{{ ui.nav_item("Home", href="/") }}
+{{ ui.nav_item(content="Home", href="/") }}
 
 <!-- Active navigation item -->
-{{ ui.nav_item("Datasets", href="/datasets", active=True) }}
+{{ ui.nav_item(content="Datasets", href="/datasets", active=True) }}
 
 <!-- Navigation item with icon -->
-{{ ui.nav_item(ui.icon("home") ~ " Home", href="/") }}
+{{ ui.nav_item(content=(ui.icon("home") ~ " Home"), href="/") }}
 ```
 ///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The text or content to display in the navigation item. |
+| `href` | string | - | The URL that the navigation item links to. |
+| `active` | bool | - | Whether the navigation item is currently active/selected. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and behavior:
+
+- `disabled` (bool): Whether the navigation item is disabled - theme-dependent
+- `variant` (string): Style variant (e.g., "primary", "secondary") - theme-dependent
+- `dropdown` (bool): Whether the item has a dropdown menu - theme-dependent
+- `external` (bool): Whether it's an external link - theme-dependent
 
 ## Main Nav Item Component
 
@@ -94,6 +111,23 @@ Page action components are context-sensitive and provide immediate access to the
 ```
 ///
 
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The text to display in the page action. |
+| `href` | string | - | The URL that the action links to. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and behavior:
+
+- `style` (string): Button style (e.g., "primary", "secondary", "danger") - theme-dependent
+- `size` (string): Button size (e.g., "sm", "lg") - theme-dependent
+- `variant` (string): Style variant (e.g., "outline", "link") - theme-dependent
+- `disabled` (bool): Whether the action is disabled - theme-dependent
+- `icon` (string): Icon to display with the action - theme-dependent
+
 ## Content Action Component
 
 The `content_action` component creates content-specific action items that provide actions related to specific content items. These components typically appear near or within content displays and allow users to perform actions like editing, sharing, or managing specific content items.
@@ -111,6 +145,38 @@ Tab handle components handle active state indication, visual styling, and access
 
 The `tab_handle` component works with tab content areas to create complete tabbed interface experiences. While tab handles provide the navigation mechanism, the content areas provide the display for different sections.
 ///
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic tab handle -->
+{{ ui.tab_handle(content="Tab 1", href="/tab1") }}
+
+<!-- Active tab handle -->
+{{ ui.tab_handle(content="Tab 2", href="/tab2", active=True) }}
+
+<!-- Tab handle with attributes -->
+{{ ui.tab_handle(content="Settings", href="/settings", attrs={"class": "nav-link"}) }}
+```
+///
+
+### Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The text to display in the tab handle. |
+| `href` | string | - | The URL that the tab links to. |
+| `active` | bool | - | Whether the tab is currently active/selected. |
+
+#### Theme-Specific Parameters
+
+Different themes may support additional parameters for styling and behavior:
+
+- `disabled` (bool): Whether the tab is disabled - theme-dependent
+- `variant` (string): Style variant (e.g., "tabs", "pills") - theme-dependent
+- `icon` (string): Icon to display with the tab - theme-dependent
+- `count` (int): Count indicator to display on the tab - theme-dependent
 
 ## Menu Item Component
 
