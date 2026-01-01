@@ -13,7 +13,7 @@
 
     {% if group_dropdown %}
         {%- call ui.util.call(ui.form, method="POST") -%}
-            {%- call ui.select_block(name="group_added", autocomplete=true) -%}
+            {%- call ui.util.call(ui.select_block, name="group_added", autocomplete=true) -%}
                 {% for option in group_dropdown %}
                     {{ ui.select_option(option[1], value=option[0]) }}
                 {% endfor %}
@@ -26,13 +26,13 @@
 
     {% if pkg_dict.groups %}
         {%- call ui.util.call(ui.form, method="POST") -%}
-            {%- call ui.util.call(ui.group_list) -%}
+            {%- call ui.util.call(ui.group_wrapper) -%}
                 {%- for group in pkg_dict.groups -%}
                     {%- if group.user_member -%}
                         {% set remove_label = _('Unlink {name} from the dataset').format(name=group.display_name) %}
                         {%- set remove_btn = ui.tooltip(ui.button(_("Remove"), type="submit", style="danger", attrs={"name": 'group_remove.'~group.id}), tooltip=remove_label) -%}
                     {%- endif %}
-                    {{ ui.group_item(group, footer=remove_btn) }}
+                    {{ ui.group(group, footer=remove_btn) }}
                 {%- endfor %}
             {%- endcall %}
         {%- endcall %}

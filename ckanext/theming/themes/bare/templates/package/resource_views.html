@@ -20,9 +20,9 @@
 
 {% block primary_content_inner %}
     {% if views %}
-        {%- call ui.util.call(ui.listing) -%}
+        {%- call ui.util.call(ui.list) -%}
             {%- for view in views -%}
-                {{ ui.listing_item(ui.link(view.title, h.url_for(pkg_dict.type ~ '_resource.edit_view', id=pkg_dict.id, resource_id=resource.id, view_id=view.id))) }}
+                {{ ui.list_item(ui.link(view.title, h.url_for(pkg_dict.type ~ '_resource.edit_view', id=pkg_dict.id, resource_id=resource.id, view_id=view.id))) }}
             {%- endfor %}
         {%- endcall %}
 

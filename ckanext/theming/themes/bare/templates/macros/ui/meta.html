@@ -1,6 +1,5 @@
 {%- macro header_block(content, title, subtitle, logo) -%}
-    {%- do kwargs -%}
-    <header id="header">
+    <header {{ ui.util.attrs(kwargs) }} id="header">
         {%- call ui.util.call(ui.container) -%}
             {%- if logo %}
                 {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
@@ -21,20 +20,18 @@
 {%- endmacro %}
 
 {%- macro footer_block(content) -%}
-    {%- do kwargs -%}
-    <footer id="footer">
+    <footer {{ ui.util.attrs(kwargs) }} id="footer">
         {{ ui.container(content) }}
     </footer>
 {%- endmacro %}
 
 {%- macro account_block(content, title, subtitle, logo) -%}
-    {%- do kwargs -%}
-
-    <header id="account">
+    <header {{ ui.util.attrs(kwargs) }} id="account">
         {{ ui.container(content) }}
     </header>
 {%- endmacro %}
 
 {%- macro subtitle_item(content, initial) -%}
+    {%- do kwargs -%}
     {{ content }} {{ g.template_title_delimiter if not initial }}
 {%- endmacro %}

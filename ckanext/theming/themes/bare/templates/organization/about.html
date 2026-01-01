@@ -16,7 +16,7 @@
 
     {%- block organization_extras %}
         {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion_item, title=_('Additional Info')) -%}
+            {%- call ui.util.call(ui.accordion, title=_('Additional Info')) -%}
                 {%- call ui.util.call(ui.table, striped=true, bordered=true) -%}
                     {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
 

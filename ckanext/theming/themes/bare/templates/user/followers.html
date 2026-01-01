@@ -15,7 +15,7 @@
 
     {%- block followers_list -%}
         {%- if followers -%}
-            {{ ui.user_list(ui.util.map(ui.user_item, followers)) }}
+            {{ ui.user_wrapper(ui.util.map(ui.user, followers)) }}
 
         {%- else -%}
             <p>{{ _('No followers') }}</p>

@@ -5,8 +5,7 @@
 {%- endmacro %}
 
 {%- macro spacer(size="md") -%}
-    {%- do kwargs -%}
-    <div class="spacer spacer-{{ size }}"></div>
+    <div {{ ui.util.attrs(kwargs) }} class="spacer spacer-{{ size }}"></div>
 {%- endmacro %}
 
 {%- macro truncate(content, max_lines=1) -%}
@@ -46,5 +45,7 @@
     {%- elif not template -%}
         {% set template = _("Results {first} - {last} out of {total}")  %}
     {%- endif -%}
-    {{ template.format(first=first, last=last, total=total) }}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ template.format(first=first, last=last, total=total) }}
+    </div>
 {%- endmacro %}

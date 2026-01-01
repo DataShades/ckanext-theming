@@ -24,7 +24,7 @@
         {%- for ent_type, entities in data.items() -%}
             {% set entities = entities|list %}
 
-            {%- call ui.util.call(ui.accordion_item, title=titles[ent_type]) -%}
+            {%- call ui.util.call(ui.accordion, title=titles[ent_type]) -%}
 
                 {%- with form_id = ui.util.id(), modal_id = ui.util.id() -%}
                     {{ ui.modal_handle(_('Purge'), id=modal_id) }}

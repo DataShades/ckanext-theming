@@ -10,7 +10,7 @@
 
     {%- block package_list %}
         {%- if page.items %}
-            {{ ui.package_list(ui.util.map(ui.package_item, page.items)) }}
+            {{ ui.package_wrapper(ui.util.map(ui.package, page.items)) }}
         {%- else %}
             <p>{{ _('No datasets found.') }}</p>
         {%- endif %}

@@ -30,7 +30,7 @@
 
     {%- block organization_list %}
         {%- if page.items %}
-            {{ ui.organization_list(ui.util.map(ui.organization_item, page.items)) }}
+            {{ ui.organization_wrapper(ui.util.map(ui.organization, page.items)) }}
 
         {%- else %}
             {%- if q %}

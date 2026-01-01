@@ -13,6 +13,6 @@
 {%- block primary_content_inner %}
     {{ ui.heading(_('Administrators'), level=1) }}
     {%- block admins_list %}
-        {{ ui.user_list(ui.util.map(ui.user_item, admins)) }}
+        {{ ui.user_wrapper(ui.util.map(ui.user, admins)) }}
     {%- endblock %}
 {%- endblock %}

@@ -54,22 +54,22 @@
 
     {% if status.status and status.task_info and not has_error %}
         {{ ui.heading(_('Upload Log'), level=3) }}
-        {%- call ui.util.call(ui.listing) -%}
+        {%- call ui.util.call(ui.list) -%}
             {% for item in status.task_info.logs|sort(attribute='timestamp') %}
                 {% set icon = 'check' if item.level == 'INFO' else 'exclamation' %}
                 {% set class = ' failure' if icon == 'exclamation' else ' success' %}
-                {% set popover_content = 'test' %}
-                {%- call ui.util.call(ui.listing_item) -%}
+
+                {%- call ui.util.call(ui.list_item) -%}
                     {% for line in item.message.strip().split('\n') %}
                         {{ line | urlize }}<br />
                     {% endfor %}
                     <span title="{{ h.render_datetime(item.timestamp, with_hours=True) }}">
                         {{ h.time_ago_from_timestamp(item.timestamp) }}
                         {%- with popover_id=ui.util.id() -%}
-                            {%- call ui.util.call(ui.popover_content, title=_("Details"), id=popover_id) -%}
-                                {%- call ui.util.call(ui.listing) -%}
+                            {%- call ui.util.call(ui.popover, title=_("Details"), id=popover_id) -%}
+                                {%- call ui.util.call(ui.list) -%}
                                     {% for key, value in item.items() %}
-                                        {%- call ui.util.call(ui.listing_item) -%}
+                                        {%- call ui.util.call(ui.list_item) -%}
                                             <strong>{{ key }}</strong>: {{ h.clean_html(value|string) }}
                                         {%- endcall %}
                                     {% endfor %}
@@ -82,7 +82,7 @@
 
             {% endfor %}
 
-            {{ ui.listing_item(_('End of log')) }}
+            {{ ui.list_item(_('End of log')) }}
         {%- endcall %}
     {% endif %}
 

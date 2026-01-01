@@ -2,7 +2,7 @@
     {%- call ui.util.call(ui.accordion_wrapper) -%}
         {% for field in ddict %}
 
-            {%- call ui.util.call(ui.accordion_item, title=ui.grid(ui.column(loop.index) ~ ui.column(h.get_translated(field.get('info', {}), 'label') or field.id, span={"xs": 7}) ~ ui.column(field.type, span={"xs": 4}))) -%}
+            {%- call ui.util.call(ui.accordion, title=ui.grid(ui.column(loop.index) ~ ui.column(h.get_translated(field.get('info', {}), 'label') or field.id, span={"xs": 7}) ~ ui.column(field.type, span={"xs": 4}))) -%}
 
                 {%- call ui.util.call(ui.table, striped=true) -%}
                     {{ ui.table_row(ui.table_cell(_('ID'), heading=true) ~ ui.table_cell(field.id)) }}

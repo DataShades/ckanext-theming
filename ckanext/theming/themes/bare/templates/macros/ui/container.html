@@ -1,14 +1,14 @@
-{%- macro accordion_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} role="region" aria-label="{{ _('Accordion') }}">
-        {{ content }}
-    </div>
-{%- endmacro %}
-
-{%- macro accordion_item(content, title, open) -%}
+{%- macro accordion(content, title, open) -%}
     <details {{ ui.util.attrs(kwargs) }} {{ "open" if open}}>
         <summary role="button" aria-expanded="{{ 'true' if open else 'false' }}">{{ title }}</summary>
         <div role="region" aria-labelledby="{{ kwargs.attrs.id if kwargs.attrs and kwargs.attrs.id else '' }}">{{ content }}</div>
     </details>
+{%- endmacro %}
+
+{%- macro button_group(content, direction="row") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="btn-group btn-group-{{ direction }}">
+        {{- content -}}
+    </div>
 {%- endmacro %}
 
 {%- macro card(content, title, footer, img, href) -%}
@@ -35,6 +35,12 @@
     </div>
 {%- endmacro %}
 
+{%- macro column(content, span) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="col{% if span %}{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}{% endif %}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
 {%- macro container(content, fluid) -%}
     <div {{ ui.util.attrs(kwargs) }} class="bare-container {{ 'container-fluid' if fluid }}">{{ content }}</div>
 {%- endmacro %}
@@ -45,92 +51,21 @@
     </div>
 {%- endmacro %}
 
-{%- macro column(content, span) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="col{% if span %}{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}{% endif %}">
-        {{ content }}
-    </div>
-{%- endmacro %}
-
-{%- macro panel_wrapper(content) -%}
-    {%- do kwargs.setdefault("attrs", {}).setdefault("id", ui.util.id())-%}
-    <script>
-     window.addEventListener("hashchange", event => {
-         const hash = window.location.hash.slice(1);
-         const wrapper = document.getElementById("{{ kwargs.attrs.id }}");
-         wrapper.querySelectorAll(`[data-panel]`).forEach(el => el.hidden = hash ? el.dataset.panel !== hash : !el.dataset.panelDefault);
-     })
-     document.addEventListener("DOMContentLoaded", () => window.dispatchEvent(new Event("hashchange")));
-    </script>
-    <div {{ ui.util.attrs(kwargs) }}>
-        {{ content }}
-    </div>
-{%- endmacro %}
-
-{%- macro panel(content, title, id, open) -%}
-    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id or ui.util.id() }}"
-                                     {% if open %} data-panel-default="true"{% else %} hidden{% endif %}>
-        {{ content }}
-    </div>
-{%- endmacro %}
-
-{%- macro panel_handle(content, id) -%}
-    {{ ui.link(content, href="#" ~ id, **kwargs) }}
-{%- endmacro %}
-
-{%- macro section(content, title, level=2) -%}
-    <section {{ ui.util.attrs(kwargs) }}>
-        {{ ui.heading(title, level=2) if title }}
-        <div>
-            {{ content }}
-        </div>
-    </section>
-{%- endmacro %}
-
-{%- macro listing(content) -%}
+{%- macro list(content) -%}
     <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
         {{ content }}
     </div>
 {%- endmacro %}
 
-{%- macro listing_item(content) -%}
+{%- macro list_item(content) -%}
     <div {{ ui.util.attrs(kwargs) }}>
         {{ content }}
     </div>
 {%- endmacro %}
 
-{%- macro jumbotron(content, title, subtitle) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="jumbotron">
-        {%- if title %}
-            <h1>{{ title }}</h1>
-        {%- endif %}
-        {%- if subtitle %}
-            <p>{{ subtitle }}</p>
-        {%- endif %}
+{%- macro panel(content, title, id, active) -%}
+    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id or ui.util.id() }}"
+        {%- if active %} data-panel-default="true"{% else %} hidden{% endif %}>
         {{ content }}
     </div>
-{%- endmacro %}
-
-{%- macro well(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="well">{{ content }}</div>
-{%- endmacro %}
-
-{%- macro media_object(img, content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="media">
-        {{ ui.image(img) }}
-        <div class="media-body">{{ content }}</div>
-    </div>
-{%- endmacro %}
-
-{%- macro list_group_item(content, active) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="list-group-item {{ 'active' if active }}">{{ content }}</div>
-{%- endmacro %}
-
-{%- macro sidebar_section(content, title) -%}
-    {%- set id = ui.util.id() -%}
-    <aside {{ ui.util.attrs(kwargs) }} role="complementary" aria-labelledby="section-title-{{ id }}">
-        {{ ui.heading(title, level=2, attrs={"id": "section-title-" ~ id}) }}
-        <div>
-            {{ content }}
-        </div>
-    </aside>
 {%- endmacro %}

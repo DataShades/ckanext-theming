@@ -53,7 +53,7 @@
 
     {% block resource_additional_information %}
         {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion_item, title=_('Additional Information')) -%}
+            {%- call ui.util.call(ui.accordion, title=_('Additional Information')) -%}
 
                 {%- call ui.util.call(ui.table, striped=true, bordered=true) -%}
                     {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
@@ -98,7 +98,7 @@
         {%- endcall %}
 
         {%- if h.plugin_loaded("datastore") and resource.datastore_active -%}
-            {%- call ui.util.call(ui.accordion_item, title=_("Data Dictionary")) -%}
+            {%- call ui.util.call(ui.accordion, title=_("Data Dictionary")) -%}
                 {% block resource_data_dictionary %}
                     {%- with ddict=h.datastore_dictionary(resource.id), res=resource -%}
                         {% include 'datastore/snippets/_dictionary_view.html' %}

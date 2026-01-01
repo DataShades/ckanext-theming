@@ -25,14 +25,14 @@
 
         {%- block package_resources -%}
             {%- if pkg_dict.resources %}
-                {%- call ui.util.call(ui.accordion_item, title=_("Resources")) %}
-                    {{ ui.resource_list(ui.util.map(ui.resource_item, pkg_dict.resources)) }}
+                {%- call ui.util.call(ui.accordion, title=_("Resources")) %}
+                    {{ ui.resource_wrapper(ui.util.map(ui.resource, pkg_dict.resources)) }}
                 {%- endcall %}
             {%- endif %}
         {%- endblock %}
 
         {%- block package_additional_info -%}
-            {%- call ui.util.call(ui.accordion_item, title=_("Additional details")) %}
+            {%- call ui.util.call(ui.accordion, title=_("Additional details")) %}
 
                 {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
                     {{ ui.table_head(ui.table_row(cells=[_("Field"), _("Value")], heading=true)) }}

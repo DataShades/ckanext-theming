@@ -5,10 +5,18 @@
     </div>
 {%- endmacro %}
 
-{%- macro toast(message, style) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
-        {{ message }}
-    </div>
+{%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label, href) -%}
+    {%- if not form_id -%}
+        {% set form_id = ui.util.id() %}
+        {{ ui.form(method="POST", attrs={"id": form_id}, action=href) }}
+    {%- endif %}
+
+    {%- set close_button = ui.modal_close_handle(cancel_label or _("Close"), id=id) %}
+    {%- set confirm_button = ui.button(confirm_label or _("Confirm"), attrs={"onclick": "const form = window['{form_id}']; (form.getAttribute('hx-post')||form.getAttribute('hx-get')) ? form.dispatchEvent(new Event('submit')) : form.submit(); ckan.sandbox().ui.getModal('{id}').close();".format(form_id=form_id, id=id)}) %}
+
+    {%- call ui.util.call(ui.modal, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) -%}
+        {{ content }}
+    {%- endcall %}
 {%- endmacro %}
 
 {%- macro modal(content, title, footer, dismissible, dismiss_label, id) -%}
@@ -28,52 +36,32 @@
     </dialog>
 {%- endmacro %}
 
-{%- macro modal_handle(content, id) -%}
-    {%- do kwargs.setdefault("attrs", {}).setdefault("onclick", "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)) -%}
-    {{ ui.button(content, **kwargs) }}
-{%- endmacro %}
 
-{%- macro modal_close(content, id) -%}
-    {{ ui.button(content, attrs={"onclick": "ckan.sandbox().ui.getModal('{id}').close()".format(id=id)}) }}
-{%- endmacro %}
-
-{%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label, href) -%}
-    {%- if not form_id -%}
-        {% set form_id = ui.util.id() %}
-        {{ ui.form(method="POST", attrs={"id": form_id}, action=href) }}
-    {%- endif %}
-
-    {%- set close_button = ui.modal_close(cancel_label or _("Close"), id=id) %}
-    {%- set confirm_button = ui.button(confirm_label or _("Confirm"), attrs={"onclick": "const form = window['{form_id}']; (form.getAttribute('hx-post')||form.getAttribute('hx-get')) ? form.dispatchEvent(new Event('submit')) : form.submit(); ckan.sandbox().ui.getModal('{id}').close();".format(form_id=form_id, id=id)}) %}
-
-    {%- call ui.util.call(ui.modal, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) -%}
-        {{ content }}
-    {%- endcall %}
-{%- endmacro %}
-
-{%- macro tooltip(content, tooltip, position="bottom") -%}
-    <span {{ ui.util.attrs(kwargs) }} data-tooltip="{{ tooltip }}" data-tooltip-position="{{ position }}">{{ content }}</span>
-{%- endmacro %}
-
-{%- macro popover_content(content, title, id) -%}
-    <div popover id="{{ id }}">
+{%- macro popover(content, title, id) -%}
+    <div {{ ui.util.attrs(kwargs) }} popover id="{{ id }}">
         {{ ui.heading(title, level=4) if title }}
         <div>{{ content }}</div>
     </div>
 {%- endmacro %}
 
-{%- macro popover_handle(content, id) -%}
-    <span onclick="window['{{ id }}'].togglePopover({source: this})" style="cursor: pointer;">{{ content }}</span>
-{%- endmacro %}
-
-{%- macro progress(value, max=100, label=None) -%}
+{%- macro progress(content, value=0, max=100) -%}
     <div {{ ui.util.attrs(kwargs) }} class="progress">
         <div class="progress-bar" style="width: {{ (value / max) * 100 }}%" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ max }}">
-            {%- if label %}{{ label }}{% else %}{{ value }} / {{ max }}{% endif %}
+            {%- if content %}{{ content }}{% else %}{{ value }} / {{ max }}{% endif %}
         </div>
     </div>
 {%- endmacro %}
 
 {%- macro spinner(size="md") -%}
     <span {{ ui.util.attrs(kwargs) }} class="spinner spinner-{{ size }}"></span>
+{%- endmacro %}
+
+{%- macro toast(message, style) -%}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{%- macro tooltip(content, tooltip, position="bottom") -%}
+    <span {{ ui.util.attrs(kwargs) }} data-tooltip="{{ tooltip }}" data-tooltip-position="{{ position }}">{{ content }}</span>
 {%- endmacro %}

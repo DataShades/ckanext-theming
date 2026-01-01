@@ -5,8 +5,10 @@ import inspect
 import logging
 import os
 import pprint
+import random
 import re
 import shutil
+import string
 from collections import defaultdict
 from collections.abc import Callable, Collection
 from typing import Any
@@ -14,6 +16,7 @@ from typing import Any
 import click
 import flask.signals
 from jinja2 import TemplateNotFound
+from jinja2.exceptions import UndefinedError
 from jinja2.runtime import Macro
 from werkzeug.exceptions import NotFound
 from werkzeug.routing import BuildError
@@ -127,10 +130,7 @@ def component_list(ctx: click.Context, theme: lib.Theme):
     """List available components."""
     with _make_ui(ctx, theme) as ui:
         for item in ui:
-            el = getattr(ui, item)
-            if not el:
-                el = "❌"
-                click.echo(f"{item}: {el}")
+            click.echo(item)
 
 
 @component.command("analyze")
@@ -179,7 +179,7 @@ def component_analyze(ctx: click.Context, components: Collection[str], theme: li
 @component.command("check")
 @theme_option
 @click.pass_context
-def component_check(ctx: click.Context, theme: lib.Theme):
+def component_check(ctx: click.Context, theme: lib.Theme):  # noqa: C901
     """Verify that a theme implements all required UI components."""
     categorized: dict[reference.Category, set[str]] = defaultdict(set)
     for name, info in reference.components.items():
@@ -208,6 +208,32 @@ def component_check(ctx: click.Context, theme: lib.Theme):
         if extra_components:
             click.secho(f"  Extra components ({len(extra_components)})", fg="yellow")
             click.secho("    " + ", ".join(extra_components), fg="blue")
+
+        with ctx.meta["flask_app"].test_request_context():
+            args = {
+                "".join(random.sample(string.ascii_letters, 10)): random.randint(0, 100),  # noqa: S311
+            }
+            rigid: dict[type, dict[str, Exception]] = defaultdict(dict)
+            allow_rigid = {"user", "group", "package", "resource", "organization"}
+
+            for name in sorted(theme_components):
+                func = getattr(ui, name)
+                try:
+                    func(**args)
+                except Exception as err:  # noqa: BLE001
+                    if isinstance(err, UndefinedError) and name in allow_rigid:
+                        continue
+                    rigid[type(err)][name] = err
+
+            if rigid:
+                click.secho(
+                    f"  {sum(map(len, rigid.values()))} components produced an error with random arguments",
+                    fg="yellow",
+                )
+                for key, values in rigid.items():
+                    click.secho(f"    {key.__name__}:", bold=False)
+                    for name, err in values.items():
+                        click.secho(f"      {click.style(name, bold=True)}: {err}")
 
 
 @theme.group()

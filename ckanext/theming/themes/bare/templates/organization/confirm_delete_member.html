@@ -7,15 +7,13 @@
 {% endblock %}
 
 {%- block primary_content_inner %}
-    {%- call ui.util.call(ui.container, class="col-md-6 col-md-offset-3") -%}
-        {%- call ui.util.call(ui.panel) -%}
-            <p>{{ _('Are you sure you want to delete member - {name}?').format(name=user_dict.name) }}</p>
-            {%- call ui.util.call(ui.form, method="POST", action=h.url_for(group_type ~ '.member_delete', id=organization_id, user=user_id)) -%}
-                {{ h.csrf_input() }}
-                {{ ui.hidden_input("user", value=user_id) }}
-                {{ ui.button(_('Cancel'), type="submit", name="cancel", style="danger") }}
-                {{ ui.button(_('Confirm Delete'), type="submit", name="delete", style="primary") }}
-            {%- endcall -%}
-        {%- endcall -%}
-    {%- endcall -%}
+    <p>{{ _('Are you sure you want to delete member - {name}?').format(name=user_dict.name) }}</p>
+
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.button(_("Cancel"), href=h.url_for(group_dict.type ~ ".edit", id=group_dict.name)) }}
+            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+        {%- endcall %}
+    {%- endcall %}
+
 {%- endblock %}

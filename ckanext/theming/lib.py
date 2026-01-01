@@ -174,6 +174,32 @@ class Util:
         storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
         return storage[category].get(key, default) if key else storage[category]
 
+    def icon(self, name: str) -> str:
+        """Normalize icon name.
+
+        Maps common icon names to their corresponding names in the theme's icon
+        set. If no mapping exists, returns the original name. This allows using
+        consistent icon names across different themes. For example, "search" is
+        mapped to "magnifying-glass" if the theme does not have icon with ID
+        `search`. Themes can override these mappings as needed.
+
+        # TODO: Make this configurable per theme.
+
+        :param name: Common name of the icon.
+        :return: The name of the corresponding icon provided by theme
+
+        """
+        icon_map = {
+            "search": "magnifying-glass",
+            "edit": "pencil",
+            "delete": "trash",
+            "add": "plus-circle",
+            "info": "info-circle",
+            "warning": "exclamation-triangle",
+            "user": "user-circle",
+        }
+        return icon_map.get(name, name)
+
 
 class UI(Iterable[str], abc.ABC):
     """Abstract base class for theme UIs.

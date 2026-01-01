@@ -13,7 +13,7 @@
     {{ ui.heading(_('Resources'), level=2) }}
 
     {%- if pkg_dict.resources %}
-        {%- call ui.util.call(ui.resource_list, attrs={"id": wrapper_id}) -%}
+        {%- call ui.util.call(ui.resource_wrapper, attrs={"id": wrapper_id}) -%}
             {%- for resource in pkg_dict.resources %}
                 {%- set kwargs = {
                     "attrs": {"draggable": "true"},
@@ -30,7 +30,7 @@
                     },
                 } -%}
 
-                {{ ui.resource_item(resource, **kwargs) }}
+                {{ ui.resource(resource, **kwargs) }}
             {%- endfor %}
 
         {%- endcall %}

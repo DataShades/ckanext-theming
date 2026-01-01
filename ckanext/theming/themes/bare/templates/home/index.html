@@ -9,11 +9,8 @@
 {%- block toolbar %}{% endblock %}
 
 {%- block primary_content_inner %}
-
-    {{ ui.activity_item("hello", a=1, b=2) }}
-
     {%- call ui.util.call(ui.grid) -%}
-        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+        {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
             {%- block promoted %}
                 <div class="promoted-content">
                     {{ ui.heading(_('Welcome to CKAN'), level=2) }}
@@ -22,11 +19,11 @@
             {%- endblock %}
         {%- endcall %}
 
-        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+        {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
             {%- block search %}
                 {{ ui.heading(_('Discover Datasets'), level=3) }}
-                {%- call ui.form_block(action=h.url_for('dataset.search')) -%}
-                    {{ ui.input(name="q", attrs={"placeholder": _('Search datasets...'), "autocomplete": "off"}) }}
+                {%- call ui.util.call(ui.form, action=h.url_for('dataset.search')) -%}
+                    {{ ui.input(name="q", placeholder=_('Search datasets...')) }}
                     {{ ui.button(_("Search"), type="submit") }}
                 {%- endcall %}
             {%- endblock %}
@@ -34,14 +31,14 @@
     {%- endcall %}
 
     {%- call ui.util.call(ui.grid) -%}
-        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+        {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
 
             {%- block featured_group %}
                 <div class="featured-group">
                     {{ ui.heading(_('Featured Groups'), level=3) }}
                     {%- set groups = h.get_featured_groups() -%}
                     {%- if groups -%}
-                        {{ ui.group_list(ui.util.map(ui.group_item, groups)) }}
+                        {{ ui.group_wrapper(ui.util.map(ui.group, groups)) }}
 
                     {%- else -%}
                         <p>{{ _('A featured group would appear here.') }}</p>
@@ -51,14 +48,14 @@
             {%- endblock %}
         {%- endcall %}
 
-        {%- call ui.util.call(ui.column, {"xs": 12, "md": 6}) -%}
+        {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
 
             {%- block featured_organization %}
                 <div class="featured-organization">
                     {{ ui.heading(_('Featured Organizations'), level=3) }}
                     {%- set organizations = h.get_featured_organizations() -%}
                     {%- if organizations -%}
-                        {{ ui.organization_list(ui.util.map(ui.organization_item, organizations)) }}
+                        {{ ui.organization_wrapper(ui.util.map(ui.organization, organizations)) }}
 
                     {%- else -%}
                             <p>{{ _('A featured organization would appear here.') }}</p>

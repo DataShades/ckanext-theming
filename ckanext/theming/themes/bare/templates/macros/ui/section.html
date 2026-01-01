@@ -1,0 +1,30 @@
+{%- macro sidebar_section(content, title) -%}
+    {%- set id = ui.util.id() -%}
+    <aside {{ ui.util.attrs(kwargs) }} role="complementary" aria-labelledby="section-title-{{ id }}">
+        <section>
+            {{ ui.heading(title, level=2, attrs={"id": "section-title-" ~ id}) }}
+            <div>
+                {{ content }}
+            </div>
+        </section>
+    </aside>
+{%- endmacro %}
+
+{%- macro facet_section(content, title) -%}
+    <section {{ ui.util.attrs(kwargs) }}>
+        {{ ui.heading(title, level=3) }}
+        <div>
+            {{ content }}
+        </div>
+        {{ ui.divider() }}
+    </section>
+{%- endmacro %}
+
+{%- macro section(content, title) -%}
+    <section {{ ui.util.attrs(kwargs) }}>
+        {{ ui.heading(title, level=2) if title }}
+        <div>
+            {{ content }}
+        </div>
+    </section>
+{%- endmacro %}

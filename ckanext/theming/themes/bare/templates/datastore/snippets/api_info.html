@@ -41,11 +41,11 @@
         {% endfor %}
 
         {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion_item, title=_('Querying')) -%}
+            {%- call ui.util.call(ui.accordion, title=_('Querying')) -%}
                 {% block query_examples %}
                     <strong>{{ _('Get 5 results containing "jones" in any field:') }}</strong>
                     {% for clang in code_languages %}
-                        {{ ui.panel(code_examples[clang]['request_limit'], id="lang-" ~ clang, open=loop.index == 1) }}
+                        {{ ui.panel(code_examples[clang]['request_limit'], id="lang-" ~ clang, active=loop.index == 1) }}
                     {% endfor %}
                     <strong>{{ _('Get results with either "watershed" or "survey" as subject and "active" as its stage:') }}</strong>
                     {% for clang in code_languages %}
@@ -62,7 +62,7 @@
         {%- endcall %}
 
         {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion_item, title=_('Using the API with this Web Browser')) -%}
+            {%- call ui.util.call(ui.accordion, title=_('Using the API with this Web Browser')) -%}
                 {% block get_query_examples %}
                     <p>{{ _('Some API endpoints may be accessed using a GET query string.') }}</p>
                     <strong>{{ _('Query example (first 5 results)') }}</strong>

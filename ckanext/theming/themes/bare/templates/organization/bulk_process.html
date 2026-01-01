@@ -20,7 +20,7 @@
             {"text": _('Name Ascending'), "value": "title_string asc"},
             {"text": _('Name Descending'), "value": "title_string desc"},
             {"text": _('Last Modified'), "value": "metadata_modified desc"}
-        ] %}
+            ] %}
 
         {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item, use_htmx=false) }}
 
@@ -35,7 +35,7 @@
 
                     {%- endcall %}
 
-                    {%- call ui.util.call(ui.package_list) -%}
+                    {%- call ui.util.call(ui.package_wrapperui.package_wrapper) -%}
                         {%- for package in page.items -%}
                             {{ ui.checkbox(name="dataset_" ~ package.id, label=ui.link(package.title, href=h.url_for(package.type ~ ".read", id=package.name))) }}
                         {%- endfor %}

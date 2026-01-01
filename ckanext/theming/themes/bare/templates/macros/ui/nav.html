@@ -1,9 +1,3 @@
-{%- macro breadcrumb_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="breadcrumbs">
-        {{ content }}
-    </div>
-{%- endmacro %}
-
 {%- macro breadcrumb_item(content, href, is_first) -%}
     {{ ui.breadcrumb_divider() if not is_first }}
     {{ ui.link(content, href, **kwargs) }}
@@ -14,10 +8,6 @@
 {%- endmacro %}
 
 
-{%- macro nav_wrapper(content) -%}
-    <nav {{ ui.util.attrs(kwargs) }} role="navigation">{{ content }}</nav>
-{%- endmacro %}
-
 {%- macro nav_item(content, href, active) -%}
     {%- if active %}
         <strong>{{ ui.link(content, href, **kwargs) }}</strong>
@@ -26,26 +16,17 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro main_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro main_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 
-{%- macro account_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro account_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 
-{%- macro content_nav_wrapper(content) -%}{{ ui.tab_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro content_nav_item(content, href, active) -%}{{ ui.tab_item(content, href, active, **kwargs) }}{%- endmacro %}
 
-{%- macro page_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro page_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
 
-{%- macro content_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro content_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
 
-{%- macro tab_wrapper(content) -%}
-    <nav {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">
-        {{ content }}
-    </nav>
-{%- endmacro %}
+
 
 {%- macro tab_item(content, href, active) -%}
     {%- if active -%}
@@ -55,11 +36,7 @@
     {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
 
-{%- macro menu_wrapper(content) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
-        {{ content }}
-    </div>
-{%- endmacro %}
+
 
 {%- macro menu_item(content, href, active) -%}
     {%- if active %}
@@ -109,14 +86,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro dropdown_wrapper(content, title) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="dropdown" role="menu" aria-haspopup="true">
-        {{ ui.button(title, aria={"haspopup": "true"}) }}
-        <ul class="dropdown-menu" role="menu">
-            <li role="none">{{ content }}</li>
-        </ul>
-    </div>
-{%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
     <li role="none">

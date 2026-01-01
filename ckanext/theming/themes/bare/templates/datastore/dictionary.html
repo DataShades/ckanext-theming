@@ -17,7 +17,7 @@
                 {% for field in fields %}
                     {%- set position = loop.index -%}
 
-                    {%- call ui.util.call(ui.accordion_item, title=_( "Field {num}.").format(num=position) ~ " " ~ field.id ~ " " ~ field.type ~ (", " ~ _("Primary key") if field.schema and field.schema.is_index else "")) -%}
+                    {%- call ui.util.call(ui.accordion, title=_( "Field {num}.").format(num=position) ~ " " ~ field.id ~ " " ~ field.type ~ (", " ~ _("Primary key") if field.schema and field.schema.is_index else "")) -%}
 
 
 

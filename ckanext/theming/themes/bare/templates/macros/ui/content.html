@@ -1,12 +1,5 @@
-{%- macro organization_item(group) -%}
-    {{ ui.group_item(group, **kwargs) }}
-{%- endmacro %}
 
-{%- macro organization_list(content) -%}
-    {{ ui.group_list(content, **kwargs) }}
-{%- endmacro %}
-
-{%- macro group_item(group) -%}
+{%- macro group(group) -%}
     {%- call ui.util.call(ui.column, span={"xs": 12, "md": 4, "lg": 3}) -%}
         {% set img = group.image_display_url or h.url_for_static('/base/images/placeholder-' ~ ('organization' if group.is_organization else 'group') ~ '.png') %}
         {% set title = group.title or group.name  %}
@@ -14,79 +7,45 @@
 
         {{ ui.card(title=title, img=img, body=body, href=h.url_for(('organization' if group.is_organization else 'group') ~ ".read", id=group.name), **kwargs) }}
     {%- endcall %}
-
 {%- endmacro %}
 
-
-{%- macro group_list(content) -%}
-    {{ ui.grid(content, **kwargs) }}
+{%- macro organization(organization) -%}
+    {{ ui.group(organization, **kwargs) }}
 {%- endmacro %}
 
-
-{%- macro package_list(content) -%}
-    {{ ui.listing(content, **kwargs) }}
-{%- endmacro %}
-
-{%- macro package_item(pkg) -%}
+{%- macro package(pkg) -%}
     {% set title = pkg.title or pkg.name  %}
     {% set body = h.markdown_extract(pkg.notes, 120)|urlize %}
 
     {{ ui.card(title=title, body=body, href=h.url_for(pkg.type ~ ".read", id=pkg.name), **kwargs) }}
 {%- endmacro %}
 
-{%- macro resource_list(content) -%}
-    {{ ui.listing(content, **kwargs) }}
-{%- endmacro %}
-
-{%- macro resource_item(res) -%}
+{%- macro resource(res) -%}
     {% set title = res.name  %}
     {% set body = h.markdown_extract(res.description, 120)|urlize %}
 
     {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id), **kwargs) }}
 {%- endmacro %}
 
-{%- macro user_list(content) -%}
-    {{ ui.listing(content, **kwargs) }}
-{%- endmacro %}
-
-{%- macro user_item(user) -%}
+{%- macro user(user) -%}
     {%- do kwargs -%}
     {{ h.linked_user(user if user is string else user.name, maxlength=20) }}
 {%- endmacro %}
 
-{%- macro facet_list(content) -%}
-    {{ ui.listing(content, **kwargs) }}
-{%- endmacro %}
 
-{%- macro facet_item(facet, key) -%}
-    {%- set url = h.remove_url_param(key, facet.name) if facet.active else h.add_url_param(new_params={key: facet.name}) -%}
+{%- macro facet(content, key, value, count, active) -%}
+    {%- set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("hx-boost", "true") -%}
     {%- call ui.util.call(ui.link, href=url, **kwargs) -%}
         <div style="display: flex; justify-content: space-between;">
-            <span>{{ facet.display_name }}</span>
-            <span>{{ "&times;"|safe if facet.active else facet.count }}</span>
+            <span>{{ content }}</span>
+            <span>{{ "&times;"|safe if active else count }}</span>
         </div>
     {%- endcall %}
-
 {%- endmacro %}
 
-{%- macro facet_group(content, title) -%}
-    <section {{ ui.util.attrs(kwargs) }}>
-        {{ ui.heading(title, level=3) }}
-        <div>
-            {{ content }}
-        </div>
-        {{ ui.divider() }}
-    </section>
-{%- endmacro %}
-
-{%- macro activity_stream(content) -%}
-    {{ ui.listing(content, **kwargs) }}
-{%- endmacro %}
-
-
-{%- macro activity_item(content, activity) -%}
-    {{ ui.listing_item(content, **kwargs) }}
+{%- macro activity(content, activity) -%}
+    {{ ui.list_item(content, **kwargs) }}
 {%- endmacro %}
 
 {% macro license(content, id, url) %}

@@ -30,7 +30,7 @@
 
     {%- block group_list %}
         {%- if page.items %}
-            {{ ui.group_list(ui.util.map(ui.group_item, page.items)) }}
+            {{ ui.group_wrapper(ui.util.map(ui.group, page.items)) }}
 
         {%- else %}
             {%- if q %}

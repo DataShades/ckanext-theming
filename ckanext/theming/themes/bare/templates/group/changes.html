@@ -28,16 +28,16 @@
         </strong>
 
         {% set changes = h.compare_group_dicts(activity_diff.activities[0].data.group, activity.data.group, activity_diff.activities[0].id) %}
-        {%- call ui.util.call(ui.listing) -%}
+        {%- call ui.util.call(ui.list) -%}
             {% for change in changes %}
-                {%- call ui.util.call(ui.listing_item) -%}
+                {%- call ui.util.call(ui.list_item) -%}
                     {% snippet "snippets/group_changes/{}.html".format(change.type), change=change, group_dict=group_dict, dataset_type=activity.data.group.type %}
                 {%- endcall %}
 
             {% endfor %}
         {%- endcall %}
 
-        {{ ui.accordion_wrapper(ui.accordion_item(activity_diffs[0]['diff']|safe, title=_("Show metadata diff"))) if i == 0 }}
+        {{ ui.accordion_wrapper(ui.accordion(activity_diffs[0]['diff']|safe, title=_("Show metadata diff"))) if i == 0 }}
 
         {{ ui.divider() }}
     {% endfor %}

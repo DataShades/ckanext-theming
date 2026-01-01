@@ -28,9 +28,9 @@
 
 {%- macro search_active_filters(active_filters, facet_titles, facets, use_htmx) -%}
     {%- if active_filters -%}
-        {%- call ui.util.call(ui.listing, **kwargs) -%}
+        {%- call ui.util.call(ui.list, **kwargs) -%}
             {%- for key, values in active_filters|groupby(0) -%}
-                {%- call ui.util.call(ui.listing_item) -%}
+                {%- call ui.util.call(ui.list_item) -%}
                     <strong>{{ facet_titles.get(key, key) }}:</strong>
                     {%- for _, value in values %}
                         <del>

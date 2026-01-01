@@ -1,5 +1,10 @@
-{%- macro badge(content) -%}
-    <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
+{%- macro avatar(src, alt) -%}
+    {%- if kwargs.attrs -%}
+        {%- do kwargs.attrs.setdefault("width", 100) -%}
+        {%- do kwargs.attrs.setdefault("height", 100) -%}
+    {%- endif -%}
+
+    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
 {%- endmacro %}
 
 {%- macro button(content, href, type="button", style="primary") -%}
@@ -8,13 +13,10 @@
     {%- else -%}
         <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn--{{ style }}">{{ content }}</button>
     {%- endif %}
-
 {%- endmacro %}
 
-{%- macro button_group(content, direction="row") -%}
-    <div {{ ui.util.attrs(kwargs) }} class="btn-group btn-group-{{ direction }}">
-        {{- content -}}
-    </div>
+{%- macro badge(content) -%}
+    <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}
 
 {%- macro divider(content) -%}
@@ -30,6 +32,10 @@
 {%- macro heading(content, level) -%}
     {%- set tag =  "h" ~ level %}
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
+{%- endmacro %}
+
+{%- macro icon(name) -%}
+    <i {{ ui.util.attrs(kwargs) }} class="icon-{{ ui.util.icon(name) }}"></i>
 {%- endmacro %}
 
 {%- macro image(src, alt, height, width) -%}
@@ -53,6 +59,10 @@
     <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 
+{%- macro tag(content, href, id) -%}
+    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+{%- endmacro %}
+
 {%- macro text(content) -%}
     <p {{ ui.util.attrs(kwargs) }}>
         {{ content }}
@@ -61,27 +71,4 @@
 
 {%- macro video(src, controls) -%}
     <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
-{%- endmacro %}
-
-
-{%- macro tag(content, href, id) -%}
-    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
-{%- endmacro %}
-
-
-{%- macro avatar(src, alt) -%}
-    {%- if kwargs.attrs -%}
-        {%- do kwargs.attrs.setdefault("width", 100) -%}
-        {%- do kwargs.attrs.setdefault("height", 100) -%}
-    {%- endif -%}
-
-    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
-{%- endmacro %}
-
-{%- macro icon(name, size) -%}
-    <i {{ ui.util.attrs(kwargs) }} class="icon-{{ name }} icon-{{ size or "md" }}"></i>
-{%- endmacro %}
-
-{%- macro label(content, for_id) -%}
-    <label {{ ui.util.attrs(kwargs) }} for="{{ for_id }}">{{ content }}</label>
 {%- endmacro %}

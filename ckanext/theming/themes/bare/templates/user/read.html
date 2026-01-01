@@ -7,6 +7,6 @@
 {%- block primary_content_inner %}
     {{ ui.heading(user_dict.display_name or user_dict.name, level=1) }}
 
-    {{ ui.package_list(ui.util.map(ui.package_item, user_dict.datasets)) }}
+    {{ ui.package_wrapper(ui.util.map(ui.package, user_dict.datasets)) }}
 
 {%- endblock %}

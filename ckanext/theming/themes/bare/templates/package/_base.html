@@ -45,7 +45,7 @@
 
         {%- block package_sidebar_resources -%}
             {%- call ui.util.call(ui.sidebar_section, title=_("Resources")) -%}
-                {%- call ui.util.call(ui.listing) -%}
+                {%- call ui.util.call(ui.list) -%}
                     {%- if pkg_dict.resources %}
                         {%- for res in pkg_dict.resources[:5] %}
                             {{ ui.link(res.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "_resource.read", id=pkg_dict.name, resource_id=res.id)) }}
