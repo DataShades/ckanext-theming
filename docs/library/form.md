@@ -415,8 +415,6 @@ Select components handle option display, selection management, and accessibility
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | Help text or description for the select. |
@@ -430,15 +428,15 @@ Select components handle option display, selection management, and accessibility
 | `autocomplete` | string | - | Autocomplete behavior for the select. |
 | `errors` | list | [] | List of error messages to display. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and functionality:
-
-- `size` (string): Size of the select (e.g., "sm", "lg") - theme-dependent
-- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
-- `helper_text` (string): Additional helper text below the select - theme-dependent
-- `disabled` (bool): Whether the select is disabled - theme-dependent
-- `native` (bool): Whether to use native browser select - theme-dependent
+- `size` (string): Size of the select (e.g., "sm", "lg")
+- `variant` (string): Style variant (e.g., "filled", "outlined")
+- `helper_text` (string): Additional helper text below the select
+- `disabled` (bool): Whether the select is disabled
+- `native` (bool): Whether to use native browser select
+///
 
 /// admonition | Relationship
     type: info
@@ -536,8 +534,6 @@ Textarea components handle appropriate sizing, scrolling behavior, and accessibi
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | Help text or description for the textarea. |
@@ -551,12 +547,12 @@ Textarea components handle appropriate sizing, scrolling behavior, and accessibi
 | `cols` | int | - | Number of visible text columns. |
 | `errors` | list | [] | List of error messages to display. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and functionality:
-
-- `size` (string): Size of the textarea (e.g., "sm", "lg") - theme-dependent
-- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
-- `helper_text` (string): Additional helper text below the textarea - theme-dependent
-- `disabled` (bool): Whether the textarea is disabled - theme-dependent
-- `readonly` (bool): Whether the textarea is read-only - theme-dependent
+- `size` (string): Size of the textarea (e.g., "sm", "lg")
+- `variant` (string): Style variant (e.g., "filled", "outlined")
+- `helper_text` (string): Additional helper text below the textarea
+- `disabled` (bool): Whether the textarea is disabled
+- `readonly` (bool): Whether the textarea is read-only
+///

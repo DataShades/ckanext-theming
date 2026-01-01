@@ -55,22 +55,20 @@ Nav item components handle proper styling, active state indication, and accessib
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The text or content to display in the navigation item. |
 | `href` | string | - | The URL that the navigation item links to. |
 | `active` | bool | - | Whether the navigation item is currently active/selected. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and behavior:
-
-- `disabled` (bool): Whether the navigation item is disabled - theme-dependent
-- `variant` (string): Style variant (e.g., "primary", "secondary") - theme-dependent
-- `dropdown` (bool): Whether the item has a dropdown menu - theme-dependent
-- `external` (bool): Whether it's an external link - theme-dependent
+- `disabled` (bool): Whether the navigation item is disabled
+- `variant` (string): Style variant (e.g., "primary", "secondary")
+- `dropdown` (bool): Whether the item has a dropdown menu
+- `external` (bool): Whether it's an external link
+///
 
 ## Main Nav Item Component
 

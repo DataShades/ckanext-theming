@@ -27,23 +27,21 @@ Alerts typically come in different styles to indicate different types of informa
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `message` | string | - | The content to display in the alert. |
 | `dismissible` | bool | - | Whether the alert can be dismissed by the user. |
 | `style` | string | - | Visual style of the alert (e.g., "success", "warning", "error", "info"). |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and behavior:
-
-- `variant` (string): Style variant (e.g., "filled", "outlined", "tonal") - theme-dependent
-- `elevation` (int): Shadow level (e.g., 0-24) - theme-dependent
-- `closable` (bool): Whether to show close button - theme-dependent
-- `timeout` (int): Auto-dismiss timeout in milliseconds - theme-dependent
-- `icon` (string): Icon to display in the alert - theme-dependent
+- `variant` (string): Style variant (e.g., "filled", "outlined", "tonal")
+- `elevation` (int): Shadow level (e.g., 0-24)
+- `closable` (bool): Whether to show close button
+- `timeout` (int): Auto-dismiss timeout in milliseconds
+- `icon` (string): Icon to display in the alert
+///
 
 ## Confirm Modal Component
 
@@ -68,17 +66,21 @@ Modal components handle overlay backgrounds, positioning, and interaction patter
 
 ```jinja2
 <!-- Basic modal -->
-{{ ui.modal("Modal content goes here", title="Modal Title", id="my-modal") }}
+{% call ui.util.call(ui.modal, title="Modal Title", id="my-modal") %}
+    Modal content goes here
+{% endcall %}
 
 <!-- Modal with footer -->
-{{ ui.modal("Content with footer", title="Modal with Actions", footer=ui.button("Close") ~ ui.button("Save", style="primary"), id="modal-with-footer") }}
+{% call ui.util.call(ui.modal, title="Modal with Actions", id="modal-with-footer", footer=(ui.button("Close") ~ ui.button("Save", style="primary"))) %}
+    Content with footer
+{% endcall %}
 
 <!-- Dismissible modal -->
-{{ ui.modal("Dismissible content", title="Dismissible Modal", dismissible=True, id="dismissible-modal") }}
+{% call ui.util.call(ui.modal, title="Dismissible Modal", id="dismissible-modal", dismissible=True) %}
+    Dismissible content
+{% endcall %}
 ```
 ///
-
-### Parameters
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
@@ -89,15 +91,15 @@ Modal components handle overlay backgrounds, positioning, and interaction patter
 | `dismissible` | bool | - | Whether the modal can be dismissed by clicking outside or pressing escape. |
 | `dismiss_label` | string | - | Label for the dismiss/close button. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and behavior:
-
-- `size` (string): Size of the modal (e.g., "sm", "md", "lg", "xl") - theme-dependent
-- `centered` (bool): Whether to center the modal vertically - theme-dependent
-- `scrollable` (bool): Whether the modal body should be scrollable - theme-dependent
-- `backdrop` (string): Backdrop style (e.g., "static", "true") - theme-dependent
-- `animation` (bool): Whether to use open/close animations - theme-dependent
+- `size` (string): Size of the modal (e.g., "sm", "md", "lg", "xl")
+- `centered` (bool): Whether to center the modal vertically
+- `scrollable` (bool): Whether the modal body should be scrollable
+- `backdrop` (string): Backdrop style (e.g., "static", "true")
+- `animation` (bool): Whether to use open/close animations
+///
 
 /// admonition | Relationship
     type: info
@@ -144,21 +146,19 @@ Spinner components are typically small, animated elements that can be placed inl
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `size` | string | "md" | Size of the spinner (e.g., "sm", "md", "lg"). |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and animation:
-
-- `variant` (string): Style variant (e.g., "border", "grow", "dots") - theme-dependent
-- `color` (string): Color of the spinner - theme-dependent
-- `animation` (string): Animation type (e.g., "spin", "pulse", "bounce") - theme-dependent
-- `full_screen` (bool): Whether to display as full-screen overlay - theme-dependent
-- `overlay` (bool): Whether to show as overlay with backdrop - theme-dependent
+- `variant` (string): Style variant (e.g., "border", "grow", "dots")
+- `color` (string): Color of the spinner
+- `animation` (string): Animation type (e.g., "spin", "pulse", "bounce")
+- `full_screen` (bool): Whether to display as full-screen overlay
+- `overlay` (bool): Whether to show as overlay with backdrop
+///
 
 ## Toast Component
 
