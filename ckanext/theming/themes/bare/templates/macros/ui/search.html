@@ -3,7 +3,7 @@
 {%- endmacro %}
 
 {%- macro search_submit_button(content=_("Search")) -%}
-    {{ ui.button(label, type="submit", **kwargs) }}
+    {{ ui.button(content, type="submit", **kwargs) }}
 {%- endmacro %}
 
 {%- macro search_sort_control(content, name="sort", selected="", options=[], label=_("Order by")) -%}

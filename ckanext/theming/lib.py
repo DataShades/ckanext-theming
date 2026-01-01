@@ -26,6 +26,7 @@ from collections.abc import Iterable, Iterator
 from typing import Any, Protocol
 
 from flask import current_app
+from jinja2 import Template
 from jinja2.runtime import Macro
 from markupsafe import Markup
 from typing_extensions import override
@@ -50,11 +51,11 @@ class PElement(Protocol):
 
 
 class Util:
-    ui: UI
-    _storage_key = "ui_storage"
+    _storage_key: str = "ui_storage"
+    _theme: Theme
 
-    def __init__(self, ui: UI):
-        self.ui = ui
+    def __init__(self, theme: Theme):
+        self._theme = theme
 
     def attrs(self, kwargs: dict[str, Any]):
         """Helper method to render HTML attributes from a dictionary."""
@@ -183,41 +184,29 @@ class Util:
         mapped to "magnifying-glass" if the theme does not have icon with ID
         `search`. Themes can override these mappings as needed.
 
-        # TODO: Make this configurable per theme.
-
         :param name: Common name of the icon.
         :return: The name of the corresponding icon provided by theme
 
         """
-        icon_map = {
-            "search": "magnifying-glass",
-            "edit": "pencil",
-            "delete": "trash",
-            "add": "plus-circle",
-            "info": "info-circle",
-            "warning": "exclamation-triangle",
-            "user": "user-circle",
-        }
-        return icon_map.get(name, name)
+        return self._theme.icon_map.get(name, name)
 
 
 class UI(Iterable[str], abc.ABC):
     """Abstract base class for theme UIs.
 
-    A UI provides access to a set of macros that can be used in templates.
+    A UI provides access to a set of function that can be used in
+    templates. Each function corresponds to a UI element, such as buttons,
+    links, forms, etc. The UI class maintains an inventory of available
+    elements that can be accessed by name.
+
     """
 
-    Util: type[Util] = Util
     util: Util
     inv: dict[str, PElement]
 
-    def __init__(self, app: types.CKANApp):
-        """Initialize the UI with the CKAN application instance.
-
-        :param app: The CKAN application instance.
-        """
+    def __init__(self, app: types.CKANApp, util: Util):
+        self.util = util
         self.inv = {}
-        self.util = self.Util(self)
 
     @override
     def __iter__(self) -> Iterator[str]:
@@ -238,6 +227,14 @@ class UI(Iterable[str], abc.ABC):
 
         return self.inv[name]
 
+    def add_component(self, name: str, component: PElement):
+        """Add a new component to the UI inventory.
+
+        :param name: The name of the component.
+        :param component: A callable that produces the component.
+        """
+        self.inv[name] = component
+
 
 class MacroUI(UI):
     """A UI implementation that loads macros from a Jinja2 template.
@@ -248,25 +245,39 @@ class MacroUI(UI):
     :param source: The path to the Jinja2 template containing the macros.
     """
 
-    source: str = "macros/ui.html"
+    _sources: list[str] = ["macros/ui.html"]
+
+    __templates: list[Template]
 
     @override
-    def __init__(self, app: types.CKANApp):
-        super().__init__(app)
+    def __init__(self, app: types.CKANApp, util: Util):
+        super().__init__(app, util)
         self.__env = app.jinja_env
-        self.__tpl = app.jinja_env.get_template(self.source)
+
+        sources = self._sources.copy()
+        for plugin in p.PluginImplementations(ITheme):
+            sources += plugin.get_additional_theme_ui_sources()
+
+        self.__templates = [app.jinja_env.get_template(source) for source in sources]
+
         self._fill_inventory()
 
     def _fill_inventory(self):
-        mod = self.__tpl.module
-        self.inv: dict[str, PElement] = {name: getattr(mod, name) for name in dir(mod) if not name.startswith("_")}
+        for tpl in self.__templates:
+            mod = tpl.module
+            for name in dir(mod):
+                if name.startswith("_"):
+                    continue
+                self.add_component(name, getattr(mod, name))
 
     @override
     def __getattr__(self, name: str):
         # reset macro cache at the beginning of the request in debug mode. This
         # allows to edit UI macros without restarting the server.
         if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
-            self.__tpl._module = self.__tpl.make_module()
+            for tpl in self.__templates:
+                tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
+
             tk.g._ui_compiled = True
             self._fill_inventory()
 
@@ -285,6 +296,8 @@ class Theme:
     parent: str | None = None
 
     ui_factory: type[UI] = MacroUI
+    util_factory: type[Util] = Util
+    icon_map: dict[str, str] = dataclasses.field(default_factory=dict)
 
     def build_ui(self, app: types.CKANApp) -> UI:
         """Build a UI instance for this theme.
@@ -292,7 +305,11 @@ class Theme:
         :param app: The CKAN application instance.
         :return: A UI instance.
         """
-        return self.ui_factory(app)
+        ui = self.ui_factory(app, self.util_factory(self))
+        for plugin in p.PluginImplementations(ITheme):
+            plugin.patch_theme_ui(self, ui)
+
+        return ui
 
     def template_path(self):
         """Get the path to the theme's templates directory."""

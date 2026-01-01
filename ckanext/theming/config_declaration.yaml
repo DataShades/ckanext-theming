@@ -5,4 +5,4 @@ groups:
       - key: ckan.ui.theme
         example: midnight-blue
         description: |
-          The theme to use for the CKAN UI. .
+          The theme to use for the CKAN UI.
