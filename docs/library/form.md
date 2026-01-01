@@ -318,8 +318,6 @@ Input components handle various input types such as text, email, password, and n
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | Help text or description for the input. |
@@ -332,15 +330,15 @@ Input components handle various input types such as text, email, password, and n
 | `type` | string | "text" | Input type (e.g., "text", "email", "password", "number"). |
 | `errors` | list | [] | List of error messages to display. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
-Different themes may support additional parameters for styling and functionality:
-
-- `size` (string): Size of the input (e.g., "sm", "lg") - theme-dependent
-- `variant` (string): Style variant (e.g., "filled", "outlined") - theme-dependent
-- `helper_text` (string): Additional helper text below the input - theme-dependent
-- `disabled` (bool): Whether the input is disabled - theme-dependent
-- `readonly` (bool): Whether the input is read-only - theme-dependent
+- `size` (string): Size of the input (e.g., "sm", "lg")
+- `variant` (string): Style variant (e.g., "filled", "outlined")
+- `helper_text` (string): Additional helper text below the input
+- `disabled` (bool): Whether the input is disabled
+- `readonly` (bool): Whether the input is read-only
+///
 
 ## Markdown Component
 

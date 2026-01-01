@@ -42,22 +42,19 @@ sections, the wrapper provides the container for multiple accordions.
 ```
 ///
 
-### Parameters
-
 | Parameter | Type   | Default | Description                                            |
 |-----------|--------|---------|--------------------------------------------------------|
 | `content` | string | -       | The content to display when the accordion is expanded. |
 | `title`   | string | -       | The title displayed in the accordion header.           |
 | `open`    | bool   | -       | Whether the accordion should be open by default.       |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for styling and behavior:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `variant` (string): Style variant (e.g., "primary", "secondary")
 - `flush` (bool): Whether to remove borders and rounded corners
-- `independent` (bool): Whether the accordion should remain openwhen sibling
-  accordion is opened
+- `independent` (bool): Whether the accordion should remain open when sibling accordion is opened
+///
 
 
 ## Button Group Component
@@ -81,21 +78,19 @@ Button groups help users understand the relationship between different actions a
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The buttons to group together. |
 | `direction` | string | "row" | The direction of the button group ("row" for horizontal, "column" for vertical). |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for styling and layout:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `size` (string): Size of the button group (e.g., "sm", "lg")
 - `vertical` (bool): Whether to stack buttons vertically
 - `toolbar` (bool): Whether to use toolbar styling
 - `justified` (bool): Whether to make buttons equal width
+///
 
 
 ## Card Component
@@ -122,8 +117,6 @@ Cards are particularly effective for displaying collections of related informati
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The main content of the card. |
@@ -132,15 +125,15 @@ Cards are particularly effective for displaying collections of related informati
 | `img` | string | - | URL to an image to display in the card. |
 | `href` | string | - | URL to link the entire card to. |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for styling and functionality:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `variant` (string): Style variant (e.g., "primary", "secondary", "outline")
 - `size` (string): Size of the card (e.g., "sm", "lg")
 - `outline` (bool): Whether to use outline style
 - `clickable` (bool): Whether the card should have hover effects indicating clickability
 - `shadow` (string): Shadow level (e.g., "none", "sm", "lg")
+///
 
 ## Column Component
 
@@ -163,21 +156,19 @@ The column component typically accepts parameters for responsive behavior, allow
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The content to display in the column. |
 | `span` | dict | - | Responsive span configuration with breakpoints (e.g., {"xs": 12, "md": 6}). |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for grid behavior:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `offset` (dict): Offset configuration for pushing/pulling columns
 - `order` (dict): Order configuration for reordering columns
 - `align_self` (string): Self-alignment (e.g., "start", "center", "end")
 - `no_gutters` (bool): Whether to remove gutters between columns
+///
 
 /// admonition | Relationship
     type: info
@@ -206,21 +197,19 @@ Container components are essential for maintaining visual consistency across dif
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The content to display within the container. |
 | `fluid` | bool | - | Whether to make the container full-width without max-width constraints. |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for layout behavior:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `size` (string): Container size (e.g., "sm", "md", "lg", "xl")
 - `centered` (bool): Whether to center the container
 - `padding` (string): Padding level (e.g., "sm", "md", "lg")
 - `gutter` (string): Gutter size for responsive spacing
+///
 
 ## Grid Component
 
@@ -240,21 +229,19 @@ Grid layouts are particularly useful for displaying collections of similar conte
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The content to display within the grid (typically columns). |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for grid behavior:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `gap` (string): Gap between grid items (e.g., "sm", "md", "lg")
 - `align_items` (string): Alignment of items (e.g., "start", "center", "end")
 - `justify_content` (string): Justification of content (e.g., "start", "center", "end")
 - `direction` (string): Direction of the grid (e.g., "row", "column")
 - `reverse` (bool): Whether to reverse the direction
+///
 
 /// admonition | Relationship
     type: info
@@ -280,21 +267,19 @@ List components are fundamental for displaying collections of related items, nav
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The content to display in the list (typically list items). |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for list styling:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `ordered` (bool): Whether to use ordered list (numbers) instead of unordered
 - `variant` (string): Style variant (e.g., "flush", "inline")
 - `size` (string): Size of the list (e.g., "sm", "lg")
 - `divider` (bool): Whether to show dividers between items
 - `horizontal` (bool): Whether to display items horizontally
+///
 
 /// admonition | Relationship
     type: info
@@ -323,20 +308,18 @@ List items are essential for creating organized content displays, navigation men
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The content to display in the list item. |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for list item styling:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `active` (bool): Whether the item is currently active/selected
 - `disabled` (bool): Whether the item is disabled
 - `variant` (string): Style variant (e.g., "primary", "secondary")
 - `action` (bool): Whether the item is an action item
+///
 
 /// admonition | Relationship
     type: info
@@ -365,8 +348,6 @@ Panels work well for displaying forms, detailed information sections, or any con
 ```
 ///
 
-### Parameters
-
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The content to display in the panel. |
@@ -374,14 +355,14 @@ Panels work well for displaying forms, detailed information sections, or any con
 | `id` | string | - | Unique identifier for the panel. |
 | `active` | bool | - | Whether the panel is active/visible by default. |
 
-#### Theme-Specific Parameters
-
-Different themes may support additional parameters for panel styling and behavior:
+/// details | Theme-Specific Parameters
+    type: tip
 
 - `variant` (string): Style variant (e.g., "primary", "secondary", "success")
 - `collapsible` (bool): Whether the panel can be collapsed
 - `flush` (bool): Whether to remove borders and rounded corners
 - `outline` (bool): Whether to use outline style
+///
 
 /// admonition | Relationship
     type: info
