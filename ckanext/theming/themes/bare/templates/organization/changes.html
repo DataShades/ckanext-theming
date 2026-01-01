@@ -7,8 +7,8 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Activity Stream"), h.url_for("activity.organization_activity", id=group_dict.name)) }}
-    {{ ui.nav_item(_('Changes'), href=h.url_for('activity.organization_changes', id=activity_diffs[0].activities[1].id)) }}
+    {{ ui.breadcrumb(_("Activity Stream"), href=h.url_for("activity.organization_activity", id=group_dict.name)) }}
+    {{ ui.breadcrumb(_('Changes'), href=h.url_for('activity.organization_changes', id=activity_diffs[0].activities[1].id)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

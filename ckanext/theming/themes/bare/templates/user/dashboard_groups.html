@@ -7,11 +7,11 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), h.url_for('dashboard.groups')) }}
+    {{ ui.breadcrumb(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), h.url_for('dashboard.groups')) }}
 {%- endblock %}
 
 {%- block page_action %}
-    {{ ui.page_action_item(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
+    {{ ui.page_action(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
 {%- endblock %}
 
 {%- block dashboard_content %}

@@ -2,7 +2,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Statistics'), href=h.url_for("stats.index")) }}
+    {{ ui.breadcrumb(_('Statistics'), href=h.url_for("stats.index")) }}
 {%- endblock %}
 
 {% block secondary_content %}

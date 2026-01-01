@@ -9,7 +9,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', org_type, 'breadcrumb') or _('Groups'), h.url_for('user.read_groups', id=user_dict.name)) }}
+    {{ ui.breadcrumb(h.humanize_entity_type('organization', org_type, 'breadcrumb') or _('Groups'), h.url_for('user.read_groups', id=user_dict.name)) }}
 {%- endblock %}
 
 {%- block page_action -%}

@@ -7,11 +7,11 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Add Member'), href=h.url_for(group_dict.type ~ '.member_new', id=group_dict.id)) }}
+    {{ ui.breadcrumb(_('Add Member'), href=h.url_for(group_dict.type ~ '.member_new', id=group_dict.id)) }}
 {%- endblock %}
 
 {%- block content_action -%}
-    {{ ui.content_action_item(_('Back to all members'), h.url_for(group_dict.type ~ ".manage_members", id=group_dict.name)) }}
+    {{ ui.content_action(_('Back to all members'), h.url_for(group_dict.type ~ ".manage_members", id=group_dict.name)) }}
 {%- endblock %}
 
 

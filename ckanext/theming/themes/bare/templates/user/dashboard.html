@@ -8,7 +8,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Dashboard'), h.url_for('dashboard.datasets')) }}
+    {{ ui.breadcrumb(_('Dashboard'), h.url_for('dashboard.datasets')) }}
 {%- endblock %}
 
 {%- block content_action %}

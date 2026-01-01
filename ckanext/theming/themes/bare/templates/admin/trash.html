@@ -9,7 +9,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Trash"), h.url_for("admin.trash")) }}
+    {{ ui.breadcrumb(_("Trash"), h.url_for("admin.trash")) }}
 {%- endblock %}
 
 

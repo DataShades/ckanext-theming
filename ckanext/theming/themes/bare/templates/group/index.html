@@ -7,14 +7,14 @@
 {% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), href=h.url_for(group_type ~ '.index')) }}
+    {{ ui.breadcrumb(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), href=h.url_for(group_type ~ '.index')) }}
 {%- endblock %}
 
 {%- block content_nav -%}
 {%- endblock %}
 
 {%- block page_action %}
-    {{ ui.page_action_item(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
+    {{ ui.page_action(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

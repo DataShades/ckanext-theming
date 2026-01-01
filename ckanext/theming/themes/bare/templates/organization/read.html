@@ -1,6 +1,6 @@
 {% extends "organization/_base.html" %}
 
-{%- set _layout = _layout | default("sidebar") -%}
+{%- set _layout = _layout | default("content_control") -%}
 
 {%- block primary_content_inner %}
     {%- with dataset_type=dataset_type, fields_grouped=fields_grouped, search_facets=search_facets, facet_titles=facet_titles, translated_fields=translated_fields, remove_field=remove_field, q=q, sort_by_selected=sort_by_selected, page=page, query_error=query_error, fields=fields -%}

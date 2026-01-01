@@ -13,7 +13,7 @@
 
     {% if group_dropdown %}
         {%- call ui.util.call(ui.form, method="POST") -%}
-            {%- call ui.util.call(ui.select_block, name="group_added", autocomplete=true) -%}
+            {%- call ui.util.call(ui.select_box, name="group_added", autocomplete=true) -%}
                 {% for option in group_dropdown %}
                     {{ ui.select_option(option[1], value=option[0]) }}
                 {% endfor %}

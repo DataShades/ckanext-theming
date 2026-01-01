@@ -11,13 +11,13 @@
 {% endblock %}
 
 {%- block breadcrumb_content %}
-    {{ ui.breadcrumb_item(_('Users'), href=h.url_for('user.index')) }}
-    {{ ui.breadcrumb_item(user_dict.display_name, href=h.url_for('user.read', id=user_dict.name)) if user_dict }}
+    {{ ui.breadcrumb(_('Users'), href=h.url_for('user.index')) }}
+    {{ ui.breadcrumb(user_dict.display_name, href=h.url_for('user.read', id=user_dict.name)) if user_dict }}
 {%- endblock %}
 
 {%- block content_action %}
     {% if user_dict %}
-        {{ ui.content_action_item(_('Manage'), href=h.url_for('user.edit', id=user_dict.name)) if h.check_access('user_update', user_dict) }}
+        {{ ui.content_action(_('Manage'), href=h.url_for('user.edit', id=user_dict.name)) if h.check_access('user_update', user_dict) }}
 
     {%- endif %}
 {%- endblock %}

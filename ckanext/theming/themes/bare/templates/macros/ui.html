@@ -7,7 +7,6 @@
 {% import "macros/ui/form.html" as _form with context %}
 {% import "macros/ui/handle.html" as _handle with context %}
 {% import "macros/ui/meta.html" as meta with context %}
-{% import "macros/ui/misc.html" as misc with context %}
 {% import "macros/ui/nav.html" as _nav with context %}
 {% import "macros/ui/search.html" as _search with context %}
 {% import "macros/ui/section.html" as _section with context %}
@@ -67,6 +66,7 @@
 {% set avatar = avatar | default(element.avatar) %}
 {% set badge = badge | default(element.badge) %}
 {% set button = button | default(element.button) %}
+{% set datetime = datetime | default(element.datetime) %}
 {% set divider = divider | default(element.divider) %}
 {% set heading = heading | default(element.heading) %}
 {% set icon = icon | default(element.icon) %}
@@ -75,6 +75,7 @@
 {% set tag = tag | default(element.tag) %}
 {% set text = text | default(element.text) %}
 {% set video = video | default(element.video) %}
+{% set breadcrumb_divider = breadcrumb_divider | default(element.breadcrumb_divider) %}
 
 {% set chart = chart | default(data.chart) %}
 {% set code = code | default(data.code) %}
@@ -103,31 +104,32 @@
 {% set radio = radio | default(_form.radio) %}
 {% set range_input = range_input | default(_form.range_input) %}
 {% set select = select | default(_form.select) %}
-{% set select_block = select_block | default(_form.select_block) %}
+{% set select_box = select_box | default(_form.select_box) %}
 {% set select_option = select_option | default(_form.select_option) %}
 {% set submit = submit | default(_form.submit) %}
 {% set textarea = textarea | default(_form.textarea) %}
 
-{% set account_block = account_block | default(meta.account_block) %}
-{% set footer_block = footer_block | default(meta.footer_block) %}
-{% set header_block = header_block | default(meta.header_block) %}
+{% set panel_handle = panel_handle | default(_handle.panel_handle) %}
+{% set modal_handle = modal_handle | default(_handle.modal_handle) %}
+{% set popover_handle = popover_handle | default(_handle.popover_handle) %}
+{% set modal_close_handle = modal_close_handle | default(_handle.modal_close_handle) %}
+{% set tab_handle = tab_handle | default(_handle.tab_handle) %}
+
+{% set account = account | default(meta.account) %}
+{% set footer = footer | default(meta.footer) %}
+{% set header = header | default(meta.header) %}
 {% set subtitle_item = subtitle_item | default(meta.subtitle_item) %}
 
-{% set datetime = datetime | default(misc.datetime) %}
-{% set pagination_info = pagination_info | default(misc.pagination_info) %}
-
 {% set account_nav_item = account_nav_item | default(_nav.account_nav_item) %}
-{% set breadcrumb_divider = breadcrumb_divider | default(_nav.breadcrumb_divider) %}
-{% set breadcrumb_item = breadcrumb_item | default(_nav.breadcrumb_item) %}
-{% set content_action_item = content_action_item | default(_nav.content_action_item) %}
+{% set breadcrumb = breadcrumb | default(_nav.breadcrumb) %}
+{% set content_action = content_action | default(_nav.content_action) %}
 {% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %}
 {% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %}
 {% set main_nav_item = main_nav_item | default(_nav.main_nav_item) %}
 {% set menu_item = menu_item | default(_nav.menu_item) %}
 {% set nav_item = nav_item | default(_nav.nav_item) %}
-{% set page_action_item = page_action_item | default(_nav.page_action_item) %}
+{% set page_action = page_action | default(_nav.page_action) %}
 {% set pagination = pagination | default(_nav.pagination) %}
-{% set tab_item = tab_item | default(_nav.tab_item) %}
 
 {% set search_active_filters = search_active_filters | default(_search.search_active_filters) %}
 {% set search_advanced_controls = search_advanced_controls | default(_search.search_advanced_controls) %}
@@ -136,8 +138,4 @@
 {% set search_results_header = search_results_header | default(_search.search_results_header) %}
 {% set search_sort_control = search_sort_control | default(_search.search_sort_control) %}
 {% set search_submit_button = search_submit_button | default(_search.search_submit_button) %}
-
-{% set panel_handle = panel_handle | default(_handle.panel_handle) %}
-{% set modal_handle = modal_handle | default(_handle.modal_handle) %}
-{% set popover_handle = popover_handle | default(_handle.popover_handle) %}
-{% set modal_close_handle = modal_close_handle | default(_handle.modal_close_handle) %}
+{% set search_pagination_info = search_pagination_info | default(_search.search_pagination_info) %}

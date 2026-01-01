@@ -1,5 +1,5 @@
 {% extends "organization/_edit_base.html" %}
-{%- set _layout = _layout | default("sidebar") -%}
+{%- set _layout = _layout | default("content_control") -%}
 
 {%- set dataset_type = h.default_package_type() %}
 
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {%- block page_action %}
-    {{ ui.page_action_item(_('Add Dataset'), href=h.url_for('dataset.new', group=group_dict.id)) }}
+    {{ ui.page_action(_('Add Dataset'), href=h.url_for('dataset.new', group=group_dict.id)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

@@ -86,7 +86,6 @@ this.parentNode.insertBefore(tpl, this);
     <div{{ ui.util.attrs(kwargs) }}>{{ content }}</div>
 {%- endmacro %}
 
-
 {%- macro form_end() -%}
     {%- do kwargs -%}
     </form>
@@ -229,7 +228,7 @@ this.parentNode.insertBefore(tpl, this);
 
 {%- macro select(content, selected, options) -%}
     {%- set selected_values = selected if selected is not string and selected is iterable else [selected or ""] %}
-    {%- call ui.util.call(ui.select_block, content, selected=selected, options=options or [], **kwargs) -%}
+    {%- call ui.util.call(ui.select_box, content, selected=selected, options=options or [], **kwargs) -%}
         {%- for option in (options or []) %}
             {%- if option is string %}
                 {% set value, text = option, option %}
@@ -242,7 +241,7 @@ this.parentNode.insertBefore(tpl, this);
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro select_block(content, nested_content, name, id, label, multiple, required, autocomplete, errors=[]) -%}
+{%- macro select_box(content, nested_content, name, id, label, multiple, required, autocomplete, errors=[]) -%}
     {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
     {%- set help_id = ui.util.id() if nested_content -%}
     <div>

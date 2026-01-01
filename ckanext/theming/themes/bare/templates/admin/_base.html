@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Admin'), h.url_for('admin.index')) }}
+    {{ ui.breadcrumb(_('Admin'), h.url_for('admin.index')) }}
 {%- endblock %}
 
 

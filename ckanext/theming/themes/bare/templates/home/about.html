@@ -8,7 +8,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item("About", h.url_for("home.about")) }}
+    {{ ui.breadcrumb("About", h.url_for("home.about")) }}
 {%- endblock %}
 
 

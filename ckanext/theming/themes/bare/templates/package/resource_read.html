@@ -7,14 +7,14 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ "_resource.read", id=pkg_dict.id, resource_id=resource.id)) }}
+    {{ ui.breadcrumb(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ "_resource.read", id=pkg_dict.id, resource_id=resource.id)) }}
 {%- endblock %}
 
 
 {%- block content_action -%}
     {% if h.check_access('package_update', {'id':pkg_dict.id }) %}
-        {{ ui.content_action_item(_('Edit resource'), h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id)) }}
-        {{ ui.content_action_item(_('Views'), h.url_for(pkg_dict.type ~ '_resource.views', id=pkg.name, resource_id=resource.id)) }}
+        {{ ui.content_action(_('Edit resource'), h.url_for(pkg_dict.type ~ '_resource.edit', id=pkg.name, resource_id=resource.id)) }}
+        {{ ui.content_action(_('Views'), h.url_for(pkg_dict.type ~ '_resource.views', id=pkg.name, resource_id=resource.id)) }}
     {% endif %}
 {%- endblock %}
 
@@ -112,9 +112,9 @@
 
     {%- block resource_view -%}
         {% block resource_view_nav %}
-            {%- call ui.util.call(ui.content_nav_wrapper) -%}
+            {%- call ui.util.call(ui.tab_wrapper) -%}
                 {%- for view in resource_views -%}
-                    {{ ui.content_nav_item(view.title, h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.id, resource_id=resource.id, view_id=view.id), active=view == current_resource_view) }}
+                    {{ ui.tab_handle(view.title, href=h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.id, resource_id=resource.id, view_id=view.id), active=view == current_resource_view) }}
                 {%- endfor %}
             {%- endcall %}
         {% endblock %}

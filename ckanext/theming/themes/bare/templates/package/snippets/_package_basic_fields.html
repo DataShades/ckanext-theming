@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block package_basic_fields_license %}
-    {%- call ui.util.call(ui.select_block, name="license_id", label=_("License"), errors=errors.license_id, options=h.license_options(existing_license_id)) -%}
+    {%- call ui.util.call(ui.select_box, name="license_id", label=_("License"), errors=errors.license_id, options=h.license_options(existing_license_id)) -%}
         {%- for value, text in h.license_options(existing_license_id) -%}
             {{ ui.select_option(text, value=value, selected=value == data.license_id) }}
         {%- endfor %}
@@ -35,7 +35,7 @@
     {% if organizations_available and h.can_update_owner_org(data, organizations_available) %}
         {% set existing_org = data.owner_org or data.group_id %}
 
-        {%- call ui.util.call(ui.select_block, name="owner_org", label=h.humanize_entity_type('organization', default_group_type, 'default label') or _('Organization'), errors=errors.owner_org) -%}
+        {%- call ui.util.call(ui.select_box, name="owner_org", label=h.humanize_entity_type('organization', default_group_type, 'default label') or _('Organization'), errors=errors.owner_org) -%}
 
             {%- if h.check_config_permission('create_unowned_dataset') -%}
                 {{ ui.select_option(h.humanize_entity_type('organization', default_group_type, 'no label') or _('No Organization'), value="", selected=not data.owner_org and data.id) }}

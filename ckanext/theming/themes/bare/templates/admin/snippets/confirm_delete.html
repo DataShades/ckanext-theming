@@ -2,8 +2,8 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Trash"), h.url_for("admin.trash")) }}
-    {{ ui.breadcrumb_item(_("Confirm Delete"), h.url_for("admin.trash", name=ent_type)) }}
+    {{ ui.breadcrumb(_("Trash"), h.url_for("admin.trash")) }}
+    {{ ui.breadcrumb(_("Confirm Delete"), h.url_for("admin.trash", name=ent_type)) }}
 {%- endblock %}
 
 

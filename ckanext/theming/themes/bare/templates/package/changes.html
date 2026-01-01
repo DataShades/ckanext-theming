@@ -8,8 +8,8 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) }}
-    {{ ui.breadcrumb_item(_("Changes"), h.url_for("activity.package_changes", id=activity_diffs[0].activities[1].id)) }}
+    {{ ui.breadcrumb(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) }}
+    {{ ui.breadcrumb(_("Changes"), h.url_for("activity.package_changes", id=activity_diffs[0].activities[1].id)) }}
 {%- endblock %}
 
 

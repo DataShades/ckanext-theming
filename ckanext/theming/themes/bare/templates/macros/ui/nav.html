@@ -1,12 +1,7 @@
-{%- macro breadcrumb_item(content, href, is_first) -%}
+{%- macro breadcrumb(content, href, is_first) -%}
     {{ ui.breadcrumb_divider() if not is_first }}
     {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
-
-{%- macro breadcrumb_divider(content="/") -%}
-    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">{{ content }}</span>
-{%- endmacro %}
-
 
 {%- macro nav_item(content, href, active) -%}
     {%- if active %}
@@ -20,23 +15,11 @@
 
 {%- macro account_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 
-{%- macro content_nav_item(content, href, active) -%}{{ ui.tab_item(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_item(content, href, active) -%}{{ ui.tab_handle(content, href, active, **kwargs) }}{%- endmacro %}
 
-{%- macro page_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
+{%- macro page_action(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
 
-{%- macro content_action_item(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
-
-
-
-{%- macro tab_item(content, href, active) -%}
-    {%- if active -%}
-        {%- do kwargs.setdefault("aria", {}).setdefault("selected", "true") -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
-    {%- endif %}
-    {{ ui.link(content, href, **kwargs) }}
-{%- endmacro %}
-
-
+{%- macro content_action(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
 
 {%- macro menu_item(content, href, active) -%}
     {%- if active %}
@@ -86,20 +69,8 @@
     {%- endif %}
 {%- endmacro %}
 
-
 {%- macro dropdown_item(content, href="#") -%}
     <li role="none">
         {{ ui.link(content, href=href, role="menuitem", **kwargs) }}
     </li>
-{%- endmacro %}
-
-{%- macro sidebar(content) -%}
-    <aside {{ ui.util.attrs(kwargs) }} class="sidebar">{{ content }}</aside>
-{%- endmacro %}
-
-{%- macro navbar(brand, items) -%}
-    <nav {{ ui.util.attrs(kwargs) }} class="navbar">
-        <div class="navbar-brand">{{ brand }}</div>
-        <div class="navbar-nav">{{ items }}</div>
-    </nav>
 {%- endmacro %}

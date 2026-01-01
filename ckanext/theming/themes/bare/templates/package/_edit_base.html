@@ -1,7 +1,7 @@
 {% extends "package/_base.html" %}
 
 {%- block content_action %}
-    {{ ui.content_action_item(_("View"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) if pkg_dict }}
+    {{ ui.content_action(_("View"), h.url_for(pkg_dict.type ~ ".read", id=pkg_dict.name)) if pkg_dict }}
 {%- endblock %}
 
 {%- block content_nav %}

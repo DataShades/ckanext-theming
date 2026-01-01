@@ -2,7 +2,7 @@
 {%- set _layout = _layout|default("sidebar") -%}
 
 {%- block page_action %}
-    {{ ui.page_action_item(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}
+    {{ ui.page_action(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}
 {%- endblock %}
 
 

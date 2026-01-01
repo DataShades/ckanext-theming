@@ -2,7 +2,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Sysadmins"), h.url_for("admin.index")) }}
+    {{ ui.breadcrumb(_("Sysadmins"), h.url_for("admin.index")) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

@@ -1,4 +1,3 @@
-
 {%- macro panel_handle(content, id) -%}
     {{ ui.link(content, href="#" ~ id, **kwargs) }}
 {%- endmacro %}
@@ -14,8 +13,15 @@
     {{ ui.button(content, **kwargs) }}
 {%- endmacro %}
 
-
 {%- macro modal_close_handle(content, id) -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("onclick", "ckan.sandbox().ui.getModal('{id}').close()".format(id=id)) -%}
     {{ ui.button(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro tab_handle(content, href, active) -%}
+    {%- if active -%}
+        {%- do kwargs.setdefault("aria", {}).setdefault("selected", "true") -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
+    {%- endif %}
+    {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}

@@ -7,6 +7,14 @@
     {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
 {%- endmacro %}
 
+{%- macro badge(content) -%}
+    <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
+{%- endmacro %}
+
+{%- macro breadcrumb_divider(content="/") -%}
+    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">{{ content }}</span>
+{%- endmacro %}
+
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
         <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn--{{ style }}">{{ content }}</a>
@@ -15,8 +23,10 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro badge(content) -%}
-    <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
+{%- macro datetime(dt, date_format, with_hours, empty="") -%}
+    <time {{ ui.util.attrs(kwargs) }} datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
+        {{- h.render_datetime(dt, date_format=date_format, with_hours=with_hours) or empty -}}
+    </time>
 {%- endmacro %}
 
 {%- macro divider(content) -%}

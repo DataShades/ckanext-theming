@@ -2,8 +2,8 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Config"), h.url_for("admin.config")) }}
-    {{ ui.breadcrumb_item(_("Confirm Reset"), h.url_for("admin.reset_config")) }}
+    {{ ui.breadcrumb(_("Config"), h.url_for("admin.config")) }}
+    {{ ui.breadcrumb(_("Confirm Reset"), h.url_for("admin.reset_config")) }}
 {%- endblock %}
 
 

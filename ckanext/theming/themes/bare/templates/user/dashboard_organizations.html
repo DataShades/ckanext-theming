@@ -7,11 +7,11 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), h.url_for('dashboard.organizations')) }}
+    {{ ui.breadcrumb(h.humanize_entity_type('organization', org_type, 'my label') or _('My Organizations'), h.url_for('dashboard.organizations')) }}
 {%- endblock %}
 
 {%- block page_action %}
-    {{ ui.page_action_item(h.humanize_entity_type('organization', org_type, 'add link') or _('Add Organization'), href=h.url_for(org_type ~ '.new')) if h.check_access('organization_create') }}
+    {{ ui.page_action(h.humanize_entity_type('organization', org_type, 'add link') or _('Add Organization'), href=h.url_for(org_type ~ '.new')) if h.check_access('organization_create') }}
 {%- endblock %}
 
 {%- block dashboard_content %}

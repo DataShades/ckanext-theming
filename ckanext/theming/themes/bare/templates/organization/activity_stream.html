@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Activity Stream"), h.url_for("activity.organization_activity", id=group_dict.name)) }}
+    {{ ui.breadcrumb(_("Activity Stream"), h.url_for("activity.organization_activity", id=group_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

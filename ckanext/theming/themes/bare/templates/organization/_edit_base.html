@@ -1,7 +1,7 @@
 {%- extends "organization/_base.html" -%}
 
 {% block content_action %}
-    {{ ui.content_action_item(_("View"), h.url_for(group_dict.type+'.read', id=group_dict.name)) if group_dict }}
+    {{ ui.content_action(_("View"), h.url_for(group_dict.type+'.read', id=group_dict.name)) if group_dict }}
 {% endblock %}
 
 {% block content_nav %}

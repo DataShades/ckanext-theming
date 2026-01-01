@@ -7,7 +7,7 @@
 
 {% block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Add New Resource'), href=h.url_for(pkg_dict.type ~ "_resource.new", id=pkg_dict.id)) }}
+    {{ ui.breadcrumb(_('Add New Resource'), href=h.url_for(pkg_dict.type ~ "_resource.new", id=pkg_dict.id)) }}
 {% endblock %}
 
 {% block primary_content_inner %}

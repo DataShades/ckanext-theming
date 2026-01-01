@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Create"), h.url_for(dataset_type ~ ".new")) }}
+    {{ ui.breadcrumb(_("Create"), h.url_for(dataset_type ~ ".new")) }}
 {%- endblock %}
 
 

@@ -1,7 +1,7 @@
 {% extends "user/_base.html" %}
 
 {%- block page_action -%}
-    {{ ui.page_action_item(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}
+    {{ ui.page_action(_('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

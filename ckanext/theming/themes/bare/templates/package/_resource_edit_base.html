@@ -8,7 +8,7 @@
 {%- block breadcrumb_content %}
   {{ super() }}
 
-  {{ ui.breadcrumb_item(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id)) if resource }}
+  {{ ui.breadcrumb(h.resource_display_name(resource)|truncate(30), h.url_for(pkg_dict.type ~ '_resource.read', id=pkg_dict.name, resource_id=resource.id)) if resource }}
 
 {%- endblock %}
 

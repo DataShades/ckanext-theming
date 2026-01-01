@@ -6,7 +6,7 @@
 {% endblock %}
 
 {%- block content_action -%}
-    {{ ui.content_action_item(_('Back to all collaborators'), h.url_for(pkg_dict.type ~ ".collaborators_read", id=pkg_dict.name)) }}
+    {{ ui.content_action(_('Back to all collaborators'), h.url_for(pkg_dict.type ~ ".collaborators_read", id=pkg_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner -%}

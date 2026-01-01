@@ -1,4 +1,4 @@
-{%- macro header_block(content, title, subtitle, logo) -%}
+{%- macro header(content, title, subtitle, logo) -%}
     <header {{ ui.util.attrs(kwargs) }} id="header">
         {%- call ui.util.call(ui.container) -%}
             {%- if logo %}
@@ -19,13 +19,13 @@
     </header>
 {%- endmacro %}
 
-{%- macro footer_block(content) -%}
+{%- macro footer(content) -%}
     <footer {{ ui.util.attrs(kwargs) }} id="footer">
         {{ ui.container(content) }}
     </footer>
 {%- endmacro %}
 
-{%- macro account_block(content, title, subtitle, logo) -%}
+{%- macro account(content, title, subtitle, logo) -%}
     <header {{ ui.util.attrs(kwargs) }} id="account">
         {{ ui.container(content) }}
     </header>

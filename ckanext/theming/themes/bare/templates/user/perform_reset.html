@@ -7,7 +7,7 @@
 
 {% block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Password Reset'), href=h.url_for("user.request_reset")) }}
+    {{ ui.breadcrumb(_('Password Reset'), href=h.url_for("user.request_reset")) }}
 {% endblock %}
 
 

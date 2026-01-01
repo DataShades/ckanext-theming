@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('Login'), href=h.url_for("user.login")) }}
+    {{ ui.breadcrumb(_('Login'), href=h.url_for("user.login")) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

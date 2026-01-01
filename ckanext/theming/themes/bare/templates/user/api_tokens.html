@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_('API Tokens'), h.url_for('user.api_tokens', id=user_dict.name)) }}
+    {{ ui.breadcrumb(_('API Tokens'), h.url_for('user.api_tokens', id=user_dict.name)) }}
 {%- endblock %}
 
 

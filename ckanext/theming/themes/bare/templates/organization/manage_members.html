@@ -6,8 +6,8 @@
 {% endblock %}
 
 {%- block page_action %}
-    {{ ui.page_action_item(_('Add Member'), href=h.url_for(group_type ~ '.member_new', id=group_dict.id)) }}
-    {{ ui.page_action_item(_('CSV'), href=h.url_for(group_type ~ '.member_dump', id=group_dict.id)) }}
+    {{ ui.page_action(_('Add Member'), href=h.url_for(group_type ~ '.member_new', id=group_dict.id)) }}
+    {{ ui.page_action(_('CSV'), href=h.url_for(group_type ~ '.member_dump', id=group_dict.id)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

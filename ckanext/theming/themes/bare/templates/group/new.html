@@ -9,7 +9,7 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb_item(label, h.url_for(group_type~'.new')) }}
+    {{ ui.breadcrumb(label, h.url_for(group_type~'.new')) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

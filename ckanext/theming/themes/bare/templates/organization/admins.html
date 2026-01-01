@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Administrators"), h.url_for(group_type ~ '.admins', id=group_dict.name)) }}
+    {{ ui.breadcrumb(_("Administrators"), h.url_for(group_type ~ '.admins', id=group_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

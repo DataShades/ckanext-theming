@@ -7,7 +7,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Followers"), h.url_for('user.followers', id=user_dict.name)) }}
+    {{ ui.breadcrumb(_("Followers"), h.url_for('user.followers', id=user_dict.name)) }}
 {%- endblock %}
 
 {%- block primary_content_inner %}

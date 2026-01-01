@@ -1,5 +1,5 @@
 {%- block header_account %}
-    {%- call ui.util.call(ui.account_block) -%}
+    {%- call ui.util.call(ui.account) -%}
         {%- call ui.util.call(ui.account_nav_wrapper) -%}
             {%- if current_user.is_authenticated %}
                 {%- block header_account_logged -%}
@@ -39,7 +39,7 @@
 {%- endblock %}
 
 {%- block header %}
-    {%- call ui.util.call(ui.header_block, g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
+    {%- call ui.util.call(ui.header, g.site_title, subtitle=g.site_description, logo=g.site_logo) %}
         {%- call ui.util.call(ui.main_nav_wrapper) %}
             {% set items = [
                         ["Datasets", "dataset.search"],

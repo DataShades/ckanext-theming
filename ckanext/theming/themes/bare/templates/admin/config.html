@@ -2,7 +2,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb_item(_("Config"), h.url_for("admin.config")) }}
+    {{ ui.breadcrumb(_("Config"), h.url_for("admin.config")) }}
 {%- endblock %}
 
 
