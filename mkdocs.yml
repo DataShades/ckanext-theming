@@ -85,15 +85,18 @@ theme:
 nav:
   - index.md
   - theming-parties.md
-  # - Component library:
-  #     - library/component.md
-  #     - library/container.md
-  #     - library/data.md
-  #     - library/element.md
-  #     - library/feedback.md
-  #     - library/form.md
-  #     - library/meta.md
-  #     - library/misc.md
-  #     - library/nav.md
+  - Component library:
+      - library/wrappers.md
+      - library/content.md
+      - library/containers.md
+      - library/sections.md
+      - library/feedback.md
+      - library/elements.md
+      - library/data.md
+      - library/form.md
+      - library/handles.md
+      - library/meta.md
+      - library/navigation.md
+      - library/search.md
   - theme.md
   - cli.md
