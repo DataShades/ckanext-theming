@@ -54,13 +54,24 @@ based on their importance and type.
 
 ## Confirm Modal
 
-The `confirm_modal` component creates confirmation dialog modals that require user acknowledgment before proceeding with potentially important or destructive actions. These modals are essential for preventing accidental data loss or unintended operations by requiring explicit user confirmation.
+The [`confirm_modal`][confirm-modal] component creates confirmation dialog modals that require
+user acknowledgment before proceeding with potentially important or destructive
+actions. These modals are essential for preventing accidental data loss or
+unintended operations by requiring explicit user confirmation.
 
-Confirmation modals typically include clear messaging about the action to be confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and sometimes additional context about the consequences of the action. The component works with `modal_handle` components to trigger the confirmation dialog when needed.
+Confirmation modals typically include clear messaging about the action to be
+confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and
+sometimes additional context about the consequences of the action. The
+component works with [`modal_handle`][modal-handle] components to trigger the
+confirmation dialog when needed.
 
-The confirm modal works by submitting a form when the user confirms the action. In simple cases, it submits an empty form via POST, but you can specify the ID of an existing form when building the confirm_modal - in this case, that specific form will be submitted upon confirmation. This allows for integration with existing form workflows.
+The confirm modal works by submitting a form when the user confirms the
+action. In simple cases, it submits an empty form via POST, but you can specify
+the ID of an existing form when building the confirm_modal - in this case, that
+specific form will be submitted upon confirmation. This allows for integration
+with existing form workflows.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -68,16 +79,35 @@ The confirm modal works by submitting a form when the user confirms the action. 
 {% call ui.util.call(ui.confirm_modal, title="Confirm Action", id="confirm-action") %}
     <p>Are you sure you want to perform this action?</p>
 {% endcall %}
+{{ ui.modal_handle("Open", id="confirm-action") }}
 
-<!-- Confirm modal with custom form ID -->
-{% call ui.util.call(ui.confirm_modal, title="Confirm Delete", id="confirm-delete", form_id="delete-form") %}
-    <p>Are you sure you want to delete this item? This action cannot be undone.</p>
-{% endcall %}
+<!-- Confirm modal with custom form -->
+{{ ui.confirm_modal(
+    "Are you sure you want to delete this item? This action cannot be undone.",
+    title="Confirm Delete",
+    id="confirm-delete",
+    form_id="delete-form"
+) }}
+
+{{ ui.form(
+    ui.input(name="id", value="123"),
+    method="POST",
+    action="/dataset/delete",
+    attrs={"id": "delete-form"}
+) }}
+
+{{ ui.modal_handle("Open", id="confirm-delete") }}
 
 <!-- Confirm modal with custom buttons -->
-{% call ui.util.call(ui.confirm_modal, title="Confirm Operation", id="confirm-operation", confirm_label="Yes, Proceed", cancel_label="No, Cancel") %}
-    <p>Please confirm that you want to proceed with this operation.</p>
-{% endcall %}
+{{ ui.confirm_modal(
+    "Please confirm that you want to proceed with this operation.",
+    title="Confirm Operation",
+    id="confirm-operation",
+    confirm_label="Yes, Proceed",
+    cancel_label="No, Cancel"
+) %}
+
+{{ ui.modal_handle("Open", id="confirm-operation") }}
 ```
 ///
 
@@ -94,8 +124,7 @@ The confirm modal works by submitting a form when the user confirms the action. 
     type: tip
 
 - `size` (string): Size of the modal (e.g., "sm", "md", "lg")
-- `variant` (string): Style variant (e.g., "primary", "danger")
-- `centered` (bool): Whether to center the modal vertically
+- `style` (string): Style variant (e.g., "primary", "danger")
 - `backdrop` (string): Backdrop behavior (e.g., "static", "true")
 - `animation` (bool): Whether to use open/close animations
 ///
@@ -103,7 +132,11 @@ The confirm modal works by submitting a form when the user confirms the action. 
 /// admonition | Relationship
     type: info
 
-The `confirm_modal` component works with `modal_handle` components to create interactive confirmation experiences. While the modal provides the dialog structure, the handle provides the trigger mechanism.
+The [`confirm_modal`][confirm-modal] component works with
+[`modal_handle`][modal-handle] components to create interactive confirmation
+experiences. While the modal provides the dialog structure, the handle provides
+the trigger mechanism.
+
 ///
 
 ## Modal
@@ -125,19 +158,26 @@ components to provide complete modal interaction experiences.
 
 ```jinja2
 <!-- Basic modal -->
-{% call ui.util.call(ui.modal, title="Modal Title", id="my-modal") %}
+{% call ui.util.call(ui.modal, title="Modal Title", id="my-modal", footer=ui.modal_close_handle("Close", id="my-modal")) %}
     Modal content goes here
 {% endcall %}
+{{ ui.modal_handle("Open", id="my-modal") }}
 
-<!-- Modal with footer -->
-{% call ui.util.call(ui.modal, title="Modal with Actions", id="modal-with-footer", footer=(ui.button("Close") ~ ui.button("Save", style="primary"))) %}
+<!-- Modal with multiple buttons -->
+{% set close = ui.modal_close_handle("Close", id="modal-with-footer") %}
+{% set save = ui.button("Save") %}
+
+{% call ui.util.call(ui.modal, title="Modal with Actions", id="modal-with-footer", footer=close ~ save) %}
     Content with footer
 {% endcall %}
+{{ ui.modal_handle("Open", id="modal-with-footer") }}
 
 <!-- Dismissible modal -->
-{% call ui.util.call(ui.modal, title="Dismissible Modal", id="dismissible-modal", dismissible=True) %}
+{% call ui.util.call(ui.modal, title="Dismissible Modal", id="dismissible-modal", dismissible=true) %}
     Dismissible content
 {% endcall %}
+{{ ui.modal_handle("Open", id="dismissible-modal") }}
+
 ```
 ///
 
@@ -148,7 +188,6 @@ components to provide complete modal interaction experiences.
 | `id`            | string | -       | Unique identifier for the modal.                                           |
 | `footer`        | string | -       | Content for the modal footer (typically action buttons).                   |
 | `dismissible`   | bool   | -       | Whether the modal can be dismissed by clicking outside or pressing escape. |
-| `dismiss_label` | string | -       | Label for the dismiss/close button.                                        |
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -180,15 +219,43 @@ actions, or supplementary information that doesn't require full user focus.
 Popover components handle positioning relative to their trigger elements,
 ensuring they remain visible and accessible. They often appear on hover or
 click and disappear when the user moves away or clicks elsewhere. The component
-works with [`popover_handle`][popover-handle] components to provide the trigger mechanism for
-showing and hiding popovers.
+works with [`popover_handle`][popover-handle] components to provide the trigger
+mechanism for showing and hiding popovers.
+
+/// admonition | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic popover -->
+{% call ui.util.call(ui.popover, title="Help Information", id="help-popover") %}
+    <p>This is helpful information about the current element.</p>
+{% endcall %}
+{{ ui.popover_handle("Show", id="help-popover") }}
+```
+///
+
+| Parameter | Type   | Default | Description                                |
+|-----------|--------|---------|--------------------------------------------|
+| `content` | string | -       | The content to display in the popover.     |
+| `title`   | string | -       | The title displayed in the popover header. |
+| `id`      | string | -       | Unique identifier for the popover.         |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `placement` (string): Position relative to trigger element (e.g., "top", "bottom", "left", "right")
+- `trigger` (string): How to trigger the popover (e.g., "click", "hover")
+- `delay` (int): Delay in milliseconds before showing/hiding
+- `style` (string): Style variant (e.g., "primary", "secondary")
+- `arrow` (bool): Whether to show an arrow pointing to the trigger element
+///
 
 /// admonition | Relationship
     type: info
 
-The [`popover`][] component works with [`popover_handle`][popover-handle] components to create
-contextual information displays. While the popover provides the content
-container, the handle provides the trigger mechanism.
+The [`popover`][] component works with [`popover_handle`][popover-handle]
+components to create contextual information displays. While the popover
+provides the content container, the handle provides the trigger mechanism.
 
 ///
 
@@ -204,6 +271,32 @@ Progress components typically show both visual progress (as a filled bar) and
 numerical progress (as percentages or counts). They help prevent user
 frustration by confirming that operations are progressing and provide
 reassurance that the system is still responsive during longer operations.
+
+/// admonition | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic progress indicator -->
+{{ ui.progress(value=50, max=100) }}
+
+<!-- Progress with content -->
+{{ ui.progress("50%", value=50, max=100) }}
+```
+///
+
+| Parameter | Type   | Default | Description                                                                      |
+|-----------|--------|---------|----------------------------------------------------------------------------------|
+| `value`   | int    | 0       | Current progress value.                                                          |
+| `max`     | int    | 100     | Maximum progress value.                                                          |
+| `content` | string | -       | Content to display inside the progress bar. |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `style` (string): Style variant (e.g., "primary", "success", "warning")
+- `striped` (bool): Whether to use striped styling
+- `animated` (bool): Whether to animate the progress bar
+///
 
 ## Spinner
 
@@ -226,15 +319,12 @@ confidence during operations that might otherwise appear to hang or freeze.
 
 <!-- Spinner with size -->
 {{ ui.spinner(size="lg") }}
-
-<!-- Spinner with attributes -->
-{{ ui.spinner(attrs={"class": "loading-spinner"}) }}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `size` | string | "md" | Size of the spinner (e.g., "sm", "md", "lg"). |
+| Parameter | Type   | Default | Description                                   |
+|-----------|--------|---------|-----------------------------------------------|
+| `size`    | string | "md"    | Size of the spinner (e.g., "sm", "md", "lg"). |
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -242,17 +332,16 @@ confidence during operations that might otherwise appear to hang or freeze.
 - `variant` (string): Style variant (e.g., "border", "grow", "dots")
 - `color` (string): Color of the spinner
 - `animation` (string): Animation type (e.g., "spin", "pulse", "bounce")
-- `full_screen` (bool): Whether to display as full-screen overlay
 - `overlay` (bool): Whether to show as overlay with backdrop
 ///
 
 ## Toast
 
-The [`toast`][] component displays toast notification messages that appear briefly
-to provide feedback about operations or system events. Toast notifications are
-less intrusive than alerts and typically disappear automatically after a short
-period, making them ideal for non-critical information that doesn't require
-user action.
+The [`toast`][] component displays toast notification messages that appear
+briefly to provide feedback about operations or system events. Toast
+notifications are less intrusive than alerts and typically disappear
+automatically after a short period, making them ideal for non-critical
+information that doesn't require user action.
 
 Toast components are often used for confirming successful operations, providing
 status updates, or alerting users to events that don't require immediate
@@ -260,11 +349,46 @@ attention. They typically appear in a corner of the screen and can be dismissed
 manually or disappear automatically, ensuring they don't interfere with ongoing
 user tasks.
 
+/// admonition | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic toast notification -->
+{{ ui.toast("Operation completed successfully") }}
+
+<!-- Toast with attributes -->
+{{ ui.toast("Item saved", style="secondary") }}
+
+<!-- Dismissible toast -->
+{{ ui.toast("Informational message", dismissible=True) }}
+```
+///
+
+| Parameter     | Type   | Default | Description                                                              |
+|---------------|--------|---------|--------------------------------------------------------------------------|
+| `content`     | string | -       | The message content to display in the toast.                             |
+| `dismissible` | bool   | -       | Whether the toast can be dismissed by the user.                          |
+| `style`       | string | -       | Visual style of the toast (e.g., "success", "warning", "error", "info"). |
+| `duration`    | int    | -       | Duration in milliseconds before auto-dismissal.                          |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `position` (string): Position on screen (e.g., "top-right", "bottom-left")
+- `animation` (bool): Whether to use show/hide animations
+///
+
 ## Tooltip
 
-The [`tooltip`][] component displays tooltips that provide additional information about elements when users hover over or focus on them. Tooltips are essential for providing contextual help, explaining abbreviations, or offering brief descriptions without cluttering the main interface.
+The [`tooltip`][] component displays tooltips that provide additional
+information about elements when users hover over or focus on them. Tooltips are
+essential for providing contextual help, explaining abbreviations, or offering
+brief descriptions without cluttering the main interface.
 
-Tooltip components handle positioning to ensure they remain visible and readable, often appearing above, below, or to the side of the target element. They provide a non-intrusive way to offer additional information that enhances user understanding without requiring dedicated interface space.
+Tooltip components handle positioning to ensure they remain visible and
+readable, often appearing above, below, or to the side of the target
+element. They provide a non-intrusive way to offer additional information that
+enhances user understanding without requiring dedicated interface space.
 
 /// admonition | Usage Example
     type: example

@@ -19,7 +19,7 @@
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro modal(content, title, footer, dismissible, dismiss_label, id) -%}
+{%- macro modal(content, title, footer, dismissible, id) -%}
     <dialog {{ ui.util.attrs(kwargs) }} id="{{ id }}" closedby="{{ 'any' if dismissible else 'closerequest' }}">
         {%- if title %}
             {{ ui.heading(title, level=2) }}
@@ -56,7 +56,7 @@
     <span {{ ui.util.attrs(kwargs) }} class="spinner spinner-{{ size }}"></span>
 {%- endmacro %}
 
-{%- macro toast(message, style) -%}
+{%- macro toast(message, style, dismissible, duration) -%}
     <div {{ ui.util.attrs(kwargs) }}>
         {{ message }}
     </div>
