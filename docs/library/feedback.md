@@ -54,26 +54,56 @@ based on their importance and type.
 
 ## Confirm Modal
 
-The [`confirm_modal`][confirm-modal] component creates confirmation dialog
-modals that require user acknowledgment before proceeding with potentially
-important or destructive actions. These modals are essential for preventing
-accidental data loss or unintended operations by requiring explicit user
-confirmation.
+The `confirm_modal` component creates confirmation dialog modals that require user acknowledgment before proceeding with potentially important or destructive actions. These modals are essential for preventing accidental data loss or unintended operations by requiring explicit user confirmation.
 
-Confirmation modals typically include clear messaging about the action to be
-confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and
-sometimes additional context about the consequences of the action. The
-component works with [`modal_handle`][modal-handle] components to trigger the confirmation
-dialog when needed.
+Confirmation modals typically include clear messaging about the action to be confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and sometimes additional context about the consequences of the action. The component works with `modal_handle` components to trigger the confirmation dialog when needed.
+
+The confirm modal works by submitting a form when the user confirms the action. In simple cases, it submits an empty form via POST, but you can specify the ID of an existing form when building the confirm_modal - in this case, that specific form will be submitted upon confirmation. This allows for integration with existing form workflows.
+
+/// details | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic confirm modal -->
+{% call ui.util.call(ui.confirm_modal, title="Confirm Action", id="confirm-action") %}
+    <p>Are you sure you want to perform this action?</p>
+{% endcall %}
+
+<!-- Confirm modal with custom form ID -->
+{% call ui.util.call(ui.confirm_modal, title="Confirm Delete", id="confirm-delete", form_id="delete-form") %}
+    <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+{% endcall %}
+
+<!-- Confirm modal with custom buttons -->
+{% call ui.util.call(ui.confirm_modal, title="Confirm Operation", id="confirm-operation", confirm_label="Yes, Proceed", cancel_label="No, Cancel") %}
+    <p>Please confirm that you want to proceed with this operation.</p>
+{% endcall %}
+```
+///
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `content` | string | - | The main content to display in the confirmation modal. |
+| `title` | string | - | The title displayed in the modal header. |
+| `id` | string | - | Unique identifier for the modal. |
+| `form_id` | string | - | ID of an existing form to submit when confirmed (instead of submitting an empty form). |
+| `confirm_label` | string | "Confirm" | Label for the confirm button. |
+| `cancel_label` | string | "Cancel" | Label for the cancel button. |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `size` (string): Size of the modal (e.g., "sm", "md", "lg")
+- `variant` (string): Style variant (e.g., "primary", "danger")
+- `centered` (bool): Whether to center the modal vertically
+- `backdrop` (string): Backdrop behavior (e.g., "static", "true")
+- `animation` (bool): Whether to use open/close animations
+///
 
 /// admonition | Relationship
     type: info
 
-The [`confirm_modal`][confirm-modal] component works with
-[`modal_handle`][modal-handle] components to create interactive confirmation
-experiences. While the modal provides the dialog structure, the handle provides
-the trigger mechanism.
-
+The `confirm_modal` component works with `modal_handle` components to create interactive confirmation experiences. While the modal provides the dialog structure, the handle provides the trigger mechanism.
 ///
 
 ## Modal
