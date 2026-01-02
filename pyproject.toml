@@ -32,8 +32,8 @@ theming = "ckanext.theming.plugin:ThemingPlugin"
 
 [project.optional-dependencies]
 test = ["pytest-ckan", "pytest-benchmark", "pytest-pretty"]
-docs = ["mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]"]
-dev = ["pytest-ckan", "pytest-benchmark", "pytest-pretty", "mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]", "pre-commit", "pytest-playwright"]
+docs = ["mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]", "mkdocs-autorefs"]
+dev = ["pytest-ckan", "pytest-benchmark", "pytest-pretty", "mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]", "pre-commit", "pytest-playwright", "mkdocs-autorefs"]
 
 [build-system]
 requires = ["setuptools"]

@@ -48,8 +48,8 @@
             <col>
         </colgroup>
 
-        {{ ui.table_row(ui.table_cell(_('Status'), heading=true) ~ ui.table_cell(h.datapusher_status_description(status))) }}
-        {{ ui.table_row(ui.table_cell(_('Last updated'), heading=true) ~ ui.table_cell(ui.datetime(status.last_updated) if status.last_updated else _("Never"))) }}
+        {{ ui.table_row(ui.table_cell(_('Status'), header=true) ~ ui.table_cell(h.datapusher_status_description(status))) }}
+        {{ ui.table_row(ui.table_cell(_('Last updated'), header=true) ~ ui.table_cell(ui.datetime(status.last_updated) if status.last_updated else _("Never"))) }}
     {%- endcall %}
 
     {% if status.status and status.task_info and not has_error %}

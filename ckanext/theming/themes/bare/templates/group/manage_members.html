@@ -14,7 +14,7 @@
     {{ ui.heading(_('{0} members'.format(members|length)), level=3) }}
 
     {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
-        {{ ui.table_head(ui.table_row(cells=[_('User'), _('Role'), ""], heading=true)) }}
+        {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('User'), _('Role'), ""], header=true))) }}
 
         {%- call ui.util.call(ui.table_body) -%}
 

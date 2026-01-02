@@ -10,18 +10,18 @@
                     {%- call ui.util.call(ui.table_head) -%}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for(pkg_dict.type ~ ".followers", id=pkg_dict.name)), heading=true) }}
+                            {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for(pkg_dict.type ~ ".followers", id=pkg_dict.name)), header=true) }}
                             {{ ui.table_cell(h.SI_number_span(num_followers)) }}
                         {%- endcall %}
 
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(_('Resources'), heading=true)  }}
+                            {{ ui.table_cell(_('Resources'), header=true)  }}
                             {{ ui.table_cell(pkg_dict.resources|length) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(ui.link(_('Groups'), href=h.url_for(pkg_dict.type ~ ".groups", id=pkg_dict.name)), heading=true)  }}
+                            {{ ui.table_cell(ui.link(_('Groups'), href=h.url_for(pkg_dict.type ~ ".groups", id=pkg_dict.name)), header=true)  }}
                             {{ ui.table_cell(pkg_dict.groups|length) }}
                         {%- endcall %}
 

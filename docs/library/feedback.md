@@ -1,4 +1,4 @@
-# Feedback Components
+# Feedback
 
 Feedback components provide interactive elements for user feedback, notifications, and modal interactions. These components help communicate with users and provide interactive experiences.
 
@@ -12,7 +12,7 @@ The `alert` component displays notification and alert messages to users, providi
 
 Alerts typically come in different styles to indicate different types of information: success messages for completed actions, warnings for cautionary information, errors for problems that need attention, and informational messages for general notifications. The component handles consistent styling and positioning to ensure messages are clearly visible and appropriately styled based on their importance and type.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -61,7 +61,7 @@ The `modal` component creates modal dialog containers that overlay the main cont
 
 Modal components handle overlay backgrounds, positioning, and interaction patterns to ensure they capture user attention appropriately while remaining accessible. They typically include close mechanisms and may prevent interaction with the background content until dismissed. The component works with `modal_handle` and `modal_close_handle` components to provide complete modal interaction experiences.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -131,7 +131,7 @@ The `spinner` component displays loading spinners that indicate ongoing operatio
 
 Spinner components are typically small, animated elements that can be placed inline with content or used as full-page overlays. They provide visual confirmation that the system is active and processing, helping maintain user confidence during operations that might otherwise appear to hang or freeze.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -172,7 +172,7 @@ The `tooltip` component displays tooltips that provide additional information ab
 
 Tooltip components handle positioning to ensure they remain visible and readable, often appearing above, below, or to the side of the target element. They provide a non-intrusive way to offer additional information that enhances user understanding without requiring dedicated interface space.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2

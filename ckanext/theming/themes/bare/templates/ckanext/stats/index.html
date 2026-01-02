@@ -44,10 +44,10 @@
         {%- call ui.util.call(ui.panel, active=true, id="stats-total-datasets") -%}
             {{ ui.heading(_('Total number of Datasets'), level=2) }}
             {%- call ui.util.call(ui.table, striped=true) -%}
-                {{ ui.table_head(ui.table_row(cells=[_("Date"), _("Total datasets")], heading=true)) }}
+                {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_("Date"), _("Total datasets")], header=true))) }}
                 {%- call ui.util.call(ui.table_body) -%}
                     {% for row in raw_packages_by_week %}
-                        {{ ui.table_row(cells=[ui.datetime(row.date), row.total_packages]) }}
+                        {{ ui.table_row(ui.util.map(ui.table_cell, [ui.datetime(row.date), row.total_packages])) }}
                     {% endfor %}
                 {%- endcall %}
             {%- endcall %}
@@ -56,10 +56,10 @@
         {%- call ui.util.call(ui.panel, id="stats-dataset-revisions") -%}
             {{ ui.heading(_('Dataset Revisions per Week'), level=2) }}
             {%- call ui.util.call(ui.table, striped=true) -%}
-                {{ ui.table_head(ui.table_row(cells=[_("Date"), _("All dataset revisions"), _("New datasets")], heading=true)) }}
+                {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_("Date"), _("All dataset revisions"), _("New datasets")], header=true))) }}
                 {%- call ui.util.call(ui.table_body) -%}
                     {% for row in raw_all_package_revisions %}
-                        {{ ui.table_row(cells=[ui.datetime(row.date), row.total_revisions, raw_new_datasets[loop.index0].new_packages]) }}
+                        {{ ui.table_row(ui.util.map(ui.table_cell, [ui.datetime(row.date), row.total_revisions, raw_new_datasets[loop.index0].new_packages])) }}
                     {% endfor %}
                 {%- endcall %}
             {%- endcall %}
@@ -69,10 +69,10 @@
             {{ ui.heading(_('Most Edited Datasets'), level=2) }}
             {% if most_edited_packages %}
                 {%- call ui.util.call(ui.table, striped=true) -%}
-                    {{ ui.table_head(ui.table_row(cells=[_('Dataset'), _('Number of edits')], heading=true)) }}
+                    {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('Dataset'), _('Number of edits')], header=true))) }}
                     {%- call ui.util.call(ui.table_body) -%}
                         {% for package, edits in most_edited_packages %}
-                            {{ ui.table_row(cells=[ui.link(package.title or package.name, href=h.url_for('dataset.read', id=package.name)), edits]) }}
+                            {{ ui.table_row(ui.util.map(ui.table_cell, [ui.link(package.title or package.name, href=h.url_for('dataset.read', id=package.name)), edits])) }}
                         {% endfor %}
                     {%- endcall %}
                 {%- endcall %}
@@ -85,10 +85,10 @@
             {{ ui.heading(_('Largest Groups'), level=2) }}
             {% if largest_groups %}
                 {%- call ui.util.call(ui.table, striped=true) -%}
-                    {{ ui.table_head(ui.table_row(cells=[_('Group'), _('Number of datasets') ], heading=true)) }}
+                    {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('Group'), _('Number of datasets') ], header=true))) }}
                     {%- call ui.util.call(ui.table_body) -%}
                         {% for group, num_packages in largest_groups %}
-                            {{ ui.table_row(cells=[ui.link(group.title or group.name, href=h.url_for(controller=group.type, action='read', id=group.name)), num_packages]) }}
+                            {{ ui.table_row(ui.util.map(ui.table_cell, [ui.link(group.title or group.name, href=h.url_for(controller=group.type, action='read', id=group.name)), num_packages])) }}
                         {% endfor %}
                     {%- endcall %}
                 {%- endcall %}
@@ -100,10 +100,10 @@
         {%- call ui.util.call(ui.panel, id="stats-top-tags") -%}
             {{ ui.heading(_('Top Tags'), level=2) }}
             {%- call ui.util.call(ui.table, striped=true) -%}
-                {{ ui.table_head(ui.table_row(cells=[_('Tag Name'), _('Number of Datasets') ], heading=true)) }}
+                {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('Tag Name'), _('Number of Datasets') ], header=true))) }}
                 {%- call ui.util.call(ui.table_body) -%}
                     {% for tag, num_packages in top_tags %}
-                        {{ ui.table_row(cells=[ui.link(tag.name, href=h.url_for('dataset.search', tags=tag.name)), num_packages]) }}
+                        {{ ui.table_row(ui.util.map(ui.table_cell, [ui.link(tag.name, href=h.url_for('dataset.search', tags=tag.name)), num_packages])) }}
                     {% endfor %}
                 {%- endcall %}
             {%- endcall %}
@@ -113,10 +113,10 @@
             {%- call ui.util.call(ui.panel, id="stats-most-create") -%}
                 {{ ui.heading(_('Users Creating Most Datasets'), level=2) }}
                 {%- call ui.util.call(ui.table, striped=true) -%}
-                    {{ ui.table_head(ui.table_row(cells=[_('User'), _('Number of Datasets')], heading=true)) }}
+                    {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('User'), _('Number of Datasets')], header=true))) }}
                     {%- call ui.util.call(ui.table_body) -%}
                         {% for user, num_packages in top_package_creators %}
-                            {{ ui.table_row(cells=[h.linked_user(user), num_packages]) }}
+                            {{ ui.table_row(ui.util.map(ui.table_cell, [h.linked_user(user), num_packages])) }}
                         {% endfor %}
                     {%- endcall %}
                 {%- endcall %}

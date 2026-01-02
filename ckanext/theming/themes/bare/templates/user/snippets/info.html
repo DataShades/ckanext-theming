@@ -29,22 +29,22 @@
             {%- set num_followers = h.follow_count('user', user_dict.id) %}
             {%- call ui.util.call(ui.table) -%}
                 {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for("user.followers", id=user_dict.name)), heading=true) }}
+                    {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for("user.followers", id=user_dict.name)), header=true) }}
                     {{ ui.table_cell(h.SI_number_span(num_followers)) }}
                 {%- endcall %}
 
                 {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(ui.link(h.humanize_entity_type('package', dataset_type, 'facet label') or _('Datasets'), href=h.url_for("user.read", id=user_dict.name)), heading=true)  }}
+                    {{ ui.table_cell(ui.link(h.humanize_entity_type('package', dataset_type, 'facet label') or _('Datasets'), href=h.url_for("user.read", id=user_dict.name)), header=true)  }}
                     {{ ui.table_cell(user_dict.number_created_packages) }}
                 {%- endcall %}
 
                 {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(ui.link(h.humanize_entity_type('organization', org_type, 'facet label') or _('Organizations'), href=h.url_for("user.read_organizations", id=user_dict.name)), heading=true)  }}
+                    {{ ui.table_cell(ui.link(h.humanize_entity_type('organization', org_type, 'facet label') or _('Organizations'), href=h.url_for("user.read_organizations", id=user_dict.name)), header=true)  }}
                     {{ ui.table_cell(orgs_available | count) }}
                 {%- endcall %}
 
                 {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(ui.link(h.humanize_entity_type('group', group_type, 'facet label') or _('Groups'), href=h.url_for("user.read_groups", id=user_dict.name)), heading=true)  }}
+                    {{ ui.table_cell(ui.link(h.humanize_entity_type('group', group_type, 'facet label') or _('Groups'), href=h.url_for("user.read_groups", id=user_dict.name)), header=true)  }}
                     {{ ui.table_cell(groups_available | count) }}
                 {%- endcall %}
             {%- endcall %}
@@ -66,33 +66,33 @@
             {%- call ui.util.call(ui.table) -%}
 
                 {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(_('Username'), heading=true) }}
+                    {{ ui.table_cell(_('Username'), header=true) }}
                     {{ ui.table_cell(user_dict.name) }}
                 {%- endcall %}
 
                 {%- if is_myself %}
                     {%- call ui.util.call(ui.table_row) -%}
-                        {{ ui.table_cell(_('Email'), heading=true) }}
+                        {{ ui.table_cell(_('Email'), header=true) }}
                         {{ ui.table_cell(ui.tooltip(user_dict.email, tooltip=_('This information is visible to you and admins'))) }}
                     {%- endcall %}
 
                 {%- endif %}
 
                 {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(_('Member Since'), heading=true) }}
+                    {{ ui.table_cell(_('Member Since'), header=true) }}
                     {{ ui.table_cell(ui.datetime(user_dict.created)) }}
                 {%- endcall %}
 
                 {%- if is_sysadmin %}
                     {%- call ui.util.call(ui.table_row) -%}
-                        {{ ui.table_cell(_('Last Active'), heading=true) }}
+                        {{ ui.table_cell(_('Last Active'), header=true) }}
                         {{ ui.table_cell(h.time_ago_from_timestamp(user_dict.last_active)) }}
                     {%- endcall %}
                 {%- endif %}
 
                 {%- if is_sysadmin %}
                     {%- call ui.util.call(ui.table_row) -%}
-                        {{ ui.table_cell(_('State'), heading=true) }}
+                        {{ ui.table_cell(_('State'), header=true) }}
                         {{ ui.table_cell(_(user_dict.state)) }}
                     {%- endcall %}
                 {%- endif %}

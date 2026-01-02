@@ -15,11 +15,11 @@
         {%- call ui.util.call(ui.accordion_wrapper) -%}
             {%- call ui.util.call(ui.accordion, title=_('Additional Info')) -%}
                 {%- call ui.util.call(ui.table, striped=true, bordered=true) -%}
-                    {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
+                    {{ ui.table_head(ui.table_row(ui.table_cell(_('Field'), header=true) ~ ui.table_cell(_('Value'), header=true))) }}
 
                     {%- call ui.util.call(ui.table_body) -%}
                         {% for key, value in h.sorted_extras(group_dict.extras) %}
-                            {{ ui.table_row(ui.table_cell(_(key|e), heading=true) ~ ui.table_cell(_(value))) }}
+                            {{ ui.table_row(ui.table_cell(_(key|e), header=true) ~ ui.table_cell(_(value))) }}
                         {% endfor %}
                     {%- endcall %}
 

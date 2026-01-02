@@ -56,37 +56,37 @@
             {%- call ui.util.call(ui.accordion, title=_('Additional Information')) -%}
 
                 {%- call ui.util.call(ui.table, striped=true, bordered=true) -%}
-                    {{ ui.table_head(ui.table_row(cells=[_('Field'), _('Value')], heading=true)) }}
+                    {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('Field'), _('Value')], header=true))) }}
                     {%- call ui.util.call(ui.table_body) -%}
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(_('Data last updated'), heading=true) }}
+                            {{ ui.table_cell(_('Data last updated'), header=true) }}
                             {{ ui.table_cell(h.render_datetime(resource.last_modified) or h.render_datetime(resource.created) or _('unknown')) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(_('Metadata last updated'), heading=true) }}
+                            {{ ui.table_cell(_('Metadata last updated'), header=true) }}
                             {{ ui.table_cell(h.render_datetime(resource.metadata_modified) or h.render_datetime(resource.created) or _('unknown')) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(_('Created'), heading=true) }}
+                            {{ ui.table_cell(_('Created'), header=true) }}
                             {{ ui.table_cell(h.render_datetime(resource.created) or _('unknown')) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(_('Format'), heading=true) }}
+                            {{ ui.table_cell(_('Format'), header=true) }}
                             {{ ui.table_cell(resource.format or resource.mimetype_inner or resource.mimetype or _('unknown')) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(_('License'), heading=true) }}
+                            {{ ui.table_cell(_('License'), header=true) }}
                             {{ ui.table_cell(ui.license(pkg_dict.license_title, id=pkg_dict.license_id, url=pkg_dict.license_url)) }}
                         {%- endcall %}
 
                         {% for key, value in h.format_resource_items(resource.items()) if key not in ('created', 'metadata modified', 'last modified', 'format') %}
 
                             {%- call ui.util.call(ui.table_row) -%}
-                                {{ ui.table_cell(key|capitalize, heading=true) }}
+                                {{ ui.table_cell(key|capitalize, header=true) }}
                                 {{ ui.table_cell(value) }}
                             {%- endcall %}
 

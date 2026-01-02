@@ -12,26 +12,29 @@
         {{ ui.heading(_("Accordion"), level=3, attrs={"id": "accordion"}) }}
 
         {{ ui.heading(_("Simple accordion"), level=4) }}
-        {%- call ui.util.call(ui.code) -%}
-{%- raw -%}
-{%- call ui.util.call(ui.accordion, title="More Information") -%}
-    Detailed information about this section
-{%- endcall %}
-{%- endraw %}
+        {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+            {%- raw %}
+                {%- call ui.util.call(ui.accordion_wrapper) -%}
+                    {%- call ui.util.call(ui.accordion, title="More Information") -%}
+                        Detailed information about this section
+                    {%- endcall %}
+                {%- endcall %}
+            {%- endraw %}
         {%- endcall %}
 
-        {{ ui.accordion(content="Detailed information about this section", title="More Information") }}
+        {{ ui.accordion_wrapper(ui.accordion(content="Detailed information about this section", title="More Information")) }}
         {{ ui.divider() }}
 
         {{ ui.heading(_("Open accordion by default"), level=4) }}
-        {%- call ui.util.call(ui.code) -%}
-{%- raw -%}
-{{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
-{%- endraw %}
+        {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+            {%- raw %}
+                {{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
+            {%- endraw %}
         {%- endcall -%}
         {{ ui.accordion(content="This content is visible by default", title="Default Open", open=True) }}
         {{ ui.divider() }}
 
     {%- endcall %}
+
 
 {% endblock %}

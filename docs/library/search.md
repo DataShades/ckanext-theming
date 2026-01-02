@@ -1,4 +1,4 @@
-# Search Components
+# Search
 
 Search components provide all the elements needed for search functionality, including search forms, filters, results display, and related controls.
 
@@ -12,7 +12,7 @@ The `search_active_filters` component displays the currently active filters in s
 
 Active filters are typically displayed as removable tags or badges that show the filter type and value. Users can click these elements to remove specific filters, providing immediate feedback and control over their search criteria. The component ensures that users always know which filters are active and can easily modify their search parameters.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -47,7 +47,7 @@ The `search_advanced_controls` component provides advanced search controls that 
 
 Advanced controls are usually hidden by default and revealed when users need more precise search capabilities. The component handles the interface for these advanced features while maintaining accessibility and usability. It ensures that advanced search functionality is available to users who need it without cluttering the interface for users who prefer simple searches.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -65,7 +65,7 @@ The `search_form` component creates complete search forms that organize all sear
 
 Search form components work with several related elements including `search_input`, `search_submit_button`, and various filter controls to create complete search experiences. The component ensures proper form structure, accessibility, and functionality while maintaining consistency across different search contexts throughout the application.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -120,7 +120,7 @@ The `search_input` component creates search input fields where users enter their
 
 Search input components are fundamental to the search experience, providing the primary interface for users to enter their search criteria. The component ensures proper accessibility, styling, and functionality while supporting features like autocomplete or search history that enhance the user experience. It handles various input types and validation requirements specific to search functionality.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -164,7 +164,7 @@ The `search_pagination_info` component displays information about search results
 
 Pagination info components typically display text like "Showing 1-10 of 127 results" or similar information that helps users understand the extent of their search results. The component ensures this information is clearly visible and properly formatted, helping users navigate through large result sets effectively.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -199,7 +199,7 @@ The `search_results_header` component creates headers for search results display
 
 Search results headers are important for orienting users and providing context about their search. They often include the search query that was performed, the number of results found, and controls for sorting or refining the results. The component ensures this information is clearly presented and easily accessible to users.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -234,7 +234,7 @@ The `search_sort_control` component provides controls for sorting search results
 
 Sort control components typically include dropdown menus or other interface elements that allow users to select different sorting options. The component handles the interface for these controls while ensuring proper accessibility and clear indication of the current sort order. It provides users with the ability to reorganize their results based on their specific needs.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -269,7 +269,7 @@ The `search_submit_button` component creates search submission buttons that trig
 
 Search submit buttons handle the form submission functionality for search operations and often include visual elements like search icons to clearly indicate their purpose. The component ensures proper accessibility and provides clear feedback about the search submission action. It works within `search_form` containers to provide the primary search initiation mechanism.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2

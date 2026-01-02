@@ -1,4 +1,4 @@
-# Navigation Components
+# Navigation
 
 Navigation components provide all the elements needed for site navigation, including menus, breadcrumbs, pagination, and other navigation aids.
 
@@ -12,7 +12,7 @@ The `breadcrumb` component creates breadcrumb navigation trails that show users 
 
 Breadcrumb components typically display a series of linked navigation items that represent the path from the site root to the current page. They work with `breadcrumb_wrapper` and `breadcrumb_divider` components to create complete breadcrumb experiences with proper visual separation and structural organization. Breadcrumbs are particularly valuable for sites with deep hierarchical structures where users might navigate several levels deep.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -40,7 +40,7 @@ The `nav_item` component creates navigation menu items that serve as individual 
 
 Nav item components handle proper styling, active state indication, and accessibility attributes to ensure navigation is both visually clear and functionally accessible. They can contain various types of content including text, icons, or other components, making them flexible for different navigation requirements. The component ensures consistent appearance and behavior across different navigation contexts.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -94,7 +94,7 @@ The `page_action` component creates page-specific action items that provide quic
 
 Page action components are context-sensitive and provide immediate access to the most relevant actions for the current page. They're typically positioned prominently to ensure users can easily find and access important actions without having to navigate to other sections of the site. The component ensures these actions are clearly visible and appropriately styled for their importance.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -109,14 +109,14 @@ Page action components are context-sensitive and provide immediate access to the
 ```
 ///
 
-### Parameters
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `content` | string | - | The text to display in the page action. |
 | `href` | string | - | The URL that the action links to. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
 Different themes may support additional parameters for styling and behavior:
 
@@ -125,6 +125,7 @@ Different themes may support additional parameters for styling and behavior:
 - `variant` (string): Style variant (e.g., "outline", "link") - theme-dependent
 - `disabled` (bool): Whether the action is disabled - theme-dependent
 - `icon` (string): Icon to display with the action - theme-dependent
+///
 
 ## Content Action Component
 
@@ -144,7 +145,7 @@ Tab handle components handle active state indication, visual styling, and access
 The `tab_handle` component works with tab content areas to create complete tabbed interface experiences. While tab handles provide the navigation mechanism, the content areas provide the display for different sections.
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -159,15 +160,15 @@ The `tab_handle` component works with tab content areas to create complete tabbe
 ```
 ///
 
-### Parameters
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The text to display in the tab handle. |
-| `href` | string | - | The URL that the tab links to. |
-| `active` | bool | - | Whether the tab is currently active/selected. |
+| Parameter | Type   | Default | Description                                   |
+|-----------|--------|---------|-----------------------------------------------|
+| `content` | string | -       | The text to display in the tab handle.        |
+| `href`    | string | -       | The URL that the tab links to.                |
+| `active`  | bool   | -       | Whether the tab is currently active/selected. |
 
-#### Theme-Specific Parameters
+/// details | Theme-Specific Parameters
+    type: tip
 
 Different themes may support additional parameters for styling and behavior:
 
@@ -175,6 +176,8 @@ Different themes may support additional parameters for styling and behavior:
 - `variant` (string): Style variant (e.g., "tabs", "pills") - theme-dependent
 - `icon` (string): Icon to display with the tab - theme-dependent
 - `count` (int): Count indicator to display on the tab - theme-dependent
+
+///
 
 ## Menu Item Component
 
@@ -188,7 +191,7 @@ The `pagination` component creates pagination controls that allow users to navig
 
 Pagination components handle complex navigation patterns including page numbers, next/previous controls, and page size selection. They provide clear indication of current page position and total content extent, helping users understand their position within larger content collections. The component ensures pagination controls are clearly visible and easily accessible while maintaining appropriate styling and positioning.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2

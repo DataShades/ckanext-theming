@@ -10,7 +10,7 @@
     {{ ui.heading(_('Current Sysadmins'), level=2) }}
 
     {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
-        {{ ui.table_head(ui.table_row(cells=[_('User'), ''], heading=true)) }}
+        {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('User'), ''], header=true))) }}
 
         {%- call ui.util.call(ui.table_body) -%}
             {%- for user in sysadmins %}

@@ -1,4 +1,4 @@
-# Element Components
+# Elements
 
 Element components are basic UI building blocks like buttons, links, headings, and other fundamental interface elements. These components form the foundation of the user interface.
 
@@ -25,7 +25,7 @@ Avatar components typically handle image sizing, circular cropping, and fallback
 - `variant` (string): Style variant (e.g., "circle", "square")
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -56,7 +56,7 @@ Badge components typically come in different styles to indicate different types 
 - `size` (string): Size of the badge (e.g., "sm", "lg")
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -90,7 +90,7 @@ Breadcrumb dividers typically use simple visual elements like chevrons, arrows, 
 - `color` (string): Color of the divider
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -132,7 +132,7 @@ Button components typically support different styles for different purposes: pri
 - `variant` (string): Additional style variant (e.g., "outline-primary", "link")
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -173,7 +173,7 @@ Datetime components handle various formatting options and localization requireme
 - `format_short` (string): Short format string for compact display
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -208,7 +208,7 @@ Divider components can be simple horizontal lines or more complex elements that 
 - `textAlign` (string): Text alignment when content is present (e.g., "center", "left", "right")
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -242,7 +242,7 @@ Heading components support different levels (typically h1 through h6) to create 
 - `underline` (bool): Whether to add underline decoration
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -279,7 +279,7 @@ Icon components typically support various icon sets or libraries, allowing theme
 - `fixed_width` (bool): Whether to use fixed width - common in Font Awesome themes
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -316,7 +316,7 @@ Image components handle various aspects of image display including responsive si
 - `crossorigin` (string): Cross-origin policy for the image - HTML attribute
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -354,7 +354,7 @@ Link components handle various states including normal, hover, visited, and acti
 - `download` (bool): Whether the link is for downloading - HTML attribute
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -395,7 +395,7 @@ Tag components typically provide consistent styling for tag elements while suppo
 - `removable` (bool): Whether to include a remove button
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -431,7 +431,7 @@ Text components can handle various text styles including paragraphs, emphasized 
 - `transform` (string): Text transformation (e.g., "uppercase", "lowercase", "capitalize")
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -466,7 +466,7 @@ Video components handle various aspects of video display including responsive si
 - `responsive` (bool): Whether to make the video responsive
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2

@@ -1,44 +1,51 @@
-# Container Components
+
+# Containers
 
 Container components form the building blocks of page layouts, providing
 structure and organization for other UI elements. They help create visual
 hierarchy and group related content together. Many container components work in
-pairs - for example, `list` containers work with `list_item` elements, and
-`grid` containers work with `column` elements.
+pairs - for example, [`list`][] containers work with [`list_item`][list-item]
+elements, and [`grid`][] containers work with [`column`][] elements.
 
-## Accordion Component
+## Accordion
 
-The `accordion` component creates collapsible content sections that allow users
-to expand and collapse content as needed. This component is particularly useful
-for organizing large amounts of information in a space-efficient manner,
+The [`accordion`][] component creates collapsible content sections that allow
+users to expand and collapse content as needed. This component is particularly
+useful for organizing large amounts of information in a space-efficient manner,
 allowing users to focus on relevant sections while keeping the interface
 uncluttered.
 
 Accordions are commonly used for FAQ sections, detailed metadata displays, and
 any content that benefits from progressive disclosure. The component typically
 includes a header that serves as the toggle control and a content area that
-expands or collapses. It works with `accordion_wrapper` to provide consistent
-grouping of multiple accordion sections.
+expands or collapses. It works with [`accordion_wrapper`][accordion-wrapper] to
+provide consistent grouping of multiple accordion sections.
 
 /// admonition | Relationship
     type: info
 
-The `accordion` component works with `accordion_wrapper` to create organized
-accordion groups. While individual accordions handle single collapsible
-sections, the wrapper provides the container for multiple accordions.
+The [`accordion`][] component works with
+[`accordion_wrapper`][accordion-wrapper] to create organized accordion
+groups. While individual accordions handle single collapsible sections, the
+wrapper provides the container for multiple accordions.
+
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Simple accordion -->
-{%- call ui.util.call(ui.accordion, title="More Information") -%}
-    Detailed information about this section
+{%- call ui.util.call(ui.accordion_wrapper) -%}
+    {%- call ui.util.call(ui.accordion, title="More Information") -%}
+        Detailed information about this section
+    {%- endcall %}
 {%- endcall %}
 
 <!-- Open accordion by default -->
-{{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
+{{ ui.accordion_wrapper(
+    ui.accordion("Detailed information about this section", title="More Information")
+) }}
 ```
 ///
 
@@ -51,156 +58,189 @@ sections, the wrapper provides the container for multiple accordions.
 /// details | Theme-Specific Parameters
     type: tip
 
-- `variant` (string): Style variant (e.g., "primary", "secondary")
+- `style` (string): Style variant (e.g., "primary", "secondary")
 - `flush` (bool): Whether to remove borders and rounded corners
 - `independent` (bool): Whether the accordion should remain open when sibling accordion is opened
 ///
 
 
-## Button Group Component
+## Button Group
 
-The `button_group` component groups related buttons together, providing visual cohesion and indicating that the buttons are functionally related. This component is useful for grouping action buttons, toggle buttons, or any set of buttons that perform related functions.
+The [`button_group`][button-group] component groups related buttons together,
+providing visual cohesion and indicating that the buttons are functionally
+related. This component is useful for grouping action buttons, toggle buttons,
+or any set of buttons that perform related functions.
 
-Button groups help users understand the relationship between different actions and provide a cleaner interface than individual buttons scattered throughout the layout. The component ensures consistent spacing and alignment between grouped buttons, regardless of the underlying CSS framework.
+Button groups help users understand the relationship between different actions
+and provide a cleaner interface than individual buttons scattered throughout
+the layout. The component ensures consistent spacing and alignment between
+grouped buttons, regardless of the underlying CSS framework.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Group of action buttons -->
-{{ ui.button_group(ui.button("Edit", href="/edit") ~ ui.button("Delete", href="/delete", style="danger")) }}
+{{ ui.button_group(
+    ui.button("Edit", href="/edit")
+    ~ ui.button("Delete", href="/delete", style="danger")
+) }}
 
 <!-- Group with vertical direction -->
-{{ ui.button_group(ui.button("First") ~ ui.button("Second") ~ ui.button("Third"), direction="column") }}
+{%- call ui.util.call(uibutton_group, direction="column") -%}
+    {{ ui.button("First") }}
+    {{ ui.button("Second") }}
+    {{ ui.button("Third") }}
+{%- endcall %}
 
-<!-- Button group with attributes -->
-{{ ui.button_group(ui.button("Save") ~ ui.button("Cancel"), attrs={"class": "form-actions"}) }}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The buttons to group together. |
-| `direction` | string | "row" | The direction of the button group ("row" for horizontal, "column" for vertical). |
+| Parameter   | Type   | Default | Description                                                                      |
+|-------------|--------|---------|----------------------------------------------------------------------------------|
+| `content`   | string | -       | The buttons to group together.                                                   |
+| `direction` | string | "row"   | The direction of the button group ("row" for horizontal, "column" for vertical). |
 
 /// details | Theme-Specific Parameters
     type: tip
 
 - `size` (string): Size of the button group (e.g., "sm", "lg")
-- `vertical` (bool): Whether to stack buttons vertically
 - `toolbar` (bool): Whether to use toolbar styling
 - `justified` (bool): Whether to make buttons equal width
 ///
 
+## Card
 
-## Card Component
+The [`card`][] component provides a self-contained container for related
+content, typically featuring a header, body, and optional footer. Cards are
+versatile containers that can display various types of content including text,
+images, buttons, and other components. They provide visual separation from
+surrounding content and create a consistent appearance for similar content
+blocks.
 
-The `card` component provides a self-contained container for related content, typically featuring a header, body, and optional footer. Cards are versatile containers that can display various types of content including text, images, buttons, and other components. They provide visual separation from surrounding content and create a consistent appearance for similar content blocks.
+Cards are particularly effective for displaying collections of related
+information such as dataset summaries, user profiles, or content previews. The
+component handles consistent styling, spacing, and layout across different
+themes while maintaining the flexibility to accommodate various content types.
 
-Cards are particularly effective for displaying collections of related information such as dataset summaries, user profiles, or content previews. The component handles consistent styling, spacing, and layout across different themes while maintaining the flexibility to accommodate various content types.
-
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic card -->
-{{ ui.card(content="Dataset description goes here", title="Dataset Title") }}
+{{ ui.card("Dataset description goes here", title="Dataset Title") }}
 
 <!-- Card with image -->
-{{ ui.card(content="Description", title="Dataset Title", img="/path/to/image.jpg") }}
+{{ ui.card("Description", title="Dataset Title", img="/path/to/image.jpg") }}
 
 <!-- Card with link -->
-{{ ui.card(content="Description", title="Dataset Title", href="/dataset/123") }}
+{{ ui.card("Description", title="Dataset Title", href="/dataset/123") }}
 
 <!-- Card with footer -->
-{{ ui.card(content="Description", title="Dataset Title", footer="Updated: 2023-01-01") }}
+{{ ui.card("Description", title="Dataset Title", footer="Updated: 2023-01-01") }}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The main content of the card. |
-| `title` | string | - | The title displayed in the card header. |
-| `footer` | string | - | Content for the card footer. |
-| `img` | string | - | URL to an image to display in the card. |
-| `href` | string | - | URL to link the entire card to. |
+| Parameter | Type   | Default | Description                             |
+|-----------|--------|---------|-----------------------------------------|
+| `content` | string | -       | The main content of the card.           |
+| `title`   | string | -       | The title displayed in the card header. |
+| `footer`  | string | -       | Content for the card footer.            |
+| `img`     | string | -       | URL to an image to display in the card. |
+| `href`    | string | -       | URL to link the entire card to.         |
 
 /// details | Theme-Specific Parameters
     type: tip
 
-- `variant` (string): Style variant (e.g., "primary", "secondary", "outline")
+- `style` (string): Style variant (e.g., "primary", "secondary", "outline")
+- `direction` (string): Stack image and content horizontally instead of vertically (e.g., "row", "column")
 - `size` (string): Size of the card (e.g., "sm", "lg")
 - `outline` (bool): Whether to use outline style
 - `clickable` (bool): Whether the card should have hover effects indicating clickability
 - `shadow` (string): Shadow level (e.g., "none", "sm", "lg")
 ///
 
-## Column Component
+## Column
 
-The `column` component defines individual columns within grid layouts, working in conjunction with the `grid` component to create responsive, structured layouts. Columns allow content to be organized horizontally in a flexible manner, adapting to different screen sizes and device types.
+The [`column`][] component defines individual columns within grid layouts,
+working in conjunction with the [`grid`][] component to create responsive,
+structured layouts. Columns allow content to be organized horizontally in a
+flexible manner, adapting to different screen sizes and device types.
 
-The column component typically accepts parameters for responsive behavior, allowing developers to specify how many columns an element should span on different screen sizes. This component is fundamental to creating modern, responsive layouts that work well across desktop, tablet, and mobile devices.
+The column component typically accepts parameters for responsive behavior,
+allowing developers to specify how many columns an element should span on
+different screen sizes. This component is fundamental to creating modern,
+responsive layouts that work well across desktop, tablet, and mobile devices.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
-<!-- Simple column -->
-{{ ui.column(content="Content in a column") }}
+<!-- Simple column (1/12) -->
+{%- call ui.util.call(ui.grid) -%}
+    {{ ui.column("Content in a column") }}
+{%- endcall %}
 
 <!-- Column with responsive span -->
-{{ ui.column(content="Responsive column", span={"xs": 12, "md": 6, "lg": 4}) }}
-
-<!-- Column with attributes -->
-{{ ui.column(content="Styled column", span={"xs": 12, "md": 8}, attrs={"class": "custom-column"}) }}
+{%- call ui.util.call(ui.grid) -%}
+    {{ ui.column("Responsive column", span={"xs": 12, "md": 6, "lg": 4}) }}
+{%- endcall %}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The content to display in the column. |
-| `span` | dict | - | Responsive span configuration with breakpoints (e.g., {"xs": 12, "md": 6}). |
+| Parameter | Type   | Default | Description                                                                   |
+|-----------|--------|---------|-------------------------------------------------------------------------------|
+| `content` | string | -       | The content to display in the column.                                         |
+| `span`    | dict   | -       | Responsive span configuration with breakpoints (e.g., `{"xs": 12, "md": 6}`). |
 
 /// details | Theme-Specific Parameters
     type: tip
 
 - `offset` (dict): Offset configuration for pushing/pulling columns
 - `order` (dict): Order configuration for reordering columns
-- `align_self` (string): Self-alignment (e.g., "start", "center", "end")
-- `no_gutters` (bool): Whether to remove gutters between columns
+- `align` (string): Self-alignment (e.g., "start", "center", "end")
+- `gutters` (bool): Whether to remove gutters between columns
 ///
 
 /// admonition | Relationship
     type: info
 
-The `column` component works with `grid` components to create structured layouts. While the grid provides the overall layout structure, columns define the individual content areas within that structure.
+The [`column`][] component works with [`grid`][] components to create
+structured layouts. While the grid provides the overall layout structure,
+columns define the individual content areas within that structure.
+
 ///
 
-## Container Component
+## Container
 
-The `container` component provides the main structural container for page content, establishing the primary layout boundaries and responsive behavior. This component typically handles the maximum width, centering, and padding for main content areas, ensuring consistent spacing and alignment throughout the application.
+The [`container`][] component provides the main structural container for page
+content, establishing the primary layout boundaries and responsive
+behavior. This component typically handles the maximum width, centering, and
+padding for main content areas, ensuring consistent spacing and alignment
+throughout the application.
 
-Container components are essential for maintaining visual consistency across different pages and sections of the application. They provide the foundational structure upon which other layout components are built, ensuring that content maintains proper margins and alignment regardless of the underlying CSS framework.
+Container components are essential for maintaining visual consistency across
+different pages and sections of the application. They provide the foundational
+structure upon which other layout components are built, ensuring that content
+maintains proper margins and alignment regardless of the underlying CSS
+framework.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic container -->
-{{ ui.container(content="Content within a container") }}
+{{ ui.container("Content within a container") }}
 
 <!-- Fluid container -->
-{{ ui.container(content="Full-width content", fluid=True) }}
-
-<!-- Container with attributes -->
-{{ ui.container(content="Styled container", attrs={"class": "main-container"}) }}
+{{ ui.container("Full-width content", fluid=true) }}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The content to display within the container. |
-| `fluid` | bool | - | Whether to make the container full-width without max-width constraints. |
+| Parameter | Type   | Default | Description                                                             |
+|-----------|--------|---------|-------------------------------------------------------------------------|
+| `content` | string | -       | The content to display within the container.                            |
+| `fluid`   | bool   | -       | Whether to make the container full-width without max-width constraints. |
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -211,27 +251,34 @@ Container components are essential for maintaining visual consistency across dif
 - `gutter` (string): Gutter size for responsive spacing
 ///
 
-## Grid Component
+## Grid
 
-The `grid` component creates structured grid layouts that organize content in rows and columns. It works with `column` components to define the overall layout structure, providing responsive behavior and consistent spacing between elements. Grid components are fundamental to creating modern, flexible layouts that adapt to different screen sizes.
+The [`grid`][] component creates structured grid layouts that organize content
+in rows and columns. It works with [`column`][] components to define the
+overall layout structure, providing responsive behavior and consistent spacing
+between elements. Grid components are fundamental to creating modern, flexible
+layouts that adapt to different screen sizes.
 
-Grid layouts are particularly useful for displaying collections of similar content such as dataset cards, user profiles, or content thumbnails. The component handles complex responsive behavior, ensuring that content reflows appropriately on different devices while maintaining visual consistency.
+Grid layouts are particularly useful for displaying collections of similar
+content such as dataset cards, user profiles, or content thumbnails. The
+component handles complex responsive behavior, ensuring that content reflows
+appropriately on different devices while maintaining visual consistency.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic grid -->
-{{ ui.grid(content=ui.column("Item 1", span={"xs": 12, "md": 6}) ~ ui.column("Item 2", span={"xs": 12, "md": 6})) }}
-
-<!-- Grid with attributes -->
-{{ ui.grid(content="Grid content", attrs={"class": "custom-grid"}) }}
+{%- call ui.util.call(ui.grid) -%}
+    {{ ui.column("Item 1", span={"xs": 12, "md": 6}) }}
+    {{ ui.column("Item 2", span={"xs": 12, "md": 6}) }}
+{%- endcall %}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The content to display within the grid (typically columns). |
+| Parameter | Type   | Default | Description                                                 |
+|-----------|--------|---------|-------------------------------------------------------------|
+| `content` | string | -       | The content to display within the grid (typically columns). |
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -246,24 +293,34 @@ Grid layouts are particularly useful for displaying collections of similar conte
 /// admonition | Relationship
     type: info
 
-The `grid` component works with `column` components to create structured layouts. The grid provides the overall structure, while columns define the individual content areas within that structure.
+The [`grid`][] component works with [`column`][] components to create
+structured layouts. The grid provides the overall structure, while columns
+define the individual content areas within that structure.
+
 ///
 
-## List Component
+## List
 
-The `list` component provides a container for ordered or unordered lists of items, working with `list_item` components to create structured content displays. This component handles consistent spacing, styling, and layout for list content, ensuring that items are properly aligned and visually distinct.
+The [`list`][] component provides a container for collections of items, working
+with [`list_item`][list-item] components to create structured content
+displays. This component handles consistent spacing, styling, and layout for
+list content, ensuring that items are properly aligned and visually distinct.
 
-List components are fundamental for displaying collections of related items, navigation menus, or any content that benefits from sequential organization. The component provides flexibility for both ordered and unordered lists while maintaining consistent styling across different themes.
+List components are fundamental for displaying collections of related items,
+navigation menus, or any content that benefits from sequential
+organization. The component provides flexibility for both ordered and unordered
+lists while maintaining consistent styling across different themes.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic list -->
-{{ ui.list(content=ui.list_item("Item 1") ~ ui.list_item("Item 2") ~ ui.list_item("Item 3")) }}
-
-<!-- List with attributes -->
-{{ ui.list(content=ui.list_item("Styled item"), attrs={"class": "custom-list"}) }}
+{%- call ui.util.call(ui.list) -%}
+    {{ ui.list_item("Item 1") }}
+    {{ ui.list_item("Item 2") }}
+    {{ ui.list_item("Item 3") }}
+{%- endcall %}
 ```
 ///
 
@@ -284,27 +341,37 @@ List components are fundamental for displaying collections of related items, nav
 /// admonition | Relationship
     type: info
 
-The `list` component works with `list_item` components to create structured lists. While the list provides the container structure, individual list items provide the content within that structure.
+The `list` component works with `list_item` components to create structured
+lists. While the list provides the container structure, individual list items
+provide the content within that structure.
+
 ///
 
-## List Item Component
+## List Item
 
-The `list_item` component represents individual items within list containers, providing consistent styling and behavior for list elements. Each list item works within the context of a `list` component to create cohesive list displays. List items can contain various types of content including text, links, images, and other components.
+The [`list_item`][list-item] component represents individual items within list
+containers, providing consistent styling and behavior for list elements. Each
+list item works within the context of a [`list`][] component to create cohesive
+list displays. List items can contain various types of content including text,
+links, images, and other components.
 
-List items are essential for creating organized content displays, navigation menus, and any interface element that benefits from sequential presentation. The component ensures proper spacing, alignment, and styling within the broader list structure.
+List items are essential for creating organized content displays, navigation
+menus, and any interface element that benefits from sequential
+presentation. The component ensures proper spacing, alignment, and styling
+within the broader list structure.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic list item -->
-{{ ui.list_item(content="Simple list item") }}
+{{ ui.list_item("Simple list item") }}
 
 <!-- List item with attributes -->
-{{ ui.list_item(content="Styled list item", attrs={"class": "active"}) }}
+{{ ui.list_item("Styled list item", attrs={"class": "active"}) }}
 
 <!-- List item with complex content -->
-{{ ui.list_item(content=ui.link("Link in list", href="/page") ~ ui.badge("New")) }}
+{{ ui.list_item(ui.link("Link in list", href="/page") ~ ui.badge("New")) }}
 ```
 ///
 
@@ -317,55 +384,75 @@ List items are essential for creating organized content displays, navigation men
 
 - `active` (bool): Whether the item is currently active/selected
 - `disabled` (bool): Whether the item is disabled
-- `variant` (string): Style variant (e.g., "primary", "secondary")
+- `style` (string): Style variant (e.g., "primary", "secondary")
 - `action` (bool): Whether the item is an action item
 ///
 
 /// admonition | Relationship
     type: info
 
-The `list_item` component works within `list` components to create structured lists. While the list provides the container, individual list items provide the content elements within that container.
+The [`list_item`][list-item] component works within [`list`][] components to
+create structured lists. While the list provides the container, individual list
+items provide the content elements within that container.
+
 ///
 
-## Panel Component
+## Panel
 
-The `panel` component creates content panels with distinct header, body, and optional footer sections. Panels are useful for organizing related content, creating form sections, or displaying information in a structured, visually distinct manner. The component typically includes styling for headers and consistent spacing for content areas.
+The [`panel`][] component creates content containers that can be switched
+between using [`panel_handle`][panel-handle] components. Unlike accordions
+which are visually collapsible, panels are completely hidden when not active
+and only one panel is typically visible at a time. This makes them ideal for
+tab-like interfaces where users can switch between different content sections.
 
-Panels work well for displaying forms, detailed information sections, or any content that benefits from clear visual separation from surrounding elements. The component often works with `panel_wrapper` and `panel_handle` components to create expandable or collapsible panel experiences.
+Panels are useful for organizing related content in a way that maximizes space
+efficiency while allowing users to focus on one section at a time. The
+component works with [`panel_handle`][panel-handle] components to provide the
+switching mechanism and [`panel_wrapper`][panel-wrapper] to provide the
+container structure for multiple panels.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic panel -->
-{{ ui.panel(content="Panel content goes here", title="Panel Title") }}
+{{ panel_handle("Show #1", id="panel-1") }}
+{{ panel_handle("Show #2", id="panel-2") }}
+
+{%- call ui.util.call(ui.panel_wrapper) -%}
+    {{ ui.panel("Panel #1 content goes here", id="panel-1") }}
+    {{ ui.panel("Panel #2 content goes here", id="panel-2") }}
+{%- endcall %}
+
 
 <!-- Active panel -->
-{{ ui.panel(content="Visible panel content", active=True) }}
-
-<!-- Panel with ID -->
-{{ ui.panel(content="Panel with ID", id="my-panel", active=True) }}
+{%- call ui.util.call(ui.panel_wrapper) -%}
+    {{ ui.panel("Visible panel content", id="panel-2", active=true) }}
+    {{ ui.panel("Hidden panel content", id="panel-2") }}
+{%- endcall %}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The content to display in the panel. |
-| `title` | string | - | The title displayed in the panel header. |
-| `id` | string | - | Unique identifier for the panel. |
-| `active` | bool | - | Whether the panel is active/visible by default. |
+| Parameter | Type   | Default | Description                                     |
+|-----------|--------|---------|-------------------------------------------------|
+| `content` | string | -       | The content to display in the panel.            |
+| `id`      | string | -       | Unique identifier for the panel.                |
+| `active`  | bool   | -       | Whether the panel is active/visible by default. |
+
 
 /// details | Theme-Specific Parameters
     type: tip
 
-- `variant` (string): Style variant (e.g., "primary", "secondary", "success")
-- `collapsible` (bool): Whether the panel can be collapsed
-- `flush` (bool): Whether to remove borders and rounded corners
+- `collapsible` (bool): Whether the panel can be collapsed (vs. switched)
 - `outline` (bool): Whether to use outline style
 ///
 
 /// admonition | Relationship
     type: info
 
-The `panel` component works with `panel_wrapper` and `panel_handle` components to create structured panel experiences. The panel provides the content structure, the wrapper provides the container, and the handle provides interactive controls.
+The [`panel`][] component works with [`panel_wrapper`][panel-wrapper] and
+[`panel_handle`][panel-handle] components to create tab-like switching
+experiences. The panel provides the content structure, the wrapper provides the
+container for multiple panels, and the handle provides the switching mechanism.
+
 ///

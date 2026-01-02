@@ -1,4 +1,4 @@
-# Meta Components
+# Meta
 
 Meta components provide structural elements for the overall page structure like headers, footers, and navigation elements that appear consistently across pages.
 
@@ -12,7 +12,7 @@ The `account` component provides account-related meta elements that appear consi
 
 Account components are essential for maintaining user awareness of their account status and providing quick access to account-related functions. They often include elements like user avatars, display names, notification indicators, or quick access to account settings. The component ensures consistent presentation of account information across different pages and contexts where user identification is important.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -30,7 +30,7 @@ The `header` component creates page headers that establish the top-level structu
 
 Header components handle complex layout requirements including responsive behavior, navigation menus, search bars, and branding elements. They ensure consistent positioning and styling of header content while adapting to different page types and content requirements. The component provides the structural foundation for the top portion of every page, creating visual consistency and familiar navigation patterns for users.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -48,7 +48,7 @@ The `footer` component creates page footers that provide consistent information 
 
 Footer components handle various content types and layout requirements, ensuring that important but less frequently accessed information remains accessible to users. They provide consistent positioning and styling for footer content while maintaining visual harmony with the overall page design. The component ensures that footer elements remain accessible and properly formatted across different page types and content lengths.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -66,7 +66,7 @@ The `subtitle_item` component creates subtitle elements that provide additional 
 
 Subtitle components are particularly useful for pages with complex information structures where additional descriptive text helps users understand the context or purpose of content sections. The component handles appropriate sizing, positioning, and styling that distinguishes subtitles from main headings while maintaining visual harmony with the overall design. Subtitles often appear below main headings or as secondary labels for content sections.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2

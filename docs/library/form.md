@@ -1,4 +1,4 @@
-# Form Components
+# Form
 
 Form components provide all the necessary elements for creating and managing forms in CKAN. These components handle user input and form submission.
 
@@ -12,7 +12,7 @@ The `autocomplete` component creates input fields with autocomplete functionalit
 
 Autocomplete components provide enhanced user experience by reducing typing effort and helping users select from predefined options. They typically display suggestions in a dropdown list as the user types, filtering options based on the input. The component handles accessibility requirements and ensures suggestions are properly announced to screen readers.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -30,7 +30,7 @@ The `checkbox` component creates checkbox input elements that allow users to sel
 
 Checkbox components handle proper labeling, accessibility attributes, and visual styling to ensure they're easily identifiable and usable. They can be used individually or grouped together, and often work with other form components to create comprehensive input experiences.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -51,7 +51,7 @@ The `extra_field` component creates additional form fields that can be dynamical
 
 Extra field components provide flexibility for forms that need to accommodate varying amounts of information. They often work with `extra_field_multiplicator` and `extra_fields_collection` components to create dynamic form experiences where users can add as many fields as needed.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -75,7 +75,7 @@ The `extra_field_multiplicator` component provides tools for adding multiple ext
 
 The multiplicator component handles the JavaScript functionality needed to add new field instances while maintaining proper form structure and validation. It ensures that each new field has unique identifiers and proper naming conventions for form processing.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -99,7 +99,7 @@ The `extra_fields_collection` component manages collections of extra fields with
 
 The collection component handles validation, processing, and display of multiple extra fields, ensuring they maintain proper form structure and accessibility. It works with the other extra field components to create cohesive dynamic form experiences.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -123,7 +123,7 @@ The `field_errors` component displays field-specific error messages that provide
 
 Field error components are typically displayed near the relevant form field and provide clear, actionable information about what went wrong and how to fix it. They ensure proper accessibility by linking errors to their associated fields and providing appropriate ARIA attributes.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -141,7 +141,7 @@ The `file_input` component creates file upload input elements that allow users t
 
 File input components provide enhanced user experience through features like drag-and-drop support, file previews, and upload progress tracking. They handle accessibility requirements and ensure file uploads work consistently across different browsers and devices.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -162,7 +162,7 @@ The `form` component creates complete form containers that organize all form ele
 
 The form component works with several related components including `form_start`, `form_end`, `form_actions`, and `form_errors` to create complete form experiences. It ensures proper form structure, accessibility, and functionality while maintaining consistency across different form types.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -186,7 +186,7 @@ The `form_actions` component creates containers for form action buttons such as 
 
 Form actions components handle the layout and styling of action buttons, ensuring they're clearly visible and appropriately spaced. They often include buttons like "Save Changes", "Cancel", or "Reset Form" that control the form submission and navigation flow.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -210,7 +210,7 @@ The `form_end` component marks the end of form containers, providing the closing
 
 Form end components work with `form_start` components to create complete form boundaries, ensuring all form elements are properly contained and processed. They handle form-level functionality that occurs at the end of form processing.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -234,7 +234,7 @@ The `form_errors` component displays form-wide error messages that provide feedb
 
 Form error components are displayed prominently within the form to ensure users notice critical issues that prevent form submission. They provide clear information about what went wrong and often include guidance about how to resolve the issues.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -258,7 +258,7 @@ The `form_start` component marks the beginning of form containers, establishing 
 
 Form start components work with `form_end` components to create complete form boundaries, ensuring all form elements are properly contained. They handle form-level attributes such as action URLs, method types, and encoding types that are necessary for proper form processing.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -282,7 +282,7 @@ The `hidden_input` component creates hidden form input elements that store data 
 
 Hidden input components handle the proper HTML structure and attributes for hidden form fields, ensuring they're properly processed during form submission while remaining invisible to users. They maintain accessibility standards and proper form functionality.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -300,7 +300,7 @@ The `input` component creates general text input fields for collecting user text
 
 Input components handle various input types such as text, email, password, and number fields, providing appropriate validation and formatting for each type. They ensure proper accessibility, styling, and functionality while maintaining consistency across different input contexts.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -346,7 +346,7 @@ The `markdown` component creates markdown editor inputs that allow users to writ
 
 Markdown components provide syntax highlighting, preview functionality, and appropriate tooling to help users create well-formatted content using simple markdown syntax. They balance ease of use with formatting capabilities, making them suitable for various content creation scenarios.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -364,7 +364,7 @@ The `radio` component creates radio button input elements that allow users to se
 
 Radio components handle proper grouping, accessibility attributes, and visual styling to ensure users understand the selection constraints. They ensure that only one option can be selected within a group and provide clear visual feedback about the current selection.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -382,7 +382,7 @@ The `range_input` component creates range slider inputs that allow users to sele
 
 Range input components provide visual feedback about the selected value and handle accessibility requirements for slider controls. They ensure proper keyboard navigation and screen reader support while maintaining intuitive interaction patterns.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -400,7 +400,7 @@ The `select` component creates dropdown select input elements that allow users t
 
 Select components handle option display, selection management, and accessibility requirements. They work with `select_option` and `select_box` components to create complete selection experiences with proper structure and functionality.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -450,7 +450,7 @@ The `select_box` component creates containers for select input elements, providi
 
 Select box components work with `select` and `select_option` components to create cohesive selection experiences. They ensure proper styling, positioning, and accessibility for dropdown controls while maintaining consistency across different themes.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -474,7 +474,7 @@ The `select_option` component creates individual options within select input ele
 
 Select option components handle proper value assignment, display text, and selection states. They work within `select` elements to create the complete list of available choices, ensuring proper functionality and accessibility for each option.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -498,7 +498,7 @@ The `submit` component creates form submission buttons that trigger form process
 
 Submit components handle form submission functionality, validation triggering, and appropriate visual styling to distinguish them from other buttons. They ensure proper accessibility and provide clear feedback about the submission action.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -519,7 +519,7 @@ The `textarea` component creates multi-line text input fields that allow users t
 
 Textarea components handle appropriate sizing, scrolling behavior, and accessibility requirements for multi-line text input. They provide sufficient space for users to enter and edit longer content while maintaining proper form structure and validation capabilities.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2

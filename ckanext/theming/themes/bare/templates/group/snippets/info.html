@@ -11,18 +11,18 @@
                     {%- call ui.util.call(ui.table_head) -%}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for(group_dict.type ~ ".followers", id=group_dict.name)), heading=true) }}
+                            {{ ui.table_cell(ui.link(_('Followers'), href=h.url_for(group_dict.type ~ ".followers", id=group_dict.name)), header=true) }}
                             {{ ui.table_cell(h.SI_number_span(num_followers)) }}
                         {%- endcall %}
 
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(ui.link(h.humanize_entity_type('package', dataset_type, 'facet label') or _('Datasets'), href=h.url_for(group_dict.type ~ ".read", id=group_dict.id)), heading=true)  }}
+                            {{ ui.table_cell(ui.link(h.humanize_entity_type('package', dataset_type, 'facet label') or _('Datasets'), href=h.url_for(group_dict.type ~ ".read", id=group_dict.id)), header=true)  }}
                             {{ ui.table_cell(group_dict.package_count) }}
                         {%- endcall %}
 
                         {%- call ui.util.call(ui.table_row) -%}
-                            {{ ui.table_cell(ui.link(_('Members'), href=h.url_for(group_dict.type ~ ".members", id=group_dict.name)), heading=true)  }}
+                            {{ ui.table_cell(ui.link(_('Members'), href=h.url_for(group_dict.type ~ ".members", id=group_dict.name)), header=true)  }}
                             {{ ui.table_cell(h.member_count(group_dict.id)) }}
                         {%- endcall %}
 

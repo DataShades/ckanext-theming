@@ -11,9 +11,9 @@
         {%- call ui.util.call(ui.table_head) -%}
             {%- call ui.util.call(ui.table_row) -%}
                 {%- block head_cells %}
-                    {{ ui.table_cell(_('Token'), heading=true) }}
-                    {{ ui.table_cell(_('Created'), heading=true) }}
-                    {{ ui.table_cell(_('Last access'), heading=true) }}
+                    {{ ui.table_cell(_('Token'), header=true) }}
+                    {{ ui.table_cell(_('Created'), header=true) }}
+                    {{ ui.table_cell(_('Last access'), header=true) }}
                 {%- endblock %}
             {%- endcall %}
         {%- endcall %}

@@ -25,6 +25,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
+  - autorefs
   - mkdocstrings:
       handlers:
         python:
@@ -85,6 +86,7 @@ theme:
 nav:
   - index.md
   - theming-parties.md
+  - parameters.md
   - Component library:
       - library/containers.md
       - library/content.md
@@ -100,3 +102,7 @@ nav:
       - library/wrappers.md
   - theme.md
   - cli.md
+
+extra:
+  status:
+    new: Recently added

@@ -1,4 +1,4 @@
-# Wrapper Components
+# Wrappers
 
 Wrapper components are used to provide consistent structural patterns for
 different types of content and UI elements. They typically don't have visible
@@ -17,7 +17,7 @@ The `accordion_wrapper` component provides the structural container for accordio
 The `accordion_wrapper` component is designed to work with `accordion` components. While the accordion component defines the individual collapsible sections, the wrapper provides the container that holds multiple accordions together.
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -38,7 +38,7 @@ The `accordion_wrapper` component is designed to work with `accordion` component
 
 The `account_nav_wrapper` component creates a consistent container for account-related navigation elements. It ensures that user account navigation maintains a uniform appearance and structure across different themes and pages. This component typically wraps `account_nav_item` elements to provide proper spacing and styling.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -59,7 +59,7 @@ The `account_nav_wrapper` component creates a consistent container for account-r
 
 The `activity_wrapper` component provides a structural container for activity stream content. It ensures that activity entries are properly formatted and styled consistently. This wrapper works with the `activity` component to display user actions and system events in a structured format.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -80,7 +80,7 @@ The `activity_wrapper` component provides a structural container for activity st
 
 The `breadcrumb_wrapper` component creates a container for breadcrumb navigation elements. It ensures proper spacing and styling for breadcrumb trails, working in conjunction with `breadcrumb` and `breadcrumb_divider` components to create a cohesive navigation experience.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -103,7 +103,7 @@ The `breadcrumb_wrapper` component creates a container for breadcrumb navigation
 
 The `content_action_wrapper` component provides a container for content-specific action buttons and links. It ensures that actions related to specific content items (like edit, delete, or share buttons) are consistently positioned and styled. This component typically wraps `content_action` elements.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -124,7 +124,7 @@ The `content_action_wrapper` component provides a container for content-specific
 
 The `content_nav_wrapper` component creates a container for navigation elements related to specific content. It provides consistent styling and positioning for content navigation, typically wrapping `content_nav_item` components to maintain a uniform appearance.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -145,7 +145,7 @@ The `content_nav_wrapper` component creates a container for navigation elements 
 
 The `dropdown_wrapper` component provides the structural foundation for dropdown menus. It ensures proper positioning, styling, and behavior for dropdown components. This wrapper works with dropdown-related components to create consistent menu experiences across different themes.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -172,7 +172,7 @@ The `facet_wrapper` component creates a container for facet filter elements, whi
 The `facet_wrapper` component is closely related to `facet` and `facet_section` components. While the wrapper provides the container structure, the facet components provide the actual filter controls and display elements.
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -194,7 +194,7 @@ The `facet_wrapper` component is closely related to `facet` and `facet_section` 
 
 The `group_wrapper` component provides a structural container for group-related content. It ensures that group information, listings, and related elements maintain consistent styling and layout. This wrapper works with `group` components to display organizational structures within CKAN.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -214,7 +214,7 @@ The `group_wrapper` component provides a structural container for group-related 
 
 The `main_nav_wrapper` component creates a container for the primary site navigation. It ensures that the main navigation maintains consistent styling and behavior across different pages and themes. This component typically wraps `main_nav_item` elements.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -235,7 +235,7 @@ The `main_nav_wrapper` component creates a container for the primary site naviga
 
 The `menu_wrapper` component provides a general container for menu structures throughout the application. It works with `menu_item` components to create consistent menu experiences, whether for dropdowns, navigation, or other menu-based interfaces.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -256,7 +256,7 @@ The `menu_wrapper` component provides a general container for menu structures th
 
 The `nav_wrapper` component serves as a general container for navigation elements. It provides the structural foundation for various navigation patterns and works with different navigation item components to ensure consistency.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -277,7 +277,7 @@ The `nav_wrapper` component serves as a general container for navigation element
 
 The `organization_wrapper` component creates a container for organization-related content. It works with `organization` components to provide consistent display of organizational information, members, and related content within CKAN.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -297,7 +297,7 @@ The `organization_wrapper` component creates a container for organization-relate
 
 The `package_wrapper` component provides a structural container for package (dataset) related content. It ensures that dataset information, resources, and related elements maintain consistent styling and layout. This wrapper works with `package` components to display dataset information effectively.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -317,7 +317,7 @@ The `package_wrapper` component provides a structural container for package (dat
 
 The `page_action_wrapper` component creates a container for page-specific action elements. It ensures that actions like "Add Dataset" or "Create Group" are consistently positioned and styled across different pages. This component typically wraps `page_action` elements.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -343,18 +343,18 @@ The `panel_wrapper` component provides the structural container for panel compon
 The `panel_wrapper` component works closely with `panel` and `panel_handle` components. The wrapper provides the container, the panel contains the content, and the handle provides the interactive element for controlling the panel.
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic panel wrapper -->
 {% call ui.util.call(ui.panel_wrapper) %}
-    {{ ui.panel("Panel content", title="Panel Title") }}
+    {{ ui.panel("Panel content", id="panel-1") }}
 {% endcall %}
 
 <!-- Panel wrapper with attributes -->
 {% call ui.util.call(ui.panel_wrapper, attrs={"class": "panel-container"}) %}
-    {{ ui.panel("Styled panel", active=True) }}
+    {{ ui.panel("Styled panel", id="panel-2", active=True) }}
 {% endcall %}
 ```
 ///
@@ -364,7 +364,7 @@ The `panel_wrapper` component works closely with `panel` and `panel_handle` comp
 
 The `resource_wrapper` component creates a container for resource-related content. It ensures that resource information, download links, and related elements maintain consistent styling and layout. This wrapper works with `resource` components to display resource information effectively.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -390,7 +390,7 @@ The `tab_wrapper` component provides the structural container for tab-based inte
 The `tab_wrapper` component is designed to work with `tab_handle` components. The wrapper provides the container structure, while the handles provide the interactive elements for switching between tab content.
 ///
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
@@ -411,7 +411,7 @@ The `tab_wrapper` component is designed to work with `tab_handle` components. Th
 
 The `user_wrapper` component creates a container for user-related content. It ensures that user profiles, activity, and related information maintain consistent styling and layout. This wrapper works with `user` components to display user information effectively.
 
-/// details | Usage Example
+/// admonition | Usage Example
     type: example
 
 ```jinja2
