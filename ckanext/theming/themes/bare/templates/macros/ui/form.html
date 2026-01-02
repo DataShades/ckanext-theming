@@ -86,8 +86,9 @@ this.parentNode.insertBefore(tpl, this);
     <div{{ ui.util.attrs(kwargs) }}>{{ content }}</div>
 {%- endmacro %}
 
-{%- macro form_end() -%}
+{%- macro form_end(content) -%}
     {%- do kwargs -%}
+    {{ content }}
     </form>
 {%- endmacro %}
 
@@ -216,12 +217,15 @@ this.parentNode.insertBefore(tpl, this);
     {{ ui.input(content, value=value or "on", type="radio", **kwargs) }}
 {%- endmacro %}
 
-{%- macro range_input(content, min_value, max_value) -%}
+{%- macro range_input(content, min_value, max_value, step) -%}
     {%- if min_value is defined -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("min", min_value) -%}
     {%- endif %}
     {%- if max_value is defined -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("max", max_value) -%}
+    {%- endif %}
+    {%- if step is defined -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("step", step) -%}
     {%- endif %}
     {{ ui.input(content, type="range", **kwargs) }}
 {%- endmacro %}

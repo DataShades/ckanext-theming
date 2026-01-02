@@ -50,13 +50,10 @@ components to create comprehensive input experiences.
 
 ```jinja2
 <!-- Basic checkbox -->
-{{ ui.checkbox("Accept terms", name="terms", value="yes") }}
+{{ ui.checkbox(name="terms", label="Accept terms", value="yes") }}
 
 <!-- Checked checkbox -->
-{{ ui.checkbox("Subscribe to newsletter", name="subscribe", checked=True) }}
-
-<!-- Checkbox with label -->
-{{ ui.checkbox("Remember me", name="remember", label="Remember my login") }}
+{{ ui.checkbox(label="Subscribe to newsletter", name="subscribe", checked=true) }}
 ```
 ///
 
@@ -83,6 +80,19 @@ dynamic form experiences where users can add as many fields as needed.
 <!-- Extra field with data -->
 {{ ui.extra_field(index=1, data={"key": "custom_field", "value": "custom_value"}) }}
 ```
+///
+
+| Parameter | Type | Default | Description                         |
+|-----------|------|---------|-------------------------------------|
+| `index`   | int  | -       | Index position of the extra field.  |
+| `data`    | dict | -       | Field data including key and value. |
+| `errors`  | list | -       | Error messages for the field.       |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `key_placeholder` (string): Placeholder for key input
+- `value_placeholder` (string): Placeholder for value input
 ///
 
 /// admonition | Relationship
@@ -121,6 +131,18 @@ conventions for form processing.
 ```
 ///
 
+| Parameter | Type   | Default     | Description                                    |
+|-----------|--------|-------------|------------------------------------------------|
+| `index`   | int    | -           | Index position for the next field to be added. |
+| `label`   | string | "Add Field" | Label text for the add button.                 |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `style` (string): Style variant (e.g., "primary", "secondary")
+- `icon` (string): Icon to display with the button
+///
+
 /// admonition | Relationship
     type: info
 
@@ -156,6 +178,18 @@ cohesive dynamic form experiences.
 ```
 ///
 
+| Parameter | Type | Default | Description                                                          |
+|-----------|------|---------|----------------------------------------------------------------------|
+| `extras`  | list | []      | List of extra field data as [{"key": "...", "value": "..."}] format. |
+| `limit`   | int  | -       | Initial number of fields.                                            |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `show_add_button` (bool): Whether to show the add button
+- `collapsible` (bool): Whether the collection can be collapsed
+///
+
 /// admonition | Relationship
     type: info
 
@@ -185,9 +219,6 @@ fields and providing appropriate ARIA attributes.
 ```jinja2
 <!-- Basic field errors -->
 {{ ui.field_errors(["Field is required", "Must be at least 3 characters"]) }}
-
-<!-- Field errors with attributes -->
-{{ ui.field_errors(["Invalid email format"], attrs={"class": "error-messages"}) }}
 ```
 ///
 
@@ -214,9 +245,14 @@ different browsers and devices.
 {{ ui.file_input(name="image", label="Upload Image", accept=".jpg,.png,.gif") }}
 
 <!-- Multiple file input -->
-{{ ui.file_input(name="files", label="Upload Multiple Files", multiple=True) }}
+{{ ui.file_input(name="files", label="Upload Multiple Files", multiple=true) }}
 ```
 ///
+
+| Parameter  | Type   | Default | Description                                        |
+|------------|--------|---------|----------------------------------------------------|
+| `accept`   | string | -       | Allowed types of uploaded file.                    |
+| `multiple` | bool   | -       | Whether to allow uploading multiple files at once. |
 
 ## Form
 
@@ -243,13 +279,31 @@ functionality while maintaining consistency across different form types.
 ```
 ///
 
+| Parameter | Type   | Default | Description                                                             |
+|-----------|--------|---------|-------------------------------------------------------------------------|
+| `content` | string | -       | The content to display in the form (typically form fields and actions). |
+| `method`  | string | -       | The HTTP method for form submission (e.g., "GET", "POST").              |
+| `action`  | string | -       | The URL to submit the form to.                                          |
+| `enctype` | string | -       | Encoding type for form submission (e.g., "multipart/form-data").        |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `variant` (string): Style variant (e.g., "horizontal", "vertical", "inline")
+- `novalidate` (bool): Whether to disable browser validation
+- `inline` (bool): Whether to display form inline
+///
+
 /// admonition | Relationship
     type: info
 
-The [`form`][] component works with [`form_start`][form-start], [`form_end`][form-end], [`form_actions`][form-actions],
-and [`form_errors`][form-errors] components to create complete form experiences. The form
-provides the overall container, while the other components provide specific
-structural elements.  ///
+The [`form`][] component works with [`form_start`][form-start],
+[`form_end`][form-end], [`form_actions`][form-actions], and
+[`form_errors`][form-errors] components to create complete form
+experiences. The form provides the overall container, while the other
+components provide specific structural elements.
+
+///
 
 ## Form Actions
 
@@ -268,10 +322,18 @@ submission and navigation flow.
 ```jinja2
 <!-- Basic form actions -->
 {{ ui.form_actions(ui.button("Save", type="submit") ~ ui.button("Cancel", href="/cancel")) }}
-
-<!-- Form actions with attributes -->
-{{ ui.form_actions(ui.submit("Submit") ~ ui.button("Cancel"), attrs={"class": "form-actions"}) }}
 ```
+///
+
+| Parameter | Type   | Default | Description                                                     |
+|-----------|--------|---------|-----------------------------------------------------------------|
+| `content` | string | -       | The content to display in the form actions (typically buttons). |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `align` (string): Alignment of action buttons (e.g., "start", "center", "end")
+- `justify` (string): Justification of buttons (e.g., "between", "around", "evenly")
 ///
 
 /// admonition | Relationship
@@ -301,11 +363,12 @@ processing.
 ```jinja2
 <!-- Basic form end -->
 {{ ui.form_end() }}
-
-<!-- Form end with attributes -->
-{{ ui.form_end(attrs={"class": "form-end"}) }}
 ```
 ///
+
+| Parameter | Type   | Default | Description                                           |
+|-----------|--------|---------|-------------------------------------------------------|
+| `content` | string | -       | Additional content to include at the end of the form. |
 
 /// admonition | Relationship
     type: info
@@ -333,12 +396,13 @@ resolve the issues.
 
 ```jinja2
 <!-- Basic form errors -->
-{{ ui.form_errors({"name": ["Name is required"], "email": ["Invalid email format"]}) }}
-
-<!-- Form errors with attributes -->
-{{ ui.form_errors({"password": ["Password too weak"]}, attrs={"class": "form-errors"}) }}
+{{ ui.form_errors(errors={"name": ["Name is required"], "email": ["Invalid email format"]}) }}
 ```
 ///
+
+| Parameter | Type | Default | Description                                                                           |
+|-----------|------|---------|---------------------------------------------------------------------------------------|
+| `errors`  | dict | -       | Dictionary of form-wide errors with field names as keys and error messages as values. |
 
 /// admonition | Relationship
     type: info
@@ -374,6 +438,19 @@ and encoding types that are necessary for proper form processing.
 ```
 ///
 
+| Parameter | Type   | Default | Description                                                      |
+|-----------|--------|---------|------------------------------------------------------------------|
+| `method`  | string | "GET"   | The HTTP method for form submission (e.g., "GET", "POST").       |
+| `action`  | string | -       | The URL to submit the form to.                                   |
+| `enctype` | string | -       | Encoding type for form submission (e.g., "multipart/form-data"). |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `novalidate` (bool): Whether to disable browser validation
+- `target` (string): Target frame/window for form submission (e.g., "_blank", "_self")
+///
+
 /// admonition | Relationship
     type: info
 
@@ -401,11 +478,13 @@ proper form functionality.
 ```jinja2
 <!-- Basic hidden input -->
 {{ ui.hidden_input(name="csrf_token", value="abc123") }}
-
-<!-- Hidden input with attributes -->
-{{ ui.hidden_input(name="user_id", value="123", attrs={"data-hidden": "true"}) }}
 ```
 ///
+
+| Parameter | Type   | Default | Description                          |
+|-----------|--------|---------|--------------------------------------|
+| `name`    | string | -       | Name attribute for the hidden input. |
+| `value`   | string | -       | Value of the hidden input.           |
 
 ## Input
 
@@ -430,34 +509,24 @@ maintaining consistency across different input contexts.
 {{ ui.input(name="email", type="email", label="Email", placeholder="user@example.com") }}
 
 <!-- Password input -->
-{{ ui.input(name="password", type="password", label="Password", required=True) }}
+{{ ui.input(name="password", type="password", label="Password", required=true) }}
 
 <!-- Input with validation errors -->
 {{ ui.input(name="title", label="Title", value="Dataset Title", errors=["Title is required"]) }}
 ```
 ///
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | Help text or description for the input. |
-| `name` | string | - | Name attribute for the input field. |
-| `id` | string | - | ID attribute for the input field. |
-| `label` | string | - | Label text for the input field. |
-| `value` | string | - | Value of the input field. |
-| `required` | bool | - | Whether the field is required. |
-| `placeholder` | string | - | Placeholder text for the input field. |
-| `type` | string | "text" | Input type (e.g., "text", "email", "password", "number"). |
-| `errors` | list | [] | List of error messages to display. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `size` (string): Size of the input (e.g., "sm", "lg")
-- `variant` (string): Style variant (e.g., "filled", "outlined")
-- `helper_text` (string): Additional helper text below the input
-- `disabled` (bool): Whether the input is disabled
-- `readonly` (bool): Whether the input is read-only
-///
+| Parameter     | Type   | Default | Description                                               |
+|---------------|--------|---------|-----------------------------------------------------------|
+| `content`     | string | -       | Help text or description for the input.                   |
+| `name`        | string | -       | Name attribute for the input field.                       |
+| `id`          | string | -       | ID attribute for the input field.                         |
+| `label`       | string | -       | Label text for the input field.                           |
+| `value`       | string | -       | Value of the input field.                                 |
+| `required`    | bool   | -       | Whether the field is required.                            |
+| `placeholder` | string | -       | Placeholder text for the input field.                     |
+| `type`        | string | "text"  | Input type (e.g., "text", "email", "password", "number"). |
+| `errors`      | list   | []      | List of error messages to display.                        |
 
 ## Markdown
 
@@ -483,6 +552,14 @@ them suitable for various content creation scenarios.
 ```
 ///
 
+| Parameter     | Type   | Default | Description                             |
+|---------------|--------|---------|-----------------------------------------|
+| `name`        | string | -       | Name attribute for the markdown editor. |
+| `label`       | string | -       | Label text for the markdown editor.     |
+| `value`       | string | -       | Initial value of the markdown editor.   |
+| `placeholder` | string | -       | Placeholder text for the editor.        |
+| `required`    | bool   | -       | Whether the field is required.          |
+
 ## Radio
 
 The [`radio`][] component creates radio button input elements that allow users
@@ -500,12 +577,19 @@ feedback about the current selection.
 
 ```jinja2
 <!-- Basic radio component -->
-{{ ui.radio("Option 1", name="choice", value="option1") }}
+{{ ui.radio(content="Option 1", name="choice", value="option1") }}
 
 <!-- Checked radio component -->
-{{ ui.radio("Option 2", name="choice", value="option2", checked=True) }}
+{{ ui.radio(content="Option 2", name="choice", value="option2", checked=true) }}
 ```
 ///
+
+| Parameter | Type   | Default | Description                            |
+|-----------|--------|---------|----------------------------------------|
+| `content` | string | -       | The label text for the radio button.   |
+| `name`    | string | -       | Name attribute to group radio buttons. |
+| `value`   | string | -       | Value of the radio button.             |
+| `checked` | bool   | -       | Whether the radio button is checked.   |
 
 ## Range Input
 
@@ -529,6 +613,23 @@ interaction patterns.
 <!-- Range input with initial value -->
 {{ ui.range_input(min_value=0, max_value=10, value=5) }}
 ```
+///
+
+| Parameter   | Type   | Default | Description                                   |
+|-------------|--------|---------|-----------------------------------------------|
+| `content`   | string | -       | Help text or description for the range input. |
+| `name`      | string | -       | Name attribute for the range input field.     |
+| `min_value` | int    | 0       | Minimum value of the range.                   |
+| `max_value` | int    | 100     | Maximum value of the range.                   |
+| `value`     | int    | -       | Initial value of the range input.             |
+| `step`      | int    | 1       | Step increment for the range input.           |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+- `show_value` (bool): Whether to show the current value
+- `vertical` (bool): Whether to display vertically
+- `tooltip` (string): Tooltip position (e.g., "top", "bottom")
 ///
 
 ## Select
@@ -558,27 +659,21 @@ with proper structure and functionality.
 ```
 ///
 
-| Parameter      | Type        | Default | Description                                  |
-|----------------|-------------|---------|----------------------------------------------|
-| `content`      | string      | -       | Help text or description for the select.     |
-| `name`         | string      | -       | Name attribute for the select field.         |
-| `id`           | string      | -       | ID attribute for the select field.           |
-| `label`        | string      | -       | Label text for the select field.             |
-| `selected`     | string/list | -       | Value(s) that should be selected by default. |
-| `options`      | list        | -       | List of options to display in the select.    |
-| `multiple`     | bool        | -       | Whether multiple options can be selected.    |
-| `required`     | bool        | -       | Whether the field is required.               |
-| `autocomplete` | string      | -       | Autocomplete behavior for the select.        |
-| `errors`       | list        | []      | List of error messages to display.           |
+| Parameter     | Type        | Default | Description                                  |
+|---------------|-------------|---------|----------------------------------------------|
+| `content`     | string      | -       | Help text or description for the select.     |
+| `name`        | string      | -       | Name attribute for the select field.         |
+| `label`       | string      | -       | Label text for the select field.             |
+| `selected`    | string/list | -       | Value(s) that should be selected by default. |
+| `options`     | list        | -       | List of options to display in the select.    |
+| `multiple`    | bool        | -       | Whether multiple options can be selected.    |
+| `required`    | bool        | -       | Whether the field is required.               |
 
 /// details | Theme-Specific Parameters
     type: tip
 
-- `size` (string): Size of the select (e.g., "sm", "lg")
-- `variant` (string): Style variant (e.g., "filled", "outlined")
-- `helper_text` (string): Additional helper text below the select
-- `disabled` (bool): Whether the select is disabled
-- `native` (bool): Whether to use native browser select
+- `searchable` (bool): Whether to make the select searchable
+- `clearable` (bool): Whether to show clear button
 ///
 
 /// admonition | Relationship
@@ -598,29 +693,40 @@ elements, providing the structural foundation for dropdown selection
 controls. This component handles the visual presentation and interaction
 patterns for select elements.
 
-Select box components work with [`select`][] and
-[`select_option`][select-option] components to create cohesive selection
-experiences. They ensure proper styling, positioning, and accessibility for
-dropdown controls while maintaining consistency across different themes.
+Select box components work with [`select_option`][select-option] to create
+cohesive selection experiences. They ensure proper styling, positioning, and
+accessibility for dropdown controls while maintaining consistency across
+different themes.
 
 /// admonition | Usage Example
     type: example
 
 ```jinja2
 <!-- Basic select box -->
-{{ ui.select_box(ui.select_option("Option 1", "opt1") ~ ui.select_option("Option 2", "opt2")) }}
+{% call ui.util.call(ui.select_box) %}
+    {{ ui.select_option("Option 1", value="opt1") }}
+    {{ ui.select_option("Option 2", value="opt2") }}
+{% endcall %}
 
 <!-- Select box with attributes -->
-{{ ui.select_box(ui.select_option("Choice A", "a") ~ ui.select_option("Choice B", "b"), attrs={"class": "custom-select"}) }}
+{% call ui.util.call(ui.select_box) %}
+    {{ ui.select_option("Choice A", value="a") }}
+    {{ ui.select_option("Choice B", value="b") }}
+{% endcall %}
 ```
 ///
+
+| Parameter | Type   | Default | Description                                                          |
+|-----------|--------|---------|----------------------------------------------------------------------|
+| `content` | string | -       | The content to display in the select box (typically select options). |
+
 
 /// admonition | Relationship
     type: info
 
-The [`select_box`][select-box] component works with [`select`][] and
-[`select_option`][select-option] components to create complete selection
-experiences. The box provides the container styling and structure.
+The [`select_box`][select-box] component works with
+[`select_option`][select-option] to create complete selection experiences. The
+box provides the container styling and structure.
 
 ///
 
@@ -641,12 +747,23 @@ each option.
 
 ```jinja2
 <!-- Basic select option -->
-{{ ui.select_option("Option Text", "option_value") }}
+{% call ui.util.call(ui.select_box) %}
+    {{ ui.select_option("Option Text", value="option_value") }}
+{% endcall %}
 
 <!-- Selected option -->
-{{ ui.select_option("Selected Option", "selected_value", selected=True) }}
+{% call ui.util.call(ui.select_box) %}
+    {{ ui.select_option("Option Text", value="option_value") }}
+    {{ ui.select_option("Selected Option", value="selected_value", selected=true) }}
+{% endcall %}
 ```
 ///
+
+| Parameter  | Type   | Default | Description                                |
+|------------|--------|---------|--------------------------------------------|
+| `content`  | string | -       | The display text for the option.           |
+| `value`    | string | -       | The value of the option.                   |
+| `selected` | bool   | -       | Whether the option is selected by default. |
 
 /// admonition | Relationship
     type: info
@@ -675,13 +792,16 @@ action.
 <!-- Basic submit button -->
 {{ ui.submit("Save Changes", name="save") }}
 
-<!-- Submit with different style -->
-{{ ui.submit("Submit Form", name="submit", attrs={"class": "btn btn-primary"}) }}
-
 <!-- Submit with confirmation -->
-{{ ui.submit("Delete", name="delete", attrs={"onclick": "return confirm('Are you sure?')", "class": "btn btn-danger"}) }}
+{{ ui.submit("Delete", name="delete", attrs={"onclick": "return confirm('Are you sure?')"}) }}
 ```
 ///
+
+| Parameter | Type   | Default | Description                               |
+|-----------|--------|---------|-------------------------------------------|
+| `content` | string | -       | The text to display on the submit button. |
+| `name`    | string | -       | Name attribute for the submit button.     |
+| `value`   | string | -       | Value attribute for the submit button.    |
 
 ## Textarea
 
@@ -703,7 +823,7 @@ structure and validation capabilities.
 {{ ui.textarea(name="description", label="Description", placeholder="Enter description here...") }}
 
 <!-- Textarea with value -->
-{{ ui.textarea(name="content", label="Content", value="Existing content", required=True) }}
+{{ ui.textarea(name="content", label="Content", value="Existing content", required=true) }}
 
 <!-- Textarea with validation errors -->
 {{ ui.textarea(name="comment", label="Comment", errors=["Comment is required"]) }}
@@ -719,16 +839,11 @@ structure and validation capabilities.
 | `value`       | string | -       | Value of the textarea field.               |
 | `required`    | bool   | -       | Whether the field is required.             |
 | `placeholder` | string | -       | Placeholder text for the textarea field.   |
-| `rows`        | int    | -       | Number of visible text rows.               |
-| `cols`        | int    | -       | Number of visible text columns.            |
 | `errors`      | list   | []      | List of error messages to display.         |
 
 /// details | Theme-Specific Parameters
     type: tip
 
-- `size` (string): Size of the textarea (e.g., "sm", "lg")
-- `variant` (string): Style variant (e.g., "filled", "outlined")
-- `helper_text` (string): Additional helper text below the textarea
-- `disabled` (bool): Whether the textarea is disabled
-- `readonly` (bool): Whether the textarea is read-only
+- `rows` (int): Number of visible text rows
+- `cols` (int): Number of visible text columns
 ///

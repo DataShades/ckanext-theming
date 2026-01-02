@@ -1,6 +1,12 @@
 # Navigation
 
-Navigation components help users move through the application and find content. They provide consistent navigation patterns and help maintain user orientation within the site. Many navigation components work in hierarchical relationships - for example, [`nav_item`][nav-item] components work within navigation containers, and [`breadcrumb`][] components work with [`breadcrumb_wrapper`][breadcrumb-wrapper] and [`breadcrumb_divider`][breadcrumb-divider] components.
+Navigation components help users move through the application and find
+content. They provide consistent navigation patterns and help maintain user
+orientation within the site. Many navigation components work in hierarchical
+relationships - for example, [`nav_item`][nav-item] components work within
+navigation containers, and [`breadcrumb`][] components work with
+[`breadcrumb_wrapper`][breadcrumb-wrapper] and
+[`breadcrumb_divider`][breadcrumb-divider] components.
 
 ## Breadcrumb
 
@@ -178,15 +184,30 @@ Different themes may support additional parameters for styling and behavior:
 
 ## Menu Item
 
-The [`menu_item`][menu-item] component creates menu items that serve as individual elements within various menu structures throughout the application. These components provide the clickable elements for dropdown menus, context menus, and other menu-based navigation systems.
+The [`menu_item`][menu-item] component creates menu items that serve as
+individual elements within various menu structures throughout the
+application. These components provide the clickable elements for dropdown
+menus, context menus, and other menu-based navigation systems.
 
-Menu item components handle proper styling, active state indication, and accessibility attributes to ensure menus are both visually clear and functionally accessible. They can contain various types of content and often include sub-menus or other complex navigation structures. The component ensures consistent appearance and behavior across different menu contexts.
+Menu item components handle proper styling, active state indication, and
+accessibility attributes to ensure menus are both visually clear and
+functionally accessible. They can contain various types of content and often
+include sub-menus or other complex navigation structures. The component ensures
+consistent appearance and behavior across different menu contexts.
 
 ## Pagination
 
-The [`pagination`][] component creates pagination controls that allow users to navigate through multiple pages of content. Pagination is essential for content-heavy sections where displaying all items on a single page would be impractical or overwhelming.
+The [`pagination`][] component creates pagination controls that allow users to
+navigate through multiple pages of content. Pagination is essential for
+content-heavy sections where displaying all items on a single page would be
+impractical or overwhelming.
 
-Pagination components handle complex navigation patterns including page numbers, next/previous controls, and page size selection. They provide clear indication of current page position and total content extent, helping users understand their position within larger content collections. The component ensures pagination controls are clearly visible and easily accessible while maintaining appropriate styling and positioning.
+Pagination components handle complex navigation patterns including page
+numbers, next/previous controls, and page size selection. They provide clear
+indication of current page position and total content extent, helping users
+understand their position within larger content collections. The component
+ensures pagination controls are clearly visible and easily accessible while
+maintaining appropriate styling and positioning.
 
 /// admonition | Usage Example
     type: example
@@ -205,6 +226,13 @@ Pagination components handle complex navigation patterns including page numbers,
 
 ## Dropdown Item
 
-The [`dropdown_item`][dropdown-item] component creates individual items within dropdown menus, providing the clickable elements that appear when dropdown menus are activated. These components are the fundamental building blocks of dropdown navigation systems.
+The [`dropdown_item`][dropdown-item] component creates individual items within
+dropdown menus, providing the clickable elements that appear when dropdown
+menus are activated. These components are the fundamental building blocks of
+dropdown navigation systems.
 
-Dropdown item components handle proper styling, active state indication, and accessibility attributes to ensure dropdown menus are both visually clear and functionally accessible. They can contain various types of content and often include sub-menus or other complex navigation structures. The component ensures consistent appearance and behavior across different dropdown contexts.
+Dropdown item components handle proper styling, active state indication, and
+accessibility attributes to ensure dropdown menus are both visually clear and
+functionally accessible. They can contain various types of content and often
+include sub-menus or other complex navigation structures. The component ensures
+consistent appearance and behavior across different dropdown contexts.
