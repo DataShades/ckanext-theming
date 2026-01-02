@@ -1,13 +1,12 @@
-{%- macro avatar(src, alt) -%}
-    {%- if kwargs.attrs -%}
-        {%- do kwargs.attrs.setdefault("width", 100) -%}
-        {%- do kwargs.attrs.setdefault("height", 100) -%}
-    {%- endif -%}
+{%- macro avatar(src, alt, size) -%}
+    {%- set attrs = kwargs.setdefault("attrs", {}) -%}
+    {%- do attrs.setdefault("width", size) -%}
+    {%- do attrs.setdefault("height", size) -%}
 
     {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
 {%- endmacro %}
 
-{%- macro badge(content) -%}
+{%- macro badge(content, style) -%}
     <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}
 
@@ -45,7 +44,7 @@
 {%- endmacro %}
 
 {%- macro icon(name) -%}
-    <i {{ ui.util.attrs(kwargs) }} class="icon-{{ ui.util.icon(name) }}"></i>
+    <span {{ ui.util.attrs(kwargs) }} class="icon-{{ name }}">{{ ui.util.icon(name) }}</span>
 {%- endmacro %}
 
 {%- macro image(src, alt, height, width) -%}
@@ -69,8 +68,8 @@
     <a {{ ui.util.attrs(kwargs) }} href="{{ href or content }}">{{ content }}</a>
 {%- endmacro %}
 
-{%- macro tag(content, href, id) -%}
-    <a {{ ui.util.attrs(kwargs) }} href="{{ href or h.url_for('dataset.search', tags=id or content) }}">{{ content }}</a>
+{%- macro tag(content, href) -%}
+    <a {{ ui.util.attrs(kwargs) }} {%- if href %} href="{{ href }}"{%- endif %}>{{ content }}</a>
 {%- endmacro %}
 
 {%- macro text(content) -%}

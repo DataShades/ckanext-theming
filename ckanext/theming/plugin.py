@@ -10,6 +10,7 @@ import ckan.plugins.toolkit as tk
 from ckan import plugins as p
 from ckan import types
 
+from . import reference
 from .interfaces import ITheme
 from .lib import Theme, enable_theme, ui
 
@@ -31,7 +32,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
     def register_themes(self) -> dict[str, Theme]:
         root = os.path.dirname(os.path.abspath(__file__))
         return {
-            "bare": Theme(os.path.join(root, "themes/bare")),
+            "bare": Theme(os.path.join(root, "themes/bare"), icon_map=reference.bare_icons),
             # "bulma": Theme(os.path.join(root, "themes/bulma"), parent="bare"),
             # "tailwind": Theme(os.path.join(root, "themes/tailwind"), parent="bare"),
             # "bs5": Theme(os.path.join(root, "themes/bs5"), parent="bare"),

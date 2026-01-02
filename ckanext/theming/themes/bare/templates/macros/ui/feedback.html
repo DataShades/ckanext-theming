@@ -1,7 +1,7 @@
 {%- macro alert(message, dismissible, style) -%}
     <div {{ ui.util.attrs(kwargs) }} style="padding: 0.5rem;border: 1px solid;">
         {{ message }}
-        {{ ui.button("&times;"|safe, on={"click": "this.parentNode.remove()"}) if dismissible or 1 }}
+        {{ ui.button("&times;"|safe, on={"click": "this.parentNode.remove()"}) if dismissible }}
     </div>
 {%- endmacro %}
 

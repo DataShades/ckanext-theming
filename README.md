@@ -107,7 +107,3 @@ Once a theme is active, UI macros can be used in templates:
 ### Creating Custom Themes
 
 For detailed instructions on creating custom themes, see [theming guide](https://datashades.github.io/ckanext-theming/theme/).
-
-## License
-
-[AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html)

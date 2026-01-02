@@ -15,7 +15,7 @@
         {%- if pkg_dict.tags %}
             <div>
                 {%- for tag  in pkg_dict.tags %}
-                    {{ ui.tag(tag.display_name) }}
+                    {{ ui.tag(tag.display_name, href=h.url_for('dataset.search', tags=tag.display_name)) }}
                 {%- endfor %}
             </div>
         {%- endif %}
