@@ -101,8 +101,9 @@ nav:
       - library/sections.md
       - library/wrappers.md
   - theme.md
+  # - blocks.md
   - cli.md
 
 extra:
   status:
-    new: Recently added
+    draft: Draft

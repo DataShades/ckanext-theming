@@ -325,6 +325,19 @@
                 {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
             {%- endcall %}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Active facet component"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.facet_wrapper) -%}
+                        {{ ui.facet("CSV", key="format", value="csv", count=8, active=true) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.facet_wrapper) -%}
+                {{ ui.facet("CSV", key="format", value="csv", count=8, active=true) }}
+            {%- endcall %}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -412,6 +425,8 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.chart(data=[[1,2,3], [3,2,4]], type="bar", attrs={"style": "height: 200px;"}) }}
+            {{ ui.chart(data=[[1,2,3], [3,2,4]], type="line", attrs={"style": "height: 200px;"}) }}
+            {{ ui.chart(data=[1,2,3], type="pie", attrs={"style": "height: 200px;"}) }}
             {{ ui.divider() }}
         </div>
 
@@ -432,10 +447,20 @@
             {{ ui.heading(_("Basic definition list"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.definition_list([["Hello", "Praesent augue."], ["World", "Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus."]]) }}
+                    {%- call ui.util.call(ui.definition_list) -%}
+                        <dt>Term 1</dt>
+                        <dd>Definition 1</dd>
+                        <dt>Term 2</dt>
+                        <dd>Definition 2</dd>
+                    {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.definition_list([["Hello", "Praesent augue."], ["World", "Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus."]]) }}
+            {%- call ui.util.call(ui.definition_list) -%}
+                <dt>Term 1</dt>
+                <dd>Definition 1</dd>
+                <dt>Term 2</dt>
+                <dd>Definition 2</dd>
+            {%- endcall %}
             {{ ui.divider() }}
         </div>
 
@@ -553,10 +578,18 @@
     {%- call ui.util.call(ui.section, title=_("Element components")) -%}
         <div>
             {{ ui.heading(_("Avatar"), level=3, attrs={"id": "avatar"}) }}
-            {{ ui.heading(_("Basic avatar"), level=4) }}
+            {{ ui.heading(_("Avatar with user image"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {{ ui.avatar(src="/path/to/user/image.jpg", alt="User Name") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.avatar(src="/path/to/user/image.jpg", alt="User Name") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Avatar with fallback"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
                     {{ ui.avatar(alt="Default User") }}
                 {%- endraw %}
             {%- endcall -%}
@@ -566,7 +599,7 @@
 
         <div>
             {{ ui.heading(_("Badge"), level=3, attrs={"id": "badge"}) }}
-            {{ ui.heading(_("Simplebadge"), level=4) }}
+            {{ ui.heading(_("Simple badge"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {{ ui.badge("New") }}
@@ -588,6 +621,24 @@
             {{ ui.button("Primary Button", style="primary") }}
             {{ ui.button("Secondary Button", style="secondary") }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Button with icon"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.button((ui.icon("plus") ~ " Add"), style="primary") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.button((ui.icon("plus") ~ " Add"), style="primary") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Disabled button"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.button("Disabled Button", disabled=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.button("Disabled Button", disabled=true) }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -599,6 +650,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.datetime(datetime="2023-01-01T12:00:00Z") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Datetime with format"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.datetime(datetime="2023-01-01T12:00:00Z", format="long") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.datetime(datetime="2023-01-01T12:00:00Z", format="long") }}
             {{ ui.divider() }}
         </div>
 
@@ -636,13 +696,18 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {{ ui.icon("home") }}
-                    {{ ui.icon("search") }}
-                    {{ ui.icon("user") }}
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.icon("home") }}
-            {{ ui.icon("search") }}
-            {{ ui.icon("user") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Icon with custom class"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.icon("search", attrs={"class": "custom-icon"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.icon("search", attrs={"class": "custom-icon"}) }}
             {{ ui.divider() }}
         </div>
 
@@ -651,10 +716,19 @@
             {{ ui.heading(_("Basic image"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image", attrs={"style": "width: 100px;"}) }}
+                    {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image") }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image", attrs={"style": "width: 100px;"}) }}
+            {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Responsive image"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image", responsive=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image", responsive=true) }}
             {{ ui.divider() }}
         </div>
 
@@ -668,6 +742,24 @@
             {%- endcall -%}
             {{ ui.link("Sample Link", href="#") }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("External link"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.link("External Link", href="https://example.com", external=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.link("External Link", href="https://example.com", external=true) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Link with icon"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.link((ui.icon("external-link") ~ " Visit Website"), href="https://example.com") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.link((ui.icon("external-link") ~ " Visit Website"), href="https://example.com") }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -679,6 +771,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.tag("Sample Tag") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Tag with link"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.tag("Linked Tag", href="/tag/linked-tag") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.tag("Linked Tag", href="/tag/linked-tag") }}
             {{ ui.divider() }}
         </div>
 
@@ -692,6 +793,24 @@
             {%- endcall -%}
             {{ ui.text("Sample text content") }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Emphasized text"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.text("Important text", emphasis="bold") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.text("Important text", emphasis="bold") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Small text"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.text("Less important text", size="small") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.text("Less important text", size="small") }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -703,6 +822,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.video(src="/base/images/placeholder.jpg", attrs={"width": "300"}) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Responsive video"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.video(src="/path/to/video.mp4", responsive=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.video(src="/base/images/placeholder.jpg", responsive=true) }}
             {{ ui.divider() }}
         </div>
 
@@ -726,12 +854,26 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {{ ui.alert("Operation completed successfully") }}
-                    {{ ui.alert("This message can be dismissed", dismissible=true) }}
-                    {{ ui.alert("Warning: Check your input", style="danger") }}
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.alert("Operation completed successfully") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Dismissible alert"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.alert("This message can be dismissed", dismissible=true) }}
+                {%- endraw %}
+            {%- endcall -%}
             {{ ui.alert("This message can be dismissed", dismissible=true) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Alert with custom styling"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.alert("Warning: Check your input", style="danger") }}
+                {%- endraw %}
+            {%- endcall -%}
             {{ ui.alert("Warning: Check your input", style="danger") }}
             {{ ui.divider() }}
         </div>
@@ -746,9 +888,9 @@
             {%- endcall -%}
             {{ ui.confirm_modal(content="Are you sure you want to delete this item?", title="Confirm Delete") }}
             {{ ui.divider() }}
-            ]        </div>
+        </div>
 
-            <div>
+        <div>
                 {{ ui.heading(_("Modal"), level=3, attrs={"id": "modal"}) }}
                 {{ ui.heading(_("Basic modal"), level=4) }}
                 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
@@ -757,6 +899,15 @@
                     {%- endraw %}
                 {%- endcall -%}
                 {{ ui.modal("This is modal content", id="example-modal") }}
+                {{ ui.divider() }}
+
+                {{ ui.heading(_("Modal with title"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.modal("Modal content with title", id="modal-with-title", title="Modal Title") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.modal("Modal content with title", id="modal-with-title", title="Modal Title") }}
                 {{ ui.divider() }}
             </div>
 
@@ -782,6 +933,15 @@
                 {%- endcall -%}
                 {{ ui.progress(value=50, max=100) }}
                 {{ ui.divider() }}
+
+                {{ ui.heading(_("Progress with label"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.progress(value=75, max=100, label="75% Complete") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.progress(value=75, max=100, label="75% Complete") }}
+                {{ ui.divider() }}
             </div>
 
             <div>
@@ -793,6 +953,15 @@
                     {%- endraw %}
                 {%- endcall -%}
                 {{ ui.spinner() }}
+                {{ ui.divider() }}
+
+                {{ ui.heading(_("Large spinner"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.spinner(size="lg") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.spinner(size="lg") }}
                 {{ ui.divider() }}
             </div>
 
@@ -806,6 +975,15 @@
                 {%- endcall -%}
                 {{ ui.toast("This is a toast message") }}
                 {{ ui.divider() }}
+
+                {{ ui.heading(_("Toast with title"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.toast("Toast message with title", title="Notification") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.toast("Toast message with title", title="Notification") }}
+                {{ ui.divider() }}
             </div>
 
             <div>
@@ -817,6 +995,15 @@
                     {%- endraw %}
                 {%- endcall -%}
                 {{ ui.tooltip(content="This is tooltip content", title="Tooltip Title") }}
+                {{ ui.divider() }}
+
+                {{ ui.heading(_("Tooltip with placement"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.tooltip(content="Positioned tooltip", title="Top Tooltip", placement="top") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.tooltip(content="Positioned tooltip", title="Top Tooltip", placement="top") }}
                 {{ ui.divider() }}
             </div>
     {%- endcall %}
@@ -831,6 +1018,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.autocomplete(name="search", placeholder="Search...") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Autocomplete with source"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.autocomplete(name="location", placeholder="Enter location", source="/api/locations") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.autocomplete(name="location", placeholder="Enter location", source="/api/locations") }}
             {{ ui.divider() }}
         </div>
 
@@ -853,10 +1049,19 @@
             {{ ui.heading(_("Basic extra field"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.extra_field(name="custom_field", label="Custom Field", value="") }}
+                    {{ ui.extra_field(index=0) }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.extra_field(name="custom_field", label="Custom Field", value="") }}
+            {{ ui.extra_field(index=0) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Extra field with data"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.extra_field(index=1, data={"key": "custom_field", "value": "custom_value"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.extra_field(index=1, data={"key": "custom_field", "value": "custom_value"}) }}
             {{ ui.divider() }}
         </div>
 
@@ -911,6 +1116,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.file_input(name="upload", label="Upload File") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("File input with accept"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.file_input(name="document", label="Upload Document", accept=".pdf,.doc,.docx") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.file_input(name="document", label="Upload Document", accept=".pdf,.doc,.docx") }}
             {{ ui.divider() }}
         </div>
 
@@ -967,10 +1181,10 @@
             {{ ui.heading(_("Basic form errors"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.form_errors(errors={"name": ["Name is required"], "email": ["Invalid email format"]}) }}
+                    {{ ui.form_errors(errors=["Error 1", "Error 2"]) }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.form_errors(errors={"name": ["Name is required"], "email": ["Invalid email format"]}) }}
+            {{ ui.form_errors(errors=["Error 1", "Error 2"]) }}
             {{ ui.divider() }}
         </div>
 
@@ -1017,6 +1231,24 @@
             {%- endcall -%}
             {{ ui.input(name="username", label="Username", placeholder="Enter username") }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Password input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.input(name="password", label="Password", type="password", placeholder="Enter password") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.input(name="password", label="Password", type="password", placeholder="Enter password") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Email input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.input(name="email", label="Email", type="email", placeholder="Enter email") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.input(name="email", label="Email", type="email", placeholder="Enter email") }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -1037,10 +1269,17 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {{ ui.radio(name="choice", label="Option 1", value="option1") }}
-                    {{ ui.radio(name="choice", label="Option 2", value="option2", checked=true) }}
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.radio(name="choice", label="Option 1", value="option1") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Checked radio"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.radio(name="choice", label="Option 2", value="option2", checked=true) }}
+                {%- endraw %}
+            {%- endcall -%}
             {{ ui.radio(name="choice", label="Option 2", value="option2", checked=true) }}
             {{ ui.divider() }}
         </div>
@@ -1050,10 +1289,19 @@
             {{ ui.heading(_("Basic range input"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.range_input(name="range", min=0, max=100, value=50) }}
+                    {{ ui.range_input(name="volume", min=0, max=100, value=50) }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.range_input(name="range", min=0, max=100, value=50) }}
+            {{ ui.range_input(name="volume", min=0, max=100, value=50) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Range input with step"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.range_input(name="brightness", min=0, max=100, value=75, step=5) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.range_input(name="brightness", min=0, max=100, value=75, step=5) }}
             {{ ui.divider() }}
         </div>
 
@@ -1067,6 +1315,15 @@
             {%- endcall -%}
             {{ ui.select(name="country", label="Country", options=[{"value": "us", "text": "United States"}, {"value": "ca", "text": "Canada"}]) }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Select with default value"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.select(name="category", label="Category", options=[{"value": "tech", "text": "Technology"}, {"value": "health", "text": "Health"}], selected="tech") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.select(name="category", label="Category", options=[{"value": "tech", "text": "Technology"}, {"value": "health", "text": "Health"}], selected="tech") }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -1079,6 +1336,15 @@
             {%- endcall -%}
             {{ ui.select_box(name="category", label="Category", options=[{"value": "tech", "text": "Technology"}, {"value": "health", "text": "Health"}]) }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Select box with default value"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.select_box(name="status", label="Status", options=[{"value": "active", "text": "Active"}, {"value": "inactive", "text": "Inactive"}], selected="active") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.select_box(name="status", label="Status", options=[{"value": "active", "text": "Active"}, {"value": "inactive", "text": "Inactive"}], selected="active") }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -1090,6 +1356,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.select_option(value="option1", text="Option 1") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Selected select option"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.select_option(value="option2", text="Option 2", selected=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.select_option(value="option2", text="Option 2", selected=true) }}
             {{ ui.divider() }}
         </div>
 
@@ -1351,15 +1626,31 @@
 
         <div>
             {{ ui.heading(_("Nav Item"), level=3, attrs={"id": "nav-item"}) }}
-            {{ ui.heading(_("Basic nav item"), level=4) }}
+            {{ ui.heading(_("Basic navigation item"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.nav_item(content="Home", href="/") }}
-                    {{ ui.nav_item(content="Datasets", href="/datasets", active=true) }}
+                    {{ ui.nav_item("Home", href="/") }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.nav_item(content="Home", href="/") }}
-            {{ ui.nav_item(content="Datasets", href="/datasets", active=true) }}
+            {{ ui.nav_item("Home", href="/") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Active navigation item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.nav_item("Datasets", href="/datasets", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.nav_item("Datasets", href="/datasets", active=true) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Navigation item with icon"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.nav_item((ui.icon("home") ~ " Home"), href="/") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.nav_item((ui.icon("home") ~ " Home"), href="/") }}
             {{ ui.divider() }}
         </div>
 
@@ -1385,7 +1676,25 @@
                     {{ ui.pagination(page=1, total=10, url_generator=h.pager_url) }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.pagination(page=1, total=3, url_generator=h.pager_url) }}
+            {{ ui.pagination(page=1, total=10, url_generator=h.pager_url) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Pagination with custom parameters"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.pagination(page=3, total=20, url_generator=h.pager_url, padding=3) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.pagination(page=3, total=20, url_generator=h.pager_url, padding=3) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Pagination with attributes"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.pagination(page=2, total=15, url_generator=h.pager_url, attrs={"class": "custom-pagination"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.pagination(page=2, total=15, url_generator=h.pager_url, attrs={"class": "custom-pagination"}) }}
             {{ ui.divider() }}
         </div>
     {%- endcall %}
@@ -1479,6 +1788,15 @@
             {%- endcall -%}
             {{ ui.search_input(name="q", value="search term", placeholder="Search...") }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Search input with custom label"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_input(name="query", label="Find datasets", placeholder="Enter search terms") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_input(name="query", label="Find datasets", placeholder="Enter search terms") }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -1490,6 +1808,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.search_results_header(item_count=25, first_item_position=1, last_item_position=10) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Search results header with query error"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_results_header(item_count=0, first_item_position=0, last_item_position=0, query_error="Invalid search query") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_results_header(item_count=0, first_item_position=0, last_item_position=0, query_error="Invalid search query") }}
             {{ ui.divider() }}
         </div>
 
@@ -1515,6 +1842,15 @@
             {%- endcall -%}
             {{ ui.search_submit_button("Search") }}
             {{ ui.divider() }}
+
+            {{ ui.heading(_("Search submit button with custom content"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_submit_button((ui.icon("search") ~ " Search")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_submit_button((ui.icon("search") ~ " Search")) }}
+            {{ ui.divider() }}
         </div>
 
         <div>
@@ -1526,6 +1862,15 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.search_pagination_info(total=127, first=1, last=10) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Search pagination info with custom template"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_pagination_info(total=50, first=21, last=30, template=_("Results {first} - {last} out of {total}")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_pagination_info(total=50, first=21, last=30, template=_("Results {first} - {last} out of {total}")) }}
             {{ ui.divider() }}
         </div>
     {%- endcall %}

@@ -77,7 +77,6 @@ wrapper and section components provide the structural container.
 {%- call ui.util.call(ui.facet_wrapper) -%}
     {{ ui.facet("CSV", key="format", value="csv", count=8, active=true) }}
 {%- endcall %}
-
 ```
 ///
 
@@ -169,7 +168,7 @@ layout when displaying multiple groups together.
 ```jinja2
 <!-- Basic group component -->
 {%- call ui.util.call(ui.group_wrapper) -%}
-    {{ ui.group(group_data) }}
+    {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
 {%- endcall %}
 ```
 ///
@@ -219,7 +218,7 @@ styling and layout when displaying multiple organizations together.
 ```jinja2
 <!-- Basic organization component -->
 {%- call ui.util.call(ui.organization_wrapper) -%}
-    {{ ui.organization(org_data) }}
+    {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
 {%- endcall %}
 ```
 ///
@@ -269,7 +268,7 @@ and layout when displaying multiple packages together.
 ```jinja2
 <!-- Basic package component -->
 {%- call ui.util.call(ui.package_wrapper) -%}
-    {{ ui.package(dataset_data) }}
+    {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
 {%- endcall %}
 ```
 ///
@@ -319,7 +318,7 @@ and layout when displaying multiple resources together.
 ```jinja2
 <!-- Basic resource component -->
 {%- call ui.util.call(ui.resource_wrapper) -%}
-    {{ ui.resource(resource_data) }}
+    {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
 {%- endcall %}
 
 ```
@@ -370,7 +369,7 @@ users together.
 ```jinja2
 <!-- Basic user component -->
 {%- call ui.util.call(ui.user_wrapper) -%}
-    {{ ui.user(user_data) }}
+    {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
 {%- endcall %}
 ```
 ///
