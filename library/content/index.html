@@ -1141,7 +1141,7 @@ layout when displaying multiple groups together.</p>
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic group component --&gt;
 {%- call ui.util.call(ui.group_wrapper) -%}
-    {{ ui.group(group_data) }}
+    {{ ui.group({&quot;name&quot;: &quot;test-group&quot;, &quot;title&quot;: &quot;Test Group&quot;, &quot;description&quot;: &quot;A test group&quot;, &quot;type&quot;: &quot;group&quot;}) }}
 {%- endcall %}
 </code></pre></div>
 </div>
@@ -1194,7 +1194,7 @@ styling and layout when displaying multiple organizations together.</p>
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic organization component --&gt;
 {%- call ui.util.call(ui.organization_wrapper) -%}
-    {{ ui.organization(org_data) }}
+    {{ ui.organization({&quot;name&quot;: &quot;test-organization&quot;, &quot;title&quot;: &quot;Test Organization&quot;, &quot;description&quot;: &quot;A test organization&quot;, &quot;type&quot;: &quot;organization&quot;}) }}
 {%- endcall %}
 </code></pre></div>
 </div>
@@ -1247,7 +1247,7 @@ and layout when displaying multiple packages together.</p>
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic package component --&gt;
 {%- call ui.util.call(ui.package_wrapper) -%}
-    {{ ui.package(dataset_data) }}
+    {{ ui.package({&quot;name&quot;: &quot;test-dataset&quot;, &quot;title&quot;: &quot;Test Dataset&quot;, &quot;description&quot;: &quot;A test dataset&quot;, &quot;type&quot;: &quot;dataset&quot;}) }}
 {%- endcall %}
 </code></pre></div>
 </div>
@@ -1300,7 +1300,7 @@ and layout when displaying multiple resources together.</p>
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic resource component --&gt;
 {%- call ui.util.call(ui.resource_wrapper) -%}
-    {{ ui.resource(resource_data) }}
+    {{ ui.resource({&quot;name&quot;: &quot;test-group&quot;, &quot;id&quot;: &quot;test-resource&quot;, &quot;description&quot;: &quot;A test group&quot;, &quot;package_id&quot;: &quot;test-package&quot;}) }}
 {%- endcall %}
 </code></pre></div>
 </div>
@@ -1353,7 +1353,7 @@ users together.</p>
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic user component --&gt;
 {%- call ui.util.call(ui.user_wrapper) -%}
-    {{ ui.user(user_data) }}
+    {{ ui.user({&quot;name&quot;: &quot;test-user&quot;, &quot;fullname&quot;: &quot;Test User&quot;, &quot;id&quot;: &quot;test-user&quot;}) }}
 {%- endcall %}
 </code></pre></div>
 </div>

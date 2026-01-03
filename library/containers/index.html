@@ -1004,7 +1004,7 @@ wrapper provides the container for multiple accordions.</p>
 
 &lt;!-- Open accordion by default --&gt;
 {{ ui.accordion_wrapper(
-    ui.accordion(&quot;Detailed information about this section&quot;, title=&quot;More Information&quot;)
+    ui.accordion(content=&quot;This content is visible by default&quot;, title=&quot;Default Open&quot;, open=true)
 ) }}
 </code></pre></div>
 </div>
@@ -1471,8 +1471,8 @@ container structure for multiple panels.</p>
 <div class="admonition example">
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic panel --&gt;
-{{ panel_handle(&quot;Show #1&quot;, id=&quot;panel-1&quot;) }}
-{{ panel_handle(&quot;Show #2&quot;, id=&quot;panel-2&quot;) }}
+{{ ui.panel_handle(&quot;Show #1&quot;, id=&quot;panel-1&quot;) }}
+{{ ui.panel_handle(&quot;Show #2&quot;, id=&quot;panel-2&quot;) }}
 
 {%- call ui.util.call(ui.panel_wrapper) -%}
     {{ ui.panel(&quot;Panel #1 content goes here&quot;, id=&quot;panel-1&quot;) }}

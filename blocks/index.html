@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/parameters/">
+        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/blocks/">
       
       
-        <link rel="prev" href="../theming-parties/">
-      
-      
-        <link rel="next" href="../library/containers/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +18,7 @@
     
     
       
-        <title>Standard Parameter Values - ckanext-theming</title>
+        <title>Template Blocks - ckanext-theming</title>
       
     
     
@@ -76,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#standard-parameter-values" class="md-skip">
+        <a href="#template-blocks" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Standard Parameter Values
+              Template Blocks
             
           </span>
         </div>
@@ -309,32 +305,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Standard Parameter Values
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../parameters/" class="md-nav__link">
         
   
   
@@ -345,116 +319,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#size-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Size Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stylevariant-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Style/Variant Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#icon-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Icon Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#direction-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Direction Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#alignment-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Alignment Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#position-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Position Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#state-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      State Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spacing-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Spacing Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#color-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Color Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation-guidelines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation Guidelines
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -877,90 +741,174 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#size-parameters" class="md-nav__link">
+  <a href="#generic-blocks-available-on-all-pages" class="md-nav__link">
     <span class="md-ellipsis">
-      Size Parameters
+      Generic Blocks (Available on All Pages)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic Blocks (Available on All Pages)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#page-structure-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page Structure Blocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Layout Blocks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Blocks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#page-specific-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page-Specific Blocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page-Specific Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dataset-pages-packagereadhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Pages (package/read.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataset-search-packagesearchhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Search (package/search.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organization-pages-organizationreadhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organization Pages (organization/read.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-pages-groupreadhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Group Pages (group/read.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-pages-userreadhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Pages (user/read.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-pages-userdashboardhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard Pages (user/dashboard.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-pages-adminindexhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Admin Pages (admin/index.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#home-page-homeindexhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home Page (home/index.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#about-page-homeabouthtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      About Page (home/about.html)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-pages-error_document_templatehtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Pages (error_document_template.html)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#block-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      Block Relationships
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#stylevariant-parameters" class="md-nav__link">
+  <a href="#overriding-blocks" class="md-nav__link">
     <span class="md-ellipsis">
-      Style/Variant Parameters
+      Overriding Blocks
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#icon-parameters" class="md-nav__link">
+  <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
-      Icon Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#direction-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Direction Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#alignment-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Alignment Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#position-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Position Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#state-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      State Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#spacing-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Spacing Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#color-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Color Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#implementation-guidelines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Implementation Guidelines
+      Best Practices
     </span>
   </a>
   
@@ -985,447 +933,155 @@
   
 
 
-<h1 id="standard-parameter-values">Standard Parameter Values</h1>
-<p>This page describes the expected values for common parameters across all UI
-components. Using standardized parameter values ensures consistency across
-different themes and simplifies theme switching. Each theme implementation
-should support these standard values, though they may translate them to
-framework-specific equivalents.</p>
-<h2 id="size-parameters">Size Parameters</h2>
-<p>Size parameters are used across many components to control sizing and
-spacing. The following values are standardized:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>xs</code></td>
-<td>Extra small size</td>
-<td>Bootstrap: <code>sm</code>, Tailwind: <code>xs</code>, Bulma: <code>is-small</code></td>
-</tr>
-<tr>
-<td><code>sm</code></td>
-<td>Small size</td>
-<td>Bootstrap: <code>sm</code>, Tailwind: <code>sm</code>, Bulma: <code>is-small</code></td>
-</tr>
-<tr>
-<td><code>md</code></td>
-<td>Medium size (default)</td>
-<td>Bootstrap: <code>md</code> (or no class), Tailwind: <code>md</code>, Bulma: (no class)</td>
-</tr>
-<tr>
-<td><code>lg</code></td>
-<td>Large size</td>
-<td>Bootstrap: <code>lg</code>, Tailwind: <code>lg</code>, Bulma: <code>is-medium</code></td>
-</tr>
-<tr>
-<td><code>xl</code></td>
-<td>Extra large size</td>
-<td>Bootstrap: <code>lg</code>, Tailwind: <code>xl</code>, Bulma: <code>is-large</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="stylevariant-parameters">Style/Variant Parameters</h2>
-<p>Style parameters control the visual appearance and semantic meaning of
-components. The following values are standardized:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>primary</code></td>
-<td>Primary/important style</td>
-<td>Bootstrap: <code>primary</code>, Tailwind: <code>primary</code>, Bulma: <code>is-primary</code></td>
-</tr>
-<tr>
-<td><code>secondary</code></td>
-<td>Secondary/alternative style</td>
-<td>Bootstrap: <code>secondary</code>, Tailwind: <code>secondary</code>, Bulma: <code>is-secondary</code> or <code>is-light</code></td>
-</tr>
-<tr>
-<td><code>success</code></td>
-<td>Success/positive state</td>
-<td>Bootstrap: <code>success</code>, Tailwind: <code>success</code>, Bulma: <code>is-success</code></td>
-</tr>
-<tr>
-<td><code>warning</code></td>
-<td>Warning/cautionary state</td>
-<td>Bootstrap: <code>warning</code>, Tailwind: <code>warning</code>, Bulma: <code>is-warning</code></td>
-</tr>
-<tr>
-<td><code>danger</code></td>
-<td>Danger/error/destructive action</td>
-<td>Bootstrap: <code>danger</code>, Tailwind: <code>danger</code>, Bulma: <code>is-danger</code></td>
-</tr>
-<tr>
-<td><code>info</code></td>
-<td>Informational state</td>
-<td>Bootstrap: <code>info</code>, Tailwind: <code>info</code>, Bulma: <code>is-info</code></td>
-</tr>
-<tr>
-<td><code>light</code></td>
-<td>Light/low emphasis style</td>
-<td>Bootstrap: <code>light</code>, Tailwind: <code>light</code>, Bulma: <code>is-light</code></td>
-</tr>
-<tr>
-<td><code>dark</code></td>
-<td>Dark/high contrast style</td>
-<td>Bootstrap: <code>dark</code>, Tailwind: <code>dark</code>, Bulma: <code>is-dark</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="icon-parameters">Icon Parameters</h2>
-<p>Icon parameters expect Font Awesome icon names without the <code>fa-</code> prefix. Themes
-that use different icon sets should provide translation via <code>ui.util.icon()</code>.</p>
-<p><strong>Common icon names:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Icon</th>
-<th>Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>home</code></td>
-<td>Home navigation</td>
-</tr>
-<tr>
-<td><code>search</code></td>
-<td>Search functionality</td>
-</tr>
-<tr>
-<td><code>user</code></td>
-<td>User/profile related</td>
-</tr>
-<tr>
-<td><code>cog</code></td>
-<td>Settings/configuration</td>
-</tr>
-<tr>
-<td><code>plus</code></td>
-<td>Add/create actions</td>
-</tr>
-<tr>
-<td><code>minus</code></td>
-<td>Remove/reduce actions</td>
-</tr>
-<tr>
-<td><code>trash</code></td>
-<td>Delete/trash actions</td>
-</tr>
-<tr>
-<td><code>edit</code></td>
-<td>Edit/update actions</td>
-</tr>
-<tr>
-<td><code>download</code></td>
-<td>Download actions</td>
-</tr>
-<tr>
-<td><code>upload</code></td>
-<td>Upload actions</td>
-</tr>
-<tr>
-<td><code>eye</code></td>
-<td>View/show actions</td>
-</tr>
-<tr>
-<td><code>lock</code></td>
-<td>Security/locked state</td>
-</tr>
-<tr>
-<td><code>unlock</code></td>
-<td>Unlocked/open state</td>
-</tr>
-<tr>
-<td><code>info-circle</code></td>
-<td>Information/help</td>
-</tr>
-<tr>
-<td><code>exclamation-triangle</code></td>
-<td>Warning</td>
-</tr>
-<tr>
-<td><code>times</code></td>
-<td>Close/remove/cancel</td>
-</tr>
-<tr>
-<td><code>check</code></td>
-<td>Success/confirmation</td>
-</tr>
-<tr>
-<td><code>chevron-down</code></td>
-<td>Expand/down arrow</td>
-</tr>
-<tr>
-<td><code>chevron-up</code></td>
-<td>Collapse/up arrow</td>
-</tr>
-<tr>
-<td><code>chevron-left</code></td>
-<td>Previous/back</td>
-</tr>
-<tr>
-<td><code>chevron-right</code></td>
-<td>Next/forward</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Themes should provide icon mapping to translate these names to their specific
-icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Theme</span><span class="p">]:</span>
+<h1 id="template-blocks">Template Blocks</h1>
+<p>CKAN theming system provides a comprehensive set of template blocks that allow themes to customize different parts of the page layout. These blocks are defined in the base templates and can be overridden by child templates to customize the appearance and content of specific sections.</p>
+<h2 id="generic-blocks-available-on-all-pages">Generic Blocks (Available on All Pages)</h2>
+<p>These blocks are defined in <code>_base.html</code> and <code>_layout.html</code> templates and are available on all pages throughout the application:</p>
+<h3 id="page-structure-blocks">Page Structure Blocks</h3>
+<ul>
+<li><code>title</code>: Sets the page title in the <code>&lt;title&gt;</code> tag</li>
+<li><code>meta</code>: Contains meta tags in the head section</li>
+<li><code>head_extras</code>: Additional head content (CSS, favicons, etc.)</li>
+<li><code>body_extras</code>: Additional attributes for the body tag</li>
+<li><code>flash</code>: Displays flash messages</li>
+<li><code>skip</code>: Skip navigation links for accessibility</li>
+<li><code>masthead</code>: Site header/masthead section</li>
+<li><code>skip_primary_nav</code>: Skip link for primary navigation</li>
+<li><code>primary_nav</code>: Main navigation menu</li>
+<li><code>content</code>: Main content area</li>
+<li><code>footer</code>: Page footer content</li>
+</ul>
+<h3 id="layout-blocks">Layout Blocks</h3>
+<ul>
+<li><code>prelude</code>: Content before the main layout</li>
+<li><code>layout</code>: The main layout structure</li>
+<li><code>main_content</code>: The main content section</li>
+<li><code>secondary_content</code>: Sidebar or secondary content area</li>
+<li><code>tertiary_content</code>: Additional content area (if needed)</li>
+<li><code>page_header</code>: Page-specific header content</li>
+<li><code>page_title</code>: Page title display</li>
+<li><code>breadcrumbs</code>: Breadcrumb navigation</li>
+<li><code>actions_content</code>: Action buttons or links area</li>
+</ul>
+<h3 id="content-blocks">Content Blocks</h3>
+<ul>
+<li><code>primary_content_inner</code>: Inner content of the main content area</li>
+<li><code>secondary_content_inner</code>: Inner content of the secondary area</li>
+<li><code>tertiary_content_inner</code>: Inner content of the tertiary area</li>
+<li><code>content_action</code>: Content-specific action buttons</li>
+<li><code>content_toolbar</code>: Toolbar for content actions</li>
+<li><code>content_footer</code>: Footer for content area</li>
+</ul>
+<h2 id="page-specific-blocks">Page-Specific Blocks</h2>
+<p>These blocks are available on specific page types and provide fine-grained control over page content:</p>
+<h3 id="dataset-pages-packagereadhtml">Dataset Pages (<code>package/read.html</code>)</h3>
+<ul>
+<li><code>package_header</code>: Dataset-specific header</li>
+<li><code>package_social</code>: Social sharing buttons for dataset</li>
+<li><code>package_description</code>: Dataset description area</li>
+<li><code>package_tags</code>: Dataset tags display</li>
+<li><code>package_resources</code>: Dataset resources section</li>
+<li><code>package_info</code>: Dataset metadata information</li>
+<li><code>package_license</code>: License information</li>
+<li><code>package_organization</code>: Organization information</li>
+<li><code>package_groups</code>: Groups information</li>
+<li><code>package_activity</code>: Activity stream for dataset</li>
+</ul>
+<h3 id="dataset-search-packagesearchhtml">Dataset Search (<code>package/search.html</code>)</h3>
+<ul>
+<li><code>dataset_search_title</code>: Title for dataset search page</li>
+<li><code>dataset_search_form</code>: Dataset search form</li>
+<li><code>dataset_search_results</code>: Search results display</li>
+<li><code>dataset_facets</code>: Facet filters for dataset search</li>
+<li><code>dataset_search_adv_filters</code>: Advanced filters</li>
+</ul>
+<h3 id="organization-pages-organizationreadhtml">Organization Pages (<code>organization/read.html</code>)</h3>
+<ul>
+<li><code>organization_header</code>: Organization header</li>
+<li><code>organization_description</code>: Organization description</li>
+<li><code>organization_content</code>: Main organization content</li>
+<li><code>organization_facets</code>: Organization-specific facets</li>
+<li><code>organization_menu</code>: Organization navigation menu</li>
+</ul>
+<h3 id="group-pages-groupreadhtml">Group Pages (<code>group/read.html</code>)</h3>
+<ul>
+<li><code>group_header</code>: Group header</li>
+<li><code>group_description</code>: Group description</li>
+<li><code>group_content</code>: Main group content</li>
+<li><code>group_facets</code>: Group-specific facets</li>
+<li><code>group_menu</code>: Group navigation menu</li>
+</ul>
+<h3 id="user-pages-userreadhtml">User Pages (<code>user/read.html</code>)</h3>
+<ul>
+<li><code>user_header</code>: User header</li>
+<li><code>user_about</code>: User about section</li>
+<li><code>user_content</code>: Main user content</li>
+<li><code>user_menu</code>: User navigation menu</li>
+<li><code>user_followers</code>: User followers section</li>
+<li><code>user_activity</code>: User activity stream</li>
+</ul>
+<h3 id="dashboard-pages-userdashboardhtml">Dashboard Pages (<code>user/dashboard.html</code>)</h3>
+<ul>
+<li><code>dashboard_header</code>: Dashboard header</li>
+<li><code>dashboard_activity_stream</code>: Activity stream for dashboard</li>
+<li><code>dashboard_datasets</code>: User's datasets</li>
+<li><code>dashboard_organizations</code>: User's organizations</li>
+<li><code>dashboard_groups</code>: User's groups</li>
+</ul>
+<h3 id="admin-pages-adminindexhtml">Admin Pages (<code>admin/index.html</code>)</h3>
+<ul>
+<li><code>admin_content</code>: Main admin content area</li>
+<li><code>admin_tabs</code>: Administrative tabs</li>
+<li><code>admin_system_info</code>: System information display</li>
+</ul>
+<h3 id="home-page-homeindexhtml">Home Page (<code>home/index.html</code>)</h3>
+<ul>
+<li><code>home_header</code>: Home page header</li>
+<li><code>home_introduction</code>: Introduction section</li>
+<li><code>home_main</code>: Main home page content</li>
+<li><code>home_sidebar</code>: Home page sidebar</li>
+<li><code>home_tertiary</code>: Tertiary content area for home page</li>
+</ul>
+<h3 id="about-page-homeabouthtml">About Page (<code>home/about.html</code>)</h3>
+<ul>
+<li><code>about_header</code>: About page header</li>
+<li><code>about_main</code>: Main about page content</li>
+<li><code>about_sidebar</code>: About page sidebar</li>
+</ul>
+<h3 id="error-pages-error_document_templatehtml">Error Pages (<code>error_document_template.html</code>)</h3>
+<ul>
+<li><code>error_title</code>: Error page title</li>
+<li><code>error_message</code>: Error message display</li>
+<li><code>error_content</code>: Main error page content</li>
+</ul>
+<h2 id="block-relationships">Block Relationships</h2>
+<p>Many blocks work in relationship with each other:</p>
+<ul>
+<li><code>primary_content</code> contains <code>primary_content_inner</code></li>
+<li><code>secondary_content</code> contains <code>secondary_content_inner</code></li>
+<li><code>content_action</code> appears in context of specific content types</li>
+<li><code>page_header</code> contains <code>page_title</code> and <code>breadcrumbs</code></li>
+</ul>
+<h2 id="overriding-blocks">Overriding Blocks</h2>
+<p>To override a block in a child template:</p>
+<div class="highlight"><pre><span></span><code>{% block title %}My Custom Page Title{% endblock %}
 
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;my_theme&quot;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;themes/bare&quot;</span><span class="p">),</span>
-            <span class="n">icon_map</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;home&quot;</span><span class="p">:</span> <span class="s2">&quot;material-home-icon&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="s2">&quot;glass&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;human-figure&quot;</span><span class="p">,</span> <span class="o">..</span><span class="p">}</span>
-        <span class="p">),</span>
-    <span class="p">}</span>
+{% block content %}
+    &lt;div class=&quot;my-custom-content&quot;&gt;
+        {{ super() }}  {# Include parent content #}
+        &lt;!-- Additional custom content --&gt;
+    &lt;/div&gt;
+{% endblock %}
 </code></pre></div>
-</div>
-<h2 id="direction-parameters">Direction Parameters</h2>
-<p>Direction parameters control layout orientation and positioning:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>row</code></td>
-<td>Horizontal layout</td>
-<td>Flexbox: <code>flex-row</code>, CSS Grid: <code>grid-flow-col</code></td>
-</tr>
-<tr>
-<td><code>column</code></td>
-<td>Vertical layout</td>
-<td>Flexbox: <code>flex-col</code>, CSS Grid: <code>grid-flow-row</code></td>
-</tr>
-<tr>
-<td><code>row-reverse</code></td>
-<td>Reverse horizontal layout</td>
-<td>Flexbox: <code>flex-row-reverse</code></td>
-</tr>
-<tr>
-<td><code>column-reverse</code></td>
-<td>Reverse vertical layout</td>
-<td>Flexbox: <code>flex-column-reverse</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="alignment-parameters">Alignment Parameters</h2>
-<p>Alignment parameters control content alignment within components:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>start</code></td>
-<td>Align to start (left/top)</td>
-<td>Bootstrap: <code>start</code>, Tailwind: <code>items-start</code>, Bulma: <code>has-text-left</code></td>
-</tr>
-<tr>
-<td><code>center</code></td>
-<td>Center alignment</td>
-<td>Bootstrap: <code>center</code>, Tailwind: <code>items-center</code>, Bulma: <code>has-text-centered</code></td>
-</tr>
-<tr>
-<td><code>end</code></td>
-<td>Align to end (right/bottom)</td>
-<td>Bootstrap: <code>end</code>, Tailwind: <code>items-end</code>, Bulma: <code>has-text-right</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="position-parameters">Position Parameters</h2>
-<p>Position parameters control element positioning and placement:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>top</code></td>
-<td>Top position</td>
-<td>Bootstrap: <code>top</code>, Tailwind: <code>top-0</code>, CSS: <code>position: top</code></td>
-</tr>
-<tr>
-<td><code>bottom</code></td>
-<td>Bottom position</td>
-<td>Bootstrap: <code>bottom</code>, Tailwind: <code>bottom-0</code></td>
-</tr>
-<tr>
-<td><code>left</code></td>
-<td>Left position</td>
-<td>Bootstrap: <code>left</code>, Tailwind: <code>left-0</code></td>
-</tr>
-<tr>
-<td><code>right</code></td>
-<td>Right position</td>
-<td>Bootstrap: <code>right</code>, Tailwind: <code>right-0</code></td>
-</tr>
-<tr>
-<td><code>center</code></td>
-<td>Center position</td>
-<td>Bootstrap: <code>center</code>, Tailwind: <code>center</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="state-parameters">State Parameters</h2>
-<p>State parameters control component states and behaviors:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>active</code></td>
-<td>Active/selected state</td>
-<td>Bootstrap: <code>active</code>, Tailwind: <code>active</code>, Bulma: <code>is-active</code></td>
-</tr>
-<tr>
-<td><code>disabled</code></td>
-<td>Disabled/inactive state</td>
-<td>Bootstrap: <code>disabled</code>, Tailwind: <code>disabled</code>, Bulma: <code>is-disabled</code></td>
-</tr>
-<tr>
-<td><code>readonly</code></td>
-<td>Read-only state</td>
-<td>HTML attribute: <code>readonly</code></td>
-</tr>
-<tr>
-<td><code>required</code></td>
-<td>Required state</td>
-<td>HTML attribute: <code>required</code></td>
-</tr>
-<tr>
-<td><code>checked</code></td>
-<td>Checked state (for checkboxes/radios)</td>
-<td>HTML attribute: <code>checked</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="spacing-parameters">Spacing Parameters</h2>
-<p>Spacing parameters control padding and margin:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>none</code></td>
-<td>No spacing</td>
-<td>Bootstrap: <code>0</code>, Tailwind: <code>0</code>, Bulma: <code>0</code></td>
-</tr>
-<tr>
-<td><code>sm</code></td>
-<td>Small spacing</td>
-<td>Bootstrap: <code>1</code>, Tailwind: <code>1</code>, Bulma: <code>1</code></td>
-</tr>
-<tr>
-<td><code>md</code></td>
-<td>Medium spacing</td>
-<td>Bootstrap: <code>2</code>, Tailwind: <code>2</code>, Bulma: <code>2</code></td>
-</tr>
-<tr>
-<td><code>lg</code></td>
-<td>Large spacing</td>
-<td>Bootstrap: <code>3</code>, Tailwind: <code>3</code>, Bulma: <code>3</code></td>
-</tr>
-<tr>
-<td><code>xl</code></td>
-<td>Extra large spacing</td>
-<td>Bootstrap: <code>4</code>, Tailwind: <code>4</code>, Bulma: <code>4</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="color-parameters">Color Parameters</h2>
-<p>Color parameters control color schemes and themes:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Description</th>
-<th>Framework Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>primary</code></td>
-<td>Primary theme color</td>
-<td>Bootstrap: <code>primary</code>, Tailwind: <code>primary</code>, Bulma: <code>primary</code></td>
-</tr>
-<tr>
-<td><code>secondary</code></td>
-<td>Secondary theme color</td>
-<td>Bootstrap: <code>secondary</code>, Tailwind: <code>secondary</code>, Bulma: <code>secondary</code></td>
-</tr>
-<tr>
-<td><code>success</code></td>
-<td>Success/green color</td>
-<td>Bootstrap: <code>success</code>, Tailwind: <code>success</code>, Bulma: <code>success</code></td>
-</tr>
-<tr>
-<td><code>danger</code></td>
-<td>Error/red color</td>
-<td>Bootstrap: <code>danger</code>, Tailwind: <code>danger</code>, Bulma: <code>danger</code></td>
-</tr>
-<tr>
-<td><code>warning</code></td>
-<td>Warning/orange color</td>
-<td>Bootstrap: <code>warning</code>, Tailwind: <code>warning</code>, Bulma: <code>warning</code></td>
-</tr>
-<tr>
-<td><code>info</code></td>
-<td>Informational/blue color</td>
-<td>Bootstrap: <code>info</code>, Tailwind: <code>info</code>, Bulma: <code>info</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="implementation-guidelines">Implementation Guidelines</h2>
-<p>When implementing themes, ensure that:</p>
+<p>The <code>super()</code> function can be used to include content from the parent template while adding custom content.</p>
+<h2 id="best-practices">Best Practices</h2>
 <ol>
-<li><strong>Standard values are supported</strong>: Your theme should handle all standard parameter values listed above</li>
-<li><strong>Translation is provided</strong>: If your CSS framework uses different naming conventions, implement translation in your theme</li>
-<li><strong>Fallbacks are available</strong>: Provide sensible defaults when standard values don't map directly to your framework</li>
-<li><strong>Consistency is maintained</strong>: Same parameter values should produce similar visual results across different themes</li>
-<li><strong>Accessibility is preserved</strong>: Ensure that visual differences are also conveyed through appropriate ARIA attributes and semantic markup</li>
+<li>Use <code>super()</code> when you want to extend rather than replace parent content</li>
+<li>Maintain semantic structure when overriding blocks</li>
+<li>Respect accessibility features when customizing navigation blocks</li>
+<li>Keep related content together within appropriate blocks</li>
+<li>Use consistent styling patterns across similar block types</li>
 </ol>
-<p>By following these standardized parameter values, themes become more
-interoperable and users can switch between themes with minimal disruption to
-their expectations about component behavior and appearance.</p>
 
 
 
@@ -1456,44 +1112,6 @@ their expectations about component behavior and appearance.</p>
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../theming-parties/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Theming Parties">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Theming Parties
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../library/containers/" class="md-footer__link md-footer__link--next" aria-label="Next: Containers">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Containers
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">

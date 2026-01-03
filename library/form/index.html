@@ -565,15 +565,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#autocomplete" class="md-nav__link">
-    <span class="md-ellipsis">
-      Autocomplete
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#checkbox" class="md-nav__link">
     <span class="md-ellipsis">
       Checkbox
@@ -987,15 +978,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#autocomplete" class="md-nav__link">
-    <span class="md-ellipsis">
-      Autocomplete
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#checkbox" class="md-nav__link">
     <span class="md-ellipsis">
       Checkbox
@@ -1211,25 +1193,6 @@ structured relationships - for example, <a class="autorefs autorefs-internal" ti
 <a class="autorefs autorefs-internal" title="Form Start" href="#form-start"><code>form_start</code></a>, <a class="autorefs autorefs-internal" title="Form End" href="#form-end"><code>form_end</code></a>,
 <a class="autorefs autorefs-internal" title="Form Actions" href="#form-actions"><code>form_actions</code></a>, and <a class="autorefs autorefs-internal" title="Form Errors" href="#form-errors"><code>form_errors</code></a> to create
 complete form experiences.</p>
-<h2 id="autocomplete">Autocomplete</h2>
-<p>The <a class="autorefs autorefs-internal" title="Autocomplete" href="#autocomplete"><code>autocomplete</code></a> component creates input fields with autocomplete
-functionality that suggests possible values as users type. This component is
-particularly valuable for forms with large sets of possible values, such as
-location selectors, category pickers, or user search fields.</p>
-<p>Autocomplete components provide enhanced user experience by reducing typing
-effort and helping users select from predefined options. They typically display
-suggestions in a dropdown list as the user types, filtering options based on
-the input. The component handles accessibility requirements and ensures
-suggestions are properly announced to screen readers.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic autocomplete --&gt;
-{{ ui.autocomplete(name=&quot;search&quot;, placeholder=&quot;Search...&quot;) }}
-
-&lt;!-- Autocomplete with source --&gt;
-{{ ui.autocomplete(name=&quot;location&quot;, placeholder=&quot;Enter location&quot;, source=&quot;/api/locations&quot;) }}
-</code></pre></div>
-</div>
 <h2 id="checkbox">Checkbox</h2>
 <p>The <a class="autorefs autorefs-internal" title="Checkbox" href="#checkbox"><code>checkbox</code></a> component creates checkbox input elements that allow users
 to select one or multiple options from a set. Checkboxes are fundamental for
@@ -1654,7 +1617,7 @@ resolve the issues.</p>
 <div class="admonition example">
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic form errors --&gt;
-{{ ui.form_errors(errors={&quot;name&quot;: [&quot;Name is required&quot;], &quot;email&quot;: [&quot;Invalid email format&quot;]}) }}
+{{ ui.form_errors(errors={&quot;Name&quot;: &quot;Name is required&quot;, &quot;Email&quot;: &quot;Invalid email format&quot;}) }}
 </code></pre></div>
 </div>
 <table>
