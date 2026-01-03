@@ -150,7 +150,7 @@ components to create consistent menu experiences across different themes.
 
 ```jinja2
 <!-- Basic dropdown wrapper -->
-{% call ui.util.call(ui.dropdown_wrapper) %}
+{% call ui.util.call(ui.dropdown_wrapper, title="Dropdown") %}
     {{ ui.dropdown_item("Option 1", href="/option1") }}
     {{ ui.dropdown_item("Option 2", href="/option2") }}
 {% endcall %}
@@ -199,7 +199,7 @@ with [`group`][] components to display organizational structures within CKAN.
 ```jinja2
 <!-- Basic group wrapper -->
 {% call ui.util.call(ui.group_wrapper) %}
-    {{ ui.group(group_data) }}
+    {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
 {% endcall %}
 ```
 ///
@@ -274,7 +274,7 @@ members, and related content within CKAN.
 ```jinja2
 <!-- Basic organization wrapper -->
 {% call ui.util.call(ui.organization_wrapper) %}
-    {{ ui.organization(org_data) }}
+    {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
 {% endcall %}
 ```
 ///
@@ -293,7 +293,7 @@ information effectively.
 ```jinja2
 <!-- Basic package wrapper -->
 {% call ui.util.call(ui.package_wrapper) %}
-    {{ ui.package(dataset_data) }}
+    {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
 {% endcall %}
 ```
 ///
@@ -358,7 +358,7 @@ with [`resource`][] components to display resource information effectively.
 ```jinja2
 <!-- Basic resource wrapper -->
 {% call ui.util.call(ui.resource_wrapper) %}
-    {{ ui.resource(resource_data) }}
+    {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
 {% endcall %}
 ```
 ///
@@ -405,7 +405,7 @@ information maintain consistent styling and layout. This wrapper works with
 ```jinja2
 <!-- Basic user wrapper -->
 {% call ui.util.call(ui.user_wrapper) %}
-    {{ ui.user(user_data) }}
+    {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
 {% endcall %}
 ```
 ///

@@ -179,7 +179,7 @@ to ensure buttons are both visually appealing and functionally accessible.
 {{ ui.button("View Details", href="/details") }}
 
 <!-- Button with attributes -->
-{{ ui.button("Delete", type="submit", style="danger", attrs={"onclick": "return confirm('Are you sure?')"}) }}
+{{ ui.button("Button with callback", type="submit", style="danger", attrs={"onclick": "return confirm('Are you sure?')"}) }}
 ```
 ///
 

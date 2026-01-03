@@ -1,8 +1,3 @@
-{%- macro autocomplete(content, source, multiple, param_name="q", param_template="{value}") -%}
-    {# TODO: implement autocomplete #}
-    {{ ui.input(content, **kwargs) }}
-{%- endmacro %}
-
 {%- macro checkbox(content, checked, value="on") -%}
     {%- if checked -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
@@ -263,6 +258,7 @@ this.parentNode.insertBefore(tpl, this);
             {%- if multiple %} multiple{%- endif %}
             {%- if nested_content %} aria-describedby="{{ help_id }}"{% endif %}
             {%- if errors %} aria-invalid="true"{% endif %}
+        >
             {{ content }}
         </select>
         {%- if errors %}

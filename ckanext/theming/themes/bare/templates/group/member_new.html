@@ -24,14 +24,7 @@
 
     {%- call ui.util.call(ui.form, method="POST") -%}
 
-        {% if user_dict %}
-            {{ ui.input(name="username", label=_("Username"), value=user_dict.name, attrs={"readonly": true}) }}
-
-        {% else %}
-            {%- call ui.util.call(ui.autocomplete, name="username", label=_('Existing User'), source="/api/2/util/user/autocomplete") -%}
-                {{ _('If you wish to add an existing user, search for their username below.') }}
-            {%- endcall %}
-        {% endif %}
+        {{ ui.input(name="username", label=_("Username"), value=user_dict.name, attrs={"readonly": true}) }}
 
         {{ ui.select(name='role', label=_('Role'), options=roles, selected=user_role) }}
 

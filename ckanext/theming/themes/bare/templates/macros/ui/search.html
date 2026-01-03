@@ -13,7 +13,7 @@
 {%- macro search_results_header(item_count, first_item_position, last_item_position, query_error) -%}
     {%- call ui.util.call(ui.heading, level=2, **kwargs) -%}
         {%- if query_error %}
-            {{ _('Error: {error}').format(query_error) }}
+            {{ _('Error: {error}').format(error=query_error) }}
 
         {%- else %}
             {%- if item_count %}

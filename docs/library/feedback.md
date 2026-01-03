@@ -399,8 +399,5 @@ enhances user understanding without requiring dedicated interface space.
 
 <!-- Tooltip with position -->
 {{ ui.tooltip("Info", tooltip="Additional information", position="top") }}
-
-<!-- Tooltip with attributes -->
-{{ ui.tooltip(ui.icon("help"), tooltip="Help information", attrs={"class": "help-tooltip"}) }}
 ```
 ///

@@ -44,7 +44,7 @@ wrapper provides the container for multiple accordions.
 
 <!-- Open accordion by default -->
 {{ ui.accordion_wrapper(
-    ui.accordion("Detailed information about this section", title="More Information")
+    ui.accordion(content="This content is visible by default", title="Default Open", open=true)
 ) }}
 ```
 ///
@@ -416,8 +416,8 @@ container structure for multiple panels.
 
 ```jinja2
 <!-- Basic panel -->
-{{ panel_handle("Show #1", id="panel-1") }}
-{{ panel_handle("Show #2", id="panel-2") }}
+{{ ui.panel_handle("Show #1", id="panel-1") }}
+{{ ui.panel_handle("Show #2", id="panel-2") }}
 
 {%- call ui.util.call(ui.panel_wrapper) -%}
     {{ ui.panel("Panel #1 content goes here", id="panel-1") }}

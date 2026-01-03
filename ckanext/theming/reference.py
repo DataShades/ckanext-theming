@@ -158,7 +158,6 @@ components.update(
         "table_head": Component(Category.ESSENTIAL),
         "table_row": Component(Category.ESSENTIAL),
         # form ################################################################
-        "autocomplete": Component(Category.ESSENTIAL),
         "checkbox": Component(Category.ESSENTIAL),
         "extra_field": Component(Category.ESSENTIAL),
         "extra_field_multiplicator": Component(Category.ESSENTIAL),

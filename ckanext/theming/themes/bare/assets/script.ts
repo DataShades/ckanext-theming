@@ -8,7 +8,7 @@
     applyAttrs(el: HTMLElement, attrs: { [key: string]: string }) {
       Object.entries(attrs).forEach(([key, value]) =>
         el.setAttribute(key, value),
-      );
+                                   );
     },
 
     applyProps(el: HTMLElement, props: { [key: string]: any }) {
@@ -230,11 +230,6 @@
         return null;
       }
       return new Popover(el);
-    },
-
-    autocomplete(target, props = {}) {
-      // TODO: add module
-      console.error("Autocomplete is not implemented;");
     },
   };
 

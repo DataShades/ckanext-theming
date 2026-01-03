@@ -8,31 +8,6 @@ structured relationships - for example, [`form`][] components work with
 [`form_actions`][form-actions], and [`form_errors`][form-errors] to create
 complete form experiences.
 
-## Autocomplete
-
-The [`autocomplete`][] component creates input fields with autocomplete
-functionality that suggests possible values as users type. This component is
-particularly valuable for forms with large sets of possible values, such as
-location selectors, category pickers, or user search fields.
-
-Autocomplete components provide enhanced user experience by reducing typing
-effort and helping users select from predefined options. They typically display
-suggestions in a dropdown list as the user types, filtering options based on
-the input. The component handles accessibility requirements and ensures
-suggestions are properly announced to screen readers.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic autocomplete -->
-{{ ui.autocomplete(name="search", placeholder="Search...") }}
-
-<!-- Autocomplete with source -->
-{{ ui.autocomplete(name="location", placeholder="Enter location", source="/api/locations") }}
-```
-///
-
 ## Checkbox
 
 The [`checkbox`][] component creates checkbox input elements that allow users
@@ -396,7 +371,7 @@ resolve the issues.
 
 ```jinja2
 <!-- Basic form errors -->
-{{ ui.form_errors(errors={"name": ["Name is required"], "email": ["Invalid email format"]}) }}
+{{ ui.form_errors(errors={"Name": "Name is required", "Email": "Invalid email format"}) }}
 ```
 ///
 

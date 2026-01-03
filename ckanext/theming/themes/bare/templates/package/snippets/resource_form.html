@@ -30,7 +30,7 @@
         {% endblock %}
 
         {% block basic_fields_format %}
-            {%- call ui.util.call(ui.autocomplete, name="format", label=_('Format'), placeholder=_('eg. CSV, XML or JSON'), value=data.format, errors=errors.format, source="/api/2/util/resource/format_autocomplete", param_name="incomplete") -%}
+            {%- call ui.util.call(ui.input, name="format", label=_('Format'), placeholder=_('eg. CSV, XML or JSON'), value=data.format, errors=errors.format) -%}
                 {{ _('This will be guessed automatically. Leave blank if you wish') }}
             {%- endcall %}
         {% endblock %}

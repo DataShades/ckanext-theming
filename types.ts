@@ -71,11 +71,6 @@ declare global {
     interface IPopoverParams extends IParams {}
 
     /**
-     * Parameters for autocomplete functionality.
-     */
-    interface IAutocompleteParams extends IParams {}
-
-    /**
      * Content type for UI components.
      */
     type Content = string | Node;
@@ -184,7 +179,6 @@ declare global {
    * @property notification - Method to create a notification element.
    * @property popover - Method to create a popover element.
    * @property tooltip - Method to create a tooltip element.
-   * @property autocomplete - Method to initialize autocomplete on an input or select element.
    * @property getModal - Method to retrieve an existing modal by ID.
    * @property getTooltip - Method to retrieve an existing tooltip by ID.
    * @property getPopover - Method to retrieve an existing popover by ID.
@@ -258,17 +252,6 @@ declare global {
       target: HTMLElement,
       props: Theming.ITooltipParams,
     ) => ITooltip;
-
-    /**
-     * Initialize autocomplete on a target input or select element.
-     *
-     * @param target The input or select element to attach autocomplete to.
-     * @param props Configuration parameters for the autocomplete.
-     */
-    autocomplete: (
-      target: HTMLInputElement | HTMLSelectElement,
-      props: Theming.IAutocompleteParams,
-    ) => void;
 
     /**
      * Initialize or retrieve a modal by ID.
