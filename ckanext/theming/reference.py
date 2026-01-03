@@ -206,6 +206,7 @@ components.update(
         "search_active_filters": Component(Category.ESSENTIAL),
         "search_advanced_controls": Component(Category.RECOMMENDED),
         "search_form": Component(Category.ESSENTIAL),
+        "search_form_box": Component(Category.ESSENTIAL),
         "search_input": Component(Category.ESSENTIAL),
         "search_pagination_info": Component(Category.ESSENTIAL),
         "search_results_header": Component(Category.ESSENTIAL),
