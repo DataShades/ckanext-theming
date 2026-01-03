@@ -72,9 +72,17 @@ cluttering the interface for users who prefer simple searches.
 
 ## Search Form Box
 
-The [`search_form_box`][search-form-box] component creates the container for search forms, providing the form element structure and HTMX integration for enhanced search functionality. This component serves as the foundational wrapper for search forms, handling form submission and accessibility requirements.
+The [`search_form_box`][search-form-box] component creates the container for
+search forms, providing the form element structure and HTMX integration for
+enhanced search functionality. This component serves as the foundational
+wrapper for search forms, handling form submission and accessibility
+requirements.
 
-Search form box components are designed to work with HTMX for enhanced user experience, automatically adding appropriate HTMX attributes when the `use_htmx` parameter is enabled. The component ensures proper form structure and accessibility while maintaining flexibility for different search contexts and requirements.
+Search form box components are designed to work with HTMX for enhanced user
+experience, automatically adding appropriate HTMX attributes when the
+`use_htmx` parameter is enabled. The component ensures proper form structure
+and accessibility while maintaining flexibility for different search contexts
+and requirements.
 
 /// admonition | Usage Example
     type: example
@@ -87,17 +95,9 @@ Search form box components are designed to work with HTMX for enhanced user expe
 {% endcall %}
 
 <!-- Search form box with HTMX -->
-{% call ui.util.call(ui.search_form_box, use_htmx=True) %}
+{% call ui.util.call(ui.search_form_box, use_htmx=true) %}
     {{ ui.search_input(name="q", value="") }}
     {{ ui.search_submit_button("Search") }}
-{% endcall %}
-
-<!-- Search form box with attributes -->
-{% call ui.util.call(ui.search_form_box, attrs={"class": "custom-search-form"}, use_htmx=False) %}
-    <div class="search-controls">
-        {{ ui.search_input(name="q", value="") }}
-        {{ ui.search_submit_button("Search") }}
-    </div>
 {% endcall %}
 ```
 ///
@@ -110,11 +110,8 @@ Search form box components are designed to work with HTMX for enhanced user expe
 /// details | Theme-Specific Parameters
     type: tip
 
-- `variant` (string): Style variant (e.g., "default", "inline", "advanced") - theme-dependent
-- `method` (string): Form method (e.g., "get", "post") - theme-dependent
-- `action` (string): Form action URL - theme-dependent
-- `autocomplete` (string): Autocomplete setting (e.g., "on", "off") - theme-dependent
-- `novalidate` (bool): Whether to disable form validation - theme-dependent
+- `method` (string): Form method (e.g., "get", "post")
+- `action` (string): Form action URL
 ///
 
 /// admonition | Relationship
@@ -193,10 +190,6 @@ application.
     type: tip
 
 - `variant` (string): Style variant (e.g., "simple", "advanced")
-- `inline` (bool): Whether to display as inline form
-- `large` (bool): Whether to use larger input field
-- `placeholder` (string): Placeholder text for search input
-- `button_position` (string): Position of search button (e.g., "after", "before")
 ///
 
 /// admonition | Relationship
@@ -204,8 +197,9 @@ application.
 
 The [`search_form`][search-form] component works with
 [`search_input`][search-input], [`search_submit_button`][search-submit-button],
-[`search_form_box`][search-form-box], and various filter components to create complete search experiences. The form
-provides the overall container structure for all search elements through its use of the search_form_box component.
+[`search_form_box`][search-form-box], and various filter components to create
+complete search experiences. The form provides the overall container structure
+for all search elements through its use of the search_form_box component.
 
 ///
 
@@ -302,7 +296,6 @@ effectively.
 - `show_total` (bool): Whether to show total count
 - `show_range` (bool): Whether to show item range
 - `format` (string): Format for number display (e.g., "numeric", "words")
-- `loading` (bool): Whether to show loading state
 ///
 
 ## Search Results Header
@@ -344,7 +337,6 @@ to users.
 - `show_count` (bool): Whether to show result count
 - `show_range` (bool): Whether to show item range
 - `template` (string): Custom template for header display
-- `loading` (bool): Whether to show loading state
 ///
 
 ## Search Sort Control
@@ -365,26 +357,19 @@ ability to reorganize their results based on their specific needs.
 
 ```jinja2
 <!-- Basic search sort control -->
-{{ ui.search_sort_control(selected="relevance", options=[{"text": "Relevance", "value": "relevance"}, {"text": "Date", "value": "date"}]) }}
+{{ ui.search_sort_control(
+    selected="relevance",
+    options=[{"text": "Relevance", "value": "relevance"}, {"text": "Date", "value": "date"}]
+) }}
 ```
 ///
 
-| Parameter  | Type   | Default    | Description                                                         |
-|------------|--------|------------|---------------------------------------------------------------------|
-| `name`     | string | "sort"     | Name attribute for the sort control.                                |
-| `selected` | string | -          | Currently selected sort option.                                     |
-| `options`  | list   | -          | Available sort options as [{"text": "...", "value": "..."}] format. |
-| `label`    | string | "Order by" | Label text for the sort control.                                    |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `size` (string): Size of the control (e.g., "sm", "lg")
-- `variant` (string): Style variant (e.g., "filled", "outlined")
-- `inline` (bool): Whether to display inline
-- `disabled` (bool): Whether the control is disabled
-- `searchable` (bool): Whether to make the select searchable
-///
+| Parameter  | Type   | Default | Description                                                         |
+|------------|--------|---------|---------------------------------------------------------------------|
+| `name`     | string | "sort"  | Name attribute for the sort control.                                |
+| `selected` | string | -       | Currently selected sort option.                                     |
+| `options`  | list   | -       | Available sort options as [{"text": "...", "value": "..."}] format. |
+| `label`    | string | -       | Label text for the sort control.                                    |
 
 ## Search Submit Button
 

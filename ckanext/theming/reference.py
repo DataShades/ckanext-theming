@@ -459,37 +459,38 @@ bare_icons = {
     "bookmark": "🔖",
     "calendar": "📅",
     "calendar-alt": "🗓️",
-    "calendar-minus": "📅➖",
-    "calendar-plus": "📅➕",
-    "calendar-times": "📅❌",
     "chart-area": "📉",
     "chart-bar": "📊",
     "chart-line": "📈",
     "chart-pie": "🥧",
     "chart-scatter": "📊",
-    "check": "✔️",
+    "check": "✔️",  # Success / confirmation
     "check-circle": "✅",
+    "chevron-down": "▾",  # Expand
+    "chevron-left": "◂",  # Back
+    "chevron-right": "▸",  # Forward
+    "chevron-up": "▴",  # Collapse
     "clipboard": "📋",
     "clock": "⏰",
     "cloud": "☁️",
     "cloud-download-alt": "☁️⬇️",
     "cloud-upload-alt": "☁️⬆️",
-    "cog": "⚙️",
+    "cog": "⚙️",  # Settings / configuration
     "cogs": "🛠️",
     "comment": "💬",
     "comments": "🗨️",
     "copy": "📋",
     "database": "🗄️",
-    "download": "⬇️",
+    "download": "⬇️",  # Download
     "download-alt": "⤵️",
-    "edit": "✏️",
+    "edit": "✏️",  # Edit / update
     "ellipsis-h": "⋯",
     "ellipsis-v": "⋮",
     "envelope": "✉️",
     "envelope-open": "📬",
-    "exclamation-triangle": "⚠️",
+    "exclamation-triangle": "⚠️",  # Warning
     "external-link-alt": "🌐",
-    "eye": "👁️",
+    "eye": "👁️",  # View / show
     "eye-slash": "🙈",
     "file": "📄",
     "file-alt": "📄",
@@ -501,26 +502,26 @@ bare_icons = {
     "folder-open": "📂",
     "globe": "🌍",
     "heart": "❤️",
-    "home": "🏠",
+    "home": "🏠",  # Home navigation
     "info": "ℹ",
-    "info-circle": "ℹ️",
+    "info-circle": "ℹ️",  # Information / help
     "key": "🔑",
     "language": "🈯",
     "link": "🔗",
     "list": "📋",
     "list-alt": "🗒️",
-    "lock": "🔒",
+    "lock": "🔒",  # Locked / secure
     "map": "🗺️",
     "map-marker-alt": "📍",
-    "minus": "➖",
+    "minus": "➖",  # Remove / reduce
     "pause": "⏸️",
     "play": "▶️",
-    "plus": "➕",
+    "plus": "➕",  # Add / create
     "print": "🖨️",
     "question-circle": "❓",
     "redo": "↪️",
     "save": "💾",
-    "search": "🔍",
+    "search": "🔍",  # Search functionality
     "share": "🔗",
     "shield-alt": "🛡️",
     "signal": "📡",
@@ -535,20 +536,17 @@ bare_icons = {
     "sync": "🔄",
     "table": "🗂️",
     "tag": "🏷️",
-    "tags": "🏷️🏷️",
     "thumbs-down": "👎",
     "thumbs-up": "👍",
-    "times": "❌",
+    "times": "❌",  # Close / cancel
     "times-circle": "⛔",
-    "trash": "🗑️",
+    "trash": "🗑️",  # Delete / trash
     "trash-alt": "🚮",
     "undo": "↩️",
-    "unlock": "🔓",
-    "upload": "⬆️",
+    "unlock": "🔓",  # Unlocked / open
+    "upload": "⬆️",  # Upload
     "upload-alt": "⤴️",
-    "user": "👤",
-    "user-minus": "👤➖",
-    "user-plus": "👤➕",
+    "user": "👤",  # User / profile
     "users": "👥",
     "wifi": "📶",
 }

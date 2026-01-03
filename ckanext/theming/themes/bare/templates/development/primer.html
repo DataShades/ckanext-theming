@@ -4,36 +4,1912 @@
 {%- block secondary_content -%}
     {%- call ui.util.call(ui.list) -%}
         {{ ui.list_item(ui.link(_("Accordion"), href="#accordion")) }}
+        {{ ui.list_item(ui.link(_("Button Group"), href="#button-group")) }}
+        {{ ui.list_item(ui.link(_("Card"), href="#card")) }}
+        {{ ui.list_item(ui.link(_("Column"), href="#column")) }}
+        {{ ui.list_item(ui.link(_("Container"), href="#container")) }}
+        {{ ui.list_item(ui.link(_("Grid"), href="#grid")) }}
+        {{ ui.list_item(ui.link(_("List"), href="#list")) }}
+        {{ ui.list_item(ui.link(_("List Item"), href="#list-item")) }}
+        {{ ui.list_item(ui.link(_("Panel"), href="#panel")) }}
+        {{ ui.list_item(ui.link(_("Activity"), href="#activity")) }}
+        {{ ui.list_item(ui.link(_("Facet"), href="#facet")) }}
+        {{ ui.list_item(ui.link(_("License"), href="#license")) }}
+        {{ ui.list_item(ui.link(_("Group"), href="#group")) }}
+        {{ ui.list_item(ui.link(_("Organization"), href="#organization")) }}
+        {{ ui.list_item(ui.link(_("Package"), href="#package")) }}
+        {{ ui.list_item(ui.link(_("Resource"), href="#resource")) }}
+        {{ ui.list_item(ui.link(_("User"), href="#user")) }}
+        {{ ui.list_item(ui.link(_("Chart"), href="#chart")) }}
+        {{ ui.list_item(ui.link(_("Code"), href="#code")) }}
+        {{ ui.list_item(ui.link(_("Definition List"), href="#definition-list")) }}
+        {{ ui.list_item(ui.link(_("Table"), href="#table")) }}
+        {{ ui.list_item(ui.link(_("Table Body"), href="#table-body")) }}
+        {{ ui.list_item(ui.link(_("Table Cell"), href="#table-cell")) }}
+        {{ ui.list_item(ui.link(_("Table Head"), href="#table-head")) }}
+        {{ ui.list_item(ui.link(_("Table Row"), href="#table-row")) }}
+        {{ ui.list_item(ui.link(_("Avatar"), href="#avatar")) }}
+        {{ ui.list_item(ui.link(_("Badge"), href="#badge")) }}
+        {{ ui.list_item(ui.link(_("Button"), href="#button")) }}
+        {{ ui.list_item(ui.link(_("Datetime"), href="#datetime")) }}
+        {{ ui.list_item(ui.link(_("Divider"), href="#divider")) }}
+        {{ ui.list_item(ui.link(_("Heading"), href="#heading")) }}
+        {{ ui.list_item(ui.link(_("Icon"), href="#icon")) }}
+        {{ ui.list_item(ui.link(_("Image"), href="#image")) }}
+        {{ ui.list_item(ui.link(_("Link"), href="#link")) }}
+        {{ ui.list_item(ui.link(_("Tag"), href="#tag")) }}
+        {{ ui.list_item(ui.link(_("Text"), href="#text")) }}
+        {{ ui.list_item(ui.link(_("Video"), href="#video")) }}
+        {{ ui.list_item(ui.link(_("Breadcrumb Divider"), href="#breadcrumb-divider")) }}
+        {{ ui.list_item(ui.link(_("Alert"), href="#alert")) }}
+        {{ ui.list_item(ui.link(_("Confirm Modal"), href="#confirm-modal")) }}
+        {{ ui.list_item(ui.link(_("Modal"), href="#modal")) }}
+        {{ ui.list_item(ui.link(_("Popover"), href="#popover")) }}
+        {{ ui.list_item(ui.link(_("Progress"), href="#progress")) }}
+        {{ ui.list_item(ui.link(_("Spinner"), href="#spinner")) }}
+        {{ ui.list_item(ui.link(_("Toast"), href="#toast")) }}
+        {{ ui.list_item(ui.link(_("Tooltip"), href="#tooltip")) }}
+        {{ ui.list_item(ui.link(_("Autocomplete"), href="#autocomplete")) }}
+        {{ ui.list_item(ui.link(_("Checkbox"), href="#checkbox")) }}
+        {{ ui.list_item(ui.link(_("Extra Field"), href="#extra-field")) }}
+        {{ ui.list_item(ui.link(_("Extra Field Multiplicator"), href="#extra-field-multiplicator")) }}
+        {{ ui.list_item(ui.link(_("Extra Fields Collection"), href="#extra-fields-collection")) }}
+        {{ ui.list_item(ui.link(_("Field Errors"), href="#field-errors")) }}
+        {{ ui.list_item(ui.link(_("File Input"), href="#file-input")) }}
+        {{ ui.list_item(ui.link(_("Form"), href="#form")) }}
+        {{ ui.list_item(ui.link(_("Form Actions"), href="#form-actions")) }}
+        {{ ui.list_item(ui.link(_("Form End"), href="#form-end")) }}
+        {{ ui.list_item(ui.link(_("Form Errors"), href="#form-errors")) }}
+        {{ ui.list_item(ui.link(_("Form Start"), href="#form-start")) }}
+        {{ ui.list_item(ui.link(_("Hidden Input"), href="#hidden-input")) }}
+        {{ ui.list_item(ui.link(_("Input"), href="#input")) }}
+        {{ ui.list_item(ui.link(_("Markdown"), href="#markdown")) }}
+        {{ ui.list_item(ui.link(_("Radio"), href="#radio")) }}
+        {{ ui.list_item(ui.link(_("Range Input"), href="#range-input")) }}
+        {{ ui.list_item(ui.link(_("Select"), href="#select")) }}
+        {{ ui.list_item(ui.link(_("Select Box"), href="#select-box")) }}
+        {{ ui.list_item(ui.link(_("Select Option"), href="#select-option")) }}
+        {{ ui.list_item(ui.link(_("Submit"), href="#submit")) }}
+        {{ ui.list_item(ui.link(_("Textarea"), href="#textarea")) }}
+        {{ ui.list_item(ui.link(_("Modal Close Handle"), href="#modal-close-handle")) }}
+        {{ ui.list_item(ui.link(_("Modal Handle"), href="#modal-handle")) }}
+        {{ ui.list_item(ui.link(_("Panel Handle"), href="#panel-handle")) }}
+        {{ ui.list_item(ui.link(_("Popover Handle"), href="#popover-handle")) }}
+        {{ ui.list_item(ui.link(_("Tab Handle"), href="#tab-handle")) }}
+        {{ ui.list_item(ui.link(_("Account"), href="#account")) }}
+        {{ ui.list_item(ui.link(_("Footer"), href="#footer")) }}
+        {{ ui.list_item(ui.link(_("Header"), href="#header")) }}
+        {{ ui.list_item(ui.link(_("Subtitle Item"), href="#subtitle-item")) }}
+        {{ ui.list_item(ui.link(_("Account Nav Item"), href="#account-nav-item")) }}
+        {{ ui.list_item(ui.link(_("Breadcrumb"), href="#breadcrumb")) }}
+        {{ ui.list_item(ui.link(_("Content Action"), href="#content-action")) }}
+        {{ ui.list_item(ui.link(_("Content Nav Item"), href="#content-nav-item")) }}
+        {{ ui.list_item(ui.link(_("Dropdown Item"), href="#dropdown-item")) }}
+        {{ ui.list_item(ui.link(_("Main Nav Item"), href="#main-nav-item")) }}
+        {{ ui.list_item(ui.link(_("Menu Item"), href="#menu-item")) }}
+        {{ ui.list_item(ui.link(_("Nav Item"), href="#nav-item")) }}
+        {{ ui.list_item(ui.link(_("Page Action"), href="#page-action")) }}
+        {{ ui.list_item(ui.link(_("Pagination"), href="#pagination")) }}
+        {{ ui.list_item(ui.link(_("Search Active Filters"), href="#search-active-filters")) }}
+        {{ ui.list_item(ui.link(_("Search Advanced Controls"), href="#search-advanced-controls")) }}
+        {{ ui.list_item(ui.link(_("Search Form"), href="#search-form")) }}
+        {{ ui.list_item(ui.link(_("Search Form Box"), href="#search-form-box")) }}
+        {{ ui.list_item(ui.link(_("Search Input"), href="#search-input")) }}
+        {{ ui.list_item(ui.link(_("Search Results Header"), href="#search-results-header")) }}
+        {{ ui.list_item(ui.link(_("Search Sort Control"), href="#search-sort-control")) }}
+        {{ ui.list_item(ui.link(_("Search Submit Button"), href="#search-submit-button")) }}
+        {{ ui.list_item(ui.link(_("Search Pagination Info"), href="#search-pagination-info")) }}
+        {{ ui.list_item(ui.link(_("Facet Section"), href="#facet-section")) }}
+        {{ ui.list_item(ui.link(_("Section"), href="#section")) }}
+        {{ ui.list_item(ui.link(_("Sidebar Section"), href="#sidebar-section")) }}
+        {{ ui.list_item(ui.link(_("Accordion Wrapper"), href="#accordion-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Account Nav Wrapper"), href="#account-nav-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Activity Wrapper"), href="#activity-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Breadcrumb Wrapper"), href="#breadcrumb-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Content Action Wrapper"), href="#content-action-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Content Nav Wrapper"), href="#content-nav-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Dropdown Wrapper"), href="#dropdown-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Facet Wrapper"), href="#facet-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Group Wrapper"), href="#group-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Main Nav Wrapper"), href="#main-nav-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Menu Wrapper"), href="#menu-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Nav Wrapper"), href="#nav-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Organization Wrapper"), href="#organization-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Package Wrapper"), href="#package-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Page Action Wrapper"), href="#page-action-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Panel Wrapper"), href="#panel-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Resource Wrapper"), href="#resource-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Tab Wrapper"), href="#tab-wrapper")) }}
+        {{ ui.list_item(ui.link(_("User Wrapper"), href="#user-wrapper")) }}
     {%- endcall %}
 {%- endblock %}
+
 {% block primary_content_inner %}
 
     {%- call ui.util.call(ui.section, title=_("Container components")) -%}
-        {{ ui.heading(_("Accordion"), level=3, attrs={"id": "accordion"}) }}
+        <div>
+            {{ ui.heading(_("Accordion"), level=3, attrs={"id": "accordion"}) }}
 
-        {{ ui.heading(_("Simple accordion"), level=4) }}
-        {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-            {%- raw %}
-                {%- call ui.util.call(ui.accordion_wrapper) -%}
-                    {%- call ui.util.call(ui.accordion, title="More Information") -%}
-                        Detailed information about this section
+            {{ ui.heading(_("Simple accordion"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.accordion_wrapper) -%}
+                        {%- call ui.util.call(ui.accordion, title="More Information") -%}
+                            Detailed information about this section
+                        {%- endcall %}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall %}
+
+            {{ ui.accordion_wrapper(ui.accordion(content="Detailed information about this section", title="More Information")) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Open accordion by default"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.accordion(content="This content is visible by default", title="Default Open", open=True) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Button Group"), level=3, attrs={"id": "button-group"}) }}
+            {{ ui.heading(_("Group of action buttons"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.button_group(
+                        ui.button("Edit", href="/edit")
+                        ~ ui.button("Delete", href="/delete", style="danger")
+                        ) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.button_group(
+                ui.button("Edit", href="/edit")
+                ~ ui.button("Delete", href="/delete", style="danger")
+                ) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Group with vertical direction"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.button_group, direction="column") -%}
+                        {{ ui.button("First") }}
+                        {{ ui.button("Second") }}
+                        {{ ui.button("Third") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.button_group, direction="column") -%}
+                {{ ui.button("First") }}
+                {{ ui.button("Second") }}
+                {{ ui.button("Third") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Card"), level=3, attrs={"id": "card"}) }}
+            {{ ui.heading(_("Basic card"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.card(
+                        content="This is a simple card with some content.",
+                        title="Card Title",
+                        attrs={"class": "mb-3"}
+                        ) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.card(
+                content="This is a simple card with some content.",
+                title="Card Title",
+                attrs={"class": "mb-3"}
+                ) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Column"), level=3, attrs={"id": "column"}) }}
+            {{ ui.heading(_("Basic column"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.column(content="This is a column", size=6) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.column(content="This is a column", size=6) }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Container"), level=3, attrs={"id": "container"}) }}
+            {{ ui.heading(_("Basic container"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.container(content="This is a container", attrs={"class": "bg-light p-3"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.container(content="This is a container", attrs={"class": "bg-light p-3"}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Grid"), level=3, attrs={"id": "grid"}) }}
+            {{ ui.heading(_("Basic grid"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.grid) -%}
+                        {{ ui.column(content="Column 1", size=6) }}
+                        {{ ui.column(content="Column 2", size=6) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.grid) -%}
+                {{ ui.column(content="Column 1", size=6) }}
+                {{ ui.column(content="Column 2", size=6) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("List"), level=3, attrs={"id": "list"}) }}
+            {{ ui.heading(_("Basic list"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.list) -%}
+                        {{ ui.list_item("First item") }}
+                        {{ ui.list_item("Second item") }}
+                        {{ ui.list_item("Third item") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.list) -%}
+                {{ ui.list_item("First item") }}
+                {{ ui.list_item("Second item") }}
+                {{ ui.list_item("Third item") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("List Item"), level=3, attrs={"id": "list-item"}) }}
+            {{ ui.heading(_("Basic list item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.list_item("This is a list item") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.list_item("This is a list item") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Panel"), level=3, attrs={"id": "panel"}) }}
+            {{ ui.heading(_("Basic panel"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.panel(content="This is a panel component", title="Panel Title") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.panel(content="This is a panel component", title="Panel Title") }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Content components")) -%}
+        <div>
+            {{ ui.heading(_("Activity"), level=3, attrs={"id": "activity"}) }}
+            {{ ui.heading(_("Basic activity"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.activity_wrapper) -%}
+                        {{ ui.activity("User created a new dataset", activity=activity_data) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.activity_wrapper) -%}
+                {{ ui.activity("User created a new dataset", activity={"user": "test_user", "activity_type": "new package", "data": {"package": {"title": "Test Dataset"}}}) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Facet"), level=3, attrs={"id": "facet"}) }}
+            {{ ui.heading(_("Basic facet component"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.facet_wrapper) -%}
+                        {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.facet_wrapper) -%}
+                {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("License"), level=3, attrs={"id": "license"}) }}
+            {{ ui.heading(_("Basic license"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.license(name="cc-by", title="Creative Commons Attribution", url="https://creativecommons.org/licenses/by/4.0/") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.license(name="cc-by", title="Creative Commons Attribution", url="https://creativecommons.org/licenses/by/4.0/") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Group"), level=3, attrs={"id": "group"}) }}
+            {{ ui.heading(_("Basic group"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.group(dict(name="test-group", title="Test Group", description="A test group", type="group")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.group(dict(name="test-group", title="Test Group", description="A test group", type="group")) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Organization"), level=3, attrs={"id": "organization"}) }}
+            {{ ui.heading(_("Basic organization"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.organization(dict(name="test-org", title="Test Organization", description="A test organization", type="organization")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.organization(dict(name="test-org", title="Test Organization", description="A test organization", type="organization")) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Package"), level=3, attrs={"id": "package"}) }}
+            {{ ui.heading(_("Basic package"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.package(dict(name="test-package", title="Test Package", notes="A test package", type="dataset")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.package(dict(name="test-package", title="Test Package", notes="A test package", type="dataset")) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Resource"), level=3, attrs={"id": "resource"}) }}
+            {{ ui.heading(_("Basic resource"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.resource(dict(name="test-resource", description="A test resource", format="CSV", url="/dataset/test/resource")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.resource(dict(name="test-resource", description="A test resource", format="CSV", url="/dataset/test/resource")) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("User"), level=3, attrs={"id": "user"}) }}
+            {{ ui.heading(_("Basic user"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.user(dict(name="test-user", display_name="Test User", email="test@example.com")) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.user(dict(name="test-user", display_name="Test User", email="test@example.com")) }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Data components")) -%}
+        <div>
+            {{ ui.heading(_("Chart"), level=3, attrs={"id": "chart"}) }}
+            {{ ui.heading(_("Basic chart"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.chart(data=[[1,2,3], [3,2,4]], type="bar") }}
+                    {{ ui.chart(data=[[1,2,3], [3,2,4]], type="line") }}
+                    {{ ui.chart(data=[1,2,3], type="pie") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.chart(data=[[1,2,3], [3,2,4]], type="bar", attrs={"style": "height: 200px;"}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Code"), level=3, attrs={"id": "code"}) }}
+            {{ ui.heading(_("Basic code"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.code("print('Hello World')") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.code("print('Hello World')") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Definition List"), level=3, attrs={"id": "definition-list"}) }}
+            {{ ui.heading(_("Basic definition list"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.definition_list([["Hello", "Praesent augue."], ["World", "Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus."]]) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.definition_list([["Hello", "Praesent augue."], ["World", "Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus."]]) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Table"), level=3, attrs={"id": "table"}) }}
+            {{ ui.heading(_("Basic table"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.table) -%}
+                        {%- call ui.util.call(ui.table_head) -%}
+                            {%- call ui.util.call(ui.table_row) -%}
+                                {{ ui.table_cell("Header 1", is_header=true) }}
+                                {{ ui.table_cell("Header 2", is_header=true) }}
+                            {%- endcall %}
+                        {%- endcall %}
+                        {%- call ui.util.call(ui.table_body) -%}
+                            {%- call ui.util.call(ui.table_row) -%}
+                                {{ ui.table_cell("Cell 1") }}
+                                {{ ui.table_cell("Cell 2") }}
+                            {%- endcall %}
+                        {%- endcall %}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.table) -%}
+                {%- call ui.util.call(ui.table_head) -%}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell("Header 1", is_header=true) }}
+                        {{ ui.table_cell("Header 2", is_header=true) }}
                     {%- endcall %}
                 {%- endcall %}
-            {%- endraw %}
-        {%- endcall %}
+                {%- call ui.util.call(ui.table_body) -%}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell("Cell 1") }}
+                        {{ ui.table_cell("Cell 2") }}
+                    {%- endcall %}
+                {%- endcall %}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
 
-        {{ ui.accordion_wrapper(ui.accordion(content="Detailed information about this section", title="More Information")) }}
-        {{ ui.divider() }}
+        <div>
+            {{ ui.heading(_("Table Body"), level=3, attrs={"id": "table-body"}) }}
+            {{ ui.heading(_("Basic table body"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.table_body) -%}
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell("Row 1, Cell 1") }}
+                            {{ ui.table_cell("Row 1, Cell 2") }}
+                        {%- endcall %}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.table_body) -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell("Row 1, Cell 1") }}
+                    {{ ui.table_cell("Row 1, Cell 2") }}
+                {%- endcall %}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
 
-        {{ ui.heading(_("Open accordion by default"), level=4) }}
-        {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-            {%- raw %}
-                {{ ui.accordion("This content is visible by default", title="Default Open", open=True) }}
-            {%- endraw %}
-        {%- endcall -%}
-        {{ ui.accordion(content="This content is visible by default", title="Default Open", open=True) }}
-        {{ ui.divider() }}
+        <div>
+            {{ ui.heading(_("Table Cell"), level=3, attrs={"id": "table-cell"}) }}
+            {{ ui.heading(_("Basic table cell"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.table_cell("Sample cell content") }}
+                {%- endraw %}
+            {%- endcall -%}
+            <table><tr>{{ ui.table_cell("Sample cell content") }}</tr></table>
+            {{ ui.divider() }}
+        </div>
 
+        <div>
+            {{ ui.heading(_("Table Head"), level=3, attrs={"id": "table-head"}) }}
+            {{ ui.heading(_("Basic table head"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.table_head) -%}
+                        {%- call ui.util.call(ui.table_row) -%}
+                            {{ ui.table_cell("Header", is_header=true) }}
+                        {%- endcall %}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.table_head) -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell("Header", is_header=true) }}
+                {%- endcall %}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Table Row"), level=3, attrs={"id": "table-row"}) }}
+            {{ ui.heading(_("Basic table row"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell("Cell 1") }}
+                        {{ ui.table_cell("Cell 2") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            <table>{%- call ui.util.call(ui.table_row) -%}
+                {{ ui.table_cell("Cell 1") }}
+                {{ ui.table_cell("Cell 2") }}
+            {%- endcall %}</table>
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Element components")) -%}
+        <div>
+            {{ ui.heading(_("Avatar"), level=3, attrs={"id": "avatar"}) }}
+            {{ ui.heading(_("Basic avatar"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.avatar(src="/path/to/user/image.jpg", alt="User Name") }}
+                    {{ ui.avatar(alt="Default User") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.avatar(alt="Default User") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Badge"), level=3, attrs={"id": "badge"}) }}
+            {{ ui.heading(_("Simplebadge"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.badge("New") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.badge("New") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Button"), level=3, attrs={"id": "button"}) }}
+            {{ ui.heading(_("Basic button"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.button("Primary Button", style="primary") }}
+                    {{ ui.button("Secondary Button", style="secondary") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.button("Primary Button", style="primary") }}
+            {{ ui.button("Secondary Button", style="secondary") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Datetime"), level=3, attrs={"id": "datetime"}) }}
+            {{ ui.heading(_("Basic datetime"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.datetime(datetime="2023-01-01T12:00:00Z") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.datetime(datetime="2023-01-01T12:00:00Z") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Divider"), level=3, attrs={"id": "divider"}) }}
+            {{ ui.heading(_("Basic divider"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.divider() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.divider() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Heading"), level=3, attrs={"id": "heading"}) }}
+            {{ ui.heading(_("Basic heading"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.heading("Main Heading", level=1) }}
+                    {{ ui.heading("Sub Heading", level=2) }}
+                    {{ ui.heading("Section Heading", level=3) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.heading("Main Heading", level=1) }}
+            {{ ui.heading("Sub Heading", level=2) }}
+            {{ ui.heading("Section Heading", level=3) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Icon"), level=3, attrs={"id": "icon"}) }}
+            {{ ui.heading(_("Basic icon"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.icon("home") }}
+                    {{ ui.icon("search") }}
+                    {{ ui.icon("user") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.icon("home") }}
+            {{ ui.icon("search") }}
+            {{ ui.icon("user") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Image"), level=3, attrs={"id": "image"}) }}
+            {{ ui.heading(_("Basic image"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image", attrs={"style": "width: 100px;"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.image(src="/base/images/placeholder.jpg", alt="Sample image", attrs={"style": "width: 100px;"}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Link"), level=3, attrs={"id": "link"}) }}
+            {{ ui.heading(_("Basic link"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.link("Sample Link", href="#") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.link("Sample Link", href="#") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Tag"), level=3, attrs={"id": "tag"}) }}
+            {{ ui.heading(_("Basic tag"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.tag("Sample Tag") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.tag("Sample Tag") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Text"), level=3, attrs={"id": "text"}) }}
+            {{ ui.heading(_("Basic text"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.text("Sample text content") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.text("Sample text content") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Video"), level=3, attrs={"id": "video"}) }}
+            {{ ui.heading(_("Basic video"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.video(src="/path/to/video.mp4", attrs={"width": "300"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.video(src="/base/images/placeholder.jpg", attrs={"width": "300"}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Breadcrumb Divider"), level=3, attrs={"id": "breadcrumb-divider"}) }}
+            {{ ui.heading(_("Basic breadcrumb divider"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.breadcrumb_divider() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.breadcrumb_divider() }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Feedback components")) -%}
+        <div>
+            {{ ui.heading(_("Alert"), level=3, attrs={"id": "alert"}) }}
+            {{ ui.heading(_("Basic alert"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.alert("Operation completed successfully") }}
+                    {{ ui.alert("This message can be dismissed", dismissible=true) }}
+                    {{ ui.alert("Warning: Check your input", style="danger") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.alert("Operation completed successfully") }}
+            {{ ui.alert("This message can be dismissed", dismissible=true) }}
+            {{ ui.alert("Warning: Check your input", style="danger") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Confirm Modal"), level=3, attrs={"id": "confirm-modal"}) }}
+            {{ ui.heading(_("Basic confirm modal"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.confirm_modal(content="Are you sure you want to delete this item?", title="Confirm Delete") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.confirm_modal(content="Are you sure you want to delete this item?", title="Confirm Delete") }}
+            {{ ui.divider() }}
+            ]        </div>
+
+            <div>
+                {{ ui.heading(_("Modal"), level=3, attrs={"id": "modal"}) }}
+                {{ ui.heading(_("Basic modal"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.modal("This is modal content", id="example-modal") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.modal("This is modal content", id="example-modal") }}
+                {{ ui.divider() }}
+            </div>
+
+            <div>
+                {{ ui.heading(_("Popover"), level=3, attrs={"id": "popover"}) }}
+                {{ ui.heading(_("Basic popover"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.popover(content="This is popover content", title="Popover Title") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.popover(content="This is popover content", title="Popover Title") }}
+                {{ ui.divider() }}
+            </div>
+
+            <div>
+                {{ ui.heading(_("Progress"), level=3, attrs={"id": "progress"}) }}
+                {{ ui.heading(_("Basic progress"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.progress(value=50, max=100) }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.progress(value=50, max=100) }}
+                {{ ui.divider() }}
+            </div>
+
+            <div>
+                {{ ui.heading(_("Spinner"), level=3, attrs={"id": "spinner"}) }}
+                {{ ui.heading(_("Basic spinner"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.spinner() }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.spinner() }}
+                {{ ui.divider() }}
+            </div>
+
+            <div>
+                {{ ui.heading(_("Toast"), level=3, attrs={"id": "toast"}) }}
+                {{ ui.heading(_("Basic toast"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.toast("This is a toast message") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.toast("This is a toast message") }}
+                {{ ui.divider() }}
+            </div>
+
+            <div>
+                {{ ui.heading(_("Tooltip"), level=3, attrs={"id": "tooltip"}) }}
+                {{ ui.heading(_("Basic tooltip"), level=4) }}
+                {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                    {%- raw %}
+                        {{ ui.tooltip(content="This is tooltip content", title="Tooltip Title") }}
+                    {%- endraw %}
+                {%- endcall -%}
+                {{ ui.tooltip(content="This is tooltip content", title="Tooltip Title") }}
+                {{ ui.divider() }}
+            </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Form components")) -%}
+        <div>
+            {{ ui.heading(_("Autocomplete"), level=3, attrs={"id": "autocomplete"}) }}
+            {{ ui.heading(_("Basic autocomplete"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.autocomplete(name="search", placeholder="Search...") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.autocomplete(name="search", placeholder="Search...") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Checkbox"), level=3, attrs={"id": "checkbox"}) }}
+            {{ ui.heading(_("Basic checkbox"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.checkbox(name="terms", label="Accept terms", value="yes") }}
+                    {{ ui.checkbox(label="Subscribe to newsletter", name="subscribe", checked=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.checkbox(name="terms", label="Accept terms", value="yes") }}
+            {{ ui.checkbox(label="Subscribe to newsletter", name="subscribe", checked=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Extra Field"), level=3, attrs={"id": "extra-field"}) }}
+            {{ ui.heading(_("Basic extra field"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.extra_field(name="custom_field", label="Custom Field", value="") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.extra_field(name="custom_field", label="Custom Field", value="") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Extra Field Multiplicator"), level=3, attrs={"id": "extra-field-multiplicator"}) }}
+            {{ ui.heading(_("Basic extra field multiplicator"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.extra_field_multiplicator() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.extra_field_multiplicator() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Extra Fields Collection"), level=3, attrs={"id": "extra-fields-collection"}) }}
+            {{ ui.heading(_("Basic extra fields collection"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.extra_fields_collection) -%}
+                        {{ ui.extra_field(name="field1", label="Field 1", value="") }}
+                        {{ ui.extra_field(name="field2", label="Field 2", value="") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.extra_fields_collection) -%}
+                {{ ui.extra_field(name="field1", label="Field 1", value="") }}
+                {{ ui.extra_field(name="field2", label="Field 2", value="") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Field Errors"), level=3, attrs={"id": "field-errors"}) }}
+            {{ ui.heading(_("Basic field errors"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.field_errors(errors=["This field is required"]) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.field_errors(errors=["This field is required"]) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("File Input"), level=3, attrs={"id": "file-input"}) }}
+            {{ ui.heading(_("Basic file input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.file_input(name="upload", label="Upload File") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.file_input(name="upload", label="Upload File") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Form"), level=3, attrs={"id": "form"}) }}
+            {{ ui.heading(_("Basic form"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.form, action="/submit", method="post") -%}
+                        {{ ui.input(name="name", label="Name", placeholder="Enter your name") }}
+                        {{ ui.submit("Submit") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.form, action="/submit", method="post") -%}
+                {{ ui.input(name="name", label="Name", placeholder="Enter your name") }}
+                {{ ui.submit("Submit") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Form Actions"), level=3, attrs={"id": "form-actions"}) }}
+            {{ ui.heading(_("Basic form actions"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.form_actions) -%}
+                        {{ ui.submit("Save") }}
+                        {{ ui.button("Cancel", style="secondary") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.form_actions) -%}
+                {{ ui.submit("Save") }}
+                {{ ui.button("Cancel", style="secondary") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Form End"), level=3, attrs={"id": "form-end"}) }}
+            {{ ui.heading(_("Basic form end"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.form_end() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.form_end() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Form Errors"), level=3, attrs={"id": "form-errors"}) }}
+            {{ ui.heading(_("Basic form errors"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.form_errors(errors={"name": ["Name is required"], "email": ["Invalid email format"]}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.form_errors(errors={"name": ["Name is required"], "email": ["Invalid email format"]}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Form Start"), level=3, attrs={"id": "form-start"}) }}
+            {{ ui.heading(_("Basic form start"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.form_start(method="POST", action="/submit") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.form_start(method="POST", action="/submit") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Form start with enctype"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.form_start(method="POST", action="/upload", enctype="multipart/form-data") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.form_start(method="POST", action="/upload", enctype="multipart/form-data") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Hidden Input"), level=3, attrs={"id": "hidden-input"}) }}
+            {{ ui.heading(_("Basic hidden input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.hidden_input(name="hidden_field", value="hidden_value") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.hidden_input(name="hidden_field", value="hidden_value") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Input"), level=3, attrs={"id": "input"}) }}
+            {{ ui.heading(_("Basic input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.input(name="username", label="Username", placeholder="Enter username") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.input(name="username", label="Username", placeholder="Enter username") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Markdown"), level=3, attrs={"id": "markdown"}) }}
+            {{ ui.heading(_("Basic markdown"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.markdown(content="# Title\n\nThis is markdown content") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.markdown(content="# Title\n\nThis is markdown content") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Radio"), level=3, attrs={"id": "radio"}) }}
+            {{ ui.heading(_("Basic radio"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.radio(name="choice", label="Option 1", value="option1") }}
+                    {{ ui.radio(name="choice", label="Option 2", value="option2", checked=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.radio(name="choice", label="Option 1", value="option1") }}
+            {{ ui.radio(name="choice", label="Option 2", value="option2", checked=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Range Input"), level=3, attrs={"id": "range-input"}) }}
+            {{ ui.heading(_("Basic range input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.range_input(name="range", min=0, max=100, value=50) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.range_input(name="range", min=0, max=100, value=50) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Select"), level=3, attrs={"id": "select"}) }}
+            {{ ui.heading(_("Basic select"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.select(name="country", label="Country", options=[{"value": "us", "text": "United States"}, {"value": "ca", "text": "Canada"}]) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.select(name="country", label="Country", options=[{"value": "us", "text": "United States"}, {"value": "ca", "text": "Canada"}]) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Select Box"), level=3, attrs={"id": "select-box"}) }}
+            {{ ui.heading(_("Basic select box"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.select_box(name="category", label="Category", options=[{"value": "tech", "text": "Technology"}, {"value": "health", "text": "Health"}]) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.select_box(name="category", label="Category", options=[{"value": "tech", "text": "Technology"}, {"value": "health", "text": "Health"}]) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Select Option"), level=3, attrs={"id": "select-option"}) }}
+            {{ ui.heading(_("Basic select option"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.select_option(value="option1", text="Option 1") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.select_option(value="option1", text="Option 1") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Submit"), level=3, attrs={"id": "submit"}) }}
+            {{ ui.heading(_("Basic submit"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.submit("Submit Form") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.submit("Submit Form") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Textarea"), level=3, attrs={"id": "textarea"}) }}
+            {{ ui.heading(_("Basic textarea"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.textarea(name="description", label="Description", placeholder="Enter description") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.textarea(name="description", label="Description", placeholder="Enter description") }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Handle components")) -%}
+        <div>
+            {{ ui.heading(_("Modal Close Handle"), level=3, attrs={"id": "modal-close-handle"}) }}
+            {{ ui.heading(_("Basic modal close handle"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.modal_close_handle("Close", id="my-modal") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.modal_close_handle("Close", id="my-modal") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Modal Handle"), level=3, attrs={"id": "modal-handle"}) }}
+            {{ ui.heading(_("Basic modal handle"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.modal_handle("Open Modal", id="modal-handle") }}
+                    {{ ui.modal("Modal content", id="modal-handle") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.modal_handle("Open Modal", id="modal-handle") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Panel Handle"), level=3, attrs={"id": "panel-handle"}) }}
+            {{ ui.heading(_("Basic panel handle"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.panel_handle("Panel Title", id="panel-id") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.panel_handle("Panel Title", id="panel-id") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Popover Handle"), level=3, attrs={"id": "popover-handle"}) }}
+            {{ ui.heading(_("Basic popover handle"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.popover_handle("Hover for popover", id="popover-id") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.popover_handle("Hover for popover", id="popover-id") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Tab Handle"), level=3, attrs={"id": "tab-handle"}) }}
+            {{ ui.heading(_("Basic tab handle"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.tab_handle("Tab 1", href="/tab1") }}
+                    {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.tab_handle("Tab 1", href="/tab1") }}
+            {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Meta components")) -%}
+        <div>
+            {{ ui.heading(_("Account"), level=3, attrs={"id": "account"}) }}
+            {{ ui.heading(_("Basic account"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.account() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.account() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Footer"), level=3, attrs={"id": "footer"}) }}
+            {{ ui.heading(_("Basic footer"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.footer() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.footer() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Header"), level=3, attrs={"id": "header"}) }}
+            {{ ui.heading(_("Basic header"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.header(title="Title", subtitle="Subtitle") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.header(title="Title", subtitle="Subtitle") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Subtitle Item"), level=3, attrs={"id": "subtitle-item"}) }}
+            {{ ui.heading(_("Basic subtitle item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.subtitle_item("Subtitle content") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.subtitle_item("Subtitle content") }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Navigation components")) -%}
+        <div>
+            {{ ui.heading(_("Account Nav Item"), level=3, attrs={"id": "account-nav-item"}) }}
+            {{ ui.heading(_("Basic account nav item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.account_nav_item(content="Profile", href="/user/me") }}
+                    {{ ui.account_nav_item(content="Dashboard", href="/dashboard", active=true) }}
+                    {{ ui.account_nav_item(content=(ui.icon("cog") ~ " Settings"), href="/user/edit") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.account_nav_item(content="Profile", href="/user/me") }}
+            {{ ui.account_nav_item(content="Dashboard", href="/dashboard", active=true) }}
+            {{ ui.account_nav_item(content=(ui.icon("cog") ~ " Settings"), href="/user/edit") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Breadcrumb"), level=3, attrs={"id": "breadcrumb"}) }}
+            {{ ui.heading(_("Basic breadcrumb"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+                    {{ ui.breadcrumb("Datasets", href="/datasets") }}
+                    {{ ui.breadcrumb("Dataset Name") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+            {{ ui.breadcrumb("Datasets", href="/datasets") }}
+            {{ ui.breadcrumb("Dataset Name") }}
+            {{ ui.divider() }}
+
+            {{ ui.heading(_("Breadcrumb with leading divider"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+                    {{ ui.breadcrumb("Datasets", href="/datasets") }}
+                    {{ ui.breadcrumb_divider() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+            {{ ui.breadcrumb("Datasets", href="/datasets") }}
+            {{ ui.breadcrumb_divider() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Content Action"), level=3, attrs={"id": "content-action"}) }}
+            {{ ui.heading(_("Basic content action"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.content_action(content="Edit", href="/dataset/edit/my-dataset") }}
+                    {{ ui.content_action(content=(ui.icon("edit") ~ " Edit"), href="/dataset/edit/my-dataset") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.content_action(content="Edit", href="/dataset/edit/my-dataset") }}
+            {{ ui.content_action(content=(ui.icon("edit") ~ " Edit"), href="/dataset/edit/my-dataset") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Content Nav Item"), level=3, attrs={"id": "content-nav-item"}) }}
+            {{ ui.heading(_("Basic content nav item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.content_nav_item(content="About", href="/dataset/my-dataset") }}
+                    {{ ui.content_nav_item(content="Resources", href="/dataset/my-dataset/resources", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.content_nav_item(content="About", href="/dataset/my-dataset") }}
+            {{ ui.content_nav_item(content="Resources", href="/dataset/my-dataset/resources", active=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Dropdown Item"), level=3, attrs={"id": "dropdown-item"}) }}
+            {{ ui.heading(_("Basic dropdown item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.dropdown_item(content="Action", href="/action") }}
+                    {{ ui.dropdown_item(content="Active Action", href="/active", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.dropdown_item(content="Action", href="/action") }}
+            {{ ui.dropdown_item(content="Active Action", href="/active", active=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Main Nav Item"), level=3, attrs={"id": "main-nav-item"}) }}
+            {{ ui.heading(_("Basic main nav item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.main_nav_item(content="Datasets", href="/dataset") }}
+                    {{ ui.main_nav_item(content="Organizations", href="/organization", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.main_nav_item(content="Datasets", href="/dataset") }}
+            {{ ui.main_nav_item(content="Organizations", href="/organization", active=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Menu Item"), level=3, attrs={"id": "menu-item"}) }}
+            {{ ui.heading(_("Basic menu item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.menu_item(content="Option 1", href="/option1") }}
+                    {{ ui.menu_item(content="Current Option", href="/current", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.menu_item(content="Option 1", href="/option1") }}
+            {{ ui.menu_item(content="Current Option", href="/current", active=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Nav Item"), level=3, attrs={"id": "nav-item"}) }}
+            {{ ui.heading(_("Basic nav item"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.nav_item(content="Home", href="/") }}
+                    {{ ui.nav_item(content="Datasets", href="/datasets", active=true) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.nav_item(content="Home", href="/") }}
+            {{ ui.nav_item(content="Datasets", href="/datasets", active=true) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Page Action"), level=3, attrs={"id": "page-action"}) }}
+            {{ ui.heading(_("Basic page action"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.page_action(content="Add Dataset", href="/dataset/new") }}
+                    {{ ui.page_action(content="Create Group", href="/group/new", attrs={"class": "btn btn-primary"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.page_action(content="Add Dataset", href="/dataset/new") }}
+            {{ ui.page_action(content="Create Group", href="/group/new", attrs={"class": "btn btn-primary"}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Pagination"), level=3, attrs={"id": "pagination"}) }}
+            {{ ui.heading(_("Basic pagination"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.pagination(page=1, total=10, url_generator=h.pager_url) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.pagination(page=1, total=3, url_generator=h.pager_url) }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Search components")) -%}
+        <div>
+            {{ ui.heading(_("Search Active Filters"), level=3, attrs={"id": "search-active-filters"}) }}
+            {{ ui.heading(_("Basic search active filters"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_active_filters(
+                        active_filters={"organization": ["gov"], "format": ["csv"]},
+                        facet_titles={"organization": "Organization", "format": "Format"}
+                        ) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_active_filters(
+                active_filters={"organization": ["gov"], "format": ["csv"]},
+                facet_titles={"organization": "Organization", "format": "Format"}
+                ) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Advanced Controls"), level=3, attrs={"id": "search-advanced-controls"}) }}
+            {{ ui.heading(_("Basic search advanced controls"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_advanced_controls() }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_advanced_controls() }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Form"), level=3, attrs={"id": "search-form"}) }}
+            {{ ui.heading(_("Basic search form"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_form(
+                        query="search term",
+                        item_count=25,
+                        first_item_position=1,
+                        last_item_position=10,
+                        active_filters={},
+                        facets={},
+                        facet_titles={},
+                        use_htmx=false
+                        ) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_form(
+                query="search term",
+                item_count=25,
+                first_item_position=1,
+                last_item_position=10,
+                active_filters={},
+                facets={},
+                facet_titles={},
+                use_htmx=false
+                ) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Form Box"), level=3, attrs={"id": "search-form-box"}) }}
+            {{ ui.heading(_("Basic search form box"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.search_form_box) -%}
+                        {{ ui.search_input(name="q", value="") }}
+                        {{ ui.search_submit_button("Search") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.search_form_box) -%}
+                {{ ui.search_input(name="q", value="") }}
+                {{ ui.search_submit_button("Search") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Input"), level=3, attrs={"id": "search-input"}) }}
+            {{ ui.heading(_("Basic search input"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_input(name="q", value="search term", placeholder="Search...") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_input(name="q", value="search term", placeholder="Search...") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Results Header"), level=3, attrs={"id": "search-results-header"}) }}
+            {{ ui.heading(_("Basic search results header"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_results_header(item_count=25, first_item_position=1, last_item_position=10) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_results_header(item_count=25, first_item_position=1, last_item_position=10) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Sort Control"), level=3, attrs={"id": "search-sort-control"}) }}
+            {{ ui.heading(_("Basic search sort control"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_sort_control(selected="relevance", options=[{"text": "Relevance", "value": "relevance"}, {"text": "Date", "value": "date"}]) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_sort_control(selected="relevance", options=[{"text": "Relevance", "value": "relevance"}, {"text": "Date", "value": "date"}]) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Submit Button"), level=3, attrs={"id": "search-submit-button"}) }}
+            {{ ui.heading(_("Basic search submit button"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_submit_button("Search") }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_submit_button("Search") }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Search Pagination Info"), level=3, attrs={"id": "search-pagination-info"}) }}
+            {{ ui.heading(_("Basic search pagination info"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.search_pagination_info(total=127, first=1, last=10) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.search_pagination_info(total=127, first=1, last=10) }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Section components")) -%}
+        <div>
+            {{ ui.heading(_("Facet Section"), level=3, attrs={"id": "facet-section"}) }}
+            {{ ui.heading(_("Basic facet section"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.facet_section, title="Organization") -%}
+                        {%- call ui.util.call(ui.facet_wrapper, title="Organization") -%}
+                            {{ ui.facet("Government", key="org", value="gov", count=15) }}
+                        {%- endcall %}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.facet_section, title="Organization") -%}
+                {%- call ui.util.call(ui.facet_wrapper, title="Organization") -%}
+                    {{ ui.facet("Government", key="org", value="gov", count=15) }}
+                {%- endcall %}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Section"), level=3, attrs={"id": "section"}) }}
+            {{ ui.heading(_("Basic section"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.section("Content for this section") }}
+                    {{ ui.section("Styled section content", attrs={"class": "custom-section"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.section("Content for this section") }}
+            {{ ui.section("Styled section content", attrs={"class": "custom-section"}) }}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Sidebar Section"), level=3, attrs={"id": "sidebar-section"}) }}
+            {{ ui.heading(_("Basic sidebar section"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {{ ui.sidebar_section("Sidebar content") }}
+                    {{ ui.sidebar_section("Navigation content", attrs={"class": "sidebar-nav-section"}) }}
+                {%- endraw %}
+            {%- endcall -%}
+            {{ ui.sidebar_section("Sidebar content") }}
+            {{ ui.sidebar_section("Navigation content", attrs={"class": "sidebar-nav-section"}) }}
+            {{ ui.divider() }}
+        </div>
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.section, title=_("Wrapper components")) -%}
+        <div>
+            {{ ui.heading(_("Accordion Wrapper"), level=3, attrs={"id": "accordion-wrapper"}) }}
+            {{ ui.heading(_("Basic accordion wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.accordion_wrapper) -%}
+                        {{ ui.accordion("First section content", title="First Section") }}
+                        {{ ui.accordion("Second section content", title="Second Section") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.accordion_wrapper) -%}
+                {{ ui.accordion("First section content", title="First Section") }}
+                {{ ui.accordion("Second section content", title="Second Section") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Account Nav Wrapper"), level=3, attrs={"id": "account-nav-wrapper"}) }}
+            {{ ui.heading(_("Basic account nav wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.account_nav_wrapper) -%}
+                        {{ ui.account_nav_item("Profile", href="/profile") }}
+                        {{ ui.account_nav_item("Settings", href="/settings") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+                {{ ui.account_nav_item("Profile", href="/profile") }}
+                {{ ui.account_nav_item("Settings", href="/settings") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Activity Wrapper"), level=3, attrs={"id": "activity-wrapper"}) }}
+            {{ ui.heading(_("Basic activity wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.activity_wrapper) -%}
+                        {{ ui.activity("User created a dataset", activity=activity_data) }}
+                        {{ ui.activity("User updated profile", activity=activity_data2) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.activity_wrapper) -%}
+                {{ ui.activity("User created a dataset", activity={"user": "test_user", "activity_type": "new package", "data": {"package": {"title": "Test Dataset"}}}) }}
+                {{ ui.activity("User updated profile", activity={"user": "test_user", "activity_type": "updated profile", "data": {"user": {"name": "test_user"}}}) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Breadcrumb Wrapper"), level=3, attrs={"id": "breadcrumb-wrapper"}) }}
+            {{ ui.heading(_("Basic breadcrumb wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+                        {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+                        {{ ui.breadcrumb("Section", href="/section") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+                {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+                {{ ui.breadcrumb("Section", href="/section") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Content Action Wrapper"), level=3, attrs={"id": "content-action-wrapper"}) }}
+            {{ ui.heading(_("Basic content action wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.content_action_wrapper) -%}
+                        {{ ui.content_action("Edit", href="/edit") }}
+                        {{ ui.content_action("Delete", href="/delete") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.content_action_wrapper) -%}
+                {{ ui.content_action("Edit", href="/edit") }}
+                {{ ui.content_action("Delete", href="/delete") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Content Nav Wrapper"), level=3, attrs={"id": "content-nav-wrapper"}) }}
+            {{ ui.heading(_("Basic content nav wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.content_nav_wrapper) -%}
+                        {{ ui.content_nav_item("About", href="/about") }}
+                        {{ ui.content_nav_item("Resources", href="/resources", active=true) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.content_nav_wrapper) -%}
+                {{ ui.content_nav_item("About", href="/about") }}
+                {{ ui.content_nav_item("Resources", href="/resources", active=true) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Dropdown Wrapper"), level=3, attrs={"id": "dropdown-wrapper"}) }}
+            {{ ui.heading(_("Basic dropdown wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.dropdown_wrapper) -%}
+                        {{ ui.dropdown_item("Option 1", href="/option1") }}
+                        {{ ui.dropdown_item("Option 2", href="/option2") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.dropdown_wrapper) -%}
+                {{ ui.dropdown_item("Option 1", href="/option1") }}
+                {{ ui.dropdown_item("Option 2", href="/option2") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Facet Wrapper"), level=3, attrs={"id": "facet-wrapper"}) }}
+            {{ ui.heading(_("Basic facet wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.facet_wrapper) -%}
+                        {{ ui.facet("Organization", key="org", value="my-org", count=15) }}
+                        {{ ui.facet("Format", key="format", value="csv", count=8) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.facet_wrapper) -%}
+                {{ ui.facet("Organization", key="org", value="my-org", count=15) }}
+                {{ ui.facet("Format", key="format", value="csv", count=8) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Group Wrapper"), level=3, attrs={"id": "group-wrapper"}) }}
+            {{ ui.heading(_("Basic group wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.group_wrapper) -%}
+                        {{ ui.group(name="test-group", title="Test Group", description="A test group") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.group_wrapper) -%}
+                {{ ui.group(name="test-group", title="Test Group", description="A test group") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Main Nav Wrapper"), level=3, attrs={"id": "main-nav-wrapper"}) }}
+            {{ ui.heading(_("Basic main nav wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.main_nav_wrapper) -%}
+                        {{ ui.main_nav_item("Datasets", href="/dataset") }}
+                        {{ ui.main_nav_item("Organizations", href="/organization", active=true) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.main_nav_wrapper) -%}
+                {{ ui.main_nav_item("Datasets", href="/dataset") }}
+                {{ ui.main_nav_item("Organizations", href="/organization", active=true) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Menu Wrapper"), level=3, attrs={"id": "menu-wrapper"}) }}
+            {{ ui.heading(_("Basic menu wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.menu_wrapper) -%}
+                        {{ ui.menu_item("Item 1", href="/item1") }}
+                        {{ ui.menu_item("Item 2", href="/item2") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.menu_wrapper) -%}
+                {{ ui.menu_item("Item 1", href="/item1") }}
+                {{ ui.menu_item("Item 2", href="/item2") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Nav Wrapper"), level=3, attrs={"id": "nav-wrapper"}) }}
+            {{ ui.heading(_("Basic nav wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.nav_wrapper) -%}
+                        {{ ui.nav_item("Home", href="/") }}
+                        {{ ui.nav_item("About", href="/about") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.nav_wrapper) -%}
+                {{ ui.nav_item("Home", href="/") }}
+                {{ ui.nav_item("About", href="/about") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Organization Wrapper"), level=3, attrs={"id": "organization-wrapper"}) }}
+            {{ ui.heading(_("Basic organization wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.organization_wrapper) -%}
+                        {{ ui.organization(name="test-org", title="Test Organization", description="A test organization") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.organization_wrapper) -%}
+                {{ ui.organization(name="test-org", title="Test Organization", description="A test organization") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Package Wrapper"), level=3, attrs={"id": "package-wrapper"}) }}
+            {{ ui.heading(_("Basic package wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.package_wrapper) -%}
+                        {{ ui.package(name="test-package", title="Test Package", notes="A test package") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.package_wrapper) -%}
+                {{ ui.package(name="test-package", title="Test Package", notes="A test package") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Page Action Wrapper"), level=3, attrs={"id": "page-action-wrapper"}) }}
+            {{ ui.heading(_("Basic page action wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.page_action_wrapper) -%}
+                        {{ ui.page_action("Add Dataset", href="/dataset/new") }}
+                        {{ ui.page_action("Create Group", href="/group/new") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.page_action_wrapper) -%}
+                {{ ui.page_action("Add Dataset", href="/dataset/new") }}
+                {{ ui.page_action("Create Group", href="/group/new") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Panel Wrapper"), level=3, attrs={"id": "panel-wrapper"}) }}
+            {{ ui.heading(_("Basic panel wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.panel_wrapper) -%}
+                        {{ ui.panel("Panel content", title="Panel Title") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.panel_wrapper) -%}
+                {{ ui.panel("Panel content", title="Panel Title") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Resource Wrapper"), level=3, attrs={"id": "resource-wrapper"}) }}
+            {{ ui.heading(_("Basic resource wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.resource_wrapper) -%}
+                        {{ ui.resource(name="test-resource", description="A test resource", format="CSV", url="/dataset/test/resource") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.resource_wrapper) -%}
+                {{ ui.resource(name="test-resource", description="A test resource", format="CSV", url="/dataset/test/resource") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("Tab Wrapper"), level=3, attrs={"id": "tab-wrapper"}) }}
+            {{ ui.heading(_("Basic tab wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.tab_wrapper) -%}
+                        {{ ui.tab_handle("Tab 1", href="/tab1") }}
+                        {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.tab_wrapper) -%}
+                {{ ui.tab_handle("Tab 1", href="/tab1") }}
+                {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
+
+        <div>
+            {{ ui.heading(_("User Wrapper"), level=3, attrs={"id": "user-wrapper"}) }}
+            {{ ui.heading(_("Basic user wrapper"), level=4) }}
+            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+                {%- raw %}
+                    {%- call ui.util.call(ui.user_wrapper) -%}
+                        {{ ui.user(name="test-user", display_name="Test User", email="test@example.com") }}
+                    {%- endcall %}
+                {%- endraw %}
+            {%- endcall -%}
+            {%- call ui.util.call(ui.user_wrapper) -%}
+                {{ ui.user(name="test-user", display_name="Test User", email="test@example.com") }}
+            {%- endcall %}
+            {{ ui.divider() }}
+        </div>
     {%- endcall %}
 
 {% endblock %}

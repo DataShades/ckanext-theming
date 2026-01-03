@@ -69,8 +69,19 @@ that use different icon sets should provide translation via `ui.util.icon()`.
 
 /// note
 
-Themes should implement `ui.util.icon()` to translate these names to their
-specific icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).
+Themes should provide icon mapping to translate these names to their specific
+icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).
+
+```py
+def register_themes(self) -> dict[str, Theme]:
+
+    return {
+        "my_theme": Theme(
+            os.path.join(root, "themes/bare"),
+            icon_map={"home": "material-home-icon", "search": "glass", "user": "human-figure", ..}
+        ),
+    }
+```
 
 ///
 
@@ -95,7 +106,6 @@ Alignment parameters control content alignment within components:
 | `start`    | Align to start (left/top)   | Bootstrap: `start`, Tailwind: `items-start`, Bulma: `has-text-left`       |
 | `center`   | Center alignment            | Bootstrap: `center`, Tailwind: `items-center`, Bulma: `has-text-centered` |
 | `end`      | Align to end (right/bottom) | Bootstrap: `end`, Tailwind: `items-end`, Bulma: `has-text-right`          |
-| `baseline` | Align to baseline           | Bootstrap: `baseline`, Tailwind: `items-baseline`                         |
 
 
 ## Position Parameters
