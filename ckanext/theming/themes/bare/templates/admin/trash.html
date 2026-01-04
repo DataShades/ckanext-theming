@@ -1,5 +1,10 @@
 {% extends "admin/_base.html" %}
 
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Trash')) }}
+    {{ super() }}
+{% endblock %}
+
 
 {% set titles = {
 "package": _('Deleted datasets'),

@@ -1,69 +1,121 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
+from faker import Faker
 from playwright.sync_api import Page, expect
 
 import ckan.plugins.toolkit as tk
+from ckan.tests.helpers import call_action
 
 
-@pytest.mark.usefixtures("with_plugins")
-class TestActivity:
-    """Test activity stream pages."""
-
-    def test_dashboard_loads(self, page: Page):
-        """Test that the activity dashboard loads successfully."""
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestDashboard:
+    def test_title(self, page: Page, title_builder: Any, user: dict[str, Any], login: Any):
+        """Test that the dashboard title is correct."""
+        login(user)
         page.goto(tk.url_for("activity.dashboard"))
-        expect(page.locator("body")).to_be_visible()
-
-    def test_dashboard_testing_loads(self, page: Page):
-        """Test that the dashboard testing page loads successfully."""
-        page.goto(tk.url_for("activity.dashboard_testing"))
-        expect(page.locator("body")).to_be_visible()
-
-    def test_group_activity_loads(self, page: Page):
-        """Test that the group activity page loads successfully."""
-        # This would require a specific group ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_group_changes_loads(self, page: Page):
-        """Test that the group changes page loads successfully."""
-        # This would require a specific group ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_organization_activity_loads(self, page: Page):
-        """Test that the organization activity page loads successfully."""
-        # This would require a specific organization ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_organization_changes_loads(self, page: Page):
-        """Test that the organization changes page loads successfully."""
-        # This would require a specific organization ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_package_activity_loads(self, page: Page):
-        """Test that the package activity page loads successfully."""
-        # This would require a specific package ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_package_changes_loads(self, page: Page):
-        """Test that the package changes page loads successfully."""
-        # This would require a specific package ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_user_activity_loads(self, page: Page):
-        """Test that the user activity page loads successfully."""
-        # This would require a specific user ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
+        expected = title_builder("Dashboard", user["fullname"], "Users")
+        expect(page).to_have_title(expected)
 
 
-routes = (
-    "activity.dashboard",
-    "activity.dashboard_testing",
-    "activity.group_activity",
-    "activity.group_changes",
-    "activity.organization_activity",
-    "activity.organization_changes",
-    "activity.package_activity",
-    "activity.package_changes",
-    "activity.user_activity",
-)
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestGroupActivity:
+    def test_title(self, page: Page, title_builder: Any, group: dict[str, Any]):
+        """Test that the group activity title is correct."""
+        page.goto(tk.url_for("activity.group_activity", id=group["name"]))
+        expected = title_builder("Activity Stream", group["title"], "Groups")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestGroupChanges:
+    def test_title(
+        self, page: Page, login: Any, title_builder: Any, group: dict[str, Any], faker: Faker, sysadmin: dict[str, Any]
+    ):
+        """Test that the group changes title is correct."""
+        login(sysadmin)
+        new_name = faker.name()
+        call_action("group_patch", {"user": sysadmin["name"]}, id=group["id"], title=new_name)
+        activity_id = call_action("group_activity_list", id=group["id"])[0]["id"]
+        page.goto(tk.url_for("activity.group_changes", id=activity_id))
+        expected = title_builder("Changes", new_name, "Groups")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestOrganizationActivity:
+    def test_title(self, page: Page, title_builder: Any, organization: dict[str, Any]):
+        """Test that the organization activity title is correct."""
+        page.goto(tk.url_for("activity.organization_activity", id=organization["name"]))
+        expected = title_builder("Activity Stream", organization["title"], "Organizations")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestOrganizationChanges:
+    def test_title(
+        self,
+        page: Page,
+        login: Any,
+        title_builder: Any,
+        organization: dict[str, Any],
+        faker: Faker,
+        sysadmin: dict[str, Any],
+    ):
+        """Test that the organization changes title is correct."""
+        login(sysadmin)
+        new_name = faker.name()
+        call_action("organization_patch", {"user": sysadmin["name"]}, id=organization["id"], title=new_name)
+        activity_id = call_action("organization_activity_list", id=organization["id"])[0]["id"]
+        page.goto(tk.url_for("activity.organization_changes", id=activity_id))
+        expected = title_builder("Changes", new_name, "Organizations")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestPackageActivity:
+    def test_title(self, page: Page, title_builder: Any, package: dict[str, Any]):
+        """Test that the package activity title is correct."""
+        page.goto(tk.url_for("activity.package_activity", id=package["name"]))
+        expected = title_builder("Activity Stream", package["title"], "Datasets")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestPackageChanges:
+    def test_title(
+        self,
+        page: Page,
+        login: Any,
+        title_builder: Any,
+        package: dict[str, Any],
+        faker: Faker,
+        sysadmin: dict[str, Any],
+    ):
+        """Test that the organization changes title is correct."""
+        login(sysadmin)
+        new_name = faker.name()
+        call_action("package_patch", {"user": sysadmin["name"]}, id=package["id"], title=new_name)
+        activity_id = call_action("package_activity_list", id=package["id"])[0]["id"]
+        page.goto(tk.url_for("activity.package_changes", id=activity_id))
+        expected = title_builder("Changes", new_name, "Datasets")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.ckan_config("ckan.plugins", ["activity"])
+@pytest.mark.usefixtures("with_plugins", "clean_db")
+class TestUserActivity:
+    def test_title(self, page: Page, title_builder: Any, user: dict[str, Any], login: Any):
+        """Test that the user activity title is correct."""
+        login(user)
+        page.goto(tk.url_for("activity.user_activity", id=user["name"]))
+        expected = title_builder("Activity Stream", user["fullname"], "Users")
+        expect(page).to_have_title(expected)

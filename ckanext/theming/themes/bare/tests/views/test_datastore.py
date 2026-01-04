@@ -1,31 +1,21 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 from playwright.sync_api import Page, expect
 
+import ckan.plugins.toolkit as tk
+from ckan.tests.helpers import call_action
+
 
 @pytest.mark.usefixtures("with_plugins")
-class TestDatastore:
-    """Test datastore pages."""
+class TestDictionary:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, package: dict[str, Any]):
+        """Test that the datastore dictionary page has the correct title."""
+        login(sysadmin)
+        result = call_action("datastore_create", {"user": sysadmin["name"]}, resource={"package_id": package["id"]})
 
-    def test_api_info_loads(self, page: Page):
-        """Test that the datastore API info page loads successfully."""
-        # This would require a specific resource ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_dictionary_loads(self, page: Page):
-        """Test that the datastore dictionary page loads successfully."""
-        # This would require specific IDs, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_dump_loads(self, page: Page):
-        """Test that the datastore dump page loads successfully."""
-        # This would require a specific resource ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-
-routes = (
-    "datastore.api_info",
-    "datastore.dictionary",
-    "datastore.dump",
-)
+        page.goto(tk.url_for("datastore.dictionary", id=package["id"], resource_id=result["resource_id"]))
+        expected = title_builder("Data Dictionary", ".*", package["title"], "Datasets", pattern=True)
+        expect(page).to_have_title(expected)

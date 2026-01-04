@@ -1,5 +1,10 @@
 {% extends "_page.html" %}
 
+{%- block subtitle -%}
+    {{ ui.subtitle_item(_("Statistics")) }}
+    {{ super() }}
+{%- endblock %}
+
 {%- block breadcrumb_content -%}
     {{ super() }}
     {{ ui.breadcrumb(_('Statistics'), href=h.url_for("stats.index")) }}

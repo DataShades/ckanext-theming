@@ -1,11 +1,6 @@
 {% extends "group/_base.html" %}
 {%- set _layout = _layout | default("fullwidth") -%}
 
-{%- block subtitle %}
-    {{ ui.subtitle_item(h.humanize_entity_type('group', group_type, 'page title') or _('Groups')) }}
-    {{ super() }}
-{% endblock %}
-
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb(h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), href=h.url_for(group_type ~ '.index')) }}
 {%- endblock %}

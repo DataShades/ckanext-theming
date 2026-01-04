@@ -1,5 +1,10 @@
 {% extends "package/_base.html" %}
 
+{%- block subtitle -%}
+    {{ ui.subtitle_item(_('Activity Stream')) }}
+    {{ super() }}
+{%- endblock %}
+
 {%- block breadcrumb_content -%}
     {{ super() }}
     {{ ui.breadcrumb(_("Activity Stream"), h.url_for("activity.package_activity", id=pkg_dict.name)) }}

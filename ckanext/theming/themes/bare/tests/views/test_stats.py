@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -7,13 +9,11 @@ import ckan.plugins.toolkit as tk
 
 
 @pytest.mark.usefixtures("with_plugins")
-class TestStats:
-    """Test statistics pages."""
-
-    def test_stats_index_loads(self, page: Page):
-        """Test that the stats index page loads successfully."""
+class TestIndex:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
+        """Test that the stats index page has the correct title."""
+        login(sysadmin)
         page.goto(tk.url_for("stats.index"))
-        expect(page.locator("body")).to_be_visible()
 
-
-routes = ("stats.index",)
+        expected = title_builder("Statistics")
+        expect(page).to_have_title(expected)

@@ -1,10 +1,10 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout|default("right_sidebar") -%}
-
+{% set dataset_type = pkg_dict.type if pkg_dict else dataset_type or 'dataset' %}
 
 {%- block subtitle %}
     {{ ui.subtitle_item(h.dataset_display_name(pkg_dict)) if pkg_dict }}
-    {{ ui.subtitle_item(h.humanize_entity_type('package', pkg_dict.type if pkg_dict else dataset_type or 'dataset',  'page title') or _('Datasets')) }}
+    {{ ui.subtitle_item(h.humanize_entity_type('package', dataset_type or 'dataset',  'page title') or _('Datasets')) }}
     {{ super() }}
 {% endblock %}
 

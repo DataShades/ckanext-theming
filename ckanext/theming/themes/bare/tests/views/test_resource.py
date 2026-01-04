@@ -1,36 +1,88 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 from playwright.sync_api import Page, expect
 
+import ckan.plugins.toolkit as tk
+from ckan import types
+
 
 @pytest.mark.usefixtures("with_plugins")
-class TestResource:
-    """Test resource pages."""
-
-    def test_resource_new_loads(self, page: Page):
-        """Test that the resource creation page loads successfully."""
-        # This would require a dataset ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_resource_read_loads(self, page: Page):
-        """Test that the resource read page loads successfully."""
-        # This would require specific dataset and resource IDs, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
-
-    def test_resource_edit_loads(self, page: Page):
-        """Test that the resource edit page loads successfully."""
-        # This would require specific dataset and resource IDs, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
+class TestResourceDelete:
+    def test_title(
+        self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, resource: dict[str, Any]
+    ):
+        """Test that the resource delete page has the correct title."""
+        login(sysadmin)
+        page.goto(tk.url_for("resource.delete", id=resource["package_id"], resource_id=resource["id"]))
+        expected = title_builder("Confirm Delete")
+        expect(page).to_have_title(expected)
 
 
-routes = (
-    "resource.delete",
-    "resource.download",
-    "resource.edit",
-    "resource.edit_view",
-    "resource.new",
-    "resource.read",
-    "resource.view",
-    "resource.views",
-)
+@pytest.mark.usefixtures("with_plugins")
+class TestResourceEdit:
+    def test_title(
+        self,
+        page: Page,
+        login: Any,
+        sysadmin: dict[str, Any],
+        title_builder: Any,
+        resource_factory: types.TestFactory,
+        package: dict[str, Any],
+    ):
+        """Test that the resource edit page has the correct title."""
+        login(sysadmin)
+        resource = resource_factory(package_id=package["id"])
+        page.goto(tk.url_for("resource.edit", id=resource["package_id"], resource_id=resource["id"]))
+        expected = title_builder("Edit", resource["name"], package["title"], "Datasets")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestResourceNew:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, package: dict[str, Any]):
+        """Test that the resource new page has the correct title."""
+        login(sysadmin)
+        page.goto(tk.url_for("resource.new", id=package["id"]))
+        expected = title_builder("Add data to the dataset", package["title"], "Datasets")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestResourceRead:
+    def test_title(
+        self,
+        page: Page,
+        login: Any,
+        sysadmin: dict[str, Any],
+        title_builder: Any,
+        resource_factory: types.TestFactory,
+        package: dict[str, Any],
+    ):
+        """Test that the resource read page has the correct title."""
+        login(sysadmin)
+        resource = resource_factory(package_id=package["id"])
+        page.goto(tk.url_for("resource.read", id=resource["package_id"], resource_id=resource["id"]))
+        expected = title_builder(resource["name"], package["title"], "Datasets")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestResourceViews:
+    def test_title(
+        self,
+        page: Page,
+        login: Any,
+        sysadmin: dict[str, Any],
+        title_builder: Any,
+        resource_factory: types.TestFactory,
+        package: dict[str, Any],
+    ):
+        """Test that the resource views page has the correct title."""
+        login(sysadmin)
+        resource = resource_factory(package_id=package["id"])
+        page.goto(tk.url_for("resource.views", id=resource["package_id"], resource_id=resource["id"]))
+        expected = title_builder("View", resource["name"], package["title"], "Datasets")
+        expect(page).to_have_title(expected)

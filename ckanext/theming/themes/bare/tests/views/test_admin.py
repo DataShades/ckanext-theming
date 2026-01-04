@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -7,33 +9,40 @@ import ckan.plugins.toolkit as tk
 
 
 @pytest.mark.usefixtures("with_plugins")
-class TestAdmin:
-    """Test admin pages."""
-
-    def test_admin_index_loads(self, page: Page):
-        """Test that the admin index page loads successfully."""
+class TestIndex:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
+        """Test that the admin index page has the correct title."""
+        login(sysadmin)
         page.goto(tk.url_for("admin.index"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("Admin")
+        expect(page).to_have_title(expected)
 
-    def test_admin_config_loads(self, page: Page):
-        """Test that the admin config page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestConfig:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
+        """Test that the admin config page has the correct title."""
+        login(sysadmin)
         page.goto(tk.url_for("admin.config"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("Config", "Admin")
+        expect(page).to_have_title(expected)
 
-    def test_admin_trash_loads(self, page: Page):
-        """Test that the admin trash page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestTrash:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
+        """Test that the admin trash page has the correct title."""
+        login(sysadmin)
         page.goto(tk.url_for("admin.trash"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("Trash", "Admin")
+        expect(page).to_have_title(expected)
 
-    def test_admin_reset_config_loads(self, page: Page):
-        """Test that the admin reset config page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestResetConfig:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
+        """Test that the admin reset config page has the correct title."""
+        login(sysadmin)
         page.goto(tk.url_for("admin.reset_config"))
-        expect(page.locator("body")).to_be_visible()
-
-
-routes = (
-    "admin.config",
-    "admin.index",
-    "admin.reset_config",
-    "admin.trash",
-)
+        expected = title_builder("Confirm Reset", "Config", "Admin")
+        expect(page).to_have_title(expected)

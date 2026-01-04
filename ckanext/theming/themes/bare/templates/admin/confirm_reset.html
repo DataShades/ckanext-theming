@@ -2,6 +2,7 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
+
     {{ ui.breadcrumb(_("Config"), h.url_for("admin.config")) }}
     {{ ui.breadcrumb(_("Confirm Reset"), h.url_for("admin.reset_config")) }}
 {%- endblock %}

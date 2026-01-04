@@ -5,9 +5,12 @@
         {'name': 'text', 'value': 'text'},
         {'name': 'numeric', 'value': 'numeric'},
         {'name': 'timestamp', 'value': 'timestamp'},
-] -%}
+    ] -%}
 
-
+{%- block subtitle -%}
+    {{ ui.subtitle_item(_("Data Dictionary")) }}
+    {{ super() }}
+{%- endblock %}
 {%- block primary_content_inner -%}
     {%- call ui.util.call(ui.form, method="POST") -%}
         {% block errors %}{{ ui.form_errors(error_summary) }}{% endblock %}

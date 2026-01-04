@@ -1,11 +1,6 @@
 {% extends "organization/_base.html" %}
 {%- set _layout = _layout | default("fullwidth") -%}
 
-{%- block subtitle %}
-    {{ ui.subtitle_item(h.humanize_entity_type('organization', group_type, 'page title') or _('Organizations')) }}
-    {{ super() }}
-{% endblock %}
-
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb(h.humanize_entity_type('organization', group_type, 'breadcrumb') or _('Organizations'), href=h.url_for(group_type ~ '.index')) }}
 {%- endblock %}

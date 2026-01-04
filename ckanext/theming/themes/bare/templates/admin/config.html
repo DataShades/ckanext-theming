@@ -1,5 +1,10 @@
 {% extends "admin/_base.html" %}
 
+{%- block subtitle %}
+    {{ ui.subtitle_item(_('Config')) }}
+    {{ super() }}
+{% endblock %}
+
 {%- block breadcrumb_content -%}
     {{ super() }}
     {{ ui.breadcrumb(_("Config"), h.url_for("admin.config")) }}

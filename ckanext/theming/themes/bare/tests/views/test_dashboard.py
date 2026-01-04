@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -7,27 +9,30 @@ import ckan.plugins.toolkit as tk
 
 
 @pytest.mark.usefixtures("with_plugins")
-class TestDashboard:
-    """Test dashboard pages."""
-
-    def test_dashboard_datasets_loads(self, page: Page):
-        """Test that the dashboard datasets page loads successfully."""
+class TestDatasets:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the dashboard datasets page has the correct title."""
+        login(user)
         page.goto(tk.url_for("dashboard.datasets"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("Datasets", "Dashboard")
+        expect(page).to_have_title(expected)
 
-    def test_dashboard_groups_loads(self, page: Page):
-        """Test that the dashboard groups page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestGroups:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the dashboard groups page has the correct title."""
+        login(user)
         page.goto(tk.url_for("dashboard.groups"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("Groups", "Dashboard")
+        expect(page).to_have_title(expected)
 
-    def test_dashboard_organizations_loads(self, page: Page):
-        """Test that the dashboard organizations page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestOrganizations:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the dashboard organizations page has the correct title."""
+        login(user)
         page.goto(tk.url_for("dashboard.organizations"))
-        expect(page.locator("body")).to_be_visible()
-
-
-routes = (
-    "dashboard.datasets",
-    "dashboard.groups",
-    "dashboard.organizations",
-)
+        expected = title_builder("Organizations", "Dashboard")
+        expect(page).to_have_title(expected)

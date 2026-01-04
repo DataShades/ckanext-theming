@@ -35,7 +35,7 @@
 
                     {%- endcall %}
 
-                    {%- call ui.util.call(ui.package_wrapperui.package_wrapper) -%}
+                    {%- call ui.util.call(ui.package_wrapper) -%}
                         {%- for package in page.items -%}
                             {{ ui.checkbox(name="dataset_" ~ package.id, label=ui.link(package.title, href=h.url_for(package.type ~ ".read", id=package.name))) }}
                         {%- endfor %}

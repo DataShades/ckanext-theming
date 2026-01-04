@@ -355,7 +355,6 @@ routes: dict[str, Route] = defaultdict(Route)
 routes.update(
     {
         "activity.dashboard": Route(plugin="activity"),
-        "activity.dashboard_testing": Route(plugin="activity"),
         "activity.group_activity": Route(plugin="activity", view_args={"id"}),
         "activity.group_changes": Route(plugin="activity", view_args={"id"}),
         "activity.organization_activity": Route(plugin="activity", view_args={"id"}),

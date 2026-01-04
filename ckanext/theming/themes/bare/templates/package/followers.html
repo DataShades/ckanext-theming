@@ -1,5 +1,10 @@
 {% extends "package/_base.html" %}
 
+{%- block subtitle -%}
+    {{ ui.subtitle_item(_("Followers")) }}
+    {{ super() }}
+{%- endblock %}
+
 {%- block primary_content_inner %}
     {{ ui.heading(_('Followers'), level=1) }}
 

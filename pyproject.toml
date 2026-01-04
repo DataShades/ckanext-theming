@@ -84,7 +84,8 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"ckanext/theming/tests*" = ["S", "PL", "ANN"]
+"ckanext/theming/tests*" = ["S", "PL", "ANN", "PLR0913"]
+"ckanext/theming/themes/*/tests*" = ["S", "PL", "ANN", "PLR0913"]
 
 [tool.ruff.lint.flake8-import-conventions.aliases]
 "ckan.plugins" = "p"

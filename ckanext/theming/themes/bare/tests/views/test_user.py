@@ -1,59 +1,130 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pytest
 from playwright.sync_api import Page, expect
 
 import ckan.plugins.toolkit as tk
+from ckan.tests.helpers import call_action
 
 
 @pytest.mark.usefixtures("with_plugins")
-class TestUser:
-    """Test user pages."""
+class TestApiTokens:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the user API tokens page has the correct title."""
+        login(user)
+        page.goto(tk.url_for("user.api_tokens", id=user["name"]))
+        expected = title_builder("API Tokens", user["fullname"], "Users")
+        expect(page).to_have_title(expected)
 
-    def test_user_index_loads(self, page: Page):
-        """Test that the user index page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestDelete:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the user delete page has the correct title."""
+        login(user)
+        page.goto(tk.url_for("user.delete", id=user["name"]))
+        expected = title_builder("Confirm Delete")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestEdit:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the user edit page has the correct title."""
+        login(user)
+        page.goto(tk.url_for("user.edit", id=user["name"]))
+        expected = title_builder("Edit Profile", user["fullname"], "Users")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestFollowers:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any, sysadmin: dict[str, Any]):
+        """Test that the user followers page has the correct title."""
+        login(sysadmin)
+        page.goto(tk.url_for("user.followers", id=user["name"]))
+        expected = title_builder("Followers", user["fullname"], "Users")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestIndex:
+    def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
+        """Test that the user index page has the correct title."""
+        login(sysadmin)
         page.goto(tk.url_for("user.index"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("All Users", "Users")
+        expect(page).to_have_title(expected)
 
-    def test_user_login_loads(self, page: Page):
-        """Test that the user login page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestLoggedOutPage:
+    def test_title(self, page: Page, title_builder: Any):
+        """Test that the user logged out page has the correct title."""
+        page.goto(tk.url_for("user.logged_out_page"))
+        expected = title_builder("Logged Out", "Users")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestLogin:
+    def test_title(self, page: Page, title_builder: Any):
+        """Test that the user login page has the correct title."""
         page.goto(tk.url_for("user.login"))
-        expect(page.locator("body")).to_be_visible()
+        expected = title_builder("Login", "Users")
+        expect(page).to_have_title(expected)
 
-    def test_user_register_loads(self, page: Page):
-        """Test that the user registration page loads successfully."""
+
+@pytest.mark.usefixtures("with_plugins")
+class TestRead:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
+        """Test that the user read page has the correct title."""
+        login(user)
+        page.goto(tk.url_for("user.read", id=user["name"]))
+        expected = title_builder(user["fullname"], "Users")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestReadGroups:
+    def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any, group: dict[str, Any]):
+        """Test that the user read groups page has the correct title."""
+        login(user)
+        call_action("member_create", id=group["id"], object=user["id"], object_type="user", capacity="member")
+
+        page.goto(tk.url_for("user.read_groups", id=user["name"]))
+        expected = title_builder("Groups", user["fullname"], "Users")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestReadOrganizations:
+    def test_title(
+        self, page: Page, login: Any, user: dict[str, Any], title_builder: Any, organization: dict[str, Any]
+    ):
+        """Test that the user read organizations page has the correct title."""
+        login(user)
+        call_action("member_create", id=organization["id"], object=user["id"], object_type="user", capacity="member")
+        page.goto(tk.url_for("user.read_organizations", id=user["name"]))
+        expected = title_builder("Organizations", user["fullname"], "Users")
+        expect(page).to_have_title(expected)
+
+
+@pytest.mark.usefixtures("with_plugins")
+class TestRegister:
+    def test_title(self, page: Page, title_builder: Any):
+        """Test that the user register page has the correct title."""
         page.goto(tk.url_for("user.register"))
-        expect(page.locator("body")).to_be_visible()
-
-    def test_user_logout_loads(self, page: Page):
-        """Test that the user logout page loads successfully."""
-        page.goto(tk.url_for("user.logout"))
-        expect(page.locator("body")).to_be_visible()
-
-    def test_user_read_loads(self, page: Page):
-        """Test that the user profile page loads successfully."""
-        # This would require a specific user ID, so we'll test with a mock
-        expect(True).to_be(True)  # Placeholder for now
+        expected = title_builder("Register", "Users")
+        expect(page).to_have_title(expected)
 
 
-routes = (
-    "user.api_tokens",
-    "user.api_tokens_revoke",
-    "user.delete",
-    "user.edit",
-    "user.follow",
-    "user.followers",
-    "user.index",
-    "user.logged_out_page",
-    "user.login",
-    "user.logout",
-    "user.me",
-    "user.perform_reset",
-    "user.read",
-    "user.read_groups",
-    "user.read_organizations",
-    "user.register",
-    "user.request_reset",
-    "user.sysadmin",
-    "user.unfollow",
-)
+@pytest.mark.usefixtures("with_plugins")
+class TestRequestReset:
+    def test_title(self, page: Page, title_builder: Any):
+        """Test that the user request reset page has the correct title."""
+        page.goto(tk.url_for("user.request_reset"))
+        expected = title_builder("Reset your password", "Users")
+        expect(page).to_have_title(expected)
