@@ -859,6 +859,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#ckan-theme-template-component-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme template component-usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#common-options" class="md-nav__link">
     <span class="md-ellipsis">
       Common Options
@@ -1004,6 +1013,15 @@
   <a href="#ckan-theme-endpoint-dump" class="md-nav__link">
     <span class="md-ellipsis">
       ckan theme endpoint dump
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-template-component-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme template component-usage
     </span>
   </a>
   
@@ -1267,6 +1285,25 @@ ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"
 <li><code>--ignore</code>: Context variables to ignore (can be specified multiple times)</li>
 <li><code>--endpoints</code>: Specific endpoints to dump (can be specified multiple times)</li>
 <li><code>-v, --verbose</code>: Show full context variables instead of just their types</li>
+</ul>
+<h2 id="ckan-theme-template-component-usage"><code>ckan theme template component-usage</code></h2>
+<p>Analyzes template files to identify which UI components are used in each template.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Analyze component usage in all templates</span>
+ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>component<span class="w"> </span>usage
+
+<span class="c1"># Show detailed usage information</span>
+ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>component<span class="w"> </span>usage<span class="w"> </span>--include-frequency
+</code></pre></div>
+<p>Output includes:</p>
+<ul>
+<li>List of UI unknown and unused components</li>
+<li>List of UI components used in the template</li>
+<li>Count of each component usage</li>
+</ul>
+<p>Options:</p>
+<ul>
+<li><code>-t, --theme</code>: Specify the theme to analyze (defaults to configured theme)</li>
+<li><code>--include-frequency</code>: Show component count</li>
 </ul>
 <h2 id="common-options">Common Options</h2>
 <p>Most theme commands support the <code>--theme</code> option to specify which theme to operate on:</p>
