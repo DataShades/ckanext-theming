@@ -54,16 +54,15 @@
                                             {%- block page_action %}{% endblock -%}
                                         {%- endcall %}
 
-
                                         {%- block page_header %}
-                                            {%- call ui.util.call(ui.content_action_wrapper) -%}
-                                                {%- block content_action %}{% endblock -%}
-                                            {%- endcall %}
-
                                             {%- call ui.util.call(ui.content_nav_wrapper) -%}
                                                 {%- block content_nav %}{% endblock -%}
                                             {%- endcall %}
                                         {% endblock -%}
+
+                                        {%- call ui.util.call(ui.content_action_wrapper) -%}
+                                            {%- block content_action %}{% endblock -%}
+                                        {%- endcall %}
 
                                         {%- block primary_content_inner %}
                                         {% endblock -%}

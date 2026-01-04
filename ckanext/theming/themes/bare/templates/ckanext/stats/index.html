@@ -1,4 +1,5 @@
-{% extends "_page.html" %}
+{% extends "_layout.html" %}
+{%- set _layout = _layout|default("content_control") -%}
 
 {%- block subtitle -%}
     {{ ui.subtitle_item(_("Statistics")) }}
