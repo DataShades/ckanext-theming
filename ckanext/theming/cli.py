@@ -9,13 +9,13 @@ import random
 import re
 import shutil
 import string
-from collections import defaultdict
+from collections import Counter, defaultdict
 from collections.abc import Callable, Collection
 from typing import Any
 
 import click
 import flask.signals
-from jinja2 import TemplateNotFound
+from jinja2 import Environment, TemplateNotFound
 from jinja2.exceptions import UndefinedError
 from jinja2.runtime import Macro
 from werkzeug.exceptions import NotFound
@@ -32,6 +32,8 @@ log = logging.getLogger(__name__)
 
 __all__ = ["theme"]
 
+RE_COMPONENT = re.compile(r"(?<!\.)ui\.(?!util\.)(?P<name>\w+)")
+
 RE_EXTEND = re.compile(
     r"""
     \{%-?\s*		(?# tag start)
@@ -41,6 +43,7 @@ RE_EXTEND = re.compile(
 """,
     re.X,
 )
+
 
 RE_INCLUDE = re.compile(
     r"""
@@ -363,6 +366,54 @@ def template_analyze(  # noqa: C901
             click.secho(click.style("All blocks: ", fg="yellow") + ", ".join(sorted(blocks)))
 
         click.echo()
+
+
+@template.command("component-usage")
+@theme_option
+@click.pass_context
+@click.option("--include-frequency", is_flag=True, help="Include component usage frequency.")
+def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequency: bool):  # noqa: C901
+    """Analyze component usage in templates."""
+    env: Environment = ctx.meta["flask_app"].jinja_env
+    used: dict[str, set[str]] = defaultdict(set)
+    counter: Counter[str] = Counter()
+    for name in env.list_templates():
+        if not name.endswith(".html"):
+            continue
+        tpl = env.get_template(name)
+        if not tpl.filename:
+            continue
+
+        with open(tpl.filename) as src:
+            for component_name in RE_COMPONENT.findall(src.read()):
+                used[component_name].add(tpl.filename)
+                counter.update([component_name])
+
+    with _make_ui(ctx, theme) as ui:
+        existing = set(ui)
+
+    unused = existing - set(used)
+    unknown = set(used) - existing
+
+    if unused:
+        click.secho(click.style(f"Unused components({len(unused)}): ", fg="yellow") + ", ".join(sorted(unused)))
+    else:
+        click.secho("No unused components", fg="green")
+
+    if unknown:
+        click.secho(f"Unknown components({len(unknown)}): ", fg="yellow")
+        for name in sorted(unknown):
+            click.echo(f"  {name}:")
+            for tpl_name in sorted(used[name]):
+                click.echo(f"    {tpl_name}")
+
+    else:
+        click.secho("No unknown components", fg="green")
+
+    if include_frequency:
+        click.secho("Component frequency:", fg="yellow")
+        for name, count in sorted(counter.items(), key=lambda pair: pair[::-1], reverse=True):
+            click.echo(f"{count:> 5}: {name}")
 
 
 @theme.group()

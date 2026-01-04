@@ -278,6 +278,29 @@ Options:
 - `--endpoints`: Specific endpoints to dump (can be specified multiple times)
 - `-v, --verbose`: Show full context variables instead of just their types
 
+## `ckan theme template component-usage`
+
+Analyzes template files to identify which UI components are used in each template.
+
+```bash
+# Analyze component usage in all templates
+ckan theme template component usage
+
+# Show detailed usage information
+ckan theme template component usage --include-frequency
+```
+
+Output includes:
+
+- List of UI unknown and unused components
+- List of UI components used in the template
+- Count of each component usage
+
+Options:
+
+- `-t, --theme`: Specify the theme to analyze (defaults to configured theme)
+- `--include-frequency`: Show component count
+
 ## Common Options
 
 Most theme commands support the `--theme` option to specify which theme to operate on:
