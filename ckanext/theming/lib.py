@@ -289,14 +289,24 @@ class MacroUI(UI):
 class Theme:
     """Information about a theme.
 
+    :param name: Name of the theme.
     :param path: Path to the theme directory.
     :param parent: Name of the parent theme, or None.
+    :param template_folder: Subdirectory for templates.
+    :param public_folder: Subdirectory for public static files.
+    :param asset_folder: Subdirectory for asset files.
+    :param ui_factory: Factory class for creating the UI instance.
+    :param util_factory: Factory class for creating the Util instance.
+    :param icon_map: Mapping of common icon names to theme-specific names.
     """
 
     name: str
     path: str | None
     parent: str | None = None
 
+    template_folder: str = "templates"
+    public_folder: str = "public"
+    asset_folder: str = "assets"
     ui_factory: type[UI] = MacroUI
     util_factory: type[Util] = Util
     icon_map: dict[str, str] = dataclasses.field(default_factory=dict)
@@ -316,17 +326,17 @@ class Theme:
     def template_path(self):
         """Get the path to the theme's templates directory."""
         if self.path:
-            return os.path.join(self.path, "templates")
+            return os.path.join(self.path, self.template_folder)
 
     def public_path(self):
         """Get the path to the theme's public directory."""
         if self.path:
-            return os.path.join(self.path, "public")
+            return os.path.join(self.path, self.public_folder)
 
     def asset_path(self):
         """Get the path to the theme's assets directory."""
         if self.path:
-            return os.path.join(self.path, "assets")
+            return os.path.join(self.path, self.asset_folder)
 
 
 def get_theme(name: str):
