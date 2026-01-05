@@ -1212,7 +1212,8 @@
 </code></pre></div>
 <h2 id="registering-a-theme">Registering a Theme</h2>
 <h3 id="1-implement-the-itheme-interface">1. Implement the <code>ITheme</code> Interface</h3>
-<p>In your extension's <code>plugin.py</code> file, implement the <code>ITheme</code> interface. The key method is <code>register_themes()</code> which returns a dictionary mapping theme names to <code>Theme</code> objects:</p>
+<p>In your extension's <code>plugin.py</code> file, implement the <code>ITheme</code> interface. The key
+method is <code>register_themes()</code> which returns a list of <code>Theme</code> objects:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ckan.plugins</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">p</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.interfaces</span><span class="w"> </span><span class="kn">import</span> <span class="n">ITheme</span>
@@ -1221,26 +1222,28 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">YourExtensionPlugin</span><span class="p">(</span><span class="n">ITheme</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">SingletonPlugin</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Return a dictionary of theme names to Theme objects</span>
+        <span class="c1"># Return a list of theme Theme objects</span>
         <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s1">&#39;your_theme&#39;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Theme</span><span class="p">(</span>
+                <span class="s1">&#39;your_theme&#39;</span><span class="p">,</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;themes/your_theme&#39;</span><span class="p">),</span>
                 <span class="c1"># Optionally specify a parent theme to extend</span>
                 <span class="c1"># parent=&#39;parent_theme_name&#39;</span>
             <span class="p">),</span>
-        <span class="p">}</span>
+        <span class="p">]</span>
 </code></pre></div>
 <h3 id="2-theme-inheritance">2. Theme Inheritance</h3>
 <p>Themes can inherit from parent themes to build upon existing functionality:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;child_theme&#39;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">Theme</span><span class="p">(</span>
+            <span class="s1">&#39;child_theme&#39;</span><span class="p">,</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;themes/child_theme&#39;</span><span class="p">),</span>
             <span class="n">parent</span><span class="o">=</span><span class="s1">&#39;parent_theme_name&#39;</span>  <span class="c1"># Inherits from another theme</span>
         <span class="p">),</span>
-    <span class="p">}</span>
+    <span class="p">]</span>
 </code></pre></div>
 <p>Child themes inherit all macros and templates from the parent, but can selectively override only the components they want to customize. Unimplemented macros fall back to the parent theme.</p>
 <h3 id="3-custom-ui-implementation-optional">3. Custom UI Implementation (Optional)</h3>
@@ -1259,12 +1262,13 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">.theme</span><span class="w"> </span><span class="kn">import</span> <span class="n">YourThemeUI</span>  <span class="c1"># Import your custom UI class</span>
 
     <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;your_theme&#39;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">Theme</span><span class="p">(</span>
+            <span class="s1">&#39;your_theme&#39;</span><span class="p">,</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;themes/your_theme&#39;</span><span class="p">),</span>
             <span class="n">ui_factory</span><span class="o">=</span><span class="n">YourThemeUI</span><span class="p">,</span>  <span class="c1"># Set custom UI class</span>
         <span class="p">),</span>
-    <span class="p">}</span>
+    <span class="p">]</span>
 </code></pre></div>
 <h2 id="creating-ui-macros">Creating UI Macros</h2>
 <h3 id="1-create-the-main-macros-entry-point">1. Create the Main Macros Entry Point</h3>

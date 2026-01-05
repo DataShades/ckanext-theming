@@ -1023,10 +1023,10 @@ plugin class:</p>
 <span class="k">class</span><span class="w"> </span><span class="nc">MyThemePlugin</span><span class="p">(</span><span class="n">ITheme</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">SingletonPlugin</span><span class="p">):</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;my_theme&quot;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span><span class="s2">&quot;/path/to/my_theme/root&quot;</span><span class="p">),</span>
-            <span class="s2">&quot;extended_my_theme&quot;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span><span class="s2">&quot;/path/to/extended_my_theme/root&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;my_theme&quot;</span><span class="p">),</span>
-        <span class="p">}</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">Theme</span><span class="p">(</span><span class="s2">&quot;my_theme&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/my_theme/root&quot;</span><span class="p">),</span>
+            <span class="n">Theme</span><span class="p">(</span><span class="s2">&quot;extended_my_theme&quot;</span><span class="p">,</span> <span class="s2">&quot;/path/to/extended_my_theme/root&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;my_theme&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
 </code></pre></div>
 <h3 id="using-ui-macros">Using UI Macros</h3>
 <p>Once a theme is active, UI macros can be used in templates:</p>

@@ -1186,14 +1186,15 @@ that use different icon sets should provide translation via <code>ui.util.icon()
 <p class="admonition-title">Note</p>
 <p>Themes should provide icon mapping to translate these names to their specific
 icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Theme</span><span class="p">]:</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Theme</span><span class="p">]:</span>
 
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;my_theme&quot;</span><span class="p">:</span> <span class="n">Theme</span><span class="p">(</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">Theme</span><span class="p">(</span>
+            <span class="s2">&quot;my_theme&quot;</span><span class="p">,</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;themes/bare&quot;</span><span class="p">),</span>
             <span class="n">icon_map</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;home&quot;</span><span class="p">:</span> <span class="s2">&quot;material-home-icon&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="s2">&quot;glass&quot;</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;human-figure&quot;</span><span class="p">,</span> <span class="o">..</span><span class="p">}</span>
         <span class="p">),</span>
-    <span class="p">}</span>
+    <span class="p">]</span>
 </code></pre></div>
 </div>
 <h2 id="direction-parameters">Direction Parameters</h2>
