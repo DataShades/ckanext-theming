@@ -273,7 +273,8 @@ class MacroUI(UI):
     @override
     def __getattr__(self, name: str):
         # reset macro cache at the beginning of the request in debug mode. This
-        # allows to edit UI macros without restarting the server.
+        # allows to edit UI macros without restarting the server. New macros
+        # are not detected in this way and still require restart.
         if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
             for tpl in self.__templates:
                 tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
@@ -292,7 +293,8 @@ class Theme:
     :param parent: Name of the parent theme, or None.
     """
 
-    path: str
+    name: str
+    path: str | None
     parent: str | None = None
 
     ui_factory: type[UI] = MacroUI
@@ -313,15 +315,18 @@ class Theme:
 
     def template_path(self):
         """Get the path to the theme's templates directory."""
-        return os.path.join(self.path, "templates")
+        if self.path:
+            return os.path.join(self.path, "templates")
 
     def public_path(self):
         """Get the path to the theme's public directory."""
-        return os.path.join(self.path, "public")
+        if self.path:
+            return os.path.join(self.path, "public")
 
     def asset_path(self):
         """Get the path to the theme's assets directory."""
-        return os.path.join(self.path, "assets")
+        if self.path:
+            return os.path.join(self.path, "assets")
 
 
 def get_theme(name: str):
@@ -337,11 +342,11 @@ def collect_themes() -> dict[str, Theme]:
     """Collect available themes from core and plugins."""
     # ckan_root = os.path.dirname(os.path.abspath(ckan.__file__))
     themes: dict[str, Theme] = {
-        # "classic": Theme(os.path.join(ckan_root, "templates")),
-        # "midnight-blue": Theme(os.path.join(ckan_root, "templates-midnight-blue")),
+        # Theme("classic", os.path.join(ckan_root, "templates")),
+        # Theme("midnight-blue", os.path.join(ckan_root, "templates-midnight-blue")),
     }
     for plugin in p.PluginImplementations(ITheme):
-        themes.update(plugin.register_themes())
+        themes.update({theme.name: theme for theme in plugin.register_themes()})
 
     return themes
 
@@ -355,7 +360,8 @@ def resolve_paths(theme: str | None) -> list[str]:
     paths: list[str] = []
     while theme:
         info = themes[theme]
-        paths.append(info.path)
+        if info.path:
+            paths.append(info.path)
         theme = info.parent
 
     return paths
@@ -373,34 +379,30 @@ def enable_theme(name: str, config: Any):
 
     """
     themes = collect_themes()
+    enabled_themes: list[Theme] = []
 
-    next_name = name
-    enabled_themes = {next_name}
+    while True:
+        theme = themes.pop(name, None)
+        if not theme:
+            msg = f"Theme '{name}' is not recognised."
+            raise CkanConfigurationException(msg)
+
+        enabled_themes.append(theme)
+        if not theme.parent:
+            break
+        name = theme.parent
+
     here = os.path.dirname(__file__)
 
-    while theme := themes.get(next_name):
-        if os.path.isdir(theme.template_path()):
-            tk.add_template_directory(config, os.path.relpath(theme.template_path(), here))
+    for theme in reversed(enabled_themes):
+        if (path := theme.template_path()) and os.path.isdir(path):
+            tk.add_template_directory(config, os.path.relpath(path, here))
 
-        if os.path.isdir(theme.asset_path()):
-            tk.add_resource(os.path.relpath(theme.asset_path(), here), f"theming/{next_name}")
+        if (path := theme.asset_path()) and os.path.isdir(path):
+            tk.add_resource(os.path.relpath(path, here), f"theming/{theme.name}")
 
-        if os.path.isdir(theme.public_path()):
-            tk.add_public_directory(config, os.path.relpath(theme.public_path(), here))
-
-        next_name = theme.parent
-        if not next_name:
-            break
-
-        if next_name in enabled_themes:
-            log.warning("Theme %s causes a recursion in theme hierarchy", next_name)
-            break
-
-        enabled_themes.add(next_name)
-
-    else:
-        msg = f"Theme '{next_name}' is not recognised."
-        raise CkanConfigurationException(msg)
+        if (path := theme.public_path()) and os.path.isdir(path):
+            tk.add_public_directory(config, os.path.relpath(path, here))
 
     UIManager.reset()
 

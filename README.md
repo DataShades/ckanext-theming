@@ -88,10 +88,10 @@ from ckanext.theming.lib import Theme
 class MyThemePlugin(ITheme, p.SingletonPlugin):
 
     def get_ui(self):
-        return {
-            "my_theme": Theme("/path/to/my_theme/root"),
-            "extended_my_theme": Theme("/path/to/extended_my_theme/root", parent="my_theme"),
-        }
+        return [
+            Theme("my_theme", "/path/to/my_theme/root"),
+            Theme("extended_my_theme", "/path/to/extended_my_theme/root", parent="my_theme"),
+        ]
 ```
 
 ### Using UI Macros

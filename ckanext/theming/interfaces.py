@@ -11,11 +11,8 @@ if TYPE_CHECKING:
 class ITheme(Interface):
     """Allow extensions to provide custom themes for CKAN."""
 
-    def register_themes(self) -> dict[str, Theme]:
+    def register_themes(self) -> list[Theme]:
         """Register themes provided by extension.
-
-        The returned dictionary must map theme names to
-        :py:class:`~ckan.lib.theme.Theme` objects.
 
         Example::
 
@@ -23,18 +20,19 @@ class ITheme(Interface):
                 from ckan.lib.theme import Theme
 
                 return {
-                    "mytheme": Theme("/path/to/mytheme"),
-                    "myothertheme": Theme(
+                    Theme("mytheme", "/path/to/mytheme"),
+                    Theme(
+                        "myothertheme",
                         "/path/to/myothertheme",
                         parent="templates",
                     ),
                 }
 
         :returns: themes provided by the extension
-        :rtype: dict
+        :rtype: list
 
         """
-        return {}
+        return []
 
     def get_additional_theme_ui_sources(self) -> list[str]:
         """Get additional UI macro files for themes.

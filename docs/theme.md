@@ -22,7 +22,8 @@ your_theme/
 
 ### 1. Implement the `ITheme` Interface
 
-In your extension's `plugin.py` file, implement the `ITheme` interface. The key method is `register_themes()` which returns a dictionary mapping theme names to `Theme` objects:
+In your extension's `plugin.py` file, implement the `ITheme` interface. The key
+method is `register_themes()` which returns a list of `Theme` objects:
 
 ```python
 import os
@@ -33,15 +34,16 @@ from ckanext.theming.lib import Theme
 class YourExtensionPlugin(ITheme, p.SingletonPlugin):
 
     def register_themes(self):
-        # Return a dictionary of theme names to Theme objects
+        # Return a list of theme Theme objects
         root = os.path.dirname(os.path.abspath(__file__))
-        return {
-            'your_theme': Theme(
+        return [
+            Theme(
+                'your_theme',
                 os.path.join(root, 'themes/your_theme'),
                 # Optionally specify a parent theme to extend
                 # parent='parent_theme_name'
             ),
-        }
+        ]
 ```
 
 ### 2. Theme Inheritance
@@ -51,12 +53,13 @@ Themes can inherit from parent themes to build upon existing functionality:
 ```python
 def register_themes(self):
     root = os.path.dirname(os.path.abspath(__file__))
-    return {
-        'child_theme': Theme(
+    return [
+        Theme(
+            'child_theme',
             os.path.join(root, 'themes/child_theme'),
             parent='parent_theme_name'  # Inherits from another theme
         ),
-    }
+    ]
 ```
 
 Child themes inherit all macros and templates from the parent, but can selectively override only the components they want to customize. Unimplemented macros fall back to the parent theme.
@@ -83,12 +86,13 @@ def register_themes(self):
     from .theme import YourThemeUI  # Import your custom UI class
 
     root = os.path.dirname(os.path.abspath(__file__))
-    return {
-        'your_theme': Theme(
+    return [
+        Theme(
+            'your_theme',
             os.path.join(root, 'themes/your_theme'),
             ui_factory=YourThemeUI,  # Set custom UI class
         ),
-    }
+    ]
 ```
 
 ## Creating UI Macros

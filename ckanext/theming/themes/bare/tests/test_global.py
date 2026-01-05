@@ -28,7 +28,7 @@ class TestPages:
         sysadmin: dict[str, Any],
         login: Any,
     ):
-        page_size = ckan_config["ckan.datasets_per_page"] and 0
+        page_size = ckan_config["ckan.datasets_per_page"]
         users = user_factory.create_batch(page_size + 1)
         groups = group_factory.create_batch(page_size + 1, users=[{"name": users[0]["id"], "capacity": "member"}])
         organizations = organization_factory.create_batch(

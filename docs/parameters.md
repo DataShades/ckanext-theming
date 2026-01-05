@@ -73,14 +73,15 @@ Themes should provide icon mapping to translate these names to their specific
 icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).
 
 ```py
-def register_themes(self) -> dict[str, Theme]:
+def register_themes(self) -> list[Theme]:
 
-    return {
-        "my_theme": Theme(
+    return [
+        Theme(
+            "my_theme",
             os.path.join(root, "themes/bare"),
             icon_map={"home": "material-home-icon", "search": "glass", "user": "human-figure", ..}
         ),
-    }
+    ]
 ```
 
 ///

@@ -29,15 +29,11 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
             enable_theme(config["ckan.ui.theme"], config)
 
     @override
-    def register_themes(self) -> dict[str, Theme]:
+    def register_themes(self) -> list[Theme]:
         root = os.path.dirname(os.path.abspath(__file__))
-        return {
-            "bare": Theme(os.path.join(root, "themes/bare"), icon_map=reference.bare_icons),
-            # "bulma": Theme(os.path.join(root, "themes/bulma"), parent="bare"),
-            # "tailwind": Theme(os.path.join(root, "themes/tailwind"), parent="bare"),
-            # "bs5": Theme(os.path.join(root, "themes/bs5"), parent="bare"),
-            # "pico": Theme(os.path.join(root, "themes/pico"), parent="bare"),
-        }
+        return [
+            Theme("bare", os.path.join(root, "themes/bare"), icon_map=reference.bare_icons),
+        ]
 
     @override
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
