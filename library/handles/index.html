@@ -623,6 +623,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tab-handle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tab Handle
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -860,6 +869,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tab-handle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tab Handle
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -980,6 +998,70 @@ experiences.</p>
 components to create contextual information displays. While the handle provides
 the trigger mechanism, the popover provides the content container.</p>
 </div>
+<h2 id="tab-handle">Tab Handle</h2>
+<p>The <a class="autorefs autorefs-internal" title="Tab Handle" href="#tab-handle"><code>tab_handle</code></a> component creates tab navigation handles that
+allow users to switch between different content sections within the same
+page. Tab handles are essential for organizing related content in a
+space-efficient manner while maintaining clear navigation between different
+sections.</p>
+<p>Tab handle components handle active state indication, visual styling, and
+accessibility attributes to ensure tab navigation is both visually clear and
+functionally accessible. They work with tab content areas to create complete
+tabbed interface experiences, allowing users to switch between different views
+or aspects of related content without leaving the current page.</p>
+<div class="admonition info">
+<p class="admonition-title">Relationship</p>
+<p>The <a class="autorefs autorefs-internal" title="Tab Handle" href="#tab-handle"><code>tab_handle</code></a> component works with tab content areas to create
+complete tabbed interface experiences. While tab handles provide the navigation
+mechanism, the content areas provide the display for different sections.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Usage Example</p>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic tab handle --&gt;
+{{ ui.tab_handle(&quot;Tab 1&quot;, href=&quot;/tab1&quot;) }}
+
+&lt;!-- Active tab handle --&gt;
+{{ ui.tab_handle(&quot;Tab 2&quot;, href=&quot;/tab2&quot;, active=true) }}
+</code></pre></div>
+</div>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>string</td>
+<td>-</td>
+<td>The text to display in the tab handle.</td>
+</tr>
+<tr>
+<td><code>href</code></td>
+<td>string</td>
+<td>-</td>
+<td>The URL that the tab links to.</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>bool</td>
+<td>-</td>
+<td>Whether the tab is currently active/selected.</td>
+</tr>
+</tbody>
+</table>
+<details class="tip">
+<summary>Theme-Specific Parameters</summary>
+<p>Different themes may support additional parameters for styling and behavior:</p>
+<ul>
+<li><code>disabled</code> (bool): Whether the tab is disabled</li>
+<li><code>icon</code> (string): Icon to display with the tab</li>
+</ul>
+</details>
 
 
 

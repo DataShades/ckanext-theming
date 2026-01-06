@@ -856,9 +856,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tab-wrapper" class="md-nav__link">
+  <a href="#tab-navigation-wrapper" class="md-nav__link">
     <span class="md-ellipsis">
-      Tab Wrapper
+      Tab Navigation Wrapper
     </span>
   </a>
   
@@ -1113,9 +1113,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tab-wrapper" class="md-nav__link">
+  <a href="#tab-navigation-wrapper" class="md-nav__link">
     <span class="md-ellipsis">
-      Tab Wrapper
+      Tab Navigation Wrapper
     </span>
   </a>
   
@@ -1418,22 +1418,22 @@ with <a class="autorefs autorefs-internal" title="Resource" href="../content/#re
 {% endcall %}
 </code></pre></div>
 </div>
-<h2 id="tab-wrapper">Tab Wrapper</h2>
-<p>The <a class="autorefs autorefs-internal" title="Tab Wrapper" href="#tab-wrapper"><code>tab_wrapper</code></a> component provides the structural container
-for tab-based interfaces. It works with <a class="autorefs autorefs-internal" title="Tab Handle" href="../navigation/#tab-handle"><code>tab_handle</code></a> components
+<h2 id="tab-navigation-wrapper">Tab Navigation Wrapper</h2>
+<p>The <a class="autorefs autorefs-internal" title="Tab Navigation Wrapper" href="#tab-navigation-wrapper"><code>tab_nav_wrapper</code></a> component provides the structural container
+for tab-based interfaces. It works with <a class="autorefs autorefs-internal" title="Tab Handle" href="../handles/#tab-handle"><code>tab_handle</code></a> components
 to create consistent tab navigation and content switching experiences across
 different themes.</p>
 <div class="admonition info">
 <p class="admonition-title">Relationship</p>
-<p>The <a class="autorefs autorefs-internal" title="Tab Wrapper" href="#tab-wrapper"><code>tab_wrapper</code></a> component is designed to work with
-<a class="autorefs autorefs-internal" title="Tab Handle" href="../navigation/#tab-handle"><code>tab_handle</code></a> components. The wrapper provides the container
+<p>The <a class="autorefs autorefs-internal" title="Tab Navigation Wrapper" href="#tab-navigation-wrapper"><code>tab_nav_wrapper</code></a> component is designed to work with
+<a class="autorefs autorefs-internal" title="Tab Handle" href="../handles/#tab-handle"><code>tab_handle</code></a> components. The wrapper provides the container
 structure, while the handles provide the interactive elements for switching
 between tab content.</p>
 </div>
 <div class="admonition example">
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic tab wrapper --&gt;
-{% call ui.util.call(ui.tab_wrapper) %}
+{% call ui.util.call(ui.tab_nav_wrapper) %}
     {{ ui.tab_handle(&quot;Tab 1&quot;, href=&quot;/tab1&quot;) }}
     {{ ui.tab_handle(&quot;Tab 2&quot;, href=&quot;/tab2&quot;, active=True) }}
 {% endcall %}
