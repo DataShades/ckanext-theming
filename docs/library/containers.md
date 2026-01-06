@@ -403,7 +403,8 @@ The [`panel`][] component creates content containers that can be switched
 between using [`panel_handle`][panel-handle] components. Unlike accordions
 which are visually collapsible, panels are completely hidden when not active
 and only one panel is typically visible at a time. This makes them ideal for
-tab-like interfaces where users can switch between different content sections.
+tab-like interfaces where users can switch between different content sections
+or drawers with tools.
 
 Panels are useful for organizing related content in a way that maximizes space
 efficiency while allowing users to focus on one section at a time. The

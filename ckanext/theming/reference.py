@@ -100,7 +100,7 @@ components.update(
         "page_action_wrapper": Component(Category.RECOMMENDED),
         "panel_wrapper": Component(Category.ESSENTIAL),
         "resource_wrapper": Component(Category.ESSENTIAL),
-        "tab_wrapper": Component(Category.ESSENTIAL),
+        "tab_nav_wrapper": Component(Category.ESSENTIAL),
         "user_wrapper": Component(Category.ESSENTIAL),
         # content #############################################################
         "activity": Component(Category.ESSENTIAL),

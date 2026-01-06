@@ -42,7 +42,7 @@
 
 {%- macro content_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 
-{%- macro content_nav_wrapper(content) -%}{{ ui.tab_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_wrapper(content) -%}{{ ui.tab_nav_wrapper(content, **kwargs) }}{%- endmacro %}
 
 {%- macro dropdown_wrapper(content, title) -%}
     <div {{ ui.util.attrs(kwargs) }} class="dropdown" role="menu" aria-haspopup="true">
@@ -65,6 +65,6 @@
 
 {%- macro page_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 
-{%- macro tab_wrapper(content) -%}
+{%- macro tab_nav_wrapper(content) -%}
     <nav {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">{{ content }}</nav>
 {%- endmacro %}

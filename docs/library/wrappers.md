@@ -363,9 +363,9 @@ with [`resource`][] components to display resource information effectively.
 ```
 ///
 
-## Tab Wrapper
+## Tab Navigation Wrapper
 
-The [`tab_wrapper`][tab-wrapper] component provides the structural container
+The [`tab_nav_wrapper`][tab-navigation-wrapper] component provides the structural container
 for tab-based interfaces. It works with [`tab_handle`][tab-handle] components
 to create consistent tab navigation and content switching experiences across
 different themes.
@@ -373,7 +373,7 @@ different themes.
 /// admonition | Relationship
     type: info
 
-The [`tab_wrapper`][tab-wrapper] component is designed to work with
+The [`tab_nav_wrapper`][tab-navigation-wrapper] component is designed to work with
 [`tab_handle`][tab-handle] components. The wrapper provides the container
 structure, while the handles provide the interactive elements for switching
 between tab content.
@@ -385,7 +385,7 @@ between tab content.
 
 ```jinja2
 <!-- Basic tab wrapper -->
-{% call ui.util.call(ui.tab_wrapper) %}
+{% call ui.util.call(ui.tab_nav_wrapper) %}
     {{ ui.tab_handle("Tab 1", href="/tab1") }}
     {{ ui.tab_handle("Tab 2", href="/tab2", active=True) }}
 {% endcall %}

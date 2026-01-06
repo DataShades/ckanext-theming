@@ -1536,13 +1536,13 @@
             {{ ui.heading(_("Basic tab wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.tab_wrapper) -%}
+                    {%- call ui.util.call(ui.tab_nav_wrapper) -%}
                         {{ ui.tab_handle("Tab 1", href="/tab1") }}
                         {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.tab_wrapper) -%}
+            {%- call ui.util.call(ui.tab_nav_wrapper) -%}
                 {{ ui.tab_handle("Tab 1", href="/tab1") }}
                 {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
             {%- endcall %}
