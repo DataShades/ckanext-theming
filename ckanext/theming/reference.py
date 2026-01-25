@@ -37,6 +37,7 @@ class Route:
     endpoint: str | None = None
     check_availability: Callable[[], bool] = _true
     view_args: set[str] = dataclasses.field(default_factory=set)
+    args: dict[str, str] = dataclasses.field(default_factory=dict)
     authenticated: bool = True
 
     def make_params(self, endpoint: str, data: dict[str, Any]):  # noqa: C901

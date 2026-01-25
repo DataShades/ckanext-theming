@@ -1,76 +1,95 @@
-{%- block doctype %}<!DOCTYPE html>{% endblock %}
-<html{% block html_attrs %} lang="{{ h.lang() }}"{{ ' dir="rtl"' if h.is_rtl_language() }}{% endblock %}>
-    <head>
-        {%- block document_head %}
-            {%- block meta %}
-                <meta charset="utf-8" />
-                <meta name="site-root" content="{{ h.url_for('home.index', locale='default', qualified=true) }}" />
-                <meta name="locale-root" content="{{ h.url_for('home.index', qualified=true) }}" />
-                {%- block meta_csrf %}
-                    <meta name="csrf_field_name" content="{{ g.csrf_field_name }}" />
-                    <meta name="{{ g.csrf_field_name }}" content="{{ csrf_token() }}" />
-                {% endblock meta_csrf %}
-                {%- block meta_generator %}<meta name="generator" content="ckan {{ h.ckan_version() }}" />{% endblock %}
-                {%- block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1">{% endblock %}
-            {%- endblock meta -%}
+{#
+    Base template for the CKAN theming system.
+    This template defines the overall structure of the HTML document,
+    including blocks for the head, body, styles, scripts, and main content area. #}
+{%- block document -%}
+    {# Allows the DOCTYPE to be set on a page by page basis #}
+    {%- block doctype %}<!DOCTYPE html>{% endblock %}
+    <html{% block html_attrs %} lang="{{ h.lang() }}"{{ ' dir="rtl"' if h.is_rtl_language() }}{% endblock %}>
+        <head>
+            {# Document head block - contains meta tags, title, links to stylesheets, etc. #}
+            {%- block document_head %}
+                {%- block meta %}
+                    <meta charset="utf-8" />
+                    <meta name="site-root" content="{{ h.url_for('home.index', locale='default', qualified=true) }}" />
+                    <meta name="locale-root" content="{{ h.url_for('home.index', qualified=true) }}" />
+                    {%- block meta_csrf %}
+                        <meta name="csrf_field_name" content="{{ g.csrf_field_name }}" />
+                        <meta name="{{ g.csrf_field_name }}" content="{{ csrf_token() }}" />
+                    {% endblock meta_csrf %}
+                    {%- block meta_generator %}<meta name="generator" content="ckan {{ h.ckan_version() }}" />{% endblock %}
+                    {%- block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1">{% endblock %}
+                {%- endblock meta -%}
 
-            <title>
-                {%- block title %}
-                    {%- block subtitle %}{% endblock %}
-                    {{- ui.subtitle_item(g.site_title, initial=true) }}
-                {%- endblock title -%}
-            </title>
+                <title>
+                    {# Title block - contains the title of the page #}
+                    {%- block title %}
+                        {%- block subtitle %}{% endblock %}
+                        {{- ui.subtitle_item(g.site_title, initial=true) }}
+                    {%- endblock title -%}
+                </title>
 
-            {%- block links %}
-                <link rel="shortcut icon" href="{{ g.favicon }}" />
-            {%- endblock %}
+                {# Links block - contains links to external stylesheets, favicons, etc. #}
+                {%- block links %}
+                    <link rel="shortcut icon" href="{{ g.favicon }}" />
+                {%- endblock %}
 
-            {%- block styles %}
-                {%- block styles_theming -%}
-                    {%- block styles_bare %}
-                        {%- asset "theming/bare/styles" %}
+                {# Styles block - contains links to stylesheets #}
+                {%- block styles %}
+                    {%- block styles_theming -%}
+                        {%- block styles_bare %}
+                            {%- asset "theming/bare/styles" %}
+                        {%- endblock %}
                     {%- endblock %}
-                {%- endblock %}
-            {%- endblock -%}
+                {%- endblock -%}
 
-            {{- h.render_assets('style') -}}
+                {{- h.render_assets('style') -}}
 
-            {%- block custom_styles %}
-                {%- if g.site_custom_css -%}
-                    <style>
-                     {{ g.site_custom_css | safe }}
-                    </style>
-                {%- endif %}
-            {%- endblock %}
-
-            {%- block head_extras %}{% endblock %}
-
-        {%- endblock document_head %}
-    </head>
-
-    <body{% block body_attrs %}{% endblock %}>
-        {% block document_body %}
-            {%- block page %}{% endblock %}
-
-            {%- block scripts %}
-                {%- block scripts_base -%}
-                    {%- asset "base/main" -%}
+                {# Custom styles block - contains any custom CSS defined in site configuration #}
+                {%- block custom_styles %}
+                    {%- if g.site_custom_css -%}
+                        <style>
+                            {{ g.site_custom_css | safe }}
+                        </style>
+                    {%- endif %}
                 {%- endblock %}
 
-                {%- block scripts_theming -%}
-                    {%- block scripts_bare %}
-                        {%- asset "theming/bare/scripts" -%}
+                {# Additional head extras block - for any extra head content #}
+                {%- block head_extras %}{% endblock %}
+
+            {%- endblock document_head %}
+        </head>
+
+        <body{% block body_attrs %}{% endblock %}>
+            {# Document body block - contains the main content of the page #}
+            {% block document_body %}
+                {# Page block - main content area #}
+                {%- block page %}{% endblock %}
+
+                {# Scripts block - contains links to JavaScript files #}
+                {%- block scripts %}
+                    {# Base scripts block - contains core JavaScript files #}
+                    {%- block scripts_base -%}
+                        {%- asset "base/main" -%}
                     {%- endblock %}
-                {%- endblock %}
-            {% endblock %}
 
-            {# render all assets included in scripts block and everywhere else #}
-            {# make sure there are no calls to `asset` tag after this point #}
-            {{ h.render_assets('style') }}
-            {{ h.render_assets('script') }}
+                    {# Theming scripts block - contains theming related JavaScript files #}
+                    {%- block scripts_theming -%}
+                        {%- block scripts_bare %}
+                            {%- asset "theming/bare/scripts" -%}
+                        {%- endblock %}
+                    {%- endblock %}
+                {% endblock %}
 
-            {%- block body_extras %}{% endblock %}
+                {# render all assets included in scripts block and everywhere else #}
+                {# make sure there are no calls to `asset` tag after this point #}
+                {{ h.render_assets('style') }}
+                {{ h.render_assets('script') }}
 
-        {%- endblock document_body %}
-    </body>
-</html>
+                {# Body extras block - for any extra body content #}
+                {%- block body_extras %}{% endblock %}
+
+            {%- endblock document_body %}
+        </body>
+    </html>
+{%- endblock document %}

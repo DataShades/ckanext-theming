@@ -330,7 +330,7 @@ def template_analyze(  # noqa: C901
         if includes := RE_INCLUDE.findall(content):
             click.secho(click.style("Includes: ", fg="yellow") + ", ".join(i for i in sorted(set(includes))))
 
-        blocks = set(tpl.blocks)
+        all_blocks: set[str] = set(tpl.blocks)
         hierarchy = []
         hierarchy_break = None
 
@@ -345,7 +345,7 @@ def template_analyze(  # noqa: C901
                     hierarchy_break = parent_name
                     break
                 hierarchy.append(parent_name)
-                blocks.update(parent_tpl.blocks)
+                all_blocks.update(parent_tpl.blocks)
 
                 with open(parent_tpl.filename) as src:
                     parent_content = src.read()
@@ -360,10 +360,11 @@ def template_analyze(  # noqa: C901
             click.secho(click.style("Hierarchy detection interrupted on: ", fg="red") + hierarchy_break)
 
         if tpl.blocks:
-            click.secho(click.style("Own blocks: ", fg="yellow") + ", ".join(sorted(tpl.blocks)))
+            click.secho(click.style("Explicit blocks: ", fg="yellow") + ", ".join(sorted(tpl.blocks)))
 
-        if blocks:
-            click.secho(click.style("All blocks: ", fg="yellow") + ", ".join(sorted(blocks)))
+        implicit_blocks = all_blocks.difference(tpl.blocks)
+        if implicit_blocks:
+            click.secho(click.style("Implicit blocks: ", fg="yellow") + ", ".join(sorted(implicit_blocks)))
 
         click.echo()
 
@@ -611,6 +612,7 @@ def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
                     "user": user_dict,
                 },
             )
+            params.update(route.args)
 
             data = _observe_endpoint(
                 route.endpoint or name, params, app, user=auth_obj if route.authenticated else None
