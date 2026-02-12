@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import contextlib
+import fnmatch
 import inspect
+import json
 import logging
 import os
 import pprint
@@ -11,20 +13,18 @@ import shutil
 import string
 from collections import Counter, defaultdict
 from collections.abc import Callable, Collection
-from typing import Any
+from typing import IO, Any
 
 import click
 import flask.signals
-from jinja2 import Environment, TemplateNotFound
+from jinja2 import Environment, Template, TemplateNotFound
 from jinja2.exceptions import UndefinedError
 from jinja2.runtime import Macro
 from werkzeug.exceptions import NotFound
-from werkzeug.routing import BuildError
+from werkzeug.routing import BuildError, Rule
 
 import ckan.plugins.toolkit as tk
 from ckan import model, types
-from ckan.common import json
-from ckan.plugins import plugin_loaded
 
 from . import lib, reference
 
@@ -437,7 +437,7 @@ def endpoint_list(ctx: click.Context):
 def endpoint_variants(ctx: click.Context, endpoints: Collection[str]):
     """List variants of Flask endpoints."""
     app = ctx.meta["flask_app"]
-    grouped = app.url_map._rules_by_endpoint
+    grouped: dict[str, list[Rule]] = app.url_map._rules_by_endpoint
     if not endpoints:
         endpoints = tuple(grouped)
 
@@ -449,7 +449,7 @@ def endpoint_variants(ctx: click.Context, endpoints: Collection[str]):
         click.secho(name, bold=True)
         for variant in grouped[name]:
             click.secho(click.style("Rule: ", fg="yellow") + variant.rule)
-            click.secho(click.style("Methods: ", fg="yellow") + ", ".join(variant.methods))
+            click.secho(click.style("Methods: ", fg="yellow") + ", ".join(variant.methods or []))
             if variant.arguments:
                 click.secho(click.style("Arguments: ", fg="yellow") + ", ".join(variant.arguments))
             if variant.defaults:
@@ -502,8 +502,8 @@ def _observe_endpoint(
         except RenderInterceptionError as err:
             return err.args[0]
 
-        tk.error_shout(f"Endpoint {endpoint} did not render any template")
-        raise click.Abort
+        log.warning("Endpoint %s did not render any template", endpoint)
+        return {"template": Template(""), "context": {}}
 
 
 @endpoint.command("observe", context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
@@ -552,81 +552,64 @@ def _dump_encoder(value: Any):
 
 @endpoint.command("dump")
 @click.pass_context
-@click.option("--auth-user", required=True)
-@click.option("--user", required=True)
-@click.option("--package", required=True)
-@click.option("--resource", required=True)
-@click.option("--resource-view", required=True)
-@click.option("--organization", required=True)
-@click.option("--group", required=True)
+@click.option("--user")
 @click.option("--ignore", default=("request", "session", "g", "csrf_token", "current_user"), multiple=True)
 @click.option("--endpoints", multiple=True)
+@click.option(
+    "--source",
+    type=click.File("r"),
+    required=True,
+    default=os.path.join(os.path.dirname(__file__), "dump_source.json"),
+)
 @click.option("-v", "--verbose", is_flag=True)
 def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
     ctx: click.Context,
-    auth_user: str,
-    user: str,
-    package: str,
-    resource: str,
-    resource_view: str,
-    organization: str,
-    group: str,
+    user: str | None,
     ignore: tuple[str, ...],
     endpoints: tuple[str, ...],
     verbose: bool,
+    source: IO[str],
 ):
     """Dump templates and context variables used by Flask endpoints in JSON format."""
     app = ctx.meta["flask_app"]
+    url_map: dict[str, list[Rule]] = app.url_map._rules_by_endpoint
 
-    if not (auth_obj := model.User.get(auth_user)):
-        tk.error_shout("Object specified by `--auth` does not exist")
-        raise click.Abort
+    auth_obj = model.User.get(user)
+    source_data: dict[str, Any] = json.load(source)
 
-    user_dict = tk.get_action("user_show")({"ignore_auth": True}, {"id": user})
-    package_dict = tk.get_action("package_show")({"ignore_auth": True}, {"id": package})
-    resource_dict = tk.get_action("resource_show")({"ignore_auth": True}, {"id": resource})
-    resource_view_dict = tk.get_action("resource_view_show")({"ignore_auth": True}, {"id": resource_view})
-    group_dict = tk.get_action("group_show")({"ignore_auth": True}, {"id": group})
-    organization_dict = tk.get_action("organization_show")({"ignore_auth": True}, {"id": organization})
+    result: dict[str, Any] = {}
 
-    result = {}
     with app.app_context():
-        for name, route in reference.routes.items():
+        for name, rules in url_map.items():
             if endpoints and name not in endpoints:
                 continue
 
-            if route.plugin and not plugin_loaded(route.plugin):
+            if any(fnmatch.fnmatch(name, pattern) for pattern in source_data.get("ignore", [])):
                 continue
 
-            if not route.check_availability():
-                continue
+            for rule in rules:
+                if rule.methods and "GET" not in rule.methods:
+                    continue
 
-            params = route.make_params(
-                name,
-                {
-                    "resource": resource_dict,
-                    "package": package_dict,
-                    "resource_view": resource_view_dict,
-                    "group": group_dict,
-                    "organization": organization_dict,
-                    "user": user_dict,
-                },
-            )
-            params.update(route.args)
+                params = reference.make_params(name, rule.arguments, source_data, rule.defaults or {})
+                # TODO: handle different variants
+                params.update(source_data.get("args", {}).get("name", {}))
 
-            data = _observe_endpoint(
-                route.endpoint or name, params, app, user=auth_obj if route.authenticated else None
-            )
+                try:
+                    data = _observe_endpoint(name, params, app, user=auth_obj)
+                except tk.ObjectNotFound as err:
+                    tk.error_shout(f"Endpoint {name} with params {params} caused 404")
+                    raise click.Abort from err
 
-            result[name] = {
-                "template": data["template"].name,
-                "context_types": {
-                    key: type(value).__name__ for key, value in data["context"].items() if key not in ignore
-                },
-            }
-            if verbose:
-                result[name]["context_variables"] = {
-                    key: value for key, value in data["context"].items() if key not in ignore
+                result[name] = {
+                    "template": data["template"].name,
+                    "context_types": {
+                        key: type(value).__name__ for key, value in data["context"].items() if key not in ignore
+                    },
                 }
+                if verbose:
+                    result[name]["context_variables"] = {
+                        key: value for key, value in data["context"].items() if key not in ignore
+                    }
 
     click.echo(json.dumps(result, default=_dump_encoder))

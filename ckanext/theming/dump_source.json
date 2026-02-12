@@ -1,0 +1,55 @@
+{
+    "data": {
+        "activity": {"id": "123"},
+        "resource": {"id": "123"},
+        "resource_view": {"id": "123"},
+        "package": {"id": "123", "name": "123"},
+        "group": {"id": "123", "name": "123"},
+        "organization": {"id": "123", "name": "123"},
+        "user": {"id": "123", "name": "default"}
+    },
+    "ignore": [
+        "static",
+        "_debug_toolbar.*",
+        "debugtoolbar.*",
+        "webassets.*",
+        "api.*",
+        "feeds.*",
+        "file.*",
+        "dataset_resource.*",
+        "resource.download",
+        "home.redirect_locale",
+        "group.member_dump",
+        "organization.member_dump",
+        "activity.package_changes_multiple",
+        "activity.organization_changes_multiple",
+        "activity.group_changes_multiple"
+    ],
+    "matchers": [
+        ["resource_id:*", ["resource", "id"]],
+        ["user_id:*", ["user", "id"]],
+        ["view_id:*", ["resource_view", "id"]],
+        ["activity_id:*", ["activity", "id"]],
+
+        ["id:dataset.*", ["package", "name"]],
+        ["id:resource.*", ["package", "name"]],
+        ["id:datastore.*", ["package", "name"]],
+
+        ["id:group.*", ["group", "name"]],
+        ["id:organization.*", ["organization", "name"]],
+        ["id:user.*", ["user", "name"]],
+
+        ["id:activity.resource_history", ["resource", "id"]],
+        ["id:activity.package_history", ["package", "id"]],
+
+        ["id:activity.group_activity", ["group", "id"]],
+        ["id:activity.group_changes", ["group", "id"]],
+        ["id:activity.organization_activity", ["organization", "id"]],
+        ["id:activity.organization_changes", ["organization", "id"]],
+        ["id:activity.user_activity", ["user", "id"]],
+        ["id:activity.user_changes", ["user", "id"]],
+        ["id:activity.package_activity", ["package", "id"]],
+        ["id:activity.package_changes", ["package", "id"]]
+
+    ]
+}

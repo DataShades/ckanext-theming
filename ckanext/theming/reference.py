@@ -4,11 +4,10 @@ from __future__ import annotations
 
 import dataclasses
 import enum
+import fnmatch
 from collections import defaultdict
-from collections.abc import Callable
+from collections.abc import Mapping
 from typing import Any
-
-import ckan.plugins.toolkit as tk
 
 
 class Category(enum.Enum):
@@ -31,52 +30,27 @@ def _true():
     return True
 
 
-@dataclasses.dataclass(frozen=True)
-class Route:
-    plugin: str | None = None
-    endpoint: str | None = None
-    check_availability: Callable[[], bool] = _true
-    view_args: set[str] = dataclasses.field(default_factory=set)
-    args: dict[str, str] = dataclasses.field(default_factory=dict)
-    authenticated: bool = True
-
-    def make_params(self, endpoint: str, data: dict[str, Any]):  # noqa: C901
-        params: dict[str, Any] = {}
-        if "resource_id" in self.view_args:
-            params["resource_id"] = data["resource"]["id"]
-
-        if "user_id" in self.view_args:
-            params["user_id"] = data["user"]["id"]
-
-        if "view_id" in self.view_args:
-            params["view_id"] = data["resource_view"]["id"]
-
-        if "id" in self.view_args:
-            if endpoint.startswith(("dataset", "resource", "datastore")):
-                params["id"] = data["package"]["name"]
-
-            elif endpoint.startswith("group"):
-                params["id"] = data["group"]["name"]
-
-            elif endpoint.startswith("organization"):
-                params["id"] = data["organization"]["name"]
-
-            elif endpoint.startswith("user"):
-                params["id"] = data["user"]["name"]
-
-            elif endpoint.endswith(("user_activity", "user_changes")):
-                params["id"] = data["user"]["id"]
-
-            elif endpoint.endswith(("group_activity", "group_changes")):
-                params["id"] = data["group"]["id"]
-
-            elif endpoint.endswith(("package_activity", "package_changes")):
-                params["id"] = data["package"]["id"]
-
-            elif endpoint.endswith(("organization_activity", "organization_changes")):
-                params["id"] = data["organization"]["id"]
-
-        return params
+def make_params(endpoint: str, args: set[str], source: dict[str, Any], defaults: Mapping[str, Any]):  # noqa: C901
+    params: dict[str, Any] = {}
+    data = source.get("data", {})
+    matchers = source.get("matchers", [])
+    for arg in args:
+        for pattern, path in matchers:
+            if not fnmatch.fnmatch(f"{arg}:{endpoint}", pattern):
+                continue
+            value = data
+            for step in path:
+                value = value[step]
+            params[arg] = value
+            break
+        else:
+            if arg in data:
+                params[arg] = data[arg]
+            elif arg in defaults:
+                params[arg] = defaults[arg]
+            else:
+                raise KeyError(f"{arg}:{endpoint}")
+    return params
 
 
 components: dict[str, Component] = defaultdict(Component)
@@ -348,102 +322,6 @@ templates.update(
         "organization/manage_members.html": Template(Category.ESSENTIAL),
         "organization/_edit_base.html": Template(Category.RECOMMENDED),
         "organization/snippets/info.html": Template(Category.ESSENTIAL),
-    }
-)
-
-
-routes: dict[str, Route] = defaultdict(Route)
-routes.update(
-    {
-        "activity.dashboard": Route(plugin="activity"),
-        "activity.group_activity": Route(plugin="activity", view_args={"id"}),
-        "activity.group_changes": Route(plugin="activity", view_args={"id"}),
-        "activity.organization_activity": Route(plugin="activity", view_args={"id"}),
-        "activity.organization_changes": Route(plugin="activity", view_args={"id"}),
-        "activity.package_activity": Route(plugin="activity", view_args={"id"}),
-        "activity.package_changes": Route(plugin="activity", view_args={"id"}),
-        "activity.user_activity": Route(plugin="activity", view_args={"id"}),
-        "admin.config": Route(),
-        "admin.index": Route(),
-        "admin.reset_config": Route(),
-        "admin.trash": Route(),
-        "dashboard.datasets": Route(),
-        "dashboard.groups": Route(),
-        "dashboard.organizations": Route(),
-        "dataset.collaborator_delete": Route(
-            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"],
-            view_args={"id", "user_id"},
-        ),
-        "dataset.collaborators_read": Route(
-            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"],
-            view_args={"id", "user_id"},
-        ),
-        "dataset.delete": Route(view_args={"id"}),
-        "dataset.edit": Route(view_args={"id"}),
-        "dataset.followers": Route(view_args={"id"}),
-        "dataset.groups": Route(view_args={"id"}),
-        "dataset.new": Route(),
-        "dataset.new_collaborator": Route(
-            check_availability=lambda: tk.config["ckan.auth.allow_dataset_collaborators"],
-            view_args={"id"},
-        ),
-        "dataset.read": Route(view_args={"id"}),
-        "dataset.resources": Route(view_args={"id"}),
-        "dataset.search": Route(),
-        "datastore.api_info": Route(plugin="datastore", view_args={"resource_id"}),
-        "datastore.dictionary": Route(plugin="datastore", view_args={"id", "resource_id"}),
-        "group.about": Route(view_args={"id"}),
-        "group.admins": Route(view_args={"id"}),
-        "group.delete": Route(view_args={"id"}),
-        "group.edit": Route(view_args={"id"}),
-        "group.followers": Route(view_args={"id"}),
-        "group.index": Route(),
-        "group.manage_members": Route(view_args={"id"}),
-        "group.member_new": Route(view_args={"id"}),
-        "group.members": Route(view_args={"id"}),
-        "group.new": Route(),
-        "group.read": Route(view_args={"id"}),
-        "organization.about": Route(view_args={"id"}),
-        "organization.admins": Route(view_args={"id"}),
-        "organization.bulk_process": Route(view_args={"id"}),
-        "organization.delete": Route(view_args={"id"}),
-        "organization.edit": Route(view_args={"id"}),
-        "organization.followers": Route(view_args={"id"}),
-        "organization.index": Route(),
-        "organization.manage_members": Route(view_args={"id"}),
-        "organization.member_new": Route(view_args={"id"}),
-        "organization.members": Route(view_args={"id"}),
-        "organization.new": Route(),
-        "organization.read": Route(view_args={"id"}),
-        "home.index": Route(),
-        "home.about": Route(),
-        "resource.delete": Route(view_args={"id", "resource_id"}),
-        "resource.edit": Route(view_args={"id", "resource_id"}),
-        "resource.edit_view": Route(view_args={"id", "resource_id"}),
-        "resource.edit_view:view_selected": Route(
-            endpoint="resource.edit_view", view_args={"id", "resource_id", "view_id"}
-        ),
-        "resource.new": Route(view_args={"id"}),
-        "resource.read": Route(view_args={"id", "resource_id"}),
-        "resource.view": Route(view_args={"id", "resource_id"}),
-        "resource.view:view_selected": Route(endpoint="resource.view", view_args={"id", "resource_id", "view_id"}),
-        "resource.views": Route(view_args={"id", "resource_id"}),
-        "stats.index": Route(plugin="stats"),
-        "user.api_tokens": Route(view_args={"id"}),
-        "user.delete": Route(view_args={"id"}),
-        "user.edit": Route(view_args={"id"}),
-        "user.followers": Route(view_args={"id"}),
-        "user.index": Route(),
-        "user.logged_out_page": Route(authenticated=False),
-        "user.login": Route(authenticated=False),
-        "user.login:authenticated": Route(endpoint="user.login"),
-        "user.perform_reset": Route(view_args={"id"}, authenticated=False),
-        "user.read": Route(view_args={"id"}),
-        "user.read_groups": Route(view_args={"id"}),
-        "user.read_organizations": Route(view_args={"id"}),
-        "user.register": Route(authenticated=False),
-        "user.request_reset": Route(authenticated=False),
-        "util.primer": Route(),
     }
 )
 
