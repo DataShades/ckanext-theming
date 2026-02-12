@@ -91,7 +91,9 @@
 
     {%- block package_notes -%}
         {%- if pkg_dict.notes %}
-            {{ ui.text(h.render_markdown(pkg_dict.notes)) }}
+            <div>
+                {{ h.render_markdown(pkg_dict.notes) }}
+            </div>
         {%- endif %}
     {%- endblock %}
 

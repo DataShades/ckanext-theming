@@ -11,7 +11,9 @@
     {% endblock %}
 
     {%- block organization_description %}
-        {{ ui.text(h.render_markdown(group_dict.description)) if group_dict.description }}
+        <div>
+            {{ h.render_markdown(group_dict.description) if group_dict.description }}
+        </div>
     {%- endblock %}
 
     {%- block organization_extras %}

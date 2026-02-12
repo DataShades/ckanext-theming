@@ -88,6 +88,7 @@ nav:
   - theming-parties.md
   - parameters.md
   - Component library:
+      - library/index.md
       - library/containers.md
       - library/content.md
       - library/data.md

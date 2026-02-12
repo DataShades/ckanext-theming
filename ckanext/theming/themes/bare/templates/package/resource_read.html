@@ -27,7 +27,9 @@
     {%- endblock %}
 
     {%- block resource_description -%}
-        {{ ui.text(h.render_markdown(resource.description)) if resource.description }}
+        <div>
+            {{ h.render_markdown(resource.description) if resource.description }}
+        </div>
     {%- endblock %}
 
     {%- block resource_url -%}

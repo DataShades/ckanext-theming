@@ -14,7 +14,9 @@
 
 {%- block primary_content_inner %}
     {%- if g.site_about %}
-        {{ ui.text(h.render_markdown(g.site_about)) }}
+        <div>
+            {{ h.render_markdown(g.site_about) }}
+        </div>
 
     {%- else %}
         {{ ui.heading( _("About"), level=1) }}

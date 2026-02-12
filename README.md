@@ -87,7 +87,7 @@ from ckanext.theming.lib import Theme
 
 class MyThemePlugin(ITheme, p.SingletonPlugin):
 
-    def get_ui(self):
+    def register_themes(self):
         return [
             Theme("my_theme", "/path/to/my_theme/root"),
             Theme("extended_my_theme", "/path/to/extended_my_theme/root", parent="my_theme"),
@@ -100,7 +100,7 @@ Once a theme is active, UI macros can be used in templates:
 
 ```jinja
 {{ ui.button("Click Me", style="primary", type="button") }}
-{{ ui.card(title="My Card", content="Card content here") }}
+{{ ui.card("Card content here", title="My Card") }}
 {{ ui.alert("Success message", style="success") }}
 ```
 
