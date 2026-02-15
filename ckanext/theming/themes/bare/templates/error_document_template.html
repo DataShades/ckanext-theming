@@ -1,10 +1,10 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout|default("content_focus") -%}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(gettext('Error %(error_code)s', error_code=code)) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
     {{ ui.heading(title=code ~ " " ~ name, level=1) }}

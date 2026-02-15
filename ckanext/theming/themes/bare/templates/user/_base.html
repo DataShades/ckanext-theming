@@ -5,10 +5,11 @@
 {%- set org_type = h.default_group_type('organization') %}
 {%- set group_type = h.default_group_type('group') %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(user_dict.display_name) if user_dict }}
-    {{ ui.subtitle_item(_('Users')) }}
-{% endblock %}
+    {{- ui.subtitle_item(_('Users')) }}
+    {{- super() }}
+{%- endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb(_('Users'), href=h.url_for('user.index')) }}

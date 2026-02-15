@@ -1,9 +1,9 @@
 {% extends "user/read.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Activity Stream')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}

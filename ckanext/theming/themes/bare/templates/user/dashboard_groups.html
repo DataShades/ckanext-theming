@@ -1,9 +1,9 @@
 {% extends "user/dashboard.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}

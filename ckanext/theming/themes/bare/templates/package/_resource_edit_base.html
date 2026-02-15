@@ -2,7 +2,7 @@
 
 {%- block subtitle -%}
   {{ ui.subtitle_item(h.resource_display_name(resource)) if resource }}
-  {{ super() }}
+  {{- super() }}
 {%- endblock %}
 
 {%- block breadcrumb_content %}

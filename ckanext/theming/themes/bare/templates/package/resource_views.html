@@ -1,9 +1,9 @@
 {% extends "package/_resource_edit_base.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('View')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block content_action -%}
     {% if h.check_access('resource_view_create', {'resource_id': resource.id}) %}

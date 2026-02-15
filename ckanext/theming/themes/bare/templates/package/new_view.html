@@ -1,9 +1,9 @@
 {% extends "package/_resource_edit_base.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Edit view') if resource_view.id else _('Add view')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}

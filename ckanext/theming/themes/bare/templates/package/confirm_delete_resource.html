@@ -1,10 +1,10 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout|default("content_focus") -%}
 
-{% block subtitle %}
+{% block subtitle -%}
     {{ ui.subtitle_item(_("Confirm Delete")) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block primary_content_inner -%}
     <p>{{ _('Are you sure you want to delete resource - {name}?').format(name=h.resource_display_name(resource_dict)) }}</p>

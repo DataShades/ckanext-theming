@@ -1,117 +1,138 @@
 {#
-  Base page template.
+    Base page template.
 
-  This template defines the overall structure of a web page, including
-  header, footer, sidebar, main content area, and notification messages.
-  It uses blocks to allow for customization and extension in child templates. #}
+    This template defines the overall structure of a web page, including
+    header, footer, sidebar, main content area, and notification messages.
+    It uses blocks to allow for customization and extension in child templates. #}
 {% extends "_base.html" %}
 
 {%- block page %}
-    {# Zone start block - for any content to be placed at the start of the page #}
-    {%- block zone_start -%}{%- endblock %}
+    {#- Zone start block - for any content to be placed at the start of the page -#}
+    <div id="zone-start">
+        {%- block zone_start -%}{%- endblock -%}
+    </div>
 
-    {# Zone header block - contains page headers #}
-    {%- block zone_header -%}
-        {# Header block - contains the site header, logo, main/account navigation, etc. #}
-        {%- block header %}
-            {% include "_header.html" %}
-        {%- endblock header %}
-    {%- endblock zone_header %}
+    {#- Zone header block - contains page headers -#}
+    <div id="zone-header">
+        {%- block zone_header -%}
+            {# Header block - contains the site header, logo, main/account navigation, etc. #}
+            {%- block header %}
+                {% include "_header.html" %}
+            {%- endblock header %}
+        {%- endblock zone_header -%}
+    </div>
 
-    {# Zone toolbar block - contains the global tools, like breadcrumbs #}
-    {%- block zone_toolbar %}
-        {# Breadcrumb block - contains the breadcrumb navigation #}
-        {%- block breadcrumb %}
-            {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-                {{ ui.breadcrumb("Home", h.url_for("home.index"), is_first=true) }}
-                {%- block breadcrumb_content %}{% endblock %}
-            {%- endcall %}
-        {%- endblock breadcrumb %}
-    {%- endblock %}
+    {#- Zone toolbar block - contains the global tools, like breadcrumbs -#}
+    <div id="zone-toolbar">
+        {%- block zone_toolbar %}
+            {#- Breadcrumb block - contains the breadcrumb navigation #}
+            {%- block breadcrumb %}
+                {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+                    {{ ui.breadcrumb("Home", h.url_for("home.index"), is_first=true) }}
+                    {%- block breadcrumb_content %}{% endblock %}
+                {%- endcall %}
+            {%- endblock breadcrumb %}
+        {%- endblock -%}
+    </div>
 
-    {# Zone intro block - contains objects shown before the main content #}
-    {%- block zone_intro %}
-        {%- block notifications_container %}
-            <div id="flash-messages">
-                {%- for category, message in h.get_flashed_messages(with_categories=true) %}
-                    {%- block notification_item scoped -%}
-                        <div>{{ h.literal(message) }}</div>
-                    {%- endblock notification_item %}
-                {%- endfor -%}
-            </div>
-        {%- endblock notifications_container %}
-    {%- endblock %}
-
-    {# Zone center block - contains the main content area #}
-    {%- block zone_content %}
-        {%- block content -%}
-            <div id="content" {% block content_attrs %}{% endblock %}>
-
-                {%- block zone_main %}
-
-                    {%- block zone_secondary -%}
-                        {%- block secondary %}
-                            <aside id="sidebar">
-                                {%- block secondary_content %}
-                                {%- endblock secondary_content %}
-                            </aside>
-                        {%- endblock secondary -%}
-                    {%- endblock zone_secondary %}
-
-                    {%- block zone_primary -%}
-                        {%- block primary -%}
-                            <main id="main">
-                                <article>
-                                    {%- block primary_content %}
-                                        {%- call ui.util.call(ui.page_action_wrapper) -%}
-                                            {%- block page_action %}{% endblock -%}
-                                        {%- endcall %}
-
-                                        {%- block page_header %}
-                                            {%- call ui.util.call(ui.content_nav_wrapper) -%}
-                                                {%- block content_nav %}{% endblock -%}
-                                            {%- endcall %}
-                                        {% endblock -%}
-
-                                        {%- call ui.util.call(ui.content_action_wrapper) -%}
-                                            {%- block content_action %}{% endblock -%}
-                                        {%- endcall %}
-
-                                        {%- block primary_content_inner %}
-                                        {% endblock -%}
-
-                                    {%- endblock primary_content %}
-                                </article>
-                            </main>
-                        {%- endblock primary %}
-                    {%- endblock zone_primary %}
-
-                {%- endblock zone_main %}
-            </div>
-        {%- endblock content%}
-    {%- endblock zone_content %}
-
-    {# Zone outro block - contains objects shown after the main content #}
-    {%- block zone_outro %}{% endblock -%}
-
-    {# Zone footer block - contains page footers #}
-    {%- block zone_footer -%}
-        {%- block footer %}
-            {%- include "_footer.html" -%}
-        {% endblock footer %}
-
-        {%- block debug -%}
-            {%- if g.debug %}
-                <button onclick="window['debug-modal'].showModal()" accesskey="d" hidden>Debug</button>
-                <dialog id="debug-modal" style="max-width: 90vw; overflow-x: auto;" closedby="any">
-                    <pre>
-                        {%- debug -%}
-                    </pre>
-                </dialog>
-            {%- endif %}
+    {#- Zone intro block - contains objects shown before the main content -#}
+    <div id="zone-intro">
+        {%- block zone_intro %}
+            {%- block notifications_container %}
+                <div id="flash-messages">
+                    {%- for category, message in h.get_flashed_messages(with_categories=true) %}
+                        {%- block notification_item scoped -%}
+                            <div>{{ h.literal(message) }}</div>
+                        {%- endblock notification_item %}
+                    {%- endfor -%}
+                </div>
+            {%- endblock notifications_container %}
         {%- endblock %}
-    {%- endblock zone_footer %}
+    </div>
 
+    {#- Zone content block - contains the main content area -#}
+    <div id="zone-content">
+        {%- block zone_content %}
+            {%- block content -%}
+                <div id="content" {% block content_attrs %}{% endblock %}>
+                    <div id="zone-main">
+                        {%- block zone_main -%}
+
+                            <div id="zone-secondary">
+                                {%- block zone_secondary -%}
+                                    {%- block secondary %}
+                                        <aside id="sidebar">
+                                            {%- block secondary_content %}
+                                            {%- endblock secondary_content %}
+                                        </aside>
+                                    {%- endblock secondary -%}
+                                {%- endblock zone_secondary -%}
+                            </div>
+
+                            {#--#}
+                            <div id="zone-primary">
+                                {%- block zone_primary -%}
+                                    {%- block primary -%}
+                                        <main id="main">
+                                            <article>
+                                                {%- block primary_content %}
+                                                    {%- call ui.util.call(ui.page_action_wrapper) -%}
+                                                        {%- block page_action %}{% endblock -%}
+                                                    {%- endcall %}
+
+                                                    {%- block page_header %}
+                                                        {%- call ui.util.call(ui.content_nav_wrapper) -%}
+                                                            {%- block content_nav %}{% endblock -%}
+                                                        {%- endcall %}
+                                                    {% endblock -%}
+
+                                                    {%- call ui.util.call(ui.content_action_wrapper) -%}
+                                                        {%- block content_action %}{% endblock -%}
+                                                    {%- endcall %}
+
+                                                    {%- block primary_content_inner %}
+                                                    {% endblock -%}
+
+                                                {%- endblock primary_content %}
+                                            </article>
+                                        </main>
+                                    {%- endblock primary %}
+                                {%- endblock zone_primary -%}
+                            </div>
+
+                        {%- endblock zone_main -%}
+                    </div>
+                </div>
+            {%- endblock content %}
+        {%- endblock zone_content -%}
+    </div>
+
+    {#- Zone outro block - contains objects shown after the main content -#}
+    <div id="zone-outro">
+        {%- block zone_outro %}{% endblock -%}
+    </div>
+
+    {#- Zone footer block - contains page footers -#}
+    <div id="zone-footer">
+        {%- block zone_footer -%}
+            {%- block footer %}
+                {%- include "_footer.html" -%}
+            {% endblock footer %}
+
+            {%- block debug -%}
+                {%- if g.debug %}
+                    <button onclick="window['debug-modal'].showModal()" accesskey="d" hidden>Debug</button>
+                    <dialog id="debug-modal" style="max-width: 90vw; overflow-x: auto;" closedby="any">
+                        <pre>
+                            {%- debug -%}
+                        </pre>
+                    </dialog>
+                {%- endif %}
+            {%- endblock %}
+        {%- endblock zone_footer -%}
+    </div>
     {# Zone end block - for any content to be placed at the end of the page #}
-    {%- block zone_end -%}{%- endblock %}
+    <div id="zone-end">
+        {%- block zone_end -%}{%- endblock %}
+    </div>
 {%- endblock %}

@@ -9,7 +9,7 @@
 
 {%- block subtitle -%}
     {{ ui.subtitle_item(_("Data Dictionary")) }}
-    {{ super() }}
+    {{- super() }}
 {%- endblock %}
 {%- block primary_content_inner -%}
     {%- call ui.util.call(ui.form, method="POST") -%}

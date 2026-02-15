@@ -1,10 +1,10 @@
 {% extends "user/_edit_base.html" %}
 {%- set _layout = _layout|default("content_focus") -%}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Register')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block breadcrumb_content %}
     {{ ui.breadcrumb(_("Register"), h.url_for("user.register")) }}

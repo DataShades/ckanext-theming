@@ -1,6 +1,10 @@
 {% extends "_page.html" %}
 
 {%- block zone_main %}
-    {%- block zone_primary %}{{ super() }}{% endblock %}
-    {%- block zone_secondary %}{{ super() }}{% endblock %}
+    <div id="zone-primary">
+        {%- block zone_primary %}{{ super() }}{% endblock %}
+    </div>
+    <div id="zone-secondary">
+        {%- block zone_secondary %}{{ super() }}{% endblock %}
+    </div>
 {%- endblock %}

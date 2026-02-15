@@ -1,10 +1,10 @@
 {% extends "user/_base.html" %}
 {%- set _layout = _layout|default("content_focus") -%}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Logged Out')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block primary_content %}
     {{ ui.heading(_('Logged Out'), level=1) }}

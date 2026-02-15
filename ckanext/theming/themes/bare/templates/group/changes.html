@@ -1,9 +1,9 @@
 {% extends "group/_base.html" %}
 
-{% block subtitle %}
+{% block subtitle -%}
     {{ ui.subtitle_item(_("Changes")) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 
 {%- block breadcrumb_content -%}

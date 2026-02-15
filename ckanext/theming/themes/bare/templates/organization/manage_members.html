@@ -1,9 +1,9 @@
 {% extends "organization/_edit_base.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Members')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block page_action %}
     {{ ui.page_action(_('Add Member'), href=h.url_for(group_type ~ '.member_new', id=group_dict.id)) }}

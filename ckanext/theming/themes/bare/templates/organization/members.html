@@ -1,9 +1,9 @@
 {% extends "organization/_base.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Members')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block primary_content_inner %}
     {{ ui.heading(_('{0} members'.format(members|length)), level=3) }}

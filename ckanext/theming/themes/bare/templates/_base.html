@@ -1,13 +1,13 @@
 {#
     Base template for the CKAN theming system.
     This template defines the overall structure of the HTML document,
-    including blocks for the head, body, styles, scripts, and main content area. #}
+    including blocks for the head, body, styles, scripts, and main content area. -#}
 {%- block document -%}
-    {# Allows the DOCTYPE to be set on a page by page basis #}
+    {#- Allows the DOCTYPE to be set on a page by page basis -#}
     {%- block doctype %}<!DOCTYPE html>{% endblock %}
     <html{% block html_attrs %} lang="{{ h.lang() }}"{{ ' dir="rtl"' if h.is_rtl_language() }}{% endblock %}>
         <head>
-            {# Document head block - contains meta tags, title, links to stylesheets, etc. #}
+            {#- Document head block - contains meta tags, title, links to stylesheets, etc. -#}
             {%- block document_head %}
                 {%- block meta %}
                     <meta charset="utf-8" />
@@ -22,19 +22,19 @@
                 {%- endblock meta -%}
 
                 <title>
-                    {# Title block - contains the title of the page #}
+                    {#- Title block - contains the title of the page -#}
                     {%- block title %}
                         {%- block subtitle %}{% endblock %}
                         {{- ui.subtitle_item(g.site_title, initial=true) }}
                     {%- endblock title -%}
                 </title>
 
-                {# Links block - contains links to external stylesheets, favicons, etc. #}
+                {#- Links block - contains links to external stylesheets, favicons, etc. -#}
                 {%- block links %}
                     <link rel="shortcut icon" href="{{ g.favicon }}" />
                 {%- endblock %}
 
-                {# Styles block - contains links to stylesheets #}
+                {#- Styles block - contains links to stylesheets -#}
                 {%- block styles %}
                     {%- block styles_theming -%}
                         {%- block styles_bare %}
@@ -45,7 +45,7 @@
 
                 {{- h.render_assets('style') -}}
 
-                {# Custom styles block - contains any custom CSS defined in site configuration #}
+                {#- Custom styles block - contains any custom CSS defined in site configuration -#}
                 {%- block custom_styles %}
                     {%- if g.site_custom_css -%}
                         <style>
@@ -54,26 +54,26 @@
                     {%- endif %}
                 {%- endblock %}
 
-                {# Additional head extras block - for any extra head content #}
+                {#- Additional head extras block - for any extra head content -#}
                 {%- block head_extras %}{% endblock %}
 
             {%- endblock document_head %}
         </head>
 
         <body{% block body_attrs %}{% endblock %}>
-            {# Document body block - contains the main content of the page #}
+            {#- Document body block - contains the main content of the page -#}
             {% block document_body %}
-                {# Page block - main content area #}
+                {#- Page block - main content area -#}
                 {%- block page %}{% endblock %}
 
-                {# Scripts block - contains links to JavaScript files #}
+                {#- Scripts block - contains links to JavaScript files -#}
                 {%- block scripts %}
-                    {# Base scripts block - contains core JavaScript files #}
+                    {#- Base scripts block - contains core JavaScript files -#}
                     {%- block scripts_base -%}
                         {%- asset "base/main" -%}
                     {%- endblock %}
 
-                    {# Theming scripts block - contains theming related JavaScript files #}
+                    {#- Theming scripts block - contains theming related JavaScript files -#}
                     {%- block scripts_theming -%}
                         {%- block scripts_bare %}
                             {%- asset "theming/bare/scripts" -%}
@@ -81,12 +81,12 @@
                     {%- endblock %}
                 {% endblock %}
 
-                {# render all assets included in scripts block and everywhere else #}
-                {# make sure there are no calls to `asset` tag after this point #}
+                {#- render all assets included in scripts block and everywhere else -#}
+                {#- make sure there are no calls to `asset` tag after this point -#}
                 {{ h.render_assets('style') }}
                 {{ h.render_assets('script') }}
 
-                {# Body extras block - for any extra body content #}
+                {#- Body extras block - for any extra body content -#}
                 {%- block body_extras %}{% endblock %}
 
             {%- endblock document_body %}

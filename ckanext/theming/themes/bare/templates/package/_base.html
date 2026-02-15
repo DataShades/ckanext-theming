@@ -2,11 +2,11 @@
 {%- set _layout = _layout|default("right_sidebar") -%}
 {% set dataset_type = pkg_dict.type if pkg_dict else dataset_type or 'dataset' %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(h.dataset_display_name(pkg_dict)) if pkg_dict }}
-    {{ ui.subtitle_item(h.humanize_entity_type('package', dataset_type or 'dataset',  'page title') or _('Datasets')) }}
-    {{ super() }}
-{% endblock %}
+    {{- ui.subtitle_item(h.humanize_entity_type('package', dataset_type or 'dataset',  'page title') or _('Datasets')) }}
+    {{- super() }}
+{%- endblock %}
 
 {%- block breadcrumb_content %}
     {%- if pkg_dict and pkg_dict.organization -%}

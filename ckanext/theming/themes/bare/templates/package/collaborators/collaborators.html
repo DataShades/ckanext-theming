@@ -1,9 +1,9 @@
 {% extends "package/_edit_base.html" %}
 
-{%- block subtitle %}
+{%- block subtitle -%}
     {{ ui.subtitle_item(_('Collaborators')) }}
-    {{ super() }}
-{% endblock %}
+    {{- super() }}
+{%- endblock %}
 
 {%- block content_action -%}
     {{ ui.content_action(_('Add Collaborators'), h.url_for(pkg_dict.type ~ ".new_collaborator", id=pkg_dict.name)) if h.check_access('package_collaborator_create', {'id': pkg_dict.id}) }}
