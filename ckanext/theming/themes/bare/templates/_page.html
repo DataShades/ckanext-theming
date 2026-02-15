@@ -121,7 +121,9 @@
 
             {%- block debug -%}
                 {%- if g.debug %}
-                    <button onclick="window['debug-modal'].showModal()" accesskey="d" hidden>Debug</button>
+                    <button onclick="document.body.classList.toggle('debug-zones')" accesskey="z" hidden>Show zones</button>
+
+                    <button onclick="window['debug-modal'].toggle()" accesskey="d" hidden>Debug</button>
                     <dialog id="debug-modal" style="max-width: 90vw; overflow-x: auto;" closedby="any">
                         <pre>
                             {%- debug -%}

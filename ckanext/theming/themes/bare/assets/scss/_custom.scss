@@ -5,12 +5,13 @@
     max-height: 200px;
 }
 
+#zone-header {background: var(--bg-header);}
 #account {
     background: var(--bg-account);
     text-align: right;
 }
 
-#header {background: var(--bg-header);}
+
 #header .bare-container {
     display: flex;
     flex-direction: column;
@@ -24,9 +25,21 @@
     }
 }
 
-#footer {background: var(--bg-footer);}
+#zone-toolbar {background: var(--bg-breadcrumb);}
 
-#sidebar {
+#zone-content { display: flex; flex-grow: 1;}
+#content { width: 100%;}
+#zone-main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    @include m.breakpoint(md) {
+        flex-direction: row;
+    }
+}
+
+#zone-secondary {
     background: var(--bg-sidebar);
 
     @include m.breakpoint(md) {
@@ -35,22 +48,14 @@
     }
 }
 
-#main {
+#zone-primary {
     flex-grow: 1;
     background: var(--bg-body);
 }
 
-#content {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+#footer {background: var(--bg-footer);}
 
-    @include m.breakpoint(md) {
-        flex-direction: row;
-    }
-}
 
-.breadcrumbs {background: var(--bg-breadcrumb);}
 .breadcrumbs > a:last-child {
     text-decoration: none;
     pointer-events: none;
@@ -61,6 +66,26 @@
     padding: 0 1rem;
 }
 
+body.debug-zones [id^=zone-] {
+    padding: 1.5rem 0.5rem 1rem;
+    position: relative;
+    margin: 0.25rem;
+
+    &:before {
+        align-items: flex-start;
+        backdrop-filter: blur(3px);
+        border: 2px solid grey;
+        bottom: 0px;
+        box-shadow:  0.25rem  0.25rem 0.5rem;
+        content: attr(id);
+        display: flex;
+        justify-content: center;
+        left: 0px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+}
 
 /* modal *********************************************************************/
 dialog::backdrop {backdrop-filter: brightness(0.8) blur(3px);}

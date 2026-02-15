@@ -508,36 +508,59 @@ box-shadow:none
  * Bare Theme Main Stylesheet
  */.card-image{
 max-height:200px
+}#zone-header{
+background:var(--bg-header)
 }#account{
 background:var(--bg-account);
 text-align:right
-}#header{
-background:var(--bg-header)
 }#header .bare-container{
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 gap:1rem
-}#footer{
-background:var(--bg-footer)
-}#sidebar{
-background:var(--bg-sidebar)
-}#main{
-flex-grow:1;
-background:var(--bg-body)
+}#zone-toolbar{
+background:var(--bg-breadcrumb)
+}#zone-content{
+display:flex;
+flex-grow:1
 }#content{
+width:100%
+}#zone-main{
 display:flex;
 flex-direction:column;
-flex-grow:1
-}.breadcrumbs{
-background:var(--bg-breadcrumb)
+flex-grow:1;
+height:100%
+}#zone-secondary{
+background:var(--bg-sidebar)
+}#zone-primary{
+flex-grow:1;
+background:var(--bg-body)
+}#footer{
+background:var(--bg-footer)
 }.breadcrumbs>a:last-child{
 text-decoration:none;
 pointer-events:none;
 font-weight:700
 }.bare-container{
 padding:0 1rem
+}body.debug-zones [id^=zone-]{
+padding:1.5rem .5rem 1rem;
+position:relative;
+margin:.25rem
+}body.debug-zones [id^=zone-]:before{
+align-items:flex-start;
+backdrop-filter:blur(3px);
+border:2px solid grey;
+bottom:0;
+box-shadow:.25rem .25rem .5rem;
+content:attr(id);
+display:flex;
+justify-content:center;
+left:0;
+position:absolute;
+right:0;
+top:0
 }dialog::backdrop{
 backdrop-filter:brightness(.8) blur(3px)
 }[data-tooltip]{
@@ -688,11 +711,11 @@ grid-column:span 12
 }#header .bare-container{
 flex-direction:row;
 justify-content:space-between
-}#sidebar{
+}#zone-main{
+flex-direction:row
+}#zone-secondary{
 width:20%;
 min-width:300px
-}#content{
-flex-direction:row
 }
 }@media (min-width:992px){.col-lg-1{
 grid-column:span 1
