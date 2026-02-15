@@ -185,7 +185,7 @@ Current datetime can be obtained via `ui.util.now()`:
 ### Request-Scoped Data Storage
 
 Data can be stored during a request using `ui.util.keep_item()` and retrieved
-later with `ui.util.pop_items()` or `ui.util.get_items()`:
+later with `ui.util.pop_items()`:
 
 ```jinja
 {# Store a notification message anywhere in the template #}
@@ -205,7 +205,7 @@ later with `ui.util.pop_items()` or `ui.util.get_items()`:
 This pattern is particularly useful for "pushing" chunks of data (like toast
 messages, alerts, or metadata) throughout templates without concerning yourself
 about the actual rendering location, then collecting and rendering them
-together at the appropriate place in the layout.
+together at the appropriate place further in the layout.
 
 ## Icon Normalization
 

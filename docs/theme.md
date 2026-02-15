@@ -213,7 +213,6 @@ The theming system provides utility functions accessible via `ui.util`:
 - `ui.util.id(value, prefix="id-")`: Generate a unique identifier
 - `ui.util.keep_item(category, key, value)`: Store items in UI storage
 - `ui.util.pop_items(category, key=None)`: Retrieve and remove items from UI storage
-- `ui.util.get_items(category, key=None)`: Get items from UI storage
 
 Example usage of utilities:
 

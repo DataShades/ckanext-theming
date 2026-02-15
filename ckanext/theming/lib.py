@@ -151,29 +151,27 @@ class Util:
         storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
         storage[category][key] = value
 
-    def pop_items(self, category: str, key: str | None = None, default: Any = None) -> dict[str, Any] | Any:
+    def pop_items(
+        self, category: str, key: str | None = None, default: Any = None, keep: bool = False
+    ) -> dict[str, Any] | Any:
         """Pop items from the UI storage under the specified category.
 
         :param category: The category from which to pop items.
         :param key: Optional key of the item to pop. If not provided, all items
                     under the category are popped.
         :param default: Default value to return if the key is not found.
+        :param keep: If True, items will not be removed from storage after popping.
         :return: The popped item(s) from the UI storage.
         """
         storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
-        return storage[category].pop(key, default) if key else storage.pop(category)
+        items = storage[category]
+        if key:
+            return storage[category].pop(key, default)
 
-    def get_items(self, category: str, key: str | None = None, default: Any = None) -> dict[str, Any] | Any:
-        """Get all items stored under the specified category in the UI storage.
+        if not keep:
+            del storage[category]
 
-        :param category: The category from which to get items.
-        :param key: Optional key of the item to get. If not provided, all items
-                    under the category are returned.
-        :param default: Default value to return if the key is not found.
-        :return: The requested item(s) from the UI storage.
-        """
-        storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
-        return storage[category].get(key, default) if key else storage[category]
+        return items
 
     def icon(self, name: str) -> str:
         """Normalize icon name.
