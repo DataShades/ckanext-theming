@@ -1,63 +1,41 @@
 
 {%- macro group(group) -%}
-    {%- call ui.util.call(ui.column, span={"xs": 12, "md": 4, "lg": 3}) -%}
-        {% set img = group.image_display_url or h.url_for_static('/base/images/placeholder-' ~ ('organization' if group.is_organization else 'group') ~ '.png') %}
-        {% set title = group.title or group.name  %}
-        {% set body = h.markdown_extract(group.description, 120)|urlize %}
-
-        {{ ui.card(title=title, img=img, body=body, href=h.url_for(('organization' if group.is_organization else 'group') ~ ".read", id=group.name), **kwargs) }}
-    {%- endcall %}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/group.html" -%}
 {%- endmacro %}
 
 {%- macro organization(organization) -%}
-    {{ ui.group(organization, **kwargs) }}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/organization.html" -%}
 {%- endmacro %}
 
 {%- macro package(pkg) -%}
-    {% set title = pkg.title or pkg.name  %}
-    {% set body = h.markdown_extract(pkg.notes, 120)|urlize %}
-
-    {{ ui.card(title=title, body=body, href=h.url_for(pkg.type ~ ".read", id=pkg.name), **kwargs) }}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/package.html" -%}
 {%- endmacro %}
 
 {%- macro resource(res) -%}
-    {% set title = res.name  %}
-    {% set body = h.markdown_extract(res.description, 120)|urlize %}
-
-    {{ ui.card(title=title, body=body, href=h.url_for("resource.read", id=res.package_id, resource_id=res.id), **kwargs) }}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/resource.html" -%}
 {%- endmacro %}
 
 {%- macro user(user) -%}
     {%- do kwargs -%}
-    {{ h.linked_user(user if user is string else user.name, maxlength=20) }}
+    {%- include "macros/ui/snippets/user.html" -%}
 {%- endmacro %}
 
 
 {%- macro facet(content, key, value, count, active) -%}
-    {%- set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) -%}
-    {%- do kwargs.setdefault("attrs", {}).setdefault("hx-boost", "true") -%}
-    {%- call ui.util.call(ui.link, href=url, **kwargs) -%}
-        <div style="display: flex; justify-content: space-between;">
-            <span>{{ content }}</span>
-            <span>{{ "&times;"|safe if active else count }}</span>
-        </div>
-    {%- endcall %}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/facet.html" -%}
 {%- endmacro %}
 
 {%- macro activity(content, activity) -%}
-    {{ ui.list_item(content, **kwargs) }}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/activity.html" -%}
 {%- endmacro %}
 
 {% macro license(content, id, url) %}
-    {% if url %}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("rel", "dc:rights") -%}
-        {{ ui.link(content, href=url, **kwargs) }}
-
-    {% elif content %}
-        <span {{ ui.util.attrs(kwargs) }} property="dc:rights">{{ content }}</span>
-
-    {% else %}
-        <span {{ ui.util.attrs(kwargs) }}>{{ _('No License Provided') }}</span>
-
-    {% endif %}
+    {%- do kwargs -%}
+    {%- include "macros/ui/snippets/license.html" -%}
 {% endmacro %}

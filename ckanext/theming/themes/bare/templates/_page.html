@@ -43,22 +43,22 @@
     {%- endblock %}
 
     {# Zone center block - contains the main content area #}
-    {%- block zone_center %}
+    {%- block zone_content %}
         {%- block content -%}
             <div id="content" {% block content_attrs %}{% endblock %}>
 
-                {%- block zone_content %}
+                {%- block zone_main %}
 
-                    {%- block zone_sidebar -%}
+                    {%- block zone_secondary -%}
                         {%- block secondary %}
                             <aside id="sidebar">
                                 {%- block secondary_content %}
                                 {%- endblock secondary_content %}
                             </aside>
                         {%- endblock secondary -%}
-                    {%- endblock zone_sidebar %}
+                    {%- endblock zone_secondary %}
 
-                    {%- block zone_main -%}
+                    {%- block zone_primary -%}
                         {%- block primary -%}
                             <main id="main">
                                 <article>
@@ -84,12 +84,12 @@
                                 </article>
                             </main>
                         {%- endblock primary %}
-                    {%- endblock zone_main %}
+                    {%- endblock zone_primary %}
 
-                {%- endblock zone_content %}
+                {%- endblock zone_main %}
             </div>
         {%- endblock content%}
-    {%- endblock zone_center %}
+    {%- endblock zone_content %}
 
     {# Zone outro block - contains objects shown after the main content #}
     {%- block zone_outro %}{% endblock -%}
