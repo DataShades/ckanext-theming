@@ -23,7 +23,7 @@
 {%- endblock %}
 
 {%- block content_action %}
-    {{ ui.content_action(_("Manange"), href=h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict and h.check_access('package_update', {'id': pkg_dict.id }) }}
+    {{ ui.content_action(ui.icon("edit") ~ _("Manange"), href=h.url_for(pkg_dict.type ~ ".edit", id=pkg_dict.name)) if pkg_dict and h.check_access('package_update', {'id': pkg_dict.id }) }}
 {% endblock -%}
 
 {%- block content_nav %}

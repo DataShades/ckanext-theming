@@ -2,7 +2,7 @@
     {{ ui.input(content, name=name, label=label, value=value, type="search", placeholder=placeholder, **kwargs) }}
 {%- endmacro %}
 
-{%- macro search_submit_button(content=_("Search")) -%}
+{%- macro search_submit_button(content=ui.icon("search") ~ _("Search")) -%}
     {{ ui.button(content, type="submit", **kwargs) }}
 {%- endmacro %}
 

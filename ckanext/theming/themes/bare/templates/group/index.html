@@ -9,7 +9,7 @@
 {%- endblock %}
 
 {%- block page_action %}
-    {{ ui.page_action(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
+    {{ ui.page_action(ui.icon("plus") ~ h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
 {%- endblock %}
 
 {%- block primary_content_inner %}
