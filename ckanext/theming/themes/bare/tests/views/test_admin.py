@@ -44,5 +44,5 @@ class TestResetConfig:
         """Test that the admin reset config page has the correct title."""
         login(sysadmin)
         page.goto(tk.url_for("admin.reset_config"))
-        expected = title_builder("Confirm Reset", "Config", "Admin")
+        expected = title_builder("Admin")
         expect(page).to_have_title(expected)

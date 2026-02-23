@@ -1,0 +1,164 @@
+site_name: Theme Documentation
+site_description: Portal pages documentation for CKAN theme
+site_url: https://your-domain.com/theme-docs
+
+repo_url: https://github.com/your-org/your-theme
+repo_name: your-theme
+
+markdown_extensions:
+  - tables
+  - attr_list
+  - abbr
+  - footnotes
+  - md_in_html
+  - pymdownx.snippets
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.blocks.admonition
+  - pymdownx.blocks.details
+  - pymdownx.blocks.tab:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  # - autorefs
+  - glightbox
+  - search:
+      separator: '[\s\-\.\_]+'
+  - macros:
+      j2_block_start_string: "<%"
+      j2_block_end_string: "%>"
+      j2_variable_start_string: "<<"
+      j2_variable_end_string: ">>"
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: lime
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to system preference
+
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.footer
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tooltips
+    - content.footnote.tooltips
+
+nav:
+  - index.md
+  - Home:
+    - home/index.md
+    - home/home.md
+    - home/about.md
+  - Dataset:
+    - dataset/index.md
+    - dataset/search.md
+    - dataset/read.md
+    - dataset/new.md
+    - dataset/edit.md
+    - dataset/history.md
+    - dataset/activity.md
+    - dataset/followers.md
+    - dataset/groups.md
+    - dataset/resources.md
+    - dataset/resource-views.md
+  - Organization:
+    - organization/index.md
+    - organization/index.md
+    - organization/read.md
+    - organization/about.md
+    - organization/new.md
+    - organization/edit.md
+    - organization/members.md
+    - organization/member-new.md
+    - organization/manage-members.md
+    - organization/admins.md
+    - organization/activity.md
+    - organization/changes.md
+    - organization/bulk-process.md
+  - Group:
+    - group/index.md
+    - group/index.md
+    - group/read.md
+    - group/about.md
+    - group/new.md
+    - group/edit.md
+    - group/members.md
+    - group/member-new.md
+    - group/manage-members.md
+    - group/admins.md
+    - group/activity.md
+    - group/changes.md
+    - group/followers.md
+  - User:
+    - user/index.md
+    - user/login.md
+    - user/new.md
+    - user/read.md
+    - user/edit.md
+    - user/activity.md
+    - user/followers.md
+    - user/organizations.md
+    - user/groups.md
+    - user/api-tokens.md
+    - user/request-reset.md
+    - user/perform-reset.md
+  - Admin:
+    - admin/index.md
+    - admin/index.md
+    - admin/config.md
+    - admin/trash.md
+  - Dashboard:
+    - dashboard/index.md
+    - dashboard/dashboard.md
+    - dashboard/datasets.md
+    - dashboard/organizations.md
+    - dashboard/groups.md
+  - Resource:
+    - resource/index.md
+    - resource/read.md
+    - resource/edit.md
+    - resource/history.md
+    - resource/views.md
+    - resource/dictionary.md
+    - resource/data.md
+  - Other:
+    - other/index.md
+    - other/error-pages.md
+    - other/stats.md
+    - other/feeds.md
+    - other/htmx-search.md
+
+extra:
+    vars:
+        site_url: https://example.com

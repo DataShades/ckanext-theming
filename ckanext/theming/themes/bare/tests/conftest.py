@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -7,6 +8,8 @@ from flask_login import encode_cookie  # pyright: ignore[reportUnknownVariableTy
 from playwright.sync_api import BrowserContext, Page
 
 from ckan import types
+
+_here = Path(__file__).parent
 
 
 @pytest.fixture
@@ -80,7 +83,12 @@ def login(page: Page, context: BrowserContext, ckan_config: types.FixtureCkanCon
 
 
 @pytest.fixture
-def screenshot(page: Page, request: pytest.FixtureRequest):
+def screenshots_dir():
+    return _here / ".." / ".test-screenshots"
+
+
+@pytest.fixture
+def screenshot(page: Page, request: pytest.FixtureRequest, screenshots_dir: Path):
     """Fixture to take screenshots during a test.
 
     Usage:
@@ -93,7 +101,7 @@ def screenshot(page: Page, request: pytest.FixtureRequest):
     """
     step = 1
 
-    def func(name: str, _page: Page | None = None, **kwargs: Any):
+    def func(name: str, _page: Page | None = None, /, **kwargs: Any):
         """Takes a screenshot and saves it to the test-results directory."""
         nonlocal step
         node = request.node  # pyright: ignore[reportUnknownVariableType]
@@ -101,8 +109,10 @@ def screenshot(page: Page, request: pytest.FixtureRequest):
             _page = page
 
         prefix: str = node.originalname[5:]  # pyright: ignore[reportUnknownVariableType]
-        kwargs["path"] = f"screenshots/{prefix}__{step:04d}_{name}.jpeg"
+        if "path" not in kwargs:
+            kwargs["path"] = f"{screenshots_dir}/{prefix}__{step:04d}_{name}.jpeg"
         step += 1
-        return _page.screenshot(**kwargs, full_page=True)
+        kwargs.setdefault("full_page", True)
+        return _page.screenshot(**kwargs)
 
     return func

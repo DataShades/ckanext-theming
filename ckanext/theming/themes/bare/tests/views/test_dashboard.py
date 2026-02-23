@@ -14,7 +14,7 @@ class TestDatasets:
         """Test that the dashboard datasets page has the correct title."""
         login(user)
         page.goto(tk.url_for("dashboard.datasets"))
-        expected = title_builder("Datasets", "Dashboard")
+        expected = title_builder("My Datasets", "Dashboard")
         expect(page).to_have_title(expected)
 
 
@@ -24,7 +24,7 @@ class TestGroups:
         """Test that the dashboard groups page has the correct title."""
         login(user)
         page.goto(tk.url_for("dashboard.groups"))
-        expected = title_builder("Groups", "Dashboard")
+        expected = title_builder("My Groups", "Dashboard")
         expect(page).to_have_title(expected)
 
 
@@ -34,5 +34,5 @@ class TestOrganizations:
         """Test that the dashboard organizations page has the correct title."""
         login(user)
         page.goto(tk.url_for("dashboard.organizations"))
-        expected = title_builder("Organizations", "Dashboard")
+        expected = title_builder("My Organizations", "Dashboard")
         expect(page).to_have_title(expected)

@@ -22,11 +22,11 @@
     {{ ui.button(label, data={"index": index}, attrs={"onclick": "
 const tpl = document.getElementById('custom-field-template').content.cloneNode(true);
 tpl.querySelectorAll('input').forEach(el => {
-  el.name = el.name.replace('TPL', this.dataset.index);
-  el.id = el.id.replace('TPL', this.dataset.index);
+  el.name = el.name.replace('{{ placeholder }}', this.dataset.index);
+  el.id = el.id.replace('{{ placeholder }}', this.dataset.index);
 });
 tpl.querySelectorAll('label').forEach(el => {
-  el.setAttribute('for', el.getAttribute('for').replace('TPL', this.dataset.index));
+  el.setAttribute('for', el.getAttribute('for').replace('{{ placeholder }}', this.dataset.index));
 });
 ++this.dataset.index;
 this.parentNode.insertBefore(tpl, this);

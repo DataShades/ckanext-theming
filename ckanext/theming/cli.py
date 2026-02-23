@@ -534,7 +534,7 @@ def endpoint_observe(  # noqa: PLR0913
 
         data = _observe_endpoint(endpoint, params, app, user=user, method=method)
 
-        click.secho(click.style("Template: ", fg="yellow") + data["template"].name)
+        click.secho(f"{click.style('Template: ', fg='yellow')}{data['template'].name}")
         click.secho(
             click.style("Context types(use `-v` to see values): ", fg="yellow")
             + pprint.pformat({key: type(value) for key, value in data["context"].items() if key not in ignore})
