@@ -1,42 +1,75 @@
-# Resource Read
+# Dashboard Content Pages
 
-View resource details and access data.
+Dashboard sub-pages for managing user content.
 
-## Overview
+## My Datasets
 
-Resource read page displays:
-- Resource information
-- File download option
-- Data preview
-- Resource metadata
-- Views/visualizations
+Shows all datasets created by the current user:
 
-## URL Pattern
+- Published datasets
+- Draft datasets
+- Quick edit actions
 
-```
-GET /dataset/{id}/resource/{resource_id}
-```
+/// admonition | Screenshots
 
-## Purpose
+/// tab | Datasets list
+![datasets](../screenshots/dashboard-datasets.jpeg)
+///
 
-Allows users to:
-- View resource details
-- Download file
-- Preview data
-- Access visualizations
-- View data dictionary
+/// tab | Empty state
+![empty](../screenshots/dashboard-datasets-empty.jpeg)
+///
 
-## Template
+///
 
-**File:** `templates/package/resource_read.html`
+**URL:** `/dashboard/datasets`
 
-## Screenshot Placeholder
+## My Organizations
 
-![Resource Read](../screenshots/resource-read.png)
-*Placeholder: Resource view page*
+Shows organizations where user is a member:
+
+- Admin permissions
+- Editor permissions
+- Member permissions
+
+/// admonition | Screenshots
+
+/// tab | Organizations list
+![orgs](../screenshots/dashboard-organizations.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/dashboard-organizations-empty.jpeg)
+///
+
+///
+
+**URL:** `/dashboard/organizations`
+
+## My Groups
+
+Shows groups where user is a member:
+
+- Groups user belongs to
+- Membership level
+- Group activity
+
+/// admonition | Screenshots
+
+/// tab | Groups list
+![groups](../screenshots/dashboard-groups.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/dashboard-groups-empty.jpeg)
+///
+
+///
+
+**URL:** `/dashboard/groups`
 
 ## Related Pages
 
-- [Dataset Read](../dataset/read.md) - Parent dataset
-- [Resource Edit](edit.md) - Edit resource
-- [Resource Views](views.md) - Visualizations
+- [Dashboard](dashboard.md) - Main dashboard
+- [User Profile](../user/read.md) - User profile
+- [Dataset Search](../dataset/search.md) - Browse datasets

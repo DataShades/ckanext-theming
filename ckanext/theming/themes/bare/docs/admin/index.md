@@ -1,53 +1,43 @@
-# Admin Panel
+# User Confirm Delete Page
 
-Main administration dashboard.
+Confirm deletion of a user account.
 
 ## Overview
 
-The admin panel provides:
+User delete confirmation:
 
-- System overview
-- Quick links to admin tools
-- System statistics
-- Administrator list
+- Final verification
+- Account deletion warning
+- Data impact notice
+
+/// admonition | Screenshots
+![confirm delete](../screenshots/user-confirm-delete.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /ckan-admin
-```
-
-**Example:**
-```
-<<vars.site_url>>/ckan-admin
+GET /user/delete/{id}
+POST /user/delete/{id}
 ```
 
 ## Purpose
 
-The admin panel allows sysadmins to:
-- View system status
-- Access admin tools
-- Manage site configuration
-- Monitor system health
+Warns about consequences:
+
+- Account removal
+- Dataset ownership changes
+- Membership removal
+- API token revocation
 
 ## Actions Available
 
-| Action         | Description         |
-|----------------|---------------------|
-| View config    | Edit site settings  |
-| Manage trash   | Purge deleted items |
-| View sysadmins | See administrators  |
-
-## Template
-
-**File:** `templates/admin/index.html`
-
-## Screenshot Placeholder
-
-![Admin Panel](../screenshots/admin-index.png)
-*Placeholder: Admin dashboard with tools and stats*
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm delete  | Permanently remove       |
+| Cancel          | Keep account             |
 
 ## Related Pages
 
-- [Config](config.md) - Site configuration
-- [Trash](trash.md) - Purge deleted items
+- [Edit Profile](edit.md) - Edit profile
+- [User Profile](read.md) - View profile

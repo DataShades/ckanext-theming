@@ -1,31 +1,42 @@
-# Group Activity Stream
+# Group Administrators Page
 
-View group activity history.
+View group administrators.
 
 ## Overview
 
-Activity page displays:
-- Recent group actions
-- Dataset changes
-- Member updates
-- Timeline
+Administrators page shows:
+
+- Admin list
+- Admin count
+- Admin details
+
+/// admonition | Screenshots
+![admins](../screenshots/group-admins.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /group/activity/{id}
+GET /group/admins/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/group/activity_stream.html`
+Allows users to:
 
-## Screenshot Placeholder
+- See who manages the group
+- Identify decision makers
+- Contact administrators
 
-![Group Activity](../screenshots/group-activity.png)
-*Placeholder: Activity feed*
+## Actions Available
+
+| Action       | Description              |
+|--------------|--------------------------|
+| View admins  | See admin list           |
+| Contact admin| Reach out                |
+| View profile | Navigate to user         |
 
 ## Related Pages
 
-- [Group Read](read.md) - Group profile
-- [Group Changes](changes.md) - Revision history
+- [Group Members](members.md) - All members
+- [Group Manage Members](manage-members.md) - Manage members

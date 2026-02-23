@@ -1,32 +1,43 @@
-# Group Manage Members
+# Group Add Member Page
 
-Bulk management of group members.
+Add a new member to a group.
 
 ## Overview
 
-Manage members page provides:
-- Complete member list
-- Bulk role changes
-- Bulk removal
-- Search/filter
+Add member page provides:
+
+- User selection
+- Role assignment
+- Permission explanation
+
+/// admonition | Screenshots
+![add member](../screenshots/group-member-new.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /group/member_manage/{id}
-POST /group/member_manage/{id}
+GET /group/member_new/{id}
+POST /group/member_new/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/group/manage_members.html`
+Allows authorized users to:
 
-## Screenshot Placeholder
+- Search for existing users
+- Select user to add
+- Assign role (admin, editor, member)
 
-![Group Manage Members](../screenshots/group-manage-members.png)
-*Placeholder: Member management interface*
+## Actions Available
+
+| Action      | Description              |
+|-------------|--------------------------|
+| Search user | Find user                |
+| Select user | Choose user              |
+| Set role    | Assign role              |
 
 ## Related Pages
 
 - [Group Members](members.md) - Member list
-- [Group Add Member](member-new.md) - Add member
+- [Group Manage Members](manage-members.md) - Manage members

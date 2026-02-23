@@ -1,70 +1,44 @@
-# Dashboard Section
+# Admin Reset Configuration Page
 
-This section covers the user dashboard pages.
+Confirm reset of site configuration to defaults.
 
 ## Overview
 
-Dashboard pages provide:
+Reset confirmation page:
 
-- Personal activity feed
-- Quick access to user content
-- Management shortcuts
-- Notifications
+- Final verification
+- Lists items to be reset
+- Warns about data loss
 
-## Pages in This Section
+/// admonition | Screenshots
+![confirm reset](../screenshots/admin-confirm-reset.jpeg)
+///
 
-| Page                                 | Description     |
-|--------------------------------------|-----------------|
-| [Dashboard](dashboard.md)            | Main dashboard  |
-| [My Datasets](datasets.md)           | User's datasets |
-| [My Organizations](organizations.md) | User's orgs     |
-| [My Groups](groups.md)               | User's groups   |
-
-## Access
-
-Dashboard requires authentication:
-```python
-@dashboard.before_request
-def before_request():
-    if current_user.is_anonymous:
-        flash_error(_('Not authorized to see this page'))
-        return redirect_to('user.login')
-```
-
-## URL Structure
+## URL Pattern
 
 ```
-/dashboard                    # Main dashboard
-/dashboard/datasets           # User's datasets
-/dashboard/organizations      # User's organizations
-/dashboard/groups             # User's groups
+GET /ckan-admin/reset_config
+POST /ckan-admin/reset_config
 ```
 
-## Customization Tips
+## Purpose
 
-1. **Dashboard**: Customize activity feed and widgets
-2. **Datasets**: Add quick actions and filters
-3. **Organizations**: Show management options
-4. **Groups**: Display group activity
+Resets configuration:
 
-## Screenshots
+- Site title
+- Site description
+- Logo
+- Custom CSS
+- All configurable items
 
-<!-- TODO: Add screenshots of your themed dashboard pages -->
+## Actions Available
 
-### Dashboard
-![Dashboard](../screenshots/dashboard.png)
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm reset   | Reset to defaults        |
+| Cancel          | Keep current settings    |
 
-### My Datasets
-![Datasets](../screenshots/dashboard-datasets.png)
+## Related Pages
 
-### My Organizations
-![Organizations](../screenshots/dashboard-orgs.png)
-
-### My Groups
-![Groups](../screenshots/dashboard-groups.png)
-
-## Related Sections
-
-- [User](../user/index.md) - User account
-- [Dataset](../dataset/index.md) - Dataset management
-- [Organization](../organization/index.md) - Organizations
+- [Admin Config](config.md) - Site configuration
+- [Admin Panel](index.md) - Admin dashboard

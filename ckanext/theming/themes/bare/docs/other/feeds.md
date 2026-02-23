@@ -1,85 +1,68 @@
-# RSS/Atom Feeds
+# HTMX Search Components
 
-Syndication feeds for portal content.
+Dynamic search functionality using HTMX.
 
 ## Overview
 
-CKAN provides feeds for:
-- Recently added datasets
-- Organization activity
-- Group activity
-- User activity
-- Custom searches
+HTMX search provides:
 
-## URL Patterns
+- Live search results
+- Dynamic facet updates
+- No page refresh
+- URL synchronization
 
-```
-/feed/atom              # Atom feed
-/feed/rss               # RSS feed
-/dataset/feed           # Dataset feed
-/organization/{id}/feed # Organization feed
-```
+## Components
 
-## Purpose
+### Search HTMX
 
-Feeds allow users to:
-- Subscribe to updates
-- Monitor new content
-- Track changes
-- Integrate with readers
+Enables dynamic search for:
 
-## Feed Types
+- Dataset search
+- Organization search
+- Group search
+- User search
 
-### Atom Feed
+## How It Works
 
-Standard Atom 1.0 format:
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>CKAN Datasets</title>
-  <entry>
-    <title>Dataset Title</title>
-    <link href="..."/>
-    <updated>2024-01-01T00:00:00Z</updated>
-  </entry>
-</feed>
-```
+HTMX enables:
 
-### RSS Feed
-
-RSS 2.0 format:
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
-  <channel>
-    <title>CKAN Datasets</title>
-    <item>
-      <title>Dataset Title</title>
-      <link>...</link>
-      <pubDate>Mon, 01 Jan 2024</pubDate>
-    </item>
-  </channel>
-</rss>
-```
+1. **Live Search**: Results update as you type
+2. **Dynamic Facets**: Facet counts update
+3. **URL Sync**: Browser history maintained
+4. **Loading States**: Visual feedback
 
 ## Customization Notes
 
-### Feed Styling
+### HTMX Attributes
 
-While feeds are XML, you can customize:
-- Feed titles
-- Item descriptions
-- Content formatting
+Configure HTMX behavior through attributes:
 
-### Custom Feeds
+```html
+<form hx-get="/dataset/search" 
+      hx-target="#search-results" 
+      hx-swap="outerHTML">
+```
 
-Create custom feeds for:
-- Specific organizations
-- Specific groups
-- Custom searches
-- Themed collections
+### Loading States
+
+Show loading indicators during search:
+
+```html
+<div id="search-results" hx-indicator=".search-loading">
+    <!-- Results here -->
+</div>
+```
+
+### Event Triggers
+
+Configure when search triggers:
+
+```html
+<input name="q" 
+       hx-trigger="input changed delay:500ms" />
+```
 
 ## Related Pages
 
-- [Dataset Search](../dataset/search.md) - Dataset listings
-- [Organization Read](../organization/read.md) - Organization content
+- [Dataset Search](../dataset/search.md) - Main search
+- [Organization Index](../organization/index.md) - Organization search

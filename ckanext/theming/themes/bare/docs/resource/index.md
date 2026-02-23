@@ -1,74 +1,58 @@
-# Resource Section
+# Dashboard Page
 
-This section covers pages for managing dataset resources.
+Main user dashboard with activity feed.
 
 ## Overview
 
-Resource pages handle:
+Dashboard provides:
 
-- Resource viewing and download
-- Resource metadata editing
-- Data visualization
-- Data dictionary management
-- Resource previews
+- Personalized activity feed
+- Quick statistics
+- Content management shortcuts
 
-## Pages in This Section
+/// admonition | Screenshots
 
-| Page                        | Description     |
-|-----------------------------|-----------------|
-| [Read](read.md)             | View resource   |
-| [Edit](edit.md)             | Edit resource   |
-| [History](history.md)       | Version history |
-| [Views](views.md)           | Manage views    |
-| [Dictionary](dictionary.md) | Data dictionary |
-| [Data](data.md)             | Resource data   |
+/// tab | Dashboard
+![dashboard](../screenshots/dashboard.jpeg)
+///
 
-## URL Structure
+/// tab | Activity feed
+![activity](../screenshots/dashboard-activity.jpeg)
+///
+
+///
+
+## URL Pattern
 
 ```
-/dataset/{id}/resource/{rid}              # Read resource
-/dataset/{id}/resource/{rid}/edit         # Edit resource
-/dataset/{id}/resource/{rid}/history      # Resource history
-/dataset/{id}/resource/{rid}/views        # Manage views
-/dataset/{id}/resource/{rid}/views/new    # New view
-/dataset/{id}/resource/{rid}/dictionary   # Data dictionary
-/dataset/{id}/resource/{rid}/data         # Resource data
+GET /dashboard
 ```
 
-## Resource Types
+**Example:**
+```
+<<vars.site_url>>/dashboard
+```
 
-CKAN supports various resource types:
+## Purpose
 
-- File uploads (CSV, Excel, PDF, etc.)
-- URL links to external data
-- API endpoints
-- Database tables (via DataStore)
+The dashboard allows users to:
 
-## Customization Tips
+- View recent activity from followed items
+- Access quick actions
+- Monitor notifications
+- Navigate to personal content
 
-1. **Read Page**: Enhance preview and download options
-2. **Edit Page**: Add custom metadata fields
-3. **Views**: Add custom visualization types
-4. **Dictionary**: Enhance field management
-5. **Styling**: Apply consistent theming
+## Actions Available
 
-## Screenshots
+| Action           | Description              |
+|------------------|--------------------------|
+| View activity    | See activity feed        |
+| View datasets    | Go to my datasets        |
+| View orgs        | Go to my organizations   |
+| View groups      | Go to my groups          |
 
-<!-- TODO: Add screenshots of your themed resource pages -->
+## Related Pages
 
-### Resource Read
-![Resource Read](../screenshots/resource-read.png)
-
-### Resource Edit
-![Resource Edit](../screenshots/resource-edit.png)
-
-### Resource Views
-![Resource Views](../screenshots/resource-views.png)
-
-### Data Dictionary
-![Data Dictionary](../screenshots/resource-dictionary.png)
-
-## Related Sections
-
-- [Dataset](../dataset/index.md) - Parent dataset
-- [Admin](../admin/index.md) - System administration
+- [User Profile](../user/read.md) - User profile
+- [User Activity](../user/activity.md) - Activity stream
+- [Dashboard Datasets](content.md) - My datasets

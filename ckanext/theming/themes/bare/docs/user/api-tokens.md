@@ -1,55 +1,61 @@
-# User API Tokens Page
+# User List Page
 
-Manage API access tokens.
+List all registered users.
 
 ## Overview
 
-The API tokens page provides:
-- List of active tokens
-- Create new tokens
-- Revoke tokens
-- Token usage information
+User list page provides:
+
+- Directory of all users
+- Search functionality
+- Sorting options
+- Pagination
+
+/// admonition | Screenshots
+
+/// tab | User list
+![list](../screenshots/user-list.jpeg)
+///
+
+/// tab | Search results
+![search](../screenshots/user-list-search.jpeg)
+///
+
+///
 
 ## URL Pattern
 
 ```
-GET /user/{id}/api-tokens
-POST /user/{id}/api-tokens
+GET /user
+GET /user?q={query}
+GET /user?order_by={field}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/user/john-doe/api-tokens
-<<vars.site_url>>/user/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f/api-tokens
+<<vars.site_url>>/user
+<<vars.site_url>>/user?q=john
+<<vars.site_url>>/user?order_by=created
 ```
 
 ## Purpose
 
-The API tokens page allows users to:
-- Generate API access tokens
-- Manage token permissions
-- Revoke compromised tokens
-- Monitor token usage
+Allows users to:
+
+- Browse all users
+- Find specific users
+- View user profiles
+- See community size
 
 ## Actions Available
 
-| Action | Description | Element |
-|--------|-------------|---------|
-| Create token | Generate new token | New token button |
-| Copy token | Copy to clipboard | Copy button |
-| Revoke token | Delete token | Revoke button |
-| View usage | See token activity | Usage link |
-
-## Template
-
-**File:** `templates/user/api_tokens.html`
-
-## Screenshot Placeholder
-
-![API Tokens](../screenshots/user-api-tokens.png)
-*Placeholder: Token list with create form*
+| Action       | Description              |
+|--------------|--------------------------|
+| Search users | Find users               |
+| Sort         | Change order             |
+| View profile | See user details         |
 
 ## Related Pages
 
-- [User Profile](read.md) - User profile
-- [API Documentation](../other/api.md) - API docs
+- [User Profile](read.md) - View profile
+- [User Register](new.md) - Create account

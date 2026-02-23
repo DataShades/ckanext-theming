@@ -75,6 +75,7 @@ def login(page: Page, context: BrowserContext, ckan_config: types.FixtureCkanCon
         url = ckan_config["ckan.site_url"]
 
         if user:
+            context.clear_cookies()
             context.add_cookies([{"name": key, "value": encode_cookie(user), "url": url}])
         else:
             context.clear_cookies()

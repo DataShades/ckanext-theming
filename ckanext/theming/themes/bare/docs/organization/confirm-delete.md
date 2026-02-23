@@ -1,38 +1,54 @@
-# Organization Delete Confirmation
+# Organization Bulk Process Page
 
-Confirm deletion of an organization.
+Manage all datasets owned by the organization in bulk.
 
 ## Overview
 
-Organization delete confirmation:
-- Final verification
-- Shows organization impact
-- Warns about datasets
+The bulk process page provides:
+
+- List of all organization datasets
+- Bulk edit capabilities
+- State changes (activate/deactivate)
+- Organization transfer
+
+/// admonition | Screenshots
+![bulk](../screenshots/organization-bulk-process.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /organization/delete/{id}
-POST /organization/delete/{id}
+GET /organization/bulk_process/{id}
+POST /organization/bulk_process/{id}
+```
+
+**Examples:**
+```
+<<vars.site_url>>/organization/bulk_process/environmental-protection-agency
+<<vars.site_url>>/organization/bulk_process/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-Warns about consequences:
-- Dataset ownership loss
-- Member access removal
-- Permanent deletion
+The bulk process page allows administrators to:
 
-## Template
+- View all organization datasets
+- Select multiple datasets
+- Change dataset states in bulk
+- Transfer ownership
 
-**File:** `templates/organization/confirm_delete.html`
+## Actions Available
 
-## Screenshot Placeholder
-
-![Org Delete](../screenshots/organization-delete-confirm.png)
-*Placeholder: Organization delete confirmation*
+| Action         | Description              |
+|----------------|--------------------------|
+| Select datasets| Choose for bulk action   |
+| Make public    | Set public state         |
+| Make private   | Set private state        |
+| Delete         | Remove datasets          |
+| Transfer       | Change ownership         |
 
 ## Related Pages
 
-- [Organization Edit](edit.md) - Edit organization
-- [Organization Index](index.md) - Organization list
+- [Organization Read](read.md) - Main organization page
+- [Dataset Edit](../dataset/edit.md) - Edit individual dataset
+- [Dataset Search](../dataset/search.md) - Search datasets

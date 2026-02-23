@@ -1,92 +1,58 @@
-# Dashboard Pages
+# Admin Trash Page
 
-User dashboard and content management.
+Purge deleted items from the system.
 
 ## Overview
 
-The dashboard provides a central location for users to:
-- View personalized activity feed
-- Manage their content
-- Access quick actions
-- Monitor notifications
+The trash page provides:
 
-## Pages
+- List of deleted items
+- Purge functionality
+- Item type filtering
+- Confirmation dialogs
 
-### Main Dashboard
+/// admonition | Screenshots
 
-**Template:** `templates/user/dashboard.html`
-**URL:** `/dashboard`
+/// tab | Trash list
+![trash](../screenshots/admin-trash.jpeg)
+///
 
-Shows:
-- Recent activity from followed items
-- News feed
-- Quick statistics
+/// tab | Confirm delete
+![confirm](../screenshots/admin-trash-confirm-delete.jpeg)
+///
 
-### My Datasets
+///
 
-**Template:** `templates/user/dashboard_datasets.html`
-**URL:** `/dashboard/datasets`
+## URL Pattern
 
-Shows:
-- User's created datasets
-- Draft datasets
-- Quick edit actions
-
-### My Organizations
-
-**Template:** `templates/user/dashboard_organizations.html`
-**URL:** `/dashboard/organizations`
-
-Shows:
-- Organizations user belongs to
-- Admin permissions
-- Quick access links
-
-### My Groups
-
-**Template:** `templates/user/dashboard_groups.html`
-**URL:** `/dashboard/groups`
-
-Shows:
-- Groups user belongs to
-- Group memberships
-- Activity updates
-
-## Template
-
-**Main Template:** `templates/user/dashboard.html`
-
-### Structure
-
-```jinja
-{% extends "user/_base.html" %}
-{%- set _layout = _layout|default("content_focus") -%}
-
-{%- block primary_content_inner %}
-    {{ ui.dashboard_activity_stream(activities) }}
-{% endblock %}
+```
+GET /ckan-admin/trash
+POST /ckan-admin/trash
 ```
 
-## Screenshot Placeholders
+**Example:**
+```
+<<vars.site_url>>/ckan-admin/trash
+```
 
-### Main Dashboard
-![Dashboard](../screenshots/dashboard.png)
-*Placeholder: Activity feed and widgets*
+## Purpose
 
-### My Datasets
-![Datasets](../screenshots/dashboard-datasets.png)
-*Placeholder: Dataset management list*
+The trash page allows sysadmins to:
 
-### My Organizations
-![Organizations](../screenshots/dashboard-orgs.png)
-*Placeholder: Organization list*
+- View deleted datasets
+- View deleted organizations
+- View deleted groups
+- Permanently purge items
 
-### My Groups
-![Groups](../screenshots/dashboard-groups.png)
-*Placeholder: Group list*
+## Actions Available
+
+| Action         | Description              |
+|----------------|--------------------------|
+| View trash     | See deleted items        |
+| Purge all      | Delete everything        |
+| Purge by type  | Delete specific type     |
 
 ## Related Pages
 
-- [User Profile](../user/read.md) - User profile
-- [User Activity](../user/activity.md) - Activity stream
-- [Dataset Search](../dataset/search.md) - Browse datasets
+- [Admin Panel](index.md) - Admin dashboard
+- [Config](config.md) - Site configuration

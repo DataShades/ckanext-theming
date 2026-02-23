@@ -20,7 +20,6 @@ Datasets (packages) are the core content type in CKAN. This section includes pag
 | [Read](read.md)                     | View dataset details         |
 | [Create](new.md)                    | Create new dataset           |
 | [Edit](edit.md)                     | Edit dataset metadata        |
-| [History](history.md)               | View dataset version history |
 | [Activity](activity.md)             | Dataset activity stream      |
 | [Followers](followers.md)           | Dataset followers list       |
 | [Groups](groups.md)                 | Dataset group associations   |

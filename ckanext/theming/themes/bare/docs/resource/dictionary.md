@@ -1,49 +1,43 @@
-# Data Dictionary
+# Resource Data Dictionary Page
 
-Define and manage field metadata for tabular resources.
+View version history of a resource.
 
 ## Overview
 
-Data dictionary page provides:
-- Field definitions
-- Type information
-- Label editing
-- Description management
+Resource history page displays:
+
+- Resource revisions
+- Change timestamps
+- Editor information
+- Version comparison
+
+/// admonition | Screenshots
+![history](../screenshots/resource-history.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /dataset/{id}/resource/{resource_id}/dictionary
-POST /dataset/{id}/resource/{resource_id}/dictionary
+GET /dataset/{id}/resource/{resource_id}/history
 ```
 
 ## Purpose
 
 Allows users to:
-- Define field labels
-- Add field descriptions
-- Set field types
-- Document data structure
 
-## Template
+- Track resource changes
+- View previous versions
+- Compare revisions
+- Restore previous versions
 
-**File:** `templates/datastore/dictionary.html`
+## Actions Available
 
-### Field Properties
-
-- Label (human-readable name)
-- Description (field documentation)
-- Type (string, number, date, etc.)
-- Unit of measurement
-- Required/optional status
-
-## Screenshot Placeholder
-
-![Data Dictionary](../screenshots/resource-dictionary.png)
-*Placeholder: Data dictionary editor*
+| Action            | Description              |
+|-------------------|--------------------------|
+| View revisions    | See change history       |
+| Compare revisions | See differences          |
+| View revision     | See specific version     |
 
 ## Related Pages
 
-- [Resource Data](data.md) - Resource data
-- [Resource Views](views.md) - Data visualizations
-- [Resource Read](read.md) - View resource
+- [Resource Edit](edit.md) - Edit resource

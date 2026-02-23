@@ -80,4 +80,3 @@ The read page is the primary view for dataset information. It should:
 - [Dataset Search](search.md) - Browse/search datasets
 - [Dataset Edit](edit.md) - Modify dataset
 - [Resource Read](../resource/read.md) - View individual resource
-- [Dataset History](history.md) - Version history

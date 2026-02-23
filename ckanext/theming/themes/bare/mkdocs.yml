@@ -87,16 +87,17 @@ nav:
     - dataset/read.md
     - dataset/new.md
     - dataset/edit.md
-    - dataset/history.md
     - dataset/activity.md
     - dataset/followers.md
     - dataset/groups.md
     - dataset/resources.md
+    - dataset/confirm-delete.md
+    - dataset/collaborators.md
   - Resource:
     - resource/index.md
     - resource/read.md
+    - resource/new.md
     - resource/edit.md
-    - resource/history.md
     - resource/views.md
     - resource/dictionary.md
     - resource/data.md

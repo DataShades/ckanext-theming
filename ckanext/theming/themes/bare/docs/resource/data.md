@@ -1,47 +1,47 @@
-# Datapusher Resource Data
+# Resource Views Management Page
 
-View and manage resource data processed by Datapusher.
+Manage visualizations for a resource.
 
 ## Overview
 
-Resource data page provides:
-- Data preview
-- DataStore status
-- Push to DataStore option
-- Data dictionary access
+Resource views page provides:
+
+- List of configured views
+- View type selection
+- View configuration
+- View ordering
+
+/// admonition | Screenshots
+![views](../screenshots/resource-views.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /dataset/{id}/resource/{resource_id}/data
+GET /dataset/{id}/resource/{resource_id}/views
+GET /dataset/{id}/resource/{resource_id}/views/new
 ```
 
 ## Purpose
 
 Allows users to:
-- Preview tabular data
-- Check DataStore status
-- Push data to DataStore
-- Access data dictionary
 
-## Template
+- Create data visualizations
+- Configure view types
+- Reorder views
+- Enable/disable views
 
-**File:** `templates/datapusher/resource_data.html`
+## Actions Available
 
-### Datapusher Features
-
-- Automatic tabular data processing
-- Data validation
-- DataStore integration
-- Preview generation
-
-## Screenshot Placeholder
-
-![Resource Data](../screenshots/resource-data.png)
-*Placeholder: Datapusher data view*
+| Action       | Description              |
+|--------------|--------------------------|
+| View list    | See existing views       |
+| Add view     | Create new view          |
+| Edit view    | Modify view config       |
+| Reorder      | Change view order        |
 
 ## Related Pages
 
-- [Resource Read](../resource/read.md) - View resource
-- [Data Dictionary](dictionary.md) - Field definitions
-- [Resource Views](../resource/views.md) - Data visualizations
+- [Resource Read](read.md) - View resource
+- [Resource Edit](edit.md) - Edit resource
+- [Dataset Resource Views](../dataset/resource-views.md) - Dataset views

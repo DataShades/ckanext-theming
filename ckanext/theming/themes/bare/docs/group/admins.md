@@ -1,30 +1,44 @@
-# Group Administrators
+# Group Manage Members Page
 
-View group administrators.
+Bulk management of group members.
 
 ## Overview
 
-Administrators page shows:
-- Admin list
-- Admin count
-- Admin details
+Manage members page provides:
+
+- Complete member list
+- Bulk role changes
+- Bulk removal
+- Search/filter
+
+/// admonition | Screenshots
+![manage](../screenshots/group-manage-members.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /group/admins/{id}
+GET /group/member_manage/{id}
+POST /group/member_manage/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/group/admins.html`
+Allows administrators to:
 
-## Screenshot Placeholder
+- View all members at once
+- Change multiple member roles
+- Remove multiple members
 
-![Group Admins](../screenshots/group-admins.png)
-*Placeholder: Administrator list*
+## Actions Available
+
+| Action         | Description              |
+|----------------|--------------------------|
+| Select members | Choose for bulk action   |
+| Change roles   | Update multiple roles    |
+| Remove members | Delete multiple members  |
 
 ## Related Pages
 
-- [Group Members](members.md) - All members
-- [Group Manage Members](manage-members.md) - Manage members
+- [Group Members](members.md) - Member list
+- [Group Add Member](member-new.md) - Add member

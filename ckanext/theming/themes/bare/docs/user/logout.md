@@ -1,64 +1,59 @@
-# User Logout Page
+# User Login Page
 
-End user session and logout.
+User authentication page for logging into CKAN.
 
 ## Overview
 
-Logout page provides:
-- Logout confirmation
-- Session termination
-- Return to home option
+The login page provides:
+
+- Username/email and password fields
+- Remember me option
+- Password reset link
+- Registration link
+
+/// admonition | Screenshots
+
+/// tab | Login form
+![login](../screenshots/user-login.jpeg)
+///
+
+/// tab | Validation errors
+![errors](../screenshots/user-login-errors.jpeg)
+///
+
+///
 
 ## URL Pattern
 
 ```
-GET /user/logout
+GET /user/login
+POST /user/login
+```
+
+**Example:**
+```
+<<vars.site_url>>/user/login
 ```
 
 ## Purpose
 
-The logout page:
-- Confirms logout was successful
-- Clears session data
-- Provides navigation options
+The login page allows users to:
 
-## Template
-
-**File:** `templates/user/logout.html`
-
-### Structure
-
-```jinja
-{% extends "user/_base.html" %}
-{%- set _layout = _layout|default("content_focus") -%}
-
-{% block subtitle %}
-    {{ ui.subtitle_item(_('Logout')) }}
-{% endblock %}
-
-{% block primary_content_inner %}
-    <h2>{{ _('You have logged out') }}</h2>
-
-    <p>{{ _('You have successfully logged out.') }}</p>
-
-    {{ ui.button(_('Go to Home'), href=h.url_for('home.index')) }}
-    {{ ui.button(_('Login'), href=h.url_for('user.login')) }}
-{% endblock %}
-```
+- Authenticate with credentials
+- Access protected features
+- Return to original page after login
 
 ## Actions Available
 
-| Action | Description | Element |
-|--------|-------------|---------|
-| Go home | Return to homepage | Home button |
-| Login | Log back in | Login button |
-
-## Screenshot Placeholder
-
-![Logout](../screenshots/user-logout.png)
-*Placeholder: Logout confirmation page*
+| Action           | Description              |
+|------------------|--------------------------|
+| Login            | Authenticate             |
+| Remember me      | Stay logged in           |
+| Reset password   | Recover account          |
+| Register         | Create account           |
 
 ## Related Pages
 
-- [Login](login.md) - User login
-- [Home](../home/home.md) - Home page
+- [Register](new.md) - Create account
+- [Request Reset](request-reset.md) - Password recovery
+- [Dashboard](../dashboard/dashboard.md) - After login destination

@@ -1,31 +1,42 @@
-# Group Delete Member Confirmation
+# Group Delete Confirmation Page
 
-Confirm removal of a member from a group.
+Confirm deletion of a group.
 
 ## Overview
 
-Member delete confirmation:
-- Verify member removal
-- Show member information
-- Confirm action
+Group delete confirmation:
+
+- Final verification step
+- Shows group information
+- Warns about impact
+
+/// admonition | Screenshots
+![confirm delete](../screenshots/group-confirm-delete.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /group/member_delete/{id}
-POST /group/member_delete/{id}
+GET /group/delete/{id}
+POST /group/delete/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/group/confirm_delete_member.html`
+Prevents accidental deletion of:
 
-## Screenshot Placeholder
+- Group metadata
+- Group associations
+- Dataset categorizations
 
-![Delete Member](../screenshots/group-member-delete.png)
-*Placeholder: Member removal confirmation*
+## Actions Available
+
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm delete  | Permanently remove       |
+| Cancel          | Keep group               |
 
 ## Related Pages
 
-- [Group Members](members.md) - Member list
-- [Group Manage Members](manage-members.md) - Manage members
+- [Group Edit](edit.md) - Edit group
+- [Group Index](index.md) - Group list

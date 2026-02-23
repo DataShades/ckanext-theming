@@ -1,30 +1,43 @@
-# Group Followers
+# Group Changes Page
 
-View group followers.
+View group revision history.
 
 ## Overview
 
-Followers page shows:
-- Follower list
-- Follower count
-- Follow dates
+Changes page displays:
+
+- Group revisions
+- Change timestamps
+- Editor information
+- Field changes
+
+/// admonition | Screenshots
+![changes](../screenshots/group-changes.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /group/followers/{id}
+GET /group/changes/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/group/followers.html`
+Allows users to:
 
-## Screenshot Placeholder
+- Track group modifications
+- View previous versions
+- Compare revisions
 
-![Group Followers](../screenshots/group-followers.png)
-*Placeholder: Follower list*
+## Actions Available
+
+| Action            | Description              |
+|-------------------|--------------------------|
+| View revisions    | See change history       |
+| Compare revisions | See differences          |
+| View revision     | See specific version     |
 
 ## Related Pages
 
-- [Group Read](read.md) - Group profile
 - [Group Activity](activity.md) - Activity stream
+- [Group Edit](edit.md) - Edit group

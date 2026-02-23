@@ -1,31 +1,50 @@
-# User Organizations
+# User Followers Page
 
-View organizations a user belongs to.
+View users following a specific user.
 
 ## Overview
 
-Organizations page displays:
-- User's organization memberships
-- Role in each organization
-- Organization details
+Followers page shows:
+
+- List of followers
+- Follower count
+- User connections
+
+/// admonition | Screenshots
+
+/// tab | With followers
+![with followers](../screenshots/user-followers-with-followers.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/user-followers-empty.jpeg)
+///
+
+///
 
 ## URL Pattern
 
 ```
-GET /user/{id}/organizations
+GET /user/followers/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/user/read_organizations.html`
+Allows users to:
 
-## Screenshot Placeholder
+- See who is following the user
+- Understand user influence
+- Connect with followers
 
-![User Organizations](../screenshots/user-organizations.png)
-*Placeholder: User's organization memberships*
+## Actions Available
+
+| Action         | Description              |
+|----------------|--------------------------|
+| View followers | See follower list        |
+| Follow         | Subscribe to user        |
+| View profile   | Navigate to user         |
 
 ## Related Pages
 
 - [User Profile](read.md) - User profile
-- [Organization Index](../organization/index.md) - All organizations
-- [Dashboard Organizations](../dashboard/content.md) - My organizations
+- [Dataset Followers](../dataset/followers.md) - Dataset followers

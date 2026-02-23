@@ -1,47 +1,56 @@
-# User Activity Stream
+# User Edit Profile Page
 
-View a user's activity history.
+Edit user profile information.
 
 ## Overview
 
-User activity page displays:
-- User's recent actions
-- Dataset changes
-- Contributions timeline
-- Activity feed
+The edit profile page provides:
+
+- Profile information form
+- Password change
+- Image upload
+
+/// admonition | Screenshots
+
+/// tab | Edit form
+![form](../screenshots/user-edit.jpeg)
+///
+
+/// tab | Validation errors
+![errors](../screenshots/user-edit-errors.jpeg)
+///
+
+///
 
 ## URL Pattern
 
 ```
-GET /user/activity/{id}
-GET /user/activity/{id}?offset={number}
+GET /user/edit
+POST /user/edit
 ```
 
-**Examples:**
+**Example:**
 ```
-<<vars.site_url>>/user/activity/john-doe
-<<vars.site_url>>/user/activity/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/user/edit
 ```
 
 ## Purpose
 
-Allows viewing:
-- User contributions
-- Creation history
-- Modification activity
-- Follow actions
+The edit page allows users to:
 
-## Template
+- Update profile information
+- Change password
+- Upload profile image
 
-**File:** `templates/user/activity_stream.html`
+## Actions Available
 
-## Screenshot Placeholder
-
-![User Activity](../screenshots/user-activity.png)
-*Placeholder: User activity feed*
+| Action        | Description              |
+|---------------|--------------------------|
+| Edit profile  | Modify user fields       |
+| Change password | Update password        |
+| Upload image  | Change profile picture   |
 
 ## Related Pages
 
-- [User Profile](read.md) - User profile
-- [Dataset Activity](../dataset/activity.md) - Dataset activity
-- [Organization Activity](../organization/activity.md) - Organization activity
+- [User Profile](read.md) - View profile
+- [User Register](new.md) - Registration form

@@ -1,58 +1,46 @@
-# Resource Views Management
+# Resource Edit Page
 
-Manage visualizations for a resource.
+Edit resource metadata.
 
 ## Overview
 
-Resource views page provides:
-- List of configured views
-- View type selection
-- View configuration
-- View ordering
+Resource edit page provides:
+
+- Pre-populated metadata form
+- File replacement option
+- URL update
+- Metadata editing
+
+/// admonition | Screenshots
+![edit](../screenshots/resource-edit.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /dataset/{id}/resource/{resource_id}/views
-GET /dataset/{id}/resource/{resource_id}/views/new
-POST /dataset/{id}/resource/{resource_id}/views
+GET /dataset/{id}/resource/{resource_id}/edit
+POST /dataset/{id}/resource/{resource_id}/edit
 ```
 
 ## Purpose
 
 Allows users to:
-- Create data visualizations
-- Configure view types
-- Reorder views
-- Enable/disable views
 
-## Templates
+- Update resource name
+- Modify description
+- Change format
+- Update URL
+- Replace file
 
-**Files:**
-- `templates/package/resource_views.html` - Views list
-- `templates/package/new_view.html` - Create/edit view
-- `templates/package/edit_view.html` - Edit view
-- `templates/package/snippets/_resource_view.html` - View snippet
+## Actions Available
 
-### View Types
-
-| Type | Description |
-|------|-------------|
-| `recline_view` | Data grid/table |
-| `recline_graph_view` | Charts and graphs |
-| `recline_map_view` | Geographic maps |
-| `image_view` | Image display |
-| `webpage_view` | Web page embed |
-| `pdf_view` | PDF viewer |
-| `datatables_view` | Sortable tables |
-
-## Screenshot Placeholder
-
-![Resource Views](../screenshots/resource-views.png)
-*Placeholder: View management interface*
+| Action        | Description              |
+|---------------|--------------------------|
+| Edit metadata | Modify resource fields   |
+| Replace file  | Upload new file          |
+| Update URL    | Change resource URL      |
 
 ## Related Pages
 
 - [Resource Read](read.md) - View resource
-- [Resource Edit](edit.md) - Edit resource
-- [Dataset Resource Views](../dataset/resource-views.md) - Dataset views
+- [New Resource](../dataset/new-resource.md) - Create resource

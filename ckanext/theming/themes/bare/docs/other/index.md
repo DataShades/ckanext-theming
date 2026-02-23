@@ -1,74 +1,54 @@
-# Other Pages Section
+# Data Dictionary Page
 
-This section covers additional pages and utilities in the CKAN portal.
+Define and manage field metadata for tabular resources.
 
 ## Overview
 
-Other pages include:
+Data dictionary page provides:
 
-- Error pages
-- Statistics
-- Feeds
-- HTMX search components
-- Development tools
+- Field definitions
+- Type information
+- Label editing
+- Description management
 
-## Pages in This Section
+/// admonition | Screenshots
 
-| Page                          | Description          |
-|-------------------------------|----------------------|
-| [Error Pages](error-pages.md) | 404, 403, 500 errors |
-| [Stats](stats.md)             | Site statistics      |
-| [Feeds](feeds.md)             | RSS/Atom feeds       |
-| [HTMX Search](htmx-search.md) | Dynamic search       |
-| [Primer](primer.md)           | Style guide          |
+/// tab | Dictionary
+![dictionary](../screenshots/resource-dictionary.jpeg)
+///
 
-## Error Pages
+/// tab | Fields
+![fields](../screenshots/resource-dictionary-fields.jpeg)
+///
 
-CKAN handles errors with custom templates:
+///
 
-### 404 Not Found
-- Resource doesn't exist
-- Invalid URL
-
-### 403 Forbidden
-- Access denied
-- Authentication required
-
-### 500 Server Error
-- Internal server error
-- Application crash
-
-## URL Structure
+## URL Pattern
 
 ```
-/error/{code}              # Error pages
-/stats                     # Statistics
-/feed                      # RSS/Atom feeds
-/development/primer        # Style guide
+GET /dataset/{id}/resource/{resource_id}/dictionary
+POST /dataset/{id}/resource/{resource_id}/dictionary
 ```
 
-## Customization Tips
+## Purpose
 
-1. **Error Pages**: Customize branding and messaging
-2. **Stats**: Add custom statistics
-3. **Feeds**: Customize feed content
-4. **Primer**: Document theme components
+Allows users to:
 
-## Screenshots
+- Define field labels
+- Add field descriptions
+- Set field types
+- Document data structure
 
-<!-- TODO: Add screenshots of your themed pages -->
+## Actions Available
 
-### 404 Error
-![404 Error](../screenshots/error-404.png)
+| Action        | Description              |
+|---------------|--------------------------|
+| Edit fields   | Modify field metadata    |
+| Add labels    | Set human-readable names |
+| Set types     | Define field types       |
 
-### Statistics
-![Stats](../screenshots/stats.png)
+## Related Pages
 
-### Style Primer
-![Primer](../screenshots/primer.png)
-
-## Related Sections
-
-- [Home](../home/index.md) - Main pages
-- [Admin](../admin/index.md) - Administration
-- [Dataset](../dataset/index.md) - Content
+- [Resource Data](data.md) - Resource data
+- [Resource Views](views.md) - Data visualizations
+- [Resource Read](read.md) - View resource

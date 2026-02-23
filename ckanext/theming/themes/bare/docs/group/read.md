@@ -1,41 +1,35 @@
-# Group Read
+# Group Section
 
-View group details and datasets.
+This section covers all pages related to group management in CKAN.
 
 ## Overview
 
-Group read page displays:
-- Group information
-- Group datasets
-- Member information
-- Group statistics
+Groups in CKAN are used to:
 
-## URL Pattern
+- Categorize datasets thematically
+- Create curated collections
+- Enable community collaboration
+- Organize content by topic
 
-```
-GET /group/{id}
-GET /group/{name}
-```
+## Pages in This Section
 
-## Purpose
+| Page                                      | Description                    |
+|-------------------------------------------|--------------------------------|
+| [Index](index.md)                         | List all groups                |
+| [Read](read.md)                           | View group details             |
+| [About](about.md)                         | Group about page               |
+| [Create](new.md)                          | Create new group               |
+| [Edit](edit.md)                           | Edit group                     |
+| [Members](members.md)                     | View members                   |
+| [Add Member](member-new.md)               | Add member                     |
+| [Manage Members](manage-members.md)       | Manage members                 |
+| [Administrators](admins.md)               | View admins                    |
+| [Activity](activity.md)                   | Activity stream                |
+| [Changes](changes.md)                     | Revision history               |
+| [Followers](followers.md)                 | Group followers                |
 
-Allows users to:
-- View group description
-- Browse group datasets
-- See group members
-- Follow group
+## Related Sections
 
-## Template
-
-**File:** `templates/group/read.html`
-
-## Screenshot Placeholder
-
-![Group Read](../screenshots/group-read.png)
-*Placeholder: Group profile page*
-
-## Related Pages
-
-- [Group Index](index.md) - Group list
-- [Group Edit](edit.md) - Edit group
-- [Dataset Search](../dataset/search.md) - Dataset search
+- [Dataset](../dataset/index.md) - Categorized datasets
+- [Organization](../organization/index.md) - Owning organizations
+- [User](../user/index.md) - Group members

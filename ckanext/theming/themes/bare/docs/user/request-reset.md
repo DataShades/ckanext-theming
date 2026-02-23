@@ -1,76 +1,58 @@
-# Password Reset Pages
+# User API Tokens Page
 
-Password recovery flow pages.
+Manage API access tokens.
 
 ## Overview
 
-Password reset consists of two pages:
-1. **Request Reset** - Request password reset email
-2. **Perform Reset** - Set new password with reset key
+The API tokens page provides:
 
-## URL Patterns
+- List of active tokens
+- Create new tokens
+- Revoke tokens
+- Token usage information
 
-### Request Reset
-```
-GET /user/reset
-POST /user/reset
-```
+/// admonition | Screenshots
 
-### Perform Reset
+/// tab | Token list
+![tokens](../screenshots/user-api-tokens.jpeg)
+///
+
+/// tab | Create form
+![create](../screenshots/user-api-tokens-create-form.jpeg)
+///
+
+///
+
+## URL Pattern
+
 ```
-GET /user/reset/{key}
-POST /user/reset/{key}
+GET /user/{id}/api-tokens
+POST /user/{id}/api-tokens
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/user/reset
-<<vars.site_url>>/user/reset/abc123xyz
+<<vars.site_url>>/user/john-doe/api-tokens
+<<vars.site_url>>/user/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f/api-tokens
 ```
 
 ## Purpose
 
-Password reset allows users to:
-- Recover forgotten passwords
-- Reset compromised credentials
-- Regain account access
+The API tokens page allows users to:
 
-## Pages
+- Generate API access tokens
+- Manage token permissions
+- Revoke compromised tokens
 
-### Request Reset Page
+## Actions Available
 
-**Template:** `templates/user/request_reset.html`
-
-**Fields:**
-- Email address
-
-**Actions:**
-- Send reset email
-- Cancel/Back to login
-
-### Perform Reset Page
-
-**Template:** `templates/user/perform_reset.html`
-
-**Fields:**
-- New password
-- Confirm password
-
-**Actions:**
-- Set new password
-- Cancel
-
-## Screenshot Placeholders
-
-### Request Reset
-![Request Reset](../screenshots/user-request-reset.png)
-*Placeholder: Email input form*
-
-### Perform Reset
-![Perform Reset](../screenshots/user-perform-reset.png)
-*Placeholder: New password form*
+| Action       | Description              |
+|--------------|--------------------------|
+| Create token | Generate new token       |
+| Copy token   | Copy to clipboard        |
+| Revoke token | Delete token             |
 
 ## Related Pages
 
-- [Login](login.md) - User login
-- [Edit Profile](edit.md) - Change password when logged in
+- [User Profile](read.md) - User profile
+- [API Documentation](../other/api.md) - API docs

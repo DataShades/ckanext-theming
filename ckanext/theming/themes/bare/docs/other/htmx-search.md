@@ -1,87 +1,46 @@
-# HTMX Search Components
+# RSS/Atom Feeds
 
-Dynamic search functionality using HTMX.
+Syndication feeds for portal content.
 
 ## Overview
 
-HTMX search provides:
-- Live search results
-- Dynamic facet updates
-- No page refresh
-- URL synchronization
+CKAN provides feeds for:
 
-## Components
+- Recently added datasets
+- Organization activity
+- Group activity
+- User activity
+- Custom searches
 
-### Search HTMX
+## URL Patterns
 
-**Template:** `templates/package/snippets/search_htmx.html`
-
-Enables dynamic search for:
-- Dataset search
-- Organization search
-- Group search
-- User search
-
-## How It Works
-
-```jinja
-{%- with dataset_type=dataset_type,
-  fields_grouped=fields_grouped,
-  search_facets=search_facets,
-  facet_titles=facet_titles,
-  disable_htmx=false -%}
-  {%- include "package/snippets/search_htmx.html" -%}
-{%- endwith -%}
+```
+/feed/atom              # Atom feed
+/feed/rss               # RSS feed
+/dataset/feed           # Dataset feed
+/organization/{id}/feed # Organization feed
 ```
 
-### Features
+## Purpose
 
-1. **Live Search**: Results update as you type
-2. **Dynamic Facets**: Facet counts update
-3. **URL Sync**: Browser history maintained
-4. **Loading States**: Visual feedback
+Feeds allow users to:
 
-## Customization Notes
+- Subscribe to updates
+- Monitor new content
+- Track changes
+- Integrate with readers
 
-### HTMX Attributes
+## Feed Types
 
-```jinja
-{{ ui.form(
-    hx={
-        'get': h.url_for('dataset.search'),
-        'target': '#search-results',
-        'swap': 'outerHTML',
-        'push-url': 'true'
-    }
-) }}
-```
+### Atom Feed
 
-### Loading States
+Standard Atom 1.0 format for dataset updates.
 
-```jinja
-<div id="search-results" hx-indicator=".search-loading">
-    <!-- Results here -->
-</div>
+### RSS Feed
 
-<div class="search-loading htmx-indicator">
-    {{ ui.spinner() }}
-</div>
-```
-
-### Event Triggers
-
-```jinja
-{{ ui.input(
-    name='q',
-    hx={
-        'get': h.url_for('dataset.search'),
-        'target': '#search-results',
-        'trigger': 'input changed delay:500ms'
-    }
-) }}
-```
+RSS 2.0 format for broader compatibility.
 
 ## Related Pages
 
-- [Dataset Search](../dataset/search.md) - Main search
-- [Organization Index](../organization/index.md) - Organization search
+- [Dataset Search](../dataset/search.md) - Dataset listings
+- [Organization Read](../organization/read.md) - Organization content

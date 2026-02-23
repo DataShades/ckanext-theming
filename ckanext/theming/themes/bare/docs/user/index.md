@@ -1,117 +1,42 @@
-# User Section
+# Group Delete Member Confirmation Page
 
-This section covers all pages related to user accounts and authentication in CKAN.
+Confirm removal of a member from a group.
 
 ## Overview
 
-User pages handle:
+Member delete confirmation:
 
-- User authentication (login/logout)
-- User registration
-- Profile management
-- API token management
-- Password reset
-- User activity and dashboard
+- Verify member removal
+- Show member role
+- Confirm action
 
-## Pages in This Section
+/// admonition | Screenshots
+![confirm delete](../screenshots/group-confirm-delete-member.jpeg)
+///
 
-| Page                                   | Description            |
-|----------------------------------------|------------------------|
-| [Login](login.md)                      | User login             |
-| [Register](new.md)                     | User registration      |
-| [User Profile](read.md)                | View user profile      |
-| [Edit Profile](edit.md)                | Edit profile           |
-| [User Activity](activity.md)           | User activity stream   |
-| [Followers](followers.md)              | User followers         |
-| [User Organizations](organizations.md) | User's organizations   |
-| [User Groups](groups.md)               | User's groups          |
-| [API Tokens](api-tokens.md)            | Manage API tokens      |
-| [Request Reset](request-reset.md)      | Request password reset |
-| [Perform Reset](perform-reset.md)      | Reset password         |
-| [User List](list.md)                   | All users              |
-
-## Common Templates
-
-### `_base.html`
-Base template for user pages:
-
-```jinja
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("content_context") -%}
-
-{%- set dataset_type = h.default_package_type() %}
-```
-
-### `_edit_base.html`
-Base template for edit pages:
-```jinja
-{% extends "user/_base.html" %}
-```
-
-## URL Structure
+## URL Pattern
 
 ```
-/user                               # User list
-/user/login                         # Login
-/user/logout                        # Logout
-/user/register                      # Register
-/user/{id}                          # User profile
-/user/edit                          # Edit profile
-/user/activity/{id}                 # Activity stream
-/user/followers/{id}                # Followers
-/user/{id}/organizations            # User organizations
-/user/{id}/groups                   # User groups
-/user/{id}/api-tokens               # API tokens
-/user/reset                         # Request password reset
-/user/reset/{key}                   # Perform password reset
+GET /group/member_delete/{id}
+POST /group/member_delete/{id}
 ```
 
-## Authentication Flow
+## Purpose
 
-```mermaid
-graph TD
-    A[Visitor] --> B{Authenticated?}
-    B -->|No| C[Login Page]
-    B -->|Yes| D[Dashboard]
-    C --> E{Valid Credentials?}
-    E -->|Yes| D
-    E -->|No| F[Error Message]
-    F --> C
-    D --> G[Logout]
-    G --> C
-```
+Prevents accidental removal of:
 
-## Customization Tips
+- Group access
+- Member permissions
+- Dataset associations
 
-1. **Login Page**: Customize branding and messaging
-2. **Registration**: Add custom fields and validation
-3. **Profile**: Enhance with additional user information
-4. **API Tokens**: Customize token management interface
-5. **Styling**: Apply consistent theming across user pages
+## Actions Available
 
-## Screenshots
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm remove  | Remove member            |
+| Cancel          | Keep member              |
 
-<!-- TODO: Add screenshots of your themed user pages -->
+## Related Pages
 
-### Login
-![Login](../screenshots/user-login.png)
-*Placeholder: Login form with username/password*
-
-### Register
-![Register](../screenshots/user-register.png)
-*Placeholder: Registration form*
-
-### User Profile
-![Profile](../screenshots/user-profile.png)
-*Placeholder: User profile page*
-
-### API Tokens
-![API Tokens](../screenshots/user-api-tokens.png)
-*Placeholder: API token management*
-
-## Related Sections
-
-- [Dashboard](../dashboard/index.md) - User dashboard
-- [Organization](../organization/index.md) - User organizations
-- [Group](../group/index.md) - User groups
-- [Admin](../admin/index.md) - Admin pages
+- [Group Members](members.md) - Member list
+- [Group Manage Members](manage-members.md) - Manage members

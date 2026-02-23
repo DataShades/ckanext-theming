@@ -1,55 +1,26 @@
-# Statistics Page
+# Other Pages Section
 
-Site usage statistics and analytics.
+This section covers additional pages and utilities in the CKAN portal.
 
 ## Overview
 
-The stats page displays:
-- Dataset statistics
-- Organization statistics
-- Group statistics
-- User statistics
-- Historical trends
+Other pages include:
 
-## URL Pattern
+- Error pages
+- Statistics
+- Feeds
+- Development tools
 
-```
-GET /stats
-```
+## Pages in This Section
 
-**Example:**
-```
-<<vars.site_url>>/stats
-```
+| Page                              | Description                    |
+|-----------------------------------|--------------------------------|
+| [Error Pages](error-pages.md)     | 404, 403, 500 errors           |
+| [Stats](stats.md)                 | Site statistics                |
+| [Primer](primer.md)               | Style guide                    |
 
-## Purpose
+## Related Sections
 
-The stats page allows users to:
-- View portal statistics
-- Track growth over time
-- Compare categories
-- Export statistics
-
-## Template
-
-**File:** `templates/ckanext/stats/index.html`
-
-### Statistics Displayed
-
-- Total datasets
-- Total organizations
-- Total groups
-- Total users
-- Total views/downloads
-- Historical trends
-
-## Screenshot Placeholder
-
-![Stats](../screenshots/stats.png)
-*Placeholder: Statistics dashboard with charts*
-
-## Related Pages
-
-- [Home](../home/home.md) - Main page
-- [Admin](../admin/index.md) - Admin statistics
-- [Dashboard](../dashboard/dashboard.md) - Personal stats
+- [Home](../home/index.md) - Main pages
+- [Admin](../admin/index.md) - Administration
+- [Dataset](../dataset/index.md) - Content

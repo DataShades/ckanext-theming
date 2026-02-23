@@ -1,13 +1,18 @@
-# Resource Delete Confirmation
+# Resource Delete Confirmation Page
 
 Confirm deletion of a dataset resource.
 
 ## Overview
 
 Resource delete confirmation:
+
 - Final check before resource removal
 - Shows resource information
 - Warns about data loss
+
+/// admonition | Screenshots
+![confirm delete](../screenshots/dataset-confirm-delete-resource.jpeg)
+///
 
 ## URL Pattern
 
@@ -19,18 +24,17 @@ POST /dataset/{id}/resource/{resource_id}/delete
 ## Purpose
 
 Prevents accidental deletion of:
+
 - Uploaded files
 - Linked data
 - Resource views
 
-## Template
+## Actions Available
 
-**File:** `templates/package/confirm_delete_resource.html`
-
-## Screenshot Placeholder
-
-![Resource Delete](../screenshots/resource-delete-confirm.png)
-*Placeholder: Resource delete confirmation*
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm delete  | Permanently remove       |
+| Cancel          | Keep resource            |
 
 ## Related Pages
 

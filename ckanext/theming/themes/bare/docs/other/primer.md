@@ -1,75 +1,54 @@
-# Development Primer
+# Error Pages
 
-Style guide and component library for theme developers.
+Error handling and custom error pages.
 
 ## Overview
 
-The primer page displays:
-- All UI components
-- Style guide
-- Usage examples
-- Code snippets
+CKAN displays error pages for:
 
-## URL Pattern
+- 404 Not Found
+- 403 Forbidden
+- 500 Internal Server Error
+
+/// admonition | Screenshots
+
+/// tab | 404 Not Found
+![404](../screenshots/error-404.jpeg)
+///
+
+/// tab | 403 Forbidden
+![403](../screenshots/error-403.jpeg)
+///
+
+///
+
+## URL Patterns
+
+Errors can occur on any URL:
 
 ```
-GET /development/primer
-```
-
-**Example:**
-```
-<<vars.site_url>>/development/primer
+/nonexistent-page       # 404
+/protected-page         # 403
+/crash-endpoint         # 500
 ```
 
 ## Purpose
 
-The primer helps developers:
-- View all available components
-- Understand styling conventions
-- Copy code examples
-- Maintain consistency
+Error pages:
 
-## Template
+- Inform users of problems
+- Provide navigation options
+- Maintain branding consistency
 
-**File:** `templates/development/primer.html`
+## Actions Available
 
-### Components Documented
-
-| Category | Components |
-|----------|------------|
-| Containers | Accordion, Card, Grid, Panel |
-| Elements | Button, Link, Badge, Tag |
-| Forms | Input, Select, Checkbox, Radio |
-| Navigation | Breadcrumb, Menu, Pagination |
-| Feedback | Alert, Modal, Toast, Tooltip |
-| Data | Table, Chart, Code |
-
-## Screenshot Placeholder
-
-![Primer](../screenshots/primer.png)
-*Placeholder: Component library showcase*
-
-## Usage
-
-### Access
-
-Visit `/development/primer` to see all components.
-
-### Copy Code
-
-Each component shows:
-- Rendered example
-- HTML code
-- Usage notes
-
-### Extend
-
-Use primer as reference for:
-- Creating new components
-- Modifying existing styles
-- Maintaining consistency
+| Action      | Description              |
+|-------------|--------------------------|
+| Go home     | Return to homepage       |
+| Search      | Search for content       |
+| Go back     | Return to previous page  |
 
 ## Related Pages
 
-- [Component Library](../library/index.md) - UI macros
-- [Style Guide](../theme.md) - Theme documentation
+- [Home](../home/home.md) - Return to home
+- [Search](../dataset/search.md) - Search for content

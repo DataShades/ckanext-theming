@@ -1,31 +1,42 @@
-# Group Add Member
+# Group Members Page
 
-Add a new member to a group.
+View group members.
 
 ## Overview
 
-Add member page provides:
-- User selection
-- Role assignment
-- Permission explanation
+Members page shows:
+
+- Member list
+- Member roles
+- Member count
+
+/// admonition | Screenshots
+![members](../screenshots/group-members.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /group/member_new/{id}
-POST /group/member_new/{id}
+GET /group/members/{id}
 ```
 
-## Template
+## Purpose
 
-**File:** `templates/group/member_new.html`
+Allows users to:
 
-## Screenshot Placeholder
+- View all group members
+- See member roles
+- Add new members (if authorized)
 
-![Group Add Member](../screenshots/group-member-new.png)
-*Placeholder: Add member form*
+## Actions Available
+
+| Action        | Description              |
+|---------------|--------------------------|
+| View members  | See member list          |
+| Add member    | Invite new member        |
+| Edit role     | Change member role       |
 
 ## Related Pages
 
-- [Group Members](members.md) - Member list
-- [Group Manage Members](manage-members.md) - Manage members
+- [Group Read](read.md) - Group profile
+- [Group Add Member](member-new.md) - Add member

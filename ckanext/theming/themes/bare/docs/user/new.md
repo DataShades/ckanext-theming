@@ -1,48 +1,41 @@
-# User Register
+# User Logout Page
 
-Create a new user account.
+End user session and logout.
 
 ## Overview
 
-Registration page provides:
-- Account creation form
-- Email verification
-- Password setup
-- Terms acceptance
+Logout page provides:
+
+- Logout confirmation
+- Session termination
+- Return to home option
+
+/// admonition | Screenshots
+![logout](../screenshots/user-logout.jpeg)
+///
 
 ## URL Pattern
 
 ```
-GET /user/register
-POST /user/register
+GET /user/logout
 ```
 
 ## Purpose
 
-Allows visitors to:
-- Create CKAN account
-- Set username and password
-- Provide email address
-- Accept terms of service
+The logout page:
 
-## Template
+- Confirms logout was successful
+- Clears session data
+- Provides navigation options
 
-**File:** `templates/user/new.html`
+## Actions Available
 
-### Form Fields
-
-- Username (required)
-- Email (required)
-- Password (required)
-- Password confirmation (required)
-- Name (optional)
-
-## Screenshot Placeholder
-
-![Register](../screenshots/user-register.png)
-*Placeholder: Registration form*
+| Action    | Description              |
+|-----------|--------------------------|
+| Go home   | Return to homepage       |
+| Login     | Log back in              |
 
 ## Related Pages
 
 - [Login](login.md) - User login
-- [User Profile](read.md) - User profile
+- [Home](../home/home.md) - Home page

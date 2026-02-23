@@ -4,15 +4,14 @@ Quick reference for all resource pages.
 
 ## All Resource Pages
 
-| Page | Template | URL | Description |
-|------|----------|-----|-------------|
-| [Read](read.md) | `package/resource_read.html` | `/dataset/{id}/resource/{rid}` | View resource |
-| [Edit](edit.md) | `package/resource_edit.html` | `/dataset/{id}/resource/{rid}/edit` | Edit metadata |
-| [History](history.md) | `package/resource_history.html` | `/dataset/{id}/resource/{rid}/history` | Version history |
-| [Views](views.md) | `package/resource_views.html` | `/dataset/{id}/resource/{rid}/views` | Manage views |
-| [New View](views.md) | `package/new_view.html` | `/dataset/{id}/resource/{rid}/views/new` | Create view |
-| [Dictionary](dictionary.md) | `datastore/dictionary.html` | `/dataset/{id}/resource/{rid}/dictionary` | Data dictionary |
-| [Data](data.md) | `datapusher/resource_data.html` | `/dataset/{id}/resource/{rid}/data` | Resource data |
+| Page                        | Template                        | URL                                       | Description     |
+|-----------------------------|---------------------------------|-------------------------------------------|-----------------|
+| [Read](read.md)             | `package/resource_read.html`    | `/dataset/{id}/resource/{rid}`            | View resource   |
+| [Edit](edit.md)             | `package/resource_edit.html`    | `/dataset/{id}/resource/{rid}/edit`       | Edit metadata   |
+| [Views](views.md)           | `package/resource_views.html`   | `/dataset/{id}/resource/{rid}/views`      | Manage views    |
+| [New View](views.md)        | `package/new_view.html`         | `/dataset/{id}/resource/{rid}/views/new`  | Create view     |
+| [Dictionary](dictionary.md) | `datastore/dictionary.html`     | `/dataset/{id}/resource/{rid}/dictionary` | Data dictionary |
+| [Data](data.md)             | `datapusher/resource_data.html` | `/dataset/{id}/resource/{rid}/data`       | Resource data   |
 
 ## Common Templates
 

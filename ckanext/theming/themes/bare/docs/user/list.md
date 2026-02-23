@@ -1,63 +1,51 @@
-# User List Page
+# User Groups Page
 
-List all registered users.
+View groups a user belongs to.
 
 ## Overview
 
-User list page provides:
-- Directory of all users
-- Search functionality
-- Sorting options
-- Pagination
+Groups page displays:
+
+- User's group memberships
+- Role in each group
+- Group details
+
+/// admonition | Screenshots
+
+/// tab | With groups
+![groups](../screenshots/user-groups.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/user-groups-empty.jpeg)
+///
+
+///
 
 ## URL Pattern
 
 ```
-GET /user
-GET /user?q={query}
-GET /user?order_by={field}
-```
-
-**Examples:**
-```
-<<vars.site_url>>/user
-<<vars.site_url>>/user?q=john
-<<vars.site_url>>/user?order_by=created
+GET /user/{id}/groups
 ```
 
 ## Purpose
 
 Allows users to:
-- Browse all users
-- Find specific users
-- View user profiles
-- See community size
+
+- View group memberships
+- See roles and permissions
+- Navigate to groups
 
 ## Actions Available
 
-| Action | Description | Element |
-|--------|-------------|---------|
-| Search users | Find users | Search input |
-| Sort | Change order | Sort dropdown |
-| View profile | See user details | User link |
-| Pagination | Navigate pages | Page controls |
-
-## Template
-
-**File:** `templates/user/list.html`
-
-### Sort Options
-
-- Name (ascending/descending)
-- Created date
-- Last active
-
-## Screenshot Placeholder
-
-![User List](../screenshots/user-list.png)
-*Placeholder: User directory listing*
+| Action          | Description              |
+|-----------------|--------------------------|
+| View groups     | See group list           |
+| View role       | See membership level     |
+| Navigate to group | Go to group            |
 
 ## Related Pages
 
-- [User Profile](read.md) - View profile
-- [User Register](new.md) - Create account
+- [User Profile](read.md) - User profile
+- [Group Index](../group/index.md) - All groups
+- [Dashboard Groups](../dashboard/content.md) - My groups
