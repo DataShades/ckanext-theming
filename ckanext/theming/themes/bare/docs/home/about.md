@@ -11,7 +11,9 @@ The about page typically displays:
 - Links to related resources
 - Custom about text from configuration
 
-![normal](../screenshots/aboutpage_normal.jpeg)
+/// admonition | Screenshots
+![normal](../screenshots/home-about.jpeg)
+///
 
 ## URL Pattern
 

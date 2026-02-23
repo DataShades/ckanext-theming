@@ -116,3 +116,41 @@ def screenshot(page: Page, request: pytest.FixtureRequest, screenshots_dir: Path
         return _page.screenshot(**kwargs)
 
     return func
+
+
+class ElementLocator:
+    page: Page
+
+    def __init__(self, page: Page):
+        self.page = page
+
+    def locate_main_content(self):
+        """Locate the main block element, which typically contains the primary content of the page."""
+        return self.page.locator("#main")
+
+    def locate_sidebar(self):
+        """Locate the secondary block element, which typically contains side content or navigation."""
+        return self.page.locator("#sidebar")
+
+    def locate_breadcrumbs(self):
+        """Locate the breadcrumbs element."""
+        return self.page.locator("nav[aria-label='Breadcrumb']")
+
+    def locate_add_dataset_button(self):
+        """Locate the "Add dataset" button."""
+        return self.page.get_by_role("link", name="Add dataset")
+
+    def locate_edit_dataset_button(self):
+        """Locate the "Edit dataset" button."""
+        return self.page.get_by_role("link", name="Manage")
+
+    def locate_follow_button(self):
+        """Locate the "Follow" button, which is typically used to follow a dataset or user for updates."""
+        follow = self.page.get_by_role("button", name="Follow")
+        unfollow = self.page.get_by_role("button", name="Unfollow")
+        return follow.or_(unfollow)
+
+
+@pytest.fixture
+def locator(page: Page):
+    return ElementLocator(page)

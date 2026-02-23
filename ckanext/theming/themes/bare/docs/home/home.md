@@ -11,7 +11,9 @@ The home page provides:
 - Display of recent/featured datasets
 - Statistics overview (dataset count, etc.)
 
-![normal](../screenshots/homepage_normal.jpeg)
+/// admonition | Screenshots
+![normal](../screenshots/home-home.jpeg)
+///
 
 ## URL Pattern
 
@@ -43,6 +45,6 @@ The home page is the first impression visitors get of your CKAN instance. It sho
 
 ## Related Pages
 
-- [About Page](about.md) - Organization information
+- [About Page](about.md) - Portal information
 - [Dataset Search](../dataset/search.md) - Full dataset search
 - [Login](../user/login.md) - User authentication

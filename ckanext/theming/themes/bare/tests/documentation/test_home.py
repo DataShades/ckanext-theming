@@ -7,9 +7,9 @@ from playwright.sync_api import Page
 
 def test_homepage(doc_screenshot: Any, page: Page):
     page.goto("/")
-    doc_screenshot("homepage_normal")
+    doc_screenshot("home-home")
 
 
 def test_about(doc_screenshot: Any, page: Page):
     page.goto("/about")
-    doc_screenshot("aboutpage_normal")
+    doc_screenshot("home-about")

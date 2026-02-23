@@ -15,6 +15,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.blocks.admonition
+  - pymdownx.blocks.caption
   - pymdownx.blocks.details
   - pymdownx.blocks.tab:
       alternate_style: true
@@ -91,7 +92,14 @@ nav:
     - dataset/followers.md
     - dataset/groups.md
     - dataset/resources.md
-    - dataset/resource-views.md
+  - Resource:
+    - resource/index.md
+    - resource/read.md
+    - resource/edit.md
+    - resource/history.md
+    - resource/views.md
+    - resource/dictionary.md
+    - resource/data.md
   - Organization:
     - organization/index.md
     - organization/index.md
@@ -133,25 +141,17 @@ nav:
     - user/api-tokens.md
     - user/request-reset.md
     - user/perform-reset.md
-  - Admin:
-    - admin/index.md
-    - admin/index.md
-    - admin/config.md
-    - admin/trash.md
   - Dashboard:
     - dashboard/index.md
     - dashboard/dashboard.md
     - dashboard/datasets.md
     - dashboard/organizations.md
     - dashboard/groups.md
-  - Resource:
-    - resource/index.md
-    - resource/read.md
-    - resource/edit.md
-    - resource/history.md
-    - resource/views.md
-    - resource/dictionary.md
-    - resource/data.md
+  - Admin:
+    - admin/index.md
+    - admin/index.md
+    - admin/config.md
+    - admin/trash.md
   - Other:
     - other/index.md
     - other/error-pages.md
