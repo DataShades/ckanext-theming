@@ -3,9 +3,11 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
+from faker import Faker
 from playwright.sync_api import Page
 
 from ckan import types
+from ckan.tests.helpers import call_action
 
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
@@ -18,16 +20,16 @@ def test_dashboard(
     package_factory: types.TestFactory,
     login: Any,
     locator: ElementLocator,
+    faker: Faker,
 ):
     """Test main dashboard page."""
-    # Create some activity
     login(user["name"])
-    package_factory.create(user_id=user["id"])
+    call_action("package_create", {"user": user["name"]},
+                name=faker.slug(), title=faker.sentence())
 
     page.goto("/dashboard")
     doc_screenshot("dashboard")
 
-    # Show activity feed
     activity = page.locator(".activity-stream")
     if activity.is_visible():
         activity.scroll_into_view_if_needed()
@@ -41,17 +43,22 @@ def test_datasets(
     user: dict[str, Any],
     package_factory: types.TestFactory,
     login: Any,
-    locator: ElementLocator,
+    faker: Faker,
 ):
     """Test dashboard datasets page."""
-    package_factory.create_batch(3, user_id=user["id"])
-
     login(user["name"])
+    call_action("package_create", {"user": user["name"]},
+                name=faker.slug(), title=faker.sentence())
+    call_action("package_create", {"user": user["name"]},
+                name=faker.slug(), title=faker.sentence())
+    call_action("package_create", {"user": user["name"]},
+                name=faker.slug(), title=faker.sentence())
+
     page.goto("/dashboard/datasets")
     doc_screenshot("dashboard-datasets")
 
-    # Test empty state
-    # Create a new user without datasets
+    new_user = user_factory.create()
+    login(new_user["name"])
     page.goto("/dashboard/datasets")
     doc_screenshot("dashboard-datasets-empty")
 
@@ -63,7 +70,6 @@ def test_organizations(
     user: dict[str, Any],
     organization_factory: types.TestFactory,
     login: Any,
-    locator: ElementLocator,
 ):
     """Test dashboard organizations page."""
     organization_factory.create(users=[{"name": user["name"], "capacity": "member"}])
@@ -72,7 +78,6 @@ def test_organizations(
     page.goto("/dashboard/organizations")
     doc_screenshot("dashboard-organizations")
 
-    # Test empty state
     page.goto("/dashboard/organizations")
     doc_screenshot("dashboard-organizations-empty")
 
@@ -84,7 +89,6 @@ def test_groups(
     user: dict[str, Any],
     group_factory: types.TestFactory,
     login: Any,
-    locator: ElementLocator,
 ):
     """Test dashboard groups page."""
     group_factory.create(users=[{"name": user["name"], "capacity": "member"}])
@@ -93,7 +97,6 @@ def test_groups(
     page.goto("/dashboard/groups")
     doc_screenshot("dashboard-groups")
 
-    # Test empty state
     page.goto("/dashboard/groups")
     doc_screenshot("dashboard-groups-empty")
 

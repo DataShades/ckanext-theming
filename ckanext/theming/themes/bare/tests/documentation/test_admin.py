@@ -3,7 +3,11 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
+from faker import Faker
 from playwright.sync_api import Page
+
+from ckan import types
+from ckan.tests.helpers import call_action
 
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
@@ -21,7 +25,6 @@ def test_index(
     page.goto("/ckan-admin")
     doc_screenshot("admin-index")
 
-    # Show admin tools section
     tools = page.locator(".admin-tools")
     if tools.is_visible():
         tools.scroll_into_view_if_needed()
@@ -34,14 +37,13 @@ def test_config(
     page: Page,
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
+    faker: Faker,
 ):
     """Test admin config page."""
     login(sysadmin["name"])
     page.goto("/ckan-admin/config")
     doc_screenshot("admin-config")
 
-    # Show form fields
     form = page.locator("form")
     form.scroll_into_view_if_needed()
     doc_screenshot("admin-config-form")
@@ -53,7 +55,6 @@ def test_confirm_reset(
     page: Page,
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test admin confirm reset configuration page."""
     login(sysadmin["name"])
@@ -71,16 +72,13 @@ def test_trash(
     locator: ElementLocator,
 ):
     """Test admin trash page."""
-    # Create and delete a dataset
     pkg = package_factory.create()
     login(sysadmin["name"])
-    page.goto("/dataset/delete/" + pkg["name"])
-    page.click("button[type='submit']")
+    call_action("package_delete", {"user": sysadmin["name"]}, id=pkg["id"])
 
     page.goto("/ckan-admin/trash")
     doc_screenshot("admin-trash")
 
-    # Show confirm delete dialog
     page.click("button[name='action'][value='package']")
     doc_screenshot("admin-trash-confirm-delete")
 

@@ -5,6 +5,9 @@ from typing import Any
 import pytest
 from playwright.sync_api import Page
 
+from ckan import types
+from ckan.tests.helpers import call_action
+
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
@@ -22,11 +25,11 @@ def test_error_403(
     page: Page,
 ):
     """Test 403 error page."""
-    # Try to access admin page without being sysadmin
     page.goto("/ckan-admin")
     doc_screenshot("error-403")
 
 
+@pytest.mark.usefixtures("clean_index")
 def test_stats(
     doc_screenshot: Any,
     page: Page,
@@ -36,7 +39,6 @@ def test_stats(
     group_factory: types.TestFactory,
 ):
     """Test statistics page."""
-    # Create some data for stats
     package_factory.create_batch(5)
     user_factory.create_batch(3)
     organization_factory.create_batch(2)
@@ -45,13 +47,13 @@ def test_stats(
     page.goto("/stats")
     doc_screenshot("stats")
 
-    # Show charts section
     charts = page.locator(".stats-charts")
     if charts.is_visible():
         charts.scroll_into_view_if_needed()
         doc_screenshot("stats-charts")
 
 
+@pytest.mark.usefixtures("clean_index")
 def test_primer(
     doc_screenshot: Any,
     page: Page,
@@ -60,12 +62,10 @@ def test_primer(
     locator: ElementLocator,
 ):
     """Test development primer page (style guide)."""
-    # Primer is usually only available in debug mode or to admins
     login(sysadmin["name"])
     page.goto("/development/primer")
     doc_screenshot("primer")
 
-    # Show components section
     components = page.locator(".component-list")
     if components.is_visible():
         components.scroll_into_view_if_needed()

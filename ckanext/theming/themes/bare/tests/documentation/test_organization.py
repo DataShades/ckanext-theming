@@ -3,9 +3,11 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
+from faker import Faker
 from playwright.sync_api import Page
 
 from ckan import types
+from ckan.tests.helpers import call_action
 
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
@@ -14,23 +16,23 @@ from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 def test_index(
     doc_screenshot: Any,
     page: Page,
-    group_factory: types.TestFactory,
+    organization_factory: types.TestFactory,
     sysadmin: dict[str, Any],
     login: Any,
     locator: ElementLocator,
 ):
     """Test organization list page."""
-    group_factory.create_batch(3, is_organization=True)
+    organization_factory.create_batch(3)
     page.goto("/organization")
     doc_screenshot("organization-index")
 
-    # Test with search
     page.goto("/organization?q=nonexistent")
     doc_screenshot("organization-index-search-empty")
 
-    # Test with add button (logged in)
     login(sysadmin["name"])
     page.goto("/organization")
+    button = locator.locate_add_organization_button()
+    button.scroll_into_view_if_needed()
     doc_screenshot("organization-index-with-add-button")
 
 
@@ -47,24 +49,23 @@ def test_read(
     """Test organization read page."""
     package_factory.create_batch(3, owner_org=organization["id"])
 
+    main = locator.locate_main_content()
+    sidebar = locator.locate_sidebar()
+
     page.goto("/organization/" + organization["name"])
     doc_screenshot("organization-read")
 
-    # Show datasets section
-    datasets = page.get_by_text("Datasets")
+    datasets = page.get_by_text("datasets")
     datasets.scroll_into_view_if_needed()
-    doc_screenshot("organization-read-datasets")
+    doc_screenshot("organization-read-datasets", clip=main.bounding_box())
 
-    # Show sidebar info
-    sidebar = locator.locate_sidebar()
     doc_screenshot("organization-read-sidebar", clip=sidebar.bounding_box())
 
-    # Logged in view
     login(sysadmin["name"])
     page.reload()
-    edit_btn = locator.locate_edit_organization_button()
-    edit_btn.scroll_into_view_if_needed()
-    doc_screenshot("organization-read-edit-button")
+    button = locator.locate_edit_organization_button()
+    button.scroll_into_view_if_needed()
+    doc_screenshot("organization-read-edit-button", clip=main.bounding_box())
 
 
 @pytest.mark.usefixtures("clean_index")
@@ -72,9 +73,6 @@ def test_about(
     doc_screenshot: Any,
     page: Page,
     organization: dict[str, Any],
-    sysadmin: dict[str, Any],
-    login: Any,
-    locator: ElementLocator,
 ):
     """Test organization about page."""
     page.goto("/organization/about/" + organization["name"])
@@ -87,17 +85,14 @@ def test_new(
     page: Page,
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
+    faker: Faker,
 ):
     """Test organization creation page."""
     login(sysadmin["name"])
     page.goto("/organization/new")
-    doc_screenshot("organization-new-empty")
-
-    # Fill in basic fields
-    page.fill("input[name='title']", "Test Organization")
-    page.fill("textarea[name='description']", "This is a test organization")
-    doc_screenshot("organization-new-filled")
+    page.fill("input[name='title']", faker.company())
+    page.fill("textarea[name='description']", faker.paragraph())
+    doc_screenshot("organization-new-form")
 
 
 @pytest.mark.usefixtures("clean_index")
@@ -107,14 +102,12 @@ def test_edit(
     organization: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test organization edit page."""
     login(sysadmin["name"])
     page.goto("/organization/edit/" + organization["name"])
     doc_screenshot("organization-edit-form")
 
-    # Show delete section
     delete_section = page.locator(".delete-section")
     if delete_section.is_visible():
         delete_section.scroll_into_view_if_needed()
@@ -129,22 +122,15 @@ def test_members(
     user: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test organization members page."""
-    # Add a member first
-    login(sysadmin["name"])
-    page.goto("/organization/member_new/" + organization["name"])
-    page.fill("input[name='username']", user["name"])
-    page.select_option("select[name='role']", "member")
-    page.click("button[type='submit']")
+    call_action("organization_member_create", {"user": sysadmin["name"]},
+                id=organization["id"], username=user["name"], role="member")
 
     page.goto("/organization/members/" + organization["name"])
     doc_screenshot("organization-members")
 
-    # Test empty state
-    empty_org = user["name"] + "-empty-org"
-    page.goto("/organization/members/" + empty_org)
+    page.goto("/organization/members/nonexistent")
     doc_screenshot("organization-members-empty")
 
 
@@ -155,14 +141,12 @@ def test_member_new(
     organization: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test organization add member page."""
     login(sysadmin["name"])
     page.goto("/organization/member_new/" + organization["name"])
     doc_screenshot("organization-member-new")
 
-    # Show role descriptions
     role_help = page.locator(".role-help")
     if role_help.is_visible():
         role_help.scroll_into_view_if_needed()
@@ -177,16 +161,12 @@ def test_manage_members(
     user: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test organization manage members page."""
-    # Add a member first
-    login(sysadmin["name"])
-    page.goto("/organization/member_new/" + organization["name"])
-    page.fill("input[name='username']", user["name"])
-    page.select_option("select[name='role']", "member")
-    page.click("button[type='submit']")
+    call_action("organization_member_create", {"user": sysadmin["name"]},
+                id=organization["id"], username=user["name"], role="member")
 
+    login(sysadmin["name"])
     page.goto("/organization/member_manage/" + organization["name"])
     doc_screenshot("organization-manage-members")
 
@@ -197,16 +177,12 @@ def test_admins(
     page: Page,
     organization: dict[str, Any],
     sysadmin: dict[str, Any],
-    login: Any,
-    locator: ElementLocator,
 ):
     """Test organization administrators page."""
     page.goto("/organization/admins/" + organization["name"])
     doc_screenshot("organization-admins")
 
-    # Test empty state
-    empty_org = sysadmin["name"] + "-empty-org"
-    page.goto("/organization/admins/" + empty_org)
+    page.goto("/organization/admins/nonexistent")
     doc_screenshot("organization-admins-empty")
 
 
@@ -217,9 +193,15 @@ def test_activity(
     organization: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
+    faker: Faker,
 ):
     """Test organization activity stream page."""
+    login(sysadmin["name"])
+    call_action("organization_patch", {"user": sysadmin["name"]},
+                id=organization["id"], title=faker.company())
+    call_action("organization_patch", {"user": sysadmin["name"]},
+                id=organization["id"], description=faker.paragraph())
+
     page.goto("/organization/activity/" + organization["name"])
     doc_screenshot("organization-activity")
 
@@ -231,14 +213,12 @@ def test_changes(
     organization: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
+    faker: Faker,
 ):
     """Test organization changes page."""
-    # Make a change first
     login(sysadmin["name"])
-    page.goto("/organization/edit/" + organization["name"])
-    page.fill("textarea[name='description']", "Updated description")
-    page.click("button[type='submit']")
+    call_action("organization_patch", {"user": sysadmin["name"]},
+                id=organization["id"], description=faker.paragraph())
 
     page.goto("/organization/changes/" + organization["name"])
     doc_screenshot("organization-changes")
@@ -269,7 +249,6 @@ def test_confirm_delete(
     organization: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test organization delete confirmation page."""
     login(sysadmin["name"])
@@ -285,21 +264,21 @@ def test_confirm_delete_member(
     user: dict[str, Any],
     sysadmin: dict[str, Any],
     login: Any,
-    locator: ElementLocator,
 ):
     """Test organization delete member confirmation page."""
-    # Add a member first
-    login(sysadmin["name"])
-    page.goto("/organization/member_new/" + organization["name"])
-    page.fill("input[name='username']", user["name"])
-    page.select_option("select[name='role']", "member")
-    page.click("button[type='submit']")
+    call_action("organization_member_create", {"user": sysadmin["name"]},
+                id=organization["id"], username=user["name"], role="member")
 
+    login(sysadmin["name"])
     page.goto("/organization/member_delete/" + organization["name"])
     doc_screenshot("organization-confirm-delete-member")
 
 
 class ElementLocatorOrg(ElementLocator):
+    def locate_add_organization_button(self):
+        """Locate the 'Add Organization' button."""
+        return self.page.get_by_role("link", name="Add Organization")
+
     def locate_edit_organization_button(self):
         """Locate the 'Edit' button on organization page."""
         return self.page.get_by_role("link", name="Edit")

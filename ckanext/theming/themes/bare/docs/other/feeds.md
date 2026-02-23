@@ -38,8 +38,8 @@ HTMX enables:
 Configure HTMX behavior through attributes:
 
 ```html
-<form hx-get="/dataset/search" 
-      hx-target="#search-results" 
+<form hx-get="/dataset/search"
+      hx-target="#search-results"
       hx-swap="outerHTML">
 ```
 
@@ -58,7 +58,7 @@ Show loading indicators during search:
 Configure when search triggers:
 
 ```html
-<input name="q" 
+<input name="q"
        hx-trigger="input changed delay:500ms" />
 ```
 
