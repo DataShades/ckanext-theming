@@ -1116,7 +1116,7 @@ ID attributes, allowing you to obfuscate the value in a reproducible manner.</p>
 </code></pre></div>
 <h3 id="request-scoped-data-storage">Request-Scoped Data Storage</h3>
 <p>Data can be stored during a request using <code>ui.util.keep_item()</code> and retrieved
-later with <code>ui.util.pop_items()</code> or <code>ui.util.get_items()</code>:</p>
+later with <code>ui.util.pop_items()</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="c">{# Store a notification message anywhere in the template #}</span>
 <span class="cp">{{</span> <span class="nv">ui.util.keep_item</span><span class="o">(</span>
     <span class="s2">&quot;notifications&quot;</span><span class="o">,</span>
@@ -1133,7 +1133,7 @@ later with <code>ui.util.pop_items()</code> or <code>ui.util.get_items()</code>:
 <p>This pattern is particularly useful for "pushing" chunks of data (like toast
 messages, alerts, or metadata) throughout templates without concerning yourself
 about the actual rendering location, then collecting and rendering them
-together at the appropriate place in the layout.</p>
+together at the appropriate place further in the layout.</p>
 <h2 id="icon-normalization">Icon Normalization</h2>
 <p>Icons can be normalized using <code>ui.util.icon()</code> which maps commpon icon names to
 their corresponding names in the theme's icon set:</p>
