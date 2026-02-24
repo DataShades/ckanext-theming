@@ -160,8 +160,6 @@ nav:
     - other/index.md
     - other/error-pages.md
     - other/stats.md
-    - other/feeds.md
-    - other/htmx-search.md
 
 extra:
     vars:

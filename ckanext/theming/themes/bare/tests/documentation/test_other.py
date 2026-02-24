@@ -6,9 +6,6 @@ import pytest
 from playwright.sync_api import Page
 
 from ckan import types
-from ckan.tests.helpers import call_action
-
-from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
 def test_error_404(
@@ -46,36 +43,3 @@ def test_stats(
 
     page.goto("/stats")
     doc_screenshot("stats")
-
-    charts = page.locator(".stats-charts")
-    if charts.is_visible():
-        charts.scroll_into_view_if_needed()
-        doc_screenshot("stats-charts")
-
-
-@pytest.mark.usefixtures("clean_index")
-def test_primer(
-    doc_screenshot: Any,
-    page: Page,
-    sysadmin: dict[str, Any],
-    login: Any,
-    locator: ElementLocator,
-):
-    """Test development primer page (style guide)."""
-    login(sysadmin["name"])
-    page.goto("/development/primer")
-    doc_screenshot("primer")
-
-    components = page.locator(".component-list")
-    if components.is_visible():
-        components.scroll_into_view_if_needed()
-        doc_screenshot("primer-components")
-
-
-class ElementLocatorOther(ElementLocator):
-    pass
-
-
-@pytest.fixture
-def locator(page: Page):
-    return ElementLocatorOther(page)
