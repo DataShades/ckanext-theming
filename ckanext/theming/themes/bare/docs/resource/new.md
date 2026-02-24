@@ -1,14 +1,18 @@
-# New Resource Page
+# Resource
 
 Add a new resource to a dataset.
 
 ## Overview
 
 The new resource page provides:
+
 - File upload functionality
 - URL linking option
 - Resource metadata form
-- File preview
+
+/// admonition | Screenshots
+![link](../screenshots/resource-new.jpeg)
+///
 
 ## URL Pattern
 
@@ -20,12 +24,12 @@ POST /dataset/{id}/resource/new
 **Examples:**
 ```
 <<vars.site_url>>/dataset/annual-report/resource/new
-<<vars.site_url>>/dataset/5f7f7d1e/resource/new
 ```
 
 ## Purpose
 
 Allows users to:
+
 - Upload data files
 - Link to external resources
 - Add API endpoints
@@ -33,43 +37,23 @@ Allows users to:
 
 ## Actions Available
 
-| Action | Description | Element |
-|--------|-------------|---------|
-| Upload file | Select file to upload | File input |
-| Link to URL | Provide external URL | URL input |
-| Enter metadata | Describe resource | Form fields |
-| Preview | View file preview | Preview area |
-| Save | Add resource | Submit button |
+| Action        | Description              |
+|---------------|--------------------------|
+| Upload file   | Select file to upload    |
+| Link to URL   | Provide external URL     |
+| Enter metadata| Describe resource        |
+| Save          | Add resource             |
 
-## Templates
+## Resource Types
 
-**Files:**
-- `templates/package/new_resource.html` - Main form
-- `templates/package/new_resource_not_draft.html` - For published datasets
-- `templates/package/snippets/resource_form.html` - Resource form snippet
-
-### Resource Types
-
-1. **File Upload** - Direct file upload to CKAN
-2. **Remote URL** - Link to external file
-3. **API Endpoint** - API access URL
-
-### Form Fields
-
-- Name/Title
-- Description
-- Format (auto-detected for uploads)
-- URL (for remote resources)
-- License
-- Additional metadata
-
-## Screenshot Placeholder
-
-![New Resource](../screenshots/dataset-new-resource.png)
-*Placeholder: Resource creation form with upload*
+| Type        | Description              |
+|-------------|--------------------------|
+| File Upload | Direct file upload       |
+| Remote URL  | Link to external file    |
+| API         | API endpoint URL         |
 
 ## Related Pages
 
-- [Dataset Resources](resources.md) - Manage resources
-- [Resource Edit](../resource/edit.md) - Edit resource
-- [Dataset Edit](edit.md) - Edit dataset
+- [Dataset Resources](../dataset/resources.md) - Manage resources
+- [Resource Edit](edit.md) - Edit resource
+- [Resource Read](read.md) - View resource

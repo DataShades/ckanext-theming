@@ -1,5 +1,4 @@
-
-# Group Manage Members Page
+# Manage Members
 
 Bulk management of group members.
 

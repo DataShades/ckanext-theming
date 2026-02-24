@@ -1,5 +1,4 @@
-
-# User Register Page
+# Register
 
 Create a new user account.
 
@@ -13,13 +12,7 @@ Registration page provides:
 
 /// admonition | Screenshots
 
-/// tab | Empty form
-![empty](../screenshots/user-register-empty.jpeg)
-///
-
-/// tab | Filled form
-![filled](../screenshots/user-register-filled.jpeg)
-///
+![empty](../screenshots/user-register-form.jpeg)
 
 ///
 

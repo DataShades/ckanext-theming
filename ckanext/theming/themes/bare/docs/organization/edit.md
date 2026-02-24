@@ -1,5 +1,4 @@
-
-# Organization Edit Page
+# Edit
 
 Form for editing existing organizations in CKAN.
 
@@ -14,13 +13,7 @@ The organization edit page provides:
 
 /// admonition | Screenshots
 
-/// tab | Edit form
 ![form](../screenshots/organization-edit-form.jpeg)
-///
-
-/// tab | Delete section
-![delete](../screenshots/organization-edit-delete-section.jpeg)
-///
 
 ///
 
@@ -34,7 +27,6 @@ POST /organization/edit/{id}
 **Examples:**
 ```
 <<vars.site_url>>/organization/edit/environmental-protection-agency
-<<vars.site_url>>/organization/edit/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose

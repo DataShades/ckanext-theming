@@ -1,5 +1,4 @@
-
-# Resource Edit Page
+# Edit
 
 Edit resource metadata.
 
@@ -22,6 +21,12 @@ Resource edit page provides:
 GET /dataset/{id}/resource/{resource_id}/edit
 POST /dataset/{id}/resource/{resource_id}/edit
 ```
+
+**Examples:**
+```
+<<vars.site_url>>/dataset/annual-report/resource/123-abc/edit
+```
+
 
 ## Purpose
 

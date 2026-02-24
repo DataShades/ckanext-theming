@@ -1,5 +1,4 @@
-
-# User Organizations Page
+# Organizations
 
 View organizations a user belongs to.
 

@@ -1,4 +1,4 @@
-# Home Page
+# Home
 
 The main landing page of the CKAN portal, serving as the entry point for
 visitors.

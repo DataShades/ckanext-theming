@@ -1,6 +1,4 @@
-
-
-# Group Delete Confirmation Page
+# Delete Confirmation
 
 Confirm deletion of a group.
 

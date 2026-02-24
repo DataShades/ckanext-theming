@@ -1,5 +1,5 @@
 
-# Organization Delete Confirmation Page
+# Delete Confirmation
 
 Confirm deletion of an organization.
 

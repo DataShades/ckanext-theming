@@ -1,4 +1,4 @@
-# Dataset Edit Page
+# Edit
 
 The form for editing existing datasets in CKAN.
 

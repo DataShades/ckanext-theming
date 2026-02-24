@@ -1,5 +1,4 @@
-
-# Group Administrators Page
+# Administrators
 
 View group administrators.
 

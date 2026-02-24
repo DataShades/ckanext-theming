@@ -1,5 +1,4 @@
-
-# User Profile Page
+# Profile
 
 View a user's public profile and activity.
 
@@ -16,10 +15,6 @@ The user profile page displays:
 
 /// tab | Main view
 ![main](../screenshots/user-read.jpeg)
-///
-
-/// tab | Activity section
-![activity](../screenshots/user-read-activity.jpeg)
 ///
 
 /// tab | Sidebar

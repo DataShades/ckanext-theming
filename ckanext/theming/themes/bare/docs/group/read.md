@@ -1,5 +1,4 @@
-
-# Group Read Page
+# Read
 
 View group details and datasets.
 
@@ -14,17 +13,7 @@ Group read page displays:
 
 /// admonition | Screenshots
 
-/// tab | Main view
 ![main](../screenshots/group-read.jpeg)
-///
-
-/// tab | Datasets section
-![datasets](../screenshots/group-read-datasets.jpeg)
-///
-
-/// tab | Sidebar info
-![sidebar](../screenshots/group-read-sidebar.jpeg)
-///
 
 ///
 
@@ -38,7 +27,6 @@ GET /group/{name}
 **Examples:**
 ```
 <<vars.site_url>>/group/environmental-data
-<<vars.site_url>>/group/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose

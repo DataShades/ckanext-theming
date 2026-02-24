@@ -1,4 +1,3 @@
-
 # Organization Section
 
 This section covers all pages related to organization management in CKAN.
@@ -26,7 +25,6 @@ Organizations in CKAN are used to:
 | [Manage Members](manage-members.md)       | Manage members                 |
 | [Administrators](admins.md)               | View admins                    |
 | [Activity](activity.md)                   | Activity stream                |
-| [Changes](changes.md)                     | Revision history               |
 | [Bulk Process](bulk-process.md)           | Bulk dataset management        |
 
 ## Related Sections

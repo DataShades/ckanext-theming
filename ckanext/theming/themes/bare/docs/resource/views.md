@@ -1,5 +1,4 @@
-
-# Resource Views Management Page
+# Views Management
 
 Manage visualizations for a resource.
 
@@ -10,7 +9,6 @@ Resource views page provides:
 - List of configured views
 - View type selection
 - View configuration
-- View ordering
 
 /// admonition | Screenshots
 ![views](../screenshots/resource-views.jpeg)
@@ -29,8 +27,6 @@ Allows users to:
 
 - Create data visualizations
 - Configure view types
-- Reorder views
-- Enable/disable views
 
 ## Actions Available
 
@@ -39,7 +35,6 @@ Allows users to:
 | View list    | See existing views       |
 | Add view     | Create new view          |
 | Edit view    | Modify view config       |
-| Reorder      | Change view order        |
 
 ## Related Pages
 

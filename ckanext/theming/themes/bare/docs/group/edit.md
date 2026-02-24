@@ -1,5 +1,4 @@
-
-# Group Edit Page
+# Edit
 
 Edit group metadata.
 

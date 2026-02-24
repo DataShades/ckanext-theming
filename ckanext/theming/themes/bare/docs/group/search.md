@@ -1,4 +1,4 @@
-# Group Index Page
+# Index
 
 List and search all group in the CKAN portal.
 
@@ -19,10 +19,6 @@ The group index page provides:
 
 /// tab | Search empty
 ![search empty](../screenshots/group-index-search-empty.jpeg)
-///
-
-/// tab | With add button
-![with add](../screenshots/group-index-with-add-button.jpeg)
 ///
 
 ///

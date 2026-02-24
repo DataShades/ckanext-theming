@@ -1,5 +1,4 @@
-
-# User List Page
+# List
 
 List all registered users.
 

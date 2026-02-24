@@ -98,9 +98,9 @@ nav:
     - resource/read.md
     - resource/new.md
     - resource/edit.md
+    - resource/confirm-delete.md
     - resource/views.md
     - resource/dictionary.md
-    - resource/data.md
   - Organization:
     - organization/index.md
     - organization/search.md
@@ -108,12 +108,13 @@ nav:
     - organization/about.md
     - organization/new.md
     - organization/edit.md
+    - organization/confirm-delete.md
     - organization/members.md
     - organization/member-new.md
     - organization/manage-members.md
+    - organization/confirm-delete-member.md
     - organization/admins.md
     - organization/activity.md
-    - organization/changes.md
     - organization/bulk-process.md
   - Group:
     - group/index.md
@@ -122,12 +123,13 @@ nav:
     - group/about.md
     - group/new.md
     - group/edit.md
+    - group/confirm-delete.md
     - group/members.md
     - group/member-new.md
     - group/manage-members.md
+    - group/confirm-delete-member.md
     - group/admins.md
     - group/activity.md
-    - group/changes.md
     - group/followers.md
   - User:
     - user/index.md

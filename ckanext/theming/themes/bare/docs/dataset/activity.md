@@ -1,4 +1,4 @@
-# Dataset Activity Stream Page
+# Activity Stream
 
 View the activity stream and recent changes for a dataset.
 

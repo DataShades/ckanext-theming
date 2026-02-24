@@ -1,5 +1,4 @@
-
-# Organization Read Page
+# Read
 
 View organization details and browse its datasets.
 
@@ -14,21 +13,7 @@ The organization read page displays:
 
 /// admonition | Screenshots
 
-/// tab | Main view
 ![main](../screenshots/organization-read.jpeg)
-///
-
-/// tab | Datasets section
-![datasets](../screenshots/organization-read-datasets.jpeg)
-///
-
-/// tab | Sidebar info
-![sidebar](../screenshots/organization-read-sidebar.jpeg)
-///
-
-/// tab | Edit button
-![edit](../screenshots/organization-read-edit-button.jpeg)
-///
 
 ///
 
@@ -43,7 +28,6 @@ GET /organization/{id}?page={number}
 **Examples:**
 ```
 <<vars.site_url>>/organization/environmental-protection-agency
-<<vars.site_url>>/organization/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose

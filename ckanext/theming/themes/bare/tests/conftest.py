@@ -145,11 +145,35 @@ class ElementLocator:
         """Locate the "Edit dataset" button."""
         return self.page.get_by_role("link", name="Manage")
 
+    def locate_edit_resource_button(self):
+        """Locate the 'Edit' button on resource page."""
+        return self.page.get_by_role("link", name="Edit")
+
     def locate_follow_button(self):
         """Locate the "Follow" button, which is typically used to follow a dataset or user for updates."""
         follow = self.page.get_by_role("button", name="Follow")
         unfollow = self.page.get_by_role("button", name="Unfollow")
         return follow.or_(unfollow)
+
+    def locate_add_organization_button(self):
+        """Locate the 'Add Organization' button."""
+        return self.page.get_by_role("link", name="Add Organization")
+
+    def locate_edit_organization_button(self):
+        """Locate the 'Edit' button on organization page."""
+        return self.page.get_by_role("link", name="Edit")
+
+    def locate_add_group_button(self):
+        """Locate the 'Add Group' button."""
+        return self.page.get_by_role("link", name="Add Group")
+
+    def locate_edit_group_button(self):
+        """Locate the 'Edit' button on group page."""
+        return self.page.get_by_role("link", name="Edit")
+
+    def locate_edit_user_button(self):
+        """Locate the 'Edit' button on user profile page."""
+        return self.page.get_by_role("link", name="Edit")
 
 
 @pytest.fixture

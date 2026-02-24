@@ -1,4 +1,4 @@
-# Dataset Followers Page
+# Followers
 
 View the list of users following a dataset.
 

@@ -1,5 +1,4 @@
-
-# Group Activity Stream Page
+# Activity Stream
 
 View group activity history.
 
@@ -41,4 +40,3 @@ Allows users to:
 ## Related Pages
 
 - [Group Read](read.md) - Group profile
-- [Group Changes](changes.md) - Revision history

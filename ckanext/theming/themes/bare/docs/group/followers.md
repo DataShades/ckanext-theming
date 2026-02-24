@@ -1,5 +1,4 @@
-
-# Group Followers Page
+# Followers
 
 View group followers.
 

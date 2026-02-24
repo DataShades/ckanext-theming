@@ -1,4 +1,4 @@
-# Dashboard Page
+# Dashboard
 
 Main user dashboard with activity feed.
 

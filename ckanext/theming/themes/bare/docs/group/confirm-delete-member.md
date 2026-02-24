@@ -1,5 +1,4 @@
-
-# Group Delete Member Confirmation Page
+# Delete Member Confirmation
 
 Confirm removal of a member from a group.
 

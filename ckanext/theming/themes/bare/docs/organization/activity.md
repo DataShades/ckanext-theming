@@ -1,5 +1,4 @@
-
-# Organization Activity Stream Page
+# Activity Stream
 
 View the activity stream for an organization.
 
@@ -26,7 +25,6 @@ GET /organization/activity/{id}?offset={number}
 **Examples:**
 ```
 <<vars.site_url>>/organization/activity/environmental-protection-agency
-<<vars.site_url>>/organization/activity/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
@@ -43,12 +41,9 @@ The activity page allows users to:
 | Action          | Description              |
 |-----------------|--------------------------|
 | View activity   | See activity items       |
-| Filter activity | Show specific types      |
 | Load more       | Show older activity      |
-| Subscribe       | Follow organization      |
 
 ## Related Pages
 
 - [Organization Read](read.md) - Main organization page
-- [Organization Changes](changes.md) - Revision history
 - [Dataset Activity](../dataset/activity.md) - Dataset activity

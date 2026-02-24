@@ -1,5 +1,4 @@
-
-# Organization About Page
+# About
 
 View detailed information about an organization.
 
@@ -25,7 +24,6 @@ GET /organization/about/{id}
 **Examples:**
 ```
 <<vars.site_url>>/organization/about/environmental-protection-agency
-<<vars.site_url>>/organization/about/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose

@@ -1,5 +1,4 @@
-
-# User Edit Profile Page
+# Edit Profile
 
 Edit user profile information.
 
@@ -13,13 +12,7 @@ The edit profile page provides:
 
 /// admonition | Screenshots
 
-/// tab | Edit form
 ![form](../screenshots/user-edit.jpeg)
-///
-
-/// tab | Validation errors
-![errors](../screenshots/user-edit-errors.jpeg)
-///
 
 ///
 

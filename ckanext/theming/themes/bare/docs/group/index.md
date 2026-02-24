@@ -1,4 +1,3 @@
-
 # Group Section
 
 This section covers all pages related to group management in CKAN.
@@ -26,7 +25,6 @@ Groups in CKAN are used to:
 | [Manage Members](manage-members.md)       | Manage members                 |
 | [Administrators](admins.md)               | View admins                    |
 | [Activity](activity.md)                   | Activity stream                |
-| [Changes](changes.md)                     | Revision history               |
 | [Followers](followers.md)                 | Group followers                |
 
 ## Related Sections

@@ -1,5 +1,4 @@
-
-# Organization Add Member Page
+# Add Member
 
 Add a new member to an organization.
 
@@ -13,13 +12,7 @@ The add member page provides:
 
 /// admonition | Screenshots
 
-/// tab | Add member form
 ![form](../screenshots/organization-member-new.jpeg)
-///
-
-/// tab | Role help
-![help](../screenshots/organization-member-new-role-help.jpeg)
-///
 
 ///
 
@@ -33,7 +26,6 @@ POST /organization/member_new/{id}
 **Examples:**
 ```
 <<vars.site_url>>/organization/member_new/environmental-protection-agency
-<<vars.site_url>>/organization/member_new/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose

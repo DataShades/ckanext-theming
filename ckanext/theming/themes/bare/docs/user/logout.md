@@ -1,5 +1,4 @@
-
-# User Logout Page
+# Logout
 
 End user session and logout.
 

@@ -1,4 +1,4 @@
-# Dataset Create Page
+# Create
 
 The form for creating new datasets in CKAN.
 

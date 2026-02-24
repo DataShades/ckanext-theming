@@ -1,4 +1,4 @@
-# Data Dictionary Page
+# Data Dictionary
 
 Define and manage field metadata for tabular resources.
 
@@ -13,13 +13,7 @@ Data dictionary page provides:
 
 /// admonition | Screenshots
 
-/// tab | Dictionary
 ![dictionary](../screenshots/resource-dictionary.jpeg)
-///
-
-/// tab | Fields
-![fields](../screenshots/resource-dictionary-fields.jpeg)
-///
 
 ///
 
@@ -49,6 +43,5 @@ Allows users to:
 
 ## Related Pages
 
-- [Resource Data](data.md) - Resource data
 - [Resource Views](views.md) - Data visualizations
 - [Resource Read](read.md) - View resource

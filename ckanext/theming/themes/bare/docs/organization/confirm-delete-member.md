@@ -1,5 +1,5 @@
 
-# Organization Delete Member Confirmation Page
+# Delete Member Confirmation
 
 Confirm removal of a member from an organization.
 

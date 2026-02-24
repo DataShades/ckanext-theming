@@ -1,5 +1,4 @@
-
-# User Groups Page
+# Groups
 
 View groups a user belongs to.
 

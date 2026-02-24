@@ -1,4 +1,4 @@
-# Admin Config Page
+# Config
 
 Site configuration management.
 

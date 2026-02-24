@@ -1,5 +1,4 @@
-
-# Admin Reset Configuration Page
+# Reset Configuration
 
 Confirm reset of site configuration to defaults.
 

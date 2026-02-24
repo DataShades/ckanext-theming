@@ -1,12 +1,12 @@
 {
     "data": {
         "activity": {"id": "123"},
-        "resource": {"id": "123"},
-        "resource_view": {"id": "123"},
-        "package": {"id": "123", "name": "123"},
-        "group": {"id": "123", "name": "123"},
-        "organization": {"id": "123", "name": "123"},
-        "user": {"id": "123", "name": "default"}
+        "resource": {"id": "ed861eb1-92b4-4edf-a175-ec5e6070d4af"},
+        "resource_view": {"id": "1dc4cbba-7028-4ef9-9aa3-3e273ed1ca10"},
+        "package": {"id": "46cc4b8f-5f9f-4e2d-a575-aba4d49d5fed", "name": "new-dataset"},
+        "group": {"id": "4321c80b-9772-4d27-a1a4-ea838542e930", "name": "group-qkpz-8942-dczs"},
+        "organization": {"id": "451df84a-9897-4342-99c3-7f912172fc86", "name": "organization-kobc-3255-qqep"},
+        "user": {"id": "sergey", "name": "sergey"}
     },
     "ignore": [
         "static",

@@ -1,5 +1,4 @@
-
-# User Login Page
+# Login
 
 User authentication page for logging into CKAN.
 

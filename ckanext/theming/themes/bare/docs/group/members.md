@@ -1,5 +1,4 @@
-
-# Group Members Page
+# Members
 
 View group members.
 

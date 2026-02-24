@@ -1,5 +1,4 @@
-
-# Organization Create Page
+# Create
 
 Form for creating new organizations in CKAN.
 
@@ -13,13 +12,7 @@ The organization create page provides:
 
 /// admonition | Screenshots
 
-/// tab | Empty form
-![empty](../screenshots/organization-new-empty.jpeg)
-///
-
-/// tab | Filled form
-![filled](../screenshots/organization-new-filled.jpeg)
-///
+![empty](../screenshots/organization-new-form.jpeg)
 
 ///
 

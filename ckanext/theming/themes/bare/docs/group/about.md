@@ -1,5 +1,4 @@
-
-# Group About Page
+# About
 
 View detailed information about a group.
 

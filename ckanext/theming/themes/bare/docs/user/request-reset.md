@@ -1,5 +1,4 @@
-
-# Password Reset Request Page
+# Request Password Reset
 
 Request password reset email.
 

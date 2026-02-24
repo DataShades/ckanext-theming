@@ -1,5 +1,4 @@
-
-# User Followers Page
+# Followers
 
 View users following a specific user.
 

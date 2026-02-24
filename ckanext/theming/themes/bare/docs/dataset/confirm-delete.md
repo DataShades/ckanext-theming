@@ -1,4 +1,4 @@
-# Dataset Delete Confirmation Page
+# Delete Confirmation
 
 Confirm deletion of a dataset.
 

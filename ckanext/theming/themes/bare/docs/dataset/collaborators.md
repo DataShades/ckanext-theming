@@ -1,4 +1,4 @@
-# Dataset Collaborators Page
+# Collaborators
 
 Manage dataset collaborators who have special permissions.
 

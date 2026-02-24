@@ -1,5 +1,4 @@
-
-# Group Add Member Page
+# Add Member
 
 Add a new member to a group.
 

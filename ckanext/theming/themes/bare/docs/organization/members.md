@@ -1,5 +1,4 @@
-
-# Organization Members Page
+# Members
 
 View and manage organization members.
 
@@ -14,13 +13,7 @@ The members page displays:
 
 /// admonition | Screenshots
 
-/// tab | Members list
 ![list](../screenshots/organization-members.jpeg)
-///
-
-/// tab | Empty state
-![empty](../screenshots/organization-members-empty.jpeg)
-///
 
 ///
 
@@ -33,7 +26,6 @@ GET /organization/members/{id}
 **Examples:**
 ```
 <<vars.site_url>>/organization/members/environmental-protection-agency
-<<vars.site_url>>/organization/members/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose

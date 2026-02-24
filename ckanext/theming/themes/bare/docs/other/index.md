@@ -17,6 +17,8 @@ Other pages include:
 |-----------------------------------|--------------------------------|
 | [Error Pages](error-pages.md)     | 404, 403, 500 errors           |
 | [Stats](stats.md)                 | Site statistics                |
+| [Feeds](feeds.md)                 | RSS/Atom feeds                 |
+| [HTMX Search](htmx-search.md)     | Dynamic search components      |
 | [Primer](primer.md)               | Style guide                    |
 
 ## Related Sections

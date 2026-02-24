@@ -1,5 +1,4 @@
-
-# User API Tokens Page
+# API Tokens
 
 Manage API access tokens.
 

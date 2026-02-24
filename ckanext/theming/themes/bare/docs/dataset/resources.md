@@ -1,4 +1,4 @@
-# Dataset Resources Management Page
+# Resources Management
 
 Manage the resources associated with a dataset.
 

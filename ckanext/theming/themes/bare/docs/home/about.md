@@ -1,4 +1,4 @@
-# About Page
+# About
 
 The about page provides information about the CKAN instance and the organization behind it.
 

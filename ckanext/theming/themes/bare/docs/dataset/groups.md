@@ -1,4 +1,4 @@
-# Dataset Groups Page
+# Groups
 
 View and manage the groups associated with a dataset.
 

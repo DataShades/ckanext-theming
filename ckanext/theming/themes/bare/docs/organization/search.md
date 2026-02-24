@@ -1,4 +1,4 @@
-# Organization Index Page
+# Index
 
 List and search all organizations in the CKAN portal.
 
@@ -19,10 +19,6 @@ The organization index page provides:
 
 /// tab | Search empty
 ![search empty](../screenshots/organization-index-search-empty.jpeg)
-///
-
-/// tab | With add button
-![with add](../screenshots/organization-index-with-add-button.jpeg)
 ///
 
 ///

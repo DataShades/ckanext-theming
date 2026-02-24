@@ -1,4 +1,4 @@
-# Dashboard Content Pages
+# Content
 
 Dashboard sub-pages for managing user content.
 

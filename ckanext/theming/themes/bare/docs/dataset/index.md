@@ -10,21 +10,22 @@ Datasets (packages) are the core content type in CKAN. This section includes pag
 - Viewing dataset details
 - Creating and editing datasets
 - Managing dataset resources
-- Viewing dataset history and activity
+- Viewing dataset activity
 
 ## Pages in This Section
 
-| Page                                | Description                  |
-|-------------------------------------|------------------------------|
-| [Search](search.md)                 | Search and filter datasets   |
-| [Read](read.md)                     | View dataset details         |
-| [Create](new.md)                    | Create new dataset           |
-| [Edit](edit.md)                     | Edit dataset metadata        |
-| [Activity](activity.md)             | Dataset activity stream      |
-| [Followers](followers.md)           | Dataset followers list       |
-| [Groups](groups.md)                 | Dataset group associations   |
-| [Resources](resources.md)           | Manage dataset resources     |
-
+| Page                                      | Description                    |
+|-------------------------------------------|--------------------------------|
+| [Search](search.md)                       | Search and filter datasets     |
+| [Read](read.md)                           | View dataset details           |
+| [Create](new.md)                          | Create new dataset             |
+| [Edit](edit.md)                           | Edit dataset metadata          |
+| [Activity](activity.md)                   | Dataset activity stream        |
+| [Followers](followers.md)                 | Dataset followers list         |
+| [Groups](groups.md)                       | Dataset group associations     |
+| [Collaborators](collaborators.md)         | Dataset collaborators          |
+| [Resources](resources.md)                 | Manage dataset resources       |
+| [Delete Confirm](confirm-delete.md)       | Delete dataset confirmation    |
 
 ## Related Sections
 

@@ -1,4 +1,4 @@
-# Password Reset Perform Page
+# Perform Password Reset
 
 Set new password with reset key.
 

@@ -1,4 +1,4 @@
-# Admin Trash Page
+# Trash
 
 Purge deleted items from the system.
 

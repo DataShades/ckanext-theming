@@ -1,4 +1,4 @@
-# User Confirm Delete Page
+# Confirm Delete
 
 Confirm deletion of a user account.
 

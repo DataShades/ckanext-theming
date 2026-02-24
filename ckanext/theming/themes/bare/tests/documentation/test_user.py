@@ -62,15 +62,10 @@ def test_read(
     """Test user profile page."""
     package_factory.create_batch(3, user_id=user["id"])
 
-    main = locator.locate_main_content()
     sidebar = locator.locate_sidebar()
 
     page.goto("/user/" + user["name"])
     doc_screenshot("user-read")
-
-    activity = page.get_by_text("activity stream")
-    activity.scroll_into_view_if_needed()
-    doc_screenshot("user-read-activity", clip=main.bounding_box())
 
     doc_screenshot("user-read-sidebar", clip=sidebar.bounding_box())
 
@@ -94,10 +89,6 @@ def test_edit(
     page.goto("/user/edit")
     doc_screenshot("user-edit")
 
-    page.fill("input[name='email']", "invalid-email")
-    page.click("button[type='submit']")
-    doc_screenshot("user-edit-errors", full_page=False)
-
 
 def test_activity(
     doc_screenshot: Any,
@@ -109,8 +100,7 @@ def test_activity(
 ):
     """Test user activity stream page."""
     login(user["name"])
-    call_action("package_create", {"user": user["name"]},
-                name=faker.slug(), title=faker.sentence())
+    call_action("package_create", {"user": user["name"]}, name=faker.slug(), title=faker.sentence())
 
     page.goto("/user/activity/" + user["name"])
     doc_screenshot("user-activity")
@@ -237,14 +227,3 @@ def test_confirm_delete(
     login(sysadmin["name"])
     page.goto("/user/delete/" + user["name"])
     doc_screenshot("user-confirm-delete")
-
-
-class ElementLocatorUser(ElementLocator):
-    def locate_edit_user_button(self):
-        """Locate the 'Edit' button on user profile page."""
-        return self.page.get_by_role("link", name="Edit")
-
-
-@pytest.fixture
-def locator(page: Page):
-    return ElementLocatorUser(page)

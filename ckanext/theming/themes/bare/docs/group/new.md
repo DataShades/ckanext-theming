@@ -1,5 +1,4 @@
-
-# Group Create Page
+# Create
 
 Create a new group.
 
@@ -13,13 +12,7 @@ Group create page provides:
 
 /// admonition | Screenshots
 
-/// tab | Empty form
-![empty](../screenshots/group-new-empty.jpeg)
-///
-
-/// tab | Filled form
-![filled](../screenshots/group-new-filled.jpeg)
-///
+![empty](../screenshots/group-new-form.jpeg)
 
 ///
 

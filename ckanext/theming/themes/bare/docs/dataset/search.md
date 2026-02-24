@@ -1,4 +1,4 @@
-# Dataset Search Page
+# Search
 
 The main search and browse interface for discovering datasets in the CKAN portal.
 

@@ -1,5 +1,4 @@
-
-# User Activity
+# Activity
 
 View a user's activity stream.
 
