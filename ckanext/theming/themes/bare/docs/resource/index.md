@@ -1,58 +1,29 @@
-# Dashboard Page
 
-Main user dashboard with activity feed.
+# Resource Section
+
+This section covers pages for managing dataset resources.
 
 ## Overview
 
-Dashboard provides:
+Resource pages handle:
 
-- Personalized activity feed
-- Quick statistics
-- Content management shortcuts
+- Resource viewing and download
+- Resource metadata editing
+- Data visualization
+- Data dictionary management
+- Resource previews
 
-/// admonition | Screenshots
+## Pages in This Section
 
-/// tab | Dashboard
-![dashboard](../screenshots/dashboard.jpeg)
-///
+| Page                              | Description                    |
+|-----------------------------------|--------------------------------|
+| [Read](read.md)                   | View resource                  |
+| [Edit](edit.md)                   | Edit resource                  |
+| [Views](views.md)                 | Manage views                   |
+| [Dictionary](dictionary.md)       | Data dictionary                |
+| [Data](data.md)                   | Resource data                  |
 
-/// tab | Activity feed
-![activity](../screenshots/dashboard-activity.jpeg)
-///
+## Related Sections
 
-///
-
-## URL Pattern
-
-```
-GET /dashboard
-```
-
-**Example:**
-```
-<<vars.site_url>>/dashboard
-```
-
-## Purpose
-
-The dashboard allows users to:
-
-- View recent activity from followed items
-- Access quick actions
-- Monitor notifications
-- Navigate to personal content
-
-## Actions Available
-
-| Action           | Description              |
-|------------------|--------------------------|
-| View activity    | See activity feed        |
-| View datasets    | Go to my datasets        |
-| View orgs        | Go to my organizations   |
-| View groups      | Go to my groups          |
-
-## Related Pages
-
-- [User Profile](../user/read.md) - User profile
-- [User Activity](../user/activity.md) - Activity stream
-- [Dashboard Datasets](content.md) - My datasets
+- [Dataset](../dataset/index.md) - Parent dataset
+- [Admin](../admin/index.md) - System administration

@@ -1,47 +1,53 @@
-# Resource Views Management Page
+# Resource Data Page
 
-Manage visualizations for a resource.
+View and manage resource data processed by Datapusher.
 
 ## Overview
 
-Resource views page provides:
+Resource data page provides:
 
-- List of configured views
-- View type selection
-- View configuration
-- View ordering
+- Data preview
+- DataStore status
+- Push to DataStore option
+- Data dictionary access
 
 /// admonition | Screenshots
-![views](../screenshots/resource-views.jpeg)
+
+/// tab | Data view
+![data](../screenshots/resource-data.jpeg)
+///
+
+/// tab | Push button
+![push](../screenshots/resource-data-push-button.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /dataset/{id}/resource/{resource_id}/views
-GET /dataset/{id}/resource/{resource_id}/views/new
+GET /dataset/{id}/resource/{resource_id}/data
 ```
 
 ## Purpose
 
 Allows users to:
 
-- Create data visualizations
-- Configure view types
-- Reorder views
-- Enable/disable views
+- Preview tabular data
+- Check DataStore status
+- Push data to DataStore
+- Access data dictionary
 
 ## Actions Available
 
-| Action       | Description              |
-|--------------|--------------------------|
-| View list    | See existing views       |
-| Add view     | Create new view          |
-| Edit view    | Modify view config       |
-| Reorder      | Change view order        |
+| Action        | Description              |
+|---------------|--------------------------|
+| Preview data  | View data table          |
+| Push to DS    | Upload to DataStore      |
+| View dictionary | See field definitions  |
 
 ## Related Pages
 
 - [Resource Read](read.md) - View resource
-- [Resource Edit](edit.md) - Edit resource
-- [Dataset Resource Views](../dataset/resource-views.md) - Dataset views
+- [Data Dictionary](dictionary.md) - Field definitions
+- [Resource Views](views.md) - Data visualizations

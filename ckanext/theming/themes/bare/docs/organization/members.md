@@ -1,24 +1,25 @@
-# Organization Edit Page
 
-Form for editing existing organizations in CKAN.
+# Organization Members Page
+
+View and manage organization members.
 
 ## Overview
 
-The organization edit page provides:
+The members page displays:
 
-- Pre-populated form with current values
-- All organization fields
-- Image upload/replace
-- Delete option
+- List of organization members
+- Member roles (admin, member, editor)
+- Member count
+- Add member functionality
 
 /// admonition | Screenshots
 
-/// tab | Edit form
-![form](../screenshots/organization-edit-form.jpeg)
+/// tab | Members list
+![list](../screenshots/organization-members.jpeg)
 ///
 
-/// tab | Delete section
-![delete](../screenshots/organization-edit-delete-section.jpeg)
+/// tab | Empty state
+![empty](../screenshots/organization-members-empty.jpeg)
 ///
 
 ///
@@ -26,36 +27,35 @@ The organization edit page provides:
 ## URL Pattern
 
 ```
-GET /organization/edit/{id}
-POST /organization/edit/{id}
+GET /organization/members/{id}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization/edit/environmental-protection-agency
-<<vars.site_url>>/organization/edit/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/members/environmental-protection-agency
+<<vars.site_url>>/organization/members/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The edit page allows authorized users to:
+The members page allows users to:
 
-- Modify organization details
-- Update logo/image
-- Change contact information
-- Delete organization (if authorized)
+- View all organization members
+- See member roles and permissions
+- Add new members (if authorized)
+- Manage member access
 
 ## Actions Available
 
-| Action           | Description              |
-|------------------|--------------------------|
-| Edit details     | Modify org fields        |
-| Update image     | Change logo              |
-| Delete org       | Remove organization      |
-| View org         | See public view          |
+| Action          | Description              |
+|-----------------|--------------------------|
+| View members    | See member list          |
+| Add member      | Invite new member        |
+| Edit role       | Change member role       |
+| Remove member   | Delete membership        |
 
 ## Related Pages
 
-- [Organization Create](new.md) - Create new organization
-- [Organization Read](read.md) - View organization
-- [Organization Delete](confirm-delete.md) - Delete confirmation
+- [Organization Read](read.md) - Main organization page
+- [Add Member](member-new.md) - Add new member
+- [Manage Members](manage-members.md) - Bulk management

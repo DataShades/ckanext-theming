@@ -1,52 +1,55 @@
-# Organization Changes Page
 
-View the revision history of an organization.
+# Organization Bulk Process Page
+
+Manage all datasets owned by the organization in bulk.
 
 ## Overview
 
-The changes page displays:
+The bulk process page provides:
 
-- Organization revision history
-- Change timestamps
-- Editor information
-- Field-level changes
+- List of all organization datasets
+- Bulk edit capabilities
+- State changes (activate/deactivate)
+- Organization transfer
 
 /// admonition | Screenshots
-![changes](../screenshots/organization-changes.jpeg)
+![bulk](../screenshots/organization-bulk-process.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/changes/{id}
+GET /organization/bulk_process/{id}
+POST /organization/bulk_process/{id}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization/changes/environmental-protection-agency
-<<vars.site_url>>/organization/changes/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/bulk_process/environmental-protection-agency
+<<vars.site_url>>/organization/bulk_process/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The changes page allows users to:
+The bulk process page allows administrators to:
 
-- Track organization modifications
-- View previous versions
-- Compare revisions
-- Understand change history
+- View all organization datasets
+- Select multiple datasets
+- Change dataset states in bulk
+- Transfer ownership
 
 ## Actions Available
 
-| Action            | Description              |
-|-------------------|--------------------------|
-| View revisions    | See change history       |
-| Compare revisions | See differences          |
-| View revision     | See specific version     |
-| Restore revision  | Revert to previous       |
+| Action         | Description              |
+|----------------|--------------------------|
+| Select datasets| Choose for bulk action   |
+| Make public    | Set public state         |
+| Make private   | Set private state        |
+| Delete         | Remove datasets          |
+| Transfer       | Change ownership         |
 
 ## Related Pages
 
 - [Organization Read](read.md) - Main organization page
-- [Organization Activity](activity.md) - Activity stream
-- [Organization Edit](edit.md) - Edit organization
+- [Dataset Edit](../dataset/edit.md) - Edit individual dataset
+- [Dataset Search](../dataset/search.md) - Search datasets

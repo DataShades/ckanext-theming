@@ -1,28 +1,33 @@
-# Organization Index Page
 
-List and search all organizations in the CKAN portal.
+# Organization Read Page
+
+View organization details and browse its datasets.
 
 ## Overview
 
-The organization index page provides:
+The organization read page displays:
 
-- List of all organizations
-- Search functionality
-- Sorting options
-- Pagination
+- Organization profile information
+- Datasets owned by organization
+- Organization statistics
+- Navigation to sub-pages
 
 /// admonition | Screenshots
 
-/// tab | Organization list
-![list](../screenshots/organization-index.jpeg)
+/// tab | Main view
+![main](../screenshots/organization-read.jpeg)
 ///
 
-/// tab | Search empty
-![search empty](../screenshots/organization-index-search-empty.jpeg)
+/// tab | Datasets section
+![datasets](../screenshots/organization-read-datasets.jpeg)
 ///
 
-/// tab | With add button
-![with add](../screenshots/organization-index-with-add-button.jpeg)
+/// tab | Sidebar info
+![sidebar](../screenshots/organization-read-sidebar.jpeg)
+///
+
+/// tab | Edit button
+![edit](../screenshots/organization-read-edit-button.jpeg)
 ///
 
 ///
@@ -30,37 +35,38 @@ The organization index page provides:
 ## URL Pattern
 
 ```
-GET /organization
-GET /organization?q={query}
-GET /organization?sort={field}
+GET /organization/{id}
+GET /organization/{name}
+GET /organization/{id}?page={number}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization
-<<vars.site_url>>/organization?q=environmental
-<<vars.site_url>>/organization?sort=title asc
+<<vars.site_url>>/organization/environmental-protection-agency
+<<vars.site_url>>/organization/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The index page allows users to:
+The read page allows users to:
 
-- Browse all organizations
-- Search for specific organizations
-- Discover dataset owners
+- View organization information
+- Browse organization's datasets
+- Understand organization's role
+- Access organization management
 
 ## Actions Available
 
-| Action              | Description              |
-|---------------------|--------------------------|
-| Search              | Find organizations       |
-| Sort                | Change order             |
-| View organization   | Navigate to org          |
-| Create organization | Add new org              |
+| Action            | Description              |
+|-------------------|--------------------------|
+| View datasets     | Browse org datasets      |
+| Search datasets   | Filter org datasets      |
+| Follow org        | Subscribe to updates     |
+| Edit org          | Modify organization      |
+| View about        | See org details          |
 
 ## Related Pages
 
-- [Organization Read](read.md) - View individual organization
-- [Organization Create](new.md) - Create new organization
-- [Dataset Search](../dataset/search.md) - Search datasets by organization
+- [Organization Index](index.md) - List all organizations
+- [Organization About](about.md) - Organization details
+- [Organization Edit](edit.md) - Edit organization

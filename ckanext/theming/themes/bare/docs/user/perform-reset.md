@@ -1,42 +1,50 @@
-# Password Reset Request Page
+# Password Reset Perform Page
 
-Request password reset email.
+Set new password with reset key.
 
 ## Overview
 
-Request reset page provides:
+Perform reset page provides:
 
-- Email input form
+- New password form
+- Password confirmation
 - Reset instructions
-- Back to login link
 
 /// admonition | Screenshots
-![request reset](../screenshots/user-request-reset.jpeg)
+
+/// tab | Reset form
+![reset](../screenshots/user-perform-reset.jpeg)
+///
+
+/// tab | Invalid key
+![invalid](../screenshots/user-perform-reset-invalid-key.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /user/reset
-POST /user/reset
+GET /user/reset/{key}
+POST /user/reset/{key}
 ```
 
 ## Purpose
 
 Allows users to:
 
-- Request password reset email
-- Recover forgotten passwords
+- Set new password
+- Confirm password match
 - Regain account access
 
 ## Actions Available
 
 | Action        | Description              |
 |---------------|--------------------------|
-| Send email    | Request reset link       |
+| Set password  | Update password          |
 | Cancel        | Go back to login         |
 
 ## Related Pages
 
 - [Login](login.md) - User login
-- [Perform Reset](perform-reset.md) - Set new password
+- [Request Reset](request-reset.md) - Password reset request

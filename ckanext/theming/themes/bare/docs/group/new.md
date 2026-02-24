@@ -1,45 +1,57 @@
-# Group About Page
 
-View detailed information about a group.
+# Group Create Page
+
+Create a new group.
 
 ## Overview
 
-The about page displays:
+Group create page provides:
 
-- Full group description
-- Contact information
-- Group metadata
-- Related links
+- Group information form
+- Image upload
+- Description field
 
 /// admonition | Screenshots
-![about](../screenshots/group-about.jpeg)
+
+/// tab | Empty form
+![empty](../screenshots/group-new-empty.jpeg)
+///
+
+/// tab | Filled form
+![filled](../screenshots/group-new-filled.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /group/about/{id}
+GET /group/new
+POST /group/new
+```
+
+**Example:**
+```
+<<vars.site_url>>/group/new
 ```
 
 ## Purpose
 
-The about page allows users to:
+Allows users to:
 
-- Learn about the group
-- View contact details
-- Understand group's purpose
-- Access related resources
+- Create thematic collections
+- Categorize datasets
+- Build communities
 
 ## Actions Available
 
 | Action        | Description              |
 |---------------|--------------------------|
-| View details  | Read group information   |
-| Edit group    | Modify details           |
-| Back to group | Return to main page      |
+| Enter details | Fill group form          |
+| Upload image  | Add group logo           |
+| Save          | Create group             |
 
 ## Related Pages
 
-- [Group Read](read.md) - Main group page
 - [Group Edit](edit.md) - Edit group
 - [Group Index](index.md) - Group list

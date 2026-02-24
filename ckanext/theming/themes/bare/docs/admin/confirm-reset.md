@@ -1,57 +1,45 @@
-# Admin Panel Page
 
-Main administration dashboard.
+# Admin Reset Configuration Page
+
+Confirm reset of site configuration to defaults.
 
 ## Overview
 
-The admin panel provides:
+Reset confirmation page:
 
-- System overview
-- Quick links to admin tools
-- System statistics
-- Administrator list
+- Final verification
+- Lists items to be reset
+- Warns about data loss
 
 /// admonition | Screenshots
-
-/// tab | Admin panel
-![panel](../screenshots/admin-index.jpeg)
-///
-
-/// tab | Admin tools
-![tools](../screenshots/admin-index-tools.jpeg)
-///
-
+![confirm reset](../screenshots/admin-confirm-reset.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /ckan-admin
-```
-
-**Example:**
-```
-<<vars.site_url>>/ckan-admin
+GET /ckan-admin/reset_config
+POST /ckan-admin/reset_config
 ```
 
 ## Purpose
 
-The admin panel allows sysadmins to:
+Resets configuration:
 
-- View system status
-- Access admin tools
-- Manage site configuration
-- Monitor system health
+- Site title
+- Site description
+- Logo
+- Custom CSS
+- All configurable items
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| View config   | Edit site settings       |
-| Manage trash  | Purge deleted items      |
-| View sysadmins| See administrators       |
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm reset   | Reset to defaults        |
+| Cancel          | Keep current settings    |
 
 ## Related Pages
 
-- [Config](config.md) - Site configuration
-- [Trash](trash.md) - Purge deleted items
+- [Admin Config](config.md) - Site configuration
+- [Admin Panel](index.md) - Admin dashboard

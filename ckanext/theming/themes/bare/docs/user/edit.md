@@ -1,32 +1,24 @@
-# User Profile Page
 
-View a user's public profile and activity.
+# User Edit Profile Page
+
+Edit user profile information.
 
 ## Overview
 
-The user profile page displays:
+The edit profile page provides:
 
-- User information (name, bio, etc.)
-- User statistics
-- Recent activity
-- Social links
+- Profile information form
+- Password change
+- Image upload
 
 /// admonition | Screenshots
 
-/// tab | Main view
-![main](../screenshots/user-read.jpeg)
+/// tab | Edit form
+![form](../screenshots/user-edit.jpeg)
 ///
 
-/// tab | Activity section
-![activity](../screenshots/user-read-activity.jpeg)
-///
-
-/// tab | Sidebar
-![sidebar](../screenshots/user-read-sidebar.jpeg)
-///
-
-/// tab | Follow button
-![follow](../screenshots/user-read-follow-button.jpeg)
+/// tab | Validation errors
+![errors](../screenshots/user-edit-errors.jpeg)
 ///
 
 ///
@@ -34,36 +26,32 @@ The user profile page displays:
 ## URL Pattern
 
 ```
-GET /user/{id}
-GET /user/{name}
+GET /user/edit
+POST /user/edit
 ```
 
-**Examples:**
+**Example:**
 ```
-<<vars.site_url>>/user/john-doe
-<<vars.site_url>>/user/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/user/edit
 ```
 
 ## Purpose
 
-The profile page allows users to:
+The edit page allows users to:
 
-- View user information
-- See user's public activity
-- Follow/unfollow user
-- Navigate to user's content
+- Update profile information
+- Change password
+- Upload profile image
 
 ## Actions Available
 
 | Action        | Description              |
 |---------------|--------------------------|
-| View info     | Read user details        |
-| Follow        | Subscribe to updates     |
-| View activity | See activity feed        |
-| View datasets | See user's datasets      |
+| Edit profile  | Modify user fields       |
+| Change password | Update password        |
+| Upload image  | Change profile picture   |
 
 ## Related Pages
 
-- [Edit Profile](edit.md) - Modify profile
-- [User Activity](activity.md) - Activity stream
-- [User Followers](followers.md) - Follower list
+- [User Profile](read.md) - View profile
+- [User Register](new.md) - Registration form

@@ -10,22 +10,30 @@
     },
     "ignore": [
         "static",
+        "resource.download",
+        "home.redirect_locale",
         "_debug_toolbar.*",
         "debugtoolbar.*",
         "webassets.*",
         "api.*",
         "feeds.*",
         "file.*",
-        "dataset_resource.*",
-        "resource.download",
-        "home.redirect_locale",
-        "group.member_dump",
-        "organization.member_dump",
-        "activity.package_changes_multiple",
-        "activity.organization_changes_multiple",
-        "activity.group_changes_multiple"
+        "*_resource.*",
+        "*.member_dump",
+        "activity.*_changes_multiple"
     ],
     "matchers": [
+        ["id:activity.resource_history", ["resource", "id"]],
+        ["id:activity.package_history", ["package", "id"]],
+        ["id:activity.group_activity", ["group", "id"]],
+        ["id:activity.group_changes", ["group", "id"]],
+        ["id:activity.organization_activity", ["organization", "id"]],
+        ["id:activity.organization_changes", ["organization", "id"]],
+        ["id:activity.user_activity", ["user", "id"]],
+        ["id:activity.user_changes", ["user", "id"]],
+        ["id:activity.package_activity", ["package", "id"]],
+        ["id:activity.package_changes", ["package", "id"]],
+
         ["resource_id:*", ["resource", "id"]],
         ["user_id:*", ["user", "id"]],
         ["view_id:*", ["resource_view", "id"]],
@@ -37,19 +45,7 @@
 
         ["id:group.*", ["group", "name"]],
         ["id:organization.*", ["organization", "name"]],
-        ["id:user.*", ["user", "name"]],
-
-        ["id:activity.resource_history", ["resource", "id"]],
-        ["id:activity.package_history", ["package", "id"]],
-
-        ["id:activity.group_activity", ["group", "id"]],
-        ["id:activity.group_changes", ["group", "id"]],
-        ["id:activity.organization_activity", ["organization", "id"]],
-        ["id:activity.organization_changes", ["organization", "id"]],
-        ["id:activity.user_activity", ["user", "id"]],
-        ["id:activity.user_changes", ["user", "id"]],
-        ["id:activity.package_activity", ["package", "id"]],
-        ["id:activity.package_changes", ["package", "id"]]
+        ["id:user.*", ["user", "name"]]
 
     ]
 }

@@ -1,65 +1,46 @@
-# Group Read Page
 
-View group details and datasets.
+# Group About Page
+
+View detailed information about a group.
 
 ## Overview
 
-Group read page displays:
+The about page displays:
 
-- Group information
-- Group datasets
-- Member information
-- Group statistics
+- Full group description
+- Contact information
+- Group metadata
+- Related links
 
 /// admonition | Screenshots
-
-/// tab | Main view
-![main](../screenshots/group-read.jpeg)
-///
-
-/// tab | Datasets section
-![datasets](../screenshots/group-read-datasets.jpeg)
-///
-
-/// tab | Sidebar info
-![sidebar](../screenshots/group-read-sidebar.jpeg)
-///
-
+![about](../screenshots/group-about.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /group/{id}
-GET /group/{name}
-```
-
-**Examples:**
-```
-<<vars.site_url>>/group/environmental-data
-<<vars.site_url>>/group/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+GET /group/about/{id}
 ```
 
 ## Purpose
 
-The read page allows users to:
+The about page allows users to:
 
-- View group description
-- Browse group datasets
-- See group members
-- Follow group
+- Learn about the group
+- View contact details
+- Understand group's purpose
+- Access related resources
 
 ## Actions Available
 
-| Action          | Description              |
-|-----------------|--------------------------|
-| View datasets   | Browse group datasets    |
-| Search datasets | Filter group datasets    |
-| Follow group    | Subscribe to updates     |
-| Edit group      | Modify group             |
+| Action        | Description              |
+|---------------|--------------------------|
+| View details  | Read group information   |
+| Edit group    | Modify details           |
+| Back to group | Return to main page      |
 
 ## Related Pages
 
-- [Group Index](index.md) - Group list
+- [Group Read](read.md) - Main group page
 - [Group Edit](edit.md) - Edit group
-- [Dataset Search](../dataset/search.md) - Dataset search
+- [Group Index](index.md) - Group list

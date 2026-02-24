@@ -1,41 +1,56 @@
-# User Logout Page
 
-End user session and logout.
+# User Register Page
+
+Create a new user account.
 
 ## Overview
 
-Logout page provides:
+Registration page provides:
 
-- Logout confirmation
-- Session termination
-- Return to home option
+- Account creation form
+- Email verification
+- Password setup
 
 /// admonition | Screenshots
-![logout](../screenshots/user-logout.jpeg)
+
+/// tab | Empty form
+![empty](../screenshots/user-register-empty.jpeg)
+///
+
+/// tab | Filled form
+![filled](../screenshots/user-register-filled.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /user/logout
+GET /user/register
+POST /user/register
+```
+
+**Example:**
+```
+<<vars.site_url>>/user/register
 ```
 
 ## Purpose
 
-The logout page:
+Allows visitors to:
 
-- Confirms logout was successful
-- Clears session data
-- Provides navigation options
+- Create CKAN account
+- Set username and password
+- Provide email address
 
 ## Actions Available
 
 | Action    | Description              |
 |-----------|--------------------------|
-| Go home   | Return to homepage       |
-| Login     | Log back in              |
+| Register  | Create account           |
+| Login     | Go to login              |
 
 ## Related Pages
 
 - [Login](login.md) - User login
-- [Home](../home/home.md) - Home page
+- [User Profile](read.md) - User profile

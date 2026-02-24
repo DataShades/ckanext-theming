@@ -1,58 +1,43 @@
-# User API Tokens Page
 
-Manage API access tokens.
+# Password Reset Request Page
+
+Request password reset email.
 
 ## Overview
 
-The API tokens page provides:
+Request reset page provides:
 
-- List of active tokens
-- Create new tokens
-- Revoke tokens
-- Token usage information
+- Email input form
+- Reset instructions
+- Back to login link
 
 /// admonition | Screenshots
-
-/// tab | Token list
-![tokens](../screenshots/user-api-tokens.jpeg)
-///
-
-/// tab | Create form
-![create](../screenshots/user-api-tokens-create-form.jpeg)
-///
-
+![request reset](../screenshots/user-request-reset.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /user/{id}/api-tokens
-POST /user/{id}/api-tokens
-```
-
-**Examples:**
-```
-<<vars.site_url>>/user/john-doe/api-tokens
-<<vars.site_url>>/user/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f/api-tokens
+GET /user/reset
+POST /user/reset
 ```
 
 ## Purpose
 
-The API tokens page allows users to:
+Allows users to:
 
-- Generate API access tokens
-- Manage token permissions
-- Revoke compromised tokens
+- Request password reset email
+- Recover forgotten passwords
+- Regain account access
 
 ## Actions Available
 
-| Action       | Description              |
-|--------------|--------------------------|
-| Create token | Generate new token       |
-| Copy token   | Copy to clipboard        |
-| Revoke token | Delete token             |
+| Action        | Description              |
+|---------------|--------------------------|
+| Send email    | Request reset link       |
+| Cancel        | Go back to login         |
 
 ## Related Pages
 
-- [User Profile](read.md) - User profile
-- [API Documentation](../other/api.md) - API docs
+- [Login](login.md) - User login
+- [Perform Reset](perform-reset.md) - Set new password

@@ -1,42 +1,44 @@
-# Group Followers Page
 
-View group followers.
+
+# Group Delete Confirmation Page
+
+Confirm deletion of a group.
 
 ## Overview
 
-Followers page shows:
+Group delete confirmation:
 
-- Follower list
-- Follower count
-- Follow dates
+- Final verification step
+- Shows group information
+- Warns about impact
 
 /// admonition | Screenshots
-![followers](../screenshots/group-followers.jpeg)
+![confirm delete](../screenshots/group-confirm-delete.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /group/followers/{id}
+GET /group/delete/{id}
+POST /group/delete/{id}
 ```
 
 ## Purpose
 
-Allows users to:
+Prevents accidental deletion of:
 
-- See who is following the group
-- Understand group popularity
-- Connect with interested users
+- Group metadata
+- Group associations
+- Dataset categorizations
 
 ## Actions Available
 
-| Action         | Description              |
-|----------------|--------------------------|
-| View followers | See follower list        |
-| Follow group   | Subscribe to updates     |
-| View profile   | Navigate to user         |
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm delete  | Permanently remove       |
+| Cancel          | Keep group               |
 
 ## Related Pages
 
-- [Group Read](read.md) - Group profile
-- [Group Activity](activity.md) - Activity stream
+- [Group Edit](edit.md) - Edit group
+- [Group Index](index.md) - Group list

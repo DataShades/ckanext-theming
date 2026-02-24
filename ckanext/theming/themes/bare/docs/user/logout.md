@@ -1,59 +1,42 @@
-# User Login Page
 
-User authentication page for logging into CKAN.
+# User Logout Page
+
+End user session and logout.
 
 ## Overview
 
-The login page provides:
+Logout page provides:
 
-- Username/email and password fields
-- Remember me option
-- Password reset link
-- Registration link
+- Logout confirmation
+- Session termination
+- Return to home option
 
 /// admonition | Screenshots
-
-/// tab | Login form
-![login](../screenshots/user-login.jpeg)
-///
-
-/// tab | Validation errors
-![errors](../screenshots/user-login-errors.jpeg)
-///
-
+![logout](../screenshots/user-logout.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /user/login
-POST /user/login
-```
-
-**Example:**
-```
-<<vars.site_url>>/user/login
+GET /user/logout
 ```
 
 ## Purpose
 
-The login page allows users to:
+The logout page:
 
-- Authenticate with credentials
-- Access protected features
-- Return to original page after login
+- Confirms logout was successful
+- Clears session data
+- Provides navigation options
 
 ## Actions Available
 
-| Action           | Description              |
-|------------------|--------------------------|
-| Login            | Authenticate             |
-| Remember me      | Stay logged in           |
-| Reset password   | Recover account          |
-| Register         | Create account           |
+| Action    | Description              |
+|-----------|--------------------------|
+| Go home   | Return to homepage       |
+| Login     | Log back in              |
 
 ## Related Pages
 
-- [Register](new.md) - Create account
-- [Request Reset](request-reset.md) - Password recovery
-- [Dashboard](../dashboard/dashboard.md) - After login destination
+- [Login](login.md) - User login
+- [Home](../home/home.md) - Home page

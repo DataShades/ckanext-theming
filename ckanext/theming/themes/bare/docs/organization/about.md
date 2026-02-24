@@ -1,71 +1,53 @@
-# Organization Read Page
 
-View organization details and browse its datasets.
+# Organization About Page
+
+View detailed information about an organization.
 
 ## Overview
 
-The organization read page displays:
+The about page displays:
 
-- Organization profile information
-- Datasets owned by organization
-- Organization statistics
-- Navigation to sub-pages
+- Full organization description
+- Contact information
+- Organization metadata
+- Related links
 
 /// admonition | Screenshots
-
-/// tab | Main view
-![main](../screenshots/organization-read.jpeg)
-///
-
-/// tab | Datasets section
-![datasets](../screenshots/organization-read-datasets.jpeg)
-///
-
-/// tab | Sidebar info
-![sidebar](../screenshots/organization-read-sidebar.jpeg)
-///
-
-/// tab | Edit button
-![edit](../screenshots/organization-read-edit-button.jpeg)
-///
-
+![about](../screenshots/organization-about.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/{id}
-GET /organization/{name}
-GET /organization/{id}?page={number}
+GET /organization/about/{id}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization/environmental-protection-agency
-<<vars.site_url>>/organization/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/about/environmental-protection-agency
+<<vars.site_url>>/organization/about/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The read page allows users to:
+The about page allows users to:
 
-- View organization information
-- Browse organization's datasets
-- Understand organization's role
-- Access organization management
+- Learn about the organization
+- View contact details
+- Understand organization's mission
+- Access related resources
 
 ## Actions Available
 
-| Action            | Description              |
-|-------------------|--------------------------|
-| View datasets     | Browse org datasets      |
-| Search datasets   | Filter org datasets      |
-| Follow org        | Subscribe to updates     |
-| Edit org          | Modify organization      |
-| View about        | See org details          |
+| Action        | Description              |
+|---------------|--------------------------|
+| View details  | Read org information     |
+| Edit org      | Modify details           |
+| Contact       | Reach organization       |
+| Back to org   | Return to main page      |
 
 ## Related Pages
 
-- [Organization Index](index.md) - List all organizations
-- [Organization About](about.md) - Organization details
+- [Organization Read](read.md) - Main organization page
 - [Organization Edit](edit.md) - Edit organization
+- [Organization Index](index.md) - List all organizations

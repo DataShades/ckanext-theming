@@ -1,46 +1,48 @@
-# Resource Edit Page
 
-Edit resource metadata.
+# Resource Views Management Page
+
+Manage visualizations for a resource.
 
 ## Overview
 
-Resource edit page provides:
+Resource views page provides:
 
-- Pre-populated metadata form
-- File replacement option
-- URL update
-- Metadata editing
+- List of configured views
+- View type selection
+- View configuration
+- View ordering
 
 /// admonition | Screenshots
-![edit](../screenshots/resource-edit.jpeg)
+![views](../screenshots/resource-views.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /dataset/{id}/resource/{resource_id}/edit
-POST /dataset/{id}/resource/{resource_id}/edit
+GET /dataset/{id}/resource/{resource_id}/views
+GET /dataset/{id}/resource/{resource_id}/views/new
 ```
 
 ## Purpose
 
 Allows users to:
 
-- Update resource name
-- Modify description
-- Change format
-- Update URL
-- Replace file
+- Create data visualizations
+- Configure view types
+- Reorder views
+- Enable/disable views
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| Edit metadata | Modify resource fields   |
-| Replace file  | Upload new file          |
-| Update URL    | Change resource URL      |
+| Action       | Description              |
+|--------------|--------------------------|
+| View list    | See existing views       |
+| Add view     | Create new view          |
+| Edit view    | Modify view config       |
+| Reorder      | Change view order        |
 
 ## Related Pages
 
 - [Resource Read](read.md) - View resource
-- [New Resource](../dataset/new-resource.md) - Create resource
+- [Resource Edit](edit.md) - Edit resource
+- [Dataset Resource Views](../dataset/resource-views.md) - Dataset views

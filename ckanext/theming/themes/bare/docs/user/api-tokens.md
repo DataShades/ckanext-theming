@@ -1,24 +1,25 @@
-# User List Page
 
-List all registered users.
+# User API Tokens Page
+
+Manage API access tokens.
 
 ## Overview
 
-User list page provides:
+The API tokens page provides:
 
-- Directory of all users
-- Search functionality
-- Sorting options
-- Pagination
+- List of active tokens
+- Create new tokens
+- Revoke tokens
+- Token usage information
 
 /// admonition | Screenshots
 
-/// tab | User list
-![list](../screenshots/user-list.jpeg)
+/// tab | Token list
+![tokens](../screenshots/user-api-tokens.jpeg)
 ///
 
-/// tab | Search results
-![search](../screenshots/user-list-search.jpeg)
+/// tab | Create form
+![create](../screenshots/user-api-tokens-create-form.jpeg)
 ///
 
 ///
@@ -26,36 +27,33 @@ User list page provides:
 ## URL Pattern
 
 ```
-GET /user
-GET /user?q={query}
-GET /user?order_by={field}
+GET /user/{id}/api-tokens
+POST /user/{id}/api-tokens
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/user
-<<vars.site_url>>/user?q=john
-<<vars.site_url>>/user?order_by=created
+<<vars.site_url>>/user/john-doe/api-tokens
+<<vars.site_url>>/user/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f/api-tokens
 ```
 
 ## Purpose
 
-Allows users to:
+The API tokens page allows users to:
 
-- Browse all users
-- Find specific users
-- View user profiles
-- See community size
+- Generate API access tokens
+- Manage token permissions
+- Revoke compromised tokens
 
 ## Actions Available
 
 | Action       | Description              |
 |--------------|--------------------------|
-| Search users | Find users               |
-| Sort         | Change order             |
-| View profile | See user details         |
+| Create token | Generate new token       |
+| Copy token   | Copy to clipboard        |
+| Revoke token | Delete token             |
 
 ## Related Pages
 
-- [User Profile](read.md) - View profile
-- [User Register](new.md) - Create account
+- [User Profile](read.md) - User profile
+- [API Documentation](../other/api.md) - API docs

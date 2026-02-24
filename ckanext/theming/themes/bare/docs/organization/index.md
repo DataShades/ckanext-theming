@@ -1,3 +1,4 @@
+
 # Organization Section
 
 This section covers all pages related to organization management in CKAN.
@@ -15,7 +16,7 @@ Organizations in CKAN are used to:
 
 | Page                                      | Description                    |
 |-------------------------------------------|--------------------------------|
-| [Index](index.md)                         | List all organizations         |
+| [Index](search.md)                         | List all organizations         |
 | [Read](read.md)                           | View organization details      |
 | [About](about.md)                         | Organization about page        |
 | [Create](new.md)                          | Create new organization        |

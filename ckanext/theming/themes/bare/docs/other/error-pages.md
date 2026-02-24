@@ -1,53 +1,54 @@
-# Resource Data Page
+# Error Pages
 
-View and manage resource data processed by Datapusher.
+Error handling and custom error pages.
 
 ## Overview
 
-Resource data page provides:
+CKAN displays error pages for:
 
-- Data preview
-- DataStore status
-- Push to DataStore option
-- Data dictionary access
+- 404 Not Found
+- 403 Forbidden
+- 500 Internal Server Error
 
 /// admonition | Screenshots
 
-/// tab | Data view
-![data](../screenshots/resource-data.jpeg)
+/// tab | 404 Not Found
+![404](../screenshots/error-404.jpeg)
 ///
 
-/// tab | Push button
-![push](../screenshots/resource-data-push-button.jpeg)
+/// tab | 403 Forbidden
+![403](../screenshots/error-403.jpeg)
 ///
 
 ///
 
-## URL Pattern
+## URL Patterns
+
+Errors can occur on any URL:
 
 ```
-GET /dataset/{id}/resource/{resource_id}/data
+/nonexistent-page       # 404
+/protected-page         # 403
+/crash-endpoint         # 500
 ```
 
 ## Purpose
 
-Allows users to:
+Error pages:
 
-- Preview tabular data
-- Check DataStore status
-- Push data to DataStore
-- Access data dictionary
+- Inform users of problems
+- Provide navigation options
+- Maintain branding consistency
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| Preview data  | View data table          |
-| Push to DS    | Upload to DataStore      |
-| View dictionary | See field definitions  |
+| Action      | Description              |
+|-------------|--------------------------|
+| Go home     | Return to homepage       |
+| Search      | Search for content       |
+| Go back     | Return to previous page  |
 
 ## Related Pages
 
-- [Resource Read](read.md) - View resource
-- [Data Dictionary](dictionary.md) - Field definitions
-- [Resource Views](views.md) - Data visualizations
+- [Home](../home/home.md) - Return to home
+- [Search](../dataset/search.md) - Search for content

@@ -1,56 +1,32 @@
-# User Edit Profile Page
 
-Edit user profile information.
+# User Activity
+
+View a user's activity stream.
 
 ## Overview
 
-The edit profile page provides:
-
-- Profile information form
-- Password change
-- Image upload
-
-/// admonition | Screenshots
-
-/// tab | Edit form
-![form](../screenshots/user-edit.jpeg)
-///
-
-/// tab | Validation errors
-![errors](../screenshots/user-edit-errors.jpeg)
-///
-
-///
+User activity page shows:
+- Recent actions by user
+- Dataset contributions
+- Timeline of activities
+- Interaction history
 
 ## URL Pattern
 
 ```
-GET /user/edit
-POST /user/edit
+GET /user/activity/{id}
 ```
 
-**Example:**
-```
-<<vars.site_url>>/user/edit
-```
+## Template
 
-## Purpose
+**File:** `templates/user/activity_stream.html`
 
-The edit page allows users to:
+## Screenshot Placeholder
 
-- Update profile information
-- Change password
-- Upload profile image
-
-## Actions Available
-
-| Action        | Description              |
-|---------------|--------------------------|
-| Edit profile  | Modify user fields       |
-| Change password | Update password        |
-| Upload image  | Change profile picture   |
+![User Activity](../screenshots/user-activity.png)
+*Placeholder: User activity timeline*
 
 ## Related Pages
 
-- [User Profile](read.md) - View profile
-- [User Register](new.md) - Registration form
+- [User Profile](read.md) - User profile
+- [Dataset Activity](../dataset/activity.md) - Dataset activity

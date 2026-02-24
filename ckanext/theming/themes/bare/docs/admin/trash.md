@@ -1,24 +1,24 @@
-# Admin Config Page
+# Admin Trash Page
 
-Site configuration management.
+Purge deleted items from the system.
 
 ## Overview
 
-The config page provides:
+The trash page provides:
 
-- Site settings form
-- Branding options
-- Feature toggles
-- Configuration reset
+- List of deleted items
+- Purge functionality
+- Item type filtering
+- Confirmation dialogs
 
 /// admonition | Screenshots
 
-/// tab | Config form
-![config](../screenshots/admin-config.jpeg)
+/// tab | Trash list
+![trash](../screenshots/admin-trash.jpeg)
 ///
 
-/// tab | Form fields
-![form](../screenshots/admin-config-form.jpeg)
+/// tab | Confirm delete
+![confirm](../screenshots/admin-trash-confirm-delete.jpeg)
 ///
 
 ///
@@ -26,33 +26,33 @@ The config page provides:
 ## URL Pattern
 
 ```
-GET /ckan-admin/config
-POST /ckan-admin/config
+GET /ckan-admin/trash
+POST /ckan-admin/trash
 ```
 
 **Example:**
 ```
-<<vars.site_url>>/ckan-admin/config
+<<vars.site_url>>/ckan-admin/trash
 ```
 
 ## Purpose
 
-The config page allows sysadmins to:
+The trash page allows sysadmins to:
 
-- Customize site appearance
-- Configure features
-- Update branding
-- Reset to defaults
+- View deleted datasets
+- View deleted organizations
+- View deleted groups
+- Permanently purge items
 
 ## Actions Available
 
-| Action          | Description              |
-|-----------------|--------------------------|
-| Edit config     | Modify site settings     |
-| Save changes    | Apply configuration      |
-| Reset config    | Restore defaults         |
+| Action         | Description              |
+|----------------|--------------------------|
+| View trash     | See deleted items        |
+| Purge all      | Delete everything        |
+| Purge by type  | Delete specific type     |
 
 ## Related Pages
 
 - [Admin Panel](index.md) - Admin dashboard
-- [Reset Config](confirm-reset.md) - Reset to defaults
+- [Config](config.md) - Site configuration

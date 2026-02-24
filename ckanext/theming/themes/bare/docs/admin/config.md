@@ -1,31 +1,58 @@
-# Admin Section
+# Admin Config Page
 
-This section covers administrative pages for system administrators.
+Site configuration management.
 
 ## Overview
 
-Admin pages provide:
+The config page provides:
 
-- System administration interface
-- Configuration management
-- Site maintenance tools
-- User and content management
+- Site settings form
+- Branding options
+- Feature toggles
+- Configuration reset
 
-## Pages in This Section
+/// admonition | Screenshots
 
-| Page                              | Description                    |
-|-----------------------------------|--------------------------------|
-| [Admin Panel](index.md)           | Admin overview                 |
-| [Config](config.md)               | Site configuration             |
-| [Reset Config](confirm-reset.md)  | Reset configuration            |
-| [Trash](trash.md)                 | Purge deleted items            |
+/// tab | Config form
+![config](../screenshots/admin-config.jpeg)
+///
 
-## Access Control
+/// tab | Form fields
+![form](../screenshots/admin-config-form.jpeg)
+///
 
-All admin pages require sysadmin access.
+///
 
-## Related Sections
+## URL Pattern
 
-- [Dashboard](../dashboard/index.md) - User dashboard
-- [User](../user/index.md) - User management
-- [Dataset](../dataset/index.md) - Content management
+```
+GET /ckan-admin/config
+POST /ckan-admin/config
+```
+
+**Example:**
+```
+<<vars.site_url>>/ckan-admin/config
+```
+
+## Purpose
+
+The config page allows sysadmins to:
+
+- Customize site appearance
+- Configure features
+- Update branding
+- Reset to defaults
+
+## Actions Available
+
+| Action          | Description              |
+|-----------------|--------------------------|
+| Edit config     | Modify site settings     |
+| Save changes    | Apply configuration      |
+| Reset config    | Restore defaults         |
+
+## Related Pages
+
+- [Admin Panel](index.md) - Admin dashboard
+- [Reset Config](confirm-reset.md) - Reset to defaults

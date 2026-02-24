@@ -1,28 +1,47 @@
-# Resource Section
 
-This section covers pages for managing dataset resources.
+# Resource Edit Page
+
+Edit resource metadata.
 
 ## Overview
 
-Resource pages handle:
+Resource edit page provides:
 
-- Resource viewing and download
-- Resource metadata editing
-- Data visualization
-- Data dictionary management
-- Resource previews
+- Pre-populated metadata form
+- File replacement option
+- URL update
+- Metadata editing
 
-## Pages in This Section
+/// admonition | Screenshots
+![edit](../screenshots/resource-edit.jpeg)
+///
 
-| Page                              | Description                    |
-|-----------------------------------|--------------------------------|
-| [Read](read.md)                   | View resource                  |
-| [Edit](edit.md)                   | Edit resource                  |
-| [Views](views.md)                 | Manage views                   |
-| [Dictionary](dictionary.md)       | Data dictionary                |
-| [Data](data.md)                   | Resource data                  |
+## URL Pattern
 
-## Related Sections
+```
+GET /dataset/{id}/resource/{resource_id}/edit
+POST /dataset/{id}/resource/{resource_id}/edit
+```
 
-- [Dataset](../dataset/index.md) - Parent dataset
-- [Admin](../admin/index.md) - System administration
+## Purpose
+
+Allows users to:
+
+- Update resource name
+- Modify description
+- Change format
+- Update URL
+- Replace file
+
+## Actions Available
+
+| Action        | Description              |
+|---------------|--------------------------|
+| Edit metadata | Modify resource fields   |
+| Replace file  | Upload new file          |
+| Update URL    | Change resource URL      |
+
+## Related Pages
+
+- [Resource Read](read.md) - View resource
+- [New Resource](../dataset/new-resource.md) - Create resource

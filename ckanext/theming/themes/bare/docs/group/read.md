@@ -1,35 +1,66 @@
-# Group Section
 
-This section covers all pages related to group management in CKAN.
+# Group Read Page
+
+View group details and datasets.
 
 ## Overview
 
-Groups in CKAN are used to:
+Group read page displays:
 
-- Categorize datasets thematically
-- Create curated collections
-- Enable community collaboration
-- Organize content by topic
+- Group information
+- Group datasets
+- Member information
+- Group statistics
 
-## Pages in This Section
+/// admonition | Screenshots
 
-| Page                                      | Description                    |
-|-------------------------------------------|--------------------------------|
-| [Index](index.md)                         | List all groups                |
-| [Read](read.md)                           | View group details             |
-| [About](about.md)                         | Group about page               |
-| [Create](new.md)                          | Create new group               |
-| [Edit](edit.md)                           | Edit group                     |
-| [Members](members.md)                     | View members                   |
-| [Add Member](member-new.md)               | Add member                     |
-| [Manage Members](manage-members.md)       | Manage members                 |
-| [Administrators](admins.md)               | View admins                    |
-| [Activity](activity.md)                   | Activity stream                |
-| [Changes](changes.md)                     | Revision history               |
-| [Followers](followers.md)                 | Group followers                |
+/// tab | Main view
+![main](../screenshots/group-read.jpeg)
+///
 
-## Related Sections
+/// tab | Datasets section
+![datasets](../screenshots/group-read-datasets.jpeg)
+///
 
-- [Dataset](../dataset/index.md) - Categorized datasets
-- [Organization](../organization/index.md) - Owning organizations
-- [User](../user/index.md) - Group members
+/// tab | Sidebar info
+![sidebar](../screenshots/group-read-sidebar.jpeg)
+///
+
+///
+
+## URL Pattern
+
+```
+GET /group/{id}
+GET /group/{name}
+```
+
+**Examples:**
+```
+<<vars.site_url>>/group/environmental-data
+<<vars.site_url>>/group/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+```
+
+## Purpose
+
+The read page allows users to:
+
+- View group description
+- Browse group datasets
+- See group members
+- Follow group
+
+## Actions Available
+
+| Action          | Description              |
+|-----------------|--------------------------|
+| View datasets   | Browse group datasets    |
+| Search datasets | Filter group datasets    |
+| Follow group    | Subscribe to updates     |
+| Edit group      | Modify group             |
+
+## Related Pages
+
+- [Group Index](index.md) - Group list
+- [Group Edit](edit.md) - Edit group
+- [Dataset Search](../dataset/search.md) - Dataset search

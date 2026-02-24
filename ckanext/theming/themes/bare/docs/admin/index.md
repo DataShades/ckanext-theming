@@ -1,43 +1,31 @@
-# User Confirm Delete Page
+# Admin Section
 
-Confirm deletion of a user account.
+This section covers administrative pages for system administrators.
 
 ## Overview
 
-User delete confirmation:
+Admin pages provide:
 
-- Final verification
-- Account deletion warning
-- Data impact notice
+- System administration interface
+- Configuration management
+- Site maintenance tools
+- User and content management
 
-/// admonition | Screenshots
-![confirm delete](../screenshots/user-confirm-delete.jpeg)
-///
+## Pages in This Section
 
-## URL Pattern
+| Page                              | Description                    |
+|-----------------------------------|--------------------------------|
+| [Admin Panel](index.md)           | Admin overview                 |
+| [Config](config.md)               | Site configuration             |
+| [Reset Config](confirm-reset.md)  | Reset configuration            |
+| [Trash](trash.md)                 | Purge deleted items            |
 
-```
-GET /user/delete/{id}
-POST /user/delete/{id}
-```
+## Access Control
 
-## Purpose
+All admin pages require sysadmin access.
 
-Warns about consequences:
+## Related Sections
 
-- Account removal
-- Dataset ownership changes
-- Membership removal
-- API token revocation
-
-## Actions Available
-
-| Action          | Description              |
-|-----------------|--------------------------|
-| Confirm delete  | Permanently remove       |
-| Cancel          | Keep account             |
-
-## Related Pages
-
-- [Edit Profile](edit.md) - Edit profile
-- [User Profile](read.md) - View profile
+- [Dashboard](../dashboard/index.md) - User dashboard
+- [User](../user/index.md) - User management
+- [Dataset](../dataset/index.md) - Content management

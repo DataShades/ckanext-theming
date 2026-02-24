@@ -1,31 +1,75 @@
-# Dashboard Section
+# Dashboard Content Pages
 
-This section covers the user dashboard pages.
+Dashboard sub-pages for managing user content.
 
-## Overview
+## My Datasets
 
-Dashboard pages provide:
+Shows all datasets created by the current user:
 
-- Personal activity feed
-- Quick access to user content
-- Management shortcuts
-- Notifications
+- Published datasets
+- Draft datasets
+- Quick edit actions
 
-## Pages in This Section
+/// admonition | Screenshots
 
-| Page                              | Description                    |
-|-----------------------------------|--------------------------------|
-| [Dashboard](dashboard.md)         | Main dashboard                 |
-| [My Datasets](content.md)         | User's datasets                |
-| [My Organizations](content.md)    | User's orgs                    |
-| [My Groups](content.md)           | User's groups                  |
+/// tab | Datasets list
+![datasets](../screenshots/dashboard-datasets.jpeg)
+///
 
-## Access
+/// tab | Empty state
+![empty](../screenshots/dashboard-datasets-empty.jpeg)
+///
 
-Dashboard requires authentication.
+///
 
-## Related Sections
+**URL:** `/dashboard/datasets`
 
-- [User](../user/index.md) - User account
-- [Dataset](../dataset/index.md) - Dataset management
-- [Organization](../organization/index.md) - Organizations
+## My Organizations
+
+Shows organizations where user is a member:
+
+- Admin permissions
+- Editor permissions
+- Member permissions
+
+/// admonition | Screenshots
+
+/// tab | Organizations list
+![orgs](../screenshots/dashboard-organizations.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/dashboard-organizations-empty.jpeg)
+///
+
+///
+
+**URL:** `/dashboard/organizations`
+
+## My Groups
+
+Shows groups where user is a member:
+
+- Groups user belongs to
+- Membership level
+- Group activity
+
+/// admonition | Screenshots
+
+/// tab | Groups list
+![groups](../screenshots/dashboard-groups.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/dashboard-groups-empty.jpeg)
+///
+
+///
+
+**URL:** `/dashboard/groups`
+
+## Related Pages
+
+- [Dashboard](dashboard.md) - Main dashboard
+- [User Profile](../user/read.md) - User profile
+- [Dataset Search](../dataset/search.md) - Browse datasets

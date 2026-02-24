@@ -1,23 +1,25 @@
-# User Groups Page
 
-View groups a user belongs to.
+# User List Page
+
+List all registered users.
 
 ## Overview
 
-Groups page displays:
+User list page provides:
 
-- User's group memberships
-- Role in each group
-- Group details
+- Directory of all users
+- Search functionality
+- Sorting options
+- Pagination
 
 /// admonition | Screenshots
 
-/// tab | With groups
-![groups](../screenshots/user-groups.jpeg)
+/// tab | User list
+![list](../screenshots/user-list.jpeg)
 ///
 
-/// tab | Empty state
-![empty](../screenshots/user-groups-empty.jpeg)
+/// tab | Search results
+![search](../screenshots/user-list-search.jpeg)
 ///
 
 ///
@@ -25,27 +27,36 @@ Groups page displays:
 ## URL Pattern
 
 ```
-GET /user/{id}/groups
+GET /user
+GET /user?q={query}
+GET /user?order_by={field}
+```
+
+**Examples:**
+```
+<<vars.site_url>>/user
+<<vars.site_url>>/user?q=john
+<<vars.site_url>>/user?order_by=created
 ```
 
 ## Purpose
 
 Allows users to:
 
-- View group memberships
-- See roles and permissions
-- Navigate to groups
+- Browse all users
+- Find specific users
+- View user profiles
+- See community size
 
 ## Actions Available
 
-| Action          | Description              |
-|-----------------|--------------------------|
-| View groups     | See group list           |
-| View role       | See membership level     |
-| Navigate to group | Go to group            |
+| Action       | Description              |
+|--------------|--------------------------|
+| Search users | Find users               |
+| Sort         | Change order             |
+| View profile | See user details         |
 
 ## Related Pages
 
-- [User Profile](read.md) - User profile
-- [Group Index](../group/index.md) - All groups
-- [Dashboard Groups](../dashboard/content.md) - My groups
+- [User Profile](read.md) - View profile
+- [User Register](new.md) - Create account

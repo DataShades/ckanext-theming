@@ -1,23 +1,25 @@
-# Organization Create Page
 
-Form for creating new organizations in CKAN.
+# Organization Edit Page
+
+Form for editing existing organizations in CKAN.
 
 ## Overview
 
-The organization create page provides:
+The organization edit page provides:
 
-- Organization information form
-- Image upload
-- Custom field support
+- Pre-populated form with current values
+- All organization fields
+- Image upload/replace
+- Delete option
 
 /// admonition | Screenshots
 
-/// tab | Empty form
-![empty](../screenshots/organization-new-empty.jpeg)
+/// tab | Edit form
+![form](../screenshots/organization-edit-form.jpeg)
 ///
 
-/// tab | Filled form
-![filled](../screenshots/organization-new-filled.jpeg)
+/// tab | Delete section
+![delete](../screenshots/organization-edit-delete-section.jpeg)
 ///
 
 ///
@@ -25,33 +27,36 @@ The organization create page provides:
 ## URL Pattern
 
 ```
-GET /organization/new
-POST /organization/new
+GET /organization/edit/{id}
+POST /organization/edit/{id}
 ```
 
-**Example:**
+**Examples:**
 ```
-<<vars.site_url>>/organization/new
+<<vars.site_url>>/organization/edit/environmental-protection-agency
+<<vars.site_url>>/organization/edit/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The create page allows authorized users to:
+The edit page allows authorized users to:
 
-- Create new organizations
-- Define organization details
-- Upload organization logo
+- Modify organization details
+- Update logo/image
+- Change contact information
+- Delete organization (if authorized)
 
 ## Actions Available
 
 | Action           | Description              |
 |------------------|--------------------------|
-| Enter details    | Fill organization form   |
-| Upload image     | Add organization logo    |
-| Save             | Create organization      |
+| Edit details     | Modify org fields        |
+| Update image     | Change logo              |
+| Delete org       | Remove organization      |
+| View org         | See public view          |
 
 ## Related Pages
 
-- [Organization Edit](edit.md) - Edit existing organization
-- [Organization Read](read.md) - View created organization
-- [Organization Index](index.md) - List all organizations
+- [Organization Create](new.md) - Create new organization
+- [Organization Read](read.md) - View organization
+- [Organization Delete](confirm-delete.md) - Delete confirmation

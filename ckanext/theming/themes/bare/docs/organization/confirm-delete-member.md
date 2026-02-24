@@ -1,42 +1,43 @@
-# Organization Delete Confirmation Page
 
-Confirm deletion of an organization.
+# Organization Delete Member Confirmation Page
+
+Confirm removal of a member from an organization.
 
 ## Overview
 
-Organization delete confirmation:
+Member delete confirmation:
 
-- Final verification
-- Shows organization impact
-- Warns about datasets
+- Verify member removal
+- Show member role
+- Confirm action
 
 /// admonition | Screenshots
-![confirm delete](../screenshots/organization-confirm-delete.jpeg)
+![confirm delete](../screenshots/organization-confirm-delete-member.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/delete/{id}
-POST /organization/delete/{id}
+GET /organization/member_delete/{id}
+POST /organization/member_delete/{id}
 ```
 
 ## Purpose
 
-Warns about consequences:
+Prevents accidental removal of:
 
-- Dataset ownership loss
-- Member access removal
-- Permanent deletion
+- Organization access
+- Member permissions
+- Dataset ownership
 
 ## Actions Available
 
 | Action          | Description              |
 |-----------------|--------------------------|
-| Confirm delete  | Permanently remove       |
-| Cancel          | Keep organization        |
+| Confirm remove  | Remove member            |
+| Cancel          | Keep member              |
 
 ## Related Pages
 
-- [Organization Edit](edit.md) - Edit organization
-- [Organization Index](index.md) - Organization list
+- [Organization Members](members.md) - Member list
+- [Organization Manage Members](manage-members.md) - Manage members

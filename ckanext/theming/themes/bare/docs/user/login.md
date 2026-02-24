@@ -1,37 +1,60 @@
-# User Section
 
-This section covers all pages related to user accounts and authentication in CKAN.
+# User Login Page
+
+User authentication page for logging into CKAN.
 
 ## Overview
 
-User pages handle:
+The login page provides:
 
-- User authentication (login/logout)
-- User registration
-- Profile management
-- API token management
-- Password reset
+- Username/email and password fields
+- Remember me option
+- Password reset link
+- Registration link
 
-## Pages in This Section
+/// admonition | Screenshots
 
-| Page                              | Description                    |
-|-----------------------------------|--------------------------------|
-| [Login](login.md)                 | User login                     |
-| [Logout](logout.md)               | User logout                    |
-| [Register](new.md)                | User registration              |
-| [User Profile](read.md)           | View user profile              |
-| [Edit Profile](edit.md)           | Edit profile                   |
-| [User Activity](activity.md)      | User activity stream           |
-| [Followers](followers.md)         | User followers                 |
-| [User Organizations](organizations.md) | User's organizations      |
-| [User Groups](groups.md)          | User's groups                  |
-| [User List](list.md)              | All users                      |
-| [API Tokens](api-tokens.md)       | Manage API tokens              |
-| [Request Reset](request-reset.md) | Request password reset         |
-| [Perform Reset](perform-reset.md) | Reset password                 |
+/// tab | Login form
+![login](../screenshots/user-login.jpeg)
+///
 
-## Related Sections
+/// tab | Validation errors
+![errors](../screenshots/user-login-errors.jpeg)
+///
 
-- [Dashboard](../dashboard/index.md) - User dashboard
-- [Organization](../organization/index.md) - User organizations
-- [Group](../group/index.md) - User groups
+///
+
+## URL Pattern
+
+```
+GET /user/login
+POST /user/login
+```
+
+**Example:**
+```
+<<vars.site_url>>/user/login
+```
+
+## Purpose
+
+The login page allows users to:
+
+- Authenticate with credentials
+- Access protected features
+- Return to original page after login
+
+## Actions Available
+
+| Action           | Description              |
+|------------------|--------------------------|
+| Login            | Authenticate             |
+| Remember me      | Stay logged in           |
+| Reset password   | Recover account          |
+| Register         | Create account           |
+
+## Related Pages
+
+- [Register](new.md) - Create account
+- [Request Reset](request-reset.md) - Password recovery
+- [Dashboard](../dashboard/dashboard.md) - After login destination

@@ -1,24 +1,23 @@
-# Admin Trash Page
+# Dashboard Page
 
-Purge deleted items from the system.
+Main user dashboard with activity feed.
 
 ## Overview
 
-The trash page provides:
+Dashboard provides:
 
-- List of deleted items
-- Purge functionality
-- Item type filtering
-- Confirmation dialogs
+- Personalized activity feed
+- Quick statistics
+- Content management shortcuts
 
 /// admonition | Screenshots
 
-/// tab | Trash list
-![trash](../screenshots/admin-trash.jpeg)
+/// tab | Dashboard
+![dashboard](../screenshots/dashboard.jpeg)
 ///
 
-/// tab | Confirm delete
-![confirm](../screenshots/admin-trash-confirm-delete.jpeg)
+/// tab | Activity feed
+![activity](../screenshots/dashboard-activity.jpeg)
 ///
 
 ///
@@ -26,33 +25,34 @@ The trash page provides:
 ## URL Pattern
 
 ```
-GET /ckan-admin/trash
-POST /ckan-admin/trash
+GET /dashboard
 ```
 
 **Example:**
 ```
-<<vars.site_url>>/ckan-admin/trash
+<<vars.site_url>>/dashboard
 ```
 
 ## Purpose
 
-The trash page allows sysadmins to:
+The dashboard allows users to:
 
-- View deleted datasets
-- View deleted organizations
-- View deleted groups
-- Permanently purge items
+- View recent activity from followed items
+- Access quick actions
+- Monitor notifications
+- Navigate to personal content
 
 ## Actions Available
 
-| Action         | Description              |
-|----------------|--------------------------|
-| View trash     | See deleted items        |
-| Purge all      | Delete everything        |
-| Purge by type  | Delete specific type     |
+| Action           | Description              |
+|------------------|--------------------------|
+| View activity    | See activity feed        |
+| View datasets    | Go to my datasets        |
+| View orgs        | Go to my organizations   |
+| View groups      | Go to my groups          |
 
 ## Related Pages
 
-- [Admin Panel](index.md) - Admin dashboard
-- [Config](config.md) - Site configuration
+- [User Profile](../user/read.md) - User profile
+- [User Activity](../user/activity.md) - Activity stream
+- [Dashboard Datasets](content.md) - My datasets

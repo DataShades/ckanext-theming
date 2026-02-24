@@ -1,48 +1,51 @@
-# User Activity Stream Page
 
-View a user's activity history.
+# User Followers Page
+
+View users following a specific user.
 
 ## Overview
 
-User activity page displays:
+Followers page shows:
 
-- User's recent actions
-- Dataset changes
-- Contributions timeline
+- List of followers
+- Follower count
+- User connections
 
 /// admonition | Screenshots
-![activity](../screenshots/user-activity.jpeg)
+
+/// tab | With followers
+![with followers](../screenshots/user-followers-with-followers.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/user-followers-empty.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /user/activity/{id}
-```
-
-**Examples:**
-```
-<<vars.site_url>>/user/activity/john-doe
-<<vars.site_url>>/user/activity/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+GET /user/followers/{id}
 ```
 
 ## Purpose
 
-Allows viewing:
+Allows users to:
 
-- User contributions
-- Creation history
-- Modification activity
+- See who is following the user
+- Understand user influence
+- Connect with followers
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| View activity | See activity items       |
-| Filter        | Show specific types      |
-| Load more     | Show older activity      |
+| Action         | Description              |
+|----------------|--------------------------|
+| View followers | See follower list        |
+| Follow         | Subscribe to user        |
+| View profile   | Navigate to user         |
 
 ## Related Pages
 
 - [User Profile](read.md) - User profile
-- [Dataset Activity](../dataset/activity.md) - Dataset activity
+- [Dataset Followers](../dataset/followers.md) - Dataset followers

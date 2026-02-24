@@ -1,43 +1,43 @@
-# Group Edit Page
 
-Edit group metadata.
+# Group Members Page
+
+View group members.
 
 ## Overview
 
-Group edit page provides:
+Members page shows:
 
-- Pre-populated form
-- Image upload
-- Description editing
+- Member list
+- Member roles
+- Member count
 
 /// admonition | Screenshots
-![edit](../screenshots/group-edit-form.jpeg)
+![members](../screenshots/group-members.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /group/edit/{id}
-POST /group/edit/{id}
+GET /group/members/{id}
 ```
 
 ## Purpose
 
-Allows authorized users to:
+Allows users to:
 
-- Update group title
-- Modify description
-- Change group image
+- View all group members
+- See member roles
+- Add new members (if authorized)
 
 ## Actions Available
 
 | Action        | Description              |
 |---------------|--------------------------|
-| Edit details  | Modify group fields      |
-| Update image  | Change logo              |
-| View group    | See public view          |
+| View members  | See member list          |
+| Add member    | Invite new member        |
+| Edit role     | Change member role       |
 
 ## Related Pages
 
-- [Group Read](read.md) - View group
-- [Group Create](new.md) - Create group
+- [Group Read](read.md) - Group profile
+- [Group Add Member](member-new.md) - Add member

@@ -1,44 +1,31 @@
-# Admin Reset Configuration Page
+# Dashboard Section
 
-Confirm reset of site configuration to defaults.
+This section covers the user dashboard pages.
 
 ## Overview
 
-Reset confirmation page:
+Dashboard pages provide:
 
-- Final verification
-- Lists items to be reset
-- Warns about data loss
+- Personal activity feed
+- Quick access to user content
+- Management shortcuts
+- Notifications
 
-/// admonition | Screenshots
-![confirm reset](../screenshots/admin-confirm-reset.jpeg)
-///
+## Pages in This Section
 
-## URL Pattern
+| Page                              | Description                    |
+|-----------------------------------|--------------------------------|
+| [Dashboard](dashboard.md)         | Main dashboard                 |
+| [My Datasets](content.md)         | User's datasets                |
+| [My Organizations](content.md)    | User's orgs                    |
+| [My Groups](content.md)           | User's groups                  |
 
-```
-GET /ckan-admin/reset_config
-POST /ckan-admin/reset_config
-```
+## Access
 
-## Purpose
+Dashboard requires authentication.
 
-Resets configuration:
+## Related Sections
 
-- Site title
-- Site description
-- Logo
-- Custom CSS
-- All configurable items
-
-## Actions Available
-
-| Action          | Description              |
-|-----------------|--------------------------|
-| Confirm reset   | Reset to defaults        |
-| Cancel          | Keep current settings    |
-
-## Related Pages
-
-- [Admin Config](config.md) - Site configuration
-- [Admin Panel](index.md) - Admin dashboard
+- [User](../user/index.md) - User account
+- [Dataset](../dataset/index.md) - Dataset management
+- [Organization](../organization/index.md) - Organizations

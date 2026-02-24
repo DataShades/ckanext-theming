@@ -1,53 +1,53 @@
-# Organization Activity Stream Page
 
-View the activity stream for an organization.
+# Organization Changes Page
+
+View the revision history of an organization.
 
 ## Overview
 
-The activity page displays:
+The changes page displays:
 
-- Recent actions in the organization
-- Dataset changes
-- Member updates
-- Organization modifications
+- Organization revision history
+- Change timestamps
+- Editor information
+- Field-level changes
 
 /// admonition | Screenshots
-![activity](../screenshots/organization-activity.jpeg)
+![changes](../screenshots/organization-changes.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/activity/{id}
-GET /organization/activity/{id}?offset={number}
+GET /organization/changes/{id}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization/activity/environmental-protection-agency
-<<vars.site_url>>/organization/activity/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/changes/environmental-protection-agency
+<<vars.site_url>>/organization/changes/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The activity page allows users to:
+The changes page allows users to:
 
-- Track organization changes
-- Monitor dataset updates
-- See member activity
-- Follow organization timeline
+- Track organization modifications
+- View previous versions
+- Compare revisions
+- Understand change history
 
 ## Actions Available
 
-| Action          | Description              |
-|-----------------|--------------------------|
-| View activity   | See activity items       |
-| Filter activity | Show specific types      |
-| Load more       | Show older activity      |
-| Subscribe       | Follow organization      |
+| Action            | Description              |
+|-------------------|--------------------------|
+| View revisions    | See change history       |
+| Compare revisions | See differences          |
+| View revision     | See specific version     |
+| Restore revision  | Revert to previous       |
 
 ## Related Pages
 
 - [Organization Read](read.md) - Main organization page
-- [Organization Changes](changes.md) - Revision history
-- [Dataset Activity](../dataset/activity.md) - Dataset activity
+- [Organization Activity](activity.md) - Activity stream
+- [Organization Edit](edit.md) - Edit organization

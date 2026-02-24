@@ -1,23 +1,33 @@
-# User Register Page
 
-Create a new user account.
+# User Profile Page
+
+View a user's public profile and activity.
 
 ## Overview
 
-Registration page provides:
+The user profile page displays:
 
-- Account creation form
-- Email verification
-- Password setup
+- User information (name, bio, etc.)
+- User statistics
+- Recent activity
+- Social links
 
 /// admonition | Screenshots
 
-/// tab | Empty form
-![empty](../screenshots/user-register-empty.jpeg)
+/// tab | Main view
+![main](../screenshots/user-read.jpeg)
 ///
 
-/// tab | Filled form
-![filled](../screenshots/user-register-filled.jpeg)
+/// tab | Activity section
+![activity](../screenshots/user-read-activity.jpeg)
+///
+
+/// tab | Sidebar
+![sidebar](../screenshots/user-read-sidebar.jpeg)
+///
+
+/// tab | Follow button
+![follow](../screenshots/user-read-follow-button.jpeg)
 ///
 
 ///
@@ -25,31 +35,36 @@ Registration page provides:
 ## URL Pattern
 
 ```
-GET /user/register
-POST /user/register
+GET /user/{id}
+GET /user/{name}
 ```
 
-**Example:**
+**Examples:**
 ```
-<<vars.site_url>>/user/register
+<<vars.site_url>>/user/john-doe
+<<vars.site_url>>/user/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-Allows visitors to:
+The profile page allows users to:
 
-- Create CKAN account
-- Set username and password
-- Provide email address
+- View user information
+- See user's public activity
+- Follow/unfollow user
+- Navigate to user's content
 
 ## Actions Available
 
-| Action    | Description              |
-|-----------|--------------------------|
-| Register  | Create account           |
-| Login     | Go to login              |
+| Action        | Description              |
+|---------------|--------------------------|
+| View info     | Read user details        |
+| Follow        | Subscribe to updates     |
+| View activity | See activity feed        |
+| View datasets | See user's datasets      |
 
 ## Related Pages
 
-- [Login](login.md) - User login
-- [User Profile](read.md) - User profile
+- [Edit Profile](edit.md) - Modify profile
+- [User Activity](activity.md) - Activity stream
+- [User Followers](followers.md) - Follower list

@@ -1,68 +1,47 @@
-# HTMX Search Components
 
-Dynamic search functionality using HTMX.
+# RSS/Atom Feeds
+
+Syndication feeds for portal content.
 
 ## Overview
 
-HTMX search provides:
+CKAN provides feeds for:
 
-- Live search results
-- Dynamic facet updates
-- No page refresh
-- URL synchronization
+- Recently added datasets
+- Organization activity
+- Group activity
+- User activity
+- Custom searches
 
-## Components
+## URL Patterns
 
-### Search HTMX
-
-Enables dynamic search for:
-
-- Dataset search
-- Organization search
-- Group search
-- User search
-
-## How It Works
-
-HTMX enables:
-
-1. **Live Search**: Results update as you type
-2. **Dynamic Facets**: Facet counts update
-3. **URL Sync**: Browser history maintained
-4. **Loading States**: Visual feedback
-
-## Customization Notes
-
-### HTMX Attributes
-
-Configure HTMX behavior through attributes:
-
-```html
-<form hx-get="/dataset/search"
-      hx-target="#search-results"
-      hx-swap="outerHTML">
+```
+/feed/atom              # Atom feed
+/feed/rss               # RSS feed
+/dataset/feed           # Dataset feed
+/organization/{id}/feed # Organization feed
 ```
 
-### Loading States
+## Purpose
 
-Show loading indicators during search:
+Feeds allow users to:
 
-```html
-<div id="search-results" hx-indicator=".search-loading">
-    <!-- Results here -->
-</div>
-```
+- Subscribe to updates
+- Monitor new content
+- Track changes
+- Integrate with readers
 
-### Event Triggers
+## Feed Types
 
-Configure when search triggers:
+### Atom Feed
 
-```html
-<input name="q"
-       hx-trigger="input changed delay:500ms" />
-```
+Standard Atom 1.0 format for dataset updates.
+
+### RSS Feed
+
+RSS 2.0 format for broader compatibility.
 
 ## Related Pages
 
-- [Dataset Search](../dataset/search.md) - Main search
-- [Organization Index](../organization/index.md) - Organization search
+- [Dataset Search](../dataset/search.md) - Dataset listings
+- [Organization Read](../organization/read.md) - Organization content

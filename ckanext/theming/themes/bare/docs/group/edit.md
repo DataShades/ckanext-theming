@@ -1,56 +1,44 @@
-# Group Create Page
 
-Create a new group.
+# Group Edit Page
+
+Edit group metadata.
 
 ## Overview
 
-Group create page provides:
+Group edit page provides:
 
-- Group information form
+- Pre-populated form
 - Image upload
-- Description field
+- Description editing
 
 /// admonition | Screenshots
-
-/// tab | Empty form
-![empty](../screenshots/group-new-empty.jpeg)
-///
-
-/// tab | Filled form
-![filled](../screenshots/group-new-filled.jpeg)
-///
-
+![edit](../screenshots/group-edit-form.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /group/new
-POST /group/new
-```
-
-**Example:**
-```
-<<vars.site_url>>/group/new
+GET /group/edit/{id}
+POST /group/edit/{id}
 ```
 
 ## Purpose
 
-Allows users to:
+Allows authorized users to:
 
-- Create thematic collections
-- Categorize datasets
-- Build communities
+- Update group title
+- Modify description
+- Change group image
 
 ## Actions Available
 
 | Action        | Description              |
 |---------------|--------------------------|
-| Enter details | Fill group form          |
-| Upload image  | Add group logo           |
-| Save          | Create group             |
+| Edit details  | Modify group fields      |
+| Update image  | Change logo              |
+| View group    | See public view          |
 
 ## Related Pages
 
-- [Group Edit](edit.md) - Edit group
-- [Group Index](index.md) - Group list
+- [Group Read](read.md) - View group
+- [Group Create](new.md) - Create group

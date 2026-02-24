@@ -103,7 +103,7 @@ nav:
     - resource/data.md
   - Organization:
     - organization/index.md
-    - organization/index.md
+    - organization/search.md
     - organization/read.md
     - organization/about.md
     - organization/new.md
@@ -117,7 +117,7 @@ nav:
     - organization/bulk-process.md
   - Group:
     - group/index.md
-    - group/index.md
+    - group/search.md
     - group/read.md
     - group/about.md
     - group/new.md

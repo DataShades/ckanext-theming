@@ -1,52 +1,58 @@
-# Organization About Page
 
-View detailed information about an organization.
+# Organization Create Page
+
+Form for creating new organizations in CKAN.
 
 ## Overview
 
-The about page displays:
+The organization create page provides:
 
-- Full organization description
-- Contact information
-- Organization metadata
-- Related links
+- Organization information form
+- Image upload
+- Custom field support
 
 /// admonition | Screenshots
-![about](../screenshots/organization-about.jpeg)
+
+/// tab | Empty form
+![empty](../screenshots/organization-new-empty.jpeg)
+///
+
+/// tab | Filled form
+![filled](../screenshots/organization-new-filled.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/about/{id}
+GET /organization/new
+POST /organization/new
 ```
 
-**Examples:**
+**Example:**
 ```
-<<vars.site_url>>/organization/about/environmental-protection-agency
-<<vars.site_url>>/organization/about/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/new
 ```
 
 ## Purpose
 
-The about page allows users to:
+The create page allows authorized users to:
 
-- Learn about the organization
-- View contact details
-- Understand organization's mission
-- Access related resources
+- Create new organizations
+- Define organization details
+- Upload organization logo
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| View details  | Read org information     |
-| Edit org      | Modify details           |
-| Contact       | Reach organization       |
-| Back to org   | Return to main page      |
+| Action           | Description              |
+|------------------|--------------------------|
+| Enter details    | Fill organization form   |
+| Upload image     | Add organization logo    |
+| Save             | Create organization      |
 
 ## Related Pages
 
-- [Organization Read](read.md) - Main organization page
-- [Organization Edit](edit.md) - Edit organization
+- [Organization Edit](edit.md) - Edit existing organization
+- [Organization Read](read.md) - View created organization
 - [Organization Index](index.md) - List all organizations

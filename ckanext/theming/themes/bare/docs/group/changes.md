@@ -1,43 +1,44 @@
-# Group Activity Stream Page
 
-View group activity history.
+# Group Changes Page
+
+View group revision history.
 
 ## Overview
 
-Activity page displays:
+Changes page displays:
 
-- Recent group actions
-- Dataset changes
-- Member updates
-- Timeline
+- Group revisions
+- Change timestamps
+- Editor information
+- Field changes
 
 /// admonition | Screenshots
-![activity](../screenshots/group-activity.jpeg)
+![changes](../screenshots/group-changes.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /group/activity/{id}
+GET /group/changes/{id}
 ```
 
 ## Purpose
 
 Allows users to:
 
-- Track group changes
-- Monitor dataset updates
-- See member activity
+- Track group modifications
+- View previous versions
+- Compare revisions
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| View activity | See activity items       |
-| Filter        | Show specific types      |
-| Load more     | Show older activity      |
+| Action            | Description              |
+|-------------------|--------------------------|
+| View revisions    | See change history       |
+| Compare revisions | See differences          |
+| View revision     | See specific version     |
 
 ## Related Pages
 
-- [Group Read](read.md) - Group profile
-- [Group Changes](changes.md) - Revision history
+- [Group Activity](activity.md) - Activity stream
+- [Group Edit](edit.md) - Edit group

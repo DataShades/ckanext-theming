@@ -1,53 +1,60 @@
-# Organization Manage Members Page
 
-Bulk management interface for organization members.
+# Organization Administrators Page
+
+View the list of administrators for an organization.
 
 ## Overview
 
-The manage members page provides:
+The administrators page displays:
 
-- Complete member list
-- Bulk role changes
-- Bulk removal
-- Member search/filter
+- List of users with admin role
+- Admin count
+- Admin permissions
+- Contact information
 
 /// admonition | Screenshots
-![manage](../screenshots/organization-manage-members.jpeg)
+
+/// tab | Admins list
+![list](../screenshots/organization-admins.jpeg)
+///
+
+/// tab | Empty state
+![empty](../screenshots/organization-admins-empty.jpeg)
+///
+
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/member_manage/{id}
-POST /organization/member_manage/{id}
+GET /organization/admins/{id}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization/member_manage/environmental-protection-agency
-<<vars.site_url>>/organization/member_manage/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/admins/environmental-protection-agency
+<<vars.site_url>>/organization/admins/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The manage members page allows administrators to:
+The administrators page allows users to:
 
-- View all members at once
-- Change multiple member roles
-- Remove multiple members
-- Search and filter members
+- See who manages the organization
+- Identify decision makers
+- Contact administrators
 
 ## Actions Available
 
-| Action           | Description              |
-|------------------|--------------------------|
-| Select members   | Choose for bulk action   |
-| Change roles     | Update multiple roles    |
-| Remove members   | Delete multiple members  |
-| Search           | Filter members           |
+| Action        | Description              |
+|---------------|--------------------------|
+| View admins   | See admin list           |
+| Contact admin | Reach out                |
+| View profile  | Navigate to user         |
+| Add admin     | Promote to admin         |
 
 ## Related Pages
 
-- [Organization Members](members.md) - Simple member list
-- [Add Member](member-new.md) - Add single member
-- [Administrators](admins.md) - Admin list
+- [Organization Members](members.md) - All members
+- [Organization Manage Members](manage-members.md) - Bulk management
+- [Add Member](member-new.md) - Add new member

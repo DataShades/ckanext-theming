@@ -1,54 +1,26 @@
-# Data Dictionary Page
+# Other Pages Section
 
-Define and manage field metadata for tabular resources.
+This section covers additional pages and utilities in the CKAN portal.
 
 ## Overview
 
-Data dictionary page provides:
+Other pages include:
 
-- Field definitions
-- Type information
-- Label editing
-- Description management
+- Error pages
+- Statistics
+- Feeds
+- Development tools
 
-/// admonition | Screenshots
+## Pages in This Section
 
-/// tab | Dictionary
-![dictionary](../screenshots/resource-dictionary.jpeg)
-///
+| Page                              | Description                    |
+|-----------------------------------|--------------------------------|
+| [Error Pages](error-pages.md)     | 404, 403, 500 errors           |
+| [Stats](stats.md)                 | Site statistics                |
+| [Primer](primer.md)               | Style guide                    |
 
-/// tab | Fields
-![fields](../screenshots/resource-dictionary-fields.jpeg)
-///
+## Related Sections
 
-///
-
-## URL Pattern
-
-```
-GET /dataset/{id}/resource/{resource_id}/dictionary
-POST /dataset/{id}/resource/{resource_id}/dictionary
-```
-
-## Purpose
-
-Allows users to:
-
-- Define field labels
-- Add field descriptions
-- Set field types
-- Document data structure
-
-## Actions Available
-
-| Action        | Description              |
-|---------------|--------------------------|
-| Edit fields   | Modify field metadata    |
-| Add labels    | Set human-readable names |
-| Set types     | Define field types       |
-
-## Related Pages
-
-- [Resource Data](data.md) - Resource data
-- [Resource Views](views.md) - Data visualizations
-- [Resource Read](read.md) - View resource
+- [Home](../home/index.md) - Main pages
+- [Admin](../admin/index.md) - Administration
+- [Dataset](../dataset/index.md) - Content

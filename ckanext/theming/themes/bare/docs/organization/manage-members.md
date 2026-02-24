@@ -1,60 +1,54 @@
-# Organization Add Member Page
 
-Add a new member to an organization.
+# Organization Manage Members Page
+
+Bulk management interface for organization members.
 
 ## Overview
 
-The add member page provides:
+The manage members page provides:
 
-- User selection interface
-- Role assignment
-- Permission explanation
+- Complete member list
+- Bulk role changes
+- Bulk removal
+- Member search/filter
 
 /// admonition | Screenshots
-
-/// tab | Add member form
-![form](../screenshots/organization-member-new.jpeg)
-///
-
-/// tab | Role help
-![help](../screenshots/organization-member-new-role-help.jpeg)
-///
-
+![manage](../screenshots/organization-manage-members.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/member_new/{id}
-POST /organization/member_new/{id}
+GET /organization/member_manage/{id}
+POST /organization/member_manage/{id}
 ```
 
 **Examples:**
 ```
-<<vars.site_url>>/organization/member_new/environmental-protection-agency
-<<vars.site_url>>/organization/member_new/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+<<vars.site_url>>/organization/member_manage/environmental-protection-agency
+<<vars.site_url>>/organization/member_manage/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
 ```
 
 ## Purpose
 
-The add member page allows authorized users to:
+The manage members page allows administrators to:
 
-- Search for existing users
-- Select user to add
-- Assign role (admin, editor, member)
-- Set permissions
+- View all members at once
+- Change multiple member roles
+- Remove multiple members
+- Search and filter members
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| Search user   | Find user                |
-| Select user   | Choose user              |
-| Set role      | Assign role              |
-| Add member    | Create membership        |
+| Action           | Description              |
+|------------------|--------------------------|
+| Select members   | Choose for bulk action   |
+| Change roles     | Update multiple roles    |
+| Remove members   | Delete multiple members  |
+| Search           | Filter members           |
 
 ## Related Pages
 
-- [Organization Members](members.md) - View all members
-- [Manage Members](manage-members.md) - Bulk management
-- [User Profile](../user/read.md) - User details
+- [Organization Members](members.md) - Simple member list
+- [Add Member](member-new.md) - Add single member
+- [Administrators](admins.md) - Admin list

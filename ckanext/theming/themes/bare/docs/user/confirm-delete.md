@@ -1,50 +1,43 @@
-# Password Reset Perform Page
+# User Confirm Delete Page
 
-Set new password with reset key.
+Confirm deletion of a user account.
 
 ## Overview
 
-Perform reset page provides:
+User delete confirmation:
 
-- New password form
-- Password confirmation
-- Reset instructions
+- Final verification
+- Account deletion warning
+- Data impact notice
 
 /// admonition | Screenshots
-
-/// tab | Reset form
-![reset](../screenshots/user-perform-reset.jpeg)
-///
-
-/// tab | Invalid key
-![invalid](../screenshots/user-perform-reset-invalid-key.jpeg)
-///
-
+![confirm delete](../screenshots/user-confirm-delete.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /user/reset/{key}
-POST /user/reset/{key}
+GET /user/delete/{id}
+POST /user/delete/{id}
 ```
 
 ## Purpose
 
-Allows users to:
+Warns about consequences:
 
-- Set new password
-- Confirm password match
-- Regain account access
+- Account removal
+- Dataset ownership changes
+- Membership removal
+- API token revocation
 
 ## Actions Available
 
-| Action        | Description              |
-|---------------|--------------------------|
-| Set password  | Update password          |
-| Cancel        | Go back to login         |
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm delete  | Permanently remove       |
+| Cancel          | Keep account             |
 
 ## Related Pages
 
-- [Login](login.md) - User login
-- [Request Reset](request-reset.md) - Password reset request
+- [Edit Profile](edit.md) - Edit profile
+- [User Profile](read.md) - View profile

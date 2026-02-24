@@ -1,54 +1,43 @@
-# Organization Bulk Process Page
 
-Manage all datasets owned by the organization in bulk.
+# Organization Delete Confirmation Page
+
+Confirm deletion of an organization.
 
 ## Overview
 
-The bulk process page provides:
+Organization delete confirmation:
 
-- List of all organization datasets
-- Bulk edit capabilities
-- State changes (activate/deactivate)
-- Organization transfer
+- Final verification
+- Shows organization impact
+- Warns about datasets
 
 /// admonition | Screenshots
-![bulk](../screenshots/organization-bulk-process.jpeg)
+![confirm delete](../screenshots/organization-confirm-delete.jpeg)
 ///
 
 ## URL Pattern
 
 ```
-GET /organization/bulk_process/{id}
-POST /organization/bulk_process/{id}
-```
-
-**Examples:**
-```
-<<vars.site_url>>/organization/bulk_process/environmental-protection-agency
-<<vars.site_url>>/organization/bulk_process/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+GET /organization/delete/{id}
+POST /organization/delete/{id}
 ```
 
 ## Purpose
 
-The bulk process page allows administrators to:
+Warns about consequences:
 
-- View all organization datasets
-- Select multiple datasets
-- Change dataset states in bulk
-- Transfer ownership
+- Dataset ownership loss
+- Member access removal
+- Permanent deletion
 
 ## Actions Available
 
-| Action         | Description              |
-|----------------|--------------------------|
-| Select datasets| Choose for bulk action   |
-| Make public    | Set public state         |
-| Make private   | Set private state        |
-| Delete         | Remove datasets          |
-| Transfer       | Change ownership         |
+| Action          | Description              |
+|-----------------|--------------------------|
+| Confirm delete  | Permanently remove       |
+| Cancel          | Keep organization        |
 
 ## Related Pages
 
-- [Organization Read](read.md) - Main organization page
-- [Dataset Edit](../dataset/edit.md) - Edit individual dataset
-- [Dataset Search](../dataset/search.md) - Search datasets
+- [Organization Edit](edit.md) - Edit organization
+- [Organization Index](index.md) - Organization list

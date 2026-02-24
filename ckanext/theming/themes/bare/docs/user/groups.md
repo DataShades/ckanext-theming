@@ -1,23 +1,24 @@
-# User Organizations Page
 
-View organizations a user belongs to.
+# User Groups Page
+
+View groups a user belongs to.
 
 ## Overview
 
-Organizations page displays:
+Groups page displays:
 
-- User's organization memberships
-- Role in each organization
-- Organization details
+- User's group memberships
+- Role in each group
+- Group details
 
 /// admonition | Screenshots
 
-/// tab | With organizations
-![organizations](../screenshots/user-organizations.jpeg)
+/// tab | With groups
+![groups](../screenshots/user-groups.jpeg)
 ///
 
 /// tab | Empty state
-![empty](../screenshots/user-organizations-empty.jpeg)
+![empty](../screenshots/user-groups-empty.jpeg)
 ///
 
 ///
@@ -25,27 +26,27 @@ Organizations page displays:
 ## URL Pattern
 
 ```
-GET /user/{id}/organizations
+GET /user/{id}/groups
 ```
 
 ## Purpose
 
 Allows users to:
 
-- View organization memberships
+- View group memberships
 - See roles and permissions
-- Navigate to organizations
+- Navigate to groups
 
 ## Actions Available
 
-| Action           | Description              |
-|------------------|--------------------------|
-| View orgs        | See organization list    |
-| View role        | See membership level     |
-| Navigate to org  | Go to organization       |
+| Action          | Description              |
+|-----------------|--------------------------|
+| View groups     | See group list           |
+| View role       | See membership level     |
+| Navigate to group | Go to group            |
 
 ## Related Pages
 
 - [User Profile](read.md) - User profile
-- [Organization Index](../organization/index.md) - All organizations
-- [Dashboard Organizations](../dashboard/content.md) - My organizations
+- [Group Index](../group/index.md) - All groups
+- [Dashboard Groups](../dashboard/content.md) - My groups
