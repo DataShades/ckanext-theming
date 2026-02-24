@@ -1,8 +1,7 @@
 from __future__ import annotations
-import pytest
+
 from typing import Any
 
-from faker import Faker
 from playwright.sync_api import Page
 
 from ckan import types

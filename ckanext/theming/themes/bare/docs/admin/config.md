@@ -13,13 +13,7 @@ The config page provides:
 
 /// admonition | Screenshots
 
-/// tab | Config form
 ![config](../screenshots/admin-config.jpeg)
-///
-
-/// tab | Form fields
-![form](../screenshots/admin-config-form.jpeg)
-///
 
 ///
 

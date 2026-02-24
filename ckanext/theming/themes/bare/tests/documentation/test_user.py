@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Any
 
-import pytest
 from faker import Faker
 from playwright.sync_api import Page
 
@@ -131,35 +130,28 @@ def test_organizations(
     page: Page,
     user: dict[str, Any],
     organization_factory: types.TestFactory,
-    sysadmin: dict[str, Any],
-    login: Any,
 ):
     """Test user organizations page."""
-    organization_factory.create(users=[{"name": user["name"], "capacity": "member"}])
+    organization_factory.create_batch(3, users=[{"name": user["name"], "capacity": "member"}])
 
     page.goto("/user/" + user["name"] + "/organizations")
     doc_screenshot("user-organizations")
-
-    page.goto("/user/" + sysadmin["name"] + "/organizations")
-    doc_screenshot("user-organizations-empty")
 
 
 def test_groups(
     doc_screenshot: Any,
     page: Page,
     user: dict[str, Any],
-    group_factory: types.TestFactory,
-    sysadmin: dict[str, Any],
     login: Any,
+    group_factory: types.TestFactory,
 ):
     """Test user groups page."""
-    group_factory.create(users=[{"name": user["name"], "capacity": "member"}])
+    for group in group_factory.create_batch(3):
+        call_action("member_create", id=group["id"], object_type="user", object=user["id"], capacity="member")
 
+    login(user["name"])
     page.goto("/user/" + user["name"] + "/groups")
     doc_screenshot("user-groups")
-
-    page.goto("/user/" + sysadmin["name"] + "/groups")
-    doc_screenshot("user-groups-empty")
 
 
 def test_list(
@@ -193,10 +185,6 @@ def test_api_tokens(
     page.goto("/user/" + user["name"] + "/api-tokens")
     doc_screenshot("user-api-tokens")
 
-    create_form = page.locator("form")
-    create_form.scroll_into_view_if_needed()
-    doc_screenshot("user-api-tokens-create-form")
-
 
 def test_request_reset(
     doc_screenshot: Any,
@@ -205,15 +193,6 @@ def test_request_reset(
     """Test password reset request page."""
     page.goto("/user/reset")
     doc_screenshot("user-request-reset")
-
-
-def test_perform_reset(
-    doc_screenshot: Any,
-    page: Page,
-):
-    """Test password reset perform page."""
-    page.goto("/user/reset/invalid-key")
-    doc_screenshot("user-perform-reset-invalid-key")
 
 
 def test_confirm_delete(

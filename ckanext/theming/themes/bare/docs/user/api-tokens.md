@@ -13,13 +13,7 @@ The API tokens page provides:
 
 /// admonition | Screenshots
 
-/// tab | Token list
 ![tokens](../screenshots/user-api-tokens.jpeg)
-///
-
-/// tab | Create form
-![create](../screenshots/user-api-tokens-create-form.jpeg)
-///
 
 ///
 

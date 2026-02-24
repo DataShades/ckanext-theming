@@ -1,14 +1,19 @@
-# Activity
+# Activity Stream
 
-View a user's activity stream.
+View a user's activity history.
 
 ## Overview
 
-User activity page shows:
-- Recent actions by user
-- Dataset contributions
-- Timeline of activities
+User activity page displays:
+
+- User's recent actions
+- Dataset changes
+- Contributions timeline
 - Interaction history
+
+/// admonition | Screenshots
+![activity](../screenshots/user-activity.jpeg)
+///
 
 ## URL Pattern
 
@@ -16,14 +21,27 @@ User activity page shows:
 GET /user/activity/{id}
 ```
 
-## Template
+**Examples:**
+```
+<<vars.site_url>>/user/activity/john-doe
+<<vars.site_url>>/user/activity/5f7f7d1e-8b3a-4c9e-9f1e-2d3c4b5a6e7f
+```
 
-**File:** `templates/user/activity_stream.html`
+## Purpose
 
-## Screenshot Placeholder
+Allows viewing:
 
-![User Activity](../screenshots/user-activity.png)
-*Placeholder: User activity timeline*
+- User contributions
+- Creation history
+- Modification activity
+
+## Actions Available
+
+| Action        | Description              |
+|---------------|--------------------------|
+| View activity | See activity items       |
+| Filter        | Show specific types      |
+| Load more     | Show older activity      |
 
 ## Related Pages
 

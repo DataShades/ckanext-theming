@@ -137,13 +137,13 @@ nav:
     - user/new.md
     - user/read.md
     - user/edit.md
+    - user/confirm-delete.md
     - user/activity.md
     - user/followers.md
     - user/organizations.md
     - user/groups.md
     - user/api-tokens.md
     - user/request-reset.md
-    - user/perform-reset.md
   - Dashboard:
     - dashboard/index.md
     - dashboard/dashboard.md
@@ -152,8 +152,9 @@ nav:
     - dashboard/groups.md
   - Admin:
     - admin/index.md
-    - admin/index.md
+    - admin/sysadmins.md
     - admin/config.md
+    - admin/confirm-reset.md
     - admin/trash.md
   - Other:
     - other/index.md

@@ -15,7 +15,7 @@ Admin pages provide:
 
 | Page                              | Description                    |
 |-----------------------------------|--------------------------------|
-| [Admin Panel](index.md)           | Admin overview                 |
+| [Sysadmins](sysadmins.md)         | Manage sysadmins               |
 | [Config](config.md)               | Site configuration             |
 | [Reset Config](confirm-reset.md)  | Reset configuration            |
 | [Trash](trash.md)                 | Purge deleted items            |

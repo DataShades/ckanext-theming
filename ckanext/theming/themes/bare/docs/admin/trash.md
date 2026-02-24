@@ -13,13 +13,7 @@ The trash page provides:
 
 /// admonition | Screenshots
 
-/// tab | Trash list
 ![trash](../screenshots/admin-trash.jpeg)
-///
-
-/// tab | Confirm delete
-![confirm](../screenshots/admin-trash-confirm-delete.jpeg)
-///
 
 ///
 

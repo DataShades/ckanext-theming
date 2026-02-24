@@ -16,9 +16,9 @@ Dashboard pages provide:
 | Page                              | Description                    |
 |-----------------------------------|--------------------------------|
 | [Dashboard](dashboard.md)         | Main dashboard                 |
-| [My Datasets](content.md)         | User's datasets                |
-| [My Organizations](content.md)    | User's orgs                    |
-| [My Groups](content.md)           | User's groups                  |
+| [My Datasets](datasets.md)        | User's datasets                |
+| [My Organizations](organizations.md) | User's organizations        |
+| [My Groups](groups.md)            | User's groups                  |
 
 ## Access
 
@@ -29,3 +29,4 @@ Dashboard requires authentication.
 - [User](../user/index.md) - User account
 - [Dataset](../dataset/index.md) - Dataset management
 - [Organization](../organization/index.md) - Organizations
+- [Group](../group/index.md) - Groups

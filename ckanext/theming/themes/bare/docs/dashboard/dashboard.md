@@ -12,13 +12,7 @@ Dashboard provides:
 
 /// admonition | Screenshots
 
-/// tab | Dashboard
 ![dashboard](../screenshots/dashboard.jpeg)
-///
-
-/// tab | Activity feed
-![activity](../screenshots/dashboard-activity.jpeg)
-///
 
 ///
 
@@ -55,4 +49,6 @@ The dashboard allows users to:
 
 - [User Profile](../user/read.md) - User profile
 - [User Activity](../user/activity.md) - Activity stream
-- [Dashboard Datasets](content.md) - My datasets
+- [Dashboard Datasets](datasets.md) - My datasets
+- [Dashboard Organizations](organizations.md) - My organizations
+- [Dashboard Groups](groups.md) - My groups

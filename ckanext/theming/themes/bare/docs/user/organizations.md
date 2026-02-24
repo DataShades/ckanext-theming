@@ -12,13 +12,7 @@ Organizations page displays:
 
 /// admonition | Screenshots
 
-/// tab | With organizations
 ![organizations](../screenshots/user-organizations.jpeg)
-///
-
-/// tab | Empty state
-![empty](../screenshots/user-organizations-empty.jpeg)
-///
 
 ///
 
