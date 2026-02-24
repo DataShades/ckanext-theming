@@ -33,6 +33,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
         root = os.path.dirname(os.path.abspath(__file__))
         return [
             Theme("bare", os.path.join(root, "themes/bare"), icon_map=reference.bare_icons),
+            Theme("midnight-blue-portable", os.path.join(root, "themes/midnight-blue-portable")),
         ]
 
     @override

@@ -110,15 +110,26 @@ def list_themes():
 @theme.command("create")
 @click.argument("name")
 @click.argument("location", required=False)
-def theme_create(name: str, location: str):
+@click.option("--base", default="bare", help="Base theme to copy structure and templates from.")
+def theme_create(name: str, location: str, base: str):
     """Create a new theme with all required structure and templates."""
     if not location:
         location = os.getcwd()
         if not click.confirm(f"No location provided, theme will be created inside `{location}`"):
             raise click.Abort
-    bare = lib.get_theme("bare")
+    theme = lib.get_theme(base)
+    if not theme.path:
+        tk.error_shout(f"{base} theme does not have a filesystem path to copy from")
+        if theme.parent:
+            click.echo(f"Consider using `{theme.parent}` as the base theme instead.")
 
-    shutil.copytree(bare.path, os.path.join(location, name), ignore=lambda d, f: ["node_modules", "package-lock.json"])
+        raise click.Abort
+
+    shutil.copytree(
+        theme.path,
+        os.path.join(location, name),
+        ignore=lambda d, f: ["node_modules", "package-lock.json", ".benchmarks", ".test-screenshots"],
+    )
 
 
 @theme.group()
