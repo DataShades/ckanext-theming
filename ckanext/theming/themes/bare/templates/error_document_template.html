@@ -1,6 +1,9 @@
 {% extends "_layout.html" %}
 {%- set _layout = _layout|default("content_focus") -%}
 
+{# eat the flash messages caused by the 404 #}
+{%- do h.get_flashed_messages() -%}
+
 {%- block subtitle -%}
     {{ ui.subtitle_item(gettext('Error %(error_code)s', error_code=code)) }}
     {{- super() }}
@@ -23,8 +26,3 @@
 {%- endblock %}
 
 {%- block breadcrumb %}{% endblock %}
-
-{%- block notifications_container %}
-    {# eat the flash messages caused by the 404 #}
-    {%- do h.get_flashed_messages() -%}
-{% endblock %}

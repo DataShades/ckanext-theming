@@ -4,14 +4,20 @@
 {%- endmacro %}
 
 {%- macro nav_item(content, href, active) -%}
-    {%- if active %}
-        <strong>{{ ui.link(content, href, **kwargs) }}</strong>
-    {%- else -%}
-        {{ ui.link(content, href, **kwargs) }}
-    {%- endif %}
+    {%- set link_kwargs = kwargs -%}
+    {%- call ui.util.call(ui.list_item, attrs={"class": "active"} if active else {}) -%}
+        {{ ui.link(content, href=href, aria={"current": "page"} if active else {}, **link_kwargs) }}
+    {%- endcall %}
 {%- endmacro %}
 
-{%- macro main_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro main_nav_item(content, href, active) -%}
+    {{ ui.nav_item(content, href, active, **kwargs) }}
+{%- endmacro %}
+
+{%- macro sidebar_nav_item(content, href, active) -%}
+    {{ ui.nav_item(content, href, active, **kwargs) }}
+{%- endmacro %}
+
 
 {%- macro account_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 

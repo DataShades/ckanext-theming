@@ -25,6 +25,14 @@
     </footer>
 {%- endmacro %}
 
+{%- macro footer_main(content) -%}
+    <div>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro footer_secondary(content) -%}
+    <div>{{ content }}</div>
+{%- endmacro %}
+
 {%- macro account(content, title, subtitle, logo) -%}
     <header {{ ui.util.attrs(kwargs) }} id="account">
         {{ ui.container(content) }}

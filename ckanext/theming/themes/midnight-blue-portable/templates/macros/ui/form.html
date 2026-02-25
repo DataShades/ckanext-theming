@@ -48,13 +48,9 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro %}
 
 {%- macro field_errors(errors) -%}
-    {%- if errors -%}
-        <div {{ ui.util.attrs(kwargs) }}>
-            {%- for error in errors -%}
-                <span role="alert">{{ error }}</span>{% if not loop.last %}<br/>{% endif %}
-            {%- endfor %}
-        </div>
-    {%- endif %}
+    {%- for error in errors -%}
+        <div {{ ui.util.attrs(kwargs) }} class="invalid-feedback">{{ error }}</div>
+    {%- endfor %}
 {%- endmacro %}
 
 {%- macro file_input(content, accept, capture, multiple) -%}
@@ -243,15 +239,13 @@ this.parentNode.insertBefore(tpl, this);
 {%- macro select_box(content, nested_content, name, id, label, multiple, required, autocomplete, errors=[]) -%}
     {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
     {%- set help_id = ui.util.id() if nested_content -%}
-    <div>
+    <div class="form-group">
         {%- if label -%}
-            <label for="{{ field_id }}">{{ label }}</label>
-        {%- endif %}
-        {%- if nested_content -%}
-            <div class="input-help" id="{{ help_id }}">{{ nested_content }}</div>
+            <label class="form-label" for="{{ field_id }}">{{ label }}</label>
         {%- endif %}
         <select
             {{ ui.util.attrs(kwargs) }}
+            class="form-select {%- if errors %} is-invalid{%- endif %}"
             {%- if name %} name="{{ name }}"{%- endif %}
             {%- if field_id %} id="{{ field_id }}"{%- endif %}
             {%- if required %} required{%- endif %}
@@ -261,11 +255,10 @@ this.parentNode.insertBefore(tpl, this);
         >
             {{ content }}
         </select>
-        {%- if errors %}
-            <div>
-                {{ ui.field_errors(errors) }}
-            </div>
+        {%- if nested_content -%}
+            <small class="form-text" id="{{ help_id }}">{{ nested_content }}</small>
         {%- endif %}
+        {{ ui.field_errors(errors) if errors }}
     </div>
 {%- endmacro %}
 

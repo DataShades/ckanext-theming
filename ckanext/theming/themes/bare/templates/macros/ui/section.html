@@ -1,12 +1,10 @@
 {%- macro sidebar_section(content, title) -%}
     {%- set id = ui.util.id() -%}
     <aside {{ ui.util.attrs(kwargs) }} role="complementary" aria-labelledby="section-title-{{ id }}">
-        <section>
-            {{ ui.heading(title, level=2, attrs={"id": "section-title-" ~ id}) }}
-            <div>
-                {{ content }}
-            </div>
-        </section>
+        {{ ui.heading(title, level=2, attrs={"id": "section-title-" ~ id}) }}
+        <div>
+            {{ content }}
+        </div>
     </aside>
 {%- endmacro %}
 

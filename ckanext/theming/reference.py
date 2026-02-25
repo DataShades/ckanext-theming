@@ -93,6 +93,7 @@ components.update(
         "column": Component(Category.RECOMMENDED),
         "container": Component(Category.RECOMMENDED),
         "grid": Component(Category.RECOMMENDED),
+        "row": Component(Category.RECOMMENDED),
         "list": Component(Category.ESSENTIAL),
         "list_item": Component(Category.ESSENTIAL),
         "panel": Component(Category.RECOMMENDED),
@@ -163,6 +164,8 @@ components.update(
         "account": Component(Category.RECOMMENDED),
         "header": Component(Category.RECOMMENDED),
         "footer": Component(Category.RECOMMENDED),
+        "footer_main": Component(Category.RECOMMENDED),
+        "footer_secondary": Component(Category.RECOMMENDED),
         "subtitle_item": Component(Category.ESSENTIAL),
         # navigation ##########################################################
         "breadcrumb": Component(Category.ESSENTIAL),

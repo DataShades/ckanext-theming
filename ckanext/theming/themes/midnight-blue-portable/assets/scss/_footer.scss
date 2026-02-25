@@ -29,7 +29,8 @@ footer {
         color: $footerTextColor;
         .form-group {
             margin-bottom: 0;
-            label {
+            .form-label {
+                color: $footerTextColor;
                 font-size: $h5-font-size;
                 margin-right: 5px;
                 &::after {

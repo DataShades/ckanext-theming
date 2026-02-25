@@ -42,25 +42,29 @@
 {%- endmacro %}
 
 {%- macro container(content, fluid) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="bare-container {{ 'container-fluid' if fluid }}">{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }} class="container {{ 'container-fluid' if fluid }}">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro grid(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="grid">
+    {%- call ui.util.call(ui.container, **kwargs) -%}
         {{ content }}
-    </div>
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro row(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="row">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro list(content) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
+    <ul {{ ui.util.attrs(kwargs) }} class="list-unstyled">
         {{ content }}
-    </div>
+    </ul>
 {%- endmacro %}
 
 {%- macro list_item(content) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
+    <li {{ ui.util.attrs(kwargs) }}>
         {{ content }}
-    </div>
+    </li>
 {%- endmacro %}
 
 {%- macro panel(content, id, active) -%}

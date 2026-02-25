@@ -43,8 +43,8 @@
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
 {%- endmacro %}
 
-{%- macro icon(name) -%}
-    <span {{ ui.util.attrs(kwargs) }} class="icon-{{ name }}">{{ ui.util.icon(name) }}</span>
+{%- macro icon(name, weight=none) -%}
+    <i {{ ui.util.attrs(kwargs) }} class="fa-{{ ui.util.icon(name) }} fa{% if weight %}-{{ weight }}{% endif %}"></i>
 {%- endmacro %}
 
 {%- macro image(src, alt, height, width) -%}

@@ -20,9 +20,9 @@
 {#% set dropdown_wrapper = dropdown_wrapper | default(_wrapper.dropdown_wrapper) %#}
 {#% set facet_wrapper = facet_wrapper | default(_wrapper.facet_wrapper) %#}
 {#% set group_wrapper = group_wrapper | default(_wrapper.group_wrapper) %#}
-{#% set main_nav_wrapper = main_nav_wrapper | default(_wrapper.main_nav_wrapper) %#}
+{% set main_nav_wrapper = main_nav_wrapper | default(_wrapper.main_nav_wrapper) %}
 {#% set menu_wrapper = menu_wrapper | default(_wrapper.menu_wrapper) %#}
-{#% set nav_wrapper = nav_wrapper | default(_wrapper.nav_wrapper) %#}
+{% set nav_wrapper = nav_wrapper | default(_wrapper.nav_wrapper) %}
 {#% set organization_wrapper = organization_wrapper | default(_wrapper.organization_wrapper) %#}
 {#% set package_wrapper = package_wrapper | default(_wrapper.package_wrapper) %#}
 {#% set page_action_wrapper = page_action_wrapper | default(_wrapper.page_action_wrapper) %#}
@@ -30,6 +30,7 @@
 {#% set resource_wrapper = resource_wrapper | default(_wrapper.resource_wrapper) %#}
 {#% set tab_nav_wrapper = tab_nav_wrapper | default(_wrapper.tab_nav_wrapper) %#}
 {#% set user_wrapper = user_wrapper | default(_wrapper.user_wrapper) %#}
+
 
 {#% set activity = activity | default(_content.activity) %#}
 {#% set facet = facet | default(_content.facet) %#}
@@ -43,11 +44,12 @@
 {#% set accordion = accordion | default(_container.accordion) %#}
 {#% set button_group = button_group | default(_container.button_group) %#}
 {#% set card = card | default(_container.card) %#}
-{#% set column = column | default(_container.column) %#}
-{#% set container = container | default(_container.container) %#}
-{#% set grid = grid | default(_container.grid) %#}
-{#% set list = list | default(_container.list) %#}
-{#% set list_item = list_item | default(_container.list_item) %#}
+{% set column = column | default(_container.column) %}
+{% set container = container | default(_container.container) %}
+{% set grid = grid | default(_container.grid) %}
+{% set row = row | default(_container.row) %}
+{% set list = list | default(_container.list) %}
+{% set list_item = list_item | default(_container.list_item) %}
 {#% set panel = panel | default(_container.panel) %#}
 
 {#% set facet_section = facet_section | default(_section.facet_section) %#}
@@ -69,9 +71,9 @@
 {#% set datetime = datetime | default(element.datetime) %#}
 {#% set divider = divider | default(element.divider) %#}
 {#% set heading = heading | default(element.heading) %#}
-{#% set icon = icon | default(element.icon) %#}
+{% set icon = icon | default(element.icon) %}
 {#% set image = image | default(element.image) %#}
-{#% set link = link | default(element.link) %#}
+{% set link = link | default(element.link) %}
 {#% set tag = tag | default(element.tag) %#}
 {#% set text = text | default(element.text) %#}
 {#% set video = video | default(element.video) %#}
@@ -90,21 +92,21 @@
 {#% set extra_field = extra_field | default(_form.extra_field) %#}
 {#% set extra_field_multiplicator = extra_field_multiplicator | default(_form.extra_field_multiplicator) %#}
 {#% set extra_fields_collection = extra_fields_collection | default(_form.extra_fields_collection) %#}
-{#% set field_errors = field_errors | default(_form.field_errors) %#}
+{% set field_errors = field_errors | default(_form.field_errors) %}
 {#% set file_input = file_input | default(_form.file_input) %#}
-{#% set form = form | default(_form.form) %#}
+{% set form = form | default(_form.form) %}
 {#% set form_actions = form_actions | default(_form.form_actions) %#}
-{#% set form_end = form_end | default(_form.form_end) %#}
+{% set form_end = form_end | default(_form.form_end) %}
 {#% set form_errors = form_errors | default(_form.form_errors) %#}
-{#% set form_start = form_start | default(_form.form_start) %#}
+{% set form_start = form_start | default(_form.form_start) %}
 {#% set hidden_input = hidden_input | default(_form.hidden_input) %#}
 {#% set input = input | default(_form.input) %#}
 {#% set markdown = markdown | default(_form.markdown) %#}
 {#% set radio = radio | default(_form.radio) %#}
 {#% set range_input = range_input | default(_form.range_input) %#}
 {#% set select = select | default(_form.select) %#}
-{#% set select_box = select_box | default(_form.select_box) %#}
-{#% set select_option = select_option | default(_form.select_option) %#}
+{% set select_box = select_box | default(_form.select_box) %}
+{% set select_option = select_option | default(_form.select_option) %}
 {#% set submit = submit | default(_form.submit) %#}
 {#% set textarea = textarea | default(_form.textarea) %#}
 
@@ -115,7 +117,9 @@
 {#% set tab_handle = tab_handle | default(_handle.tab_handle) %#}
 
 {#% set account = account | default(meta.account) %#}
-{#% set footer = footer | default(meta.footer) %#}
+{% set footer = footer | default(meta.footer) %}
+{% set footer_main = footer_main | default(meta.footer_main) %}
+{% set footer_secondary = footer_secondary | default(meta.footer_secondary) %}
 {#% set header = header | default(meta.header) %#}
 {% set subtitle_item = subtitle_item | default(meta.subtitle_item) %}
 
@@ -124,9 +128,9 @@
 {#% set content_action = content_action | default(_nav.content_action) %#}
 {#% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %#}
 {#% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %#}
-{#% set main_nav_item = main_nav_item | default(_nav.main_nav_item) %#}
+{% set main_nav_item = main_nav_item | default(_nav.main_nav_item) %}
 {#% set menu_item = menu_item | default(_nav.menu_item) %#}
-{#% set nav_item = nav_item | default(_nav.nav_item) %#}
+{% set nav_item = nav_item | default(_nav.nav_item) %}
 {#% set page_action = page_action | default(_nav.page_action) %#}
 {#% set pagination = pagination | default(_nav.pagination) %#}
 
@@ -139,3 +143,10 @@
 {#% set search_sort_control = search_sort_control | default(_search.search_sort_control) %#}
 {#% set search_submit_button = search_submit_button | default(_search.search_submit_button) %#}
 {#% set search_pagination_info = search_pagination_info | default(_search.search_pagination_info) %#}
+
+
+{#  CUSTOM COMPONENTS #}
+{% set language_selector = language_selector | default(meta.language_selector) %}
+{% set sr_only = sr_only | default(meta.sr_only) %}
+{% set sidebar_nav_wrapper = sidebar_nav_wrapper | default(_wrapper.sidebar_nav_wrapper) %}
+{% set sidebar_nav_item = sidebar_nav_item | default(_nav.sidebar_nav_item) %}

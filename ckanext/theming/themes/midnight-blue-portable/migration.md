@@ -9,3 +9,5 @@
 * MILESTIONE. CKAN UI is restored and looks normal.
 * add templates/macros/ui.html and ui/ subfolder. Comment all macros inside ui.html and enable them one by one
 * enable subtitle_item macro and update `block subtitle` everywhere.
+* rewrite footer. I got container/grid/row/column, list/list_item, icon, link, form_*, select_*, footer* components here.
+* rewrite header. Here you'll get few *nav_wrapper and *nav_item components, as well as header/account.

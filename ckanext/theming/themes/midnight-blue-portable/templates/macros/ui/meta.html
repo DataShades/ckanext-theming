@@ -20,10 +20,17 @@
 {%- endmacro %}
 
 {%- macro footer(content) -%}
-    <footer {{ ui.util.attrs(kwargs) }} id="footer">
-        {{ ui.container(content) }}
-    </footer>
+    <footer {{ ui.util.attrs(kwargs) }}>{{ content }}</footer>
 {%- endmacro %}
+
+{%- macro footer_main(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="site-footer">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro footer_secondary(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="bg-black">{{ content }}</div>
+{%- endmacro %}
+
 
 {%- macro account(content, title, subtitle, logo) -%}
     <header {{ ui.util.attrs(kwargs) }} id="account">
@@ -35,4 +42,26 @@
     {%- do kwargs -%}
     {{ content }}
     {%- if not initial %} {{ g.template_title_delimiter }} {% endif %}
+{%- endmacro %}
+
+
+{%- macro language_selector() -%}
+    {% set current_lang = request.environ.CKAN_LANG %}
+    {%- set data_attrs = {"module": "autocomplete", "module-dropdown-class": "lang-dropdown", "module-container-class": "lang-container"} -%}
+    {%- set label = ui.icon("globe", weight="solid") ~ ui.sr_only(_('Language')) -%}
+
+    <div class="lang-select">
+        {%- call ui.util.call(ui.form, method="POST", action=h.url_for('util.internal_redirect'), data={"module": "select-switch"}) -%}
+            {%- call ui.util.call(ui.select_box, name="url", id=ui.util.id(), data=data_attrs, label=label, **kwargs) -%}
+                {% for locale in h.get_available_locales() %}
+                    {{ ui.select_option(locale.display_name or locale.english_name, value=h.url_for(h.current_url(), locale=locale.short_name), selected=locale.short_name == current_lang) }}
+                {% endfor %}
+            {%- endcall %}
+        {%- endcall %}
+    </div>
+{%- endmacro %}
+
+
+{%- macro sr_only(content) -%}
+    <span {{ ui.util.attrs(kwargs) }} class="sr-only">{{ content }}</span>
 {%- endmacro %}
