@@ -1,6 +1,9 @@
 {% extends "group/read_base.html" %}
 
-{% block subtitle %}{{ _('Members') }} {{ g.template_title_delimiter }} {{ group_dict.display_name }} {{ g.template_title_delimiter }} {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Members')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block page_primary_action %}{% endblock %}
 

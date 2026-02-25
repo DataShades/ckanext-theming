@@ -1,0 +1,71 @@
+{%- macro accordion(content, title, open) -%}
+    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open}}>
+        <summary role="button" aria-expanded="{{ 'true' if open else 'false' }}">{{ title }}</summary>
+        <div role="region" aria-labelledby="{{ kwargs.attrs.id if kwargs.attrs and kwargs.attrs.id else '' }}">{{ content }}</div>
+    </details>
+{%- endmacro %}
+
+{%- macro button_group(content, direction="row") -%}
+    <div {{ ui.util.attrs(kwargs) }} class="btn-group btn-group-{{ direction }}">
+        {{- content -}}
+    </div>
+{%- endmacro %}
+
+{%- macro card(content, title, footer, img, href) -%}
+    <div {{ ui.util.attrs(kwargs) }} role="article" aria-label="{{ title if title else _('Card') }}" style="border: 1px solid gray">
+        {%- if img -%}
+            {{ ui.image(img, **kwargs) }}
+        {%- endif %}
+
+        <strong>
+            {%- if href -%}
+                {{ ui.link(title, href=href) }}
+            {%- else -%}
+                {{ title }}
+            {%- endif %}
+        </strong>
+
+        {%- if content -%}
+            <div>{{ content }}</div>
+        {%- endif %}
+
+        {%- if footer -%}
+            <div>{{ footer }}</div>
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content, span) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="col{% if span %}{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}{% endif %}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro container(content, fluid) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="bare-container {{ 'container-fluid' if fluid }}">{{ content }}</div>
+{%- endmacro %}
+
+{%- macro grid(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="grid">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro list(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} style="display: flex; flex-direction: column; gap: 1rem;">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro list_item(content) -%}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro panel(content, id, active) -%}
+    <div {{ ui.util.attrs(kwargs) }} data-panel="{{ id or ui.util.id() }}"
+        {%- if active %} data-panel-default="true"{% else %} hidden{% endif %}>
+        {{ content }}
+    </div>
+{%- endmacro %}

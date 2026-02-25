@@ -2,7 +2,11 @@
 
 {% set has_reorder = pkg_dict and pkg_dict.resources and pkg_dict.resources|length > 0 %}
 
-{% block subtitle %}{{ _('Resources') }} {{ g.template_title_delimiter }} {{ h.dataset_display_name(pkg) }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Resources')) }}
+    {{- ui.subtitle_item(h.dataset_display_name(pkg)) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block page_primary_action %}
 {% endblock %}

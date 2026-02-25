@@ -1,6 +1,9 @@
 {% extends "organization/read_base.html" %}
 
-{% block subtitle %}{{ _('Members') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Members')) }}
+    {{- super() }}
+{% endblock %}
 
 {% block page_primary_action %}
 {% endblock %}

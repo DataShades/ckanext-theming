@@ -1,6 +1,9 @@
 {% extends "user/login.html" %}
 
-{% block subtitle %}{{ _('Register') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Register')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   <li class="active">{{ h.nav_link(_('Registration'), named_route='user.register') }}</li>

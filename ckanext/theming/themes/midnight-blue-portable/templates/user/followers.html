@@ -1,6 +1,9 @@
 {% extends "user/read.html" %}
 
-{% block subtitle %}{{ _('Followers') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Followers')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block primary_content_inner %}
   <h2 class="hide-heading">

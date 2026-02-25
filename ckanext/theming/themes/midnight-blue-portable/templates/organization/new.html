@@ -2,8 +2,10 @@
 
 {% set title = h.humanize_entity_type('organization', group_type, 'create title') or _('Create an Organization')%}
 
-
-{% block subtitle %}{{ title }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(title) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block page_heading %}{{ title }}{% endblock %}
 

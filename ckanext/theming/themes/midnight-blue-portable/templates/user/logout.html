@@ -1,6 +1,9 @@
 {% extends "user/login.html" %}
 
-{% block subtitle %}{{ _('Logged Out') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Logged Out')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}{% endblock %}
 

@@ -3,7 +3,10 @@
 {% set label = h.humanize_entity_type('group', group_type, 'create title') or _('Create a Group') %}
 
 
-{% block subtitle %}{{ label }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(label) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block page_heading %}{{ label }}{% endblock %}
 

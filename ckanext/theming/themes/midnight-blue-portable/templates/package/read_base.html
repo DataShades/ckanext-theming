@@ -2,7 +2,10 @@
 
 {% set default_group_type = h.default_group_type('group') %}
 
-{% block subtitle %}{{ h.dataset_display_name(pkg) }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(h.dataset_display_name(pkg)) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block head_extras -%}
   {{ super() }}

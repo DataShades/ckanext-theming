@@ -1,6 +1,11 @@
 {% extends "package/view_edit_base.html" %}
 
-{% block subtitle %}{{ _('Add view') }} {{ g.template_title_delimiter }} {{ h.resource_display_name(resource) }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Add view')) }}
+    {{- ui.subtitle_item(h.resource_display_name(resource)) }}
+    {{- super() }}
+{%- endblock %}
+
 {% block form_title %}{{ _('Add view') }}{% endblock %}
 
 {% block breadcrumb_content %}

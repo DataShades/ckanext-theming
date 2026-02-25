@@ -2,7 +2,10 @@
 
 {% import 'macros/form.html' as form %}
 
-{% block subtitle %}{{ _('Edit Collaborator') if user else _('Add Collaborator') }} - {{ super() }}{% endblock %}
+{% block subtitle -%}
+    {{- ui.subtitle_item(_('Edit Collaborator') if user else _('Add Collaborator')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block primary_content_inner %}
   {% link_for _('Back to all collaborators'), named_route='dataset.collaborators_read', id=pkg_dict.name, class_='btn btn-secondary pull-right', icon='arrow-left' %}

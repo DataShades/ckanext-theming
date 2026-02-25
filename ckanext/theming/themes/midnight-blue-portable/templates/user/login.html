@@ -1,6 +1,9 @@
 {% extends "page.html" %}
 
-{% block subtitle %}{{ _('Login') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Login')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   <li class="active">{{ h.nav_link(_('Login'), named_route='user.login') }}</li>

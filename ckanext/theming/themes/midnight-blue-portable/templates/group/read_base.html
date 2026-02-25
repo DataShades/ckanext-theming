@@ -1,7 +1,11 @@
 {% extends "page.html" %}
 {% set dataset_type = h.default_package_type() %}
 
-{% block subtitle %}{{ group_dict.display_name }} {{ g.template_title_delimiter }} {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(group_dict.display_name) if group_dict }}
+    {{- ui.subtitle_item(h.humanize_entity_type('group', group_type, 'page title') or _('Groups')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   <li>{% link_for h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), named_route=group_type+'.index' %}</li>

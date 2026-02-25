@@ -1,6 +1,11 @@
 {% extends "package/resource_edit_base.html" %}
 
-{% block subtitle %}{{ _('Edit') }} {{ g.template_title_delimiter }} {{ h.resource_display_name(res) }} {{ g.template_title_delimiter }} {{ h.dataset_display_name(pkg) }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Edit')) }}
+    {{- ui.subtitle_item(h.resource_display_name(res)) }}
+    {{- ui.subtitle_item(h.dataset_display_name(pkg)) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block form %}
   {% snippet 'package/snippets/resource_edit_form.html',

@@ -1,0 +1,38 @@
+{%- macro header(content, title, subtitle, logo) -%}
+    <header {{ ui.util.attrs(kwargs) }} id="header">
+        {%- call ui.util.call(ui.container) -%}
+            {%- if logo %}
+                {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
+
+            {%- else %}
+                <div>
+                    {{ ui.heading(ui.link(title, href=h.url_for("home.index")), level=1) }}
+                    {% if subtitle %}
+                        {{ ui.heading(subtitle, level=2) }}
+                    {% endif %}
+                </div>
+
+            {%- endif %}
+
+            {{ content }}
+        {%- endcall %}
+    </header>
+{%- endmacro %}
+
+{%- macro footer(content) -%}
+    <footer {{ ui.util.attrs(kwargs) }} id="footer">
+        {{ ui.container(content) }}
+    </footer>
+{%- endmacro %}
+
+{%- macro account(content, title, subtitle, logo) -%}
+    <header {{ ui.util.attrs(kwargs) }} id="account">
+        {{ ui.container(content) }}
+    </header>
+{%- endmacro %}
+
+{%- macro subtitle_item(content, initial) -%}
+    {%- do kwargs -%}
+    {{ content }}
+    {%- if not initial %} {{ g.template_title_delimiter }} {% endif %}
+{%- endmacro %}

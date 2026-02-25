@@ -3,10 +3,12 @@
     This template defines the overall structure of the HTML document,
     including blocks for the head, body, styles, scripts, and main content area. -#}
 {%- block document -%}
+
     {#- Allows the DOCTYPE to be set on a page by page basis -#}
     {%- block doctype %}<!DOCTYPE html>{% endblock %}
     <html{% block html_attrs %} lang="{{ h.lang() }}"{{ ' dir="rtl"' if h.is_rtl_language() }}{% endblock %}>
         <head>
+
             {#- Document head block - contains meta tags, title, links to stylesheets, etc. -#}
             {%- block document_head %}
                 {%- block meta %}
@@ -37,9 +39,7 @@
                 {#- Styles block - contains links to stylesheets -#}
                 {%- block styles %}
                     {%- block styles_theming -%}
-                        {%- block styles_bare %}
-                            {%- asset "theming/bare/styles" %}
-                        {%- endblock %}
+                        {%- asset "theming/bare/styles" %}
                     {%- endblock %}
                 {%- endblock -%}
 
@@ -75,9 +75,7 @@
 
                     {#- Theming scripts block - contains theming related JavaScript files -#}
                     {%- block scripts_theming -%}
-                        {%- block scripts_bare %}
-                            {%- asset "theming/bare/scripts" -%}
-                        {%- endblock %}
+                        {%- asset "theming/bare/scripts" -%}
                     {%- endblock %}
                 {% endblock %}
 

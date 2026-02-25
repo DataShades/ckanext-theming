@@ -5,7 +5,11 @@
 {% set org_type = h.default_group_type('organization') %}
 {% set group_type = h.default_group_type('group') %}
 
-{% block subtitle %}{{ user.display_name }} {{ g.template_title_delimiter }} {{ _('Users') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(user.display_name) if user }}
+    {{- ui.subtitle_item(_('Users')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   {{ h.build_nav('user.index', _('Users')) }}

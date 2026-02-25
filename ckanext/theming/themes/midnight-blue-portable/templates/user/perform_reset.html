@@ -1,7 +1,10 @@
 {% extends "user/login.html" %}
 {% import "macros/form.html" as form %}
 
-{% block subtitle %}{{ _('Reset Your Password') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Reset Your Password')) }}
+    {{- super() }}
+{%- endblock %}
 {% block page_heading %}{{ _('Reset Your Password') }}{% endblock %}
 {% block breadcrumb_content %}
   <li class="active">{{ _('Password Reset') }}</li>

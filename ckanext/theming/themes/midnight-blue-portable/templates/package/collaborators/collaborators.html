@@ -1,6 +1,9 @@
 {% extends "package/edit_base.html" %}
 
-{% block subtitle %}{{ _('Collaborators') }} {{ g.template_title_delimiter }} {{ super() }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Collaborators')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block page_primary_action %}
   {% if h.check_access('package_collaborator_create', {'id': pkg_dict.id})%}

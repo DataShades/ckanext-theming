@@ -1,6 +1,11 @@
 {% extends "package/view_edit_base.html" %}
 
-{% block subtitle %}{{ _('Edit view') }} {{ g.template_title_delimiter }} {{ h.resource_display_name(resource) }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Edit view')) }}
+    {{- ui.subtitle_item(h.resource_display_name(resource)) }}
+    {{- super() }}
+{%- endblock %}
+
 {% block form_title %}{{ _('Edit view') }}{% endblock %}
 
 {% block breadcrumb_content %}

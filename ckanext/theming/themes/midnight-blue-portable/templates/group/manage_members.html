@@ -1,6 +1,9 @@
 {% extends "group/edit_base.html" %}
 
-{% block subtitle %}{{ _('Members') }} {{ g.template_title_delimiter }} {{ group_dict.display_name }} {{ g.template_title_delimiter }} {{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+{% block subtitle -%}
+    {{ _('Members') }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content_inner %}
   <li>{% link_for group.display_name|truncate(35), named_route=group_type+'.read', id=group.name, title=group.display_name %}</li>

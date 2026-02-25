@@ -1,6 +1,9 @@
 {% extends "user/login.html" %}
 
-{% block subtitle %}{{ _('Reset your password') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Reset your password')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block page_heading %}{{ _('Reset your password') }}{% endblock %}
 

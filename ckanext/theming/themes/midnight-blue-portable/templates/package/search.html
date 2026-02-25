@@ -1,6 +1,9 @@
 {% extends "page.html" %}
 
-{% block subtitle %}{{ _(dataset_type.title()) }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_(dataset_type.title())) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   <li class="active">{{ h.nav_link(_(dataset_type.title() + 's'), named_route='%s.search' % dataset_type) }}</li>

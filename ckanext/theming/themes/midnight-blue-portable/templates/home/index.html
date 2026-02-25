@@ -1,6 +1,9 @@
 {% extends "page.html" %}
 
-{% block subtitle %}{{ _("Welcome") }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_("Welcome")) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block maintag %}{% endblock %}
 {% block toolbar %}{% endblock %}

@@ -2,7 +2,10 @@
 {% import 'macros/form.html' as form %}
 {% set logged_in = true if c.userobj else false %}
 
-{% block subtitle %}{{ _('Add data to the dataset') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('Add data to the dataset')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% set data = data or {} %}
 {% set errors = errors or {} %}

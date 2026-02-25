@@ -1,6 +1,9 @@
 {% extends "page.html" %}
 
-{% block subtitle %}{{ _('About') }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_('About')) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   <li class="active">{% link_for _('About'), named_route='home.about' %}</li>

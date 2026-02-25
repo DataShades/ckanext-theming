@@ -5,7 +5,10 @@
 
 {% block breadcrumb_content_selected %} class="active"{% endblock %}
 
-{% block subtitle %}{{ _(dataset_type.title()) }}{% endblock %}
+{% block subtitle -%}
+    {{ ui.subtitle_item(_(dataset_type.title())) }}
+    {{- super() }}
+{%- endblock %}
 
 {% block breadcrumb_content %}
   {% if pkg %}
