@@ -62,6 +62,8 @@
     </div>
 {%- endmacro %}
 
-{%- macro tooltip(content, tooltip, position="bottom") -%}
-    <span {{ ui.util.attrs(kwargs) }} data-tooltip="{{ tooltip }}" data-tooltip-position="{{ position }}">{{ content }}</span>
+{%- macro tooltip(content, tooltip, position) -%}
+    <span {{ ui.util.attrs(kwargs) }} data-bs-title="{{ tooltip }}" data-bs-toggle="tooltip">
+        {{- content -}}
+    </span>
 {%- endmacro %}

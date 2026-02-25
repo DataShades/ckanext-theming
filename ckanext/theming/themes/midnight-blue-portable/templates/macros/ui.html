@@ -12,7 +12,7 @@
 {% import "macros/ui/section.html" as _section with context %}
 
 {#% set accordion_wrapper = accordion_wrapper | default(_wrapper.accordion_wrapper) %#}
-{#% set account_nav_wrapper = account_nav_wrapper | default(_wrapper.account_nav_wrapper) %#}
+{% set account_nav_wrapper = account_nav_wrapper | default(_wrapper.account_nav_wrapper) %}
 {#% set activity_wrapper = activity_wrapper | default(_wrapper.activity_wrapper) %#}
 {#% set breadcrumb_wrapper = breadcrumb_wrapper | default(_wrapper.breadcrumb_wrapper) %#}
 {#% set content_action_wrapper = content_action_wrapper | default(_wrapper.content_action_wrapper) %#}
@@ -63,16 +63,16 @@
 {#% set progress = progress | default(feedback.progress) %#}
 {#% set spinner = spinner | default(feedback.spinner) %#}
 {#% set toast = toast | default(feedback.toast) %#}
-{#% set tooltip = tooltip | default(feedback.tooltip) %#}
+{% set tooltip = tooltip | default(feedback.tooltip) %}
 
 {#% set avatar = avatar | default(element.avatar) %#}
 {#% set badge = badge | default(element.badge) %#}
-{#% set button = button | default(element.button) %#}
+{% set button = button | default(element.button) %}
 {#% set datetime = datetime | default(element.datetime) %#}
 {#% set divider = divider | default(element.divider) %#}
 {#% set heading = heading | default(element.heading) %#}
 {% set icon = icon | default(element.icon) %}
-{#% set image = image | default(element.image) %#}
+{% set image = image | default(element.image) %}
 {% set link = link | default(element.link) %}
 {#% set tag = tag | default(element.tag) %#}
 {#% set text = text | default(element.text) %#}
@@ -116,14 +116,14 @@
 {#% set modal_close_handle = modal_close_handle | default(_handle.modal_close_handle) %#}
 {#% set tab_handle = tab_handle | default(_handle.tab_handle) %#}
 
-{#% set account = account | default(meta.account) %#}
+{% set account = account | default(meta.account) %}
 {% set footer = footer | default(meta.footer) %}
 {% set footer_main = footer_main | default(meta.footer_main) %}
 {% set footer_secondary = footer_secondary | default(meta.footer_secondary) %}
-{#% set header = header | default(meta.header) %#}
+{% set header = header | default(meta.header) %}
 {% set subtitle_item = subtitle_item | default(meta.subtitle_item) %}
 
-{#% set account_nav_item = account_nav_item | default(_nav.account_nav_item) %#}
+{% set account_nav_item = account_nav_item | default(_nav.account_nav_item) %}
 {#% set breadcrumb = breadcrumb | default(_nav.breadcrumb) %#}
 {#% set content_action = content_action | default(_nav.content_action) %#}
 {#% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %#}
@@ -148,5 +148,6 @@
 {#  CUSTOM COMPONENTS #}
 {% set language_selector = language_selector | default(meta.language_selector) %}
 {% set sr_only = sr_only | default(meta.sr_only) %}
+{% set header_logo = header_logo | default(meta.header_logo) %}
 {% set sidebar_nav_wrapper = sidebar_nav_wrapper | default(_wrapper.sidebar_nav_wrapper) %}
 {% set sidebar_nav_item = sidebar_nav_item | default(_nav.sidebar_nav_item) %}

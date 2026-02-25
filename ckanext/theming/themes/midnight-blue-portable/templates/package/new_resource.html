@@ -1,6 +1,6 @@
 {% extends "package/base_form_page.html" %}
 
-{% set logged_in = true if c.userobj else false %}
+{% set logged_in = true if current_user.is_authenticated else false %}
 {% set form_id = 'resource-edit' %}
 
 {% block subtitle -%}

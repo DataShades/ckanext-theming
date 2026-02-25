@@ -1,6 +1,6 @@
 {% extends "package/base_form_page.html" %}
 {% import 'macros/form.html' as form %}
-{% set logged_in = true if c.userobj else false %}
+{% set logged_in = true if current_user.is_authenticated else false %}
 
 {% block subtitle -%}
     {{ ui.subtitle_item(_('Add data to the dataset')) }}

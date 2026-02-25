@@ -5,8 +5,12 @@
 
 {%- macro nav_item(content, href, active) -%}
     {%- set link_kwargs = kwargs -%}
+    {%- if active -%}
+        {%- do link_kwargs.setdefault("aria", {}).setdefault("current", "page") -%}
+    {%- endif %}
+
     {%- call ui.util.call(ui.list_item, attrs={"class": "active"} if active else {}) -%}
-        {{ ui.link(content, href=href, aria={"current": "page"} if active else {}, **link_kwargs) }}
+        {{ ui.link(content, href=href, **link_kwargs) }}
     {%- endcall %}
 {%- endmacro %}
 
@@ -19,7 +23,10 @@
 {%- endmacro %}
 
 
-{%- macro account_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro account_nav_item(content, href, active) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "btn btn-primary") -%}
+    {{ ui.nav_item(content, href, active, **kwargs) }}
+{%- endmacro %}
 
 {%- macro content_nav_item(content, href, active) -%}{{ ui.tab_handle(content, href, active, **kwargs) }}{%- endmacro %}
 

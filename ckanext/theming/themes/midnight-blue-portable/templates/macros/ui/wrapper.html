@@ -63,7 +63,7 @@
 {%- endmacro %}
 
 {%- macro nav_wrapper(content) -%}
-    {{ ui.list(content) }}
+    {{ ui.list(content, **kwargs) }}
 {%- endmacro %}
 
 {%- macro page_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}

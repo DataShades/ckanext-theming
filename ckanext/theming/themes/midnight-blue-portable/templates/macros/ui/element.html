@@ -16,9 +16,10 @@
 
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn--{{ style }}">{{ content }}</a>
+        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "btn btn-" ~ style) -%}
+        {{ ui.link(content, href=href, **kwargs) }}
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn--{{ style }}">{{ content }}</button>
+        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">{{ content }}</button>
     {%- endif %}
 {%- endmacro %}
 
@@ -54,7 +55,7 @@
     <img
         {{ ui.util.attrs(kwargs) }}
         src="{{ src }}"
-        alt="{{ alt or "" }}"
+        alt="{{ alt }}"
         {%- if height %} height="{{ height }}"{% endif %}
         {%- if width %} width="{{ width }}"{% endif %}
     >

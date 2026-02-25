@@ -1,20 +1,44 @@
-{%- macro header(content, title, subtitle, logo) -%}
-    <header {{ ui.util.attrs(kwargs) }} id="header">
+{%- macro subtitle_item(content, initial) -%}
+    {%- do kwargs -%}
+    {{ content }}
+    {%- if not initial %} {{ g.template_title_delimiter }} {% endif %}
+{%- endmacro %}
+
+{%- macro account(content, title, subtitle, logo) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="account-masthead">
+        {{ ui.container(content) }}
+    </div>
+{%- endmacro %}
+
+{%- macro header_logo(href, logo, title, subtitle) -%}
+    {% if logo -%}
+        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, attrs={"class": "logo"}) }}
+
+    {%- else -%}
+        {{ ui.link(title, href=href, **kwargs) }}
+        {%- if description -%}
+            <p class="mb-0">{{ description }}</p>
+        {%- endif %}
+    {%- endif %}
+{%- endmacro %}
+
+{%- macro header(content, title, subtitle, logo, href) -%}
+    <header {{ ui.util.attrs(kwargs) }} class="masthead">
         {%- call ui.util.call(ui.container) -%}
-            {%- if logo %}
-                {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
+            {% if g.debug and not g.debug_supress_header %}
+                <div class="debug">Blueprint : {{ g.blueprint }}<br />View : {{ g.view }}</div>
+            {% endif %}
 
-            {%- else %}
-                <div>
-                    {{ ui.heading(ui.link(title, href=h.url_for("home.index")), level=1) }}
-                    {% if subtitle %}
-                        {{ ui.heading(subtitle, level=2) }}
-                    {% endif %}
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="{{ g.header_class }} navbar-left col-md-2">
+                    {{ ui.header_logo(logo=logo, title=title, subtitle=subtitle, href=href or h.url_for('home.index')) }}
                 </div>
+                {{ ui.button(ui.icon("bars"), attrs={"class": "navbar-toggler"}, data={"bs-toggle": "collapse", "bs-target": "#main-navigation-toggle"}, aria={"controls": "main-navigation-toggle",  "expanded": "false", "label": _('Toggle navigation')}) }}
 
-            {%- endif %}
-
-            {{ content }}
+                <div class="main-navbar collapse navbar-collapse col-md-10" id="main-navigation-toggle">
+                    {{ content }}
+                </div>
+            </nav>
         {%- endcall %}
     </header>
 {%- endmacro %}
@@ -30,20 +54,6 @@
 {%- macro footer_secondary(content) -%}
     <div {{ ui.util.attrs(kwargs) }} class="bg-black">{{ content }}</div>
 {%- endmacro %}
-
-
-{%- macro account(content, title, subtitle, logo) -%}
-    <header {{ ui.util.attrs(kwargs) }} id="account">
-        {{ ui.container(content) }}
-    </header>
-{%- endmacro %}
-
-{%- macro subtitle_item(content, initial) -%}
-    {%- do kwargs -%}
-    {{ content }}
-    {%- if not initial %} {{ g.template_title_delimiter }} {% endif %}
-{%- endmacro %}
-
 
 {%- macro language_selector() -%}
     {% set current_lang = request.environ.CKAN_LANG %}
