@@ -10,9 +10,7 @@
     <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}
 
-{%- macro breadcrumb_divider(content="/") -%}
-    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">{{ content }}</span>
-{%- endmacro %}
+{%- macro breadcrumb_divider(content="/") -%}{%- do kwargs -%}{%- endmacro %}
 
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}

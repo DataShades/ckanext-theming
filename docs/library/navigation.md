@@ -31,12 +31,12 @@ levels deep.
 
 ```jinja2
 <!-- Basic breadcrumb -->
-{{ ui.breadcrumb("Home", href="/", is_first=true) }}
+{{ ui.breadcrumb("Home", href="/", initial=true) }}
 {{ ui.breadcrumb("Datasets", href="/datasets") }}
 {{ ui.breadcrumb("Dataset Name") }}
 
 <!-- Breadcrumb with leading divider -->
-{{ ui.breadcrumb("Home", href="/", is_first=true) }}
+{{ ui.breadcrumb("Home", href="/", initial=true) }}
 {{ ui.breadcrumb("Datasets", href="/datasets") }}
 {{ ui.breadcrumb_divider() }}
 ```

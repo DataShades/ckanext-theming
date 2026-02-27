@@ -56,11 +56,6 @@
     return element
   };
 
-  // Initialize any alerts already on the page.
-  notify.el.find('.alert').each(function () {
-    notify.initialize(this);
-  });
-
   // Watch for close clicks and remove the alert.
   notify.el.on('click', '.close', function () {
     jQuery(this).parent().alert('close');

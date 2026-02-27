@@ -91,7 +91,7 @@ create a cohesive navigation experience.
 ```jinja2
 <!-- Basic breadcrumb wrapper -->
 {% call ui.util.call(ui.breadcrumb_wrapper) %}
-    {{ ui.breadcrumb("Home", href="/", is_first=True) }}
+    {{ ui.breadcrumb("Home", href="/", initial=True) }}
     {{ ui.breadcrumb("Datasets", href="/datasets") }}
     {{ ui.breadcrumb("Dataset", href="/dataset") }}
 {% endcall %}

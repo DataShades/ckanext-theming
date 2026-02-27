@@ -1,5 +1,5 @@
-{%- macro breadcrumb(content, href, is_first) -%}
-    {{ ui.breadcrumb_divider() if not is_first }}
+{%- macro breadcrumb(content, href, initial) -%}
+    {{ ui.breadcrumb_divider() if not initial }}
     {{ ui.link(content, href, **kwargs) }}
 {%- endmacro %}
 

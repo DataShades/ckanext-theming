@@ -9,24 +9,23 @@
 {%- endblock %}
 
 {% block primary %}
-  <article class="module">
-    <div class="module-content" id="error-content">
-      {% if name %}
-      <h1>{{ code }} {{ name }}</h1>
-      {% endif %}
-      {{ content}}
-    </div>
-    {% block login_redirect %}
-    {% if show_login_redirect_link %}
-    <div class="module-content">
-      {{ _("You might need to login to access this page.") }} <a href="{{ h.url_for('user.login') }}">{{ _("Click here to login") }}</a>
-    </div>
-  {% endif %}
-  {% endblock %}
-  </article>
+    <article class="module">
+        <div class="module-content" id="error-content">
+            {% if name %}
+                <h1>{{ code }} {{ name }}</h1>
+            {% endif %}
+            {{ content}}
+        </div>
+        {% block login_redirect %}
+            {% if show_login_redirect_link %}
+                <div class="module-content">
+                    {{ _("You might need to login to access this page.") }} <a href="{{ h.url_for('user.login') }}">{{ _("Click here to login") }}</a>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </article>
 {% endblock %}
 
-{% block breadcrumb %}
-{% endblock %}
+{% block breadcrumb -%}{% endblock %}
 
 {% block secondary %}{% endblock %}

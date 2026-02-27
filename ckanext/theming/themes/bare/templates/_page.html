@@ -28,7 +28,7 @@
             {#- Breadcrumb block - contains the breadcrumb navigation #}
             {%- block breadcrumb %}
                 {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-                    {{ ui.breadcrumb("Home", h.url_for("home.index"), is_first=true) }}
+                    {{ ui.breadcrumb("Home", h.url_for("home.index"), initial=true) }}
                     {%- block breadcrumb_content %}{% endblock %}
                 {%- endcall %}
             {%- endblock breadcrumb %}

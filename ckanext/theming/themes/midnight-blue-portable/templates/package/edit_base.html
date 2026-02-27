@@ -1,13 +1,11 @@
 {% extends 'package/base.html' %}
 
-{% block breadcrumb_content_selected %}{% endblock %}
+{% block breadcrumb_content_selected -%}{% endblock %}
 
-{% block breadcrumb_content %}
+{% block breadcrumb_content -%}
     {{ super() }}
-    {% if pkg %}
-	<li class="active">{% link_for _('Edit'), named_route=pkg.type ~ '.edit', id=pkg.name %}</li>
-    {% endif %}
-{% endblock %}
+    {{- ui.breadcrumb(_('Edit'), h.url_for(pkg.type ~ '.edit', id=pkg.name), active=true) if pkg }}
+{%- endblock %}
 
 {% block content_action %}
     {% link_for h.humanize_entity_type('package', pkg.type, 'view label') or _('View dataset'), named_route=pkg.type ~ '.read', id=pkg.name, class_='btn btn-secondary', icon='eye' %}

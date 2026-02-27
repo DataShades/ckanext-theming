@@ -36,7 +36,9 @@
 {%- macro account_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 
 {%- macro breadcrumb_wrapper(content) -%}
-    <nav {{ ui.util.attrs(kwargs) }} aria-label="Breadcrumb" class="breadcrumbs">{{ content }}</nav>
+    <ol {{ ui.util.attrs(kwargs) }} class="breadcrumb">
+        {{ content }}
+    </ol>
 {%- endmacro %}
 
 {%- macro content_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}

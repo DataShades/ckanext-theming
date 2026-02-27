@@ -1311,13 +1311,13 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-                        {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+                        {{ ui.breadcrumb("Home", href="/", initial=true) }}
                         {{ ui.breadcrumb("Section", href="/section") }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-                {{ ui.breadcrumb("Home", href="/", is_first=true) }}
+                {{ ui.breadcrumb("Home", href="/", initial=true) }}
                 {{ ui.breadcrumb("Section", href="/section") }}
             {%- endcall %}
             {{ ui.divider() }}

@@ -1,7 +1,10 @@
-{%- macro alert(message, dismissible, style) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="padding: 0.5rem;border: 1px solid;">
-        {{ message }}
-        {{ ui.button("&times;"|safe, on={"click": "this.parentNode.remove()"}) if dismissible }}
+{%- macro alert(content, dismissible, style="info") -%}
+    {%- set style_class = style if style.startswith("alert-") else "alert-" ~ style -%}
+    <div {{ ui.util.attrs(kwargs) }} class="alert fade show {{ "alert-dismissible" if dismissible }} {{ style_class }}" role="alert">
+        {{ content }}
+        {%- if dismissible -%}
+            <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {%- endif %}
     </div>
 {%- endmacro %}
 

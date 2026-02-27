@@ -14,7 +14,7 @@
 {#% set accordion_wrapper = accordion_wrapper | default(_wrapper.accordion_wrapper) %#}
 {% set account_nav_wrapper = account_nav_wrapper | default(_wrapper.account_nav_wrapper) %}
 {#% set activity_wrapper = activity_wrapper | default(_wrapper.activity_wrapper) %#}
-{#% set breadcrumb_wrapper = breadcrumb_wrapper | default(_wrapper.breadcrumb_wrapper) %#}
+{% set breadcrumb_wrapper = breadcrumb_wrapper | default(_wrapper.breadcrumb_wrapper) %}
 {#% set content_action_wrapper = content_action_wrapper | default(_wrapper.content_action_wrapper) %#}
 {#% set content_nav_wrapper = content_nav_wrapper | default(_wrapper.content_nav_wrapper) %#}
 {#% set dropdown_wrapper = dropdown_wrapper | default(_wrapper.dropdown_wrapper) %#}
@@ -56,7 +56,7 @@
 {#% set section = section | default(_section.section) %#}
 {#% set sidebar_section = sidebar_section | default(_section.sidebar_section) %#}
 
-{#% set alert = alert | default(feedback.alert) %#}
+{% set alert = alert | default(feedback.alert) %}
 {#% set confirm_modal = confirm_modal | default(feedback.confirm_modal) %#}
 {#% set modal = modal | default(feedback.modal) %#}
 {#% set popover = popover | default(feedback.popover) %#}
@@ -77,7 +77,7 @@
 {#% set tag = tag | default(element.tag) %#}
 {#% set text = text | default(element.text) %#}
 {#% set video = video | default(element.video) %#}
-{#% set breadcrumb_divider = breadcrumb_divider | default(element.breadcrumb_divider) %#}
+{% set breadcrumb_divider = breadcrumb_divider | default(element.breadcrumb_divider) %}
 
 {#% set chart = chart | default(data.chart) %#}
 {#% set code = code | default(data.code) %#}
@@ -124,7 +124,7 @@
 {% set subtitle_item = subtitle_item | default(meta.subtitle_item) %}
 
 {% set account_nav_item = account_nav_item | default(_nav.account_nav_item) %}
-{#% set breadcrumb = breadcrumb | default(_nav.breadcrumb) %#}
+{% set breadcrumb = breadcrumb | default(_nav.breadcrumb) %}
 {#% set content_action = content_action | default(_nav.content_action) %#}
 {#% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %#}
 {#% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %#}

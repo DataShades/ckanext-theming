@@ -15,12 +15,12 @@
     {{- super() }}
 {%- endblock %}
 
-{% block breadcrumb_content_selected %}{% endblock %}
+{% block breadcrumb_content_selected -%}{% endblock %}
 
-{% block breadcrumb_content %}
+{% block breadcrumb_content -%}
     {{ super() }}
-    <li class="active"><a href="" aria-current="page" aria-label="{{ _('Current resource: {name}').format(name=h.resource_display_name(res)) }}">{{ h.resource_display_name(res)|truncate(30) }}</a></li>
-{% endblock %}
+    {{- ui.breadcrumb(h.resource_display_name(res)|truncate(30), href="", active=true, aria={"current": "page", "label": _('Current resource: {name}').format(name=h.resource_display_name(res))}) }}
+{%- endblock %}
 
 {% block pre_primary %}
     {% block resource %}
