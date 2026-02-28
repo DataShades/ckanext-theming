@@ -9,7 +9,7 @@
                 {%- call ui.util.call(ui.row) -%}
                     {%- call ui.util.call(ui.column, span={"md": 6}) -%}
                         <p class="footer-description col-md-8">
-                            <img class="ckan-footer-logo" src="/base/images/ckan-logo-white.png" alt="{{ _('CKAN logo') }}">
+                            {{ ui.image(h.url_for_static("/base/images/ckan-logo-white.png"), alt=_('CKAN logo'), attrs={"class": "ckan-footer-logo"}) }}
                             {{ _('The open-source data management system that powers data portals worldwide.') }}
                         </p>
                     {%- endcall %}

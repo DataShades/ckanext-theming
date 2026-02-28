@@ -53,10 +53,7 @@
     {%- if not alt -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("role", "presentation") -%}
     {%- endif -%}
-    <img
-        {{ ui.util.attrs(kwargs) }}
-        src="{{ src }}"
-        alt="{{ alt }}"
+    <img {{ ui.util.attrs(kwargs) }} src="{{ src }}" alt="{{ alt }}"
         {%- if height %} height="{{ height }}"{% endif %}
         {%- if width %} width="{{ width }}"{% endif %}
     >

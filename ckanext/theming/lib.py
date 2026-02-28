@@ -53,27 +53,44 @@ class PElement(Protocol):
 class Util:
     _storage_key: str = "ui_storage"
     _theme: Theme
+    _attr_groups: list[tuple[str, str]] = [
+        ("aria", "aria-"),
+        ("data", "data-"),
+        ("on", "on"),
+        ("hx", "hx-"),
+        ("attrs", ""),
+    ]
 
     def __init__(self, theme: Theme):
         self._theme = theme
 
     def attrs(self, kwargs: dict[str, Any]):
         """Helper method to render HTML attributes from a dictionary."""
-        parts = []
+        if not kwargs:
+            return ""
 
-        groups = [
-            ("aria", "aria-"),
-            ("data", "data-"),
-            ("on", "on"),
-            ("hx", "hx-"),
-            ("attrs", ""),
+        parts = [
+            " ".join(f'{prefix}{k}="{v}"' for k, v in kwargs[key].items())
+            for key, prefix in self._attr_groups
+            if key in kwargs
         ]
 
-        for key, prefix in groups:
-            if key in kwargs:
-                parts.append(" ".join(f'{prefix}{k}="{v}"' for k, v in kwargs[key].items()))
+        return h.literal(" ".join(parts)) if parts else ""
 
-        return h.literal(" ".join(parts))
+    def tag(self, content: str, tag: str, is_void: bool = False, /, **kwargs: Any):
+        """Helper method to render an HTML tag with the specified content, tag name, and attributes.
+
+        :param content: The content to be enclosed within the tag.
+        :param tag: The name of the HTML tag to render.
+        :param is_void: If True, renders a void tag (e.g., <img />). Defaults to False.
+        :param kwargs: Additional attributes for the tag.
+        :return: A Markup object containing the rendered HTML tag.
+        """
+        attrs = self.attrs(kwargs)
+        if is_void:
+            return h.literal(f"<{tag} {attrs}/>")
+
+        return h.literal(f"<{tag} {attrs}>{content}</{tag}>")
 
     def call(self, el: PElement, /, *args: Any, caller: Macro, **kwargs: Any) -> Markup:
         """Call an inline element as a block element.
