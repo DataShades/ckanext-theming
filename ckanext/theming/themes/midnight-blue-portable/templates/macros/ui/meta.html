@@ -16,8 +16,8 @@
 
     {%- else -%}
         {{ ui.link(title, href=href, **kwargs) }}
-        {%- if description -%}
-            <p class="mb-0">{{ description }}</p>
+        {%- if subtitle -%}
+            <p class="mb-0">{{ subtitle }}</p>
         {%- endif %}
     {%- endif %}
 {%- endmacro %}

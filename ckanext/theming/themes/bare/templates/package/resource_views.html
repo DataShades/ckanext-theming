@@ -7,7 +7,7 @@
 
 {%- block content_action -%}
     {% if h.check_access('resource_view_create', {'resource_id': resource.id}) %}
-        {%- call ui.util.call(ui.dropdown_wrapper, title=_("New view")) -%}
+        {%- call ui.util.call(ui.dropdown, title=_("New view")) -%}
             {% for option in h.get_allowed_view_types(resource, pkg_dict)  %}
                 {% set url = h.url_for(pkg_dict.type ~ '_resource.edit_view', id=pkg_dict.name, resource_id=resource.id, view_type=option[0]) %}
                 {{ ui.dropdown_item(option[1], href=url) }}

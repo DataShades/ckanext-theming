@@ -138,25 +138,6 @@ appearance.
 ```
 ///
 
-## Dropdown Wrapper
-
-The [`dropdown_wrapper`][dropdown-wrapper] component provides the structural
-foundation for dropdown menus. It ensures proper positioning, styling, and
-behavior for dropdown components. This wrapper works with dropdown-related
-components to create consistent menu experiences across different themes.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic dropdown wrapper -->
-{% call ui.util.call(ui.dropdown_wrapper, title="Dropdown") %}
-    {{ ui.dropdown_item("Option 1", href="/option1") }}
-    {{ ui.dropdown_item("Option 2", href="/option2") }}
-{% endcall %}
-```
-///
-
 ## Facet Wrapper
 
 The [`facet_wrapper`][facet-wrapper] component creates a container for facet

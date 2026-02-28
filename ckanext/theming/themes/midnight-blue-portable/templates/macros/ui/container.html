@@ -73,3 +73,16 @@
         {{ content }}
     </div>
 {%- endmacro %}
+
+{%- macro dropdown(content, title, inline, id, style="primary") -%}
+    {%- do kwargs.setdefault("data", {}).setdefault("bs-toggle", "dropdown") -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("id", ui.util.id()) -%}
+    {%- do kwargs.setdefault("aria", {}).setdefault("expanded", "false") -%}
+
+    <div class="dropdown {{ 'btn-group' if inline }}">
+        {{ ui.button(title, style=style ~ " dropdown-toggle", **kwargs) }}
+        <ul class="dropdown-menu" aria-labelledby="{{ kwargs.attrs.id }}">
+            {{ content }}
+        </ul>
+    </div>
+{%- endmacro %}

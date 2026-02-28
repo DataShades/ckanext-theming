@@ -15,17 +15,15 @@
     {%- endif %}
 {%- endblock %}
 
-{% block content_action %}
-    {% if res %}
-	{% link_for _('View resource'), named_route=pkg.type ~ '_resource.read', id=pkg.name, resource_id=res.id, class_='btn btn-secondary', icon='eye' %}
-    {% endif %}
-{% endblock %}
+{% block content_action -%}
+    {{ ui.content_action(_('View resource'), href=h.url_for(pkg.type ~ '_resource.read', id=pkg.name, resource_id=res.id), icon='eye', style="secondary") if res }}
+{%- endblock %}
 
-{% block content_primary_nav %}
-    {{ h.build_nav_icon(pkg.type ~ '_resource.edit', _('Edit resource'), id=pkg.name, resource_id=res.id, icon='pencil') }}
-    {% block inner_primary_nav %}{% endblock %}
-    {{ h.build_nav_icon(pkg.type ~ '_resource.views', _('Views'), id=pkg.name, resource_id=res.id, icon='chart-bar') }}
-{% endblock %}
+{% block content_primary_nav -%}
+    {{ ui.content_nav_item(_('Edit resource'), href=h.url_for(pkg.type ~ '_resource.edit', id=pkg.name, resource_id=res.id), icon='pencil', active=request.endpoint==pkg.type ~ '_resource.edit') }}
+    {%- block inner_primary_nav %}{% endblock %}
+    {{- ui.content_nav_item(_('Views'), href=h.url_for(pkg.type ~ '_resource.views', id=pkg.name, resource_id=res.id), icon='chart-bar', active=request.endpoint==pkg.type ~ '_resource.views') }}
+{%- endblock %}
 
 {% block primary_content_inner %}
     <h1>{% block form_title %}{{ _('Edit Resource') }}{% endblock %}</h1>

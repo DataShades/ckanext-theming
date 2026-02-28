@@ -1,10 +1,8 @@
 {% extends "user/read_base.html" %}
 
-{% block page_primary_action %}
-  {% if h.check_access('package_create') and user.datasets %}
-    {% snippet 'snippets/add_dataset.html' %}
-  {% endif %}
-{% endblock %}
+{% block page_primary_action -%}
+    {{ ui.page_action(h.humanize_entity_type('package', dataset_type, 'add link') or _("Add Dataset"), href=h.url_for(dataset_type ~ '.new'), icon="plus-square") if h.check_access('package_create') and user.datasets }}
+{%- endblock %}
 
 {% block primary_content_inner %}
   <h1>

@@ -10,12 +10,12 @@
     {{- ui.breadcrumb(_('Manage members'), href=h.url_for(group_type+'.manage_members', id=organization.name), attrs={"title": organization.display_name}, active=true) }}
 {%- endblock %}
 
-{% block page_primary_action %}
-    {% if h.check_access('organization_update', {'id': organization.id}) %}
-        {% link_for _('Add Member'), named_route=group_type+'.member_new', id=group_dict.id, class_='btn btn-primary', icon='plus-square' %}
-        {% link_for _('CSV'), named_route=group_type+'.member_dump', id=group_dict.id, class_='btn btn-primary', icon='download' %}
-    {% endif %}
-{% endblock %}
+{% block page_primary_action -%}
+    {% if h.check_access('organization_update', {'id': organization.id}) -%}
+        {{ ui.page_action(_('Add Member'), href=h.url_for(group_type+'.member_new', id=group_dict.id), icon="plus-square") }}
+        {{- ui.page_action(_('CSV'), href=h.url_for(group_type+'.member_dump', id=group_dict.id), icon='download') }}
+    {%- endif %}
+{%- endblock %}
 
 {% block primary_content_inner %}
     {% set count = members|length %}

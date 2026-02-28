@@ -12,12 +12,15 @@
 
 {%- macro breadcrumb_divider(content="/") -%}{%- do kwargs -%}{%- endmacro %}
 
-{%- macro button(content, href, type="button", style="primary") -%}
+{%- macro button(content, href, icon, type="button", style="primary") -%}
+    {%- set prefix = ui.icon(icon) if icon else "" -%}
     {%- if href -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("class", "btn btn-" ~ style) -%}
-        {{ ui.link(content, href=href, **kwargs) }}
+        {{ ui.link(prefix ~ content, href=href, **kwargs) }}
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">{{ content }}</button>
+        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">
+            {{- prefix ~ content -}}
+        </button>
     {%- endif %}
 {%- endmacro %}
 

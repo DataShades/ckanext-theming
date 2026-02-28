@@ -251,6 +251,25 @@ framework.
 - `gutter` (string): Gutter size for responsive spacing
 ///
 
+## Dropdown
+
+The [`dropdown`][dropdown] component provides the structural
+foundation for dropdown menus. It ensures proper positioning, styling, and
+behavior for dropdown components. This wrapper works with dropdown-related
+components to create consistent menu experiences across different themes.
+
+/// admonition | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic dropdown -->
+{% call ui.util.call(ui.dropdown, title="Dropdown") %}
+    {{ ui.dropdown_item("Option 1", href="/option1") }}
+    {{ ui.dropdown_item("Option 2", href="/option2") }}
+{% endcall %}
+```
+///
+
 ## Grid
 
 The [`grid`][] component creates structured grid layouts that organize content

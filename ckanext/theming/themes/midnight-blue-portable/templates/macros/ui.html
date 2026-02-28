@@ -15,9 +15,8 @@
 {% set account_nav_wrapper = account_nav_wrapper | default(_wrapper.account_nav_wrapper) %}
 {#% set activity_wrapper = activity_wrapper | default(_wrapper.activity_wrapper) %#}
 {% set breadcrumb_wrapper = breadcrumb_wrapper | default(_wrapper.breadcrumb_wrapper) %}
-{#% set content_action_wrapper = content_action_wrapper | default(_wrapper.content_action_wrapper) %#}
-{#% set content_nav_wrapper = content_nav_wrapper | default(_wrapper.content_nav_wrapper) %#}
-{#% set dropdown_wrapper = dropdown_wrapper | default(_wrapper.dropdown_wrapper) %#}
+{% set content_action_wrapper = content_action_wrapper | default(_wrapper.content_action_wrapper) %}
+{% set content_nav_wrapper = content_nav_wrapper | default(_wrapper.content_nav_wrapper) %}
 {#% set facet_wrapper = facet_wrapper | default(_wrapper.facet_wrapper) %#}
 {#% set group_wrapper = group_wrapper | default(_wrapper.group_wrapper) %#}
 {% set main_nav_wrapper = main_nav_wrapper | default(_wrapper.main_nav_wrapper) %}
@@ -25,9 +24,10 @@
 {% set nav_wrapper = nav_wrapper | default(_wrapper.nav_wrapper) %}
 {#% set organization_wrapper = organization_wrapper | default(_wrapper.organization_wrapper) %#}
 {#% set package_wrapper = package_wrapper | default(_wrapper.package_wrapper) %#}
-{#% set page_action_wrapper = page_action_wrapper | default(_wrapper.page_action_wrapper) %#}
+{% set page_action_wrapper = page_action_wrapper | default(_wrapper.page_action_wrapper) %}
 {#% set panel_wrapper = panel_wrapper | default(_wrapper.panel_wrapper) %#}
 {#% set resource_wrapper = resource_wrapper | default(_wrapper.resource_wrapper) %#}
+{% set sidebar_nav_wrapper = sidebar_nav_wrapper | default(_wrapper.sidebar_nav_wrapper) %}
 {#% set tab_nav_wrapper = tab_nav_wrapper | default(_wrapper.tab_nav_wrapper) %#}
 {#% set user_wrapper = user_wrapper | default(_wrapper.user_wrapper) %#}
 
@@ -46,6 +46,7 @@
 {#% set card = card | default(_container.card) %#}
 {% set column = column | default(_container.column) %}
 {% set container = container | default(_container.container) %}
+{% set dropdown = dropdown | default(_container.dropdown) %}
 {% set grid = grid | default(_container.grid) %}
 {% set row = row | default(_container.row) %}
 {% set list = list | default(_container.list) %}
@@ -121,17 +122,19 @@
 {% set footer_main = footer_main | default(meta.footer_main) %}
 {% set footer_secondary = footer_secondary | default(meta.footer_secondary) %}
 {% set header = header | default(meta.header) %}
+{% set header_logo = header_logo | default(meta.header_logo) %}
 {% set subtitle_item = subtitle_item | default(meta.subtitle_item) %}
 
 {% set account_nav_item = account_nav_item | default(_nav.account_nav_item) %}
 {% set breadcrumb = breadcrumb | default(_nav.breadcrumb) %}
-{#% set content_action = content_action | default(_nav.content_action) %#}
-{#% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %#}
-{#% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %#}
+{% set content_action = content_action | default(_nav.content_action) %}
+{% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %}
+{% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %}
 {% set main_nav_item = main_nav_item | default(_nav.main_nav_item) %}
 {#% set menu_item = menu_item | default(_nav.menu_item) %#}
 {% set nav_item = nav_item | default(_nav.nav_item) %}
-{#% set page_action = page_action | default(_nav.page_action) %#}
+{% set sidebar_nav_item = sidebar_nav_item | default(_nav.sidebar_nav_item) %}
+{% set page_action = page_action | default(_nav.page_action) %}
 {#% set pagination = pagination | default(_nav.pagination) %#}
 
 {#% set search_active_filters = search_active_filters | default(_search.search_active_filters) %#}
@@ -148,6 +151,3 @@
 {#  CUSTOM COMPONENTS #}
 {% set language_selector = language_selector | default(meta.language_selector) %}
 {% set sr_only = sr_only | default(meta.sr_only) %}
-{% set header_logo = header_logo | default(meta.header_logo) %}
-{% set sidebar_nav_wrapper = sidebar_nav_wrapper | default(_wrapper.sidebar_nav_wrapper) %}
-{% set sidebar_nav_item = sidebar_nav_item | default(_nav.sidebar_nav_item) %}

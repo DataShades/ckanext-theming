@@ -13,9 +13,9 @@
     {{- ui.breadcrumb(_('Edit datasets'), href=h.url_for(group_type+'.bulk_process', id=organization.name, attrs={"title": organization.display_name}), active=true) }}
 {%- endblock %}
 
-{% block page_primary_action %}
-  {% snippet 'snippets/add_dataset.html', group=group_dict.id %}
-{% endblock %}
+{% block page_primary_action -%}
+    {{ ui.page_action(h.humanize_entity_type('package', dataset_type, 'add link') or _("Add Dataset"), href=h.url_for(dataset_type ~ '.new', group=group_dict.id), icon="plus-square") }}
+{%- endblock %}
 
 {% block primary_content_inner %}
   <h1>{{ h.humanize_entity_type('package', dataset_type, 'edit label') or _('Edit Datasets') }}</h1>

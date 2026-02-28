@@ -8,46 +8,46 @@
 {%- endblock %}
 
 {% block head_extras -%}
-  {{ super() }}
-  {% set description = h.markdown_extract(
+    {{ super() }}
+    {% set description = h.markdown_extract(
     h.get_translated(pkg, 'notes'), extract_length=200) %}
-  <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
-  <meta property="og:description" content="{{ description|forceescape|trim }}">
+    <meta property="og:title" content="{{ h.dataset_display_name(pkg) }} - {{ g.site_title }}">
+    <meta property="og:description" content="{{ description|forceescape|trim }}">
 {% endblock -%}
 
-{% block content_action %}
-  {% if h.check_access('package_update', {'id':pkg.id }) %}
-    {% link_for _('Add new resource'), named_route=pkg.type ~ '_resource.new', id=pkg.name, class_='btn btn-primary', icon='plus' %}
-    {% link_for _('Manage'), named_route=pkg.type ~ '.edit', id=pkg.name, class_='btn btn-secondary', icon='wrench' %}
-  {% endif %}
-{% endblock %}
+{% block content_action -%}
+    {% if h.check_access('package_update', {'id':pkg.id }) -%}
+        {{ ui.content_action(_('Add new resource'), href=h.url_for(pkg.type ~ '_resource.new', id=pkg.name), icon="plus") }}
+        {{- ui.content_action(_('Manage'), href=h.url_for(pkg.type ~ '.edit', id=pkg.name), icon="wrench", style="secondary") }}
+    {%- endif %}
+{%- endblock %}
 
-{% block content_primary_nav %}
-  {{ h.build_nav_icon(dataset_type ~ '.read', _('Dataset'),  id=pkg.name, icon='sitemap') }}
-  {{ h.build_nav_icon(dataset_type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users') }}
-{% endblock %}
+{% block content_primary_nav -%}
+    {{ ui.content_nav_item(_('Dataset'), href=h.url_for(dataset_type ~ '.read', id=pkg.name), icon='sitemap', active=request.endpoint==dataset_type ~ '.read') }}
+    {{- ui.content_nav_item(h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), href=h.url_for(dataset_type ~ '.groups', id=pkg.name), icon='users', active=request.endpoint==dataset_type ~ '.groups') }}
+{%- endblock %}
 
 {% block secondary_content %}
 
-  {% block secondary_help_content %}{% endblock %}
+    {% block secondary_help_content %}{% endblock %}
 
-  {% block package_info %}
-    {% snippet 'package/snippets/info.html', pkg=pkg, am_following=am_following %}
-  {% endblock %}
+    {% block package_info %}
+        {% snippet 'package/snippets/info.html', pkg=pkg, am_following=am_following %}
+    {% endblock %}
 
-  {% block package_organization %}
-    {% if pkg.organization %}
-      {% set org = h.get_organization(pkg.organization.id) %}
-      {% snippet "organization/snippets/info.html", organization=org, show_nums=false, am_following=am_following, image_link=true %}
-    {% endif %}
-  {% endblock %}
+    {% block package_organization %}
+        {% if pkg.organization %}
+            {% set org = h.get_organization(pkg.organization.id) %}
+            {% snippet "organization/snippets/info.html", organization=org, show_nums=false, am_following=am_following, image_link=true %}
+        {% endif %}
+    {% endblock %}
 
-  {% block package_social %}
-    {% snippet "snippets/social.html" %}
-  {% endblock %}
+    {% block package_social %}
+        {% snippet "snippets/social.html" %}
+    {% endblock %}
 
-  {% block package_license %}
-    {% snippet "snippets/license.html", pkg_dict=pkg %}
-  {% endblock %}
+    {% block package_license %}
+        {% snippet "snippets/license.html", pkg_dict=pkg %}
+    {% endblock %}
 
 {% endblock %}

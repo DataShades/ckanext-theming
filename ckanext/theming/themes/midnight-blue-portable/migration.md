@@ -13,3 +13,4 @@
 * rewrite header. Here you'll get few *nav_wrapper and *nav_item components, as well as header/account.
 * rewrite flash-messages block
 * rewrite breadcrumbs block; use ui.breadcrumb everywhere
+* update content nav/page nav/content action/page action blocks

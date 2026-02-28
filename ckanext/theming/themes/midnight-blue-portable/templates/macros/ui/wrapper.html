@@ -41,17 +41,16 @@
     </ol>
 {%- endmacro %}
 
-{%- macro content_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
-
-{%- macro content_nav_wrapper(content) -%}{{ ui.tab_nav_wrapper(content, **kwargs) }}{%- endmacro %}
-
-{%- macro dropdown_wrapper(content, title) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="dropdown" role="menu" aria-haspopup="true">
-        {{ ui.button(title, aria={"haspopup": "true"}) }}
-        <ul class="dropdown-menu" role="menu">
-            {{ content }}
-        </ul>
+{%- macro content_action_wrapper(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="content_action gap-1 mb-md-3">
+        {{- content -}}
     </div>
+{%- endmacro %}
+
+{%- macro content_nav_wrapper(content) -%}
+    <ul {{ ui.util.attrs(kwargs) }} class="nav nav-pills">
+        {{ content }}
+    </ul>
 {%- endmacro %}
 
 {%- macro main_nav_wrapper(content) -%}
@@ -68,7 +67,11 @@
     {{ ui.list(content, **kwargs) }}
 {%- endmacro %}
 
-{%- macro page_action_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro page_action_wrapper(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="page_primary_action mb-3 mb-md-0 ms-3 pull-right">
+        {{- content -}}
+    </div>
+{%- endmacro %}
 
 {%- macro tab_nav_wrapper(content) -%}
     <nav {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">{{ content }}</nav>

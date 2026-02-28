@@ -13,9 +13,9 @@
     {{- ui.breadcrumb(_('Add view'), href="#", active=true) }}
 {%- endblock %}
 
-{% block content_primary_nav %}
-    <li class="active"><a href="#"><i class="fa fa-pencil"></i> {{ _('Add view') }}</a></li>
-{% endblock %}
+{% block content_primary_nav -%}
+    {{ ui.content_nav_item(_('Add view'), href="#", icon="pencil", active=true) }}
+{%- endblock %}
 
 {% block form %}
     <form method="post" data-module="basic-form resource-form">

@@ -51,9 +51,9 @@
                             #}
                         {% block pre_primary %}
                             {% if self.content_action() | trim %}
-                                <div class="content_action gap-1 mb-md-3">
-                                    {% block content_action %}{% endblock %}
-                                </div>
+                                {%- call ui.util.call(ui.content_action_wrapper) -%}
+                                    {% block content_action -%}{% endblock %}
+                                {%- endcall %}
                             {% endif %}
                         {% endblock %}
 
@@ -92,16 +92,16 @@
                                     <article class="module">
                                         {% block page_header %}
                                             <header class="module-content page-header">
-                                                <ul class="nav nav-pills">
-                                                    {% block content_primary_nav %}{% endblock %}
-                                                </ul>
+                                                {%- call ui.util.call(ui.content_nav_wrapper) -%}
+                                                    {% block content_primary_nav -%}{% endblock %}
+                                                {%- endcall %}
                                             </header>
                                         {% endblock %}
                                         <div class="module-content">
                                             {% if self.page_primary_action() | trim %}
-                                                <div class="page_primary_action mb-3 mb-md-0 ms-3 pull-right">
-                                                    {% block page_primary_action %}{% endblock %}
-                                                </div>
+                                                {%- call ui.util.call(ui.page_action_wrapper) -%}
+                                                    {% block page_primary_action -%}{% endblock %}
+                                                {%- endcall %}
                                             {% endif %}
                                             {% block primary_content_inner %}
                                             {% endblock %}
@@ -127,7 +127,7 @@
 {%- endblock -%}
 
 {%- block scripts %}
+    {{ super() }}
     {% asset 'theming/midnight-blue-portable/main' %}
     {% asset 'theming/midnight-blue-portable/ckan' %}
-    {{ super() }}
 {% endblock -%}

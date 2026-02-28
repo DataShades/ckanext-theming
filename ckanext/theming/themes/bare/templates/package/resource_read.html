@@ -43,7 +43,7 @@
             {{ ui.modal_handle(_("Data API"), id="api-info-modal") }}
             {%- include "datastore/snippets/api_info.html" -%}
 
-            {%- call ui.util.call(ui.dropdown_wrapper, title=_("Download as ...")) -%}
+            {%- call ui.util.call(ui.dropdown, title=_("Download as ...")) -%}
                 {{ ui.dropdown_item(_("CSV"), href=h.url_for('datastore.dump', resource_id=resource.id, bom=True)) }}
                 {{ ui.dropdown_item(_("TSV"), href=h.url_for('datastore.dump', resource_id=resource.id, bom=True, format="tsv")) }}
                 {{ ui.dropdown_item(_("JSON"), href=h.url_for('datastore.dump', resource_id=resource.id, format="json")) }}

@@ -30,11 +30,18 @@
     {{ ui.nav_item(content, href, active, **kwargs) }}
 {%- endmacro %}
 
-{%- macro content_nav_item(content, href, active) -%}{{ ui.tab_handle(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_item(content, href, active, icon) -%}
+    {%- set prefix = (ui.icon(icon) ~ " ") if icon else "" -%}
+    <li {% if active %}class="active"{% endif %}>{{ ui.link(prefix ~ content, href, **kwargs) }}</li>
+{%- endmacro %}
 
-{%- macro page_action(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
+{%- macro page_action(content, href) -%}
+    {{ ui.button(content, href=href, **kwargs) }}
+{%- endmacro %}
 
-{%- macro content_action(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
+{%- macro content_action(content, href) -%}
+    {{ ui.button(content, href=href, **kwargs) }}
+{%- endmacro %}
 
 {%- macro menu_item(content, href, active) -%}
     {%- if active %}
@@ -84,8 +91,7 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro dropdown_item(content, href="#") -%}
-    <li role="none">
-        {{ ui.link(content, href=href, role="menuitem", **kwargs) }}
-    </li>
+{%- macro dropdown_item(content) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "dropdown-item") -%}
+    <li>{{ ui.button(content, **kwargs) }}</li>
 {%- endmacro %}

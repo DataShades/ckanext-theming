@@ -73,3 +73,12 @@
         {{ content }}
     </div>
 {%- endmacro %}
+
+{%- macro dropdown(content, title) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="dropdown" role="menu" aria-haspopup="true">
+        {{ ui.button(title, aria={"haspopup": "true"}) }}
+        <ul class="dropdown-menu" role="menu">
+            {{ content }}
+        </ul>
+    </div>
+{%- endmacro %}

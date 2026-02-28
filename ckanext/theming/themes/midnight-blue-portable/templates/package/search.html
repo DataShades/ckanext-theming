@@ -9,11 +9,9 @@
     {{ ui.breadcrumb(_(dataset_type.title() + 's'), href=h.url_for('%s.search' % dataset_type), active=true) }}
 {%- endblock %}
 
-{% block content_action %}
-    {% if h.check_access('package_create') %}
-        {% snippet 'snippets/add_dataset.html', dataset_type=dataset_type %}
-    {% endif %}
-{% endblock %}
+{% block content_action -%}
+    {{ ui.content_action(h.humanize_entity_type('package', dataset_type, 'add link') or _("Add Dataset"), href=h.url_for(dataset_type ~ '.new'), icon="plus-square") if h.check_access('package_create') }}
+{%- endblock %}
 
 {% block primary_content %}
     {% snippet "package/snippets/search_results.html",

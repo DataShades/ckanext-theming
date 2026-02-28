@@ -1,23 +1,27 @@
 {%- macro header(content, title, subtitle, logo) -%}
     <header {{ ui.util.attrs(kwargs) }} id="header">
         {%- call ui.util.call(ui.container) -%}
-            {%- if logo %}
-                {{ ui.link(ui.image(h.url_for_static_or_external(g.site_logo), alt=title), href=h.url_for("home.index")) }}
-
-            {%- else %}
-                <div>
-                    {{ ui.heading(ui.link(title, href=h.url_for("home.index")), level=1) }}
-                    {% if subtitle %}
-                        {{ ui.heading(subtitle, level=2) }}
-                    {% endif %}
-                </div>
-
-            {%- endif %}
+            {{ ui.header_logo(logo=logo, title=title, subtitle=subtitle, href=href or h.url_for('home.index')) }}
 
             {{ content }}
         {%- endcall %}
     </header>
 {%- endmacro %}
+
+{%- macro header_logo(href, logo, title, subtitle) -%}
+    {% if logo -%}
+        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, attrs={"class": "logo"}) }}
+
+    {%- else -%}
+        <div>
+            {{ ui.heading(ui.link(title, href=href), level=1) }}
+            {% if subtitle %}
+                {{ ui.heading(subtitle, level=2) }}
+            {% endif %}
+        </div>
+    {%- endif %}
+{%- endmacro %}
+
 
 {%- macro footer(content) -%}
     <footer {{ ui.util.attrs(kwargs) }} id="footer">

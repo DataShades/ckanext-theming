@@ -5,51 +5,48 @@
 
 {% block breadcrumb_edit_selected -%}{% endblock %}
 
-{% block content_action %}
-  {% link_for _('All views'), named_route=pkg.type ~ '_resource.views', id=pkg.name, resource_id=res.id, class_='btn btn-secondary', icon='arrow-left' %}
-  {% if res %}
-    {% set url = h.url_for(pkg.type ~ '_resource.read', id=pkg.name, resource_id=res.id) ~ '?view_id=' ~ resource_view.id %}
-    <a href="{{ url }}" class="btn btn-secondary"><i class="fa fa-eye"></i> {{ _('View view') }}</a>
-  {% endif %}
-{% endblock %}
+{% block content_action -%}
+    {{ ui.content_action( _('All views'), href=h.url_for(pkg.type ~ '_resource.views', id=pkg.name, resource_id=res.id), icon="arrow-left", style="secondary") }}
+    {{- ui.content_action(_('View view'), href=h.url_for(pkg.type ~ '_resource.read', id=pkg.name, resource_id=res.id, view_id=resource_view.id), icon="eye", style="secondary") if res }}
+{%- endblock %}
 
-{% block content_primary_nav %}{% endblock %}
+{% block content_primary_nav -%}{% endblock %}
 
 {% block primary_content_inner %}
-  {% block form %}{% endblock %}
+    {% block form %}{% endblock %}
 {% endblock %}
 
 {% block main_content %}
-  {% if h.resource_view_full_page(resource_view) %}
-    {{ self.flash() }}
-    {{ self.toolbar() }}
-    <div class="wrapper no-nav">
-      {{ self.primary_content() }}
-    </div>
-  {% else %}
-    {{ super() }}
-  {% endif %}
-
-  {% if to_preview and h.resource_view_display_preview(resource_view) %}
-    <div class="row wrapper no-nav view-preview-container">
-      <section class="module module-narrow module-shallow">
-        <h2 class="module-heading">
-          <i class="fa fa-image"></i> {{ _('View preview') }}
-        </h2>
-        <div class="module-content">
-          {% snippet 'package/snippets/resource_view.html', resource_view=resource_view, resource=resource, package=package, to_preview=True %}
+    {% if h.resource_view_full_page(resource_view) %}
+        {{ self.flash() }}
+        {{ self.toolbar() }}
+        <div class="wrapper no-nav">
+            {{ self.primary_content() }}
         </div>
-      </section>
-    </div>
-  {% endif %}
+    {% else %}
+        {{ super() }}
+    {% endif %}
+
+    {% if to_preview and h.resource_view_display_preview(resource_view) %}
+        <div class="row wrapper no-nav view-preview-container">
+            <section class="module module-narrow module-shallow">
+                <h2 class="module-heading">
+                    <i class="fa fa-image"></i> {{ _('View preview') }}
+                </h2>
+                <div class="module-content">
+                    {% snippet 'package/snippets/resource_view.html', resource_view=resource_view, resource=resource, package=package, to_preview=True %}
+                </div>
+            </section>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block secondary %}
-  {% if not h.resource_view_full_page(resource_view) %}
-    {{ super() }}
-  {% endif %}
+    {% if not h.resource_view_full_page(resource_view) %}
+        {{ super() }}
+    {% endif %}
 {% endblock %}
 
 {% block secondary_content %}
-  {% snippet 'package/snippets/view_help.html' %}
+    {% snippet 'package/snippets/view_help.html' %}
 {% endblock %}
