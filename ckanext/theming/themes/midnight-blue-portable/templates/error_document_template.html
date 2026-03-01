@@ -1,19 +1,21 @@
 {% extends "page.html" %}
 
-{# eat the flash messages caused by the 404 #}
-{% do h.get_flashed_messages() %}
-
 {% block subtitle -%}
     {{ ui.subtitle_item(gettext('Error %(error_code)s', error_code=code)) }}
     {{- super() }}
 {%- endblock %}
 
+{% block breadcrumb -%}{% endblock %}
+
+{% block flash %}
+    {# eat the flash messages caused by the 404 #}
+    {% set flash_messages = h.get_flashed_messages() %}
+{% endblock %}
+
 {% block primary %}
     <article class="module">
         <div class="module-content" id="error-content">
-            {% if name %}
-                <h1>{{ code }} {{ name }}</h1>
-            {% endif %}
+            {{ ui.heading(code ~ " " ~ name, level=1) if name}}
             {{ content}}
         </div>
         {% block login_redirect %}
@@ -25,7 +27,5 @@
         {% endblock %}
     </article>
 {% endblock %}
-
-{% block breadcrumb -%}{% endblock %}
 
 {% block secondary %}{% endblock %}

@@ -51,44 +51,32 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=_("Previous"), next_label=_("Next"), padding_label="...") -%}
+{%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=ui.icon("chevron-left", weight="solid"), next_label=ui.icon("chevron-right", weight="solid"), padding_label="...") -%}
     {%- if total > 1 %}
-        <nav {{ ui.util.attrs(kwargs) }} role="navigation" aria-label="{{ _('Pagination') }}">
-
-            {%- if page > 1 and not hide_siblings %}
-                {{ ui.link(previous_label, href=url_generator(page=page - 1), aria={"label": _("Go to previous page")}) }}
-            {%- endif %}
-
+        {%- call ui.util.call(ui.pagination_wrapper, **kwargs) -%}
+            {{ ui.pagination_item(previous_label, href=url_generator(page=page - 1)) if page > 1 and not hide_siblings }}
 
             {%- if page - 1 > padding %}
-                {%- if not hide_edges -%}
-                    {{ ui.link((start_label or 1), href=url_generator(page=1), aria={"label": _("Go to first page")}) }}
-                {%- endif %}
-
-                <span aria-hidden="true">{{ padding_label }}</span>
+                {{ ui.pagination_item(start_label or 1, href=url_generator(page=1)) if not hide_edges}}
+                <li class="disabled"><a href="#">{{ padding_label }}</a></li>
             {%- endif %}
 
             {%- for i in range([page - padding, 1]|max, [page + padding, total]|min + 1) %}
-                {%- if i == page %}
-                    <span aria-current="page">{{ i }}</span>
-                {%- else %}
-                    {{ ui.link(i, href=url_generator(page=i), aria={"label": _("Go to page {num}".format(num=i))}) }}
-                {%- endif %}
+                {{ ui.pagination_item(i, href=url_generator(page=i), active=i == page) }}
             {%- endfor %}
 
             {%- if total - page > padding %}
-                <span aria-hidden="true">{{ padding_label }}</span>
-                {%- if not hide_edges -%}
-                    {{ ui.link((end_label or total), href=url_generator(page=total), aria={"label": _("Go to last page")}) }}
-                {%- endif %}
+                <li class="disabled"><a href="#">{{ padding_label }}</a></li>
+                {{ ui.pagination_item(end_label or total, href=url_generator(page=total)) if not hide_edges}}
             {%- endif %}
 
-            {%- if page < total and not hide_siblings %}
-                {{ ui.link(next_label, href=url_generator(page=page + 1), aria={"label": _("Go to next page")}) }}
-            {%- endif %}
-
-        </nav>
+            {{ ui.pagination_item(next_label, href=url_generator(page=page + 1)) if page < total and not hide_siblings }}
+        {%- endcall %}
     {%- endif %}
+{%- endmacro %}
+
+{%- macro pagination_item(content, href, active) -%}
+    <li {{ ui.util.attrs(kwargs) }} class="page-item{% if active %} active{% endif %}"><a class="page-link" href="{{ href }}">{{ content }}</a></li>
 {%- endmacro %}
 
 {%- macro dropdown_item(content) -%}

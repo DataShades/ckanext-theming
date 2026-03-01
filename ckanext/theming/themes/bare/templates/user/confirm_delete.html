@@ -11,8 +11,8 @@
 
     {%- call ui.util.call(ui.form, method="POST") -%}
         {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.submit(value=_("Cancel"), name="cancel") }}
-            {{ ui.submit(value=_("Confirm Delete"), style="danger", name="delete") }}
+            {{ ui.submit(_("Cancel"), name="cancel") }}
+            {{ ui.submit(_("Confirm Delete"), style="danger", name="delete") }}
         {%- endcall %}
     {%- endcall %}
 {%- endblock %}

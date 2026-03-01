@@ -273,9 +273,9 @@ this.parentNode.insertBefore(tpl, this);
     <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
 {%- endmacro %}
 
-{%- macro submit(value, name) -%}
+{%- macro submit(content, value, name) -%}
     {%- do kwargs.setdefault("attrs", {}).update({"value": value, "name": name}) -%}
-    {{ ui.button(value, type="submit", **kwargs) }}
+    {{ ui.button(content, type="submit", **kwargs) }}
 {%- endmacro %}
 
 {%- macro textarea(content, name, id, label, value, placeholder, required, errors=[]) -%}

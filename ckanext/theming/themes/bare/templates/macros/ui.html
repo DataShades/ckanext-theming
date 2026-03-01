@@ -30,6 +30,7 @@
 {% set resource_wrapper = resource_wrapper | default(_wrapper.resource_wrapper) %}
 {% set tab_nav_wrapper = tab_nav_wrapper | default(_wrapper.tab_nav_wrapper) %}
 {% set user_wrapper = user_wrapper | default(_wrapper.user_wrapper) %}
+{% set pagination_wrapper = pagination_wrapper | default(_wrapper.pagination_wrapper) %}
 
 {% set activity = activity | default(_content.activity) %}
 {% set facet = facet | default(_content.facet) %}
@@ -75,7 +76,6 @@
 {% set image = image | default(element.image) %}
 {% set link = link | default(element.link) %}
 {% set tag = tag | default(element.tag) %}
-{% set text = text | default(element.text) %}
 {% set video = video | default(element.video) %}
 {% set breadcrumb_divider = breadcrumb_divider | default(element.breadcrumb_divider) %}
 
@@ -135,6 +135,7 @@
 {% set nav_item = nav_item | default(_nav.nav_item) %}
 {% set page_action = page_action | default(_nav.page_action) %}
 {% set pagination = pagination | default(_nav.pagination) %}
+{% set pagination_item = pagination_item | default(_nav.pagination_item) %}
 
 {% set search_active_filters = search_active_filters | default(_search.search_active_filters) %}
 {% set search_advanced_controls = search_advanced_controls | default(_search.search_advanced_controls) %}

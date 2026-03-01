@@ -12,13 +12,13 @@
 
 {%- macro breadcrumb_divider(content="/") -%}{%- do kwargs -%}{%- endmacro %}
 
-{%- macro button(content, href, icon, type="button", style="primary") -%}
+{%- macro button(content, href, icon, size, type="button", style="primary") -%}
     {%- set prefix = ui.icon(icon) if icon else "" -%}
     {%- if href -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("class", "btn btn-" ~ style) -%}
         {{ ui.link(prefix ~ content, href=href, **kwargs) }}
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">
+        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }} {{ ('btn-' ~ size) if size }}">
             {{- prefix ~ content -}}
         </button>
     {%- endif %}
@@ -41,7 +41,7 @@
 {%- endmacro %}
 
 {%- macro heading(content, level) -%}
-    {%- set tag =  "h" ~ level %}
+    {%- set tag =  "h" ~ level -%}
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
 {%- endmacro %}
 
@@ -69,12 +69,6 @@
 
 {%- macro tag(content, href) -%}
     <a {{ ui.util.attrs(kwargs) }} {%- if href %} href="{{ href }}"{%- endif %}>{{ content }}</a>
-{%- endmacro %}
-
-{%- macro text(content) -%}
-    <p {{ ui.util.attrs(kwargs) }}>
-        {{ content }}
-    </p>
 {%- endmacro %}
 
 {%- macro video(src, controls) -%}

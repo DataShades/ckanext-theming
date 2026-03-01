@@ -11,6 +11,4 @@
 * enable subtitle_item macro and update `block subtitle` everywhere.
 * rewrite footer. I got container/grid/row/column, list/list_item, icon, link, form_*, select_*, footer* components here.
 * rewrite header. Here you'll get few *nav_wrapper and *nav_item components, as well as header/account.
-* rewrite flash-messages block
-* rewrite breadcrumbs block; use ui.breadcrumb everywhere
-* update content nav/page nav/content action/page action blocks
+* use `ckan theme component check` to identify missing components and implement them.

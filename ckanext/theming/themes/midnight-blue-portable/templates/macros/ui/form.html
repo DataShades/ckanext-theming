@@ -5,6 +5,33 @@
     {{ ui.input(content, value=value or "on", type="checkbox", **kwargs) }}
 {%- endmacro %}
 
+{%- macro checkbox(content, name, id, checked, label, required, placeholder, type, value="on", errors=[], group_class="form-check") -%}
+    {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
+    {%- set help_id = ui.util.id() if content -%}
+
+    {%- set aria_attrs = kwargs.setdefault("aria", {}) -%}
+    {%- if content %}{%- do aria_attrs.setdefault("describedby", help_id) -%}{%- endif -%}
+    {%- if errors  %}{%- do aria_attrs.setdefault("invalid", "true") -%}{%- endif -%}
+    {%- set attrs = kwargs.setdefault("attrs", {}) -%}
+    {%- do attrs.setdefault("class", "form-check-input") -%}
+    {%- if checked -%}{%- do attrs.update({"checked": true}) -%}{%- endif %}
+
+    <div class="{{ group_class }}">
+        {{ _input(name=name, value=value, placeholder=placeholder, type="checkbox", id=field_id, errors=errors, required=required, help_id=help_id, **kwargs) }}
+        {%- if label -%}
+            <label class="form-check-label checkbox" for="{{ field_id }}">{{ label }}</label>
+        {%- endif %}
+        {%- if content -%}
+            <div class="form-text" id="{{ help_id }}">{{ content }}</div>
+        {%- endif %}
+        {%- if errors %}
+            {{ ui.field_errors(errors) }}
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+
+
 {%- macro extra_field(index, data={}, errors={}, name_template='extras__{index}__') -%}
     {%- set prefix = name_template.format(index=index) -%}
     <fieldset {{ ui.util.attrs(kwargs) }}>
@@ -106,10 +133,10 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro %}
 
 {%- macro hidden_input(name, value) -%}
-    <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value or "" }}">
+    <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value|empty_and_escape or "" }}">
 {%- endmacro %}
 
-{%- macro input(content, name, id, label, value, required, placeholder, type, errors=[]) -%}
+{%- macro input(content, name, id, label, value, required, placeholder, type, errors=[], group_class="form-group") -%}
     {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
     {%- set help_id = ui.util.id() if content -%}
 
@@ -117,30 +144,31 @@ this.parentNode.insertBefore(tpl, this);
     {%- if content %}{%- do aria_attrs.setdefault("describedby", help_id) -%}{%- endif -%}
     {%- if errors  %}{%- do aria_attrs.setdefault("invalid", "true") -%}{%- endif -%}
 
-    <div>
+    <div class="{{ group_class }}">
         {%- if label -%}
-            <label for="{{ field_id }}">{{ label }}</label>
+            <label class="form-label" for="{{ field_id }}">{{ label }}</label>
         {%- endif %}
+        {{ _input(name=name, value=value, placeholder=placeholder, type=type, id=field_id, errors=errors, required=required, help_id=help_id, **kwargs) }}
         {%- if content -%}
-            <div class="input-help" {%- if help_id %}  id="{{ help_id }}"{%- endif %}>{{ content }}</div>
+            <div class="form-text" id="{{ help_id }}">{{ content }}</div>
         {%- endif %}
-        <input
-            {{ ui.util.attrs(kwargs) }}
-            type="{{ type or "text" }}"
-            {%- if name %} name="{{ name }}"{% endif %}
-            {%- if field_id %} id="{{ field_id }}"{%- endif %}
-            {%- if value %} value="{{ value }}"{% endif %}
-            {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}
-            {%- if required %} required{% endif %}
-            {%- if content and not kwargs.aria %}aria-describedby="{{ help_id }}"{% endif %}
-            {%- if errors and not kwargs.aria %}aria-invalid="true"{% endif %}
-        >
+
         {%- if errors %}
-            <div>
-                {{ ui.field_errors(errors) }}
-            </div>
+            {{ ui.field_errors(errors) }}
         {%- endif %}
     </div>
+{%- endmacro %}
+
+{%- macro _input(name, value, type, id, errors, placeholder, required) -%}
+    <input {{ ui.util.attrs(kwargs) }} type="{{ type or "text" }}" class="form-control {{ 'is-invalid' if errors }}"
+        {%- if name %} name="{{ name }}"{% endif %}
+        {%- if id %} id="{{ id }}"{%- endif %}
+        {%- if value %} value="{{ value|empty_and_escape }}"{% endif %}
+        {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}
+        {%- if required %} required{% endif %}
+        {%- if help_id %} aria-describedby="{{ help_id }}"{% endif %}
+        {%- if errors %} aria-invalid="true"{% endif -%}
+    >
 {%- endmacro %}
 
 {%- macro markdown(content, name, id, label, value, placeholder, required, errors=[]) -%}
@@ -266,9 +294,11 @@ this.parentNode.insertBefore(tpl, this);
     <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
 {%- endmacro %}
 
-{%- macro submit(value, name) -%}
-    {%- do kwargs.setdefault("attrs", {}).update({"value": value, "name": name}) -%}
-    {{ ui.button(value, type="submit", **kwargs) }}
+{%- macro submit(content, value, name) -%}
+    {%- set attrs = kwargs.setdefault("attrs", {}) -%}
+    {%- if value -%}{%- do attrs.update({"value": value}) -%}{%- endif %}
+    {%- if name -%}{%- do attrs.update({"name": name}) -%}{%- endif %}
+    {{- ui.button(content, type="submit", **kwargs) }}
 {%- endmacro %}
 
 {%- macro textarea(content, name, id, label, value, placeholder, required, errors=[]) -%}

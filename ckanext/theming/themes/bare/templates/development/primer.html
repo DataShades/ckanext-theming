@@ -32,7 +32,6 @@
         {{ ui.list_item(ui.link(_("Image"), href="#image")) }}
         {{ ui.list_item(ui.link(_("Link"), href="#link")) }}
         {{ ui.list_item(ui.link(_("Tag"), href="#tag")) }}
-        {{ ui.list_item(ui.link(_("Text"), href="#text")) }}
         {{ ui.list_item(ui.link(_("Video"), href="#video")) }}
         {{ ui.list_item(ui.link(_("Alert"), href="#alert")) }}
         {{ ui.list_item(ui.link(_("Confirm Modal"), href="#confirm-modal")) }}
@@ -650,18 +649,6 @@
                 {%- endraw %}
             {%- endcall -%}
             {{ ui.tag("Linked Tag", href="/tag/linked-tag") }}
-            {{ ui.divider() }}
-        </div>
-
-        <div>
-            {{ ui.heading(_("Text"), level=3, attrs={"id": "text"}) }}
-            {{ ui.heading(_("Basic text"), level=4) }}
-            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-                {%- raw %}
-                    {{ ui.text("Sample text content") }}
-                {%- endraw %}
-            {%- endcall -%}
-            {{ ui.text("Sample text content") }}
             {{ ui.divider() }}
         </div>
 

@@ -46,8 +46,10 @@
     </dl>
 {%- endmacro %}
 
-{%- macro table(content, striped=false, bordered=false) -%}
-    <table {{ ui.util.attrs(kwargs) }} width="100%" class="{{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }}">
+{%- macro table(content, striped=false, bordered=false, condensed=false, hover=false) -%}
+    <table {{ ui.util.attrs(kwargs) }}
+        class="table {{ 'table-bordered' if bordered }} {{ 'table-striped' if striped }} {{ 'table-sm' if condensed }} {{ 'table-hover' if hover }}"
+    >
         {{ content }}
     </table>
 {%- endmacro %}
@@ -66,7 +68,7 @@
     </tr>
 {%- endmacro %}
 
-{%- macro table_cell(content, header=false) -%}
+{%- macro table_cell(content, scope, header=false) -%}
     {% set tag = "th" if header else "td" %}
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>
     {{ content }}

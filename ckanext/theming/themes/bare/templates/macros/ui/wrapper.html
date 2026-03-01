@@ -60,3 +60,10 @@
 {%- macro tab_nav_wrapper(content) -%}
     <nav {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">{{ content }}</nav>
 {%- endmacro %}
+
+
+{%- macro pagination_wrapper(content) -%}
+    <nav {{ ui.util.attrs(kwargs) }} role="navigation" aria-label="{{ _('Pagination') }}">
+        {{- content -}}
+    </nav>
+{%- endmacro %}

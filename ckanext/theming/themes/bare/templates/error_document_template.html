@@ -12,7 +12,7 @@
 {%- block primary_content_inner %}
     {{ ui.heading(title=code ~ " " ~ name, level=1) }}
     <div>
-        {{ ui.text(content) }}
+        <p>{{ content }}</p>
 
         {%- block login_redirect %}
             {%- if show_login_redirect_link %}

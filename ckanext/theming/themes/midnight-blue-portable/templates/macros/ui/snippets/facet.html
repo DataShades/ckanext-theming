@@ -1,8 +1,0 @@
-{%- set url = h.remove_url_param(key, value) if active else h.add_url_param(new_params={key: value}) -%}
-{%- do kwargs.setdefault("attrs", {}).setdefault("hx-boost", "true") -%}
-{%- call ui.util.call(ui.link, href=url, **kwargs) -%}
-    <div style="display: flex; justify-content: space-between;">
-        <span>{{ content }}</span>
-        <span>{{ "&times;"|safe if active else count }}</span>
-    </div>
-{%- endcall %}

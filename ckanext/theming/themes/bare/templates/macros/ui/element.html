@@ -72,12 +72,6 @@
     <a {{ ui.util.attrs(kwargs) }} {%- if href %} href="{{ href }}"{%- endif %}>{{ content }}</a>
 {%- endmacro %}
 
-{%- macro text(content) -%}
-    <p {{ ui.util.attrs(kwargs) }}>
-        {{ content }}
-    </p>
-{%- endmacro %}
-
 {%- macro video(src, controls) -%}
     <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
 {%- endmacro %}

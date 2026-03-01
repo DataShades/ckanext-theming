@@ -34,8 +34,6 @@
   </div>
 
   {% block page_pagination %}
-    <div hx-boost="true">
-      {{ page.pager(q=q) }}
-    </div>
+      {{ ui.pagination(page=page.page, total=page.last_page, url_generator=page._url_generator, hx={"boost": "true"}) }}
   {% endblock %}
 </section>

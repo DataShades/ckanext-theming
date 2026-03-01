@@ -468,38 +468,6 @@ maintaining readability and appropriate spacing for tag collections.
 ///
 
 
-## Text
-
-The [`text`][] component handles text content elements, providing consistent
-styling and formatting for various types of textual content. This component
-ensures that text elements maintain appropriate typography, spacing, and
-readability across different contexts and themes.
-
-Text components can handle various text styles including paragraphs, emphasized
-text, code blocks, and other text formatting needs. The component ensures
-proper line heights, font sizes, and spacing to maintain readability while
-adapting to different content requirements and design contexts.
-
-| Parameter | Type   | Default | Description                  |
-|-----------|--------|---------|------------------------------|
-| `content` | string | -       | The text content to display. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `align` (string): Text alignment (e.g., "left", "center", "right")
-///
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic text -->
-{{ ui.text("This is a paragraph of text.") }}
-```
-///
-
-
 ## Video
 
 The [`video`][] component displays video content with appropriate handling for

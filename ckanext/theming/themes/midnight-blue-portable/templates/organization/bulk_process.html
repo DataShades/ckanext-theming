@@ -102,8 +102,8 @@
 {% endblock %}
 
 {% block secondary_content %}
-  {{ super() }}
-  {% for facet in c.facet_titles %}
-    {% snippet 'snippets/facet_list.html', title=c.facet_titles[facet], name=facet, extras={'id':group_dict.id}, search_facets=search_facets, default_collapsed=default_collapsed %}
-  {% endfor %}
+    {{ super() }}
+    {%- with use_htmx=false -%}
+        {% include 'package/snippets/search_facets.html' %}
+    {%- endwith %}
 {% endblock %}

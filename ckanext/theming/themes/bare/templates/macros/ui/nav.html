@@ -32,7 +32,7 @@
 
 {%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=_("Previous"), next_label=_("Next"), padding_label="...") -%}
     {%- if total > 1 %}
-        <nav {{ ui.util.attrs(kwargs) }} role="navigation" aria-label="{{ _('Pagination') }}">
+        {%- call ui.util.call(ui.pagination_wrapper, **kwargs) -%}
 
             {%- if page > 1 and not hide_siblings %}
                 {{ ui.link(previous_label, href=url_generator(page=page - 1), aria={"label": _("Go to previous page")}) }}
@@ -66,8 +66,12 @@
                 {{ ui.link(next_label, href=url_generator(page=page + 1), aria={"label": _("Go to next page")}) }}
             {%- endif %}
 
-        </nav>
+        {%- endcall %}
     {%- endif %}
+{%- endmacro %}
+
+{%- macro pagination_item(content, href) -%}
+    {{ ui.link(content, href=href, aria={"label": kwargs.label or "Go to page {}".format(content) }) }}
 {%- endmacro %}
 
 {%- macro dropdown_item(content, href="#") -%}
