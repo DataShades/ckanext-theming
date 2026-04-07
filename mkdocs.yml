@@ -85,7 +85,7 @@ theme:
 
 nav:
   - index.md
-  - qa.md
+  - theme.md
   - Component library:
       - library/index.md
       - library/containers.md
@@ -101,7 +101,6 @@ nav:
       - library/sections.md
       - library/wrappers.md
   - parameters.md
-  - theme.md
   - cli.md
   - theming-parties.md
   # - blocks.md

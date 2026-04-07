@@ -1,7 +1,9 @@
 {% extends "user/read_base.html" %}
 
 {% block primary_content_inner %}
-    <h1>{% block page_heading %}{{ _('API Tokens') }}{% endblock %}</h1>
+    {%- call ui.util.call(ui.heading, level=1) -%}
+        {% block page_heading %}{{ _('API Tokens') }}{% endblock %}
+    {%- endcall %}
 
     {% if h.check_access('api_token_create', {'user': user['name']}) %}
         {% snippet 'user/snippets/api_token_create_form.html', data=data, errors=errors, user=user %}

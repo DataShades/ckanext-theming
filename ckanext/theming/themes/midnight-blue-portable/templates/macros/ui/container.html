@@ -35,8 +35,15 @@
     </div>
 {%- endmacro %}
 
-{%- macro column(content, span) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="col{% if span %}{% for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}{% endif %}">
+{%- macro column(content, span, offset) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="col
+        {%- if span %}
+        {%- for breakpoint, size in span.items() %} col-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}
+        {%- endif -%}
+        {%- if offset %}
+        {%- for breakpoint, size in offset.items() %} offset-{{ breakpoint ~ '-' if breakpoint != 'xs' }}{{ size }}{% endfor %}
+        {%- endif -%}
+        ">
         {{ content }}
     </div>
 {%- endmacro %}

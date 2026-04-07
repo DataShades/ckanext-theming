@@ -101,7 +101,7 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro %}
 
 {%- macro form_actions(content) -%}
-    <div{{ ui.util.attrs(kwargs) }}>{{ content }}</div>
+    <div{{ ui.util.attrs(kwargs) }} class="form-actions">{{ content }}</div>
 {%- endmacro %}
 
 {%- macro form_end(content) -%}

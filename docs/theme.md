@@ -18,6 +18,37 @@ your_theme/
      └── (static files served directly)
 ```
 
+
+/// tip | Create new theme using CLI
+
+New theme can be created by making a copy of an existing theme using CKAN CLI:
+
+```sh
+ckan theme create THEME_NAME
+```
+
+The folder THEME_NAME will be created in the current directory and will contain
+all the files with minimalistic theme implementation. It does not look nice,
+but it does not contain any framework-specific code, so it's the best starting
+point.
+
+To create a theme by copying an existing theme, specify `--base` option
+
+```sh
+ckan theme create THEME_NAME --base ANOTHER_COOOL_THEME
+```
+
+To create theme in a different location, provide path to the base folder after
+theme name. In this case THEME_NAME will be created inside specified location
+instead of the current folder.
+
+
+```sh
+ckan theme create THEME_NAME /base/location/for/the/new/theme
+```
+
+///
+
 ## Registering a Theme
 
 ### 1. Implement the `ITheme` Interface
