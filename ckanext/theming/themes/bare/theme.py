@@ -109,5 +109,5 @@ icon_map = {
 }
 
 
-def make_theme():
-    return Theme("bare", here, icon_map=icon_map)
+def make_theme(name: str = "bare"):
+    return Theme(name, here, icon_map=icon_map)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-import os
 from typing import Any
 
 from typing_extensions import override
@@ -10,7 +9,7 @@ import ckan.plugins.toolkit as tk
 from ckan import plugins as p
 from ckan import types
 
-from ckanext.theming.themes.bare.theme import make_theme as make_bare_theme
+from ckanext.theming.themes.bare.theme import make_theme
 
 from . import helpers
 from .interfaces import ITheme
@@ -33,11 +32,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
 
     @override
     def register_themes(self) -> list[Theme]:
-        root = os.path.dirname(os.path.abspath(__file__))
-        return [
-            make_bare_theme(),
-            Theme("midnight-blue-portable", os.path.join(root, "themes/midnight-blue-portable")),
-        ]
+        return [make_theme()]
 
     @override
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
