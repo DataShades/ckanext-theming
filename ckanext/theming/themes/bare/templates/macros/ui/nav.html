@@ -30,18 +30,18 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=_("Previous"), next_label=_("Next"), padding_label="...") -%}
+{%- macro pagination(page=1, total=1, url_generator=h.pager_url, padding=2, hide_edges=false, hide_siblings=false, start_label=null, end_label=null, previous_label=_("Previous"), next_label=_("Next"), padding_label="...", url_params={}) -%}
     {%- if total > 1 %}
         {%- call ui.util.call(ui.pagination_wrapper, **kwargs) -%}
 
             {%- if page > 1 and not hide_siblings %}
-                {{ ui.link(previous_label, href=url_generator(page=page - 1), aria={"label": _("Go to previous page")}) }}
+                {{ ui.link(previous_label, href=url_generator(page=page - 1, **url_params), aria={"label": _("Go to previous page")}) }}
             {%- endif %}
 
 
             {%- if page - 1 > padding %}
                 {%- if not hide_edges -%}
-                    {{ ui.link((start_label or 1), href=url_generator(page=1), aria={"label": _("Go to first page")}) }}
+                    {{ ui.link((start_label or 1), href=url_generator(page=1, **url_params), aria={"label": _("Go to first page")}) }}
                 {%- endif %}
 
                 <span aria-hidden="true">{{ padding_label }}</span>
@@ -51,19 +51,19 @@
                 {%- if i == page %}
                     <span aria-current="page">{{ i }}</span>
                 {%- else %}
-                    {{ ui.link(i, href=url_generator(page=i), aria={"label": _("Go to page {num}".format(num=i))}) }}
+                    {{ ui.link(i, href=url_generator(page=i, **url_params), aria={"label": _("Go to page {num}".format(num=i))}) }}
                 {%- endif %}
             {%- endfor %}
 
             {%- if total - page > padding %}
                 <span aria-hidden="true">{{ padding_label }}</span>
                 {%- if not hide_edges -%}
-                    {{ ui.link((end_label or total), href=url_generator(page=total), aria={"label": _("Go to last page")}) }}
+                    {{ ui.link((end_label or total), href=url_generator(page=total, **url_params), aria={"label": _("Go to last page")}) }}
                 {%- endif %}
             {%- endif %}
 
             {%- if page < total and not hide_siblings %}
-                {{ ui.link(next_label, href=url_generator(page=page + 1), aria={"label": _("Go to next page")}) }}
+                {{ ui.link(next_label, href=url_generator(page=page + 1, **url_params), aria={"label": _("Go to next page")}) }}
             {%- endif %}
 
         {%- endcall %}

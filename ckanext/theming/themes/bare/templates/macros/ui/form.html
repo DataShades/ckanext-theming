@@ -1,3 +1,5 @@
+{% from 'macros/form.html' import image_upload as _image_upload %}
+
 {%- macro checkbox(content, checked, value="on") -%}
     {%- if checked -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
@@ -113,6 +115,13 @@ this.parentNode.insertBefore(tpl, this);
     <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value or "" }}">
 {%- endmacro %}
 
+{%- macro form_annotation() -%}
+{%- endmacro %}
+
+{%- macro field_info(content) -%}
+    <div {{ ui.util.attrs(kwargs) }} class="input-help">{{ content }}</div>
+{%- endmacro %}
+
 {%- macro input(content, name, id, label, value, required, placeholder, type, errors=[]) -%}
     {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
     {%- set help_id = ui.util.id() if content -%}
@@ -125,9 +134,7 @@ this.parentNode.insertBefore(tpl, this);
         {%- if label -%}
             <label for="{{ field_id }}">{{ label }}</label>
         {%- endif %}
-        {%- if content -%}
-            <div class="input-help" {%- if help_id %}  id="{{ help_id }}"{%- endif %}>{{ content }}</div>
-        {%- endif %}
+        {{ ui.field_info(content, attrs={"id": help_id}) if content }}
         <input
             {{ ui.util.attrs(kwargs) }}
             type="{{ type or "text" }}"
@@ -147,46 +154,52 @@ this.parentNode.insertBefore(tpl, this);
     </div>
 {%- endmacro %}
 
+{%- macro markdown_popover(id, title=_("Markdown formatting")) -%}
+    {%- call ui.util.call(ui.popover, title=title, id=id) -%}
+        {%- if content -%}
+            {{ content }}
+        {%- else -%}
+            {%- trans -%}
+            <p>__Bold text__ or _italic text_</p>
+            <p># title
+                <br>## secondary title
+                <br>### etc
+            </p>
+            <p>* list
+                <br>* of
+                <br>* items
+            </p>
+            <p>http://auto.link.ed/</p>
+            <p>
+                <strong>
+                    <a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'>Full markdown syntax</a>
+                </strong>
+            </p>
+            <p>
+                <strong>Please note:</strong>
+                HTML tags are stripped out for security reasons
+            </p>
+            {%- endtrans %}
+        {%- endif %}
+    {%- endcall -%}
+{%- endmacro %}
+
 {%- macro markdown(content, name, id, label, value, placeholder, required, errors=[]) -%}
     {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
     {%- set help_id = ui.util.id() if content -%}
     {% set popover_id = ui.util.id() %}
-    {%- call ui.util.call(ui.popover, title=_("Markdown formatting"), id=popover_id) -%}
-        {%- trans -%}
-        <p>__Bold text__ or _italic text_</p>
-        <p># title
-            <br>## secondary title
-            <br>### etc
-        </p>
-        <p>* list
-            <br>* of
-            <br>* items
-        </p>
-        <p>http://auto.link.ed/</p>
-        <p>
-            <strong>
-                <a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'>Full markdown syntax</a>
-            </strong>
-        </p>
-        <p>
-            <strong>Please note:</strong>
-            HTML tags are stripped out for security reasons
-        </p>
-            {%- endtrans %}
-    {%- endcall -%}
+    {{ ui.markdown_popover(id=popover_id) }}
 
     <div>
         {%- if label -%}
             <label for="{{ field_id }}">{{ label }}</label>
         {%- endif %}
-        {%- if content -%}
-            <div class="input-help" id="{{ help_id }}">{{ content }}</div>
-        {%- endif %}
-        <div class="input-help">
+        {{ ui.field_info(content, attrs={"id": help_id}) if content }}
+        {%- call ui.util.call(ui.field_info) -%}
             <sub>
                 You can use <strong>{{ ui.popover_handle(_("Markdown formatting"), id=popover_id) }}</strong> here
             </sub>
-        </div>
+        {%- endcall %}
         <textarea
             {{ ui.util.attrs(kwargs) }}
             {%- if field_id %} id="{{ field_id }}"{%- endif %}
@@ -247,9 +260,7 @@ this.parentNode.insertBefore(tpl, this);
         {%- if label -%}
             <label for="{{ field_id }}">{{ label }}</label>
         {%- endif %}
-        {%- if nested_content -%}
-            <div class="input-help" id="{{ help_id }}">{{ nested_content }}</div>
-        {%- endif %}
+        {{ ui.field_info(nested_content, attrs={"id": help_id}) if nested_content }}
         <select
             {{ ui.util.attrs(kwargs) }}
             {%- if name %} name="{{ name }}"{%- endif %}
@@ -286,9 +297,7 @@ this.parentNode.insertBefore(tpl, this);
         {%- if label -%}
             <label for="{{ field_id }}">{{ label }}</label>
         {%- endif %}
-        {%- if content -%}
-            <div class="input-help" id="{{ help_id }}">{{ content }}</div>
-        {%- endif %}
+        {{ ui.field_info(content, attrs={"id": help_id}) if content }}
         <textarea
             {{ ui.util.attrs(kwargs) }}
             {%- if field_id %} id="{{ field_id }}"{%- endif %}
@@ -304,4 +313,17 @@ this.parentNode.insertBefore(tpl, this);
             </div>
         {%- endif %}
     </div>
+{%- endmacro %}
+
+{% macro image_upload()  %}
+    {{ _image_upload(*varargs, **kwargs) }}
+{%- endmacro -%}
+
+{%- macro fieldset(content, legend) -%}
+    <fieldset>
+        {%- if legend -%}
+            <legend>{{ legend }}</legend>
+        {%- endif %}
+        {{ content }}
+    </fieldset>
 {%- endmacro %}

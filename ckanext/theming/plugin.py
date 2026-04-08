@@ -11,14 +11,12 @@ from ckan import types
 
 from ckanext.theming.themes.bare.theme import make_theme
 
-from . import helpers
 from .interfaces import ITheme
 from .lib import Theme, enable_theme, ui
 
 log = logging.getLogger(__name__)
 
 
-@tk.blanket.helpers(helpers.get_helpers)
 @tk.blanket.cli
 @tk.blanket.config_declarations
 class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
