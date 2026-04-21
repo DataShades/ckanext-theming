@@ -13,23 +13,16 @@
 
 {% set accordion_wrapper = accordion_wrapper | default(_wrapper.accordion_wrapper) %}
 {% set account_nav_wrapper = account_nav_wrapper | default(_wrapper.account_nav_wrapper) %}
-{% set activity_wrapper = activity_wrapper | default(_wrapper.activity_wrapper) %}
 {% set breadcrumb_wrapper = breadcrumb_wrapper | default(_wrapper.breadcrumb_wrapper) %}
 {% set content_action_wrapper = content_action_wrapper | default(_wrapper.content_action_wrapper) %}
 {% set content_nav_wrapper = content_nav_wrapper | default(_wrapper.content_nav_wrapper) %}
-{% set facet_wrapper = facet_wrapper | default(_wrapper.facet_wrapper) %}
-{% set group_wrapper = group_wrapper | default(_wrapper.group_wrapper) %}
 {% set main_nav_wrapper = main_nav_wrapper | default(_wrapper.main_nav_wrapper) %}
 {% set sidebar_nav_wrapper = sidebar_nav_wrapper | default(_wrapper.sidebar_nav_wrapper) %}
 {% set menu_wrapper = menu_wrapper | default(_wrapper.menu_wrapper) %}
 {% set nav_wrapper = nav_wrapper | default(_wrapper.nav_wrapper) %}
-{% set organization_wrapper = organization_wrapper | default(_wrapper.organization_wrapper) %}
-{% set package_wrapper = package_wrapper | default(_wrapper.package_wrapper) %}
 {% set page_action_wrapper = page_action_wrapper | default(_wrapper.page_action_wrapper) %}
 {% set panel_wrapper = panel_wrapper | default(_wrapper.panel_wrapper) %}
-{% set resource_wrapper = resource_wrapper | default(_wrapper.resource_wrapper) %}
 {% set tab_nav_wrapper = tab_nav_wrapper | default(_wrapper.tab_nav_wrapper) %}
-{% set user_wrapper = user_wrapper | default(_wrapper.user_wrapper) %}
 {% set pagination_wrapper = pagination_wrapper | default(_wrapper.pagination_wrapper) %}
 
 {% set activity = activity | default(_content.activity) %}
@@ -52,6 +45,13 @@
 {% set list = list | default(_container.list) %}
 {% set list_item = list_item | default(_container.list_item) %}
 {% set panel = panel | default(_container.panel) %}
+{% set user_list = user_list | default(_container.user_list) %}
+{% set resource_list = resource_list | default(_container.resource_list) %}
+{% set activity_list = activity_list | default(_container.activity_list) %}
+{% set facet_list = facet_list | default(_container.facet_list) %}
+{% set group_list = group_list | default(_container.group_list) %}
+{% set organization_list = organization_list | default(_container.organization_list) %}
+{% set package_list = package_list | default(_container.package_list) %}
 
 {% set facet_section = facet_section | default(_section.facet_section) %}
 {% set section = section | default(_section.section) %}

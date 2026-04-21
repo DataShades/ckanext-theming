@@ -26,7 +26,7 @@
         {%- block package_resources -%}
             {%- if pkg_dict.resources %}
                 {%- call ui.util.call(ui.accordion, title=_("Resources")) %}
-                    {{ ui.resource_wrapper(ui.util.map(ui.resource, pkg_dict.resources)) }}
+                    {{ ui.resource_list(ui.util.map(ui.resource, pkg_dict.resources)) }}
                 {%- endcall %}
             {%- endif %}
         {%- endblock %}

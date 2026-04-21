@@ -38,7 +38,7 @@
                     {{ ui.heading(_('Featured Groups'), level=3) }}
                     {%- set groups = h.get_featured_groups() -%}
                     {%- if groups -%}
-                        {{ ui.group_wrapper(ui.util.map(ui.group, groups)) }}
+                        {{ ui.group_list(ui.util.map(ui.group, groups)) }}
 
                     {%- else -%}
                         <p>{{ _('A featured group would appear here.') }}</p>
@@ -55,7 +55,7 @@
                     {{ ui.heading(_('Featured Organizations'), level=3) }}
                     {%- set organizations = h.get_featured_organizations() -%}
                     {%- if organizations -%}
-                        {{ ui.organization_wrapper(ui.util.map(ui.organization, organizations)) }}
+                        {{ ui.organization_list(ui.util.map(ui.organization, organizations)) }}
 
                     {%- else -%}
                             <p>{{ _('A featured organization would appear here.') }}</p>

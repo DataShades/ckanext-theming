@@ -5,7 +5,7 @@
 
     {%- if activity_stream %}
         {%- block activity_stream -%}
-            {%- call ui.util.call(ui.activity_wrapper) -%}
+            {%- call ui.util.call(ui.activity_list) -%}
                 {%- for activity in activity_stream %}
                     {%- block activity_item scoped -%}
                         {%- call ui.util.call(ui.activity, activity=activity) -%}

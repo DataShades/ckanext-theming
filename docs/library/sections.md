@@ -27,7 +27,7 @@ interface.
 ```jinja2
 <!-- Basic facet section -->
 {% call ui.util.call(ui.facet_section, title="Organization") %}
-    {% call ui.util.call(ui.facet_wrapper, title="Organization") %}
+    {% call ui.util.call(ui.facet_list, title="Organization") %}
         {{ ui.facet("Government", key="org", value="gov", count=15) }}
     {% endcall %}
 {% endcall %}
@@ -38,7 +38,7 @@ interface.
     type: info
 
 The [`facet_section`][facet-section] component works with [`facet`][] and
-[`facet_wrapper`][facet-wrapper] components to create comprehensive filtering
+[`facet_list`][facet-list] components to create comprehensive filtering
 interfaces. While facet sections provide the structural grouping, individual
 facets provide the specific filter options.
 

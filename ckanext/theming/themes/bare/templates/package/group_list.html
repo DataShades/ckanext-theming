@@ -26,7 +26,7 @@
 
     {% if pkg_dict.groups %}
         {%- call ui.util.call(ui.form, method="POST") -%}
-            {%- call ui.util.call(ui.group_wrapper) -%}
+            {%- call ui.util.call(ui.group_list) -%}
                 {%- for group in pkg_dict.groups -%}
                     {%- if group.user_member -%}
                         {% set remove_label = _('Unlink {name} from the dataset').format(name=group.display_name) %}

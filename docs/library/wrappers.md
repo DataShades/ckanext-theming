@@ -60,7 +60,7 @@ styling.
 
 ## Activity Wrapper
 
-The [`activity_wrapper`][activity-wrapper] component provides a structural
+The [`activity_list`][activity-list] component provides a structural
 container for activity stream content. It ensures that activity entries are
 properly formatted and styled consistently. This wrapper works with the
 [`activity`][] component to display user actions and system events in a
@@ -71,7 +71,7 @@ structured format.
 
 ```jinja2
 <!-- Basic activity wrapper -->
-{% call ui.util.call(ui.activity_wrapper) %}
+{% call ui.util.call(ui.activity_list) %}
     {{ ui.activity("User created a dataset", activity=activity_data) }}
     {{ ui.activity("User updated profile", activity=activity_data2) }}
 {% endcall %}
@@ -140,7 +140,7 @@ appearance.
 
 ## Facet Wrapper
 
-The [`facet_wrapper`][facet-wrapper] component creates a container for facet
+The [`facet_list`][facet-list] component creates a container for facet
 filter elements, which are crucial for search and filtering functionality in
 CKAN. It works with [`facet`][] and [`facet_section`][facet-section] components
 to provide a consistent interface for filtering datasets and other content.
@@ -148,7 +148,7 @@ to provide a consistent interface for filtering datasets and other content.
 /// admonition | Relationship
     type: info
 
-The [`facet_wrapper`][facet-wrapper] component is closely related to
+The [`facet_list`][facet-list] component is closely related to
 [`facet`][] and [`facet_section`][facet-section] components. While the wrapper
 provides the container structure, the facet components provide the actual
 filter controls and display elements.
@@ -160,7 +160,7 @@ filter controls and display elements.
 
 ```jinja2
 <!-- Basic facet wrapper -->
-{% call ui.util.call(ui.facet_wrapper) %}
+{% call ui.util.call(ui.facet_list) %}
     {{ ui.facet("Government", key="org", value="gov", count=15) }}
     {{ ui.facet("CSV", key="format", value="csv", count=8, active=true) }}
 {% endcall %}
@@ -169,7 +169,7 @@ filter controls and display elements.
 
 ## Group Wrapper
 
-The [`group_wrapper`][group-wrapper] component provides a structural container
+The [`group_list`][group-list] component provides a structural container
 for group-related content. It ensures that group information, listings, and
 related elements maintain consistent styling and layout. This wrapper works
 with [`group`][] components to display organizational structures within CKAN.
@@ -179,7 +179,7 @@ with [`group`][] components to display organizational structures within CKAN.
 
 ```jinja2
 <!-- Basic group wrapper -->
-{% call ui.util.call(ui.group_wrapper) %}
+{% call ui.util.call(ui.group_list) %}
     {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
 {% endcall %}
 ```
@@ -244,7 +244,7 @@ ensure consistency.
 
 ## Organization Wrapper
 
-The [`organization_wrapper`][organization-wrapper] component creates a
+The [`organization_list`][organization-list] component creates a
 container for organization-related content. It works with [`organization`][]
 components to provide consistent display of organizational information,
 members, and related content within CKAN.
@@ -254,7 +254,7 @@ members, and related content within CKAN.
 
 ```jinja2
 <!-- Basic organization wrapper -->
-{% call ui.util.call(ui.organization_wrapper) %}
+{% call ui.util.call(ui.organization_list) %}
     {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
 {% endcall %}
 ```
@@ -262,7 +262,7 @@ members, and related content within CKAN.
 
 ## Package Wrapper
 
-The [`package_wrapper`][package-wrapper] component provides a structural
+The [`package_list`][package-list] component provides a structural
 container for package (dataset) related content. It ensures that dataset
 information, resources, and related elements maintain consistent styling and
 layout. This wrapper works with [`package`][] components to display dataset
@@ -273,7 +273,7 @@ information effectively.
 
 ```jinja2
 <!-- Basic package wrapper -->
-{% call ui.util.call(ui.package_wrapper) %}
+{% call ui.util.call(ui.package_list) %}
     {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
 {% endcall %}
 ```
@@ -328,7 +328,7 @@ interactive element for controlling the panel.
 
 ## Resource Wrapper
 
-The [`resource_wrapper`][resource-wrapper] component creates a container for
+The [`resource_list`][resource-list] component creates a container for
 resource-related content. It ensures that resource information, download links,
 and related elements maintain consistent styling and layout. This wrapper works
 with [`resource`][] components to display resource information effectively.
@@ -338,7 +338,7 @@ with [`resource`][] components to display resource information effectively.
 
 ```jinja2
 <!-- Basic resource wrapper -->
-{% call ui.util.call(ui.resource_wrapper) %}
+{% call ui.util.call(ui.resource_list) %}
     {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
 {% endcall %}
 ```
@@ -375,7 +375,7 @@ between tab content.
 
 ## User Wrapper
 
-The [`user_wrapper`][user-wrapper] component creates a container for
+The [`user_list`][user-list] component creates a container for
 user-related content. It ensures that user profiles, activity, and related
 information maintain consistent styling and layout. This wrapper works with
 [`user`][] components to display user information effectively.
@@ -385,7 +385,7 @@ information maintain consistent styling and layout. This wrapper works with
 
 ```jinja2
 <!-- Basic user wrapper -->
-{% call ui.util.call(ui.user_wrapper) %}
+{% call ui.util.call(ui.user_list) %}
     {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
 {% endcall %}
 ```

@@ -13,7 +13,7 @@ The [`activity`][] component displays individual activity stream entries,
 showing user actions and system events in a structured format. It presents
 information about what happened, who performed the action, and when it
 occurred. This component is typically wrapped by the
-[`activity_wrapper`][activity-wrapper] to provide consistent grouping and
+[`activity_list`][activity-list] to provide consistent grouping and
 styling of multiple activity entries.
 
 Activity components are essential for showing the dynamic nature of a CKAN
@@ -26,7 +26,7 @@ such as dataset creation, updates, and user interactions.
 
 ```jinja2
 <!-- Basic activity component -->
-{%- call ui.util.call(ui.activity_wrapper) -%}
+{%- call ui.util.call(ui.activity_list) -%}
     {{ ui.activity("User created a new dataset", activity=activity_data) }}
 {%- endcall %}
 ```
@@ -35,7 +35,7 @@ such as dataset creation, updates, and user interactions.
 /// admonition | Relationship
     type: info
 
-The [`activity`][] component works with [`activity_wrapper`][activity-wrapper]
+The [`activity`][] component works with [`activity_list`][activity-list]
 to create organized activity streams. While the activity component handles
 individual entries, the wrapper provides the container for multiple entries.
 
@@ -49,7 +49,7 @@ are crucial for data discovery and exploration in CKAN, enabling users to
 filter datasets by organization, group, license, format, and other attributes.
 
 The facet component typically displays the filter name, available options, and
-selection status. It works in conjunction with [`facet_wrapper`][facet-wrapper]
+selection status. It works in conjunction with [`facet_list`][facet-list]
 and [`facet_section`][facet-section] components to create comprehensive
 filtering interfaces. Facets are particularly important for large data portals
 where users need to narrow down results efficiently.
@@ -58,7 +58,7 @@ where users need to narrow down results efficiently.
     type: info
 
 The [`facet`][] component is closely related to
-[`facet_wrapper`][facet-wrapper] and [`facet_section`][facet-section]
+[`facet_list`][facet-list] and [`facet_section`][facet-section]
 components. The facet component displays individual filter options, while the
 wrapper and section components provide the structural container.
 
@@ -69,12 +69,12 @@ wrapper and section components provide the structural container.
 
 ```jinja2
 <!-- Basic facet component -->
-{%- call ui.util.call(ui.facet_wrapper) -%}
+{%- call ui.util.call(ui.facet_list) -%}
     {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
 {%- endcall %}
 
 <!-- Active facet component -->
-{%- call ui.util.call(ui.facet_wrapper) -%}
+{%- call ui.util.call(ui.facet_list) -%}
     {{ ui.facet("CSV", key="format", value="csv", count=8, active=true) }}
 {%- endcall %}
 ```
@@ -150,14 +150,14 @@ discover related datasets and understand the thematic organization of content.
 
 The group component often includes links to view group details, browse datasets
 within the group, and access group-specific information. It works with
-[`group_wrapper`][group-wrapper] to provide consistent presentation of multiple
+[`group_list`][group-list] to provide consistent presentation of multiple
 groups in listings and search results.
 
 /// admonition | Relationship
     type: info
 
 The [`group`][] component is typically wrapped by
-[`group_wrapper`][group-wrapper] components to provide consistent styling and
+[`group_list`][group-list] components to provide consistent styling and
 layout when displaying multiple groups together.
 
 ///
@@ -167,7 +167,7 @@ layout when displaying multiple groups together.
 
 ```jinja2
 <!-- Basic group component -->
-{%- call ui.util.call(ui.group_wrapper) -%}
+{%- call ui.util.call(ui.group_list) -%}
     {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
 {%- endcall %}
 ```
@@ -200,14 +200,14 @@ governance model.
 
 The organization component typically includes information about the
 organization's datasets, members, and administrative structure. It works with
-[`organization_wrapper`][organization-wrapper] to provide consistent
+[`organization_list`][organization-list] to provide consistent
 presentation when displaying multiple organizations or organization listings.
 
 /// admonition | Relationship
     type: info
 
 The [`organization`][] component is typically wrapped by
-[`organization_wrapper`][organization-wrapper] components to provide consistent
+[`organization_list`][organization-list] components to provide consistent
 styling and layout when displaying multiple organizations together.
 
 ///
@@ -217,7 +217,7 @@ styling and layout when displaying multiple organizations together.
 
 ```jinja2
 <!-- Basic organization component -->
-{%- call ui.util.call(ui.organization_wrapper) -%}
+{%- call ui.util.call(ui.organization_list) -%}
     {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
 {%- endcall %}
 ```
@@ -250,14 +250,14 @@ functionality.
 
 The component handles complex dataset information including multiple resources,
 metadata fields, and relationships with organizations and groups. It works with
-[`package_wrapper`][package-wrapper] to provide consistent presentation in
+[`package_list`][package-list] to provide consistent presentation in
 search results, listings, and related dataset displays.
 
 /// admonition | Relationship
     type: info
 
 The [`package`][] component is typically wrapped by
-[`package_wrapper`][package-wrapper] components to provide consistent styling
+[`package_list`][package-list] components to provide consistent styling
 and layout when displaying multiple packages together.
 
 ///
@@ -267,7 +267,7 @@ and layout when displaying multiple packages together.
 
 ```jinja2
 <!-- Basic package component -->
-{%- call ui.util.call(ui.package_wrapper) -%}
+{%- call ui.util.call(ui.package_list) -%}
     {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
 {%- endcall %}
 ```
@@ -300,14 +300,14 @@ links, and API endpoints.
 
 Resource components are crucial for data access, providing users with the means
 to download, view, or interact with the actual data contained in datasets. The
-component works with [`resource_wrapper`][resource-wrapper] to provide
+component works with [`resource_list`][resource-list] to provide
 consistent presentation when displaying multiple resources within a package.
 
 /// admonition | Relationship
     type: info
 
 The [`resource`][] component is typically wrapped by
-[`resource_wrapper`][resource-wrapper] components to provide consistent styling
+[`resource_list`][resource-list] components to provide consistent styling
 and layout when displaying multiple resources together.
 
 ///
@@ -317,7 +317,7 @@ and layout when displaying multiple resources together.
 
 ```jinja2
 <!-- Basic resource component -->
-{%- call ui.util.call(ui.resource_wrapper) -%}
+{%- call ui.util.call(ui.resource_list) -%}
     {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
 {%- endcall %}
 
@@ -350,14 +350,14 @@ or organizations. The component handles both public profile information and
 user-specific details when appropriate.
 
 User components are important for community features and understanding content
-provenance. They work with [`user_wrapper`][user-wrapper] to provide consistent
+provenance. They work with [`user_list`][user-list] to provide consistent
 presentation when displaying multiple users or user listings, such as member
 lists or contributor information.
 
 /// admonition | Relationship
     type: info
 
-The [`user`][] component is typically wrapped by [`user_wrapper`][user-wrapper]
+The [`user`][] component is typically wrapped by [`user_list`][user-list]
 components to provide consistent styling and layout when displaying multiple
 users together.
 
@@ -368,7 +368,7 @@ users together.
 
 ```jinja2
 <!-- Basic user component -->
-{%- call ui.util.call(ui.user_wrapper) -%}
+{%- call ui.util.call(ui.user_list) -%}
     {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
 {%- endcall %}
 ```

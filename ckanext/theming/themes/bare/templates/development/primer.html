@@ -72,22 +72,22 @@
         {{ ui.list_item(ui.link(_("Sidebar Section"), href="#sidebar-section")) }}
         {{ ui.list_item(ui.link(_("Accordion Wrapper"), href="#accordion-wrapper")) }}
         {{ ui.list_item(ui.link(_("Account Nav Wrapper"), href="#account-nav-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Activity Wrapper"), href="#activity-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Activity Wrapper"), href="#activity-list")) }}
         {{ ui.list_item(ui.link(_("Breadcrumb Wrapper"), href="#breadcrumb-wrapper")) }}
         {{ ui.list_item(ui.link(_("Content Action Wrapper"), href="#content-action-wrapper")) }}
         {{ ui.list_item(ui.link(_("Content Nav Wrapper"), href="#content-nav-wrapper")) }}
         {{ ui.list_item(ui.link(_("Dropdown Wrapper"), href="#dropdown-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Facet Wrapper"), href="#facet-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Group Wrapper"), href="#group-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Facet Wrapper"), href="#facet-list")) }}
+        {{ ui.list_item(ui.link(_("Group Wrapper"), href="#group-list")) }}
         {{ ui.list_item(ui.link(_("Main Nav Wrapper"), href="#main-nav-wrapper")) }}
         {{ ui.list_item(ui.link(_("Menu Wrapper"), href="#menu-wrapper")) }}
         {{ ui.list_item(ui.link(_("Nav Wrapper"), href="#nav-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Organization Wrapper"), href="#organization-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Package Wrapper"), href="#package-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Organization Wrapper"), href="#organization-list")) }}
+        {{ ui.list_item(ui.link(_("Package Wrapper"), href="#package-list")) }}
         {{ ui.list_item(ui.link(_("Page Action Wrapper"), href="#page-action-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Resource Wrapper"), href="#resource-wrapper")) }}
+        {{ ui.list_item(ui.link(_("Resource Wrapper"), href="#resource-list")) }}
         {{ ui.list_item(ui.link(_("Tab Wrapper"), href="#tab-wrapper")) }}
-        {{ ui.list_item(ui.link(_("User Wrapper"), href="#user-wrapper")) }}
+        {{ ui.list_item(ui.link(_("User Wrapper"), href="#user-list")) }}
     {%- endcall %}
 {%- endblock %}
 
@@ -291,12 +291,12 @@
             {{ ui.heading(_("Basic activity"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.activity_wrapper) -%}
+                    {%- call ui.util.call(ui.activity_list) -%}
                         {{ ui.activity("User created a new dataset", activity=activity_data) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.activity_wrapper) -%}
+            {%- call ui.util.call(ui.activity_list) -%}
                 {{ ui.activity("User created a new dataset", activity={"user": "test_user", "activity_type": "new package", "data": {"package": {"title": "Test Dataset"}}}) }}
             {%- endcall %}
             {{ ui.divider() }}
@@ -307,12 +307,12 @@
             {{ ui.heading(_("Basic facet component"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.facet_wrapper) -%}
+                    {%- call ui.util.call(ui.facet_list) -%}
                         {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.facet_wrapper) -%}
+            {%- call ui.util.call(ui.facet_list) -%}
                 {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
             {%- endcall %}
             {{ ui.divider() }}
@@ -335,12 +335,12 @@
             {{ ui.heading(_("Basic group"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.group_wrapper) -%}
+                    {%- call ui.util.call(ui.group_list) -%}
                         {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.group_wrapper) -%}
+            {%- call ui.util.call(ui.group_list) -%}
                 {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
@@ -351,12 +351,12 @@
             {{ ui.heading(_("Basic organization"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.organization_wrapper) -%}
+                    {%- call ui.util.call(ui.organization_list) -%}
                         {{ ui.organization({"name": "test-org", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.organization_wrapper) -%}
+            {%- call ui.util.call(ui.organization_list) -%}
                 {{ ui.organization({"name": "test-org", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
@@ -367,12 +367,12 @@
             {{ ui.heading(_("Basic package"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.package_wrapper) -%}
+                    {%- call ui.util.call(ui.package_list) -%}
                         {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.package_wrapper) -%}
+            {%- call ui.util.call(ui.package_list) -%}
                 {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
@@ -383,12 +383,12 @@
             {{ ui.heading(_("Basic resource"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.resource_wrapper) -%}
+                    {%- call ui.util.call(ui.resource_list) -%}
                         {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.resource_wrapper) -%}
+            {%- call ui.util.call(ui.resource_list) -%}
                 {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
@@ -399,12 +399,12 @@
             {{ ui.heading(_("Basic user"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.user_wrapper) -%}
+                    {%- call ui.util.call(ui.user_list) -%}
                         {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.user_wrapper) -%}
+            {%- call ui.util.call(ui.user_list) -%}
                 {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
@@ -1210,14 +1210,14 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.facet_section, title="Organization") -%}
-                        {%- call ui.util.call(ui.facet_wrapper, title="Organization") -%}
+                        {%- call ui.util.call(ui.facet_list, title="Organization") -%}
                             {{ ui.facet("Government", key="org", value="gov", count=15) }}
                         {%- endcall %}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.facet_section, title="Organization") -%}
-                {%- call ui.util.call(ui.facet_wrapper, title="Organization") -%}
+                {%- call ui.util.call(ui.facet_list, title="Organization") -%}
                     {{ ui.facet("Government", key="org", value="gov", count=15) }}
                 {%- endcall %}
             {%- endcall %}
@@ -1275,17 +1275,17 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Activity Wrapper"), level=3, attrs={"id": "activity-wrapper"}) }}
+            {{ ui.heading(_("Activity Wrapper"), level=3, attrs={"id": "activity-list"}) }}
             {{ ui.heading(_("Basic activity wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.activity_wrapper) -%}
+                    {%- call ui.util.call(ui.activity_list) -%}
                         {{ ui.activity("User created a dataset", activity=activity_data) }}
                         {{ ui.activity("User updated profile", activity=activity_data2) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.activity_wrapper) -%}
+            {%- call ui.util.call(ui.activity_list) -%}
                 {{ ui.activity("User created a dataset", activity={"user": "test_user", "activity_type": "new package", "data": {"package": {"title": "Test Dataset"}}}) }}
                 {{ ui.activity("User updated profile", activity={"user": "test_user", "activity_type": "updated profile", "data": {"user": {"name": "test_user"}}}) }}
             {%- endcall %}
@@ -1365,17 +1365,17 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Facet Wrapper"), level=3, attrs={"id": "facet-wrapper"}) }}
+            {{ ui.heading(_("Facet Wrapper"), level=3, attrs={"id": "facet-list"}) }}
             {{ ui.heading(_("Basic facet wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.facet_wrapper) -%}
+                    {%- call ui.util.call(ui.facet_list) -%}
                         {{ ui.facet("Organization", key="org", value="my-org", count=15) }}
                         {{ ui.facet("Format", key="format", value="csv", count=8) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.facet_wrapper) -%}
+            {%- call ui.util.call(ui.facet_list) -%}
                 {{ ui.facet("Organization", key="org", value="my-org", count=15) }}
                 {{ ui.facet("Format", key="format", value="csv", count=8) }}
             {%- endcall %}
@@ -1383,16 +1383,16 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Group Wrapper"), level=3, attrs={"id": "group-wrapper"}) }}
+            {{ ui.heading(_("Group Wrapper"), level=3, attrs={"id": "group-list"}) }}
             {{ ui.heading(_("Basic group wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.group_wrapper) -%}
+                    {%- call ui.util.call(ui.group_list) -%}
                         {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.group_wrapper) -%}
+            {%- call ui.util.call(ui.group_list) -%}
                 {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
             {%- endcall %}
             {{ ui.divider() }}
@@ -1453,32 +1453,32 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Organization Wrapper"), level=3, attrs={"id": "organization-wrapper"}) }}
+            {{ ui.heading(_("Organization Wrapper"), level=3, attrs={"id": "organization-list"}) }}
             {{ ui.heading(_("Basic organization wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.organization_wrapper) -%}
+                    {%- call ui.util.call(ui.organization_list) -%}
                         {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.organization_wrapper) -%}
+            {%- call ui.util.call(ui.organization_list) -%}
                 {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
             {%- endcall %}
             {{ ui.divider() }}
         </div>
 
         <div>
-            {{ ui.heading(_("Package Wrapper"), level=3, attrs={"id": "package-wrapper"}) }}
+            {{ ui.heading(_("Package Wrapper"), level=3, attrs={"id": "package-list"}) }}
             {{ ui.heading(_("Basic package wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.package_wrapper) -%}
+                    {%- call ui.util.call(ui.package_list) -%}
                         {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.package_wrapper) -%}
+            {%- call ui.util.call(ui.package_list) -%}
                 {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
             {%- endcall %}
             {{ ui.divider() }}
@@ -1503,16 +1503,16 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Resource Wrapper"), level=3, attrs={"id": "resource-wrapper"}) }}
+            {{ ui.heading(_("Resource Wrapper"), level=3, attrs={"id": "resource-list"}) }}
             {{ ui.heading(_("Basic resource wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.resource_wrapper) -%}
+                    {%- call ui.util.call(ui.resource_list) -%}
                         {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.resource_wrapper) -%}
+            {%- call ui.util.call(ui.resource_list) -%}
                 {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
             {%- endcall %}
             {{ ui.divider() }}
@@ -1537,16 +1537,16 @@
         </div>
 
         <div>
-            {{ ui.heading(_("User Wrapper"), level=3, attrs={"id": "user-wrapper"}) }}
+            {{ ui.heading(_("User Wrapper"), level=3, attrs={"id": "user-list"}) }}
             {{ ui.heading(_("Basic user wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.user_wrapper) -%}
+                    {%- call ui.util.call(ui.user_list) -%}
                         {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.user_wrapper) -%}
+            {%- call ui.util.call(ui.user_list) -%}
                 {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
             {%- endcall %}
             {{ ui.divider() }}
