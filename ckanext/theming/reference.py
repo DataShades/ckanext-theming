@@ -138,7 +138,6 @@ components.update(
         # form ################################################################
         "checkbox": Component(Category.ESSENTIAL),
         "extra_field": Component(Category.RECOMMENDED),
-        "extra_field_multiplicator": Component(Category.RECOMMENDED),
         "extra_fields_collection": Component(Category.RECOMMENDED),
         "field_errors": Component(Category.RECOMMENDED),
         "file_input": Component(Category.ESSENTIAL),

@@ -1,10 +1,10 @@
 {% from 'macros/form.html' import image_upload as _image_upload %}
 
-{%- macro checkbox(content, checked, value="on") -%}
+{%- macro checkbox(content, checked, value="on", type="checkbox") -%}
     {%- if checked -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
     {%- endif %}
-    {{ ui.input(content, value=value or "on", type="checkbox", **kwargs) }}
+    {{ ui.input(content, value=value or "on", type=type, **kwargs) }}
 {%- endmacro %}
 
 {%- macro extra_field(index, data={}, errors={}, name_template='extras__{index}__') -%}
@@ -17,24 +17,6 @@
     </fieldset>
 {%- endmacro %}
 
-{%- macro extra_field_multiplicator(index, label=_("Add"), placeholder="TPL") -%}
-    <template id="custom-field-template">
-        {{ ui.extra_field(placeholder) }}
-    </template>
-    {{ ui.button(label, data={"index": index}, attrs={"onclick": "
-const tpl = document.getElementById('custom-field-template').content.cloneNode(true);
-tpl.querySelectorAll('input').forEach(el => {
-  el.name = el.name.replace('{{ placeholder }}', this.dataset.index);
-  el.id = el.id.replace('{{ placeholder }}', this.dataset.index);
-});
-tpl.querySelectorAll('label').forEach(el => {
-  el.setAttribute('for', el.getAttribute('for').replace('{{ placeholder }}', this.dataset.index));
-});
-++this.dataset.index;
-this.parentNode.insertBefore(tpl, this);
-        "}, **kwargs) }}
-{%- endmacro %}
-
 {%- macro extra_fields_collection(extras=[], errors={}, limit=3) -%}
     <div {{ ui.util.attrs(kwargs) }} data-module="custom-fields">
         {%- for extra in extras -%}
@@ -45,7 +27,23 @@ this.parentNode.insertBefore(tpl, this);
         {%- for index in range(num_extras, max_extras) -%}
             {{ ui.extra_field(index=index) }}
         {%- endfor %}
-        {{- ui.extra_field_multiplicator(max_extras) }}
+
+        <template id="custom-field-template">
+            {{ ui.extra_field('TPL') }}
+        </template>
+        {{ ui.button(_("Add"), data={"index": max_extras}, attrs={"onclick": "
+const tpl = document.getElementById('custom-field-template').content.cloneNode(true);
+tpl.querySelectorAll('input').forEach(el => {
+  el.name = el.name.replace('TPL', this.dataset.index);
+  el.id = el.id.replace('TPL', this.dataset.index);
+});
+tpl.querySelectorAll('label').forEach(el => {
+  el.setAttribute('for', el.getAttribute('for').replace('TPL', this.dataset.index));
+});
+++this.dataset.index;
+this.parentNode.insertBefore(tpl, this);
+            "}, **kwargs) }}
+
     </div>
 {%- endmacro %}
 
@@ -219,10 +217,7 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro %}
 
 {%- macro radio(content, checked, value="on") -%}
-    {%- if checked -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("checked", true) -%}
-    {%- endif %}
-    {{ ui.input(content, value=value or "on", type="radio", **kwargs) }}
+    {{ ui.checkbox(content, checked=checked, value=value or "on", type="radio", **kwargs) }}
 {%- endmacro %}
 
 {%- macro range_input(content, min_value, max_value, step) -%}

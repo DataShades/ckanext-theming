@@ -40,9 +40,8 @@ forms where users might need to add custom metadata, tags, or other variable
 information that isn't part of the standard form structure.
 
 Extra field components provide flexibility for forms that need to accommodate
-varying amounts of information. They often work with
-[`extra_field_multiplicator`][extra-field-multiplicator] and
-[`extra_fields_collection`][extra-fields-collection] components to create
+varying amounts of information. They normally work with
+[`extra_fields_collection`][extra-fields-collection] component to create
 dynamic form experiences where users can add as many fields as needed.
 
 /// admonition | Usage Example
@@ -74,60 +73,13 @@ dynamic form experiences where users can add as many fields as needed.
     type: info
 
 The [`extra_field`][extra-field] component works with
-[`extra_field_multiplicator`][extra-field-multiplicator] and
-[`extra_fields_collection`][extra-fields-collection] components to create
+[`extra_fields_collection`][extra-fields-collection] component to create
 dynamic form experiences. While individual extra fields provide the input
 structure, the other components handle the dynamic addition and collection of
 fields.
 
 ///
 
-## Extra Field Multiplicator
-
-The [`extra_field_multiplicator`][extra-field-multiplicator] component provides
-tools for adding multiple extra fields to forms dynamically. This component
-creates the interface elements that allow users to add additional fields as
-needed, typically through an "Add Field" button or similar control.
-
-The multiplicator component handles the JavaScript functionality needed to add
-new field instances while maintaining proper form structure and validation. It
-ensures that each new field has unique identifiers and proper naming
-conventions for form processing.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic extra field multiplicator -->
-{{ ui.extra_field_multiplicator(index=2) }}
-
-<!-- Extra field multiplicator with label -->
-{{ ui.extra_field_multiplicator(index=3, label="Add Another Field") }}
-```
-///
-
-| Parameter | Type   | Default     | Description                                    |
-|-----------|--------|-------------|------------------------------------------------|
-| `index`   | int    | -           | Index position for the next field to be added. |
-| `label`   | string | "Add Field" | Label text for the add button.                 |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `style` (string): Style variant (e.g., "primary", "secondary")
-- `icon` (string): Icon to display with the button
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`extra_field_multiplicator`][extra-field-multiplicator] component works
-with [`extra_field`][extra-field] and
-[`extra_fields_collection`][extra-fields-collection] components to create
-dynamic form experiences. The multiplicator provides the addition mechanism,
-while the other components provide the field structure and collection handling.
-
-///
 
 ## Extra Fields Collection
 
@@ -169,10 +121,8 @@ cohesive dynamic form experiences.
     type: info
 
 The [`extra_fields_collection`][extra-fields-collection] component works with
-[`extra_field`][extra-field] and
-[`extra_field_multiplicator`][extra-field-multiplicator] components to manage
-dynamic form fields. The collection provides the container structure for all
-extra fields.
+[`extra_field`][extra-field] component to manage dynamic form fields. The
+collection provides the container structure for all extra fields.
 
 ///
 
