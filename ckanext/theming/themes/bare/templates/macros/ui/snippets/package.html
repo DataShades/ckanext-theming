@@ -1,4 +1,4 @@
-{% set title = pkg.title or pkg.name  %}
-{% set body = h.markdown_extract(pkg.notes, 120)|urlize %}
+{% set title = package.title or package.name  %}
+{% set body = h.markdown_extract(package.notes, 120)|urlize %}
 
-{{ ui.card(title=title, body=body, href=h.url_for(pkg.type ~ ".read", id=pkg.name), **kwargs) }}
+{{ ui.card(title=title, body=body, href=h.url_for(package.type ~ ".read", id=package.name), **kwargs) }}

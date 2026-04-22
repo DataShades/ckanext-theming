@@ -38,6 +38,10 @@
     {%- endif %}
 {%- endmacro %}
 
+{%- macro empty(content) -%}
+    <p {{ ui.util.attrs(kwargs) }} class="text-muted empty">{{ content }}</p>
+{%- endmacro %}
+
 {%- macro heading(content, level) -%}
     {%- set tag =  "h" ~ level %}
     <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
