@@ -25,6 +25,7 @@ from collections import defaultdict
 from collections.abc import Iterable, Iterator
 from typing import Any, Protocol
 
+from dominate.util import escape as html_escape  # pyright: ignore[reportUnknownVariableType]
 from flask import current_app
 from jinja2 import Template
 from jinja2.runtime import Macro
@@ -70,7 +71,7 @@ class Util:
             return ""
 
         parts = [
-            " ".join(f'{prefix}{k}="{v}"' for k, v in kwargs[key].items())
+            " ".join(f'{prefix}{k}="{html_escape(v) if isinstance(v, str) else v}"' for k, v in kwargs[key].items())
             for key, prefix in self._attr_groups
             if key in kwargs
         ]
