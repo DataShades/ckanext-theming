@@ -101,3 +101,9 @@
         </ul>
     </div>
 {%- endmacro %}
+
+{%- macro tab_content(content, id) -%}
+    <div {{ ui.util.attrs(kwargs) }} id="{{ id }}">
+        {{ content }}
+    </div>
+{%- endmacro %}

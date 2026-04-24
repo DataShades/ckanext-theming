@@ -204,24 +204,6 @@ component typically wraps [`main_nav_item`][main-nav-item] elements.
 ```
 ///
 
-## Menu Wrapper
-
-The [`menu_wrapper`][menu-wrapper] component provides a general container for
-menu structures throughout the application. It works with
-[`menu_item`][menu-item] components to create consistent menu experiences,
-whether for dropdowns, navigation, or other menu-based interfaces.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic menu wrapper -->
-{% call ui.util.call(ui.menu_wrapper) %}
-    {{ ui.menu_item("Option 1", href="/option1") }}
-    {{ ui.menu_item("Option 2", href="/option2") }}
-{% endcall %}
-```
-///
 
 ## Navigation Wrapper
 
@@ -344,9 +326,9 @@ with [`resource`][] components to display resource information effectively.
 ```
 ///
 
-## Tab Navigation Wrapper
+## Tab Wrapper
 
-The [`tab_nav_wrapper`][tab-navigation-wrapper] component provides the structural container
+The [`tab_wrapper`][tab-wrapper] component provides the structural container
 for tab-based interfaces. It works with [`tab_handle`][tab-handle] components
 to create consistent tab navigation and content switching experiences across
 different themes.
@@ -354,7 +336,7 @@ different themes.
 /// admonition | Relationship
     type: info
 
-The [`tab_nav_wrapper`][tab-navigation-wrapper] component is designed to work with
+The [`tab_wrapper`][tab-wrapper] component is designed to work with
 [`tab_handle`][tab-handle] components. The wrapper provides the container
 structure, while the handles provide the interactive elements for switching
 between tab content.
@@ -366,7 +348,7 @@ between tab content.
 
 ```jinja2
 <!-- Basic tab wrapper -->
-{% call ui.util.call(ui.tab_nav_wrapper) %}
+{% call ui.util.call(ui.tab_wrapper) %}
     {{ ui.tab_handle("Tab 1", href="/tab1") }}
     {{ ui.tab_handle("Tab 2", href="/tab2", active=True) }}
 {% endcall %}

@@ -13,7 +13,7 @@
     {{ ui.search_sort_control(name=sorting_name, selected=sorting, options=sorting_options) }}
 
     <div>
-        {{ ui.search_results_header(item_count=item_count, first_item_position=first_item_position, last_item_position=last_item_position, query_error=query_error) }}
+        {{ ui.search_results_text(count=count, error=error) }}
     </div>
 
     {{ ui.search_active_filters(active_filters=active_filters, facet_titles=facet_titles, facets=facets, use_htmx=use_htmx) }}

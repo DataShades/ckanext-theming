@@ -20,7 +20,7 @@
             {"text": _('Name Descending'), "value": "title desc"},
         ] %}
 
-        {{ ui.search_form(query=q, sorting_options=sorting_options, sorting=sort_by_selected, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item) }}
+        {{ ui.search_form(query=q, sorting_options=sorting_options, sorting=sort_by_selected, count=page.item_count) }}
     {%- endblock %}
 
     {%- block group_list %}

@@ -145,9 +145,7 @@ application.
 <!-- Basic search form -->
 {{ ui.search_form(
     query="search term",
-    item_count=25,
-    first_item_position=1,
-    last_item_position=10,
+    count=25,
     active_filters={},
     facets={},
     facet_titles={},
@@ -159,9 +157,7 @@ application.
     query="data",
     sorting="title_string asc",
     sorting_options=[{"text": "Name A-Z", "value": "title_string asc"}],
-    item_count=15,
-    first_item_position=1,
-    last_item_position=10,
+    count=15,
     active_filters={"organization": ["gov"]},
     facets={"organization": {"items": [{"name": "gov", "display_name": "Government"}]}},
     facet_titles={"organization": "Organization"},
@@ -173,12 +169,10 @@ application.
 | Parameter             | Type   | Default | Description                                     |
 |-----------------------|--------|---------|-------------------------------------------------|
 | `query`               | string | -       | The current search query.                       |
-| `item_count`          | int    | -       | Total number of search results.                 |
-| `first_item_position` | int    | -       | Position of the first item in the current page. |
-| `last_item_position`  | int    | -       | Position of the last item in the current page.  |
+| `count`          | int    | -       | Total number of search results.                 |
 | `sorting`             | string | -       | Current sorting option.                         |
 | `sorting_options`     | list   | -       | Available sorting options.                      |
-| `query_error`         | string | -       | Error message if query is invalid.              |
+| `error`         | string | -       | Error message if query is invalid.              |
 | `facets`              | dict   | -       | Available facet filters.                        |
 | `facet_titles`        | dict   | -       | Titles for facet filters.                       |
 | `active_filters`      | dict   | -       | Currently active filters.                       |
@@ -256,79 +250,31 @@ create complete search interfaces.
 
 ///
 
-## Search Pagination Info
+## Search Results Test
 
-The [`search_pagination_info`][search-pagination-info] component displays
-information about search results pagination, showing users details about the
-current page, total results, and their position within the result set. This
-information is crucial for users to understand the scope of their search
-results and their current position within those results.
-
-Pagination info components typically display text like "Showing 1-10 of 127
-results" or similar information that helps users understand the extent of their
-search results. The component ensures this information is clearly visible and
-properly formatted, helping users navigate through large result sets
-effectively.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic search pagination info -->
-{{ ui.search_pagination_info(total=127, first=1, last=10) }}
-
-<!-- Search pagination info with custom template -->
-{{ ui.search_pagination_info(total=50, first=21, last=30, template=_("Results {first} - {last} out of {total}")) }}
-```
-///
-
-| Parameter  | Type   | Default | Description                                                |
-|------------|--------|---------|------------------------------------------------------------|
-| `total`    | int    | -       | Total number of search results.                            |
-| `first`    | int    | -       | Position of the first item in the current page.            |
-| `last`     | int    | -       | Position of the last item in the current page.             |
-| `template` | string | -       | Template string for formatting the pagination information. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `variant` (string): Style variant (e.g., "short", "detailed")
-- `show_total` (bool): Whether to show total count
-- `show_range` (bool): Whether to show item range
-- `format` (string): Format for number display (e.g., "numeric", "words")
-///
-
-## Search Results Header
-
-The [`search_results_header`][search-results-header] component creates headers
+The [`search_results_text`][search-results-text] component creates headers
 for search results displays, providing context and organization for the search
 results. This component typically includes information about the search query,
-result counts, and controls for managing or refining the search results.
-
-Search results headers are important for orienting users and providing context
-about their search. They often include the search query that was performed, the
-number of results found, and controls for sorting or refining the results. The
-component ensures this information is clearly presented and easily accessible
-to users.
+result counts, and search errors if there are any.
 
 /// admonition | Usage Example
     type: example
 
 ```jinja2
-<!-- Basic search results header -->
-{{ ui.search_results_header(item_count=25, first_item_position=1, last_item_position=10) }}
+<!-- Basic search results text -->
+{{ ui.search_results_text(count=25) }}
 
-<!-- Search results header with query error -->
-{{ ui.search_results_header(item_count=0, first_item_position=0, last_item_position=0, query_error="Invalid search query") }}
+<!-- Search results text with query error -->
+{{ ui.search_results_text(count=0, error="Invalid search query") }}
 ```
 ///
 
-| Parameter             | Type   | Default | Description                                     |
-|-----------------------|--------|---------|-------------------------------------------------|
-| `item_count`          | int    | -       | Total number of search results.                 |
-| `first_item_position` | int    | -       | Position of the first item in the current page. |
-| `last_item_position`  | int    | -       | Position of the last item in the current page.  |
-| `query_error`         | string | -       | Error message if the search query is invalid.   |
+| Parameter | Type   | Default | Description                                   |
+|-----------|--------|---------|-----------------------------------------------|
+| `count`   | int    | -       | Total number of search results.               |
+| `error`   | string | -       | Error message if the search query is invalid. |
+| `query`   | string | -       | Search query.                                 |
+| `type`    | string | -       | Type of data(dataset, organization, group)    |
 
 /// details | Theme-Specific Parameters
     type: tip

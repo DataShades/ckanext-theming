@@ -64,7 +64,7 @@
         {{ ui.list_item(ui.link(_("Search Form"), href="#search-form")) }}
         {{ ui.list_item(ui.link(_("Search Form Box"), href="#search-form-box")) }}
         {{ ui.list_item(ui.link(_("Search Input"), href="#search-input")) }}
-        {{ ui.list_item(ui.link(_("Search Results Header"), href="#search-results-header")) }}
+        {{ ui.list_item(ui.link(_("Search Results Text"), href="#search-results-text")) }}
         {{ ui.list_item(ui.link(_("Search Sort Control"), href="#search-sort-control")) }}
         {{ ui.list_item(ui.link(_("Search Submit Button"), href="#search-submit-button")) }}
         {{ ui.list_item(ui.link(_("Search Pagination Info"), href="#search-pagination-info")) }}
@@ -80,7 +80,6 @@
         {{ ui.list_item(ui.link(_("Facet Wrapper"), href="#facet-list")) }}
         {{ ui.list_item(ui.link(_("Group Wrapper"), href="#group-list")) }}
         {{ ui.list_item(ui.link(_("Main Nav Wrapper"), href="#main-nav-wrapper")) }}
-        {{ ui.list_item(ui.link(_("Menu Wrapper"), href="#menu-wrapper")) }}
         {{ ui.list_item(ui.link(_("Nav Wrapper"), href="#nav-wrapper")) }}
         {{ ui.list_item(ui.link(_("Organization Wrapper"), href="#organization-list")) }}
         {{ ui.list_item(ui.link(_("Package Wrapper"), href="#package-list")) }}
@@ -1081,9 +1080,7 @@
                 {%- raw %}
                     {{ ui.search_form(
                         query="search term",
-                        item_count=25,
-                        first_item_position=1,
-                        last_item_position=10,
+                        count=25,
                         active_filters={},
                         facets={},
                         facet_titles={},
@@ -1093,9 +1090,7 @@
             {%- endcall -%}
             {{ ui.search_form(
                 query="search term",
-                item_count=25,
-                first_item_position=1,
-                last_item_position=10,
+                count=25,
                 active_filters={},
                 facets={},
                 facet_titles={},
@@ -1135,23 +1130,23 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Search Results Header"), level=3, attrs={"id": "search-results-header"}) }}
-            {{ ui.heading(_("Basic search results header"), level=4) }}
+            {{ ui.heading(_("Search Results Text"), level=3, attrs={"id": "search-results-text"}) }}
+            {{ ui.heading(_("Basic search results text"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.search_results_header(item_count=25, first_item_position=1, last_item_position=10) }}
+                    {{ ui.search_results_text(count=25) }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.search_results_header(item_count=25, first_item_position=1, last_item_position=10) }}
+            {{ ui.search_results_text(count=25) }}
             {{ ui.divider() }}
 
-            {{ ui.heading(_("Search results header with query error"), level=4) }}
+            {{ ui.heading(_("Search results text with query error"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.search_results_header(item_count=0, first_item_position=0, last_item_position=0, query_error="Invalid search query") }}
+                    {{ ui.search_results_text(count=0, error="Invalid search query") }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.search_results_header(item_count=0, first_item_position=0, last_item_position=0, query_error="Invalid search query") }}
+            {{ ui.search_results_text(count=0, error="Invalid search query") }}
             {{ ui.divider() }}
         </div>
 
@@ -1181,26 +1176,6 @@
             {{ ui.divider() }}
         </div>
 
-        <div>
-            {{ ui.heading(_("Search Pagination Info"), level=3, attrs={"id": "search-pagination-info"}) }}
-            {{ ui.heading(_("Basic search pagination info"), level=4) }}
-            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-                {%- raw %}
-                    {{ ui.search_pagination_info(total=127, first=1, last=10) }}
-                {%- endraw %}
-            {%- endcall -%}
-            {{ ui.search_pagination_info(total=127, first=1, last=10) }}
-            {{ ui.divider() }}
-
-            {{ ui.heading(_("Search pagination info with custom template"), level=4) }}
-            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-                {%- raw %}
-                    {{ ui.search_pagination_info(total=50, first=21, last=30, template=_("Results {first} - {last} out of {total}")) }}
-                {%- endraw %}
-            {%- endcall -%}
-            {{ ui.search_pagination_info(total=50, first=21, last=30, template=_("Results {first} - {last} out of {total}")) }}
-            {{ ui.divider() }}
-        </div>
     {%- endcall %}
 
     {%- call ui.util.call(ui.section, title=_("Section components")) -%}
@@ -1417,24 +1392,6 @@
         </div>
 
         <div>
-            {{ ui.heading(_("Menu Wrapper"), level=3, attrs={"id": "menu-wrapper"}) }}
-            {{ ui.heading(_("Basic menu wrapper"), level=4) }}
-            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-                {%- raw %}
-                    {%- call ui.util.call(ui.menu_wrapper) -%}
-                        {{ ui.menu_item("Item 1", href="/item1") }}
-                        {{ ui.menu_item("Item 2", href="/item2", active=true) }}
-                    {%- endcall %}
-                {%- endraw %}
-            {%- endcall -%}
-            {%- call ui.util.call(ui.menu_wrapper) -%}
-                {{ ui.menu_item("Item 1", href="/item1") }}
-                {{ ui.menu_item("Item 2", href="/item2", active=true) }}
-            {%- endcall %}
-            {{ ui.divider() }}
-        </div>
-
-        <div>
             {{ ui.heading(_("Nav Wrapper"), level=3, attrs={"id": "nav-wrapper"}) }}
             {{ ui.heading(_("Basic nav wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
@@ -1523,13 +1480,13 @@
             {{ ui.heading(_("Basic tab wrapper"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {%- call ui.util.call(ui.tab_nav_wrapper) -%}
+                    {%- call ui.util.call(ui.tab_wrapper) -%}
                         {{ ui.tab_handle("Tab 1", href="/tab1") }}
                         {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
-            {%- call ui.util.call(ui.tab_nav_wrapper) -%}
+            {%- call ui.util.call(ui.tab_wrapper) -%}
                 {{ ui.tab_handle("Tab 1", href="/tab1") }}
                 {{ ui.tab_handle("Tab 2", href="/tab2", active=true) }}
             {%- endcall %}

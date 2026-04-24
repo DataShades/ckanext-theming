@@ -14,12 +14,12 @@
     {{ ui.button(content, **kwargs) }}
 {%- endmacro %}
 
-{%- macro tab_handle(content, href, active) -%}
+{%- macro tab_handle(content, active, id) -%}
     {%- if active -%}
         {%- do kwargs.setdefault("aria", {}).setdefault("selected", "true") -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
     {%- endif %}
-    {{ ui.link(content, href, **kwargs) }}
+    {{ ui.link(content, "#" ~ id, **kwargs) }}
 {%- endmacro %}
 
 {%- macro panel_handle(content, id) -%}

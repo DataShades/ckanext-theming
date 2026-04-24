@@ -295,47 +295,6 @@ appropriate styling and positioning.
 ///
 
 
-## Menu Item
-
-The [`menu_item`][menu-item] component creates menu items that serve as
-individual elements within various menu structures throughout the
-application. These components provide the clickable elements for dropdown
-menus, context menus, and other menu-based navigation systems.
-
-Menu item components handle proper styling, active state indication, and
-accessibility attributes to ensure menus are both visually clear and
-functionally accessible. They can contain various types of content and often
-include sub-menus or other complex navigation structures. The component ensures
-consistent appearance and behavior across different menu contexts.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic menu item -->
-{{ ui.menu_item("Option 1", href="/option1") }}
-
-<!-- Active menu item -->
-{{ ui.menu_item("Current Option", href="/current", active=true) }}
-
-<!-- Menu item with icon -->
-{{ ui.menu_item((ui.icon("file") ~ " Document"), href="/document") }}
-```
-///
-
-| Parameter | Type   | Default | Description                                         |
-|-----------|--------|---------|-----------------------------------------------------|
-| `content` | string | -       | The text or content to display in the menu item.    |
-| `href`    | string | -       | The URL that the menu item links to.                |
-| `active`  | bool   | -       | Whether the menu item is currently active/selected. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `disabled` (bool): Whether the menu item is disabled
-- `external` (bool): Whether it's an external link
-///
-
 ## Pagination
 
 The [`pagination`][] component creates pagination controls that allow users to

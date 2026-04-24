@@ -22,7 +22,7 @@
             {"text": _('Last Modified'), "value": "metadata_modified desc"}
             ] %}
 
-        {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, item_count=page.item_count, first_item_position=page.first_item, last_item_position=page.last_item, use_htmx=false) }}
+        {{ ui.search_form(q, sorting_options=sorting_options, sorting=sort_by_selected, hidden_filters=fields, facet_titles=facet_titles, facets=search_facets, active_filters=fields, count=page.item_count, use_htmx=false) }}
 
         {%- block package_list %}
             {%- if page.items %}
