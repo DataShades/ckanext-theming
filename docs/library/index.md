@@ -26,9 +26,9 @@ Some components in the "content" category (such as `group`, `package`,
 objects rather than simple content strings:
 
 ```jinja
-{{ ui.package(dataset_dict) }}
-{{ ui.organization(org_dict) }}
-{{ ui.user(user_dict) }}
+{{ ui.package(package=dataset_dict) }}
+{{ ui.organization(organization=org_dict) }}
+{{ ui.user(user=user_dict) }}
 ```
 
 ## Parameter Handling

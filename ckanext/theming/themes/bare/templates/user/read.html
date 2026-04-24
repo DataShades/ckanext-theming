@@ -7,6 +7,10 @@
 {%- block primary_content_inner %}
     {{ ui.heading(user_dict.display_name or user_dict.name, level=1) }}
 
-    {{ ui.package_list(ui.util.map(ui.package, user_dict.datasets)) }}
+    {%- call ui.util.call(ui.package_list) -%}
+        {%- for package in user_dict.datasets -%}
+            {{ ui.package(package=package) }}
+        {%- endfor %}
+    {%- endcall %}
 
 {%- endblock %}

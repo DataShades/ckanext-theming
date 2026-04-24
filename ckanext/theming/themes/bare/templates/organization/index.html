@@ -18,14 +18,19 @@
         {%- set sorting_options = [
             {"text": _('Name Ascending'), "value": "title asc"},
             {"text": _('Name Descending'), "value": "title desc"},
-        ] %}
+            ] %}
 
         {{ ui.search_form(query=q, sorting_options=sorting_options, sorting=sort_by_selected, count=page.item_count) }}
     {%- endblock %}
 
     {%- block organization_list %}
         {%- if page.items %}
-            {{ ui.organization_list(ui.util.map(ui.organization, page.items)) }}
+
+            {%- call ui.util.call(ui.organization_list) -%}
+                {%- for organization in page.items -%}
+                    {{ ui.organization(organization=organization) }}
+                {%- endfor %}
+            {%- endcall %}
 
         {%- else %}
             {%- if q %}

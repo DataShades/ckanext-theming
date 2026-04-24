@@ -10,7 +10,11 @@
 
     {%- block package_list %}
         {%- if page.items %}
-            {{ ui.package_list(ui.util.map(ui.package, page.items)) }}
+            {%- call ui.util.call(ui.package_list) -%}
+                {%- for package in page.items -%}
+                    {{ ui.package(package=package) }}
+                {%- endfor %}
+            {%- endcall %}
         {%- else %}
             <p>{{ _('No datasets found.') }}</p>
         {%- endif %}

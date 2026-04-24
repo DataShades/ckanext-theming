@@ -32,7 +32,8 @@
                         {% set remove_label = _('Unlink {name} from the dataset').format(name=group.display_name) %}
                         {%- set remove_btn = ui.tooltip(ui.button(_("Remove"), type="submit", style="danger", attrs={"name": 'group_remove.'~group.id}), tooltip=remove_label) -%}
                     {%- endif %}
-                    {{ ui.group(group, footer=remove_btn) }}
+
+                    {{ ui.group(group=group, footer=remove_btn) }}
                 {%- endfor %}
             {%- endcall %}
         {%- endcall %}

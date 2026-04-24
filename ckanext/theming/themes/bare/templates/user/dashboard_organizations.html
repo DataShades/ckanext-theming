@@ -19,7 +19,11 @@
 
     {%- set organizations = h.organizations_available(permission='manage_group', include_dataset_count=True, include_member_count=True) %}
     {%- if organizations %}
-        {{ ui.organization_list(ui.util.map(ui.organization, organizations)) }}
+        {%- call ui.util.call(ui.organization_list) -%}
+            {%- for organization in organizations -%}
+                {{ ui.organization(organization=organization) }}
+            {%- endfor %}
+        {%- endcall %}
 
     {%- else %}
         <p>{{ h.humanize_entity_type('organization', org_type, 'you not member') or _('You are not a member of any organizations.') }}</p>

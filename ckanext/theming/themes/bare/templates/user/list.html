@@ -8,7 +8,12 @@
 {%- block primary_content_inner %}
     {{ ui.heading(_('Users'), level=1) }}
     {%- block users_list %}
-        {{ ui.user_list(ui.util.map(ui.user, page.items)) }}
+        {%- call ui.util.call(ui.user_list) -%}
+            {%- for user in page.items -%}
+                {{ ui.user(user=user) }}
+            {%- endfor %}
+        {%- endcall %}
+
     {%- endblock %}
 
     {%- block page_pagination %}

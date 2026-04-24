@@ -311,12 +311,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.group_list) -%}
-                        {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
+                        {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.group_list) -%}
-                {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
+                {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
         </div>
@@ -327,12 +327,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.organization_list) -%}
-                        {{ ui.organization({"name": "test-org", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
+                        {{ ui.organization(organization={"name": "test-org", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.organization_list) -%}
-                {{ ui.organization({"name": "test-org", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
+                {{ ui.organization(organization={"name": "test-org", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
         </div>
@@ -343,12 +343,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.package_list) -%}
-                        {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
+                        {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.package_list) -%}
-                {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
+                {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
         </div>
@@ -359,12 +359,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.resource_list) -%}
-                        {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
+                        {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.resource_list) -%}
-                {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
+                {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
         </div>
@@ -375,12 +375,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.user_list) -%}
-                        {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
+                        {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
                     {%- endcall -%}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.user_list) -%}
-                {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
+                {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
             {%- endcall -%}
             {{ ui.divider() }}
         </div>
@@ -1339,12 +1339,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.group_list) -%}
-                        {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
+                        {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.group_list) -%}
-                {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
+                {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
             {%- endcall %}
             {{ ui.divider() }}
         </div>
@@ -1391,12 +1391,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.organization_list) -%}
-                        {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
+                        {{ ui.organization(organization={"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.organization_list) -%}
-                {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
+                {{ ui.organization(organization={"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
             {%- endcall %}
             {{ ui.divider() }}
         </div>
@@ -1407,12 +1407,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.package_list) -%}
-                        {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
+                        {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.package_list) -%}
-                {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
+                {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
             {%- endcall %}
             {{ ui.divider() }}
         </div>
@@ -1441,12 +1441,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.resource_list) -%}
-                        {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
+                        {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.resource_list) -%}
-                {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
+                {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
             {%- endcall %}
             {{ ui.divider() }}
         </div>
@@ -1475,12 +1475,12 @@
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
                     {%- call ui.util.call(ui.user_list) -%}
-                        {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
+                        {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
                     {%- endcall %}
                 {%- endraw %}
             {%- endcall -%}
             {%- call ui.util.call(ui.user_list) -%}
-                {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
+                {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
             {%- endcall %}
             {{ ui.divider() }}
         </div>

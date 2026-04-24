@@ -18,7 +18,11 @@
 {%- block primary_content_inner %}
     {{ ui.heading(h.humanize_entity_type('organization', org_type, 'page title') or _('Organizations'), level=1) }}
     {%- if orgs_available %}
-        {{ ui.organization_list(ui.util.map(ui.organization, orgs_available)) }}
+        {%- call ui.util.call(ui.organization_list) -%}
+            {%- for organization in orgs_available -%}
+                {{ ui.organization(organization=organization) }}
+            {%- endfor %}
+        {%- endcall %}
 
     {%- else %}
         <p>

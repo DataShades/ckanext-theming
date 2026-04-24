@@ -13,6 +13,10 @@
 {%- block primary_content_inner %}
     {{ ui.heading(_('Administrators'), level=1) }}
     {%- block admins_list %}
-        {{ ui.user_list(ui.util.map(ui.user, admins)) }}
+        {%- call ui.util.call(ui.user_list) -%}
+            {%- for user in admins -%}
+                {{ ui.user(user=user) }}
+            {%- endfor %}
+        {%- endcall %}
     {%- endblock %}
 {%- endblock %}

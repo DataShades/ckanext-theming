@@ -168,7 +168,7 @@ layout when displaying multiple groups together.
 ```jinja2
 <!-- Basic group component -->
 {%- call ui.util.call(ui.group_list) -%}
-    {{ ui.group({"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
+    {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
 {%- endcall %}
 ```
 ///
@@ -218,7 +218,7 @@ styling and layout when displaying multiple organizations together.
 ```jinja2
 <!-- Basic organization component -->
 {%- call ui.util.call(ui.organization_list) -%}
-    {{ ui.organization({"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
+    {{ ui.organization(organization={"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
 {%- endcall %}
 ```
 ///
@@ -268,7 +268,7 @@ and layout when displaying multiple packages together.
 ```jinja2
 <!-- Basic package component -->
 {%- call ui.util.call(ui.package_list) -%}
-    {{ ui.package({"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
+    {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
 {%- endcall %}
 ```
 ///
@@ -318,7 +318,7 @@ and layout when displaying multiple resources together.
 ```jinja2
 <!-- Basic resource component -->
 {%- call ui.util.call(ui.resource_list) -%}
-    {{ ui.resource({"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
+    {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
 {%- endcall %}
 
 ```
@@ -369,7 +369,7 @@ users together.
 ```jinja2
 <!-- Basic user component -->
 {%- call ui.util.call(ui.user_list) -%}
-    {{ ui.user({"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
+    {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
 {%- endcall %}
 ```
 ///

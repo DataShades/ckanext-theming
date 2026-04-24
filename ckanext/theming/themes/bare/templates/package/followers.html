@@ -10,7 +10,11 @@
 
     {%- block followers_list -%}
         {%- if followers -%}
-            {{ ui.user_list(ui.util.map(ui.user, followers)) }}
+            {%- call ui.util.call(ui.user_list) -%}
+                {%- for user in followers -%}
+                    {{ ui.user(user=user) }}
+                {%- endfor %}
+            {%- endcall %}
 
         {%- else -%}
             <p>{{ _('No followers') }}</p>
