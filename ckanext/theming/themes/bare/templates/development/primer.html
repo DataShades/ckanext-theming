@@ -9,7 +9,6 @@
         {{ ui.list_item(ui.link(_("Column"), href="#column")) }}
         {{ ui.list_item(ui.link(_("Container"), href="#container")) }}
         {{ ui.list_item(ui.link(_("List"), href="#list")) }}
-        {{ ui.list_item(ui.link(_("Panel"), href="#panel")) }}
         {{ ui.list_item(ui.link(_("Activity"), href="#activity")) }}
         {{ ui.list_item(ui.link(_("Facet"), href="#facet")) }}
         {{ ui.list_item(ui.link(_("License"), href="#license")) }}
@@ -259,29 +258,6 @@
             {{ ui.divider() }}
         </div>
 
-        <div>
-            {{ ui.heading(_("Panel"), level=3, attrs={"id": "panel"}) }}
-            {{ ui.heading(_("Basic panel"), level=4) }}
-            {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-                {%- raw %}
-                    {{ ui.panel_handle("Show #1", id="panel-1") }}
-                    {{ ui.panel_handle("Show #2", id="panel-2") }}
-
-                    {%- call ui.util.call(ui.panel_wrapper) -%}
-                        {{ ui.panel("Panel #1 content goes here", id="panel-1") }}
-                        {{ ui.panel("Panel #2 content goes here", id="panel-2") }}
-                    {%- endcall %}
-                {%- endraw %}
-            {%- endcall -%}
-            {{ ui.panel_handle("Show #1", id="panel-1") }}
-            {{ ui.panel_handle("Show #2", id="panel-2") }}
-
-            {%- call ui.util.call(ui.panel_wrapper) -%}
-                {{ ui.panel("Panel #1 content goes here", id="panel-1") }}
-                {{ ui.panel("Panel #2 content goes here", id="panel-2") }}
-            {%- endcall %}
-            {{ ui.divider() }}
-        </div>
     {%- endcall %}
 
     {%- call ui.util.call(ui.section, title=_("Content components")) -%}

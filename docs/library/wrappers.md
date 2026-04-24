@@ -5,7 +5,7 @@ different types of content and UI elements. They typically don't have visible
 output themselves but provide the structural foundation for other
 components. These components work in conjunction with their content
 counterparts - for example, [`accordion_wrapper`][accordion-wrapper] works with [`accordion`][]
-components, and [`panel_wrapper`][panel-wrapper] works with [`panel`][] components.
+components.
 
 ## Accordion Wrapper
 
@@ -279,34 +279,6 @@ pages. This component typically wraps [`page_action`][page-action] elements.
 ```
 ///
 
-## Panel Wrapper
-
-The [`panel_wrapper`][panel-wrapper] component provides the structural
-container for panel components. It establishes the base styling and behavior
-for panels, working in conjunction with [`panel`][] and
-[`panel_handle`][panel-handle] components to create expandable content
-sections.
-
-/// admonition | Relationship
-    type: info
-
-The [`panel_wrapper`][panel-wrapper] component works closely with [`panel`][]
-and [`panel_handle`][panel-handle] components. The wrapper provides the
-container, the panel contains the content, and the handle provides the
-interactive element for controlling the panel.
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic panel wrapper -->
-{% call ui.util.call(ui.panel_wrapper) %}
-    {{ ui.panel("Panel content", id="panel-1") }}
-{% endcall %}
-```
-///
 
 ## Resource Wrapper
 

@@ -19,7 +19,7 @@ def test_sysadmins(
     login: Any,
     locator: ElementLocator,
 ):
-    """Test admin panel page."""
+    """Test admin page."""
     login(sysadmin["name"])
     page.goto("/ckan-admin")
     doc_screenshot("admin-sysadmins")

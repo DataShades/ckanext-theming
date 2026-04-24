@@ -1,10 +1,10 @@
 # Handles
 
 Handle components are interactive elements that allow users to control other UI
-components. They typically trigger actions like opening modals, expanding
-panels, or showing popovers. These components work in close relationship with
-their target components - for example, [`modal_handle`][modal-handle] components work with
-[`modal`][] components, and [`panel_handle`][panel-handle] components work with [`panel`][] components.
+components. They typically trigger actions like opening modals, or showing
+popovers. These components work in close relationship with their target
+components - for example, [`modal_handle`][modal-handle] components work with
+[`modal`][] components.
 
 ## Modal Close Handle
 
@@ -64,45 +64,6 @@ mechanism, the modal provides the content container.
 
 ///
 
-## Panel Handle
-
-The [`panel_handle`][panel-handle] component provides interactive elements for
-controlling panel components, typically serving as the clickable area that
-switches between different panels. Panel handles are essential for tab-like
-interfaces where only one panel is visible at a time.
-
-Panel handles create the user interface for switching panel visibility, often
-displaying indicators about the current state and providing clear visual
-feedback when interacted with. The component ensures proper accessibility
-attributes and keyboard navigation support, making panel controls usable for
-all users. It works with [`panel`][] and [`panel_wrapper`][panel-wrapper]
-components to create complete panel switching experiences.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic panel handle -->
-{{ ui.panel_handle("Switch to Panel 1", id="panel-1") }}
-{{ ui.panel_handle("Switch to Panel 2", id="panel-2") }}
-
-<!-- Panel handle with attributes -->
-{% call ui.util.call(ui.panel_wrapper) %}
-    {{ ui.panel("First panel", id="panel-1", active=true) }}
-    {{ ui.panel("Second panel", id="panel-2") }}
-{% endcall %}
-```
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`panel_handle`][panel-handle] component works with [`panel`][] and
-[`panel_wrapper`][panel-wrapper] components to create switching panel
-experiences. While the panel provides the content container, the handle
-provides the switching mechanism.
-
-///
 
 ## Popover Handle
 

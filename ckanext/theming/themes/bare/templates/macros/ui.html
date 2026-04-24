@@ -20,7 +20,6 @@
 {% set sidebar_nav_wrapper = sidebar_nav_wrapper | default(_wrapper.sidebar_nav_wrapper) %}
 {% set nav_wrapper = nav_wrapper | default(_wrapper.nav_wrapper) %}
 {% set page_action_wrapper = page_action_wrapper | default(_wrapper.page_action_wrapper) %}
-{% set panel_wrapper = panel_wrapper | default(_wrapper.panel_wrapper) %}
 {% set tab_wrapper = tab_wrapper | default(_wrapper.tab_wrapper) %}
 {% set tab_content_wrapper = tab_content_wrapper | default(_wrapper.tab_content_wrapper) %}
 {% set pagination_wrapper = pagination_wrapper | default(_wrapper.pagination_wrapper) %}
@@ -44,7 +43,6 @@
 {% set row = row | default(_container.row) %}
 {% set list = list | default(_container.list) %}
 {% set list_item = list_item | default(_container.list_item) %}
-{% set panel = panel | default(_container.panel) %}
 {% set tab_content = tab_content | default(_container.tab_content) %}
 {% set user_list = user_list | default(_container.user_list) %}
 {% set resource_list = resource_list | default(_container.resource_list) %}
@@ -116,7 +114,6 @@
 {% set image_upload = image_upload | default(_form.image_upload) %}
 {% set fieldset = fieldset | default(_form.fieldset) %}
 
-{% set panel_handle = panel_handle | default(_handle.panel_handle) %}
 {% set modal_handle = modal_handle | default(_handle.modal_handle) %}
 {% set popover_handle = popover_handle | default(_handle.popover_handle) %}
 {% set modal_close_handle = modal_close_handle | default(_handle.modal_close_handle) %}

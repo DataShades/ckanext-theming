@@ -21,7 +21,3 @@
     {%- endif %}
     {{ ui.link(content, "#" ~ id, **kwargs) }}
 {%- endmacro %}
-
-{%- macro panel_handle(content, id) -%}
-    {{ ui.link(content, href="#" ~ id, **kwargs) }}
-{%- endmacro %}

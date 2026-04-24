@@ -141,7 +141,7 @@ Alternatively, you can concatenate components as Jinja2 strings:
 
 ### Handle Components
 
-Handle components (like modal handles, panel handles, etc.) are typically
+Handle components (like modal handles, tab handles, etc.) are typically
 connected to their corresponding interactive elements via matching `id`
 parameters:
 

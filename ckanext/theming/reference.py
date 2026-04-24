@@ -72,7 +72,6 @@ components.update(
         "organization_list": Component(Category.ESSENTIAL),
         "package_list": Component(Category.ESSENTIAL),
         "page_action_wrapper": Component(Category.RECOMMENDED),
-        "panel_wrapper": Component(Category.RECOMMENDED),
         "pagination_wrapper": Component(Category.ESSENTIAL),
         "resource_list": Component(Category.ESSENTIAL),
         "tab_wrapper": Component(Category.RECOMMENDED),
@@ -97,7 +96,6 @@ components.update(
         "row": Component(Category.RECOMMENDED),
         "list": Component(Category.ESSENTIAL),
         "list_item": Component(Category.ESSENTIAL),
-        "panel": Component(Category.RECOMMENDED),
         # sections ############################################################
         "facet_section": Component(Category.ESSENTIAL),
         "section": Component(Category.ESSENTIAL),
@@ -163,7 +161,6 @@ components.update(
         # handles #############################################################
         "modal_close_handle": Component(Category.RECOMMENDED),
         "modal_handle": Component(Category.ESSENTIAL),
-        "panel_handle": Component(Category.RECOMMENDED),
         "popover_handle": Component(Category.RECOMMENDED),
         # meta ################################################################
         "account": Component(Category.RECOMMENDED),

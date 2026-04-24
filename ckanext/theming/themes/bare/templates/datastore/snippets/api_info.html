@@ -1,14 +1,14 @@
 {#
- Displays information about accessing a resource via the API.
+    Displays information about accessing a resource via the API.
 
- resource_id - The resource id
- embedded - If true will not include the "modal" classes on the snippet.
+    resource_id - The resource id
+    embedded - If true will not include the "modal" classes on the snippet.
 
- Example
+    Example
 
- {% snippet 'datastore/snippets/api_info.html', resource_id=resource_id, embedded=true %}
+    {% snippet 'datastore/snippets/api_info.html', resource_id=resource_id, embedded=true %}
 
- #}
+    #}
 
 {% set code_examples = {} %}
 {% macro register_example(clang, example) %}
@@ -34,59 +34,60 @@
         {% endtrans %}
     </p>
 
-    {%- call ui.util.call(ui.panel_wrapper) -%}
-        <p>{{ _("Code examples:") }}</p>
-        {% for clang in code_languages %}
-            {{ ui.panel_handle(code_examples[clang]['button_label'], id="lang-" ~ clang) }}
-        {% endfor %}
 
-        {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion, title=_('Querying')) -%}
-                {% block query_examples %}
-                    <strong>{{ _('Get 5 results containing "jones" in any field:') }}</strong>
+    <p>{{ _("Code examples:") }}</p>
+    {% for clang in code_languages %}
+        {{ ui.link(code_examples[clang]['button_label'], href="#lang-" ~ clang) }}
+    {% endfor %}
+
+    {%- call ui.util.call(ui.accordion_wrapper) -%}
+        {%- call ui.util.call(ui.accordion, title=_('Querying')) -%}
+            {% block query_examples %}
+                <strong>{{ _('Get 5 results containing "jones" in any field:') }}</strong>
+                {%- call ui.uitl.call(ui.tab_wrapper) -%}
                     {% for clang in code_languages %}
-                        {{ ui.panel(code_examples[clang]['request_limit'], id="lang-" ~ clang, active=loop.index == 1) }}
+                        {{ ui.tab_handle(code_examples[clang]['request_limit'], id="lang-" ~ clang, active=loop.index == 1) }}
                     {% endfor %}
                     <strong>{{ _('Get results with either "watershed" or "survey" as subject and "active" as its stage:') }}</strong>
                     {% for clang in code_languages %}
-                        {{ ui.panel(code_examples[clang]['request_filter'], id="lang-" ~ clang) }}
+                        {{ ui.tab_handle(code_examples[clang]['request_filter'], id="lang-" ~ clang) }}
                     {% endfor %}
                     {% if h.datastore_search_sql_enabled() %}
                         <strong>{{ _('SQL query example:') }}</strong>
                         {% for clang in code_languages %}
-                            {{ ui.panel(code_examples[clang]['request_sql'], id="lang-" ~ clang) }}
+                            {{ ui.tab_handle(code_examples[clang]['request_sql'], id="lang-" ~ clang) }}
                         {% endfor %}
                     {% endif %}
-                {% endblock %}
-            {%- endcall %}
-        {%- endcall %}
+                {%- endcall %}
 
-        {%- call ui.util.call(ui.accordion_wrapper) -%}
-            {%- call ui.util.call(ui.accordion, title=_('Using the API with this Web Browser')) -%}
-                {% block get_query_examples %}
-                    <p>{{ _('Some API endpoints may be accessed using a GET query string.') }}</p>
-                    <strong>{{ _('Query example (first 5 results)') }}</strong>
-                    <p>
-                        <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}" target="_blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}</a></code>
-                    </p>
-                    <strong>{{ _('Query example (results containing \'jones\')') }}</strong>
-                    <p>
-                        <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}" target="_blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}</a></code>
-                    </p>
-                    {% if h.datastore_search_sql_enabled() %}
-                        {# not urlencoding the sql because its clearer #}
-                        {% set sql_example_url = h.url_for(
+            {% endblock %}
+        {%- endcall %}
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.accordion_wrapper) -%}
+        {%- call ui.util.call(ui.accordion, title=_('Using the API with this Web Browser')) -%}
+            {% block get_query_examples %}
+                <p>{{ _('Some API endpoints may be accessed using a GET query string.') }}</p>
+                <strong>{{ _('Query example (first 5 results)') }}</strong>
+                <p>
+                    <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}" target="_blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}</a></code>
+                </p>
+                <strong>{{ _('Query example (results containing \'jones\')') }}</strong>
+                <p>
+                    <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}" target="_blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}</a></code>
+                </p>
+                {% if h.datastore_search_sql_enabled() %}
+                    {# not urlencoding the sql because its clearer #}
+                    {% set sql_example_url = h.url_for(
                         'api.action', logic_function='datastore_search_sql', qualified=True
                         ) + '?sql=SELECT * from "' + resource.id + '" WHERE title LIKE \'jones\'' %}
-                        <strong>{{ _('Query example (via SQL statement)') }}</strong>
-                        <p>
-                            <code><a href="{{sql_example_url}}" target="_blank" rel="noreferrer">{{ sql_example_url }}</a></code>
-                        </p>
-                    {% endif %}
-                {% endblock %}
-            {%- endcall %}
+                    <strong>{{ _('Query example (via SQL statement)') }}</strong>
+                    <p>
+                        <code><a href="{{sql_example_url}}" target="_blank" rel="noreferrer">{{ sql_example_url }}</a></code>
+                    </p>
+                {% endif %}
+            {% endblock %}
         {%- endcall %}
-
     {%- endcall %}
 
 {%- endcall %}
