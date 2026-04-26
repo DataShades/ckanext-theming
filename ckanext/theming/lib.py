@@ -25,7 +25,6 @@ from collections import defaultdict
 from collections.abc import Iterable, Iterator
 from typing import Any, Protocol
 
-from dominate.util import escape as html_escape  # pyright: ignore[reportUnknownVariableType]
 from flask import current_app
 from jinja2 import Template
 from jinja2.runtime import Macro
@@ -62,6 +61,10 @@ class Util:
         ("attrs", ""),
     ]
 
+    def _escape_attr_value(self, value: str) -> str:
+        """Escape a string for safe inclusion in HTML attributes."""
+        return value.replace("&", "&amp;").replace('"', "&quot;")
+
     def __init__(self, theme: Theme):
         self._theme = theme
 
@@ -71,7 +74,7 @@ class Util:
             return ""
 
         parts = [
-            " ".join(f'{prefix}{k}="{html_escape(v) if isinstance(v, str) else v}"' for k, v in kwargs[key].items())
+            " ".join(f'{prefix}{k}="{self._escape_attr_value(str(v))}"' for k, v in kwargs[key].items())
             for key, prefix in self._attr_groups
             if key in kwargs
         ]
