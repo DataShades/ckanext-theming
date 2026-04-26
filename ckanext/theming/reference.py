@@ -122,6 +122,7 @@ components.update(
         "image": Component(Category.ESSENTIAL),
         "link": Component(Category.ESSENTIAL),
         "tag": Component(Category.ESSENTIAL),
+        "tab": Component(Category.RECOMMENDED),
         "text": Component(Category.ESSENTIAL),
         "video": Component(Category.RECOMMENDED),
         # data ################################################################
@@ -179,7 +180,6 @@ components.update(
         "content_nav_item": Component(Category.ESSENTIAL),
         "page_action": Component(Category.ESSENTIAL),
         "content_action": Component(Category.ESSENTIAL),
-        "tab_handle": Component(Category.RECOMMENDED),
         "pagination": Component(Category.ESSENTIAL),
         "pagination_item": Component(Category.ESSENTIAL),
         "dropdown_item": Component(Category.ESSENTIAL),

@@ -13,11 +13,3 @@
     {%- do kwargs.setdefault("attrs", {}).setdefault("onclick", "ckan.sandbox().ui.getModal('{id}').close()".format(id=id)) -%}
     {{ ui.button(content, **kwargs) }}
 {%- endmacro %}
-
-{%- macro tab_handle(content, active, id) -%}
-    {%- if active -%}
-        {%- do kwargs.setdefault("aria", {}).setdefault("selected", "true") -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
-    {%- endif %}
-    {{ ui.link(content, "#" ~ id, **kwargs) }}
-{%- endmacro %}

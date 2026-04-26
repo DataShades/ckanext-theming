@@ -46,16 +46,16 @@
                 <strong>{{ _('Get 5 results containing "jones" in any field:') }}</strong>
                 {%- call ui.uitl.call(ui.tab_wrapper) -%}
                     {% for clang in code_languages %}
-                        {{ ui.tab_handle(code_examples[clang]['request_limit'], id="lang-" ~ clang, active=loop.index == 1) }}
+                        {{ ui.tab(code_examples[clang]['request_limit'], id="lang-" ~ clang, active=loop.index == 1) }}
                     {% endfor %}
                     <strong>{{ _('Get results with either "watershed" or "survey" as subject and "active" as its stage:') }}</strong>
                     {% for clang in code_languages %}
-                        {{ ui.tab_handle(code_examples[clang]['request_filter'], id="lang-" ~ clang) }}
+                        {{ ui.tab(code_examples[clang]['request_filter'], id="lang-" ~ clang) }}
                     {% endfor %}
                     {% if h.datastore_search_sql_enabled() %}
                         <strong>{{ _('SQL query example:') }}</strong>
                         {% for clang in code_languages %}
-                            {{ ui.tab_handle(code_examples[clang]['request_sql'], id="lang-" ~ clang) }}
+                            {{ ui.tab(code_examples[clang]['request_sql'], id="lang-" ~ clang) }}
                         {% endfor %}
                     {% endif %}
                 {%- endcall %}

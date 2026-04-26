@@ -468,6 +468,55 @@ maintaining readability and appropriate spacing for tag collections.
 ///
 
 
+## Tab
+
+The [`tab`][tab] component creates tab navigation handles that allow users to
+switch between different content sections within the same page. Tabs are
+essential for organizing related content in a space-efficient manner while
+maintaining clear navigation between different sections.
+
+Tab components handle active state indication, visual styling, and
+accessibility attributes to ensure tab navigation is both visually clear and
+functionally accessible.
+
+/// admonition | Relationship
+    type: info
+
+The [`tab`][tab] component works with tab content areas to create
+complete tabbed interface experiences. While tabs provide the navigation
+mechanism, the content areas provide the display for different sections.
+
+///
+
+/// admonition | Usage Example
+    type: example
+
+```jinja2
+<!-- Basic tab -->
+{{ ui.tab("Tab 1", href="/tab1") }}
+
+<!-- Active tab -->
+{{ ui.tab("Tab 2", href="/tab2", active=true) }}
+```
+///
+
+
+| Parameter | Type   | Default | Description                                   |
+|-----------|--------|---------|-----------------------------------------------|
+| `content` | string | -       | The text to display in the tab.               |
+| `href`    | string | -       | The URL that the tab links to.                |
+| `active`  | bool   | -       | Whether the tab is currently active/selected. |
+
+/// details | Theme-Specific Parameters
+    type: tip
+
+Different themes may support additional parameters for styling and behavior:
+
+- `disabled` (bool): Whether the tab is disabled
+- `icon` (string): Icon to display with the tab
+
+///
+
 ## Video
 
 The [`video`][] component displays video content with appropriate handling for

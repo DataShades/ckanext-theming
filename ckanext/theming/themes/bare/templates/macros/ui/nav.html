@@ -16,7 +16,7 @@
 
 {%- macro account_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 
-{%- macro content_nav_item(content, href, active) -%}{{ ui.tab_handle(content, href, active, **kwargs) }}{%- endmacro %}
+{%- macro content_nav_item(content, href, active) -%}{{ ui.tab(content, href, active, **kwargs) }}{%- endmacro %}
 
 {%- macro page_action(content, href) -%}{{ ui.button(content, href=href, **kwargs) }}{%- endmacro %}
 
