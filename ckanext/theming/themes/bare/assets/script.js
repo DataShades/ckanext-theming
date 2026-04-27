@@ -1,6 +1,5 @@
-/// <reference path="../types.d.ts" />
+/// <reference path="../../../../../types.d.ts" />
 ((ckan) => {
-    const asNode = (value) => value instanceof Node ? value : new Text(value);
     const util = {
         applyAttrs(el, attrs) {
             Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
@@ -17,13 +16,6 @@
                     el.addEventListener(key, value.listener, value.options);
                 }
             });
-        },
-        animateTimeout(el, start, timeout) {
-            const diff = Number(new Date()) - start;
-            el.value = timeout - diff;
-            if (el.value > 0) {
-                requestAnimationFrame(() => util.animateTimeout(el, start, timeout));
-            }
         },
     };
     class Modal {
@@ -153,7 +145,14 @@
                 progress.value = props.timeout;
                 const start = Number(new Date());
                 setTimeout(() => el.remove(), props.timeout);
-                util.animateTimeout(progress, start, props.timeout);
+                function _animate(el, start, timeout, prop = "value") {
+                    const diff = Number(new Date()) - start;
+                    el[prop] = timeout - diff;
+                    if (el.value > 0) {
+                        requestAnimationFrame(() => _animate(el, start, timeout));
+                    }
+                }
+                _animate(progress, start, props.timeout);
             }
             container.append(el);
             const result = new Notification(el);

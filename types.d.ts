@@ -68,7 +68,9 @@ declare global {
     /**
      * Parameters for popover functionality.
      */
-    interface IPopoverParams extends IParams {}
+    interface IPopoverParams extends IParams {
+      trigger?: string,
+    }
 
     /**
      * Content type for UI components.
@@ -124,24 +126,11 @@ declare global {
   /**
    * Interface for utility functions.
    *
-   * @property animateTimeout - Method to animate a progress element over a specified timeout.
    * @property applyListeners - Method to attach event listeners to an element.
    * @property applyProps - Method to set properties on an element.
    * @property applyAttrs - Method to set attributes on an element.
    */
   interface IUtil {
-    /**
-     * Animate a progress element over a specified timeout.
-     *
-     * @param el The target HTMLProgressElement.
-     * @param start The starting value of the progress (0 to 1).
-     * @param timeout The duration of the animation in milliseconds.
-     */
-    animateTimeout(
-      el: HTMLProgressElement,
-      start: number,
-      timeout: number,
-    ): void;
 
     /**
      * Attach event listeners to an element.
@@ -236,6 +225,8 @@ declare global {
      */
     popover: (
       content: Theming.Content,
+      target: HTMLElement,
+      title: string | null,
       props: Theming.IPopoverParams,
     ) => IPopover;
 
