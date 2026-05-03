@@ -43,7 +43,7 @@ from .interfaces import ITheme
 
 log = logging.getLogger(__name__)
 
-NAMESPACE_UI = uuid.uuid4()
+NAMESPACE_UI = uuid.uuid5(uuid.NAMESPACE_OID, "ui")
 
 
 class PElement(Protocol):
