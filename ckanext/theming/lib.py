@@ -23,7 +23,7 @@ import os
 import uuid
 from collections import defaultdict
 from collections.abc import Iterable, Iterator
-from typing import Any, Protocol
+from typing import Any, Protocol, cast
 
 from flask import current_app
 from jinja2 import Template
@@ -68,28 +68,74 @@ class Util:
     def __init__(self, theme: Theme):
         self._theme = theme
 
-    def attrs(self, kwargs: dict[str, Any]):
-        """Helper method to render HTML attributes from a dictionary."""
-        if not kwargs:
-            return ""
+    def attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None):
+        """Helper method to render HTML attributes from a dictionary.
 
-        parts = [
-            " ".join(f'{prefix}{k}="{self._escape_attr_value(str(v))}"' for k, v in kwargs[key].items())
-            for key, prefix in self._attr_groups
-            if key in kwargs
-        ]
+        This method takes a dictionary of attributes and their values, and an
+        optional dictionary of default attributes. It combines the two
+        dictionaries, giving precedence to the provided attributes, and renders
+        them as a string of HTML attributes.
+
+        If attributes contain an "_extra_class" key, its value is appended to
+        the "class" attribute. In this way additional classes can be added to
+        the list of default classes provided by component. Example:
+
+            # definition
+            {% macro button(content, **kwargs) %}
+              {% set defaults = {"class": "btn btn-primary"} %}
+              <button {{ ui.attrs(kwargs, defaults) }}>{{ content }}</button>
+            {% endmacro %}
+
+            # call
+            {{ ui.button("Click me!", _extra_class="custom-button-class") }}
+
+            # result
+            <button class="btn btn-primary custom-button-class">Click me!</button>
+
+        :param kwargs: A dictionary of attributes to render.
+        :param defaults: An optional dictionary of default attributes.
+        :return: A Markup object containing the rendered HTML attributes.
+
+        """
+        if not kwargs and not defaults:
+            return ""
+        if defaults is None:
+            defaults = {}
+
+        parts = []
+        for key, prefix in self._attr_groups:
+            base = defaults.get(key, {})
+            base.update(kwargs.get(key, {}))
+            if not base:
+                continue
+            extra_class: str | None
+            if key == "attrs" and (extra_class := kwargs.get("_extra_class")):
+                base["class"] = " ".join([base.get("class", ""), extra_class])
+            parts.append(" ".join(f'{prefix}{k}="{self._escape_attr_value(str(v))}"' for k, v in base.items()))
 
         return h.literal(" ".join(parts)) if parts else ""
 
     def tag(self, content: str, tag: str, is_void: bool = False, /, **kwargs: Any):
         """Helper method to render an HTML tag with the specified content, tag name, and attributes.
 
+        Empty tag name will render content without any wrapper - this can be
+        used to apply wrapper conditionally. For example, `ui.util.tag(content,
+        tag if condition else "")` will render `content` wrapped in `tag` if
+        `condition` is True, and just `content` without wrapper otherwise.
+
+        If `is_void` is True, renders a void tag (e.g., <img />) instead of a
+        normal tag(e.g., <img></img>).
+
         :param content: The content to be enclosed within the tag.
         :param tag: The name of the HTML tag to render.
         :param is_void: If True, renders a void tag (e.g., <img />). Defaults to False.
         :param kwargs: Additional attributes for the tag.
         :return: A Markup object containing the rendered HTML tag.
+
         """
+        if not tag:
+            return content
+
         attrs = self.attrs(kwargs)
         if is_void:
             return h.literal(f"<{tag} {attrs}/>")
@@ -271,13 +317,17 @@ class MacroUI(UI):
     @override
     def __init__(self, app: types.CKANApp, util: Util):
         super().__init__(app, util)
+
+        if hasattr(app, "_wsgi_app"):
+            app = cast(types.CKANApp, app._wsgi_app)  # pyright: ignore[reportAttributeAccessIssue]
+
         self.__env = app.jinja_env
 
         sources = self._sources.copy()
         for plugin in p.PluginImplementations(ITheme):
             sources += plugin.get_additional_theme_ui_sources()
 
-        self.__templates = [app.jinja_env.get_template(source) for source in sources]
+        self.__templates = [self.__env.get_template(source) for source in sources]
 
         self._fill_inventory()
 
