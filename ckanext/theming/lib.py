@@ -233,7 +233,9 @@ class Util:
         storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
         items = storage[category]
         if key:
-            return storage[category].pop(key, default)
+            if keep:
+                return items.get(key, default)
+            return items.pop(key, default)
 
         if not keep:
             del storage[category]
@@ -267,11 +269,11 @@ class UI(Iterable[str], abc.ABC):
     """
 
     util: Util
-    inv: dict[str, PElement]
+    _inv: dict[str, PElement]
 
     def __init__(self, app: types.CKANApp, util: Util):
         self.util = util
-        self.inv = {}
+        self._inv = {}
 
     @override
     def __iter__(self) -> Iterator[str]:
@@ -279,7 +281,7 @@ class UI(Iterable[str], abc.ABC):
 
         :return: An iterable of element names.
         """
-        return iter(self.inv)
+        return iter(self._inv)
 
     def __getattr__(self, name: str) -> PElement:
         """Get an element factory by name.
@@ -287,10 +289,10 @@ class UI(Iterable[str], abc.ABC):
         :param name: The name of the element.
         :return: A callable that produces the element.
         """
-        if name not in self.inv:
+        if name not in self._inv:
             raise AttributeError(name)
 
-        return self.inv[name]
+        return self._inv[name]
 
     def add_component(self, name: str, component: PElement):
         """Add a new component to the UI inventory.
@@ -298,7 +300,7 @@ class UI(Iterable[str], abc.ABC):
         :param name: The name of the component.
         :param component: A callable that produces the component.
         """
-        self.inv[name] = component
+        self._inv[name] = component
 
 
 class MacroUI(UI):
@@ -498,9 +500,9 @@ class UIManager:
         return cls.ui
 
     @classmethod
-    def set(cls, theme: str):
+    def set(cls, theme: str, app: types.CKANApp = current_app):  # pyright: ignore[reportArgumentType]
         """Set the UI instance to a new theme."""
-        cls.ui = get_theme(theme).build_ui(current_app)
+        cls.ui = get_theme(theme).build_ui(app)
 
     @classmethod
     def reset(cls):

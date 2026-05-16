@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
+from typing import Any, cast
 
 from typing_extensions import override
 
@@ -36,7 +36,7 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
         if hasattr(app, "jinja_env"):
             app.jinja_env.add_extension("jinja2.ext.debug")
-            app.jinja_env.globals.update({"ui": ui})
+            app.jinja_env.globals.update({"ui": cast(Any, ui)})
         else:
             log.warning("Cannot initialize UI in the non-flask application")
         return app

@@ -17,16 +17,16 @@ class ITheme(Interface):
         Example::
 
             def register_themes(self):
-                from ckan.lib.theme import Theme
+                from ckanext.theming.lib import Theme
 
-                return {
+                return [
                     Theme("mytheme", "/path/to/mytheme"),
                     Theme(
                         "myothertheme",
                         "/path/to/myothertheme",
                         parent="templates",
                     ),
-                }
+                ]
 
         :returns: themes provided by the extension
         :rtype: list
@@ -57,7 +57,7 @@ class ITheme(Interface):
 
         Example::
 
-            def build_theme_ui(self, theme, ui):
+            def patch_theme_ui(self, theme, ui):
                 ui.add_component("divider", lambda *args, **kwargs: Markup("<hr/>"))
 
         :param theme: The theme being built
