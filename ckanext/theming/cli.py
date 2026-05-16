@@ -44,6 +44,15 @@ RE_EXTEND = re.compile(
     re.X,
 )
 
+RE_CKAN_EXTEND = re.compile(
+    r"""
+    \{%-?\s*		(?# tag start)
+    ckan_extends\s+	(?# tag name)
+    \s*-?%\}		(?# tag end)
+""",
+    re.X,
+)
+
 
 RE_INCLUDE = re.compile(
     r"""
@@ -318,10 +327,10 @@ def template_analyze(  # noqa: C901
         }
         click.secho(f"Available templates({len(templates)}):")
 
-    get_template = ctx.meta["flask_app"].jinja_env.get_template
+    env = ctx.meta["flask_app"].jinja_env
     for name in sorted(templates):
         try:
-            tpl = get_template(name)
+            tpl = env.get_template(name)
         except TemplateNotFound:
             tk.error_shout(f"Template {name} does not exist")
             continue
@@ -342,30 +351,15 @@ def template_analyze(  # noqa: C901
             click.secho(click.style("Includes: ", fg="yellow") + ", ".join(i for i in sorted(set(includes))))
 
         all_blocks: set[str] = set(tpl.blocks)
-        hierarchy = []
-        hierarchy_break = None
+        hierarchy: list[str] = []
 
-        if extends := RE_EXTEND.search(content):
-            parent_name = extends.group("name")
-            click.secho(click.style("Extends: ", fg="yellow") + parent_name)
+        hierarchy_break = _discover_template_hierarchy(env, tpl, hierarchy, all_blocks)
 
-            while parent_name:
-                try:
-                    parent_tpl = get_template(parent_name.strip("\"'"))
-                except TemplateNotFound:
-                    hierarchy_break = parent_name
-                    break
-                hierarchy.append(parent_name)
-                all_blocks.update(parent_tpl.blocks)
-
-                with open(parent_tpl.filename) as src:
-                    parent_content = src.read()
-
-                extends = RE_EXTEND.search(parent_content)
-                parent_name = extends.group("name") if extends else None
-
+        # click.secho(click.style("Extends: ", fg="yellow") + parent_name)
         if hierarchy:
-            click.secho(click.style("Hierarchy: ", fg="yellow") + ", ".join(hierarchy))
+            click.secho("Hierarchy: ", fg="yellow")
+            for item in hierarchy:
+                click.echo(f"\t{os.path.relpath(item, os.getcwd()) if relative_filename else os.path.normpath(item)}")
 
         if hierarchy_break:
             click.secho(click.style("Hierarchy detection interrupted on: ", fg="red") + hierarchy_break)
@@ -378,6 +372,36 @@ def template_analyze(  # noqa: C901
             click.secho(click.style("Implicit blocks: ", fg="yellow") + ", ".join(sorted(implicit_blocks)))
 
         click.echo()
+
+
+def _discover_template_hierarchy(
+    env: Environment, tpl: Template, hierarchy: list[str], all_blocks: set[str]
+) -> str | None:
+    parent_name = None
+
+    with open(tpl.filename) as src:  # pyright: ignore[reportArgumentType]
+        content = src.read()
+
+    if extends := RE_EXTEND.search(content):
+        parent_name = extends.group("name").strip("\"'")
+
+    elif RE_CKAN_EXTEND.search(content):
+        clean_name = tpl.name.rsplit("*", 1)[-1]  # pyright: ignore[reportOptionalMemberAccess]
+        dirname = tpl.filename[: -len(clean_name) - 1]  # pyright: ignore[reportOptionalSubscript, reportUnknownVariableType]
+        parent_name = f"*{dirname}*{clean_name}"
+
+    else:
+        return None
+
+    try:
+        parent_tpl = env.get_template(parent_name)
+    except TemplateNotFound:
+        return parent_name
+
+    hierarchy.append(parent_tpl.filename)  # pyright: ignore[reportArgumentType]
+    all_blocks.update(parent_tpl.blocks)
+
+    return _discover_template_hierarchy(env, parent_tpl, hierarchy, all_blocks)
 
 
 @template.command("component-usage")
