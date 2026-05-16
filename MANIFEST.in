@@ -4,3 +4,4 @@ include requirements.txt
 recursive-include ckanext/theming *.html *.json *.js *.less *.css *.mo *.yml
 recursive-include ckanext/theming/migration *.ini *.py *.mako
 recursive-include ckanext/theming/public *.*
+prune ckanext/theming/themes/bare/node_modules
