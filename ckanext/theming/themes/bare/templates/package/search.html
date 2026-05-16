@@ -1,5 +1,5 @@
 {% extends "package/_base.html" %}
-{%- set _layout = _layout|default("sidebar") -%}
+{%- block page_layout -%}sidebar-start{%- endblock %}
 
 {%- block page_action %}
     {{ ui.page_action(ui.icon("plus") ~ _('Add Dataset'), href=h.url_for('dataset.new')) if h.check_access('package_create') }}

@@ -1,5 +1,5 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("content_context") -%}
+{% extends "_page.html" %}
+{%- block page_layout -%}sidebar-end{%- endblock %}
 
 {%- set dataset_type = h.default_package_type() %}
 {%- set org_type = h.default_group_type('organization') %}

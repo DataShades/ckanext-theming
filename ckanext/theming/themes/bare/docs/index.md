@@ -35,15 +35,8 @@ The theme uses the following template structure:
 templates/
 ├── _base.html           # Base template with HTML structure
 ├── _page.html           # Page wrapper template
-├── _layout.html         # Layout selection template
 ├── _header.html         # Header component
 ├── _footer.html         # Footer component
-├── layout/              # Layout templates
-│   ├── default.html
-│   ├── fullwidth.html
-│   ├── left_sidebar.html
-│   ├── right_sidebar.html
-│   └── ...
 ├── macros/              # UI macros
 │   └── ui.html
 ├── package/             # Dataset templates

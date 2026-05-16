@@ -1,5 +1,5 @@
 {% extends "organization/_edit_base.html" %}
-{%- set _layout = _layout | default("content_control") -%}
+{%- block page_layout -%}sidebar-start{%- endblock %}
 
 {%- set dataset_type = h.default_package_type() %}
 

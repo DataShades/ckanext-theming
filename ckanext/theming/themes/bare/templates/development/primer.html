@@ -1,5 +1,5 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout | default("content_control") -%}
+{% extends "_page.html" %}
+{%- block page_layout -%}sidebar-start{%- endblock %}
 
 {%- block secondary_content -%}
     {%- call ui.util.call(ui.list) -%}

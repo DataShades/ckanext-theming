@@ -1,5 +1,5 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("right_sidebar") -%}
+{% extends "_page.html" %}
+{%- block page_layout -%}sidebar-end{%- endblock %}
 {% set dataset_type = pkg_dict.type if pkg_dict else dataset_type or 'dataset' %}
 
 {%- block subtitle -%}

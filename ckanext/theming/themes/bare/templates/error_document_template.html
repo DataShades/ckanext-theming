@@ -1,5 +1,5 @@
-{% extends "_layout.html" %}
-{%- set _layout = _layout|default("content_focus") -%}
+{% extends "_page.html" %}
+{%- block page_layout -%}no-sidebar{%- endblock %}
 
 {# eat the flash messages caused by the 404 #}
 {%- do h.get_flashed_messages() -%}

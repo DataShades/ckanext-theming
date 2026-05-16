@@ -1,5 +1,5 @@
 {% extends "user/_base.html" %}
-{%- set _layout = _layout|default("content_focus") -%}
+{%- block page_layout -%}no-sidebar{%- endblock %}
 
 {%- block subtitle -%}
     {{ ui.subtitle_item(_('Logged Out')) }}
