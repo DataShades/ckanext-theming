@@ -19,7 +19,8 @@ your_theme/
 ```
 
 
-/// tip | Create new theme using CLI
+/// details | Create new theme using CLI
+    type: info
 
 New theme can be created by making a copy of an existing theme using CKAN CLI:
 
@@ -51,8 +52,6 @@ ckan theme create THEME_NAME /base/location/for/the/new/theme
 
 ## Registering a Theme
 
-### 1. Implement the `ITheme` Interface
-
 In your extension's `plugin.py` file, implement the `ITheme` interface. The key
 method is `register_themes()` which returns a list of `Theme` objects:
 
@@ -77,7 +76,9 @@ class YourExtensionPlugin(ITheme, p.SingletonPlugin):
         ]
 ```
 
-### 2. Theme Inheritance
+
+/// details | Theme inheritance
+    type: info
 
 Themes can inherit from parent themes to build upon existing functionality:
 
@@ -93,17 +94,23 @@ def register_themes(self):
     ]
 ```
 
-Child themes inherit all macros and templates from the parent, but can selectively override only the components they want to customize. Unimplemented macros fall back to the parent theme.
+Child themes inherit all macros and templates from the parent, but can
+selectively override only the components they want to customize. Unimplemented
+macros fall back to the parent theme.
 
-### 3. Custom UI Implementation (Optional)
+///
 
-You can customize the macro loading mechanism by setting a custom UI class on the Theme. This allows you to customize how macros are loaded:
+/// details | Low-level customizations
+    type: tip
+
+Macro loading mechanism can be customized by setting a custom UI class on the
+Theme. First, extend `MacroUI` from `ckanext.theming.lib`:
 
 ```python
 from ckanext.theming.lib import MacroUI, Theme
 
 class YourThemeUI(MacroUI):
-    source = "custom/location/of/macros/ui.html"
+    _sources = ["macros/ui.html", "additional/location/of/macros/ui.html"]
 
     def __init__(self, app):
         super().__init__(app)
@@ -126,32 +133,35 @@ def register_themes(self):
     ]
 ```
 
+///
+
 ## Creating UI Macros
 
-### 1. Create the Main Macros Entry Point
+Create `themes/your_theme/templates/macros/ui.html` with definitions of all the
+macros. Macros can be defined elsewhere and re-exported by creating global
+template variables:
 
-Create `themes/your_theme/templates/macros/ui.html` with definitions of all the macros. You can define macros elsewhere and re-export them by creating global template variables:
-
-```html
-{% import "macros/ui/element.html" as element %}
+```django
+{% import "macros/your_theme_macros/element.html" as element %}
 
 {# Re-export macro #}
 {% set button = element.button %}
 {% set card = element.card %}
 
-{# Define new macro #}
+{# Define new macro directly inside this file #}
 {% macro input() %}
     ...
 {% endmacro %}
 ```
 
-/// note | Flexible themes
+/// details | Flexible themes
+    type: tip
 
 When macros created directly inside `ui.html` or unconditionaly re-exported as
-in example above, child theme cannot override these macros using the following
-code:
+in example above, child theme cannot override these macros. The code below
+**DOES NOT** work:
 
-```html
+```django
 {% ckan_extends %}
 
 {# Override macro #}
@@ -163,12 +173,12 @@ Jinja2 processes template hierarchy in a reverse order, so the original
 possible, never define macros directly inside `ui.html` and always use
 re-export with the default fallback:
 
-```html
+```django
 {% import "macros/ui/element.html" as element %}
 
 {# keep definition from the child template or fallback to the original implementation #}
 {% set button = button | default(element.button) %}
-{% set card = card |default(element.card) %}
+{% set card = card | default(element.card) %}
 
 {# use the same fallback-strategy for macros defined in the current file. Give
 the child template an opportunity to define its own `input` macro and, when
@@ -182,20 +192,21 @@ such macro is not defined, use the original `_input` as a fallback implementatio
 
 ///
 
-### 2. Implement Individual Macro Files
 
 Each macro file should contain actual implementations that use appropriate CSS classes for your chosen framework. When implementing macros, follow these conventions:
 
 #### Parameter Order Consistency
 All macros follow the same parameter convention:
 
-- `content` is the first positional parameter (and often the only one when needed)
+- `content` is the first positional parameter (and often the only one when needed).
 - All other parameters use named parameters with appropriate defaults
 - Always use `kwargs` for extra attributes that may be passed to the element.
 
+/// admonition | Example
+    type: example
 Example `themes/your_theme/templates/macros/ui/element.html` (using Bootstrap classes):
 
-```html
+```django
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
         <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn-{{ style }}">{{ content }}</a>
@@ -233,52 +244,98 @@ Example `themes/your_theme/templates/macros/ui/element.html` (using Bootstrap cl
 {%- endmacro %}
 ```
 
-### 3. UI Utilities
+Note, every macro in the example uses `kwargs` variables. It must not be added
+to signature: whenever Jinja2 sees that `kwargs` is used inside macro body, it
+implicitely adds `**kwargs` to macro signature; attempt to do it explicitely
+will cause en error.
+
+Because of `kwargs` usage, users can call any of these macros with additional
+parameters, even if current theme does not process them. In this way, when user
+switches from a different theme, that has more arguments inside macro
+definition, pages will not break because of invalid call payload.
+
+///
+
+### UI Utilities
 
 The theming system provides utility functions accessible via `ui.util`:
 
-- `ui.util.attrs(kwargs)`: Helper to render HTML attributes from a dictionary
-- `ui.util.call(element, *args, **kwargs)`: Call an inline element as a block element
+- `ui.util.attrs(kwargs)`: Helper to render HTML attributes from a
+  dictionary. It extracts from `kwargs` parameters with names `attrs`, `aria`,
+  `data`, `on` and builds attribute string from them. Also it can be used to
+  specify default attributes, that user can override during macro call:
+  ```django
+  {% macro button(content) %}
+      <button {{ ui.util.attrs(kwargs, {"attrs": {"class": "btn"}}) }}>
+          {{ content }}
+      </button>
+  {% endmacro %}
+  ```
+- `ui.util.call(element, *args, **kwargs)`: Call an inline element as a block
+  element. Use this to add complex content with nested HTML into element.
+  ```django
+  {% call ui.util.call(ui.button, type="submit") %}
+      <i class="fa fa-info-circle"></i>
+      Click
+  {% call%}
+  ```
 - `ui.util.map(element, items, *args, **kwargs)`: Map an element over a collection
+  ```django
+  {{ ui.util.map(ui.button, ["Click", "Press", "Push"], type="submit") }}
+  ```
 - `ui.util.now()`: Get the current UTC datetime
-- `ui.util.id(value, prefix="id-")`: Generate a unique identifier
-- `ui.util.keep_item(category, key, value)`: Store items in UI storage
-- `ui.util.pop_items(category, key=None)`: Retrieve and remove items from UI storage
+- `ui.util.id(value, prefix="id-")`: Generate a unique identifier(if value is
+  empty) or transform value into stable UUID.
+- `ui.util.tag(content, tag, **kwargs)`: Renders an arbitrary tag. Use it to
+  produce dynamic wrappers depending on condition. If tag name is empty, conent
+  will be printed as-is, without a wrapper.
+  ```django
+  {{ ui.util.tag(
+      "Hello world",
+      "span" if inline_tag else "div",
+      attrs={"class": "wrapper"}) }}
+  ```
 
-Example usage of utilities:
+- `ui.util.keep_item(category, key, value)`: Store items in UI storage. Similar
+  to `h.flash_success`, but for arbitrary data.
+- `ui.util.pop_items(category, key=None)`: Retrieve and remove items from UI
+  storage. Similar to `h.get_flashed_messages`, but for arbitrary data.
 
-```html
+/// admonition | Example
+    type: example
+
+```django
 {%- macro button_group(items) -%}
-    <div class="btn-group">
-        {{ ui.util.map(ui.button, items) }}
+    <div {{ ui.util.attrs(kwargs) }} class="btn-group">
+        {{ ui.util.map(ui.button, items, on={"click": "alert(42)"}) }}
     </div>
 {%- endmacro %}
 
 {# Using call with util.call #}
-{% call ui.util.call(ui.button, style="primary") %}
+{% call ui.util.call(ui.button, style="primary", attrs={"id": ui.util.id()}) %}
     <i class="icon"></i>
     Click me!
 {% endcall %}
 ```
 
+///
+
 ### Accessibility Considerations
 
 When implementing theme components, ensure proper accessibility support by using appropriate ARIA attributes and semantic HTML:
 
-```html
+```django
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs) }}
+        <a {{ ui.util.attrs(kwargs, {"aria": {"label": content}}) }}
            href="{{ href }}"
-           class="btn btn-{{ style }}"
-           {% if not kwargs.aria %}aria-label="{{ content }}"{% endif %}>
+           class="btn btn-{{ style }}">
             {{ content }}
         </a>
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs) }}
+        <button {{ ui.util.attrs(kwargs, {"aria": {"label": content}}) }}
                 type="{{ type }}"
-                class="btn btn-{{ style }}"
-                {% if not kwargs.aria %}aria-label="{{ content }}"{% endif %}>
+                class="btn btn-{{ style }}">
             {{ content }}
         </button>
     {%- endif %}
@@ -318,13 +375,14 @@ Use proper ARIA attributes (`aria-label`, `aria-describedby`, `aria-invalid`, `a
 
 ## Using UI Macros in Templates
 
-Once a theme is active, UI macros can be used in templates:
+Once a theme is activated by setting its name as a value for `ckan.ui.theme`
+config option, UI macros can be used in templates:
 
 ```jinja
 {{ ui.button("Click Me", style="primary", type="button") }}
-{{ ui.card(title="My Card", content="Card content here") }}
+{{ ui.card("Card content here", title="My Card") }}
 {{ ui.alert("Success message", style="success") }}
-{{ ui.link("Visit CKAN", href="https://ckan.org", blank=True) }}
+{{ ui.link("Visit CKAN", href="https://ckan.org", blank=true) }}
 ```
 
 All parameters except for `content` must be passed to macro by name. This
@@ -406,13 +464,15 @@ ckan theme endpoint dump --auth-user admin --user testuser --package testpkg --r
 To use a theme, configure it in your CKAN configuration:
 
 ```ini
-ckan.plugins = ... theming
+ckan.plugins = ... theming your_theme_plugin
 ckan.ui.theme = your_theme
 ```
 
 ## Reference Implementation
 
-The `bare` theme in this extension serves as a reference implementation showing the minimal structure needed for a theme. You can use it as a starting point for building your own themes by running:
+The `bare` theme in this extension serves as a reference implementation showing
+the minimal structure needed for a theme. It can be used as a starting point
+for building new themes by running:
 
 ```bash
 ckan theme create mytheme
