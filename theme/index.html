@@ -355,39 +355,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Registering a Theme">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-implement-the-itheme-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Implement the ITheme Interface
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-theme-inheritance" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Theme Inheritance
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-custom-ui-implementation-optional" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Custom UI Implementation (Optional)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -401,25 +368,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-create-the-main-macros-entry-point" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Create the Main Macros Entry Point
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-implement-individual-macro-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Implement Individual Macro Files
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Implement Individual Macro Files">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#parameter-order-consistency" class="md-nav__link">
     <span class="md-ellipsis">
       Parameter Order Consistency
@@ -428,15 +376,10 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#3-ui-utilities" class="md-nav__link">
+  <a href="#ui-utilities" class="md-nav__link">
     <span class="md-ellipsis">
-      3. UI Utilities
+      UI Utilities
     </span>
   </a>
   
@@ -1010,39 +953,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Registering a Theme">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-implement-the-itheme-interface" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Implement the ITheme Interface
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-theme-inheritance" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Theme Inheritance
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-custom-ui-implementation-optional" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Custom UI Implementation (Optional)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1056,25 +966,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-create-the-main-macros-entry-point" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Create the Main Macros Entry Point
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-implement-individual-macro-files" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Implement Individual Macro Files
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Implement Individual Macro Files">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#parameter-order-consistency" class="md-nav__link">
     <span class="md-ellipsis">
       Parameter Order Consistency
@@ -1083,15 +974,10 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#3-ui-utilities" class="md-nav__link">
+  <a href="#ui-utilities" class="md-nav__link">
     <span class="md-ellipsis">
-      3. UI Utilities
+      UI Utilities
     </span>
   </a>
   
@@ -1223,8 +1109,8 @@
  └── public/
      └── (static files served directly)
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Create new theme using CLI</p>
+<details class="info">
+<summary>Create new theme using CLI</summary>
 <p>New theme can be created by making a copy of an existing theme using CKAN CLI:</p>
 <div class="highlight"><pre><span></span><code>ckan<span class="w"> </span>theme<span class="w"> </span>create<span class="w"> </span>THEME_NAME
 </code></pre></div>
@@ -1240,9 +1126,8 @@ theme name. In this case THEME_NAME will be created inside specified location
 instead of the current folder.</p>
 <div class="highlight"><pre><span></span><code>ckan<span class="w"> </span>theme<span class="w"> </span>create<span class="w"> </span>THEME_NAME<span class="w"> </span>/base/location/for/the/new/theme
 </code></pre></div>
-</div>
+</details>
 <h2 id="registering-a-theme">Registering a Theme</h2>
-<h3 id="1-implement-the-itheme-interface">1. Implement the <code>ITheme</code> Interface</h3>
 <p>In your extension's <code>plugin.py</code> file, implement the <code>ITheme</code> interface. The key
 method is <code>register_themes()</code> which returns a list of <code>Theme</code> objects:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -1264,7 +1149,8 @@ method is <code>register_themes()</code> which returns a list of <code>Theme</co
             <span class="p">),</span>
         <span class="p">]</span>
 </code></pre></div>
-<h3 id="2-theme-inheritance">2. Theme Inheritance</h3>
+<details class="info">
+<summary>Theme inheritance</summary>
 <p>Themes can inherit from parent themes to build upon existing functionality:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
@@ -1276,9 +1162,14 @@ method is <code>register_themes()</code> which returns a list of <code>Theme</co
         <span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div>
-<p>Child themes inherit all macros and templates from the parent, but can selectively override only the components they want to customize. Unimplemented macros fall back to the parent theme.</p>
-<h3 id="3-custom-ui-implementation-optional">3. Custom UI Implementation (Optional)</h3>
-<p>You can customize the macro loading mechanism by setting a custom UI class on the Theme. This allows you to customize how macros are loaded:</p>
+<p>Child themes inherit all macros and templates from the parent, but can
+selectively override only the components they want to customize. Unimplemented
+macros fall back to the parent theme.</p>
+</details>
+<details class="tip">
+<summary>Low-level customizations</summary>
+<p>Macro loading mechanism can be customized by setting a custom UI class on the
+Theme. First, extend <code>MacroUI</code> from <code>ckanext.theming.lib</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">MacroUI</span><span class="p">,</span> <span class="n">Theme</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">YourThemeUI</span><span class="p">(</span><span class="n">MacroUI</span><span class="p">):</span>
@@ -1301,175 +1192,220 @@ method is <code>register_themes()</code> which returns a list of <code>Theme</co
         <span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div>
+</details>
 <h2 id="creating-ui-macros">Creating UI Macros</h2>
-<h3 id="1-create-the-main-macros-entry-point">1. Create the Main Macros Entry Point</h3>
-<p>Create <code>themes/your_theme/templates/macros/ui.html</code> with definitions of all the macros. You can define macros elsewhere and re-export them by creating global template variables:</p>
-<div class="highlight"><pre><span></span><code>{% import &quot;macros/ui/element.html&quot; as element %}
+<p>Create <code>themes/your_theme/templates/macros/ui.html</code> with definitions of all the
+macros. Macros can be defined elsewhere and re-exported by creating global
+template variables:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;macros/your_theme_macros/element.html&quot;</span> <span class="k">as</span> <span class="nv">element</span> <span class="cp">%}</span>
 
-{# Re-export macro #}
-{% set button = element.button %}
-{% set card = element.card %}
+<span class="c">{# Re-export macro #}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">button</span> <span class="o">=</span> <span class="nv">element.button</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">card</span> <span class="o">=</span> <span class="nv">element.card</span> <span class="cp">%}</span>
 
-{# Define new macro #}
-{% macro input() %}
-    ...
-{% endmacro %}
+<span class="c">{# Define new macro directly inside this file #}</span>
+<span class="cp">{%</span> <span class="k">macro</span> <span class="nv">input</span><span class="o">()</span> <span class="cp">%}</span>
+<span class="x">    ...</span>
+<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Flexible themes</p>
+<details class="tip">
+<summary>Flexible themes</summary>
 <p>When macros created directly inside <code>ui.html</code> or unconditionaly re-exported as
-in example above, child theme cannot override these macros using the following
-code:</p>
-<div class="highlight"><pre><span></span><code>{% ckan_extends %}
+in example above, child theme cannot override these macros. The code below
+<strong>DOES NOT</strong> work:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">ckan_extends</span> <span class="cp">%}</span>
 
-{# Override macro #}
-{% set button = my_custom_button %}
+<span class="c">{# Override macro #}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">button</span> <span class="o">=</span> <span class="nv">my_custom_button</span> <span class="cp">%}</span>
 </code></pre></div>
 <p>Jinja2 processes template hierarchy in a reverse order, so the original
 <code>button</code> macro will take precedence over the custom one. To make such overrides
 possible, never define macros directly inside <code>ui.html</code> and always use
 re-export with the default fallback:</p>
-<div class="highlight"><pre><span></span><code>{% import &quot;macros/ui/element.html&quot; as element %}
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;macros/ui/element.html&quot;</span> <span class="k">as</span> <span class="nv">element</span> <span class="cp">%}</span>
 
-{# keep definition from the child template or fallback to the original implementation #}
-{% set button = button | default(element.button) %}
-{% set card = card |default(element.card) %}
+<span class="c">{# keep definition from the child template or fallback to the original implementation #}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">button</span> <span class="o">=</span> <span class="nv">button</span> <span class="o">|</span> <span class="nf">default</span><span class="o">(</span><span class="nv">element.button</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">card</span> <span class="o">=</span> <span class="nv">card</span> <span class="o">|</span> <span class="nf">default</span><span class="o">(</span><span class="nv">element.card</span><span class="o">)</span> <span class="cp">%}</span>
 
-{# use the same fallback-strategy for macros defined in the current file. Give
-the child template an opportunity to define its own `input` macro and, when
-such macro is not defined, use the original `_input` as a fallback implementation #}
-{% macro _input() %}
-    ...
-{% endmacro %}
-{% set input = input | default(_input)%}
+<span class="c">{# use the same fallback-strategy for macros defined in the current file. Give</span>
+<span class="c">the child template an opportunity to define its own `input` macro and, when</span>
+<span class="c">such macro is not defined, use the original `_input` as a fallback implementation #}</span>
+<span class="cp">{%</span> <span class="k">macro</span> <span class="nv">_input</span><span class="o">()</span> <span class="cp">%}</span>
+<span class="x">    ...</span>
+<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">set</span> <span class="nv">input</span> <span class="o">=</span> <span class="nv">input</span> <span class="o">|</span> <span class="nf">default</span><span class="o">(</span><span class="nv">_input</span><span class="o">)</span><span class="cp">%}</span>
 </code></pre></div>
-</div>
-<h3 id="2-implement-individual-macro-files">2. Implement Individual Macro Files</h3>
+</details>
 <p>Each macro file should contain actual implementations that use appropriate CSS classes for your chosen framework. When implementing macros, follow these conventions:</p>
 <h4 id="parameter-order-consistency">Parameter Order Consistency</h4>
 <p>All macros follow the same parameter convention:</p>
 <ul>
-<li><code>content</code> is the first positional parameter (and often the only one when needed)</li>
+<li><code>content</code> is the first positional parameter (and often the only one when needed).</li>
 <li>All other parameters use named parameters with appropriate defaults</li>
 <li>Always use <code>kwargs</code> for extra attributes that may be passed to the element.</li>
 </ul>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
 <p>Example <code>themes/your_theme/templates/macros/ui/element.html</code> (using Bootstrap classes):</p>
-<div class="highlight"><pre><span></span><code>{%- macro button(content, href, type=&quot;button&quot;, style=&quot;primary&quot;) -%}
-    {%- if href -%}
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ href }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-{{ style }}&quot;</span><span class="p">&gt;</span>{{ content }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-    {%- else -%}
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;{{ type }}&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-{{ style }}&quot;</span><span class="p">&gt;</span>{{ content }}<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-    {%- endif %}
-{%- endmacro %}
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">href</span> -<span class="cp">%}</span>
+<span class="x">        &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> href=&quot;</span><span class="cp">{{</span> <span class="nv">href</span> <span class="cp">}}</span><span class="x">&quot; class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">else</span> -<span class="cp">%}</span>
+<span class="x">        &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> type=&quot;</span><span class="cp">{{</span> <span class="nv">type</span> <span class="cp">}}</span><span class="x">&quot; class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/button&gt;</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 
-{%- macro divider(content) -%}
-    {%- if content -%}
-        <span class="p">&lt;</span><span class="nt">div</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;divider-with-content&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ content }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
-        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    {%- else -%}
-        <span class="p">&lt;</span><span class="nt">hr</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span><span class="p">&gt;</span>
-    {%- endif %}
-{%- endmacro %}
+<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">divider</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">content</span> -<span class="cp">%}</span>
+<span class="x">        &lt;div </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> class=&quot;divider-with-content&quot;&gt;</span>
+<span class="x">            &lt;hr&gt;&lt;span&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&lt;hr&gt;</span>
+<span class="x">        &lt;/div&gt;</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">else</span> -<span class="cp">%}</span>
+<span class="x">        &lt;hr </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&gt;</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 
-{%- macro image(src, alt, height, width) -%}
-    <span class="p">&lt;</span><span class="nt">img</span>
-        <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span>
-        <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ src }}&quot;</span>
-        <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">alt</span> <span class="err">%}</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;{{ alt }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-        <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">height</span> <span class="err">%}</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;{{ height }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-        <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">width</span> <span class="err">%}</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;{{ width }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-    <span class="p">&gt;</span>
-{%- endmacro %}
+<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">image</span><span class="o">(</span><span class="nv">src</span><span class="o">,</span> <span class="nv">alt</span><span class="o">,</span> <span class="nv">height</span><span class="o">,</span> <span class="nv">width</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    &lt;img</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="x">        src=&quot;</span><span class="cp">{{</span> <span class="nv">src</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">alt</span> <span class="cp">%}</span><span class="x"> alt=&quot;</span><span class="cp">{{</span> <span class="nv">alt</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">height</span> <span class="cp">%}</span><span class="x"> height=&quot;</span><span class="cp">{{</span> <span class="nv">height</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">width</span> <span class="cp">%}</span><span class="x"> width=&quot;</span><span class="cp">{{</span> <span class="nv">width</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    &gt;</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 
-{%- macro link(content, href, blank) -%}
-    {%- if blank -%}
-        {%- do kwargs.setdefault(&quot;attrs&quot;, {}).setdefault(&quot;target&quot;, &quot;_blank&quot;) -%}
-        {%- do kwargs.setdefault(&quot;attrs&quot;, {}).setdefault(&quot;rel&quot;, &quot;noopener noreferrer&quot;) -%}
-    {%- endif %}
-    <span class="p">&lt;</span><span class="nt">a</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ href or content }}&quot;</span><span class="p">&gt;</span>{{ content }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-{%- endmacro %}
+<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">link</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">blank</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">blank</span> -<span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">do</span> <span class="nv">kwargs.setdefault</span><span class="o">(</span><span class="s2">&quot;attrs&quot;</span><span class="o">,</span> <span class="o">{})</span><span class="nv">.setdefault</span><span class="o">(</span><span class="s2">&quot;target&quot;</span><span class="o">,</span> <span class="s2">&quot;_blank&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">do</span> <span class="nv">kwargs.setdefault</span><span class="o">(</span><span class="s2">&quot;attrs&quot;</span><span class="o">,</span> <span class="o">{})</span><span class="nv">.setdefault</span><span class="o">(</span><span class="s2">&quot;rel&quot;</span><span class="o">,</span> <span class="s2">&quot;noopener noreferrer&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> href=&quot;</span><span class="cp">{{</span> <span class="nv">href</span> <span class="k">or</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 </code></pre></div>
-<h3 id="3-ui-utilities">3. UI Utilities</h3>
+<p>Note, every macro in the example uses <code>kwargs</code> variables. It must not be added
+to signature: whenever Jinja2 sees that <code>kwargs</code> is used inside macro body, it
+implicitely adds <code>**kwargs</code> to macro signature; attempt to do it explicitely
+will cause en error.</p>
+<p>Because of <code>kwargs</code> usage, users can call any of these macros with additional
+parameters, even if current theme does not process them. In this way, when user
+switches from a different theme, that has more arguments inside macro
+definition, pages will not break because of invalid call payload.</p>
+</div>
+<h3 id="ui-utilities">UI Utilities</h3>
 <p>The theming system provides utility functions accessible via <code>ui.util</code>:</p>
 <ul>
-<li><code>ui.util.attrs(kwargs)</code>: Helper to render HTML attributes from a dictionary</li>
-<li><code>ui.util.call(element, *args, **kwargs)</code>: Call an inline element as a block element</li>
-<li><code>ui.util.map(element, items, *args, **kwargs)</code>: Map an element over a collection</li>
+<li><code>ui.util.attrs(kwargs)</code>: Helper to render HTML attributes from a
+  dictionary. It extracts from <code>kwargs</code> parameters with names <code>attrs</code>, <code>aria</code>,
+  <code>data</code>, <code>on</code> and builds attribute string from them. Also it can be used to
+  specify default attributes, that user can override during macro call:
+  <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="x">    &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;attrs&quot;</span><span class="o">:</span> <span class="o">{</span><span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;btn&quot;</span><span class="cp">}}</span><span class="x">) }}&gt;</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
+<span class="x">    &lt;/button&gt;</span>
+<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
+</code></pre></div></li>
+<li><code>ui.util.call(element, *args, **kwargs)</code>: Call an inline element as a block
+  element. Use this to add complex content with nested HTML into element.
+  <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="x">    &lt;i class=&quot;fa fa-info-circle&quot;&gt;&lt;/i&gt;</span>
+<span class="x">    Click</span>
+<span class="cp">{%</span> <span class="k">call</span><span class="cp">%}</span>
+</code></pre></div></li>
+<li><code>ui.util.map(element, items, *args, **kwargs)</code>: Map an element over a collection
+  <div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.map</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="o">[</span><span class="s2">&quot;Click&quot;</span><span class="o">,</span> <span class="s2">&quot;Press&quot;</span><span class="o">,</span> <span class="s2">&quot;Push&quot;</span><span class="o">],</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div></li>
 <li><code>ui.util.now()</code>: Get the current UTC datetime</li>
-<li><code>ui.util.id(value, prefix="id-")</code>: Generate a unique identifier</li>
-<li><code>ui.util.keep_item(category, key, value)</code>: Store items in UI storage</li>
-<li><code>ui.util.pop_items(category, key=None)</code>: Retrieve and remove items from UI storage</li>
+<li><code>ui.util.id(value, prefix="id-")</code>: Generate a unique identifier(if value is
+  empty) or transform value into stable UUID.</li>
+<li>
+<p><code>ui.util.tag(content, tag, **kwargs)</code>: Renders an arbitrary tag. Use it to
+  produce dynamic wrappers depending on condition. If tag name is empty, conent
+  will be printed as-is, without a wrapper.
+  <div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.tag</span><span class="o">(</span>
+    <span class="s2">&quot;Hello world&quot;</span><span class="o">,</span>
+    <span class="s2">&quot;span&quot;</span> <span class="k">if</span> <span class="nv">inline_tag</span> <span class="k">else</span> <span class="s2">&quot;div&quot;</span><span class="o">,</span>
+    <span class="nv">attrs</span><span class="o">={</span><span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;wrapper&quot;</span><span class="o">})</span> <span class="cp">}}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><code>ui.util.keep_item(category, key, value)</code>: Store items in UI storage. Similar
+  to <code>h.flash_success</code>, but for arbitrary data.</p>
+</li>
+<li><code>ui.util.pop_items(category, key=None)</code>: Retrieve and remove items from UI
+  storage. Similar to <code>h.get_flashed_messages</code>, but for arbitrary data.</li>
 </ul>
-<p>Example usage of utilities:</p>
-<div class="highlight"><pre><span></span><code>{%- macro button_group(items) -%}
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn-group&quot;</span><span class="p">&gt;</span>
-        {{ ui.util.map(ui.button, items) }}
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{%- endmacro %}
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">button_group</span><span class="o">(</span><span class="nv">items</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    &lt;div </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> class=&quot;btn-group&quot;&gt;</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.util.map</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="nv">items</span><span class="o">,</span> <span class="nv">on</span><span class="o">={</span><span class="s2">&quot;click&quot;</span><span class="o">:</span> <span class="s2">&quot;alert(42)&quot;</span><span class="o">})</span> <span class="cp">}}</span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 
-{# Using call with util.call #}
-{% call ui.util.call(ui.button, style=&quot;primary&quot;) %}
-    <span class="p">&lt;</span><span class="nt">i</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;icon&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">i</span><span class="p">&gt;</span>
-    Click me!
-{% endcall %}
+<span class="c">{# Using call with util.call #}</span>
+<span class="cp">{%</span> <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">,</span> <span class="nv">attrs</span><span class="o">={</span><span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="nv">ui.util.id</span><span class="o">()})</span> <span class="cp">%}</span>
+<span class="x">    &lt;i class=&quot;icon&quot;&gt;&lt;/i&gt;</span>
+<span class="x">    Click me!</span>
+<span class="cp">{%</span> <span class="k">endcall</span> <span class="cp">%}</span>
 </code></pre></div>
+</div>
 <h3 id="accessibility-considerations">Accessibility Considerations</h3>
 <p>When implementing theme components, ensure proper accessibility support by using appropriate ARIA attributes and semantic HTML:</p>
-<div class="highlight"><pre><span></span><code>{%- macro button(content, href, type=&quot;button&quot;, style=&quot;primary&quot;) -%}
-    {%- if href -%}
-        <span class="p">&lt;</span><span class="nt">a</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span>
-           <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ href }}&quot;</span>
-           <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-{{ style }}&quot;</span>
-           <span class="err">{%</span> <span class="na">if</span> <span class="na">not</span> <span class="na">kwargs</span><span class="err">.</span><span class="na">aria</span> <span class="err">%}</span><span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;{{ content }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="p">&gt;</span>
-            {{ content }}
-        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-    {%- else -%}
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span>
-                <span class="na">type</span><span class="o">=</span><span class="s">&quot;{{ type }}&quot;</span>
-                <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-{{ style }}&quot;</span>
-                <span class="err">{%</span> <span class="na">if</span> <span class="na">not</span> <span class="na">kwargs</span><span class="err">.</span><span class="na">aria</span> <span class="err">%}</span><span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;{{ content }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span><span class="p">&gt;</span>
-            {{ content }}
-        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-    {%- endif %}
-{%- endmacro %}
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">href</span> -<span class="cp">%}</span>
+<span class="x">        &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;aria&quot;</span><span class="o">:</span> <span class="o">{</span><span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="nv">content</span><span class="cp">}}</span><span class="x">) }}</span>
+<span class="x">           href=&quot;</span><span class="cp">{{</span> <span class="nv">href</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">           class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
+<span class="x">        &lt;/a&gt;</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">else</span> -<span class="cp">%}</span>
+<span class="x">        &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;aria&quot;</span><span class="o">:</span> <span class="o">{</span><span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="nv">content</span><span class="cp">}}</span><span class="x">) }}</span>
+<span class="x">                type=&quot;</span><span class="cp">{{</span> <span class="nv">type</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">                class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
+<span class="x">        &lt;/button&gt;</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 
-{%- macro input(content, name, id, label, value, required, placeholder, type=&quot;text&quot;, errors=[]) -%}
-    {%- set field_id = id or (&quot;field-&quot; ~ name) if name else ui.util.id() if label else &quot;&quot; -%}
-    {%- set error_id = ui.util.id() if errors -%}
-    {%- set help_id = ui.util.id() if content -%}
+<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">input</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">name</span><span class="o">,</span> <span class="nv">id</span><span class="o">,</span> <span class="nv">label</span><span class="o">,</span> <span class="nv">value</span><span class="o">,</span> <span class="nv">required</span><span class="o">,</span> <span class="nv">placeholder</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="o">,</span> <span class="nv">errors</span><span class="o">=[])</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">field_id</span> <span class="o">=</span> <span class="nv">id</span> <span class="k">or</span> <span class="o">(</span><span class="s2">&quot;field-&quot;</span> <span class="o">~</span> <span class="nv">name</span><span class="o">)</span> <span class="k">if</span> <span class="nv">name</span> <span class="k">else</span> <span class="nv">ui.util.id</span><span class="o">()</span> <span class="k">if</span> <span class="nv">label</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">error_id</span> <span class="o">=</span> <span class="nv">ui.util.id</span><span class="o">()</span> <span class="k">if</span> <span class="nv">errors</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">help_id</span> <span class="o">=</span> <span class="nv">ui.util.id</span><span class="o">()</span> <span class="k">if</span> <span class="nv">content</span> -<span class="cp">%}</span>
 
-    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-        {%- if label -%}
-            <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;{{ field_id }}&quot;</span><span class="p">&gt;</span>{{ label }}<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
-        {%- endif %}
-        {%- if content -%}
-            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;input-help&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;{{ help_id }}&quot;</span><span class="p">&gt;</span>{{ content }}<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-        {%- endif %}
-        <span class="p">&lt;</span><span class="nt">input</span>
-            <span class="err">{{</span> <span class="na">ui</span><span class="err">.</span><span class="na">util</span><span class="err">.</span><span class="na">attrs</span><span class="err">(</span><span class="na">kwargs</span><span class="err">)</span> <span class="err">}}</span>
-            <span class="na">type</span><span class="o">=</span><span class="s">&quot;{{ type }}&quot;</span>
-            <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">name</span> <span class="err">%}</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;{{ name }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-            <span class="na">id</span><span class="o">=</span><span class="s">&quot;{{ field_id }}&quot;</span>
-            <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">value</span> <span class="err">%}</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;{{ value }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-            <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">placeholder</span> <span class="err">%}</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;{{ placeholder }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-            <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">required</span> <span class="err">%}</span> <span class="na">required</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-            <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">content</span> <span class="err">%}</span> <span class="na">aria-describedby</span><span class="o">=</span><span class="s">&quot;{{ help_id }}&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-            <span class="err">{%</span><span class="na">-</span> <span class="na">if</span> <span class="na">errors</span> <span class="err">%}</span> <span class="na">aria-invalid</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="err">{%</span> <span class="na">endif</span> <span class="err">%}</span>
-        <span class="p">&gt;</span>
-        {%- if errors %}
-            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;{{ error_id }}&quot;</span><span class="p">&gt;</span>{{ ui.field_errors(errors) }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-        {%- endif %}
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-{%- endmacro %}
+<span class="x">    &lt;div&gt;</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">label</span> -<span class="cp">%}</span>
+<span class="x">            &lt;label for=&quot;</span><span class="cp">{{</span> <span class="nv">field_id</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">label</span> <span class="cp">}}</span><span class="x">&lt;/label&gt;</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">content</span> -<span class="cp">%}</span>
+<span class="x">            &lt;div class=&quot;input-help&quot; id=&quot;</span><span class="cp">{{</span> <span class="nv">help_id</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/div&gt;</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">        &lt;input</span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="x">            type=&quot;</span><span class="cp">{{</span> <span class="nv">type</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">            </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">name</span> <span class="cp">%}</span><span class="x"> name=&quot;</span><span class="cp">{{</span> <span class="nv">name</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">            id=&quot;</span><span class="cp">{{</span> <span class="nv">field_id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">            </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">value</span> <span class="cp">%}</span><span class="x"> value=&quot;</span><span class="cp">{{</span> <span class="nv">value</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">            </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">placeholder</span> <span class="cp">%}</span><span class="x"> placeholder=&quot;</span><span class="cp">{{</span> <span class="nv">placeholder</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">            </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">required</span> <span class="cp">%}</span><span class="x"> required</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">            </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x"> aria-describedby=&quot;</span><span class="cp">{{</span> <span class="nv">help_id</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">            </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">errors</span> <span class="cp">%}</span><span class="x"> aria-invalid=&quot;true&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">        &gt;</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">errors</span> <span class="cp">%}</span>
+<span class="x">            &lt;span id=&quot;</span><span class="cp">{{</span> <span class="nv">error_id</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">ui.field_errors</span><span class="o">(</span><span class="nv">errors</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;</span>
+<span class="x">        </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 </code></pre></div>
 <p>Use proper ARIA attributes (<code>aria-label</code>, <code>aria-describedby</code>, <code>aria-invalid</code>, <code>aria-hidden</code>, etc.), semantic HTML elements, and ensure keyboard navigation support.</p>
 <h2 id="using-ui-macros-in-templates">Using UI Macros in Templates</h2>
-<p>Once a theme is active, UI macros can be used in templates:</p>
+<p>Once a theme is activated by setting its name as a value for <code>ckan.ui.theme</code>
+config option, UI macros can be used in templates:</p>
 <div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.button</span><span class="o">(</span><span class="s2">&quot;Click Me&quot;</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="cp">{{</span> <span class="nv">ui.card</span><span class="o">(</span><span class="nv">title</span><span class="o">=</span><span class="s2">&quot;My Card&quot;</span><span class="o">,</span> <span class="nv">content</span><span class="o">=</span><span class="s2">&quot;Card content here&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">ui.card</span><span class="o">(</span><span class="s2">&quot;Card content here&quot;</span><span class="o">,</span> <span class="nv">title</span><span class="o">=</span><span class="s2">&quot;My Card&quot;</span><span class="o">)</span> <span class="cp">}}</span>
 <span class="cp">{{</span> <span class="nv">ui.alert</span><span class="o">(</span><span class="s2">&quot;Success message&quot;</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;success&quot;</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="cp">{{</span> <span class="nv">ui.link</span><span class="o">(</span><span class="s2">&quot;Visit CKAN&quot;</span><span class="o">,</span> <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://ckan.org&quot;</span><span class="o">,</span> <span class="nv">blank</span><span class="o">=</span><span class="kp">True</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">ui.link</span><span class="o">(</span><span class="s2">&quot;Visit CKAN&quot;</span><span class="o">,</span> <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://ckan.org&quot;</span><span class="o">,</span> <span class="nv">blank</span><span class="o">=</span><span class="kp">true</span><span class="o">)</span> <span class="cp">}}</span>
 </code></pre></div>
 <p>All parameters except for <code>content</code> must be passed to macro by name. This
 simplifies transition between themes, when macros expect different set of
@@ -1536,11 +1472,13 @@ ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"
 </code></pre></div>
 <h2 id="configuration">Configuration</h2>
 <p>To use a theme, configure it in your CKAN configuration:</p>
-<div class="highlight"><pre><span></span><code><span class="na">ckan.plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">... theming</span>
+<div class="highlight"><pre><span></span><code><span class="na">ckan.plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">... theming your_theme_plugin</span>
 <span class="na">ckan.ui.theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">your_theme</span>
 </code></pre></div>
 <h2 id="reference-implementation">Reference Implementation</h2>
-<p>The <code>bare</code> theme in this extension serves as a reference implementation showing the minimal structure needed for a theme. You can use it as a starting point for building your own themes by running:</p>
+<p>The <code>bare</code> theme in this extension serves as a reference implementation showing
+the minimal structure needed for a theme. It can be used as a starting point
+for building new themes by running:</p>
 <div class="highlight"><pre><span></span><code>ckan<span class="w"> </span>theme<span class="w"> </span>create<span class="w"> </span>mytheme
 </code></pre></div>
 <p>This creates a new theme based on the bare theme structure with all required components.</p>
