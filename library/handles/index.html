@@ -290,34 +290,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theming-parties/" class="md-nav__link">
+      <a href="../../theme/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Theming Parties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Standard Parameter Values
+    Creating CKAN Themes
     
   </span>
   
@@ -374,7 +352,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -391,14 +369,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -619,27 +597,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#panel-handle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Panel Handle
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#popover-handle" class="md-nav__link">
     <span class="md-ellipsis">
       Popover Handle
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tab-handle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tab Handle
     </span>
   </a>
   
@@ -783,12 +743,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theme/" class="md-nav__link">
+      <a href="../../parameters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Creating CKAN Themes
+    Standard Parameter Values
     
   </span>
   
@@ -811,6 +771,28 @@
   
   <span class="md-ellipsis">
     CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theming-parties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Theming Parties
     
   </span>
   
@@ -865,27 +847,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#panel-handle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Panel Handle
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#popover-handle" class="md-nav__link">
     <span class="md-ellipsis">
       Popover Handle
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tab-handle" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tab Handle
     </span>
   </a>
   
@@ -912,10 +876,10 @@
 
 <h1 id="handles">Handles</h1>
 <p>Handle components are interactive elements that allow users to control other UI
-components. They typically trigger actions like opening modals, expanding
-panels, or showing popovers. These components work in close relationship with
-their target components - for example, <a class="autorefs autorefs-internal" title="Modal Handle" href="#modal-handle"><code>modal_handle</code></a> components work with
-<a class="autorefs autorefs-internal" title="Modal" href="../feedback/#modal"><code>modal</code></a> components, and <a class="autorefs autorefs-internal" title="Panel Handle" href="#panel-handle"><code>panel_handle</code></a> components work with <a class="autorefs autorefs-internal" title="Panel" href="../containers/#panel"><code>panel</code></a> components.</p>
+components. They typically trigger actions like opening modals, or showing
+popovers. These components work in close relationship with their target
+components - for example, <a class="autorefs autorefs-internal" title="Modal Handle" href="#modal-handle"><code>modal_handle</code></a> components work with
+<a class="autorefs autorefs-internal" title="Modal" href="../feedback/#modal"><code>modal</code></a> components.</p>
 <h2 id="modal-close-handle">Modal Close Handle</h2>
 <p>The <a class="autorefs autorefs-internal" title="Modal Close Handle" href="#modal-close-handle"><code>modal_close_handle</code></a> component provides interactive
 elements specifically designed for closing modal dialogs. This component
@@ -957,37 +921,6 @@ works closely with <a class="autorefs autorefs-internal" title="Modal" href="../
 to create complete modal experiences. While the handle provides the trigger
 mechanism, the modal provides the content container.</p>
 </div>
-<h2 id="panel-handle">Panel Handle</h2>
-<p>The <a class="autorefs autorefs-internal" title="Panel Handle" href="#panel-handle"><code>panel_handle</code></a> component provides interactive elements for
-controlling panel components, typically serving as the clickable area that
-switches between different panels. Panel handles are essential for tab-like
-interfaces where only one panel is visible at a time.</p>
-<p>Panel handles create the user interface for switching panel visibility, often
-displaying indicators about the current state and providing clear visual
-feedback when interacted with. The component ensures proper accessibility
-attributes and keyboard navigation support, making panel controls usable for
-all users. It works with <a class="autorefs autorefs-internal" title="Panel" href="../containers/#panel"><code>panel</code></a> and <a class="autorefs autorefs-internal" title="Panel Wrapper" href="../wrappers/#panel-wrapper"><code>panel_wrapper</code></a>
-components to create complete panel switching experiences.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic panel handle --&gt;
-{{ ui.panel_handle(&quot;Switch to Panel 1&quot;, id=&quot;panel-1&quot;) }}
-{{ ui.panel_handle(&quot;Switch to Panel 2&quot;, id=&quot;panel-2&quot;) }}
-
-&lt;!-- Panel handle with attributes --&gt;
-{% call ui.util.call(ui.panel_wrapper) %}
-    {{ ui.panel(&quot;First panel&quot;, id=&quot;panel-1&quot;, active=true) }}
-    {{ ui.panel(&quot;Second panel&quot;, id=&quot;panel-2&quot;) }}
-{% endcall %}
-</code></pre></div>
-</div>
-<div class="admonition info">
-<p class="admonition-title">Relationship</p>
-<p>The <a class="autorefs autorefs-internal" title="Panel Handle" href="#panel-handle"><code>panel_handle</code></a> component works with <a class="autorefs autorefs-internal" title="Panel" href="../containers/#panel"><code>panel</code></a> and
-<a class="autorefs autorefs-internal" title="Panel Wrapper" href="../wrappers/#panel-wrapper"><code>panel_wrapper</code></a> components to create switching panel
-experiences. While the panel provides the content container, the handle
-provides the switching mechanism.</p>
-</div>
 <h2 id="popover-handle">Popover Handle</h2>
 <p>The <a class="autorefs autorefs-internal" title="Popover Handle" href="#popover-handle"><code>popover_handle</code></a> component provides interactive elements
 that trigger the display of popover content. This component creates the
@@ -1011,70 +944,6 @@ experiences.</p>
 components to create contextual information displays. While the handle provides
 the trigger mechanism, the popover provides the content container.</p>
 </div>
-<h2 id="tab-handle">Tab Handle</h2>
-<p>The <a class="autorefs autorefs-internal" title="Tab Handle" href="#tab-handle"><code>tab_handle</code></a> component creates tab navigation handles that
-allow users to switch between different content sections within the same
-page. Tab handles are essential for organizing related content in a
-space-efficient manner while maintaining clear navigation between different
-sections.</p>
-<p>Tab handle components handle active state indication, visual styling, and
-accessibility attributes to ensure tab navigation is both visually clear and
-functionally accessible. They work with tab content areas to create complete
-tabbed interface experiences, allowing users to switch between different views
-or aspects of related content without leaving the current page.</p>
-<div class="admonition info">
-<p class="admonition-title">Relationship</p>
-<p>The <a class="autorefs autorefs-internal" title="Tab Handle" href="#tab-handle"><code>tab_handle</code></a> component works with tab content areas to create
-complete tabbed interface experiences. While tab handles provide the navigation
-mechanism, the content areas provide the display for different sections.</p>
-</div>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic tab handle --&gt;
-{{ ui.tab_handle(&quot;Tab 1&quot;, href=&quot;/tab1&quot;) }}
-
-&lt;!-- Active tab handle --&gt;
-{{ ui.tab_handle(&quot;Tab 2&quot;, href=&quot;/tab2&quot;, active=true) }}
-</code></pre></div>
-</div>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>string</td>
-<td>-</td>
-<td>The text to display in the tab handle.</td>
-</tr>
-<tr>
-<td><code>href</code></td>
-<td>string</td>
-<td>-</td>
-<td>The URL that the tab links to.</td>
-</tr>
-<tr>
-<td><code>active</code></td>
-<td>bool</td>
-<td>-</td>
-<td>Whether the tab is currently active/selected.</td>
-</tr>
-</tbody>
-</table>
-<details class="tip">
-<summary>Theme-Specific Parameters</summary>
-<p>Different themes may support additional parameters for styling and behavior:</p>
-<ul>
-<li><code>disabled</code> (bool): Whether the tab is disabled</li>
-<li><code>icon</code> (string): Icon to display with the tab</li>
-</ul>
-</details>
 
 
 

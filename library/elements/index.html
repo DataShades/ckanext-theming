@@ -290,34 +290,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theming-parties/" class="md-nav__link">
+      <a href="../../theme/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Theming Parties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Standard Parameter Values
+    Creating CKAN Themes
     
   </span>
   
@@ -374,7 +352,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -391,14 +369,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -631,9 +609,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
+  <a href="#tab" class="md-nav__link">
     <span class="md-ellipsis">
-      Text
+      Tab
     </span>
   </a>
   
@@ -855,12 +833,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theme/" class="md-nav__link">
+      <a href="../../parameters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Creating CKAN Themes
+    Standard Parameter Values
     
   </span>
   
@@ -883,6 +861,28 @@
   
   <span class="md-ellipsis">
     CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theming-parties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Theming Parties
     
   </span>
   
@@ -1018,9 +1018,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
+  <a href="#tab" class="md-nav__link">
     <span class="md-ellipsis">
-      Text
+      Tab
     </span>
   </a>
   
@@ -1675,15 +1675,29 @@ maintaining readability and appropriate spacing for tag collections.</p>
 {{ ui.tag(&quot;Government&quot;, href=&quot;/dataset?tags=government&quot;) }}
 </code></pre></div>
 </div>
-<h2 id="text">Text</h2>
-<p>The <a class="autorefs autorefs-internal" title="Text" href="#text"><code>text</code></a> component handles text content elements, providing consistent
-styling and formatting for various types of textual content. This component
-ensures that text elements maintain appropriate typography, spacing, and
-readability across different contexts and themes.</p>
-<p>Text components can handle various text styles including paragraphs, emphasized
-text, code blocks, and other text formatting needs. The component ensures
-proper line heights, font sizes, and spacing to maintain readability while
-adapting to different content requirements and design contexts.</p>
+<h2 id="tab">Tab</h2>
+<p>The <a class="autorefs autorefs-internal" title="Tab" href="#tab"><code>tab</code></a> component creates tab navigation handles that allow users to
+switch between different content sections within the same page. Tabs are
+essential for organizing related content in a space-efficient manner while
+maintaining clear navigation between different sections.</p>
+<p>Tab components handle active state indication, visual styling, and
+accessibility attributes to ensure tab navigation is both visually clear and
+functionally accessible.</p>
+<div class="admonition info">
+<p class="admonition-title">Relationship</p>
+<p>The <a class="autorefs autorefs-internal" title="Tab" href="#tab"><code>tab</code></a> component works with tab content areas to create
+complete tabbed interface experiences. While tabs provide the navigation
+mechanism, the content areas provide the display for different sections.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Usage Example</p>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic tab --&gt;
+{{ ui.tab(&quot;Tab 1&quot;, href=&quot;/tab1&quot;) }}
+
+&lt;!-- Active tab --&gt;
+{{ ui.tab(&quot;Tab 2&quot;, href=&quot;/tab2&quot;, active=true) }}
+</code></pre></div>
+</div>
 <table>
 <thead>
 <tr>
@@ -1698,22 +1712,30 @@ adapting to different content requirements and design contexts.</p>
 <td><code>content</code></td>
 <td>string</td>
 <td>-</td>
-<td>The text content to display.</td>
+<td>The text to display in the tab.</td>
+</tr>
+<tr>
+<td><code>href</code></td>
+<td>string</td>
+<td>-</td>
+<td>The URL that the tab links to.</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>bool</td>
+<td>-</td>
+<td>Whether the tab is currently active/selected.</td>
 </tr>
 </tbody>
 </table>
 <details class="tip">
 <summary>Theme-Specific Parameters</summary>
+<p>Different themes may support additional parameters for styling and behavior:</p>
 <ul>
-<li><code>align</code> (string): Text alignment (e.g., "left", "center", "right")</li>
+<li><code>disabled</code> (bool): Whether the tab is disabled</li>
+<li><code>icon</code> (string): Icon to display with the tab</li>
 </ul>
 </details>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic text --&gt;
-{{ ui.text(&quot;This is a paragraph of text.&quot;) }}
-</code></pre></div>
-</div>
 <h2 id="video">Video</h2>
 <p>The <a class="autorefs autorefs-internal" title="Video" href="#video"><code>video</code></a> component displays video content with appropriate handling for
 different video formats, responsive sizing, and accessibility features. Video

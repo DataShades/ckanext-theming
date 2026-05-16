@@ -290,34 +290,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theming-parties/" class="md-nav__link">
+      <a href="../../theme/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Theming Parties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Standard Parameter Values
+    Creating CKAN Themes
     
   </span>
   
@@ -374,7 +352,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -391,14 +369,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -590,15 +568,6 @@
   <a href="#extra-field" class="md-nav__link">
     <span class="md-ellipsis">
       Extra Field
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extra-field-multiplicator" class="md-nav__link">
-    <span class="md-ellipsis">
-      Extra Field Multiplicator
     </span>
   </a>
   
@@ -927,12 +896,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theme/" class="md-nav__link">
+      <a href="../../parameters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Creating CKAN Themes
+    Standard Parameter Values
     
   </span>
   
@@ -955,6 +924,28 @@
   
   <span class="md-ellipsis">
     CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theming-parties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Theming Parties
     
   </span>
   
@@ -1003,15 +994,6 @@
   <a href="#extra-field" class="md-nav__link">
     <span class="md-ellipsis">
       Extra Field
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extra-field-multiplicator" class="md-nav__link">
-    <span class="md-ellipsis">
-      Extra Field Multiplicator
     </span>
   </a>
   
@@ -1230,9 +1212,8 @@ can be dynamically added to forms. This component is particularly useful for
 forms where users might need to add custom metadata, tags, or other variable
 information that isn't part of the standard form structure.</p>
 <p>Extra field components provide flexibility for forms that need to accommodate
-varying amounts of information. They often work with
-<a class="autorefs autorefs-internal" title="Extra Field Multiplicator" href="#extra-field-multiplicator"><code>extra_field_multiplicator</code></a> and
-<a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> components to create
+varying amounts of information. They normally work with
+<a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> component to create
 dynamic form experiences where users can add as many fields as needed.</p>
 <div class="admonition example">
 <p class="admonition-title">Usage Example</p>
@@ -1283,68 +1264,10 @@ dynamic form experiences where users can add as many fields as needed.</p>
 <div class="admonition info">
 <p class="admonition-title">Relationship</p>
 <p>The <a class="autorefs autorefs-internal" title="Extra Field" href="#extra-field"><code>extra_field</code></a> component works with
-<a class="autorefs autorefs-internal" title="Extra Field Multiplicator" href="#extra-field-multiplicator"><code>extra_field_multiplicator</code></a> and
-<a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> components to create
+<a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> component to create
 dynamic form experiences. While individual extra fields provide the input
 structure, the other components handle the dynamic addition and collection of
 fields.</p>
-</div>
-<h2 id="extra-field-multiplicator">Extra Field Multiplicator</h2>
-<p>The <a class="autorefs autorefs-internal" title="Extra Field Multiplicator" href="#extra-field-multiplicator"><code>extra_field_multiplicator</code></a> component provides
-tools for adding multiple extra fields to forms dynamically. This component
-creates the interface elements that allow users to add additional fields as
-needed, typically through an "Add Field" button or similar control.</p>
-<p>The multiplicator component handles the JavaScript functionality needed to add
-new field instances while maintaining proper form structure and validation. It
-ensures that each new field has unique identifiers and proper naming
-conventions for form processing.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic extra field multiplicator --&gt;
-{{ ui.extra_field_multiplicator(index=2) }}
-
-&lt;!-- Extra field multiplicator with label --&gt;
-{{ ui.extra_field_multiplicator(index=3, label=&quot;Add Another Field&quot;) }}
-</code></pre></div>
-</div>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>index</code></td>
-<td>int</td>
-<td>-</td>
-<td>Index position for the next field to be added.</td>
-</tr>
-<tr>
-<td><code>label</code></td>
-<td>string</td>
-<td>"Add Field"</td>
-<td>Label text for the add button.</td>
-</tr>
-</tbody>
-</table>
-<details class="tip">
-<summary>Theme-Specific Parameters</summary>
-<ul>
-<li><code>style</code> (string): Style variant (e.g., "primary", "secondary")</li>
-<li><code>icon</code> (string): Icon to display with the button</li>
-</ul>
-</details>
-<div class="admonition info">
-<p class="admonition-title">Relationship</p>
-<p>The <a class="autorefs autorefs-internal" title="Extra Field Multiplicator" href="#extra-field-multiplicator"><code>extra_field_multiplicator</code></a> component works
-with <a class="autorefs autorefs-internal" title="Extra Field" href="#extra-field"><code>extra_field</code></a> and
-<a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> components to create
-dynamic form experiences. The multiplicator provides the addition mechanism,
-while the other components provide the field structure and collection handling.</p>
 </div>
 <h2 id="extra-fields-collection">Extra Fields Collection</h2>
 <p>The <a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> component manages
@@ -1398,10 +1321,8 @@ cohesive dynamic form experiences.</p>
 <div class="admonition info">
 <p class="admonition-title">Relationship</p>
 <p>The <a class="autorefs autorefs-internal" title="Extra Fields Collection" href="#extra-fields-collection"><code>extra_fields_collection</code></a> component works with
-<a class="autorefs autorefs-internal" title="Extra Field" href="#extra-field"><code>extra_field</code></a> and
-<a class="autorefs autorefs-internal" title="Extra Field Multiplicator" href="#extra-field-multiplicator"><code>extra_field_multiplicator</code></a> components to manage
-dynamic form fields. The collection provides the container structure for all
-extra fields.</p>
+<a class="autorefs autorefs-internal" title="Extra Field" href="#extra-field"><code>extra_field</code></a> component to manage dynamic form fields. The
+collection provides the container structure for all extra fields.</p>
 </div>
 <h2 id="field-errors">Field Errors</h2>
 <p>The <a class="autorefs autorefs-internal" title="Field Errors" href="#field-errors"><code>field_errors</code></a> component displays field-specific error

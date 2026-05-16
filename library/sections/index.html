@@ -290,34 +290,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theming-parties/" class="md-nav__link">
+      <a href="../../theme/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Theming Parties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Standard Parameter Values
+    Creating CKAN Themes
     
   </span>
   
@@ -374,7 +352,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -391,14 +369,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -765,12 +743,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theme/" class="md-nav__link">
+      <a href="../../parameters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Creating CKAN Themes
+    Standard Parameter Values
     
   </span>
   
@@ -793,6 +771,28 @@
   
   <span class="md-ellipsis">
     CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theming-parties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Theming Parties
     
   </span>
   
@@ -896,7 +896,7 @@ interface.</p>
 <p class="admonition-title">Usage Example</p>
 <div class="highlight"><pre><span></span><code>&lt;!-- Basic facet section --&gt;
 {% call ui.util.call(ui.facet_section, title=&quot;Organization&quot;) %}
-    {% call ui.util.call(ui.facet_wrapper, title=&quot;Organization&quot;) %}
+    {% call ui.util.call(ui.facet_list, title=&quot;Organization&quot;) %}
         {{ ui.facet(&quot;Government&quot;, key=&quot;org&quot;, value=&quot;gov&quot;, count=15) }}
     {% endcall %}
 {% endcall %}
@@ -905,7 +905,7 @@ interface.</p>
 <div class="admonition info">
 <p class="admonition-title">Relationship</p>
 <p>The <a class="autorefs autorefs-internal" title="Facet Section" href="#facet-section"><code>facet_section</code></a> component works with <a class="autorefs autorefs-internal" title="Facet" href="../content/#facet"><code>facet</code></a> and
-<a class="autorefs autorefs-internal" title="Facet Wrapper" href="../wrappers/#facet-wrapper"><code>facet_wrapper</code></a> components to create comprehensive filtering
+[<code>facet_list</code>][facet-list] components to create comprehensive filtering
 interfaces. While facet sections provide the structural grouping, individual
 facets provide the specific filter options.</p>
 </div>

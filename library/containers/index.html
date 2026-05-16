@@ -290,34 +290,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theming-parties/" class="md-nav__link">
+      <a href="../../theme/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Theming Parties
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../parameters/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Standard Parameter Values
+    Creating CKAN Themes
     
   </span>
   
@@ -374,7 +352,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
@@ -391,14 +369,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -508,6 +486,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dropdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dropdown
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#grid" class="md-nav__link">
     <span class="md-ellipsis">
       Grid
@@ -529,15 +516,6 @@
   <a href="#list-item" class="md-nav__link">
     <span class="md-ellipsis">
       List Item
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#panel" class="md-nav__link">
-    <span class="md-ellipsis">
-      Panel
     </span>
   </a>
   
@@ -819,12 +797,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theme/" class="md-nav__link">
+      <a href="../../parameters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Creating CKAN Themes
+    Standard Parameter Values
     
   </span>
   
@@ -847,6 +825,28 @@
   
   <span class="md-ellipsis">
     CLI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theming-parties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Theming Parties
     
   </span>
   
@@ -928,6 +928,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dropdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dropdown
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#grid" class="md-nav__link">
     <span class="md-ellipsis">
       Grid
@@ -949,15 +958,6 @@
   <a href="#list-item" class="md-nav__link">
     <span class="md-ellipsis">
       List Item
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#panel" class="md-nav__link">
-    <span class="md-ellipsis">
-      Panel
     </span>
   </a>
   
@@ -1309,6 +1309,20 @@ framework.</p>
 <li><code>gutter</code> (string): Gutter size for responsive spacing</li>
 </ul>
 </details>
+<h2 id="dropdown">Dropdown</h2>
+<p>The <a class="autorefs autorefs-internal" title="Dropdown" href="#dropdown"><code>dropdown</code></a> component provides the structural
+foundation for dropdown menus. It ensures proper positioning, styling, and
+behavior for dropdown components. This wrapper works with dropdown-related
+components to create consistent menu experiences across different themes.</p>
+<div class="admonition example">
+<p class="admonition-title">Usage Example</p>
+<div class="highlight"><pre><span></span><code>&lt;!-- Basic dropdown --&gt;
+{% call ui.util.call(ui.dropdown, title=&quot;Dropdown&quot;) %}
+    {{ ui.dropdown_item(&quot;Option 1&quot;, href=&quot;/option1&quot;) }}
+    {{ ui.dropdown_item(&quot;Option 2&quot;, href=&quot;/option2&quot;) }}
+{% endcall %}
+</code></pre></div>
+</div>
 <h2 id="grid">Grid</h2>
 <p>The <a class="autorefs autorefs-internal" title="Grid" href="#grid"><code>grid</code></a> component creates structured grid layouts that organize content
 in rows and columns. It works with <a class="autorefs autorefs-internal" title="Column" href="#column"><code>column</code></a> components to define the
@@ -1469,81 +1483,6 @@ within the broader list structure.</p>
 <p>The <a class="autorefs autorefs-internal" title="List Item" href="#list-item"><code>list_item</code></a> component works within <a class="autorefs autorefs-internal" title="List" href="#list"><code>list</code></a> components to
 create structured lists. While the list provides the container, individual list
 items provide the content elements within that container.</p>
-</div>
-<h2 id="panel">Panel</h2>
-<p>The <a class="autorefs autorefs-internal" title="Panel" href="#panel"><code>panel</code></a> component creates content containers that can be switched
-between using <a class="autorefs autorefs-internal" title="Panel Handle" href="../handles/#panel-handle"><code>panel_handle</code></a> components. Unlike accordions
-which are visually collapsible, panels are completely hidden when not active
-and only one panel is typically visible at a time. This makes them ideal for
-tab-like interfaces where users can switch between different content sections
-or drawers with tools.</p>
-<p>Panels are useful for organizing related content in a way that maximizes space
-efficiency while allowing users to focus on one section at a time. The
-component works with <a class="autorefs autorefs-internal" title="Panel Handle" href="../handles/#panel-handle"><code>panel_handle</code></a> components to provide the
-switching mechanism and <a class="autorefs autorefs-internal" title="Panel Wrapper" href="../wrappers/#panel-wrapper"><code>panel_wrapper</code></a> to provide the
-container structure for multiple panels.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic panel --&gt;
-{{ ui.panel_handle(&quot;Show #1&quot;, id=&quot;panel-1&quot;) }}
-{{ ui.panel_handle(&quot;Show #2&quot;, id=&quot;panel-2&quot;) }}
-
-{%- call ui.util.call(ui.panel_wrapper) -%}
-    {{ ui.panel(&quot;Panel #1 content goes here&quot;, id=&quot;panel-1&quot;) }}
-    {{ ui.panel(&quot;Panel #2 content goes here&quot;, id=&quot;panel-2&quot;) }}
-{%- endcall %}
-
-
-&lt;!-- Active panel --&gt;
-{%- call ui.util.call(ui.panel_wrapper) -%}
-    {{ ui.panel(&quot;Visible panel content&quot;, id=&quot;panel-2&quot;, active=true) }}
-    {{ ui.panel(&quot;Hidden panel content&quot;, id=&quot;panel-2&quot;) }}
-{%- endcall %}
-</code></pre></div>
-</div>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>string</td>
-<td>-</td>
-<td>The content to display in the panel.</td>
-</tr>
-<tr>
-<td><code>id</code></td>
-<td>string</td>
-<td>-</td>
-<td>Unique identifier for the panel.</td>
-</tr>
-<tr>
-<td><code>active</code></td>
-<td>bool</td>
-<td>-</td>
-<td>Whether the panel is active/visible by default.</td>
-</tr>
-</tbody>
-</table>
-<details class="tip">
-<summary>Theme-Specific Parameters</summary>
-<ul>
-<li><code>collapsible</code> (bool): Whether the panel can be collapsed (vs. switched)</li>
-<li><code>outline</code> (bool): Whether to use outline style</li>
-</ul>
-</details>
-<div class="admonition info">
-<p class="admonition-title">Relationship</p>
-<p>The <a class="autorefs autorefs-internal" title="Panel" href="#panel"><code>panel</code></a> component works with <a class="autorefs autorefs-internal" title="Panel Wrapper" href="../wrappers/#panel-wrapper"><code>panel_wrapper</code></a> and
-<a class="autorefs autorefs-internal" title="Panel Handle" href="../handles/#panel-handle"><code>panel_handle</code></a> components to create tab-like switching
-experiences. The panel provides the content structure, the wrapper provides the
-container for multiple panels, and the handle provides the switching mechanism.</p>
 </div>
 
 
