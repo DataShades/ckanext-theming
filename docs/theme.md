@@ -266,7 +266,7 @@ The theming system provides utility functions accessible via `ui.util`:
   specify default attributes, that user can override during macro call:
   ```django
   {% macro button(content) %}
-      <button {{ ui.util.attrs(kwargs, {"attrs": {"class": "btn"}}) }}>
+      <button {{ ui.util.attrs(kwargs, {"class": "btn"}) }}>
           {{ content }}
       </button>
   {% endmacro %}
@@ -327,13 +327,13 @@ When implementing theme components, ensure proper accessibility support by using
 ```django
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs, {"aria": {"label": content}}) }}
+        <a {{ ui.util.attrs(kwargs, {"aria-label": content}) }}
            href="{{ href }}"
            class="btn btn-{{ style }}">
             {{ content }}
         </a>
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs, {"aria": {"label": content}}) }}
+        <button {{ ui.util.attrs(kwargs, {"aria-label": content}) }}
                 type="{{ type }}"
                 class="btn btn-{{ style }}">
             {{ content }}

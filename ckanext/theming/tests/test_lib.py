@@ -47,17 +47,17 @@ class TestUtilAttrs:
 
     def test_with_defaults(self, util: lib.Util):
         """Attrs method includes default attributes."""
-        result = util.attrs({"attrs": {"hello": "world"}}, {"attrs": {"class": "my-class"}})
+        result = util.attrs({"attrs": {"hello": "world"}}, {"class": "my-class"})
         assert sorted(result.split()) == ['class="my-class"', 'hello="world"']
 
     def test_with_defaults_override(self, util: lib.Util):
         """Attrs method overrides default attributes."""
-        result = util.attrs({"attrs": {"class": "my-class"}}, {"attrs": {"class": "default-class"}})
+        result = util.attrs({"attrs": {"class": "my-class"}}, {"class": "default-class"})
         assert result == 'class="my-class"'
 
     def test_with_only_defaults(self, util: lib.Util):
         """Attrs method works with only default attributes."""
-        result = util.attrs({}, {"attrs": {"class": "default-class"}})
+        result = util.attrs({}, {"class": "default-class"})
         assert result == 'class="default-class"'
 
     def test_with_empty_defaults(self, util: lib.Util):
@@ -67,7 +67,7 @@ class TestUtilAttrs:
 
     def test_with_extra_classes(self, util: lib.Util):
         """Attrs method combines extra classes with existing class attribute."""
-        result = util.attrs({"_extra_class": "my-class"}, {"attrs": {"class": "existing-class"}})
+        result = util.attrs({"_extra_class": "my-class"}, {"class": "existing-class"})
         assert result == 'class="existing-class my-class"'
 
     def test_prefixes(self, util: lib.Util):

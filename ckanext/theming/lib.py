@@ -58,7 +58,6 @@ class Util:
         ("data", "data-"),
         ("on", "on"),
         ("hx", "hx-"),
-        ("attrs", ""),
     ]
 
     def _escape_attr_value(self, value: str) -> str:
@@ -76,9 +75,9 @@ class Util:
         dictionaries, giving precedence to the provided attributes, and renders
         them as a string of HTML attributes.
 
-        If attributes contain an "_extra_class" key, its value is appended to
-        the "class" attribute. In this way additional classes can be added to
-        the list of default classes provided by component. Example:
+        If kwargs contain an "_extra_class" key, its value is appended to the
+        "class" attribute. In this way additional classes can be added to the
+        list of default classes provided by component. Example:
 
             # definition
             {% macro button(content, **kwargs) %}
@@ -99,19 +98,22 @@ class Util:
         """
         if not kwargs and not defaults:
             return ""
-        if defaults is None:
-            defaults = {}
+        defaults = {} if defaults is None else defaults.copy()
 
-        parts = []
+        defaults.update(kwargs.get("attrs", {}))
+
         for key, prefix in self._attr_groups:
-            base = defaults.get(key, {})
-            base.update(kwargs.get(key, {}))
-            if not base:
+            group = kwargs.get(key, {})
+            if not group:
                 continue
-            extra_class: str | None
-            if key == "attrs" and (extra_class := kwargs.get("_extra_class")):
-                base["class"] = " ".join([base.get("class", ""), extra_class])
-            parts.append(" ".join(f'{prefix}{k}="{self._escape_attr_value(str(v))}"' for k, v in base.items()))
+
+            for k, v in group.items():
+                defaults[f"{prefix}{k}"] = v
+
+        if extra_class := kwargs.get("_extra_class"):
+            defaults["class"] = " ".join([defaults.get("class", ""), extra_class])
+
+        parts = [f'{k}="{self._escape_attr_value(str(v))}"' for k, v in defaults.items()]
 
         return h.literal(" ".join(parts)) if parts else ""
 
