@@ -126,9 +126,9 @@ components.update(
         "tab": Component(Category.RECOMMENDED),
         "video": Component(Category.RECOMMENDED),
         # data ################################################################
-        "chart": Component(Category.RECOMMENDED),
+        "chart": Component(Category.UNSTABLE),
         "code": Component(Category.RECOMMENDED),
-        "definition_list": Component(Category.RECOMMENDED),
+        "definition_list": Component(Category.UNSTABLE),
         "table": Component(Category.ESSENTIAL),
         "table_body": Component(Category.RECOMMENDED),
         "table_cell": Component(Category.RECOMMENDED),
