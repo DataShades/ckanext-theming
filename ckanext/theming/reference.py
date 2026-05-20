@@ -13,6 +13,7 @@ from typing import Any
 class Category(enum.Enum):
     ESSENTIAL = enum.auto()
     RECOMMENDED = enum.auto()
+    UNSTABLE = enum.auto()
     CUSTOM = enum.auto()
 
 
@@ -89,11 +90,11 @@ components.update(
         "accordion": Component(Category.ESSENTIAL),
         "button_group": Component(Category.ESSENTIAL),
         "card": Component(Category.RECOMMENDED),
-        "column": Component(Category.RECOMMENDED),
-        "container": Component(Category.RECOMMENDED),
+        "column": Component(Category.UNSTABLE),
+        "container": Component(Category.UNSTABLE),
         "dropdown": Component(Category.ESSENTIAL),
-        "grid": Component(Category.RECOMMENDED),
-        "row": Component(Category.RECOMMENDED),
+        "grid": Component(Category.UNSTABLE),
+        "row": Component(Category.UNSTABLE),
         "list": Component(Category.ESSENTIAL),
         "list_item": Component(Category.ESSENTIAL),
         # sections ############################################################
@@ -123,7 +124,6 @@ components.update(
         "link": Component(Category.ESSENTIAL),
         "tag": Component(Category.ESSENTIAL),
         "tab": Component(Category.RECOMMENDED),
-        "text": Component(Category.ESSENTIAL),
         "video": Component(Category.RECOMMENDED),
         # data ################################################################
         "chart": Component(Category.RECOMMENDED),

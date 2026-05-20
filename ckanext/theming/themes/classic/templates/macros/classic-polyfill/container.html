@@ -1,0 +1,135 @@
+{%- macro activity_list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "activity"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
+
+{%- macro facet_list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "list-unstyled nav nav-simple nav-facet"}) }}>{{ content }}</ul>
+{%- endmacro %}
+
+{%- macro group_list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "media-grid", "data-module": "media-grid"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
+
+{%- macro organization_list(content) -%}
+    {{ ui.group_list(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro package_list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "dataset-list list-unstyled"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
+
+{%- macro resource_list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "resource-list"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
+
+{%- macro user_list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "user-list"}) }}>{{ content }}</ul>
+{%- endmacro %}
+
+{%- macro accordion(content, title, open) -%}
+    {%- set header_id = ui.util.id() -%}
+    {%- set id = ui.util.id() -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "accordion-item"}) }}>
+        <h2 class="accordion-header" id="{{ header_id }}">
+            <button class="accordion-button {{ 'collapsed' if not open }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ id }}" aria-expanded="{{ 'true' if open else 'false' }}" aria-controls="{{ id }}">
+                {{ title }}
+            </button>
+        </h2>
+        <div id="{{ id }}" class="accordion-collapse collapse {{ 'show' if open }}" aria-labelledby="{{ header_id }}" >
+            <div class="accordion-body">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro button_group(content, direction="row") -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "btn-group" ~ ("-vertical" if direction == "column" else "")}) }}>
+        {{- content -}}
+    </div>
+{%- endmacro %}
+
+{%- macro card(content, title, footer, img) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "card"}) }} >
+        {%- if img -%}
+            {{ ui.image(img, attrs={"class": "carg-img-top"}) }}
+        {%- endif %}
+        <div class="card-body">
+            {%- if title -%}
+                <h5 class="card-title">{{ title }}</h5>
+            {%- endif %}
+            {%- if content -%}
+                <div class="card-text">{{ content }}</div>
+            {%- endif %}
+        </div>
+        {%- if footer -%}
+            <div class="card-footer">{{ footer }}</div>
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content, span, offset) -%}
+    {%- set ns = namespace(class="col") -%}
+    {%- if span %}
+        {%- for breakpoint, size in span.items() %}
+            {%- set ns.class = ns.class ~ ' col-' ~ (""  if breakpoint == 'xs' else breakpoint ~ '-') ~ size -%}
+        {% endfor %}
+    {%- endif -%}
+
+    {%- if offset %}
+        {%- for breakpoint, size in offset.items() %}
+            {%- set ns.class = ns.class ~ ' offset-' ~ (""  if breakpoint == 'xs' else breakpoint ~ '-') ~ size -%}
+        {% endfor %}
+    {%- endif -%}
+
+    <div {{ ui.util.attrs(kwargs, {"class": ns.class}) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro container(content, fluid) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "container" ~ ('-fluid' if fluid else "")}) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro grid(content) -%}
+    {%- call ui.util.call(ui.container, **kwargs) -%}
+        {{ content }}
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro row(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "row"}) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro list(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "list-unstyled"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
+
+{%- macro list_item(content) -%}
+    <li {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </li>
+{%- endmacro %}
+
+{%- macro dropdown(content, title, inline, id, style="primary") -%}
+    {%- do kwargs.setdefault("data", {}).setdefault("bs-toggle", "dropdown") -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("id", ui.util.id()) -%}
+    {%- do kwargs.setdefault("aria", {}).setdefault("expanded", "false") -%}
+
+    <div class="dropdown {{ 'btn-group' if inline }}">
+        {{ ui.button(title, style=style ~ " dropdown-toggle", **kwargs) }}
+        <ul class="dropdown-menu" aria-labelledby="{{ kwargs.attrs.id }}">
+            {{ content }}
+        </ul>
+    </div>
+{%- endmacro %}

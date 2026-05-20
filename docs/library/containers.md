@@ -147,11 +147,11 @@ themes while maintaining the flexibility to accommodate various content types.
 | `title`   | string | -       | The title displayed in the card header. |
 | `footer`  | string | -       | Content for the card footer.            |
 | `img`     | string | -       | URL to an image to display in the card. |
-| `href`    | string | -       | URL to link the entire card to.         |
 
 /// details | Theme-Specific Parameters
     type: tip
 
+- `href` (string): URL to link the entire card to.
 - `style` (string): Style variant (e.g., "primary", "secondary", "outline")
 - `direction` (string): Stack image and content horizontally instead of vertically (e.g., "row", "column")
 - `size` (string): Size of the card (e.g., "sm", "lg")

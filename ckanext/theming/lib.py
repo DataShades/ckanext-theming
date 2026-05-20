@@ -26,7 +26,6 @@ from collections.abc import Iterable, Iterator
 from typing import Any, Protocol, cast
 
 from flask import current_app
-from jinja2 import Template
 from jinja2.runtime import Macro
 from markupsafe import Markup
 from typing_extensions import override
@@ -296,7 +295,7 @@ class UI(Iterable[str], abc.ABC):
 
         return self._inv[name]
 
-    def add_component(self, name: str, component: PElement):
+    def _add_component(self, name: str, component: PElement):
         """Add a new component to the UI inventory.
 
         :param name: The name of the component.
@@ -314,9 +313,8 @@ class MacroUI(UI):
     :param source: The path to the Jinja2 template containing the macros.
     """
 
-    _sources: list[str] = ["macros/ui.html"]
-
-    __templates: list[Template]
+    __sources: list[str]
+    _base_sources: list[str] = ["macros/ui.html"]
 
     @override
     def __init__(self, app: types.CKANApp, util: Util):
@@ -327,33 +325,30 @@ class MacroUI(UI):
 
         self.__env = app.jinja_env
 
-        sources = self._sources.copy()
+        sources = self._base_sources.copy()
         for plugin in p.PluginImplementations(ITheme):
             sources += plugin.get_additional_theme_ui_sources()
 
-        self.__templates = [self.__env.get_template(source) for source in sources]
+        self.__sources = sources
 
         self._fill_inventory()
 
     def _fill_inventory(self):
-        for tpl in self.__templates:
+        for tpl in (self.__env.get_template(source) for source in self.__sources):
             mod = tpl.module
             for name in dir(mod):
                 if name.startswith("_"):
                     continue
-                self.add_component(name, getattr(mod, name))
+                self._add_component(name, getattr(mod, name))
 
     @override
     def __getattr__(self, name: str):
         # reset macro cache at the beginning of the request in debug mode. This
-        # allows to edit UI macros without restarting the server. New macros
-        # are not detected in this way and still require restart.
-        # from icecream import ic
-        # ic(getattr(tk.g, "_ui_compiled", False))
+        # allows to edit UI macros without restarting the server.
 
         if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
-            for tpl in self.__templates:
-                tpl._module = tpl.make_module({})  # pyright: ignore[reportPrivateUsage]
+            for tpl in (self.__env.get_template(source) for source in self.__sources):
+                tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
 
             tk.g._ui_compiled = True
             self._fill_inventory()

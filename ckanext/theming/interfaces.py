@@ -58,7 +58,7 @@ class ITheme(Interface):
         Example::
 
             def patch_theme_ui(self, theme, ui):
-                ui.add_component("divider", lambda *args, **kwargs: Markup("<hr/>"))
+                ui._add_component("divider", lambda *args, **kwargs: Markup("<hr/>"))
 
         :param theme: The theme being built
         :type theme: :py:class:`~ckan.lib.theme.Theme`

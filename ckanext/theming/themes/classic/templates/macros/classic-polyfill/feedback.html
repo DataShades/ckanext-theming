@@ -1,0 +1,80 @@
+{%- macro alert(content, dismissible, style="info") -%}
+    {%- set style_class = style if style.startswith("alert-") else "alert-" ~ style -%}
+    {%- set class = "alert fade show " ~  ("alert-dismissible " if dismissible else "") ~ style_class -%}
+    <div {{ ui.util.attrs(kwargs, {"class": class, "role": "alert"}) }}>
+        {{ content }}
+        {%- if dismissible -%}
+            <button type="button" class="btn-close close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label, href) -%}
+    {%- if not form_id -%}
+        {% set form_id = ui.util.id() %}
+        {{ ui.form(method="POST", attrs={"id": form_id}, action=href) }}
+    {%- endif %}
+
+    {%- set close_button = ui.modal_close_handle(cancel_label or _("Close"), id=id, style="secondary") %}
+    {%- set confirm_button = ui.modal_close_handle(confirm_label or _("Confirm"), id=id, type="submit", attrs={"form": form_id}) %}
+
+    {%- call ui.util.call(ui.modal, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) -%}
+        {{ content }}
+    {%- endcall %}
+{%- endmacro %}
+
+{%- macro modal(content, title, footer, dismissible, id) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "modal fade"}) }} tabindex="-1" id="{{ id }}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                {%- if title or dismissible -%}
+                    <div class="modal-header">
+                        {%- if title -%}<h5 class="modal-title">{{ title }}</h5>{%- endif %}
+                        {%- if dismissible -%}
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        {%- endif %}
+                    </div>
+                {%- endif %}
+                <div class="modal-body">
+                    {{ content }}
+                </div>
+                {%- if footer -%}
+                    <div class="modal-footer">
+                        {{ footer }}
+                    </div>
+                {%- endif %}
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{%- macro popover(content, title, id) -%}
+    <div {{ ui.util.attrs(kwargs) }} popover id="{{ id }}" data-popover-title="{{ title }}">
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro progress(content, value=0, max=100) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "progress"}) }}>
+        <div class="progress-bar" style="width: {{ (value / max) * 100 }}%" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ max }}">
+            {%- if content %}{{ content }}{% else %}{{ value }} / {{ max }}{% endif %}
+        </div>
+    </div>
+{%- endmacro %}
+
+{%- macro spinner(size="md") -%}
+    <span {{ ui.util.attrs(kwargs, {"class": "spinner spinner-" ~ size}) }}></span>
+{%- endmacro %}
+
+{%- macro toast(message, style, dismissible, duration) -%}
+    <div {{ ui.util.attrs(kwargs) }}>
+        {{ message }}
+    </div>
+{%- endmacro %}
+
+{%- macro tooltip(content, tooltip, position) -%}
+    <span {{ ui.util.attrs(kwargs) }} data-bs-title="{{ tooltip }}" data-bs-toggle="tooltip">
+        {{- content -}}
+    </span>
+{%- endmacro %}
