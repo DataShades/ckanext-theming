@@ -348,9 +348,12 @@ class MacroUI(UI):
         # reset macro cache at the beginning of the request in debug mode. This
         # allows to edit UI macros without restarting the server. New macros
         # are not detected in this way and still require restart.
+        # from icecream import ic
+        # ic(getattr(tk.g, "_ui_compiled", False))
+
         if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
             for tpl in self.__templates:
-                tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
+                tpl._module = tpl.make_module({})  # pyright: ignore[reportPrivateUsage]
 
             tk.g._ui_compiled = True
             self._fill_inventory()
