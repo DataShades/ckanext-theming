@@ -30,7 +30,7 @@ def update_config(config: Any):
         enable_theme(theme, config)
 
 
-def make_middleware(app: types.CKANApp, config: Any) -> types.CKANApp:
+def make_middleware(app: types.CKANApp, config: Any) -> types.CKANApp:  # pyright: ignore[reportUnusedParameter]
     if hasattr(app, "jinja_env"):
         app.jinja_env.add_extension("jinja2.ext.debug")
         app.jinja_env.globals.update({"ui": cast(Any, ui)})

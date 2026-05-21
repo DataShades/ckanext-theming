@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from collections.abc import Iterable
 
 from ckan.plugins import Interface
 
-if TYPE_CHECKING:
-    from ckanext.theming.lib import UI, Theme
+from ckanext.theming.base import UI, BaseTheme
 
 
 class ITheme(Interface):
     """Allow extensions to provide custom themes for CKAN."""
 
-    def register_themes(self) -> list[Theme]:
+    def register_themes(self) -> Iterable[BaseTheme]:
         """Register themes provided by extension.
 
         Example::
@@ -48,7 +47,7 @@ class ITheme(Interface):
         """
         return []
 
-    def patch_theme_ui(self, theme: Theme, ui: UI):
+    def patch_theme_ui(self, theme: BaseTheme, ui: UI):  # pyright: ignore[reportUnusedParameter]
         """Customize the UI for a theme.
 
         This method is called for each theme UI instance is created via

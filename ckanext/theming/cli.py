@@ -70,7 +70,7 @@ def theme():
     pass
 
 
-def theme_callback(ctx: click.Context, param: click.Parameter, name: str | None):
+def theme_callback(ctx: click.Context, param: click.Parameter, name: str | None):  # pyright: ignore[reportUnusedParameter]
     if not name:
         name = tk.config["ckan.ui.theme"]
 
@@ -269,6 +269,9 @@ def template():
 def template_list(theme: lib.Theme):
     """List template files in the theme."""
     root = theme.template_path()
+    if not root:
+        tk.error_shout(f"{theme.name} does not register templates")
+        raise click.Abort
     for path, _, files in os.walk(root):
         relpath = os.path.relpath(path, root)
         if relpath == ".":
@@ -289,6 +292,9 @@ def template_check(theme: lib.Theme):
         categorized[info.category].add(name)
 
     root = theme.template_path()
+    if not root:
+        tk.error_shout(f"{theme.name} does not register templates")
+        raise click.Abort
     templates = {os.path.relpath(os.path.join(path, file), root) for path, _, files in os.walk(root) for file in files}
 
     click.echo(f"Theme contains {len(templates)} templates")
@@ -321,6 +327,9 @@ def template_analyze(  # noqa: C901
 ):
     """Analyze theme templates."""
     root = theme.template_path()
+    if not root:
+        tk.error_shout(f"{theme.name} does not register templates")
+        raise click.Abort
     if not templates:
         templates = {
             os.path.relpath(os.path.join(path, file), root) for path, _, files in os.walk(root) for file in files
@@ -499,7 +508,7 @@ class RenderInterceptionError(Exception):
 def _render_intercept(condition: Callable[[dict[str, Any]], bool] = lambda kwargs: True):
     """Create a Jinja2 render interceptor that raises an exception when a condition is met."""
 
-    def interceptor(sender: types.CKANApp, **kwargs: Any):
+    def interceptor(sender: types.CKANApp, **kwargs: Any):  # pyright: ignore[reportUnusedParameter]
         if condition(kwargs):
             raise RenderInterceptionError(kwargs)
 

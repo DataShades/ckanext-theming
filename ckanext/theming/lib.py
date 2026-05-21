@@ -15,7 +15,6 @@ Example usage::
 
 from __future__ import annotations
 
-import abc
 import dataclasses
 import datetime
 import logging
@@ -23,7 +22,7 @@ import os
 import uuid
 from collections import defaultdict
 from collections.abc import Iterable, Iterator
-from typing import Any, Protocol, cast
+from typing import Any, cast
 
 from flask import current_app
 from jinja2.runtime import Macro
@@ -38,6 +37,7 @@ from ckan.common import config
 from ckan.exceptions import CkanConfigurationException
 from ckan.lib.helpers import helper_functions as h
 
+from .base import UI, BaseTheme, BaseUtil, PElement
 from .interfaces import ITheme
 
 log = logging.getLogger(__name__)
@@ -45,11 +45,7 @@ log = logging.getLogger(__name__)
 NAMESPACE_UI = uuid.uuid5(uuid.NAMESPACE_OID, "ui")
 
 
-class PElement(Protocol):
-    def __call__(self, *args: Any, **kwargs: Any) -> Markup: ...
-
-
-class Util:
+class Util(BaseUtil):
     _storage_key: str = "ui_storage"
     _theme: Theme
     _attr_groups: list[tuple[str, str]] = [
@@ -63,10 +59,12 @@ class Util:
         """Escape a string for safe inclusion in HTML attributes."""
         return value.replace("&", "&amp;").replace('"', "&quot;")
 
+    @override
     def __init__(self, theme: Theme):
         self._theme = theme
 
-    def attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None):
+    @override
+    def attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None) -> str:
         """Helper method to render HTML attributes from a dictionary.
 
         This method takes a dictionary of attributes and their values, and an
@@ -97,7 +95,7 @@ class Util:
         """
         if not kwargs and not defaults:
             return ""
-        defaults = {} if defaults is None else defaults.copy()
+        defaults = {} if not defaults else defaults.copy()
 
         defaults.update(kwargs.get("attrs", {}))
 
@@ -116,7 +114,8 @@ class Util:
 
         return h.literal(" ".join(parts)) if parts else ""
 
-    def tag(self, content: str, tag: str, is_void: bool = False, /, **kwargs: Any):
+    @override
+    def tag(self, content: str, tag: str, is_void: bool = False, /, **kwargs: Any) -> str:
         """Helper method to render an HTML tag with the specified content, tag name, and attributes.
 
         Empty tag name will render content without any wrapper - this can be
@@ -143,6 +142,7 @@ class Util:
 
         return h.literal(f"<{tag} {attrs}>{content}</{tag}>")
 
+    @override
     def call(self, el: PElement, /, *args: Any, caller: Macro, **kwargs: Any) -> Markup:
         """Call an inline element as a block element.
 
@@ -168,6 +168,7 @@ class Util:
         """
         return el(caller(), *args, **kwargs)
 
+    @override
     def map(self, el: PElement, items: Iterable[Any], /, *args: Any, **kwargs: Any) -> Markup:
         """Map an element over a collection of items.
 
@@ -182,7 +183,8 @@ class Util:
         """
         return Markup().join(el(item, *args, **kwargs) for item in items)
 
-    def now(self, tz: datetime.timezone = datetime.timezone.utc):
+    @override
+    def now(self, tz: datetime.timezone = datetime.timezone.utc) -> datetime.datetime:
         """Get the current UTC datetime.
 
         :param tz: Timezone for the returned datetime. Defaults to UTC.
@@ -190,6 +192,7 @@ class Util:
         """
         return datetime.datetime.now(tz)
 
+    @override
     def id(self, value: str | None = None, prefix: str = "id-"):
         """Generate a unique identifier.
 
@@ -205,6 +208,7 @@ class Util:
         result = uuid.uuid5(NAMESPACE_UI, value) if value else uuid.uuid4()
         return f"{prefix}{result.hex}"
 
+    @override
     def keep_item(self, category: str, key: str, value: Any):
         """Keep an item in the UI storage under the specified category.
 
@@ -219,6 +223,7 @@ class Util:
         storage = tk.g.setdefault(self._storage_key, defaultdict(dict))
         storage[category][key] = value
 
+    @override
     def pop_items(
         self, category: str, key: str | None = None, default: Any = None, keep: bool = False
     ) -> dict[str, Any] | Any:
@@ -243,6 +248,7 @@ class Util:
 
         return items
 
+    @override
     def icon(self, name: str) -> str:
         """Normalize icon name.
 
@@ -259,51 +265,6 @@ class Util:
         return self._theme.icon_map.get(name, name)
 
 
-class UI(Iterable[str], abc.ABC):
-    """Abstract base class for theme UIs.
-
-    A UI provides access to a set of function that can be used in
-    templates. Each function corresponds to a UI element, such as buttons,
-    links, forms, etc. The UI class maintains an inventory of available
-    elements that can be accessed by name.
-
-    """
-
-    util: Util
-    _inv: dict[str, PElement]
-
-    def __init__(self, app: types.CKANApp, util: Util):
-        self.util = util
-        self._inv = {}
-
-    @override
-    def __iter__(self) -> Iterator[str]:
-        """Return an iterable of element names provided by this UI.
-
-        :return: An iterable of element names.
-        """
-        return iter(self._inv)
-
-    def __getattr__(self, name: str) -> PElement:
-        """Get an element factory by name.
-
-        :param name: The name of the element.
-        :return: A callable that produces the element.
-        """
-        if name not in self._inv:
-            raise AttributeError(name)
-
-        return self._inv[name]
-
-    def _add_component(self, name: str, component: PElement):
-        """Add a new component to the UI inventory.
-
-        :param name: The name of the component.
-        :param component: A callable that produces the component.
-        """
-        self._inv[name] = component
-
-
 class MacroUI(UI):
     """A UI implementation that loads macros from a Jinja2 template.
 
@@ -315,10 +276,11 @@ class MacroUI(UI):
 
     __sources: list[str]
     _base_sources: list[str] = ["macros/ui.html"]
+    _inv: dict[str, PElement]
 
     @override
-    def __init__(self, app: types.CKANApp, util: Util):
-        super().__init__(app, util)
+    def __init__(self, app: types.CKANApp, theme: Theme, util: Util):
+        self._inv = {}
 
         if hasattr(app, "_wsgi_app"):
             app = cast(types.CKANApp, app._wsgi_app)  # pyright: ignore[reportAttributeAccessIssue]
@@ -331,9 +293,17 @@ class MacroUI(UI):
 
         self.__sources = sources
 
-        self._fill_inventory()
+        self._collect_macros()
 
-    def _fill_inventory(self):
+    @override
+    def __iter__(self) -> Iterator[str]:
+        """Return an iterable of element names provided by this UI.
+
+        :return: An iterable of element names.
+        """
+        return iter(self._inv)
+
+    def _collect_macros(self):
         for tpl in (self.__env.get_template(source) for source in self.__sources):
             mod = tpl.module
             for name in dir(mod):
@@ -342,6 +312,14 @@ class MacroUI(UI):
                 self._add_component(name, getattr(mod, name))
 
     @override
+    def _add_component(self, name: str, component: PElement):
+        """Add a new component to the UI inventory.
+
+        :param name: The name of the component.
+        :param component: A callable that produces the component.
+        """
+        self._inv[name] = component
+
     def __getattr__(self, name: str):
         # reset macro cache at the beginning of the request in debug mode. This
         # allows to edit UI macros without restarting the server.
@@ -351,13 +329,16 @@ class MacroUI(UI):
                 tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
 
             tk.g._ui_compiled = True
-            self._fill_inventory()
+            self._collect_macros()
 
-        return super().__getattr__(name)
+        if name not in self._inv:
+            raise AttributeError(name)
+
+        return self._inv[name]
 
 
 @dataclasses.dataclass
-class Theme:
+class Theme(BaseTheme):
     """Information about a theme.
 
     :param name: Name of the theme.
@@ -379,31 +360,35 @@ class Theme:
     public_folder: str = "public"
     asset_folder: str = "assets"
     ui_factory: type[UI] = MacroUI
-    util_factory: type[Util] = Util
+    util_factory: type[BaseUtil] = Util
     icon_map: dict[str, str] = dataclasses.field(default_factory=dict)
 
+    @override
     def build_ui(self, app: types.CKANApp) -> UI:
         """Build a UI instance for this theme.
 
         :param app: The CKAN application instance.
         :return: A UI instance.
         """
-        ui = self.ui_factory(app, self.util_factory(self))
+        ui = self.ui_factory(app, self, self.util_factory(self))
         for plugin in p.PluginImplementations(ITheme):
             plugin.patch_theme_ui(self, ui)
 
         return ui
 
+    @override
     def template_path(self):
         """Get the path to the theme's templates directory."""
         if self.path:
             return os.path.join(self.path, self.template_folder)
 
+    @override
     def public_path(self):
         """Get the path to the theme's public directory."""
         if self.path:
             return os.path.join(self.path, self.public_folder)
 
+    @override
     def asset_path(self):
         """Get the path to the theme's assets directory."""
         if self.path:
@@ -418,7 +403,7 @@ def get_theme(name: str):
     return _themes[name]
 
 
-_themes: dict[str, Theme] = {}
+_themes: dict[str, BaseTheme] = {}
 
 
 def collect_themes() -> None:
@@ -455,7 +440,7 @@ def enable_theme(name: str, config: Any):
     :raises CkanConfigurationException: if the theme or its parent is not found
 
     """
-    enabled_themes: list[Theme] = []
+    enabled_themes: list[BaseTheme] = []
 
     seen_names: list[str] = []
     while True:

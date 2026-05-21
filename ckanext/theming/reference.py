@@ -27,10 +27,6 @@ class Template:
     category: Category = dataclasses.field(default=Category.CUSTOM)
 
 
-def _true():
-    return True
-
-
 def make_params(endpoint: str, args: set[str], source: dict[str, Any], defaults: Mapping[str, Any]):  # noqa: C901
     params: dict[str, Any] = {}
     data = source.get("data", {})
