@@ -111,7 +111,7 @@ components.update(
         "toast": Component(Category.RECOMMENDED),
         "tooltip": Component(Category.ESSENTIAL),
         # elements ############################################################
-        "avatar": Component(Category.ESSENTIAL),
+        "avatar": Component(Category.UNSTABLE),
         "badge": Component(Category.RECOMMENDED),
         "breadcrumb_divider": Component(Category.RECOMMENDED),
         "button": Component(Category.ESSENTIAL),

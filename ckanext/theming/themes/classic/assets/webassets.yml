@@ -1,0 +1,8 @@
+scripts:
+  filter: rjsmin
+  extra:
+    preload:
+      - base/main
+  output: ckanext-theming/%(version)s-classic-polifill-scripts.js
+  contents:
+      - js/popover.js

@@ -276,7 +276,7 @@ and layout when displaying multiple packages together.
 
 | Parameter | Type   | Default | Description                                                     |
 |-----------|--------|---------|-----------------------------------------------------------------|
-| `pkg`     | object | -       | The package/dataset data object containing dataset information. |
+| `package` | object | -       | The package/dataset data object containing dataset information. |
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -325,9 +325,10 @@ and layout when displaying multiple resources together.
 ///
 
 
-| Parameter  | Type   | Default | Description                                               |
-|------------|--------|---------|-----------------------------------------------------------|
-| `resource` | object | -       | The resource data object containing resource information. |
+| Parameter  | Type   | Default | Description                                                     |
+|------------|--------|---------|-----------------------------------------------------------------|
+| `resource` | object | -       | The resource data object containing resource information.       |
+| `package`  | object | -       | The package/dataset data object containing dataset information. |
 
 /// details | Theme-Specific Parameters
     type: tip

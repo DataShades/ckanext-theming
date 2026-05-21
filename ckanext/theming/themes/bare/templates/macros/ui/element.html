@@ -1,9 +1,6 @@
-{%- macro avatar(src, alt, size) -%}
-    {%- set attrs = kwargs.setdefault("attrs", {}) -%}
-    {%- do attrs.setdefault("width", size) -%}
-    {%- do attrs.setdefault("height", size) -%}
-
-    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
+{%- macro avatar(content, username, size) -%}
+    {%- do kwargs -%}
+    {{ h.user_image(username, size) }}
 {%- endmacro %}
 
 {%- macro badge(content, style) -%}

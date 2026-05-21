@@ -322,9 +322,12 @@ confidence during operations that might otherwise appear to hang or freeze.
 ```
 ///
 
-| Parameter | Type   | Default | Description                                   |
-|-----------|--------|---------|-----------------------------------------------|
-| `size`    | string | "md"    | Size of the spinner (e.g., "sm", "md", "lg"). |
+| Parameter | Type   | Default | Description                                                              |
+|-----------|--------|---------|--------------------------------------------------------------------------|
+| `size`    | string | "md"    | Size of the spinner (e.g., "sm", "md", "lg").                            |
+| `style`   | string | -       | Visual style of the toast (e.g., "success", "warning", "error", "info"). |
+
+
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -369,7 +372,6 @@ user tasks.
 | `content`     | string | -       | The message content to display in the toast.                             |
 | `dismissible` | bool   | -       | Whether the toast can be dismissed by the user.                          |
 | `style`       | string | -       | Visual style of the toast (e.g., "success", "warning", "error", "info"). |
-| `duration`    | int    | -       | Duration in milliseconds before auto-dismissal.                          |
 
 /// details | Theme-Specific Parameters
     type: tip

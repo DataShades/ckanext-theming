@@ -52,13 +52,13 @@
     </div>
 {%- endmacro %}
 
-{%- macro spinner(size="md") -%}
-    <span {{ ui.util.attrs(kwargs) }} class="spinner spinner-{{ size }}"></span>
+{%- macro spinner(content, style, size) -%}
+    <span {{ ui.util.attrs(kwargs) }} class="spinner spinner-{{ size or 'md' }}"></span>
 {%- endmacro %}
 
-{%- macro toast(message, style, dismissible, duration) -%}
+{%- macro toast(content, title, style, dismissible) -%}
     <div {{ ui.util.attrs(kwargs) }}>
-        {{ message }}
+        {{ content }}
     </div>
 {%- endmacro %}
 

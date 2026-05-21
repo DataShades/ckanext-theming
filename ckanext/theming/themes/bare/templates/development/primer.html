@@ -472,10 +472,10 @@
             {{ ui.heading(_("Avatar with user image"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.avatar(src="/path/to/user/image.jpg", alt="User Name") }}
+                    {{ ui.avatar(user=current_user.name) }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.avatar(src="/path/to/user/image.jpg", alt="User Name") }}
+            {{ ui.avatar(alt="User Name", user=current_user.name) }}
             {{ ui.divider() }}
 
             {{ ui.heading(_("Avatar with fallback"), level=4) }}

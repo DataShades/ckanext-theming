@@ -1,9 +1,6 @@
-{%- macro avatar(src, alt, size) -%}
-    {%- set attrs = kwargs.setdefault("attrs", {}) -%}
-    {%- do attrs.setdefault("width", size) -%}
-    {%- do attrs.setdefault("height", size) -%}
-
-    {{ ui.image(src or h.url_for_static("/base/images/placeholder-user.png"), alt, **kwargs) }}
+{%- macro avatar(content, username, size=22) -%}
+    {%- do kwargs -%}
+    {{ h.user_image(username, size) }}
 {%- endmacro %}
 
 {%- macro badge(content, style="default") -%}
@@ -13,7 +10,7 @@
     </span>
 {%- endmacro %}
 
-{%- macro breadcrumb_divider(content="/") -%}{%- do kwargs -%}{%- endmacro %}
+{%- macro breadcrumb_divider(content) -%}{%- do kwargs -%}{%- endmacro %}
 
 {%- macro button(content, href, icon, size, type="button", style="primary") -%}
     {%- set prefix = ui.icon(icon) if icon else "" -%}
@@ -36,13 +33,7 @@
 {%- endmacro %}
 
 {%- macro divider(content) -%}
-    {%- if content -%}
-        <div {{ ui.util.attrs(kwargs, {"class": "divider divider-with-content"}) }}>
-            <hr><span>{{ content }}</span><hr>
-        </div>
-    {%- else -%}
-        <hr {{ ui.util.attrs(kwargs) }} class="divider">
-    {%- endif %}
+    <hr {{ ui.util.attrs(kwargs) }} class="divider">
 {%- endmacro %}
 
 {%- macro heading(content, level) -%}

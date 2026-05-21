@@ -10,8 +10,8 @@
     {{ h.snippet("snippets/package_item.html", package=package, **kwargs) }}
 {%- endmacro %}
 
-{%- macro resource(content, resource) -%}
-    {{ h.snippet('package/snippets/resource_item.html', res=resource, **kwargs) }}
+{%- macro resource(content, resource, package) -%}
+    {{ h.snippet('package/snippets/resource_item.html', res=resource, package=package, **kwargs) }}
 {%- endmacro %}
 
 {%- macro user(content, user) -%}

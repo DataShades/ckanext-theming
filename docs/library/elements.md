@@ -6,46 +6,6 @@ used throughout the application. These components ensure that basic UI elements
 maintain consistent appearance and behavior across different themes and
 contexts.
 
-## Avatar
-
-The [`avatar`][] component displays user avatars and profile images, providing
-visual identification for users throughout the application. Avatars are
-essential for creating a sense of community and personalization, allowing users
-to quickly identify who created content, made changes, or is associated with
-specific actions.
-
-Avatar components typically handle image sizing, circular cropping, and
-fallback representations when no image is available. They often include support
-for initials-based avatars when users don't have profile pictures, ensuring
-consistent visual representation regardless of whether a user has uploaded an
-image. The component ensures appropriate sizing and styling across different
-contexts where avatars might appear.
-
-| Parameter | Type   | Default | Description                         |
-|-----------|--------|---------|-------------------------------------|
-| `src`     | string | -       | URL to the avatar image.            |
-| `alt`     | string | -       | Alternative text for accessibility. |
-| `size`    | int    | -       | Size of the avatar                  |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `rounded` (bool): Whether to apply rounded corners
-- `variant` (string): Style variant (e.g., "circle", "square")
-///
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Avatar with user image -->
-{{ ui.avatar(src="/path/to/user/image.jpg", alt="User Name") }}
-
-<!-- Avatar with fallback -->
-{{ ui.avatar(alt="Default User") }}
-```
-///
-
 
 ## Badge
 
