@@ -220,24 +220,24 @@ def component_check(ctx: click.Context, theme: lib.Theme):  # noqa: C901
         for category, items in categorized.items():
             if missing_components[category]:
                 click.secho(
-                    f"  Missing {len(missing_components[category])} out of"
+                    f"Missing {len(missing_components[category])} out of"
                     + f" {len(items)} in category {category.name}",
                     fg="yellow",
                 )
-                click.secho("    " + ", ".join(missing_components[category]), fg="red")
+                click.secho("\t" + ", ".join(missing_components[category]), fg="red")
 
             else:
-                click.secho(f"  All components in category {category.name} are implemented", fg="green")
+                click.secho(f"All components in category {category.name} are implemented", fg="green")
         if extra_components:
-            click.secho(f"  Extra components ({len(extra_components)})", fg="yellow")
-            click.secho("    " + ", ".join(extra_components), fg="blue")
+            click.secho(f"Extra components ({len(extra_components)})", fg="yellow")
+            click.secho("\t" + ", ".join(extra_components), fg="blue")
 
         with ctx.meta["flask_app"].test_request_context():
             args = {
                 "".join(random.sample(string.ascii_letters, 10)): random.randint(0, 100),  # noqa: S311
             }
             rigid: dict[type, dict[str, Exception]] = defaultdict(dict)
-            allow_rigid = {"user", "group", "package", "resource", "organization"}
+            allow_rigid = {"user", "group", "package", "resource", "organization", "activity", "license"}
 
             for name in sorted(theme_components):
                 func = getattr(ui, name)
@@ -249,14 +249,16 @@ def component_check(ctx: click.Context, theme: lib.Theme):  # noqa: C901
                     rigid[type(err)][name] = err
 
             if rigid:
+                rigid_count = sum(map(len, rigid.values()))
                 click.secho(
-                    f"  {sum(map(len, rigid.values()))} components produced an error with random arguments",
+                    f"{rigid_count} components produced an error when called with random arguments."
+                    + "\nIdeally, components should not fail in this case",
                     fg="yellow",
                 )
                 for key, values in rigid.items():
-                    click.secho(f"    {key.__name__}:", bold=False)
+                    click.secho(f"\t{key.__name__}:", bold=False)
                     for name, err in values.items():
-                        click.secho(f"      {click.style(name, bold=True)}: {err}")
+                        click.secho(f"\t  {click.style(name, bold=True)}: {err}")
 
 
 @theme.group()
