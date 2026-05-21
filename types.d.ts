@@ -109,7 +109,7 @@ declare global {
    * @property sandbox - The sandbox environment.
    */
   interface ICkan {
-    sandbox: ISandbox;
+    sandbox: ISandboxFactory;
   }
 
   /**
@@ -118,9 +118,13 @@ declare global {
    * @property setup - Method to initialize the sandbox with a callback function.
    * @property ui - Object containing UI components and utility functions.
    */
-  interface ISandbox {
+  interface ISandboxFactory {
     setup: (callback: (sandbox: ISandbox) => void) => void;
+    (): ISandbox;
+  }
+  interface ISandbox {
     ui: IUi & { util: IUtil };
+    notify: any;
   }
 
   /**

@@ -5,4 +5,5 @@ scripts:
       - base/main
   output: ckanext-theming/%(version)s-classic-polifill-scripts.js
   contents:
-      - js/popover.js
+      - javascript/popover.js
+      - javascript/ui.js

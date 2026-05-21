@@ -76,11 +76,16 @@
 
 {%- macro search_form(query, sorting, sorting_options, error, count, facets, facet_titles, active_filters, use_htmx, query_name="q", sorting_name="sort", type="dataset") -%}
     {%- set params = {
+        "query": query,
+        "error": error,
+        "count": count,
+        "query": query,
         "sorting_selected": sorting,
         "sorting": sorting_options ,
         "form_id": kwargs.setdefault("attrs", {}).id ,
         "fields": active_filters ,
         "facets": {"titles": facet_titles, "search": facets} ,
+        "type": type ,
         } -%}
     {%- do params.update(kwargs) -%}
     {{ h.snippet("snippets/search_form.html", **params) }}
