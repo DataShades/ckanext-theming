@@ -69,10 +69,9 @@
 {%- endmacro %}
 
 {%- macro tab(content, href, active) -%}
-    {%- if active -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
-    {%- endif %}
-    {{ ui.link(content, href=href, **kwargs) }}
+    <li class="nav-item">
+        <a {{ ui.util.attrs(kwargs, {"class": "nav-link" ~ (" active" if active else "")}) }} href="{{ href }}">{{ content }}</a>
+    </li>
 {%- endmacro %}
 
 {%- macro video(src, controls) -%}
