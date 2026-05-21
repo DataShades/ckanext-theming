@@ -12,13 +12,16 @@
 
 {%- macro header_logo(href, logo, title, subtitle) -%}
     {% if logo -%}
-        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, attrs={"class": "logo"}) }}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "logo") -%}
+        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, **kwargs) }}
 
     {%- else -%}
-        {{ ui.link(title, href=href, **kwargs) }}
-        {%- if subtitle -%}
-            <p class="mb-0">{{ subtitle }}</p>
-        {%- endif %}
+        <h1>
+            {{ ui.link(title, href=href, **kwargs) }}
+        </h1>
+    {%- endif %}
+    {%- if subtitle -%}
+        <h2>{{ subtitle }}</h2>
     {%- endif %}
 {%- endmacro %}
 
@@ -44,29 +47,13 @@
 {%- endmacro %}
 
 {%- macro footer(content) -%}
-    <footer {{ ui.util.attrs(kwargs) }}>{{ content }}</footer>
+    <footer {{ ui.util.attrs(kwargs, {"class": "site-footer"}) }}>{{ content }}</footer>
 {%- endmacro %}
 
 {%- macro footer_main(content) -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "site-footer"}) }}>{{ content }}</div>
+    {%- do kwargs -%}{{ content }}
 {%- endmacro %}
 
 {%- macro footer_secondary(content) -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "bg-black"}) }}>{{ content }}</div>
-{%- endmacro %}
-
-{%- macro language_selector() -%}
-    {% set current_lang = request.environ.CKAN_LANG %}
-    {%- set data_attrs = {"module": "autocomplete", "module-dropdown-class": "lang-dropdown", "module-container-class": "lang-container"} -%}
-    {%- set label = ui.icon("globe", style="solid") ~ ui.util.tag(_('Language'), "span", attrs={"class": "sr-only"}) -%}
-
-    <div class="lang-select">
-        {%- call ui.util.call(ui.form, method="POST", action=h.url_for('util.internal_redirect'), data={"module": "select-switch"}) -%}
-            {%- call ui.util.call(ui.select_box, name="url", id=ui.util.id(), data=data_attrs, label=label, **kwargs) -%}
-                {% for locale in h.get_available_locales() %}
-                    {{ ui.select_option(locale.display_name or locale.english_name, value=h.url_for(h.current_url(), locale=locale.short_name), selected=locale.short_name == current_lang) }}
-                {% endfor %}
-            {%- endcall %}
-        {%- endcall %}
-    </div>
+    {%- do kwargs -%}
 {%- endmacro %}

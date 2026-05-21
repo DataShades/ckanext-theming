@@ -97,7 +97,8 @@ class Util(BaseUtil):
             return ""
         defaults = {} if not defaults else defaults.copy()
 
-        defaults.update(kwargs.get("attrs", {}))
+        if attrs := kwargs.get("attrs"):
+            defaults.update(attrs)
 
         for key, prefix in self._attr_groups:
             group = kwargs.get(key, {})
@@ -274,14 +275,16 @@ class MacroUI(UI):
     :param source: The path to the Jinja2 template containing the macros.
     """
 
+    util: BaseUtil
     __sources: list[str]
     _base_sources: list[str] = ["macros/ui.html"]
     _inv: dict[str, PElement]
 
     @override
     def __init__(self, app: types.CKANApp, theme: Theme, util: Util):
-        self._inv = {}
+        self.util = util
 
+        self._inv = {}
         if hasattr(app, "_wsgi_app"):
             app = cast(types.CKANApp, app._wsgi_app)  # pyright: ignore[reportAttributeAccessIssue]
 
@@ -323,7 +326,6 @@ class MacroUI(UI):
     def __getattr__(self, name: str):
         # reset macro cache at the beginning of the request in debug mode. This
         # allows to edit UI macros without restarting the server.
-
         if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
             for tpl in (self.__env.get_template(source) for source in self.__sources):
                 tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]

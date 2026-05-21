@@ -8,4 +8,4 @@ here = os.path.dirname(__file__)
 
 
 def make_theme(name: str = "midnight-blue-polyfill"):
-    return Theme(name, here)
+    return Theme(name, here, parent="classic-polyfill")

@@ -1,0 +1,30 @@
+{% ckan_extends %}
+
+{%- macro _header_logo(href, logo, title, subtitle) -%}
+    {% if logo -%}
+        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "logo") -%}
+        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, **kwargs) }}
+    {%- else -%}
+        {{ ui.link(title, href=href, **kwargs) }}
+        {%- if subtitle -%}
+            <p class="mb-0">{{ subtitle }}</p>
+        {%- endif %}
+    {%- endif %}
+{%- endmacro %}
+{%- set header_logo = header_logo or _header_logo -%}
+
+
+{%- macro _footer(content) -%}
+    <footer {{ ui.util.attrs(kwargs) }}>{{ content }}</footer>
+{%- endmacro %}
+{%- set footer = footer or _footer -%}
+
+{%- macro _footer_main(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "site-footer"}) }}>{{ content }}</div>
+{%- endmacro %}
+{%- set footer_main = footer_main or _footer_main -%}
+
+{%- macro footer_secondary(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "bg-black"}) }}>{{ content }}</div>
+{%- endmacro %}
+{%- set footer_secondary = footer_secondary or _footer_secondary -%}

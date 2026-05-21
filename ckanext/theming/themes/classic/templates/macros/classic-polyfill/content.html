@@ -15,7 +15,7 @@
 {%- endmacro %}
 
 {%- macro user(content, user) -%}
-    <li>{{ h.linked_user(user.name, maxlength=20) }}</li>
+    <li {{ ui.util.attrs(kwargs) }}>{{ h.linked_user(user.name, maxlength=20) }}</li>
 {%- endmacro %}
 
 {%- macro facet(content, key, value, count, active) -%}
