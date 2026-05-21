@@ -24,7 +24,6 @@
     {{ ui.nav_item(content, href, active, **kwargs) }}
 {%- endmacro %}
 
-
 {%- macro account_nav_item(content, href, active) -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("class", "btn btn-primary") -%}
     {{ ui.nav_item(content, href, active, **kwargs) }}

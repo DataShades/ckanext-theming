@@ -8,7 +8,7 @@
     </aside>
 {%- endmacro %}
 
-{%- macro facet_section(content, title) -%}
+{%- macro facet_section(content, title, items, key, has_more) -%}
     <section {{ ui.util.attrs(kwargs) }}>
         {{ ui.heading(title, level=3) }}
         <div>
