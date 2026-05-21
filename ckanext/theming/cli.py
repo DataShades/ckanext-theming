@@ -98,7 +98,7 @@ def _make_ui(ctx: click.Context, theme: lib.Theme):
 @theme.command("list")
 def list_themes():
     """List available themes."""
-    themes = lib.collect_themes()
+    themes = lib._themes  # pyright: ignore[reportPrivateUsage]
     for name, info in themes.items():
         click.echo(name)
         click.echo(f"  Path: {info.path}")

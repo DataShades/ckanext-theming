@@ -8,7 +8,7 @@ import ckan.plugins.toolkit as tk
 from ckan import types
 
 from .interfaces import ITheme
-from .lib import enable_theme, ui
+from .lib import collect_themes, enable_theme, ui
 from .themes import make_classic_polyfill, make_mb_polyfill
 
 log = logging.getLogger(__name__)
@@ -25,6 +25,7 @@ def update_config(config: Any):
     if config["testing"]:
         tk.add_template_directory(config, "tests/templates")
 
+    collect_themes()
     if theme := config.get("ckan.ui.theme"):
         enable_theme(theme, config)
 

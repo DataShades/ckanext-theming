@@ -415,21 +415,18 @@ def get_theme(name: str):
 
     :raises KeyError: if theme not found
     """
-    themes = collect_themes()
-    return themes[name]
+    return _themes[name]
 
 
-def collect_themes() -> dict[str, Theme]:
+_themes: dict[str, Theme] = {}
+
+
+def collect_themes() -> None:
     """Collect available themes from core and plugins."""
     # ckan_root = os.path.dirname(os.path.abspath(ckan.__file__))
-    themes: dict[str, Theme] = {
-        # Theme("classic", os.path.join(ckan_root, "templates")),
-        # Theme("midnight-blue", os.path.join(ckan_root, "templates-midnight-blue")),
-    }
+    _themes.clear()
     for plugin in p.PluginImplementations(ITheme):
-        themes.update({theme.name: theme for theme in plugin.register_themes()})
-
-    return themes
+        _themes.update({theme.name: theme for theme in plugin.register_themes()})
 
 
 def resolve_paths(theme: str | None) -> list[str]:
@@ -437,10 +434,9 @@ def resolve_paths(theme: str | None) -> list[str]:
 
     :raises KeyError: if the parent theme is not found
     """
-    themes = collect_themes()
     paths: list[str] = []
     while theme:
-        info = themes[theme]
+        info = get_theme(theme)
         if info.path:
             paths.append(info.path)
         theme = info.parent
@@ -459,19 +455,25 @@ def enable_theme(name: str, config: Any):
     :raises CkanConfigurationException: if the theme or its parent is not found
 
     """
-    themes = collect_themes()
     enabled_themes: list[Theme] = []
 
+    seen_names: list[str] = []
     while True:
-        theme = themes.pop(name, None)
-        if not theme:
+        try:
+            theme = get_theme(name)
+        except KeyError as err:
             msg = f"Theme '{name}' is not recognised."
-            raise CkanConfigurationException(msg)
+            raise CkanConfigurationException(msg) from err
 
+        seen_names.append(name)
         enabled_themes.append(theme)
         if not theme.parent:
             break
         name = theme.parent
+        if name in seen_names:
+            chain = " <- ".join(seen_names)
+            msg = f"Cannot extend '{name}' theme because it's already present in theme chain: {chain}"
+            raise CkanConfigurationException(msg)
 
     here = os.path.dirname(__file__)
 
