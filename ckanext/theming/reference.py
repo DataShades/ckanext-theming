@@ -5,21 +5,37 @@ from __future__ import annotations
 import dataclasses
 import enum
 import fnmatch
+import os
 from collections import defaultdict
 from collections.abc import Mapping
 from typing import Any
 
+import yaml
+
 
 class Category(enum.Enum):
-    ESSENTIAL = enum.auto()
-    RECOMMENDED = enum.auto()
-    UNSTABLE = enum.auto()
-    CUSTOM = enum.auto()
+    ESSENTIAL = "essential"
+    RECOMMENDED = "recommended"
+    UNSTABLE = "unstable"
+    CUSTOM = "custom"
 
 
 @dataclasses.dataclass(frozen=True)
 class Component:
-    category: Category = dataclasses.field(default=Category.CUSTOM)
+    category: Category = Category.CUSTOM
+    description: str = ""
+    arguments: dict[str, Any] = dataclasses.field(default_factory=dict)
+
+
+@dataclasses.dataclass(frozen=True)
+class MacroArgument:
+    description: str = ""
+    type: str = "unknown"
+
+
+@dataclasses.dataclass(frozen=True)
+class HtmlMacroArgument(MacroArgument):
+    type: str = "HTML"
 
 
 @dataclasses.dataclass(frozen=True)
@@ -51,145 +67,19 @@ def make_params(endpoint: str, args: set[str], source: dict[str, Any], defaults:
 
 
 components: dict[str, Component] = defaultdict(Component)
+with open(os.path.join(os.path.dirname(__file__), "components.yaml"), "rb") as src:
+    components.update(
+        {
+            k: Component(
+                category=Category(v["category"]),
+                description=v.get("description", ""),
+                arguments={name: MacroArgument(**details) for name, details in v.get("arguments", {}).items()},
+            )
+            for k, v in yaml.safe_load(src).items()
+        }
+    )
 
-components.update(
-    {
-        # wrappers ############################################################
-        "accordion_wrapper": Component(Category.ESSENTIAL),
-        "account_nav_wrapper": Component(Category.RECOMMENDED),
-        "activity_list": Component(Category.RECOMMENDED),
-        "breadcrumb_wrapper": Component(Category.RECOMMENDED),
-        "content_action_wrapper": Component(Category.RECOMMENDED),
-        "content_nav_wrapper": Component(Category.RECOMMENDED),
-        "facet_list": Component(Category.ESSENTIAL),
-        "group_list": Component(Category.ESSENTIAL),
-        "main_nav_wrapper": Component(Category.RECOMMENDED),
-        "sidebar_nav_wrapper": Component(Category.RECOMMENDED),
-        "nav_wrapper": Component(Category.ESSENTIAL),
-        "organization_list": Component(Category.ESSENTIAL),
-        "package_list": Component(Category.ESSENTIAL),
-        "page_action_wrapper": Component(Category.RECOMMENDED),
-        "pagination_wrapper": Component(Category.ESSENTIAL),
-        "resource_list": Component(Category.ESSENTIAL),
-        "tab_wrapper": Component(Category.RECOMMENDED),
-        "user_list": Component(Category.ESSENTIAL),
-        # content #############################################################
-        "activity": Component(Category.ESSENTIAL),
-        "facet": Component(Category.ESSENTIAL),
-        "license": Component(Category.ESSENTIAL),
-        "group": Component(Category.ESSENTIAL),
-        "organization": Component(Category.ESSENTIAL),
-        "package": Component(Category.ESSENTIAL),
-        "resource": Component(Category.ESSENTIAL),
-        "user": Component(Category.ESSENTIAL),
-        # containers ##########################################################
-        "accordion": Component(Category.ESSENTIAL),
-        "button_group": Component(Category.ESSENTIAL),
-        "card": Component(Category.RECOMMENDED),
-        "column": Component(Category.UNSTABLE),
-        "container": Component(Category.UNSTABLE),
-        "dropdown": Component(Category.ESSENTIAL),
-        "grid": Component(Category.UNSTABLE),
-        "row": Component(Category.UNSTABLE),
-        "list": Component(Category.ESSENTIAL),
-        "list_item": Component(Category.ESSENTIAL),
-        # sections ############################################################
-        "facet_section": Component(Category.ESSENTIAL),
-        "section": Component(Category.ESSENTIAL),
-        "sidebar_section": Component(Category.ESSENTIAL),
-        # feedback ############################################################
-        "alert": Component(Category.ESSENTIAL),
-        "confirm_modal": Component(Category.RECOMMENDED),
-        "modal": Component(Category.ESSENTIAL),
-        "popover": Component(Category.RECOMMENDED),
-        "progress": Component(Category.RECOMMENDED),
-        "spinner": Component(Category.RECOMMENDED),
-        "toast": Component(Category.RECOMMENDED),
-        "tooltip": Component(Category.ESSENTIAL),
-        # elements ############################################################
-        "avatar": Component(Category.UNSTABLE),
-        "badge": Component(Category.RECOMMENDED),
-        "breadcrumb_divider": Component(Category.RECOMMENDED),
-        "button": Component(Category.ESSENTIAL),
-        "datetime": Component(Category.ESSENTIAL),
-        "divider": Component(Category.RECOMMENDED),
-        "empty": Component(Category.ESSENTIAL),
-        "heading": Component(Category.ESSENTIAL),
-        "icon": Component(Category.ESSENTIAL),
-        "image": Component(Category.ESSENTIAL),
-        "link": Component(Category.ESSENTIAL),
-        "tag": Component(Category.ESSENTIAL),
-        "tab": Component(Category.RECOMMENDED),
-        "video": Component(Category.RECOMMENDED),
-        # data ################################################################
-        "chart": Component(Category.UNSTABLE),
-        "code": Component(Category.RECOMMENDED),
-        "definition_list": Component(Category.UNSTABLE),
-        "table": Component(Category.ESSENTIAL),
-        "table_body": Component(Category.RECOMMENDED),
-        "table_cell": Component(Category.RECOMMENDED),
-        "table_head": Component(Category.RECOMMENDED),
-        "table_row": Component(Category.RECOMMENDED),
-        # form ################################################################
-        "checkbox": Component(Category.ESSENTIAL),
-        "extra_field": Component(Category.RECOMMENDED),
-        "extra_fields_collection": Component(Category.RECOMMENDED),
-        "field_errors": Component(Category.RECOMMENDED),
-        "fieldset": Component(Category.RECOMMENDED),
-        "file_input": Component(Category.ESSENTIAL),
-        "form": Component(Category.ESSENTIAL),
-        "form_annotation": Component(Category.ESSENTIAL),
-        "field_info": Component(Category.ESSENTIAL),
-        "form_actions": Component(Category.ESSENTIAL),
-        "form_end": Component(Category.RECOMMENDED),
-        "form_errors": Component(Category.ESSENTIAL),
-        "form_start": Component(Category.RECOMMENDED),
-        "hidden_input": Component(Category.ESSENTIAL),
-        "input": Component(Category.ESSENTIAL),
-        "markdown": Component(Category.ESSENTIAL),
-        "markdown_popover": Component(Category.RECOMMENDED),
-        "radio": Component(Category.ESSENTIAL),
-        "range_input": Component(Category.RECOMMENDED),
-        "select": Component(Category.ESSENTIAL),
-        "select_box": Component(Category.ESSENTIAL),
-        "select_option": Component(Category.ESSENTIAL),
-        "submit": Component(Category.ESSENTIAL),
-        "textarea": Component(Category.ESSENTIAL),
-        # handles #############################################################
-        "modal_close_handle": Component(Category.RECOMMENDED),
-        "modal_handle": Component(Category.ESSENTIAL),
-        "popover_handle": Component(Category.RECOMMENDED),
-        # meta ################################################################
-        "account": Component(Category.RECOMMENDED),
-        "header": Component(Category.RECOMMENDED),
-        "header_logo": Component(Category.RECOMMENDED),
-        "footer": Component(Category.RECOMMENDED),
-        "footer_main": Component(Category.RECOMMENDED),
-        "footer_secondary": Component(Category.RECOMMENDED),
-        "subtitle_item": Component(Category.ESSENTIAL),
-        # navigation ##########################################################
-        "breadcrumb": Component(Category.ESSENTIAL),
-        "nav_item": Component(Category.ESSENTIAL),
-        "main_nav_item": Component(Category.ESSENTIAL),
-        "sidebar_nav_item": Component(Category.RECOMMENDED),
-        "account_nav_item": Component(Category.ESSENTIAL),
-        "content_nav_item": Component(Category.ESSENTIAL),
-        "page_action": Component(Category.ESSENTIAL),
-        "content_action": Component(Category.ESSENTIAL),
-        "pagination": Component(Category.ESSENTIAL),
-        "pagination_item": Component(Category.ESSENTIAL),
-        "dropdown_item": Component(Category.ESSENTIAL),
-        # search ##############################################################
-        "search_active_filters": Component(Category.RECOMMENDED),
-        "search_advanced_controls": Component(Category.RECOMMENDED),
-        "search_form": Component(Category.ESSENTIAL),
-        "search_form_box": Component(Category.RECOMMENDED),
-        "search_input": Component(Category.RECOMMENDED),
-        "search_results_text": Component(Category.RECOMMENDED),
-        "search_sort_control": Component(Category.RECOMMENDED),
-        "search_submit_button": Component(Category.RECOMMENDED),
-    }
-)
+components.update({})
 
 
 templates: dict[str, Template] = defaultdict(Template)

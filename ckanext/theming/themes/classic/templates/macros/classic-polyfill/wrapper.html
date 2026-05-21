@@ -33,7 +33,7 @@
     {{ ui.list(content, **kwargs) }}
 {%- endmacro %}
 
-{%- macro page_action_wrapper(content, variant) -%}
+{%- macro page_action_wrapper(content) -%}
     <div {{ ui.util.attrs(kwargs, {"class": "page_primary_action"}) }}>
         {{- content -}}
     </div>

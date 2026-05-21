@@ -4,8 +4,8 @@ Wrapper components are used to provide consistent structural patterns for
 different types of content and UI elements. They typically don't have visible
 output themselves but provide the structural foundation for other
 components. These components work in conjunction with their content
-counterparts - for example, [`accordion_wrapper`][accordion-wrapper] works with [`accordion`][]
-components.
+counterparts - for example, [`accordion_wrapper`][accordion-wrapper] works with
+[`accordion`][] components.
 
 ## Accordion Wrapper
 
@@ -14,6 +14,12 @@ container for accordion elements. It establishes the base styling and behavior
 for accordion groups, ensuring consistent appearance and interaction patterns
 across different themes. This wrapper works in conjunction with the
 [`accordion`][] component to create collapsible content sections.
+
+
+| Parameter | Type   | Default | Description                                                                         |
+|-----------|--------|---------|-------------------------------------------------------------------------------------|
+| `content` | string | -       | The content to be wrapped, typically consisting of multiple `accordion` components. |
+
 
 /// admonition | Relationship
     type: info

@@ -1,0 +1,360 @@
+# wrappers
+accordion_wrapper:
+    description: |
+        Wrapper for a collection of accordions.
+    category: essential
+    arguments:
+        content:
+            description: Collection of accordions
+
+account_nav_wrapper:
+    description: |
+        Wrapper for account navigation items.
+    category: recommended
+    arguments:
+        content:
+            description: Account navigation items
+
+activity_list:
+    description: |
+        Wrapper for a collection of activity records.
+    category: recommended
+    arguments:
+        content:
+            description: Activity records
+
+breadcrumb_wrapper:
+    description: |
+        Wrapper for breadcrumb navigation items.
+    category: recommended
+    arguments:
+        content:
+            description: Breadcrumb fragments
+
+content_action_wrapper:
+    description: |
+        Wrapper for content-level actions: mange, remove, view, etc.
+    category: recommended
+    arguments:
+        content:
+            description: Content-level actions
+
+content_nav_wrapper:
+    description: |
+        Wrapper for content-level navigation: details, activity, members, etc.
+    category: recommended
+    arguments:
+        content:
+            description: Content-level navigation
+
+facet_list:
+    description: |
+        Wrapper for a collection of search facets.
+    category: essential
+    arguments:
+        content:
+            description: Collection of search facets
+
+group_list:
+    description: |
+        Wrapper for a collection of groups.
+    category: essential
+    arguments:
+        content:
+            description: Collection of groups
+
+main_nav_wrapper:
+    description: |
+        Wrapper for main header navigation items.
+    category: recommended
+    arguments:
+        content:
+            description: Header navigation items
+
+sidebar_nav_wrapper:
+    description: |
+        Wrapper for sidebar navigation items.
+    category: recommended
+    arguments:
+        content:
+            description: Sidebar navigation
+
+nav_wrapper:
+    description: |
+        Wrapper for generic navigation items.
+    category: essential
+    arguments:
+        content:
+            description: Generic navigation
+
+
+organization_list:
+    description: |
+        Wrapper for a collection of organizations.
+    category: essential
+    arguments:
+        content:
+            description: Collection of organizations
+package_list:
+    description: |
+        Wrapper for a collection of packages.
+    category: essential
+    arguments:
+        content:
+            description: Collection of packages
+page_action_wrapper:
+    description: |
+        Wrapper for page-level actions: add dataset, go back, etc.
+    category: recommended
+    arguments:
+        content:
+            description: Page-level actions
+pagination_wrapper:
+    description: |
+        Wrapper for pagination controls.
+    category: essential
+    arguments:
+        content:
+            description: Pagination controls
+resource_list:
+    description: |
+        Wrapper for a collection of resources.
+    category: essential
+    arguments:
+        content:
+            description: Collection of resources
+tab_wrapper:
+    description: |
+        Wrapper for a collection of tabs.
+    category: recommended
+    arguments:
+        content:
+            description: Collection of tabs
+user_list:
+    description: |
+        Wrapper for a collection of users.
+    category: essential
+    arguments:
+        content:
+            description: Collection of users
+
+# content
+activity:
+    description: |
+        Details of a single activity record.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+        activity:
+            description: Dictionary with activity details
+            type: 'dict'
+
+facet:
+    description: |
+        Control link for a facet filter.
+    category: essential
+    arguments:
+        content:
+            description: Label of the facet item
+        key:
+            description: Facet key ("organization", "res_format", etc.)
+            type: 'str'
+        value:
+            description: Facet value (organization name, resource format, etc.)
+            type: 'str'
+        count:
+            description: Number of items matching this facet value.
+            type: 'int'
+        active:
+            description: Whether this facet value is currently active.
+            type: 'bool'
+
+license:
+    description: |
+        Link/logo/title of a single license.
+    category: essential
+    arguments:
+        content:
+            description: License title("Creative Commons Attribution", etc.)
+        id:
+            description: License ID (e.g. "cc-by", "odc-pddl-1.0", etc.)
+            type: 'str'
+        url:
+            description: URL of the license
+            type: 'str'
+
+group:
+    description: |
+        Details of a single group.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+        group:
+            description: Dictionary with group details
+            type: 'dict'
+
+organization:
+    description: |
+        Details of a single organization.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+        organization:
+            description: Dictionary with organization details
+            type: 'dict'
+
+package:
+    description: |
+        Details of a single package.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+        package:
+            description: Dictionary with package details
+            type: 'dict'
+
+resource:
+    description: |
+        Details of a single resource.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+        resource:
+            description: Dictionary with resource details
+            type: 'dict'
+        package:
+            description: Dictionary with parent package details
+            type: 'dict'
+
+user:
+    description: |
+        Details of a single user.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+        user:
+            description: Dictionary with user details
+            type: 'dict'
+
+
+#         # containers ##########################################################
+#         "accordion": Component(Category.ESSENTIAL),
+#         "button_group": Component(Category.ESSENTIAL),
+#         "card": Component(Category.RECOMMENDED),
+#         "column": Component(Category.UNSTABLE),
+#         "container": Component(Category.UNSTABLE),
+#         "dropdown": Component(Category.ESSENTIAL),
+#         "grid": Component(Category.UNSTABLE),
+#         "row": Component(Category.UNSTABLE),
+#         "list": Component(Category.ESSENTIAL),
+#         "list_item": Component(Category.ESSENTIAL),
+
+#         # sections ############################################################
+#         "facet_section": Component(Category.ESSENTIAL),
+#         "section": Component(Category.ESSENTIAL),
+#         "sidebar_section": Component(Category.ESSENTIAL),
+
+#         # feedback ############################################################
+#         "alert": Component(Category.ESSENTIAL),
+#         "confirm_modal": Component(Category.RECOMMENDED),
+#         "modal": Component(Category.ESSENTIAL),
+#         "popover": Component(Category.RECOMMENDED),
+#         "progress": Component(Category.RECOMMENDED),
+#         "spinner": Component(Category.RECOMMENDED),
+#         "toast": Component(Category.RECOMMENDED),
+#         "tooltip": Component(Category.ESSENTIAL),
+
+#         # elements ############################################################
+#         "avatar": Component(Category.UNSTABLE),
+#         "badge": Component(Category.RECOMMENDED),
+#         "breadcrumb_divider": Component(Category.RECOMMENDED),
+#         "button": Component(Category.ESSENTIAL),
+#         "datetime": Component(Category.ESSENTIAL),
+#         "divider": Component(Category.RECOMMENDED),
+#         "empty": Component(Category.ESSENTIAL),
+#         "heading": Component(Category.ESSENTIAL),
+#         "icon": Component(Category.ESSENTIAL),
+#         "image": Component(Category.ESSENTIAL),
+#         "link": Component(Category.ESSENTIAL),
+#         "tag": Component(Category.ESSENTIAL),
+#         "tab": Component(Category.RECOMMENDED),
+#         "video": Component(Category.RECOMMENDED),
+
+#         # data ################################################################
+#         "chart": Component(Category.UNSTABLE),
+#         "code": Component(Category.RECOMMENDED),
+#         "definition_list": Component(Category.UNSTABLE),
+#         "table": Component(Category.ESSENTIAL),
+#         "table_body": Component(Category.RECOMMENDED),
+#         "table_cell": Component(Category.RECOMMENDED),
+#         "table_head": Component(Category.RECOMMENDED),
+#         "table_row": Component(Category.RECOMMENDED),
+
+#         # form ################################################################
+#         "checkbox": Component(Category.ESSENTIAL),
+#         "extra_field": Component(Category.RECOMMENDED),
+#         "extra_fields_collection": Component(Category.RECOMMENDED),
+#         "field_errors": Component(Category.RECOMMENDED),
+#         "fieldset": Component(Category.RECOMMENDED),
+#         "file_input": Component(Category.ESSENTIAL),
+#         "form": Component(Category.ESSENTIAL),
+#         "form_annotation": Component(Category.ESSENTIAL),
+#         "field_info": Component(Category.ESSENTIAL),
+#         "form_actions": Component(Category.ESSENTIAL),
+#         "form_end": Component(Category.RECOMMENDED),
+#         "form_errors": Component(Category.ESSENTIAL),
+#         "form_start": Component(Category.RECOMMENDED),
+#         "hidden_input": Component(Category.ESSENTIAL),
+#         "input": Component(Category.ESSENTIAL),
+#         "markdown": Component(Category.ESSENTIAL),
+#         "markdown_popover": Component(Category.RECOMMENDED),
+#         "radio": Component(Category.ESSENTIAL),
+#         "range_input": Component(Category.RECOMMENDED),
+#         "select": Component(Category.ESSENTIAL),
+#         "select_box": Component(Category.ESSENTIAL),
+#         "select_option": Component(Category.ESSENTIAL),
+#         "submit": Component(Category.ESSENTIAL),
+#         "textarea": Component(Category.ESSENTIAL),
+
+#         # handles #############################################################
+#         "modal_close_handle": Component(Category.RECOMMENDED),
+#         "modal_handle": Component(Category.ESSENTIAL),
+#         "popover_handle": Component(Category.RECOMMENDED),
+
+#         # meta ################################################################
+#         "account": Component(Category.RECOMMENDED),
+#         "header": Component(Category.RECOMMENDED),
+#         "header_logo": Component(Category.RECOMMENDED),
+#         "footer": Component(Category.RECOMMENDED),
+#         "footer_main": Component(Category.RECOMMENDED),
+#         "footer_secondary": Component(Category.RECOMMENDED),
+#         "subtitle_item": Component(Category.ESSENTIAL),
+
+#         # navigation ##########################################################
+#         "breadcrumb": Component(Category.ESSENTIAL),
+#         "nav_item": Component(Category.ESSENTIAL),
+#         "main_nav_item": Component(Category.ESSENTIAL),
+#         "sidebar_nav_item": Component(Category.RECOMMENDED),
+#         "account_nav_item": Component(Category.ESSENTIAL),
+#         "content_nav_item": Component(Category.ESSENTIAL),
+#         "page_action": Component(Category.ESSENTIAL),
+#         "content_action": Component(Category.ESSENTIAL),
+#         "pagination": Component(Category.ESSENTIAL),
+#         "pagination_item": Component(Category.ESSENTIAL),
+#         "dropdown_item": Component(Category.ESSENTIAL),
+
+#         # search ##############################################################
+#         "search_active_filters": Component(Category.RECOMMENDED),
+#         "search_advanced_controls": Component(Category.RECOMMENDED),
+#         "search_form": Component(Category.ESSENTIAL),
+#         "search_form_box": Component(Category.RECOMMENDED),
+#         "search_input": Component(Category.RECOMMENDED),
+#         "search_results_text": Component(Category.RECOMMENDED),
+#         "search_sort_control": Component(Category.RECOMMENDED),
+#         "search_submit_button": Component(Category.RECOMMENDED),

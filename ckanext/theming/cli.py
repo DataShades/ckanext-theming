@@ -11,6 +11,7 @@ import random
 import re
 import shutil
 import string
+import textwrap
 from collections import Counter, defaultdict
 from collections.abc import Callable, Collection
 from typing import IO, Any
@@ -177,7 +178,23 @@ def component_analyze(ctx: click.Context, components: Collection[str], theme: li
 
             # Try to get the source or signature information
             if isinstance(comp_func, Macro):
-                sig = ", ".join(comp_func.arguments)
+                sig = ", ".join(
+                    (
+                        click.style(arg, italic=True)
+                        if arg == "content"
+                        else f"{arg}: {click.style(ref.arguments[arg].type, italic=True)}"
+                    )
+                    if arg in ref.arguments
+                    else click.style(f"+{arg}", fg="green", bold=True)
+                    for arg in comp_func.arguments
+                )
+                sig = ", ".join(
+                    [sig]
+                    + [
+                        click.style(f"-{arg}: {click.style(ref.arguments[arg].type, italic=True)}", fg="red")
+                        for arg in (set(ref.arguments) - set(comp_func.arguments))
+                    ]
+                )
 
                 if comp_func.catch_varargs:
                     sig = ", ".join([sig, "*varargs"])
@@ -195,7 +212,22 @@ def component_analyze(ctx: click.Context, components: Collection[str], theme: li
             click.secho(f"{component}", bold=True)
             click.secho(click.style("Type: ", fg="yellow") + comp_type)
             click.secho(click.style("Category: ", fg="yellow") + ref.category.name)
+            if ref.description:
+                click.secho(
+                    click.style("Description: \n", fg="yellow")
+                    + textwrap.fill(ref.description, initial_indent="\t", subsequent_indent="\t")
+                )
             click.secho(click.style("Signature: ", fg="yellow") + sig)
+
+            if ref.arguments:
+                no_description = click.style("description is missing", dim=True)
+                click.secho(
+                    click.style("Standard arguments: \n", fg="yellow")
+                    + "\n".join(
+                        f"\t{key}: {spec.description if spec.description else no_description}"
+                        for key, spec in ref.arguments.items()
+                    )
+                )
             click.echo()
 
 
