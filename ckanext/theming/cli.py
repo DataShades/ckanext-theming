@@ -221,13 +221,15 @@ def component_analyze(ctx: click.Context, components: Collection[str], theme: li
 
             if ref.arguments:
                 no_description = click.style("description is missing", dim=True)
-                click.secho(
-                    click.style("Standard arguments: \n", fg="yellow")
-                    + "\n".join(
-                        f"\t{key}: {spec.description if spec.description else no_description}"
-                        for key, spec in ref.arguments.items()
+                click.secho(click.style("Standard arguments:", fg="yellow"))
+                for key, spec in ref.arguments.items():
+                    description = (
+                        textwrap.fill(spec.description, subsequent_indent="\t    ")
+                        if spec.description
+                        else no_description
                     )
-                )
+                    click.secho(f"\t{key}: {description}")
+
             click.echo()
 
 

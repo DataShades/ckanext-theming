@@ -15,13 +15,6 @@ account_nav_wrapper:
         content:
             description: Account navigation items
 
-activity_list:
-    description: |
-        Wrapper for a collection of activity records.
-    category: recommended
-    arguments:
-        content:
-            description: Activity records
 
 breadcrumb_wrapper:
     description: |
@@ -47,21 +40,6 @@ content_nav_wrapper:
         content:
             description: Content-level navigation
 
-facet_list:
-    description: |
-        Wrapper for a collection of search facets.
-    category: essential
-    arguments:
-        content:
-            description: Collection of search facets
-
-group_list:
-    description: |
-        Wrapper for a collection of groups.
-    category: essential
-    arguments:
-        content:
-            description: Collection of groups
 
 main_nav_wrapper:
     description: |
@@ -87,21 +65,6 @@ nav_wrapper:
         content:
             description: Generic navigation
 
-
-organization_list:
-    description: |
-        Wrapper for a collection of organizations.
-    category: essential
-    arguments:
-        content:
-            description: Collection of organizations
-package_list:
-    description: |
-        Wrapper for a collection of packages.
-    category: essential
-    arguments:
-        content:
-            description: Collection of packages
 page_action_wrapper:
     description: |
         Wrapper for page-level actions: add dataset, go back, etc.
@@ -109,6 +72,7 @@ page_action_wrapper:
     arguments:
         content:
             description: Page-level actions
+
 pagination_wrapper:
     description: |
         Wrapper for pagination controls.
@@ -116,13 +80,7 @@ pagination_wrapper:
     arguments:
         content:
             description: Pagination controls
-resource_list:
-    description: |
-        Wrapper for a collection of resources.
-    category: essential
-    arguments:
-        content:
-            description: Collection of resources
+
 tab_wrapper:
     description: |
         Wrapper for a collection of tabs.
@@ -130,13 +88,6 @@ tab_wrapper:
     arguments:
         content:
             description: Collection of tabs
-user_list:
-    description: |
-        Wrapper for a collection of users.
-    category: essential
-    arguments:
-        content:
-            description: Collection of users
 
 # content
 activity:
@@ -243,84 +194,1076 @@ user:
             type: 'dict'
 
 
-#         # containers ##########################################################
-#         "accordion": Component(Category.ESSENTIAL),
-#         "button_group": Component(Category.ESSENTIAL),
-#         "card": Component(Category.RECOMMENDED),
-#         "column": Component(Category.UNSTABLE),
-#         "container": Component(Category.UNSTABLE),
-#         "dropdown": Component(Category.ESSENTIAL),
-#         "grid": Component(Category.UNSTABLE),
-#         "row": Component(Category.UNSTABLE),
-#         "list": Component(Category.ESSENTIAL),
-#         "list_item": Component(Category.ESSENTIAL),
+# containers
+accordion:
+    description: Collapsible element with title and content
+    category: essential
+    arguments:
+        content:
+            description: Content shown in the collapsible part
+        title:
+            type: 'str'
+            description: Title shown in the non-collapsible part
+        open:
+            type: 'bool'
+            description: Whether the accordion is open by default
 
-#         # sections ############################################################
-#         "facet_section": Component(Category.ESSENTIAL),
-#         "section": Component(Category.ESSENTIAL),
-#         "sidebar_section": Component(Category.ESSENTIAL),
+button_group:
+    description: A group of buttons that are visually connected.
 
-#         # feedback ############################################################
-#         "alert": Component(Category.ESSENTIAL),
-#         "confirm_modal": Component(Category.RECOMMENDED),
-#         "modal": Component(Category.ESSENTIAL),
-#         "popover": Component(Category.RECOMMENDED),
-#         "progress": Component(Category.RECOMMENDED),
-#         "spinner": Component(Category.RECOMMENDED),
-#         "toast": Component(Category.RECOMMENDED),
-#         "tooltip": Component(Category.ESSENTIAL),
+    category: essential
+    arguments:
+        content:
+            description: Collection of buttons
+        direction:
+            type: 'str'
+            description: Direction of the button group, either "row" or "column"
 
-#         # elements ############################################################
-#         "avatar": Component(Category.UNSTABLE),
-#         "badge": Component(Category.RECOMMENDED),
-#         "breadcrumb_divider": Component(Category.RECOMMENDED),
-#         "button": Component(Category.ESSENTIAL),
-#         "datetime": Component(Category.ESSENTIAL),
-#         "divider": Component(Category.RECOMMENDED),
-#         "empty": Component(Category.ESSENTIAL),
-#         "heading": Component(Category.ESSENTIAL),
-#         "icon": Component(Category.ESSENTIAL),
-#         "image": Component(Category.ESSENTIAL),
-#         "link": Component(Category.ESSENTIAL),
-#         "tag": Component(Category.ESSENTIAL),
-#         "tab": Component(Category.RECOMMENDED),
-#         "video": Component(Category.RECOMMENDED),
+card:
+    description: |
+        Container with an image, header and body, used to group related content.
 
-#         # data ################################################################
-#         "chart": Component(Category.UNSTABLE),
-#         "code": Component(Category.RECOMMENDED),
-#         "definition_list": Component(Category.UNSTABLE),
-#         "table": Component(Category.ESSENTIAL),
-#         "table_body": Component(Category.RECOMMENDED),
-#         "table_cell": Component(Category.RECOMMENDED),
-#         "table_head": Component(Category.RECOMMENDED),
-#         "table_row": Component(Category.RECOMMENDED),
+    category: recommended
+    arguments:
+        content:
+            description: Content of the card body
+        title:
+            type: 'str'
+            description: Title shown in the card header
+        footer:
+            type: 'str'
+            description: >-
+                Content shown in the card footer. May contain button or other control elements.
+        img:
+            type: 'str'
+            description: URL of the image shown in the card
 
-#         # form ################################################################
-#         "checkbox": Component(Category.ESSENTIAL),
-#         "extra_field": Component(Category.RECOMMENDED),
-#         "extra_fields_collection": Component(Category.RECOMMENDED),
-#         "field_errors": Component(Category.RECOMMENDED),
-#         "fieldset": Component(Category.RECOMMENDED),
-#         "file_input": Component(Category.ESSENTIAL),
-#         "form": Component(Category.ESSENTIAL),
-#         "form_annotation": Component(Category.ESSENTIAL),
-#         "field_info": Component(Category.ESSENTIAL),
-#         "form_actions": Component(Category.ESSENTIAL),
-#         "form_end": Component(Category.RECOMMENDED),
-#         "form_errors": Component(Category.ESSENTIAL),
-#         "form_start": Component(Category.RECOMMENDED),
-#         "hidden_input": Component(Category.ESSENTIAL),
-#         "input": Component(Category.ESSENTIAL),
-#         "markdown": Component(Category.ESSENTIAL),
-#         "markdown_popover": Component(Category.RECOMMENDED),
-#         "radio": Component(Category.ESSENTIAL),
-#         "range_input": Component(Category.RECOMMENDED),
-#         "select": Component(Category.ESSENTIAL),
-#         "select_box": Component(Category.ESSENTIAL),
-#         "select_option": Component(Category.ESSENTIAL),
-#         "submit": Component(Category.ESSENTIAL),
-#         "textarea": Component(Category.ESSENTIAL),
+column:
+    description: |
+        Container for content arranged in a vertical column. Columns are
+        typically used within rows to create grid layouts.
+    category: unstable
+    arguments:
+        content:
+            description: Content of the column
+        span:
+            type: 'dict'
+            description: >-
+                Number of grid columns to span depending on breakpoint (e.g. {"xs": 12, "sm": 6, "md": 4, "lg": 3}).
+
+container:
+    description: |
+        Generic container with restricted width, used to wrap page content and
+        center it on the page.
+    category: unstable
+    arguments:
+        content:
+            description: Content of the container
+        fluid:
+            type: 'bool'
+            description: Whether the container should be full-width (i.e. not restricted to a max width)
+
+dropdown:
+    description: |
+        Container for a dropdown menu, which is shown when the trigger element is clicked.
+    category: essential
+    arguments:
+        content:
+            description: Content of the dropdown menu
+        title:
+            type: 'str'
+            description: Text shown in the dropdown trigger element
+
+grid:
+    description: |
+        Container for a grid layout, used to arrange content in rows and columns.
+    category: unstable
+    arguments:
+        content:
+            description: Content of the grid, typically rows containing columns
+
+row:
+    description: |
+        Container for a horizontal row of content. Rows are typically used within grids to create grid layouts.
+    category: unstable
+    arguments:
+        content:
+            description: Content of the row, typically columns containing content
+
+list:
+    description: |
+        Wrapper for a collection of list items.
+    category: essential
+    arguments:
+        content:
+            description: Collection of list items
+
+list_item:
+    description: |
+        Arbitrary item in a list.
+    category: essential
+    arguments:
+        content:
+            description: Content of the list item
+
+activity_list:
+    description: |
+        Wrapper for a collection of activity records.
+    category: recommended
+    arguments:
+        content:
+            description: Activity records
+
+facet_list:
+    description: |
+        Wrapper for a collection of search facets.
+    category: essential
+    arguments:
+        content:
+            description: Collection of search facets
+
+group_list:
+    description: |
+        Wrapper for a collection of groups.
+    category: essential
+    arguments:
+        content:
+            description: Collection of groups
+
+organization_list:
+    description: |
+        Wrapper for a collection of organizations.
+    category: essential
+    arguments:
+        content:
+            description: Collection of organizations
+
+package_list:
+    description: |
+        Wrapper for a collection of packages.
+    category: essential
+    arguments:
+        content:
+            description: Collection of packages
+
+resource_list:
+    description: |
+        Wrapper for a collection of resources.
+    category: essential
+    arguments:
+        content:
+            description: Collection of resources
+
+user_list:
+    description: |
+        Wrapper for a collection of users.
+    category: essential
+    arguments:
+        content:
+            description: Collection of users
+
+# sections
+facet_section:
+    description: Sidebar section containing facet controls for search
+    category: essential
+    arguments:
+        content:
+            description: List of facets
+        title:
+            description: Optional title of the facet section
+            type: 'str'
+        items:
+            description: List of search facets that may be used by section to render empty message of facet-search widget.
+            type: 'list[dict]'
+        key:
+            description: Facet key ("organization", "res_format", etc.)
+            type: 'str'
+        has_more:
+            description: Whether there are more facet values that can be shown in a "show more" widget.
+            type: 'bool'
+
+section:
+    description: Generic section wrapper, used to group related content together.
+    category: essential
+    arguments:
+        content:
+            description: Content of the section
+        title:
+            description: Optional title of the section
+            type: 'str'
+
+sidebar_section:
+    description: Sidebar section, used to group related content together in the sidebar.
+    category: essential
+    arguments:
+        content:
+            description: Content of the sidebar section
+        title:
+            description: Optional title of the sidebar section
+            type: 'str'
+
+# # feedback
+alert:
+    description: Notification message shown to the user, typically with a colored background to indicate the type of message (error, warning, success, etc.)
+    category: essential
+    arguments:
+        content:
+            description: Message shown to the user
+        dismissible:
+            description: Whether the alert can be dismissed by the user
+            type: 'bool'
+        style:
+            description: Visual style of the alert, either "error", "warning", "success" or "info"
+            type: 'str'
+
+modal:
+    description: |
+        Modal dialog, used to show important information or ask the user to confirm an action.
+    category: essential
+    arguments:
+        content:
+            description: Content of the modal dialog
+        title:
+            description: Title shown in the modal header
+            type: 'str'
+        footer:
+            description: >-
+                Content shown in the modal footer. May contain button or other control elements.
+        dismissible:
+            description: Whether the modal can be dismissed by the user by clicking outside the modal or pressing the escape key.
+            type: 'bool'
+        id:
+            description: Unique identifier for the modal, used to target it with a modal_handle.
+            type: 'str'
+
+confirm_modal:
+    description: |
+        Modal dialog used to ask the user to confirm an action, with "confirm"
+        and "cancel" buttons. When user confirms the action, POST request is
+        sent to the specified URL.
+    category: recommended
+    arguments:
+        content:
+            description: Content of the modal dialog, typically describing the action to be confirmed
+        title:
+            description: Title shown in the modal header
+            type: 'str'
+        id:
+            description: Unique identifier for the modal, used to target it with a modal_handle.
+            type: 'str'
+        cancel_label:
+            description: Label of the cancel button
+            type: 'str'
+        confirm_label:
+            description: Label of the confirm button
+            type: 'str'
+        href:
+            description: URL to send POST request to when user confirms the action. Has no effect when form_id is specified.
+            type: 'str'
+        form_id:
+            description: ID of the form to submit when user confirms the action. If not specified, empty form will be submitted.
+            type: 'str'
+        dismissible:
+            description: Whether the modal can be dismissed by the user by clicking outside the modal or pressing the escape key.
+            type: 'bool'
+popover:
+    description: |
+        Popover element, used to show additional information when the trigger
+        element is clicked or hovered. Typically used for tooltips with HTML
+        content, but can also be used for more complex interactions.
+    category: recommended
+    arguments:
+        content:
+            description: Content of the popover, shown when the popover is triggered
+        title:
+            description: Title shown in the popover header
+            type: 'str'
+        id:
+            description: Unique identifier for the popover, used to target it with a popover_handle.
+            type: 'str'
+
+progress:
+    description: |
+        Progress bar element, used to show the progress of a long-running action.
+    category: recommended
+    arguments:
+        content:
+            description: Progress bar content, typically shown as a label inside the progress bar
+        value:
+            description: Current progress value, between 0 and max
+            type: 'int'
+        max:
+            description: Maximum progress value, default is 100
+            type: 'int'
+
+spinner:
+    description: |
+        Spinner element, used to indicate that a long-running action is in progress.
+    category: recommended
+    arguments:
+        content:
+            description: Spinner content, typically shown as a label next to the spinner icon
+
+toast:
+    description: |
+        Toast notification, used to show brief messages to the user in response to their actions. Typically shown in the corner of the screen.
+    category: recommended
+    arguments:
+        content:
+            description: Message shown in the toast notification
+        title:
+            description: Optional title shown in the toast notification
+            type: 'str'
+        style:
+            description: Visual style of the toast, either "error", "warning", "success" or "info"
+            type: 'str'
+        dismissible:
+            description: Whether the toast can be dismissed by the user
+            type: 'bool'
+
+tooltip:
+    description: |
+        Tooltip element, used to show brief messages to the user when they hover over or focus on an element.
+    category: essential
+    arguments:
+        content:
+            description: Content that has tooltip
+        tooltip:
+            description: Message shown in the tooltip
+            type: 'str'
+        position:
+            description: Position of the tooltip relative to the content, either "top", "right", "bottom" or "left"
+            type: 'str'
+
+
+# elements
+avatar:
+    description: |
+        Avatar image for a user, typically shown as a circle with the user's profile picture.
+    category: unstable
+    arguments:
+        content:
+            description: Usually ignored
+        username:
+            description: Username of the user, used to generate avatar image URL
+            type: 'str'
+        size:
+            description: Size of the avatar image in pixels
+            type: 'int'
+
+badge:
+    description: |
+        Small badge element, used to show a status or label for an item.
+    category: recommended
+    arguments:
+        content:
+            description: Content of the badge
+        style:
+            description: Visual style of the badge, either "primary", "secondary", "success", "danger", "warning", "info" or "default"
+            type: 'str'
+
+breadcrumb_divider:
+    description: |
+        Divider element used in breadcrumb navigation.
+    category: recommended
+    arguments:
+        content:
+            description: Divider content, typically a "/" or ">" character
+
+button:
+    description: |
+        Button element, used to trigger an action when clicked.
+    category: essential
+    arguments:
+        content:
+            description: Button label
+        href:
+            description: URL to navigate to when the button is clicked. If not specified, button will not be a link.
+            type: 'str'
+        type:
+            description: Button type, either "button", "submit" or "reset"
+            type: 'str'
+        style:
+            description: Visual style of the button, either "primary", "secondary", "success", "danger", "warning", "info" or "default"
+            type: 'str'
+
+datetime:
+    description: |
+        Formatted date and time string.
+    category: essential
+    arguments:
+        content:
+            description: Date and time value in ISO 8601 format or datetime object
+            type: 'str|datetime'
+        date_format:
+            description: Format string for the date part of the output, using Python's strftime format codes.
+            type: 'str'
+        with_hours:
+            description: Whether to include the time part in the output
+            type: 'bool'
+        empty:
+            description: Text to show if the value is empty or invalid
+            type: 'str'
+
+divider:
+    description: |
+        Divider element, used to visually separate content.
+    category: recommended
+    arguments:
+        content:
+            description: Usually ignored
+
+empty:
+    description: |
+        Element shown when there is no content to display, typically with a message and an optional icon.
+    category: essential
+    arguments:
+        content:
+            description: Message shown when there is no content to display
+
+heading:
+    description: |
+        Heading element, used to show a section heading or title.
+    category: essential
+    arguments:
+        content:
+            description: Heading text
+        level:
+            description: Heading level, between 1 and 6
+            type: 'int'
+
+icon:
+    description: |
+        Icon element, used to show a graphical symbol representing an action, status or type of content.
+    category: essential
+    arguments:
+        name:
+            description: >-
+                Name of the icon to show (search, home, trash, etc.). Themes
+                usually provide a mapping from FontAwesome names to name os the
+                used icon collection.
+            type: 'str'
+
+image:
+    description: |
+        Image element, used to show a graphical image.
+    category: essential
+    arguments:
+        src:
+            description: URL of the image to show
+            type: 'str'
+        alt:
+            description: Alternative text for the image, shown if the image cannot be loaded
+            type: 'str'
+
+link:
+    description: |
+        Link element, used to navigate to another page or trigger an action when clicked.
+    category: essential
+    arguments:
+        content:
+            description: Link label
+        href:
+            description: URL to navigate to when the link is clicked. If not specified, link will not be a link.
+            type: 'str'
+        blank:
+            description: Whether to open the link in a new tab
+            type: 'bool'
+
+tag:
+    description: |
+        Tag element, used to show a keyword or label for an item.
+    category: essential
+    arguments:
+        content:
+            description: Tag label
+        href:
+            description: URL to navigate to when the tag is clicked. x
+            type: 'str'
+
+tab:
+    description: |
+        Tab element, used to show a single tab in a tabbed interface.
+    category: recommended
+    arguments:
+        content:
+            description: Tab label
+        href:
+            description: URL to navigate to when the tab is clicked. If not specified, tab will not be a link.
+            type: 'str'
+        active:
+            description: Whether this tab is currently active
+            type: 'bool'
+
+video:
+    description: |
+        Video element, used to show a video player for a video resource.
+    category: recommended
+    arguments:
+        src:
+            description: URL of the video to show
+        controls:
+            description: Whether to show video controls (play, pause, etc.)
+            type: 'bool'
+
+# data ################################################################
+chart:
+    description: |
+        Chart element, used to show a chart visualization for a dataset.
+    category: unstable
+    arguments:
+        content:
+            description: Chart caption
+        type:
+            description: Type of the chart (bar, line, pie, etc.)
+            type: 'str'
+        data:
+            description: Data for the chart, in a format specific to the chart type
+            type: 'dict|list'
+        labels:
+            description: Labels for the chart data, in a format specific to the chart type
+            type: 'dict|list'
+
+code:
+    description:  |
+        Code element, used to show a block of code or preformatted text.
+    category: recommended
+    arguments:
+        content:
+            description: Code content to display
+        language:
+            description: Programming language of the code content, used for syntax highlighting
+            type: 'str'
+
+definition_list:
+    description: |
+        Definition list element, used to show a list of terms and their definitions.
+    category: unstable
+    arguments:
+        items:
+            description: List of definition items, each item is a collection of two elements
+            type: 'list[tuple[str, str]]'
+
+table:
+    description: |
+        Table element, used to show tabular data.
+    category: essential
+    arguments:
+        content:
+            description: Table content, typically table_head and table_body elements
+        striped:
+            description: Whether to show striped rows
+            type: 'bool'
+        bordered:
+            description: Whether to show borders around cells
+            type: 'bool'
+        condensed:
+            description: Whether to show condensed table with smaller cell padding
+            type: 'bool'
+        hover:
+            description: Whether to highlight rows on hover
+            type: 'bool'
+
+table_body:
+    description: |
+        Table body element, used to wrap the main content of a table.
+    category: recommended
+    arguments:
+        content:
+            description: Table body content, typically table_row elements
+
+table_head:
+    description: |
+        Table head element, used to wrap the header content of a table.
+    category: recommended
+    arguments:
+        content:
+            description: Table head content, typically a single table_row element with header cells
+
+table_row:
+    description: |
+        Table row element, used to show a single row in a table body or header.
+    category: recommended
+    arguments:
+        content:
+            description: Table row content, typically table_cell elements
+
+table_cell:
+    description: |
+        Table cell element, used to show a single cell in a table row.
+    category: recommended
+    arguments:
+        content:
+            description: Content of the table cell
+        header:
+            description: Whether this cell is a header cell (i.e. should be rendered as <th> instead of <td>)
+            type: 'bool'
+
+# form ################################################################
+checkbox:
+    description: |
+        Checkbox input element, used to show a boolean option in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the checkbox
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        value:
+            description: Value submitted when the checkbox is checked
+            type: 'str'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+        checked:
+            description: Whether the checkbox is checked by default
+            type: 'bool'
+
+extra_field:
+    description: Widget for extra details. Usually rendered as a pair of fields for key and value.
+    category: recommended
+    arguments:
+        content:
+            description: Help text for the input
+        index:
+            description: Index of the extra field in the list of extra fields, used to generate unique input names and ids
+            type: 'int'
+        data:
+            description: Dictionary with "<PREFIX>key" and "<PREFIX>value" for the extra field, used to populate the input values
+            type: 'dict'
+        errors:
+            description: >-
+                Dictionary with "<PREFIX>key" and "<PREFIX>value" for the extra
+                field, used to show error messages for the inputs
+            type: 'dict'
+        name_template:
+            description: >-
+                Template of the prefix for the input names, with "{index}"
+                placeholder for the index of the extra field
+                (e.g. "extras__{index}__")
+            type: 'str'
+
+extra_fields_collection:
+    description: |
+        Wrapper for a collection of extra_field widgets.
+    category: recommended
+    arguments:
+        extras:
+            description: List of extra fields, each item is a dictionary with "key", "value"
+        errors:
+            description: Dict of error messages for the extra fields
+        limit:
+            description: Maximum number of extra fields allowed
+            type: 'int'
+
+field_errors:
+    description: |
+        Element used to show error messages for a form field.
+    category: essential
+    arguments:
+        errors:
+            description: List of error messages to show for the field
+            type: 'list[str]'
+
+fieldset:
+    description: |
+        Fieldset element, used to group related form fields together with an optional legend.
+    category: recommended
+    arguments:
+        content:
+            description: Content of the fieldset, typically form fields
+        legend:
+            description: Optional legend text shown at the top of the fieldset
+            type: 'str'
+
+file_input:
+    description: |
+        File input element, used to allow the user to upload a file in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        accept:
+            description: Comma-separated list of accepted file types (e.g. "image/*,.pdf")
+            type: 'str'
+        capture:
+            description: Whether to allow capturing media directly from the device camera or microphone (e.g. "user", "environment")
+            type: 'str'
+        multiple:
+            description: Whether to allow selecting multiple files
+            type: 'bool'
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+
+form:
+    description: |
+        Form element, used to wrap form fields and controls, and handle form submission.
+    category: essential
+    arguments:
+        content:
+            description: Content of the form, typically form fields and a submit button
+        method:
+            description: HTTP method to use when submitting the form, either "GET" or "POST"
+            type: 'str'
+        action:
+            description: URL to submit the form to
+            type: 'str'
+        enctype:
+            description: Encoding type for the form data, either "application/x-www-form-urlencoded", "multipart/form-data", or "text/plain"
+            type: 'str'
+        include_csrf:
+            description: Whether to include a CSRF token in the form for protection against CSRF attacks
+            type: 'bool'
+
+form_annotation:
+    description: |
+        Element used to show form instructions, like explaining that asterisk
+        indicates required fields.
+    category: essential
+    arguments:
+        content:
+            description: Usually ignored
+
+field_info:
+    description: |
+        Element used to show additional information about a form field, typically
+        rendered as a small help text below the field.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the form field
+
+form_actions:
+    description: Block containing form action buttons, typically "submit" and "cancel".
+    category: essential
+    arguments:
+        content:
+            description: Form action buttons
+
+form_end:
+    description: Closing tag of the form element, used when the form is split into multiple parts in the template.
+    category: recommended
+    arguments:
+        content:
+            description: Content shown before the closing tag, typically empty or containing hidden inputs.
+
+form_errors:
+    description: |
+        Element used to show non-field-specific error messages for the form, typically shown at the top of the form.
+    category: essential
+    arguments:
+        errors:
+            description: Dict of error messages to show for the form
+            type: 'dict[str, str]'
+
+form_start:
+    description: Opening tag of the form element, used when the form is split into multiple parts in the template.
+    category: recommended
+    arguments:
+        content:
+            description:  Content shown after the opening tag, typically empty or containing hidden inputs.
+        method:
+            description: HTTP method to use when submitting the form, either "GET" or "POST"
+            type: 'str'
+        action:
+            description: URL to submit the form to
+            type: 'str'
+        enctype:
+            description: Encoding type for the form data, either "application/x-www-form-urlencoded", "multipart/form-data", or "text/plain"
+            type: 'str'
+
+hidden_input:
+    description: |
+        Hidden input element, used to include hidden data in a form submission.
+    category: essential
+    arguments:
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        value:
+            description: Value to include in the form submission
+            type: 'str'
+
+input:
+    description: |
+        Generic input element, used to show a single-line text input in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        value:
+            description: Default value of the input
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        placeholder:
+            description: Placeholder text shown in the input when it is empty
+            type: 'str'
+        type:
+            description: Type of the input, either "text", "email", "password", "number", etc.
+            type: 'str'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+
+markdown:
+    description: |
+        Markdown input element, used to show a multi-line text input for
+        markdown content in a form, typically rendered with a markdown editor
+        widget.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        value:
+            description: Default value of the input
+            type: 'str'
+        placeholder:
+            description: Placeholder text shown in the input when it is empty
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+
+
+markdown_popover:
+    description: |
+        Popover widget containing brief markdown explanation of Markdown syntax.
+    category: recommended
+    arguments:
+        id:
+            description: Unique identifier for the popover, used to target it with a popover_handle.
+            type: 'str'
+        title:
+            description: Title shown in the popover header
+            type: 'str'
+
+radio:
+    description: |
+        Radio button input element, used to show a single option in a group of mutually exclusive options in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the radiobox
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        value:
+            description: Value submitted when the checkbox is checked
+            type: 'str'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+        checked:
+            description: Whether the checkbox is checked by default
+            type: 'bool'
+
+range_input:
+    description: |
+        Range input element, used to show a slider input for selecting a numeric value within a range in a form.
+    category: recommended
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        value:
+            description: Default value of the input
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+        min_value:
+            description: Minimum value allowed for the input
+            type: 'int'
+        max_value:
+            description: Maximum value allowed for the input
+            type: 'int'
+        step:
+            description: Step size for the input value
+            type: 'int'
+
+select:
+    description: |
+        Select input element, used to show a dropdown select input for selecting one or more options in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        multiple:
+            description: Whether to allow selecting multiple options
+            type: 'bool'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+        selected:
+            description: List of values of the options that should be selected by default
+            type: 'list[str]'
+        options:
+            description: List of options to show in the select box, each option is a dictionary with "label" and "value"
+            type: 'list[dict]'
+
+select_box:
+    description: |
+        Wrapper around list of select options, used to show a dropdown select input in a form.
+    category: essential
+    arguments:
+        content:
+            description: Select options to show in the select box, typically a list of select_option elements
+        nested_content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        multiple:
+            description: Whether to allow selecting multiple options
+            type: 'bool'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+
+select_option:
+    description: |
+        Single option in a select input element, used to show an option in a dropdown select box.
+    category: essential
+    arguments:
+        content:
+            description: Option label shown to the user
+        value:
+            description: Value submitted when this option is selected
+            type: 'str'
+        selected:
+            description: Whether this option is selected by default
+            type: 'bool'
+
+submit:
+    description: |
+        Submit button element, used to submit a form when clicked.
+    category: essential
+    arguments:
+        content:
+            description: Button label
+        value:
+            description: Value submitted when the button is clicked
+            type: 'str'
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+
+textarea:
+    description: |
+        Textarea input element, used to show a multi-line text input in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        value:
+            description: Default value of the input
+            type: 'str'
+        placeholder:
+            description: Placeholder text shown in the input when it is empty
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+
 
 #         # handles #############################################################
 #         "modal_close_handle": Component(Category.RECOMMENDED),
