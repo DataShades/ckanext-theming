@@ -320,8 +320,9 @@ def template_list(theme: lib.Theme):
 
 
 @template.command("check")
+@click.option("-e", "--show-extra", is_flag=True, help="Show custom templates")
 @theme_option
-def template_check(theme: lib.Theme):
+def template_check(theme: lib.Theme, show_extra: bool):
     """Verify that a theme contains all required templates."""
     categorized: dict[reference.Category, set[str]] = defaultdict(set)
     for name, info in reference.templates.items():
@@ -348,7 +349,7 @@ def template_check(theme: lib.Theme):
 
         else:
             click.secho(f"  All templates in category {category.name} are present", fg="green")
-    if extra:
+    if extra and show_extra:
         click.secho(f"  Extra templates ({len(extra)})", fg="yellow")
         click.secho("    " + "\n    ".join(extra), fg="blue")
 
@@ -386,7 +387,7 @@ def template_analyze(  # noqa: C901
         click.secho(
             click.style("Filename: ", fg="yellow") + os.path.relpath(tpl.filename, os.getcwd())
             if relative_filename
-            else tpl.filename
+            else os.path.normpath(tpl.filename)
         )
 
         with open(tpl.filename) as src:
@@ -420,7 +421,7 @@ def template_analyze(  # noqa: C901
 
 
 def _discover_template_hierarchy(
-    env: Environment, tpl: Template, hierarchy: list[str], all_blocks: set[str]
+    env: Environment, tpl: Template, hierarchy: list[str], all_blocks: set[str] | None = None
 ) -> str | None:
     parent_name = None
 
@@ -444,7 +445,8 @@ def _discover_template_hierarchy(
         return parent_name
 
     hierarchy.append(parent_tpl.filename)  # pyright: ignore[reportArgumentType]
-    all_blocks.update(parent_tpl.blocks)
+    if all_blocks is not None:
+        all_blocks.update(parent_tpl.blocks)
 
     return _discover_template_hierarchy(env, parent_tpl, hierarchy, all_blocks)
 
@@ -458,16 +460,23 @@ def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequ
     env: Environment = ctx.meta["flask_app"].jinja_env
     used: dict[str, set[str]] = defaultdict(set)
     counter: Counter[str] = Counter()
+
+    all_templates: set[str] = set()
+
     for name in env.list_templates():
         if not name.endswith(".html"):
             continue
         tpl = env.get_template(name)
-        if not tpl.filename:
-            continue
+        all_templates.add(tpl.filename)  # pyright: ignore[reportArgumentType]
 
-        with open(tpl.filename) as src:
+        hierarchy = []
+        _discover_template_hierarchy(env, tpl, hierarchy)
+        all_templates.update(hierarchy)
+
+    for filename in all_templates:
+        with open(filename) as src:
             for component_name in RE_COMPONENT.findall(src.read()):
-                used[component_name].add(tpl.filename)
+                used[component_name].add(filename)
                 counter.update([component_name])
 
     with _make_ui(ctx, theme) as ui:
