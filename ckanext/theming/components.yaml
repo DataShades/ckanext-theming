@@ -1265,39 +1265,466 @@ textarea:
             type: 'list[str]'
 
 
-#         # handles #############################################################
-#         "modal_close_handle": Component(Category.RECOMMENDED),
-#         "modal_handle": Component(Category.ESSENTIAL),
-#         "popover_handle": Component(Category.RECOMMENDED),
+# handles
+modal_close_handle:
+    description: Element used to trigger closing of a modal dialog, typically rendered as a close button in the modal header or footer.
+    category: recommended
+    arguments:
+        content:
+            description: Label or icon for the close handle
+        id:
+            description: Unique identifier of the modal to close when this handle is triggered
+            type: 'str'
 
-#         # meta ################################################################
-#         "account": Component(Category.RECOMMENDED),
-#         "header": Component(Category.RECOMMENDED),
-#         "header_logo": Component(Category.RECOMMENDED),
-#         "footer": Component(Category.RECOMMENDED),
-#         "footer_main": Component(Category.RECOMMENDED),
-#         "footer_secondary": Component(Category.RECOMMENDED),
-#         "subtitle_item": Component(Category.ESSENTIAL),
+modal_handle:
+    description: Element used to trigger opening of a modal dialog, typically rendered as a button or link that the user can click to open the modal.
+    category: essential
+    arguments:
+        content:
+            description: Label or icon for the handle
+        id:
+            description: Unique identifier of the modal to show when this handle is triggered
+            type: 'str'
 
-#         # navigation ##########################################################
-#         "breadcrumb": Component(Category.ESSENTIAL),
-#         "nav_item": Component(Category.ESSENTIAL),
-#         "main_nav_item": Component(Category.ESSENTIAL),
-#         "sidebar_nav_item": Component(Category.RECOMMENDED),
-#         "account_nav_item": Component(Category.ESSENTIAL),
-#         "content_nav_item": Component(Category.ESSENTIAL),
-#         "page_action": Component(Category.ESSENTIAL),
-#         "content_action": Component(Category.ESSENTIAL),
-#         "pagination": Component(Category.ESSENTIAL),
-#         "pagination_item": Component(Category.ESSENTIAL),
-#         "dropdown_item": Component(Category.ESSENTIAL),
+popover_handle:
+    description: Element used to trigger showing of a popover, typically rendered as a button or link that the user can click to show the popover.
+    category: recommended
+    arguments:
+        content:
+            description: Label or icon for the handle
+        id:
+            description: Unique identifier of the popover to toggle when this handle is triggered
+            type: 'str'
 
-#         # search ##############################################################
-#         "search_active_filters": Component(Category.RECOMMENDED),
-#         "search_advanced_controls": Component(Category.RECOMMENDED),
-#         "search_form": Component(Category.ESSENTIAL),
-#         "search_form_box": Component(Category.RECOMMENDED),
-#         "search_input": Component(Category.RECOMMENDED),
-#         "search_results_text": Component(Category.RECOMMENDED),
-#         "search_sort_control": Component(Category.RECOMMENDED),
-#         "search_submit_button": Component(Category.RECOMMENDED),
+# # meta
+account:
+    description: Wrapper element for account-related links or information, typically shown in the page header.
+    category: recommended
+    arguments:
+        content:
+            description: Account-related content, typically links to user profile, settings, logout, etc.
+
+header:
+    description: Wrapper element for the page header, typically containing the site logo and main navigation.
+    category: recommended
+    arguments:
+        content:
+            description: Header content, typically main navigation
+        title:
+            description: Site title
+            type: 'str'
+        subtitle:
+            description: Site subtitle or tagline
+            type: 'str'
+        logo:
+            description: URL of the site logo image
+            type: 'str'
+        href:
+            description: URL to navigate to when the header or logo is clicked, typically the site home page
+            type: 'str'
+
+header_logo:
+    description: Element for the site logo in the page header, typically rendered as an image.
+    category: recommended
+    arguments:
+        href:
+            description: URL to navigate to when the logo is clicked, typically the site home page
+            type: 'str'
+        logo:
+            description: URL of the logo image
+            type: 'str'
+        title:
+            description: Site title, shown next to logo or used as alt text when logo is not specified
+            type: 'str'
+        subtitle:
+            description: Site subtitle or tagline, shown next to logo or used as alt text when logo is not specified
+            type: 'str'
+
+footer:
+    description: Wrapper element for the page footer, typically containing copyright information and links to legal and support pages.
+    category: recommended
+    arguments:
+        content:
+            description: Footer content, typically copyright information and links to legal and support pages
+
+footer_main:
+    description: Main content element for the page footer, typically containing copyright information and links to legal and support pages.
+    category: recommended
+    arguments:
+        content:
+            description: Main footer content, typically copyright information and links to legal and support pages
+
+footer_secondary:
+    description: Secondary content element for the page footer, typically containing additional links or information.
+    category: recommended
+    arguments:
+        content:
+            description: Secondary footer content, typically additional links or information
+
+subtitle_item:
+    description: Fragment of the page title rendered inside `<head>` tag.
+    category: essential
+    arguments:
+        content:
+            description: Fragment of the title
+        initial:
+            description: Whether this is the initial part of the title
+            type: 'bool'
+
+# navigation
+breadcrumb:
+    description: |
+        Breadcrumb navigation element, used to show the user's current location
+        within the site hierarchy and allow navigation back to parent pages.
+    category: essential
+    arguments:
+        content:
+            description: Breadcrumb label
+        href:
+            description: URL to navigate to when the breadcrumb item is clicked
+            type: 'str'
+        initial:
+            description: Whether this is the initial breadcrumb item, typically the home page
+            type: 'bool'
+        active:
+            description: Whether this breadcrumb item represents the current page
+            type: 'bool'
+
+nav_item:
+    description: |
+        Generic navigation item, used to show a link in a navigation menu.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+        active:
+            description: Whether this navigation item represents the current page
+            type: 'bool'
+
+main_nav_item:
+    description: |
+        Navigation item for the main navigation menu in the page header.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+        active:
+            description: Whether this navigation item represents the current page
+            type: 'bool'
+
+
+sidebar_nav_item:
+    description: |
+        Navigation item for the sidebar navigation menu, typically shown on the left or right side of the page.
+    category: recommended
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+        active:
+            description: Whether this navigation item represents the current page
+            type: 'bool'
+
+account_nav_item:
+    description: |
+        Navigation item for the account menu, typically shown in the page
+        header and containing links to user profile, settings, logout, etc.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+        active:
+            description: Whether this navigation item represents the current page
+            type: 'bool'
+
+content_nav_item:
+    description: |
+        Navigation item for the content menu, typically shown as a secondary
+        navigation within a page, for example to switch between different
+        sections of a dataset page.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+        active:
+            description: Whether this navigation item represents the current page
+            type: 'bool'
+
+page_action:
+    description: |
+        Navigation item for page actions, typically shown as buttons or links
+        for actions related to the current page, for example "Add a dataset".
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+
+content_action:
+    description: |
+        Navigation item for content actions, typically shown as buttons or links
+        for actions related to the current content, for example "Download",
+        "Edit", etc.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+
+pagination:
+    description: |
+        Pagination element, used to show pagination controls for paginated
+        content, typically rendered as a list of page numbers and next/previous
+        buttons.
+    category: essential
+    arguments:
+        page:
+            description: Current page number
+            type: 'int'
+        total:
+            description: Total number of pages
+            type: 'int'
+        url_generator:
+            description: Function that generates a URL for a given page number, used to create links for the pagination controls
+            type: 'callable'
+        padding:
+            description: Number of page links to show on each side of the current page
+            type: 'int'
+        hide_edges:
+            description: Whether to hide the "first" and "last" page links
+            type: 'bool'
+        hide_siblings:
+            description: Whether to hide the "next" and "previous" page links
+            type: 'bool'
+        start_label:
+            description: Label for the "first" page link
+            type: 'str'
+        end_label:
+            description: Label for the "last" page link
+            type: 'str'
+        previous_label:
+            description: Label for the "previous" page link
+            type: 'str'
+        next_label:
+            description: Label for the "next" page link
+            type: 'str'
+        padding_label:
+            description: Label for the padding links (e.g. "...")
+            type: 'str'
+        url_params:
+            description: Additional URL parameters to include in the generated URLs for the pagination links
+            type: 'dict[str, str]'
+
+pagination_item:
+    description: |
+        Single page item in a pagination element, typically rendered as a link or button for a specific page number.
+    category: essential
+    arguments:
+        content:
+            description: Page number or label for the pagination item
+        href:
+            description: URL to navigate to when the pagination item is clicked
+            type: 'str'
+        active:
+            description: Whether this pagination item represents the current page
+            type: 'bool'
+
+dropdown_item:
+    description: |
+        Single item in a dropdown menu, typically rendered as a link or button within a dropdown.
+    category: essential
+    arguments:
+        content:
+            description: Dropdown item label
+        href:
+            description: URL to navigate to when the dropdown item is clicked
+            type: 'str'
+
+
+# search
+search_active_filters:
+    description: |
+        Element used to show the currently active search filters, typically
+        rendered as a list of filter labels with options to remove each filter.
+    category: recommended
+    arguments:
+        active_filters:
+            description: List of active filters
+            type: 'list[str]'
+        facet_titles:
+            description: Mapping of facet names to their display titles, used to show user-friendly filter labels
+            type: 'dict[str, str]'
+        facets:
+            description: List of available facets, used to show user-friendly filter labels
+            type: 'list[dict]'
+        use_htmx:
+            description: Whether to use HTMX for the filter links, which allows for dynamic updating of search results without a full page reload
+            type: 'bool'
+
+search_advanced_controls:
+    description: |
+        Element used to show advanced search controls, typically rendered as a
+        collapsible section with additional search options and filters.
+    category: unstable
+    arguments:
+        content:
+            description: Usually ignored
+
+search_form:
+    description: Complete search form
+    category: essential
+    arguments:
+        content:
+            description: >-
+                Usually ignored, as the search form is typically rendered in a
+                single part in the template, but can be used when the search
+                form is split into multiple parts.
+        query:
+            description: Current search query, used to populate the search input value
+            type: 'str'
+        sorting_options:
+            description: List of available sorting options
+            type: 'list[tuple[str, str]]'
+        sorting:
+            description: Currently selected sorting option, used to set the value of the search_sort_control element
+            type: 'str'
+        error:
+            description: Search error message to show, typically shown when there is an error with the search query or filters
+            type: 'str'
+        count:
+            description: Total number of search results, used to show the number of results found
+            type: 'int'
+        facets:
+            description: List of available search facets, used to show the available filters and their counts
+            type: 'list[dict]'
+        facet_titles:
+            description: Mapping of facet names to their display titles, used to show user-friendly filter labels
+            type: 'dict[str, str]'
+        active_filters:
+            description: List of currently active filters, used to show which filters are currently applied to the search
+            type: 'list[str]'
+        use_htmx:
+            description: Whether to use HTMX for the search form, which allows for dynamic updating of search results without a full page reload
+            type: 'bool'
+        query_name:
+            description: Name of the search query parameter, used in the search input name and when generating URLs for pagination and sorting links
+            type: 'str'
+        sorting_name:
+            description: Name of the sorting parameter, used in the search_sort_control name and when generating URLs for pagination and sorting links
+            type: 'str'
+        type:
+            description: Type of the search, used to customize the search form for different types of content (e.g. datasets, organizations, etc.)
+            type: 'str'
+
+
+
+search_form_box:
+    description: |
+        Element used to wrap the search form, typically containing the search
+        input and submit button, and possibly additional search options.
+    category: recommended
+    arguments:
+        content:
+            description: Search form content, typically including search_input and search_submit_button elements
+        use_htmx:
+            description: >-
+                Whether to use HTMX for the search form, which allows for
+                dynamic updating of search results without a full page reload
+            type: 'bool'
+
+search_input:
+    description: |
+        Search input element, typically rendered as a text input for entering the search query.
+    category: recommended
+    arguments:
+        content:
+            description: Help text for the search input
+        name:
+            description: Name of the search query parameter, used in the search input name and when generating URLs for pagination and sorting links
+            type: 'str'
+        value:
+            description: Current search query, used to populate the search input value
+            type: 'str'
+        label:
+            description: Label text shown next to the search input
+            type: 'str'
+        placeholder:
+            description: Placeholder text shown in the search input when it is empty
+            type: 'str'
+
+search_results_text:
+    description: |
+        Element used to show the search results text, typically rendered above
+        the search results list and showing the number of results found and the
+        search query.
+    category: recommended
+    arguments:
+        content:
+            description: >-
+                Usually ignored, as the search results text is typically
+                generated dynamically based on the search query and results
+                count, but can be used to customize the search results text.
+        count:
+            description: Total number of search results, used to show the number of results found
+            type: 'int'
+        error:
+            description: Search error message to show, typically shown when there is an error with the search query or filters
+            type: 'str'
+        query:
+            description: Current search query, used to show the search query in the results text
+            type: 'str'
+        type:
+            description: >-
+                Type of the search, used to customize the search results text
+                for different types of content (e.g. datasets, organizations,
+                etc.)
+            type: 'str'
+
+search_sort_control:
+    description: |
+        Element used to show the search sorting control, typically rendered as a
+        dropdown select input for selecting the sorting option.
+    category: recommended
+    arguments:
+        content:
+            description: Help text for the sorting control
+        name:
+            description: >-
+                Name of the sorting parameter, used in the search_sort_control
+                name and when generating URLs for pagination and sorting links
+            type: 'str'
+        selected:
+            description: Currently selected sorting option, used to set the value of the search_sort_control element
+            type: 'str'
+        options:
+            description: List of available sorting options, each option is a tuple of (value, label)
+            type: 'list[tuple[str, str]]'
+        label:
+            description: Label text shown next to the sorting control
+            type: 'str'
+
+search_submit_button:
+    description: |
+        Submit button for the search form, typically rendered as a button with a search icon.
+    category: recommended
+    arguments:
+        content:
+            description: Button label, typically ignored when using an icon for the button
