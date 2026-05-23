@@ -114,6 +114,7 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro %}
 
 {%- macro form_annotation() -%}
+    {%- do kwargs -%}
 {%- endmacro %}
 
 {%- macro field_info(content) -%}
@@ -153,7 +154,7 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro %}
 
 {%- macro markdown_popover(id, title=_("Markdown formatting")) -%}
-    {%- call ui.util.call(ui.popover, title=title, id=id) -%}
+    {%- call ui.util.call(ui.popover, title=title, id=id, **kwargs) -%}
         {%- if content -%}
             {{ content }}
         {%- else -%}
@@ -315,7 +316,7 @@ this.parentNode.insertBefore(tpl, this);
 {%- endmacro -%}
 
 {%- macro fieldset(content, legend) -%}
-    <fieldset>
+    <fieldset {{ ui.util.attrs(kwargs) }}>
         {%- if legend -%}
             <legend>{{ legend }}</legend>
         {%- endif %}

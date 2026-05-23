@@ -14,7 +14,7 @@
 
     {%- else -%}
         <div>
-            {{ ui.heading(ui.link(title, href=href), level=1) }}
+            {{ ui.heading(ui.link(title, href=href, **kwargs), level=1) }}
             {% if subtitle %}
                 {{ ui.heading(subtitle, level=2) }}
             {% endif %}
@@ -30,11 +30,11 @@
 {%- endmacro %}
 
 {%- macro footer_main(content) -%}
-    <div>{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
 {%- endmacro %}
 
 {%- macro footer_secondary(content) -%}
-    <div>{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs) }}>{{ content }}</div>
 {%- endmacro %}
 
 {%- macro account(content, title, subtitle, logo) -%}
