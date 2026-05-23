@@ -14,10 +14,11 @@ import string
 import textwrap
 from collections import Counter, defaultdict
 from collections.abc import Callable, Collection
-from typing import IO, Any
+from typing import Any
 
 import click
 import flask.signals
+import msgspec
 from jinja2 import Environment, Template, TemplateNotFound
 from jinja2.exceptions import UndefinedError
 from jinja2.runtime import Macro
@@ -33,7 +34,7 @@ log = logging.getLogger(__name__)
 
 __all__ = ["theme"]
 
-RE_COMPONENT = re.compile(r"(?<!\.)ui\.(?!util\.)(?P<name>\w+)")
+RE_COMPONENT = re.compile(r"(?<!\.)\bui\.(?!util\.)(?P<name>\w+)")
 
 RE_EXTEND = re.compile(
     r"""
@@ -159,14 +160,21 @@ def component_list(ctx: click.Context, theme: lib.Theme):
 
 @component.command("analyze")
 @click.pass_context
+@click.option("-c", "--category", help="Filter components by category.", type=reference.Category)
+@click.option("--with-custom-args", type=click.Choice(["both", "missing", "additional"]))
 @theme_option
 @click.argument("components", nargs=-1)
-def component_analyze(ctx: click.Context, components: Collection[str], theme: lib.Theme):  # noqa: C901
+def component_analyze(  # noqa: C901, PLR0912
+    ctx: click.Context,
+    components: Collection[str],
+    theme: lib.Theme,
+    with_custom_args: str | None,
+    category: reference.Category | None,
+):  # noqa: C901
     """Analyze UI components and their implementations."""
     with _make_ui(ctx, theme) as ui:
         if not components:
             components = sorted(ui)
-            click.secho(f"Available UI components({len(components)}):")
 
         for component in components:
             comp_func = getattr(ui, component, None)
@@ -175,26 +183,37 @@ def component_analyze(ctx: click.Context, components: Collection[str], theme: li
                 continue
 
             ref = reference.components[component]
-
+            if category and ref.category != category:
+                continue
             # Try to get the source or signature information
             if isinstance(comp_func, Macro):
-                sig = ", ".join(
-                    (
-                        click.style(arg, italic=True)
-                        if arg == "content"
-                        else f"{arg}: {click.style(ref.arguments[arg].type, italic=True)}"
-                    )
-                    if arg in ref.arguments
-                    else click.style(f"+{arg}", fg="green", bold=True)
-                    for arg in comp_func.arguments
-                )
-                sig = ", ".join(
-                    [sig]
-                    + [
-                        click.style(f"-{arg}: {click.style(ref.arguments[arg].type, italic=True)}", fg="red")
-                        for arg in (set(ref.arguments) - set(comp_func.arguments))
-                    ]
-                )
+                standard_arguments = []
+                additional_arguments = []
+
+                for arg in comp_func.arguments:
+                    if arg in ref.arguments:
+                        standard_arguments.append(
+                            click.style(arg, italic=True)
+                            if arg == "content"
+                            else f"{arg}: {click.style(ref.arguments[arg].type, italic=True)}"
+                        )
+                    else:
+                        additional_arguments.append(click.style(f"+{arg}", fg="green", bold=True))
+
+                missing_arguments = [
+                    click.style(f"-{arg}: {click.style(ref.arguments[arg].type, italic=True)}", fg="red")
+                    for arg in set(ref.arguments) - set(comp_func.arguments)
+                ]
+                if with_custom_args == "both" and not additional_arguments and not missing_arguments:
+                    continue
+
+                if with_custom_args == "additional" and not additional_arguments:
+                    continue
+
+                if with_custom_args == "missing" and not missing_arguments:
+                    continue
+
+                sig = ", ".join(standard_arguments + additional_arguments + missing_arguments)
 
                 if comp_func.catch_varargs:
                     sig = ", ".join([sig, "*varargs"])
@@ -405,7 +424,7 @@ def template_analyze(  # noqa: C901
         if hierarchy:
             click.secho("Hierarchy: ", fg="yellow")
             for item in hierarchy:
-                click.echo(f"\t{os.path.relpath(item, os.getcwd()) if relative_filename else os.path.normpath(item)}")
+                click.echo(f"\t{os.path.relpath(item, os.getcwd()) if relative_filename else item}")
 
         if hierarchy_break:
             click.secho(click.style("Hierarchy detection interrupted on: ", fg="red") + hierarchy_break)
@@ -444,7 +463,7 @@ def _discover_template_hierarchy(
     except TemplateNotFound:
         return parent_name
 
-    hierarchy.append(parent_tpl.filename)  # pyright: ignore[reportArgumentType]
+    hierarchy.append(os.path.normpath(parent_tpl.filename))  # pyright: ignore[reportArgumentType, reportCallIssue]
     if all_blocks is not None:
         all_blocks.update(parent_tpl.blocks)
 
@@ -455,7 +474,8 @@ def _discover_template_hierarchy(
 @theme_option
 @click.pass_context
 @click.option("--include-frequency", is_flag=True, help="Include component usage frequency.")
-def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequency: bool):  # noqa: C901
+@click.option("--path", default="/", help="")
+def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequency: bool, path: str):  # noqa: C901, PLR0912
     """Analyze component usage in templates."""
     env: Environment = ctx.meta["flask_app"].jinja_env
     used: dict[str, set[str]] = defaultdict(set)
@@ -463,15 +483,18 @@ def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequ
 
     all_templates: set[str] = set()
 
+    path = os.path.abspath(path)
     for name in env.list_templates():
         if not name.endswith(".html"):
             continue
         tpl = env.get_template(name)
-        all_templates.add(tpl.filename)  # pyright: ignore[reportArgumentType]
+        filename: str = os.path.normpath(tpl.filename)  # pyright: ignore[reportCallIssue, reportArgumentType, reportUnknownVariableType]
+        if os.path.normpath(filename).startswith(path):
+            all_templates.add(filename)
 
-        hierarchy = []
+        hierarchy: list[str] = []
         _discover_template_hierarchy(env, tpl, hierarchy)
-        all_templates.update(hierarchy)
+        all_templates.update(filename for filename in hierarchy if filename.startswith(path))
 
     for filename in all_templates:
         with open(filename) as src:
@@ -644,12 +667,8 @@ def _dump_encoder(value: Any):
 @click.option("--user")
 @click.option("--ignore", default=("request", "session", "g", "csrf_token", "current_user"), multiple=True)
 @click.option("--endpoints", multiple=True)
-@click.option(
-    "--source",
-    type=click.File("r"),
-    required=True,
-    default=os.path.join(os.path.dirname(__file__), "dump_source.json"),
-)
+@click.option("--source")
+@click.option("--show-source", is_flag=True)
 @click.option("-v", "--verbose", is_flag=True)
 def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
     ctx: click.Context,
@@ -657,14 +676,18 @@ def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
     ignore: tuple[str, ...],
     endpoints: tuple[str, ...],
     verbose: bool,
-    source: IO[str],
+    source: str,
+    show_source: bool,
 ):
     """Dump templates and context variables used by Flask endpoints in JSON format."""
     app = ctx.meta["flask_app"]
     url_map: dict[str, list[Rule]] = app.url_map._rules_by_endpoint
 
     auth_obj = model.User.get(user)
-    source_data: dict[str, Any] = json.load(source)
+    source_data = reference.get_source(source)
+    if show_source:
+        click.echo(msgspec.yaml.encode(source_data))
+        return
 
     result: dict[str, Any] = {}
 
@@ -673,7 +696,7 @@ def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
             if endpoints and name not in endpoints:
                 continue
 
-            if any(fnmatch.fnmatch(name, pattern) for pattern in source_data.get("ignore", [])):
+            if any(fnmatch.fnmatch(name, pattern) for pattern in source_data.ignore):
                 continue
 
             for rule in rules:
@@ -682,7 +705,7 @@ def endpoint_dump(  # noqa: PLR0912, PLR0913, C901
 
                 params = reference.make_params(name, rule.arguments, source_data, rule.defaults or {})
                 # TODO: handle different variants
-                params.update(source_data.get("args", {}).get("name", {}))
+                params.update(source_data.args.get("name", {}))
 
                 try:
                     data = _observe_endpoint(name, params, app, user=auth_obj)

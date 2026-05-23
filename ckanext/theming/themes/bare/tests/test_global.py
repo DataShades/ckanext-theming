@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 import fnmatch
-import json
-import os
 from typing import Any, cast
 
 import pytest
@@ -25,9 +23,7 @@ def source_data(
     resource_view_factory: TestFactory,
     ckan_config: FixtureCkanConfig,
 ):
-    filename = os.path.join(os.path.dirname(reference.__file__), "dump_source.json")
-    with open(filename) as src:
-        source = json.load(src)
+    source = reference.get_source()
 
     page_size = ckan_config["ckan.datasets_per_page"]
     users = user_factory.create_batch(page_size + 1)
@@ -39,7 +35,7 @@ def source_data(
     resources = resource_factory.create_batch(2, package_id=packages[0]["id"])
     views = resource_view_factory.create_batch(2, resource_id=resources[0]["id"])
 
-    source["data"].update(
+    source.data.update(
         {
             "resource": resources[0],
             "package": packages[0],

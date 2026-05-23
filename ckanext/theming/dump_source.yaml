@@ -1,0 +1,114 @@
+data:
+  activity:
+    id: '123'
+  resource:
+    id: ed861eb1-92b4-4edf-a175-ec5e6070d4af
+  resource_view:
+    id: 1dc4cbba-7028-4ef9-9aa3-3e273ed1ca10
+  package:
+    id: 46cc4b8f-5f9f-4e2d-a575-aba4d49d5fed
+    name: new-dataset
+  group:
+    id: 4321c80b-9772-4d27-a1a4-ea838542e930
+    name: group-qkpz-8942-dczs
+  organization:
+    id: 451df84a-9897-4342-99c3-7f912172fc86
+    name: organization-kobc-3255-qqep
+  user:
+    id: sergey
+    name: sergey
+ignore:
+- static
+- resource.download
+- home.redirect_locale
+- _debug_toolbar.*
+- debugtoolbar.*
+- webassets.*
+- api.*
+- feeds.*
+- file.*
+- '*_resource.*'
+- '*.member_dump'
+- activity.*_changes_multiple
+matchers:
+- pattern: id:activity.resource_history
+  path:
+  - resource
+  - id
+- pattern: id:activity.package_history
+  path:
+  - package
+  - id
+- pattern: id:activity.group_activity
+  path:
+  - group
+  - id
+- pattern: id:activity.group_changes
+  path:
+  - group
+  - id
+- pattern: id:activity.organization_activity
+  path:
+  - organization
+  - id
+- pattern: id:activity.organization_changes
+  path:
+  - organization
+  - id
+- pattern: id:activity.user_activity
+  path:
+  - user
+  - id
+- pattern: id:activity.user_changes
+  path:
+  - user
+  - id
+- pattern: id:activity.package_activity
+  path:
+  - package
+  - id
+- pattern: id:activity.package_changes
+  path:
+  - package
+  - id
+- pattern: resource_id:*
+  path:
+  - resource
+  - id
+- pattern: user_id:*
+  path:
+  - user
+  - id
+- pattern: view_id:*
+  path:
+  - resource_view
+  - id
+- pattern: activity_id:*
+  path:
+  - activity
+  - id
+- pattern: id:dataset.*
+  path:
+  - package
+  - name
+- pattern: id:resource.*
+  path:
+  - package
+  - name
+- pattern: id:datastore.*
+  path:
+  - package
+  - name
+- pattern: id:group.*
+  path:
+  - group
+  - name
+- pattern: id:organization.*
+  path:
+  - organization
+  - name
+- pattern: id:user.*
+  path:
+  - user
+  - name
+args: {}
