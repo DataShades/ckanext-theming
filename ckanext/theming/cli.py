@@ -474,8 +474,11 @@ def _discover_template_hierarchy(
 @theme_option
 @click.pass_context
 @click.option("--include-frequency", is_flag=True, help="Include component usage frequency.")
-@click.option("--path", default="/", help="")
-def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequency: bool, path: str):  # noqa: C901, PLR0912
+@click.option("--show-unused", is_flag=True, help="Show components that are not used in any template.")
+@click.option("--path", default="/", help="Only analyze templates under the specified path.")
+def template_component_usage(  # noqa: C901, PLR0912
+    ctx: click.Context, theme: lib.Theme, include_frequency: bool, path: str, show_unused: bool
+):  # noqa: C901, PLR0912
     """Analyze component usage in templates."""
     env: Environment = ctx.meta["flask_app"].jinja_env
     used: dict[str, set[str]] = defaultdict(set)
@@ -507,13 +510,22 @@ def template_component_usage(ctx: click.Context, theme: lib.Theme, include_frequ
 
     unused = existing - set(used)
     unknown = set(used) - existing
+    unimplemented = unknown & set(reference.components)
 
-    if unused:
-        click.secho(click.style(f"Unused components({len(unused)}): ", fg="yellow") + ", ".join(sorted(unused)))
-    else:
-        click.secho("No unused components", fg="green")
+    if show_unused:
+        if unused:
+            click.secho(click.style(f"Unused components({len(unused)}): ", fg="yellow") + ", ".join(sorted(unused)))
+        else:
+            click.secho("No unused components", fg="green")
 
-    if unknown:
+    if unimplemented:
+        click.secho(f"Standard components with missing implementation({len(unimplemented)}): ", fg="yellow")
+        for name in sorted(unimplemented):
+            click.echo(f"  {name}:")
+            for tpl_name in sorted(used[name]):
+                click.echo(f"    {tpl_name}")
+
+    if unknown := (unknown - unimplemented):
         click.secho(f"Unknown components({len(unknown)}): ", fg="yellow")
         for name in sorted(unknown):
             click.echo(f"  {name}:")
