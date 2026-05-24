@@ -12,6 +12,7 @@ import re
 import shutil
 import string
 import textwrap
+import time
 from collections import Counter, defaultdict
 from collections.abc import Callable, Collection
 from typing import Any
@@ -668,6 +669,187 @@ def endpoint_observe(  # noqa: PLR0913
                 click.style("Context variables: ", fg="yellow")
                 + pprint.pformat({key: value for key, value in data["context"].items() if key not in ignore})
             )
+
+
+def _profile_endpoint(  # noqa: C901, PLR0913
+    endpoint: str,
+    params: dict[str, Any],
+    app: types.CKANApp,
+    output: str,
+    lib: str,
+    user: model.User | None = None,
+):
+    import cProfile  # noqa: PLC0415
+
+    import pyinstrument  # noqa: PLC0415
+
+    try:
+        url = tk.url_for(endpoint, **params)
+    except BuildError as err:
+        tk.error_shout(err)
+        raise click.Abort from err
+
+    # build jinja's render cache to standardize performance of following requests
+    with app.test_request_context(url):
+        if user:
+            tk.login_user(user)
+        try:
+            app.full_dispatch_request()
+        except NotFound as err:
+            tk.error_shout(err)
+            raise click.Abort from err
+
+    profilers: dict[str, Any] = {}
+
+    def start_render(app: Any, template: Template, context: dict[str, Any]):
+        if lib == "cprofile":
+            profilers[endpoint].disable()
+            pr = cProfile.Profile()
+            profilers[template.name or ""] = pr
+            pr.enable()
+
+    def end_render(app: Any, template: Template, context: dict[str, Any]):
+        if lib == "cprofile":
+            profilers[template.name or ""].disable()
+
+    with (
+        app.test_request_context(url),
+        flask.signals.before_render_template.connected_to(start_render),
+        flask.signals.template_rendered.connected_to(end_render),
+    ):
+        if user:
+            tk.login_user(user)
+        if lib == "pyinstrument":
+            profilers[endpoint] = pyinstrument.Profiler()
+            profilers[endpoint].start()
+        elif lib == "cprofile":
+            profilers[endpoint] = cProfile.Profile()
+            profilers[endpoint].enable()
+        app.full_dispatch_request()
+        if lib == "pyinstrument":
+            profilers[endpoint].stop()
+
+    for tpl, pr in profilers.items():
+        name = tpl.replace("/", "__")
+        if lib == "pyinstrument":
+            with open(os.path.join(output, f"{name}.html"), "w") as dest:
+                click.echo(pr.output_html(), file=dest)
+        elif lib == "cprofile":
+            pr.dump_stats(os.path.join(output, f"{name}.profile"))
+
+
+@endpoint.command("profile", context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
+@click.pass_context
+@click.argument("endpoint")
+@click.option("--auth-user")
+@click.option("--output", default=".")
+@click.option("--lib", default="cprofile", type=click.Choice(["cprofile", "pyinstrument"]))
+def endpoint_profile(  # noqa: PLR0913
+    ctx: click.Context, endpoint: str, auth_user: str, output: str, lib: str
+):
+    """Profile the render time of templates used by a Flask endpoint."""
+    app = ctx.meta["flask_app"]
+    user = model.User.get(auth_user)
+
+    os.makedirs(output, exist_ok=True)
+    with app.app_context():
+        try:
+            params = dict(arg.split("=") for arg in ctx.args)
+        except ValueError as err:
+            tk.error_shout("Extra arguments must follow the format: NAME=VALUE")
+            raise click.Abort from err
+
+        _profile_endpoint(endpoint, params, app, output, lib, user=user)
+
+
+def _benchmark_endpoint(
+    endpoint: str,
+    params: dict[str, Any],
+    app: types.CKANApp,
+    user: model.User | None = None,
+    timeout: int = 5,
+) -> dict[str, Any]:
+    try:
+        url = tk.url_for(endpoint, **params)
+    except BuildError as err:
+        tk.error_shout(err)
+        raise click.Abort from err
+
+    # build jinja's render cache to standardize performance of following requests
+    with app.test_request_context(url):
+        if user:
+            tk.login_user(user)
+        try:
+            app.full_dispatch_request()
+        except NotFound as err:
+            tk.error_shout(err)
+            raise click.Abort from err
+
+    measurements: Counter[str] = Counter()
+    moments = {}
+
+    def start_request(app: Any):
+        moments[endpoint] = time.time()
+
+    def start_render(app: Any, template: Template, context: dict[str, Any]):
+        measurements[endpoint] += time.time() - moments[endpoint]
+        moments[template.name] = time.time()
+
+    def end_render(app: Any, template: Template, context: dict[str, Any]):
+        measurements[template.name or ""] += time.time() - moments[template.name]
+
+    start = time.time()
+    step = 0
+
+    with click.progressbar(range(100), show_percent=True) as bar:
+        while True:
+            step += 1
+            with (
+                app.test_request_context(url),
+                flask.signals.request_started.connected_to(start_request),
+                flask.signals.before_render_template.connected_to(start_render),
+                flask.signals.template_rendered.connected_to(end_render),
+            ):
+                if user:
+                    tk.login_user(user)
+                app.full_dispatch_request()
+
+            spent = time.time() - start
+            bar.pos = int(spent / timeout * 100)
+            bar.render_progress()
+
+            if spent > timeout:
+                break
+
+    return {"measurements": {name: time / step for name, time in measurements.items()}, "iterations": step}
+
+
+@endpoint.command("benchmark", context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
+@click.pass_context
+@click.argument("endpoint")
+@click.option("--auth-user")
+@click.option("--timeout", default=5, type=int)
+def endpoint_benchmark(  # noqa: PLR0913
+    ctx: click.Context, endpoint: str, auth_user: str, timeout: int
+):
+    """Benchmark the render time of templates used by a Flask endpoint."""
+    app = ctx.meta["flask_app"]
+    user = model.User.get(auth_user)
+
+    with app.app_context():
+        try:
+            params = dict(arg.split("=") for arg in ctx.args)
+        except ValueError as err:
+            tk.error_shout("Extra arguments must follow the format: NAME=VALUE")
+            raise click.Abort from err
+
+        data = _benchmark_endpoint(endpoint, params, app, user=user, timeout=timeout)
+        click.echo(f"Total number of iterations: {data['iterations']}")
+        click.echo("Average time:")
+        for name, time in data["measurements"].items():
+            if name == endpoint:
+                name += "(without template rendering)"  # noqa: PLW2901
+            click.echo(f"\t{name}: {time * 100:.3f}ms")
 
 
 def _dump_encoder(value: Any):
