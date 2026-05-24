@@ -610,25 +610,23 @@ def _observe_endpoint(
         tk.error_shout(err)
         raise click.Abort from err
 
-    with (
-        app.test_request_context(url, method=method),
-        flask.signals.before_render_template.connected_to(_render_intercept()),
-    ):
-        if user:
-            tk.login_user(user)
+    with app.test_request_context(url, method=method):  # noqa: SIM117
+        with flask.signals.before_render_template.connected_to(_render_intercept()):
+            if user:
+                tk.login_user(user)
 
-        try:
-            app.full_dispatch_request()
+            try:
+                app.full_dispatch_request()
 
-        except NotFound as err:
-            tk.error_shout(err)
-            raise click.Abort from err
+            except NotFound as err:
+                tk.error_shout(err)
+                raise click.Abort from err
 
-        except RenderInterceptionError as err:
-            return err.args[0]
+            except RenderInterceptionError as err:
+                return err.args[0]
 
-        log.warning("Endpoint %s did not render any template", endpoint)
-        return {"template": Template(""), "context": {}}
+            log.warning("Endpoint %s did not render any template", endpoint)
+            return {"template": Template(""), "context": {}}
 
 
 @endpoint.command("observe", context_settings={"allow_extra_args": True, "ignore_unknown_options": True})
@@ -701,33 +699,31 @@ def _profile_endpoint(  # noqa: C901, PLR0913
 
     profilers: dict[str, Any] = {}
 
-    def start_render(app: Any, template: Template, context: dict[str, Any]):
+    def start_render(app: Any, template: Template, context: dict[str, Any]):  # pyright: ignore[reportUnusedParameter]
         if lib == "cprofile":
             profilers[endpoint].disable()
             pr = cProfile.Profile()
             profilers[template.name or ""] = pr
             pr.enable()
 
-    def end_render(app: Any, template: Template, context: dict[str, Any]):
+    def end_render(app: Any, template: Template, context: dict[str, Any]):  # pyright: ignore[reportUnusedParameter]
         if lib == "cprofile":
             profilers[template.name or ""].disable()
 
-    with (
-        app.test_request_context(url),
-        flask.signals.before_render_template.connected_to(start_render),
-        flask.signals.template_rendered.connected_to(end_render),
-    ):
-        if user:
-            tk.login_user(user)
-        if lib == "pyinstrument":
-            profilers[endpoint] = pyinstrument.Profiler()
-            profilers[endpoint].start()
-        elif lib == "cprofile":
-            profilers[endpoint] = cProfile.Profile()
-            profilers[endpoint].enable()
-        app.full_dispatch_request()
-        if lib == "pyinstrument":
-            profilers[endpoint].stop()
+    with app.test_request_context(url):  # noqa: SIM117
+        with flask.signals.before_render_template.connected_to(start_render):
+            with flask.signals.template_rendered.connected_to(end_render):
+                if user:
+                    tk.login_user(user)
+                if lib == "pyinstrument":
+                    profilers[endpoint] = pyinstrument.Profiler()
+                    profilers[endpoint].start()
+                elif lib == "cprofile":
+                    profilers[endpoint] = cProfile.Profile()
+                    profilers[endpoint].enable()
+                app.full_dispatch_request()
+                if lib == "pyinstrument":
+                    profilers[endpoint].stop()
 
     for tpl, pr in profilers.items():
         name = tpl.replace("/", "__")
@@ -788,14 +784,14 @@ def _benchmark_endpoint(
     measurements: Counter[str] = Counter()
     moments = {}
 
-    def start_request(app: Any):
+    def start_request(app: Any):  # pyright: ignore[reportUnusedParameter]
         moments[endpoint] = time.time()
 
-    def start_render(app: Any, template: Template, context: dict[str, Any]):
+    def start_render(app: Any, template: Template, context: dict[str, Any]):  # pyright: ignore[reportUnusedParameter]
         measurements[endpoint] += time.time() - moments[endpoint]
         moments[template.name] = time.time()
 
-    def end_render(app: Any, template: Template, context: dict[str, Any]):
+    def end_render(app: Any, template: Template, context: dict[str, Any]):  # pyright: ignore[reportUnusedParameter]
         measurements[template.name or ""] += time.time() - moments[template.name]
 
     start = time.time()
@@ -804,15 +800,13 @@ def _benchmark_endpoint(
     with click.progressbar(range(100), show_percent=True) as bar:
         while True:
             step += 1
-            with (
-                app.test_request_context(url),
-                flask.signals.request_started.connected_to(start_request),
-                flask.signals.before_render_template.connected_to(start_render),
-                flask.signals.template_rendered.connected_to(end_render),
-            ):
-                if user:
-                    tk.login_user(user)
-                app.full_dispatch_request()
+            with app.test_request_context(url):  # noqa: SIM117
+                with flask.signals.request_started.connected_to(start_request):
+                    with flask.signals.before_render_template.connected_to(start_render):
+                        with flask.signals.template_rendered.connected_to(end_render):
+                            if user:
+                                tk.login_user(user)
+                            app.full_dispatch_request()
 
             spent = time.time() - start
             bar.pos = int(spent / timeout * 100)

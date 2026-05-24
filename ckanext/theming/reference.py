@@ -8,7 +8,7 @@ import fnmatch
 import os
 from collections import defaultdict
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, Dict
 
 import msgspec
 
@@ -89,10 +89,10 @@ def make_params(endpoint: str, args: set[str], source: Source, defaults: Mapping
 
 components: dict[str, Component] = defaultdict(Component)
 with open(os.path.join(os.path.dirname(__file__), "components.yaml"), "rb") as src:
-    components.update(msgspec.yaml.decode(src.read(), type=dict[str, Component]))
+    components.update(msgspec.yaml.decode(src.read(), type=Dict[str, Component]))
 
 
 templates: dict[str, Template] = defaultdict(Template)
 
 with open(os.path.join(os.path.dirname(__file__), "templates.yaml"), "rb") as src:
-    templates.update(msgspec.yaml.decode(src.read(), type=dict[str, Template]))
+    templates.update(msgspec.yaml.decode(src.read(), type=Dict[str, Template]))

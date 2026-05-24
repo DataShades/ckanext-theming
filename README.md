@@ -7,6 +7,15 @@ customize the look and feel of a CKAN instance. It allows developers and
 designers to create and apply themes without modifying core CKAN code, ensuring
 easier upgrades and maintenance.
 
+Theme implementations:
+
+| Theme                                                                               | Description                                                      |
+|-------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| [Midnight blue portable][midnight-blue-portable] | CKAN's built-in theme(v2.12) rewritten according to theming flow |
+
+
+[midnight-blue-portable]: https://github.com/dataShades/ckanext-midnight-blue-theme
+
 ## Requirements
 
 Compatibility with core CKAN versions:
@@ -70,7 +79,7 @@ To install ckanext-theming:
    using `ckan theme list` CLI command
 
    ```ini
-   ckan.ui.theme = bare
+   ckan.ui.theme = classic-polyfill
    ```
 
 ## Usage
