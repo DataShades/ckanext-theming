@@ -100,37 +100,15 @@ macros fall back to the parent theme.
 
 ///
 
-/// details | Low-level customizations
+/// details | Additional macro sources
     type: tip
 
-Macro loading mechanism can be customized by setting a custom UI class on the
-Theme. First, extend `MacroUI` from `ckanext.theming.lib`:
+To load macros from an additional file(in addition to `macros/ui.html`),
+implement `ITheme.get_additional_theme_ui_sources`:
 
 ```python
-from ckanext.theming.lib import MacroUI, Theme
-
-class YourThemeUI(MacroUI):
-    _sources = ["macros/ui.html", "additional/location/of/macros/ui.html"]
-
-    def __init__(self, app):
-        super().__init__(app)
-        # Additional initialization if needed
-```
-
-Then assign it to your theme:
-
-```python
-def register_themes(self):
-    from .theme import YourThemeUI  # Import your custom UI class
-
-    root = os.path.dirname(os.path.abspath(__file__))
-    return [
-        Theme(
-            'your_theme',
-            os.path.join(root, 'themes/your_theme'),
-            ui_factory=YourThemeUI,  # Set custom UI class
-        ),
-    ]
+def get_additional_theme_ui_sources(self) -> list[str]:
+    return ["additional/location/of/macros.html"]
 ```
 
 ///
@@ -138,7 +116,15 @@ def register_themes(self):
 ## Creating UI Macros
 
 Create `themes/your_theme/templates/macros/ui.html` with definitions of all the
-macros. Macros can be defined elsewhere and re-exported by creating global
+macros.
+
+```django
+{% macro input() %}
+    ...
+{% endmacro %}
+```
+
+Macros can be defined elsewhere and re-exported by creating global
 template variables:
 
 ```django
@@ -147,12 +133,16 @@ template variables:
 {# Re-export macro #}
 {% set button = element.button %}
 {% set card = element.card %}
-
-{# Define new macro directly inside this file #}
-{% macro input() %}
-    ...
-{% endmacro %}
 ```
+
+/// admonition | **DO NOT** define macros inside blocks
+    type: warning
+
+Macros defined inside blocks will be unavailable for import. Imports are
+processed at compile time, while blocks are evaluated at render time, so macros
+defined inside blocks are invisible for external code.
+
+///
 
 /// details | Flexible themes
     type: tip
@@ -162,6 +152,7 @@ in example above, child theme cannot override these macros. The code below
 **DOES NOT** work:
 
 ```django
+{# inside child theme's macros/ui.html #}
 {% ckan_extends %}
 
 {# Override macro #}
@@ -190,6 +181,13 @@ such macro is not defined, use the original `_input` as a fallback implementatio
 
 ```
 
+Even if you define macros directly inside `ui.html`, child theme can override
+them. But to achieve this, it must implement
+`ITheme.get_additional_theme_ui_sources`. This method returns list of files
+with macros that have higher priority than the base `ui.html`. The downside of
+this approach is a bigger list of macro sources which leads to more complex
+development and unpredictable macro locations.
+
 ///
 
 
@@ -198,23 +196,38 @@ Each macro file should contain actual implementations that use appropriate CSS c
 #### Parameter Order Consistency
 All macros follow the same parameter convention:
 
-- `content` is the first positional parameter (and often the only one when needed).
+- `content` is the first positional parameter
 - All other parameters use named parameters with appropriate defaults
-- Always use `kwargs` for extra attributes that may be passed to the element.
+- Always use `kwargs` for extra attributes that may be passed to the element
 
 /// admonition | Example
     type: example
-Example `themes/your_theme/templates/macros/ui/element.html` (using Bootstrap classes):
+
+`content` is the first parameter. Usually content is the most complex part of
+the macro output, that must be provided by the caller. Other parameters can
+either be specified without a default value if there are no suitable
+options(`href`), or use most expected/neutral values as defaults(`type=button`,
+`style=primary or default`).
 
 ```django
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn-{{ style }}">{{ content }}</a>
+        <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn-{{ style }}">
+            {{ content }}
+        </a>
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">{{ content }}</button>
+        <button {{ ui.util.attrs(kwargs) }} type="{{ type }}" class="btn btn-{{ style }}">
+            {{ content }}
+        </button>
     {%- endif %}
 {%- endmacro %}
+```
 
+Sometimes macro can work even without content. In the example below, divider
+without content will be rendered as a plain horizontal line, while divider with
+content will show this content surrounded by horizontal lines.
+
+```django
 {%- macro divider(content) -%}
     {%- if content -%}
         <div {{ ui.util.attrs(kwargs) }} class="divider-with-content">
@@ -224,7 +237,17 @@ Example `themes/your_theme/templates/macros/ui/element.html` (using Bootstrap cl
         <hr {{ ui.util.attrs(kwargs) }}>
     {%- endif %}
 {%- endmacro %}
+```
 
+Certain macros do not present any HTML/textual content to user(or do not accept
+it at least). In this case it's reasonable to omit `content` completely. It
+would be acceptable to use move `alt` on the first position and call it
+`content`, but there are two reasons not to do it: it may be misleading;
+`content` usually meant for potentially complex HTML, not only plain
+text. `src` is also is not a good candidate for `content`, because it's an
+attribute, not the actual content shown to user.
+
+```django
 {%- macro image(src, alt, height, width) -%}
     <img
         {{ ui.util.attrs(kwargs) }}
@@ -234,7 +257,17 @@ Example `themes/your_theme/templates/macros/ui/element.html` (using Bootstrap cl
         {%- if width %} width="{{ width }}"{% endif %}
     >
 {%- endmacro %}
+```
 
+To render additional attributes on the tag, use `ui.util.attrs(kwargs)`. It
+will take `attrs` parameter from additional arguments provided during macro
+call and transform it into attribute string. Certain macro will expose
+parameters to simplify attribute assgnment. For example, the following macro
+has `blank` parameter, that modifies `attrs` parameter. Because of its internal
+logic, instead of calling it like `ui.link(..., attrs={"target": "_blank",
+"rel": "noopener noreferrer"})`, you can use shorter form `ui.link(..., blank=true)`
+
+```django
 {%- macro link(content, href, blank) -%}
     {%- if blank -%}
         {%- do kwargs.setdefault("attrs", {}).setdefault("target", "_blank") -%}
@@ -260,46 +293,94 @@ definition, pages will not break because of invalid call payload.
 
 The theming system provides utility functions accessible via `ui.util`:
 
-- `ui.util.attrs(kwargs)`: Helper to render HTML attributes from a
-  dictionary. It extracts from `kwargs` parameters with names `attrs`, `aria`,
-  `data`, `on` and builds attribute string from them. Also it can be used to
-  specify default attributes, that user can override during macro call:
-  ```django
-  {% macro button(content) %}
-      <button {{ ui.util.attrs(kwargs, {"class": "btn"}) }}>
-          {{ content }}
-      </button>
-  {% endmacro %}
-  ```
-- `ui.util.call(element, *args, **kwargs)`: Call an inline element as a block
-  element. Use this to add complex content with nested HTML into element.
-  ```django
-  {% call ui.util.call(ui.button, type="submit") %}
-      <i class="fa fa-info-circle"></i>
-      Click
-  {% call%}
-  ```
-- `ui.util.map(element, items, *args, **kwargs)`: Map an element over a collection
-  ```django
-  {{ ui.util.map(ui.button, ["Click", "Press", "Push"], type="submit") }}
-  ```
-- `ui.util.now()`: Get the current UTC datetime
-- `ui.util.id(value, prefix="id-")`: Generate a unique identifier(if value is
-  empty) or transform value into stable UUID.
-- `ui.util.tag(content, tag, **kwargs)`: Renders an arbitrary tag. Use it to
-  produce dynamic wrappers depending on condition. If tag name is empty, conent
-  will be printed as-is, without a wrapper.
-  ```django
-  {{ ui.util.tag(
-      "Hello world",
-      "span" if inline_tag else "div",
-      attrs={"class": "wrapper"}) }}
-  ```
+/// details | `ui.util.attrs(kwargs)`
+    type: info
 
-- `ui.util.keep_item(category, key, value)`: Store items in UI storage. Similar
-  to `h.flash_success`, but for arbitrary data.
-- `ui.util.pop_items(category, key=None)`: Retrieve and remove items from UI
-  storage. Similar to `h.get_flashed_messages`, but for arbitrary data.
+Helper to render HTML attributes from a dictionary. It extracts from `kwargs`
+parameters with names `attrs`, `aria`, `data`, `on`, `hx` and builds attribute
+string from them. Also it has second argument, that can be used to specify
+default attributes(`attrs`), that user can override during macro call:
+
+```django
+{% macro button(content) %}
+    <button {{ ui.util.attrs(kwargs, {"class": "btn"}) }}>
+        {{ content }}
+    </button>
+{% endmacro %}
+```
+
+///
+
+/// details | `ui.util.call(element, *args, **kwargs)`
+    type: info
+
+Call an inline element as a block element. It takes the content of the call
+block and pass it as a first argument of the called macro. Use this to add
+complex content with nested HTML into element.
+
+```django
+{% call ui.util.call(ui.button, type="submit") %}
+    <i class="fa fa-info-circle"></i>
+    Click
+{% call%}
+
+{# approximately the same but less readable version #}
+{{ ui.call('<i class="fa fa-info-circle"></i> Click'|safe, type="submit") }}
+```
+///
+
+/// details | `ui.util.map(element, items, *args, **kwargs)`
+    type: info
+
+Map an element over a collection
+
+```django
+{{ ui.util.map(ui.button, ["Click", "Press", "Push"], type="submit") }}
+```
+///
+
+/// details | `ui.util.now()`
+    type: info
+
+Get the current UTC datetime
+
+///
+
+/// details | `ui.util.id(value, prefix="id-")`
+    type: info
+
+Generate a unique identifier(if value is empty) or transform value into stable
+UUID.
+
+///
+
+/// details | `ui.util.tag(content, tag, **kwargs)`
+    type: info
+
+Renders an arbitrary tag. Use it to produce dynamic wrappers depending on
+condition. If tag name is empty, conent will be printed as-is, without a
+wrapper.
+
+```django
+{{ ui.util.tag(
+    "Hello world",
+    "span" if inline_tag else "div",
+    attrs={"class": "wrapper"}) }}
+```
+
+///
+
+/// details | `ui.util.keep_item(category, key, value)` and `ui.util.pop_items(category, key=None)`
+    type: info
+
+`keep_item` store items in UI storage. Similar to `h.flash_success`, but for
+arbitrary data.
+
+`pop_items` retrieve and remove items from UI storage. Similar to
+`h.get_flashed_messages`, but for arbitrary data.
+
+///
+
 
 /// admonition | Example
     type: example
@@ -313,7 +394,7 @@ The theming system provides utility functions accessible via `ui.util`:
 
 {# Using call with util.call #}
 {% call ui.util.call(ui.button, style="primary", attrs={"id": ui.util.id()}) %}
-    <i class="icon"></i>
+    {{ ui.icon("home") }}
     Click me!
 {% endcall %}
 ```
@@ -342,7 +423,7 @@ When implementing theme components, ensure proper accessibility support by using
 {%- endmacro %}
 
 {%- macro input(content, name, id, label, value, required, placeholder, type="text", errors=[]) -%}
-    {%- set field_id = id or ("field-" ~ name) if name else ui.util.id() if label else "" -%}
+    {%- set field_id = id or (name and ("field-" ~ name)) or (label and ui.util.id()) or "" -%}
     {%- set error_id = ui.util.id() if errors -%}
     {%- set help_id = ui.util.id() if content -%}
 
@@ -410,34 +491,29 @@ ckan theme create mytheme /path/to/themes
 
 ### Component Management
 ```bash
-# List available components for the configured theme
+# List available components for the current theme
 ckan theme component list
 
-# List available components for a specific theme
-ckan theme component list -t mytheme
-
-# Analyze UI components and their implementations
+# Analyze UI components and their implementations.
+# Specify component names to reduce output
 ckan theme component analyze
 ckan theme component analyze link button card
 
-# Check if a theme implements all required UI components
+# Check if a theme implements all known UI components
 ckan theme component check
-ckan theme component check -t mytheme
 ```
 
 ### Template Management
 ```bash
-# List template files in a theme
+# List template files
 ckan theme template list
-ckan theme template list -t mytheme
 
 # Verify that a theme contains all required templates
 ckan theme template check
-ckan theme template check -t mytheme
 
 # Analyze theme templates and their structure
 ckan theme template analyze
-ckan theme template analyze _header.html _footer.html
+ckan theme template analyze header.html package/search.html
 ckan theme template analyze --relative-filename
 ```
 
@@ -454,9 +530,6 @@ ckan theme endpoint variants dataset.search dataset.read
 ckan theme endpoint observe dataset.search
 ckan theme endpoint observe dataset.read id=my-dataset -v
 ckan theme endpoint observe dataset.read --auth-user admin id=my-dataset
-
-# Dump templates and context variables used by Flask endpoints in JSON format
-ckan theme endpoint dump --auth-user admin --user testuser --package testpkg --resource testres --resource-view testview --organization testorg --group testgroup
 ```
 
 ## Configuration

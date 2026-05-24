@@ -84,7 +84,8 @@ parameters:
 
 When using separate parameters, they are automatically prefixed with the
 appropriate namespace (`data-`, `aria-`, `hx-`) or treated as event handlers
-(`on`).
+(`on`). Attributes specified via separate parameters have higher precedence
+than ones from `attrs` dictionary.
 
 ### Attribute Precedence
 
@@ -209,7 +210,7 @@ together at the appropriate place further in the layout.
 
 ## Icon Normalization
 
-Icons can be normalized using `ui.util.icon()` which maps commpon icon names to
+Icons can be normalized using `ui.util.icon()` which maps common icon names to
 their corresponding names in the theme's icon set:
 
 ```jinja
