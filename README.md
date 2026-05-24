@@ -22,7 +22,7 @@ Compatibility with core CKAN versions:
 
 | CKAN version | Compatible? |
 |--------------|-------------|
-| 2.11         | no          |
+| 2.11         | not tested  |
 | 2.12         | yes         |
 
 ## Overview
