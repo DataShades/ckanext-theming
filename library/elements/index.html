@@ -510,15 +510,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#avatar" class="md-nav__link">
-    <span class="md-ellipsis">
-      Avatar
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#badge" class="md-nav__link">
     <span class="md-ellipsis">
       Badge
@@ -919,15 +910,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#avatar" class="md-nav__link">
-    <span class="md-ellipsis">
-      Avatar
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#badge" class="md-nav__link">
     <span class="md-ellipsis">
       Badge
@@ -1060,64 +1042,6 @@ consistent styling and behavior for fundamental interface elements that are
 used throughout the application. These components ensure that basic UI elements
 maintain consistent appearance and behavior across different themes and
 contexts.</p>
-<h2 id="avatar">Avatar</h2>
-<p>The <a class="autorefs autorefs-internal" title="Avatar" href="#avatar"><code>avatar</code></a> component displays user avatars and profile images, providing
-visual identification for users throughout the application. Avatars are
-essential for creating a sense of community and personalization, allowing users
-to quickly identify who created content, made changes, or is associated with
-specific actions.</p>
-<p>Avatar components typically handle image sizing, circular cropping, and
-fallback representations when no image is available. They often include support
-for initials-based avatars when users don't have profile pictures, ensuring
-consistent visual representation regardless of whether a user has uploaded an
-image. The component ensures appropriate sizing and styling across different
-contexts where avatars might appear.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>src</code></td>
-<td>string</td>
-<td>-</td>
-<td>URL to the avatar image.</td>
-</tr>
-<tr>
-<td><code>alt</code></td>
-<td>string</td>
-<td>-</td>
-<td>Alternative text for accessibility.</td>
-</tr>
-<tr>
-<td><code>size</code></td>
-<td>int</td>
-<td>-</td>
-<td>Size of the avatar</td>
-</tr>
-</tbody>
-</table>
-<details class="tip">
-<summary>Theme-Specific Parameters</summary>
-<ul>
-<li><code>rounded</code> (bool): Whether to apply rounded corners</li>
-<li><code>variant</code> (string): Style variant (e.g., "circle", "square")</li>
-</ul>
-</details>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Avatar with user image --&gt;
-{{ ui.avatar(src=&quot;/path/to/user/image.jpg&quot;, alt=&quot;User Name&quot;) }}
-
-&lt;!-- Avatar with fallback --&gt;
-{{ ui.avatar(alt=&quot;Default User&quot;) }}
-</code></pre></div>
-</div>
 <h2 id="badge">Badge</h2>
 <p>The <a class="autorefs autorefs-internal" title="Badge" href="#badge"><code>badge</code></a> component displays status badges and indicators that provide
 quick visual information about states, counts, or categories. Badges are

@@ -1045,7 +1045,8 @@ parameters:</p>
 </code></pre></div>
 <p>When using separate parameters, they are automatically prefixed with the
 appropriate namespace (<code>data-</code>, <code>aria-</code>, <code>hx-</code>) or treated as event handlers
-(<code>on</code>).</p>
+(<code>on</code>). Attributes specified via separate parameters have higher precedence
+than ones from <code>attrs</code> dictionary.</p>
 <h3 id="attribute-precedence">Attribute Precedence</h3>
 <p>Attributes passed via arguments have higher precedence than attributes defined
 in the macro implementation. This allows you to override default behavior:</p>
@@ -1135,7 +1136,7 @@ messages, alerts, or metadata) throughout templates without concerning yourself
 about the actual rendering location, then collecting and rendering them
 together at the appropriate place further in the layout.</p>
 <h2 id="icon-normalization">Icon Normalization</h2>
-<p>Icons can be normalized using <code>ui.util.icon()</code> which maps commpon icon names to
+<p>Icons can be normalized using <code>ui.util.icon()</code> which maps common icon names to
 their corresponding names in the theme's icon set:</p>
 <div class="highlight"><pre><span></span><code><span class="c">{# Maps &quot;search&quot; to theme-specific icon name like &quot;magnifying-glass&quot; #}</span>
 <span class="cp">{{</span> <span class="nv">ui.icon</span><span class="o">(</span><span class="nv">ui.util.icon</span><span class="o">(</span><span class="s2">&quot;search&quot;</span><span class="o">))</span> <span class="cp">}}</span>

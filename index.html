@@ -960,6 +960,21 @@
 customize the look and feel of a CKAN instance. It allows developers and
 designers to create and apply themes without modifying core CKAN code, ensuring
 easier upgrades and maintenance.</p>
+<p>Theme implementations:</p>
+<table>
+<thead>
+<tr>
+<th>Theme</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/dataShades/ckanext-midnight-blue-theme">Midnight blue portable</a></td>
+<td>CKAN's built-in theme(v2.12) rewritten according to theming flow</td>
+</tr>
+</tbody>
+</table>
 <h2 id="requirements">Requirements</h2>
 <p>Compatibility with core CKAN versions:</p>
 <table>
@@ -972,7 +987,7 @@ easier upgrades and maintenance.</p>
 <tbody>
 <tr>
 <td>2.11</td>
-<td>no</td>
+<td>not tested</td>
 </tr>
 <tr>
 <td>2.12</td>
@@ -1023,7 +1038,7 @@ just changing the theme configuration, without modifying any templates or code.<
 <li>Specify theme using <code>ckan.ui.theme</code> config option. Check available themes
    using <code>ckan theme list</code> CLI command</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="na">ckan.ui.theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">bare</span>
+<div class="highlight"><pre><span></span><code><span class="na">ckan.ui.theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">classic-polyfill</span>
 </code></pre></div>
 <h2 id="usage">Usage</h2>
 <h3 id="registering-themes">Registering Themes</h3>

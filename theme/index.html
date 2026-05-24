@@ -1167,53 +1167,41 @@ selectively override only the components they want to customize. Unimplemented
 macros fall back to the parent theme.</p>
 </details>
 <details class="tip">
-<summary>Low-level customizations</summary>
-<p>Macro loading mechanism can be customized by setting a custom UI class on the
-Theme. First, extend <code>MacroUI</code> from <code>ckanext.theming.lib</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">ckanext.theming.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">MacroUI</span><span class="p">,</span> <span class="n">Theme</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">YourThemeUI</span><span class="p">(</span><span class="n">MacroUI</span><span class="p">):</span>
-    <span class="n">_sources</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;macros/ui.html&quot;</span><span class="p">,</span> <span class="s2">&quot;additional/location/of/macros/ui.html&quot;</span><span class="p">]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-        <span class="c1"># Additional initialization if needed</span>
-</code></pre></div>
-<p>Then assign it to your theme:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">register_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">.theme</span><span class="w"> </span><span class="kn">import</span> <span class="n">YourThemeUI</span>  <span class="c1"># Import your custom UI class</span>
-
-    <span class="n">root</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="n">Theme</span><span class="p">(</span>
-            <span class="s1">&#39;your_theme&#39;</span><span class="p">,</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s1">&#39;themes/your_theme&#39;</span><span class="p">),</span>
-            <span class="n">ui_factory</span><span class="o">=</span><span class="n">YourThemeUI</span><span class="p">,</span>  <span class="c1"># Set custom UI class</span>
-        <span class="p">),</span>
-    <span class="p">]</span>
+<summary>Additional macro sources</summary>
+<p>To load macros from an additional file(in addition to <code>macros/ui.html</code>),
+implement <code>ITheme.get_additional_theme_ui_sources</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_additional_theme_ui_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;additional/location/of/macros.html&quot;</span><span class="p">]</span>
 </code></pre></div>
 </details>
 <h2 id="creating-ui-macros">Creating UI Macros</h2>
 <p>Create <code>themes/your_theme/templates/macros/ui.html</code> with definitions of all the
-macros. Macros can be defined elsewhere and re-exported by creating global
+macros.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">input</span><span class="o">()</span> <span class="cp">%}</span>
+<span class="x">    ...</span>
+<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
+</code></pre></div>
+<p>Macros can be defined elsewhere and re-exported by creating global
 template variables:</p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;macros/your_theme_macros/element.html&quot;</span> <span class="k">as</span> <span class="nv">element</span> <span class="cp">%}</span>
 
 <span class="c">{# Re-export macro #}</span>
 <span class="cp">{%</span> <span class="k">set</span> <span class="nv">button</span> <span class="o">=</span> <span class="nv">element.button</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">set</span> <span class="nv">card</span> <span class="o">=</span> <span class="nv">element.card</span> <span class="cp">%}</span>
-
-<span class="c">{# Define new macro directly inside this file #}</span>
-<span class="cp">{%</span> <span class="k">macro</span> <span class="nv">input</span><span class="o">()</span> <span class="cp">%}</span>
-<span class="x">    ...</span>
-<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title"><strong>DO NOT</strong> define macros inside blocks</p>
+<p>Macros defined inside blocks will be unavailable for import. Imports are
+processed at compile time, while blocks are evaluated at render time, so macros
+defined inside blocks are invisible for external code.</p>
+</div>
 <details class="tip">
 <summary>Flexible themes</summary>
 <p>When macros created directly inside <code>ui.html</code> or unconditionaly re-exported as
 in example above, child theme cannot override these macros. The code below
 <strong>DOES NOT</strong> work:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">ckan_extends</span> <span class="cp">%}</span>
+<div class="highlight"><pre><span></span><code><span class="c">{# inside child theme&#39;s macros/ui.html #}</span>
+<span class="cp">{%</span> <span class="k">ckan_extends</span> <span class="cp">%}</span>
 
 <span class="c">{# Override macro #}</span>
 <span class="cp">{%</span> <span class="k">set</span> <span class="nv">button</span> <span class="o">=</span> <span class="nv">my_custom_button</span> <span class="cp">%}</span>
@@ -1236,27 +1224,44 @@ re-export with the default fallback:</p>
 <span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">set</span> <span class="nv">input</span> <span class="o">=</span> <span class="nv">input</span> <span class="o">|</span> <span class="nf">default</span><span class="o">(</span><span class="nv">_input</span><span class="o">)</span><span class="cp">%}</span>
 </code></pre></div>
+<p>Even if you define macros directly inside <code>ui.html</code>, child theme can override
+them. But to achieve this, it must implement
+<code>ITheme.get_additional_theme_ui_sources</code>. This method returns list of files
+with macros that have higher priority than the base <code>ui.html</code>. The downside of
+this approach is a bigger list of macro sources which leads to more complex
+development and unpredictable macro locations.</p>
 </details>
 <p>Each macro file should contain actual implementations that use appropriate CSS classes for your chosen framework. When implementing macros, follow these conventions:</p>
 <h4 id="parameter-order-consistency">Parameter Order Consistency</h4>
 <p>All macros follow the same parameter convention:</p>
 <ul>
-<li><code>content</code> is the first positional parameter (and often the only one when needed).</li>
+<li><code>content</code> is the first positional parameter</li>
 <li>All other parameters use named parameters with appropriate defaults</li>
-<li>Always use <code>kwargs</code> for extra attributes that may be passed to the element.</li>
+<li>Always use <code>kwargs</code> for extra attributes that may be passed to the element</li>
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Example <code>themes/your_theme/templates/macros/ui/element.html</code> (using Bootstrap classes):</p>
+<p><code>content</code> is the first parameter. Usually content is the most complex part of
+the macro output, that must be provided by the caller. Other parameters can
+either be specified without a default value if there are no suitable
+options(<code>href</code>), or use most expected/neutral values as defaults(<code>type=button</code>,
+<code>style=primary or default</code>).</p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">href</span> -<span class="cp">%}</span>
-<span class="x">        &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> href=&quot;</span><span class="cp">{{</span> <span class="nv">href</span> <span class="cp">}}</span><span class="x">&quot; class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+<span class="x">        &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> href=&quot;</span><span class="cp">{{</span> <span class="nv">href</span> <span class="cp">}}</span><span class="x">&quot; class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
+<span class="x">        &lt;/a&gt;</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">else</span> -<span class="cp">%}</span>
-<span class="x">        &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> type=&quot;</span><span class="cp">{{</span> <span class="nv">type</span> <span class="cp">}}</span><span class="x">&quot; class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/button&gt;</span>
+<span class="x">        &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> type=&quot;</span><span class="cp">{{</span> <span class="nv">type</span> <span class="cp">}}</span><span class="x">&quot; class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
+<span class="x">        &lt;/button&gt;</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
 <span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
-
-<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">divider</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> -<span class="cp">%}</span>
+</code></pre></div>
+<p>Sometimes macro can work even without content. In the example below, divider
+without content will be rendered as a plain horizontal line, while divider with
+content will show this content surrounded by horizontal lines.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">divider</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> -<span class="cp">%}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">content</span> -<span class="cp">%}</span>
 <span class="x">        &lt;div </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x"> class=&quot;divider-with-content&quot;&gt;</span>
 <span class="x">            &lt;hr&gt;&lt;span&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/span&gt;&lt;hr&gt;</span>
@@ -1265,8 +1270,15 @@ re-export with the default fallback:</p>
 <span class="x">        &lt;hr </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&gt;</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">endif</span> <span class="cp">%}</span>
 <span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
-
-<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">image</span><span class="o">(</span><span class="nv">src</span><span class="o">,</span> <span class="nv">alt</span><span class="o">,</span> <span class="nv">height</span><span class="o">,</span> <span class="nv">width</span><span class="o">)</span> -<span class="cp">%}</span>
+</code></pre></div>
+<p>Certain macros do not present any HTML/textual content to user(or do not accept
+it at least). In this case it's reasonable to omit <code>content</code> completely. It
+would be acceptable to use move <code>alt</code> on the first position and call it
+<code>content</code>, but there are two reasons not to do it: it may be misleading;
+<code>content</code> usually meant for potentially complex HTML, not only plain
+text. <code>src</code> is also is not a good candidate for <code>content</code>, because it's an
+attribute, not the actual content shown to user.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">image</span><span class="o">(</span><span class="nv">src</span><span class="o">,</span> <span class="nv">alt</span><span class="o">,</span> <span class="nv">height</span><span class="o">,</span> <span class="nv">width</span><span class="o">)</span> -<span class="cp">%}</span>
 <span class="x">    &lt;img</span>
 <span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">)</span> <span class="cp">}}</span>
 <span class="x">        src=&quot;</span><span class="cp">{{</span> <span class="nv">src</span> <span class="cp">}}</span><span class="x">&quot;</span>
@@ -1275,8 +1287,15 @@ re-export with the default fallback:</p>
 <span class="x">        </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">width</span> <span class="cp">%}</span><span class="x"> width=&quot;</span><span class="cp">{{</span> <span class="nv">width</span> <span class="cp">}}</span><span class="x">&quot;</span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">    &gt;</span>
 <span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
-
-<span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">link</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">blank</span><span class="o">)</span> -<span class="cp">%}</span>
+</code></pre></div>
+<p>To render additional attributes on the tag, use <code>ui.util.attrs(kwargs)</code>. It
+will take <code>attrs</code> parameter from additional arguments provided during macro
+call and transform it into attribute string. Certain macro will expose
+parameters to simplify attribute assgnment. For example, the following macro
+has <code>blank</code> parameter, that modifies <code>attrs</code> parameter. Because of its internal
+logic, instead of calling it like <code>ui.link(..., attrs={"target": "_blank",
+"rel": "noopener noreferrer"})</code>, you can use shorter form <code>ui.link(..., blank=true)</code></p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">link</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">blank</span><span class="o">)</span> -<span class="cp">%}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">blank</span> -<span class="cp">%}</span>
 <span class="x">        </span><span class="cp">{%</span>- <span class="k">do</span> <span class="nv">kwargs.setdefault</span><span class="o">(</span><span class="s2">&quot;attrs&quot;</span><span class="o">,</span> <span class="o">{})</span><span class="nv">.setdefault</span><span class="o">(</span><span class="s2">&quot;target&quot;</span><span class="o">,</span> <span class="s2">&quot;_blank&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
 <span class="x">        </span><span class="cp">{%</span>- <span class="k">do</span> <span class="nv">kwargs.setdefault</span><span class="o">(</span><span class="s2">&quot;attrs&quot;</span><span class="o">,</span> <span class="o">{})</span><span class="nv">.setdefault</span><span class="o">(</span><span class="s2">&quot;rel&quot;</span><span class="o">,</span> <span class="s2">&quot;noopener noreferrer&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
@@ -1295,47 +1314,66 @@ definition, pages will not break because of invalid call payload.</p>
 </div>
 <h3 id="ui-utilities">UI Utilities</h3>
 <p>The theming system provides utility functions accessible via <code>ui.util</code>:</p>
-<ul>
-<li><code>ui.util.attrs(kwargs)</code>: Helper to render HTML attributes from a
-  dictionary. It extracts from <code>kwargs</code> parameters with names <code>attrs</code>, <code>aria</code>,
-  <code>data</code>, <code>on</code> and builds attribute string from them. Also it can be used to
-  specify default attributes, that user can override during macro call:
-  <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> <span class="cp">%}</span>
-<span class="x">    &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;attrs&quot;</span><span class="o">:</span> <span class="o">{</span><span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;btn&quot;</span><span class="cp">}}</span><span class="x">) }}&gt;</span>
+<details class="info">
+<summary><code>ui.util.attrs(kwargs)</code></summary>
+<p>Helper to render HTML attributes from a dictionary. It extracts from <code>kwargs</code>
+parameters with names <code>attrs</code>, <code>aria</code>, <code>data</code>, <code>on</code>, <code>hx</code> and builds attribute
+string from them. Also it has second argument, that can be used to specify
+default attributes(<code>attrs</code>), that user can override during macro call:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="x">    &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;btn&quot;</span><span class="o">})</span> <span class="cp">}}</span><span class="x">&gt;</span>
 <span class="x">        </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
 <span class="x">    &lt;/button&gt;</span>
 <span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
-</code></pre></div></li>
-<li><code>ui.util.call(element, *args, **kwargs)</code>: Call an inline element as a block
-  element. Use this to add complex content with nested HTML into element.
-  <div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">%}</span>
+</code></pre></div>
+</details>
+<details class="info">
+<summary><code>ui.util.call(element, *args, **kwargs)</code></summary>
+<p>Call an inline element as a block element. It takes the content of the call
+block and pass it as a first argument of the called macro. Use this to add
+complex content with nested HTML into element.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">%}</span>
 <span class="x">    &lt;i class=&quot;fa fa-info-circle&quot;&gt;&lt;/i&gt;</span>
 <span class="x">    Click</span>
 <span class="cp">{%</span> <span class="k">call</span><span class="cp">%}</span>
-</code></pre></div></li>
-<li><code>ui.util.map(element, items, *args, **kwargs)</code>: Map an element over a collection
-  <div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.map</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="o">[</span><span class="s2">&quot;Click&quot;</span><span class="o">,</span> <span class="s2">&quot;Press&quot;</span><span class="o">,</span> <span class="s2">&quot;Push&quot;</span><span class="o">],</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">}}</span>
-</code></pre></div></li>
-<li><code>ui.util.now()</code>: Get the current UTC datetime</li>
-<li><code>ui.util.id(value, prefix="id-")</code>: Generate a unique identifier(if value is
-  empty) or transform value into stable UUID.</li>
-<li>
-<p><code>ui.util.tag(content, tag, **kwargs)</code>: Renders an arbitrary tag. Use it to
-  produce dynamic wrappers depending on condition. If tag name is empty, conent
-  will be printed as-is, without a wrapper.
-  <div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.tag</span><span class="o">(</span>
+
+<span class="c">{# approximately the same but less readable version #}</span>
+<span class="cp">{{</span> <span class="nv">ui.call</span><span class="o">(</span><span class="s1">&#39;&lt;i class=&quot;fa fa-info-circle&quot;&gt;&lt;/i&gt; Click&#39;</span><span class="o">|</span><span class="nf">safe</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div>
+</details>
+<details class="info">
+<summary><code>ui.util.map(element, items, *args, **kwargs)</code></summary>
+<p>Map an element over a collection</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.map</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="o">[</span><span class="s2">&quot;Click&quot;</span><span class="o">,</span> <span class="s2">&quot;Press&quot;</span><span class="o">,</span> <span class="s2">&quot;Push&quot;</span><span class="o">],</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div>
+</details>
+<details class="info">
+<summary><code>ui.util.now()</code></summary>
+<p>Get the current UTC datetime</p>
+</details>
+<details class="info">
+<summary><code>ui.util.id(value, prefix="id-")</code></summary>
+<p>Generate a unique identifier(if value is empty) or transform value into stable
+UUID.</p>
+</details>
+<details class="info">
+<summary><code>ui.util.tag(content, tag, **kwargs)</code></summary>
+<p>Renders an arbitrary tag. Use it to produce dynamic wrappers depending on
+condition. If tag name is empty, conent will be printed as-is, without a
+wrapper.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.tag</span><span class="o">(</span>
     <span class="s2">&quot;Hello world&quot;</span><span class="o">,</span>
     <span class="s2">&quot;span&quot;</span> <span class="k">if</span> <span class="nv">inline_tag</span> <span class="k">else</span> <span class="s2">&quot;div&quot;</span><span class="o">,</span>
     <span class="nv">attrs</span><span class="o">={</span><span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;wrapper&quot;</span><span class="o">})</span> <span class="cp">}}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><code>ui.util.keep_item(category, key, value)</code>: Store items in UI storage. Similar
-  to <code>h.flash_success</code>, but for arbitrary data.</p>
-</li>
-<li><code>ui.util.pop_items(category, key=None)</code>: Retrieve and remove items from UI
-  storage. Similar to <code>h.get_flashed_messages</code>, but for arbitrary data.</li>
-</ul>
+</code></pre></div>
+</details>
+<details class="info">
+<summary><code>ui.util.keep_item(category, key, value)</code> and <code>ui.util.pop_items(category, key=None)</code></summary>
+<p><code>keep_item</code> store items in UI storage. Similar to <code>h.flash_success</code>, but for
+arbitrary data.</p>
+<p><code>pop_items</code> retrieve and remove items from UI storage. Similar to
+<code>h.get_flashed_messages</code>, but for arbitrary data.</p>
+</details>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">button_group</span><span class="o">(</span><span class="nv">items</span><span class="o">)</span> -<span class="cp">%}</span>
@@ -1346,7 +1384,7 @@ definition, pages will not break because of invalid call payload.</p>
 
 <span class="c">{# Using call with util.call #}</span>
 <span class="cp">{%</span> <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.button</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">,</span> <span class="nv">attrs</span><span class="o">={</span><span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="nv">ui.util.id</span><span class="o">()})</span> <span class="cp">%}</span>
-<span class="x">    &lt;i class=&quot;icon&quot;&gt;&lt;/i&gt;</span>
+<span class="x">    </span><span class="cp">{{</span> <span class="nv">ui.icon</span><span class="o">(</span><span class="s2">&quot;home&quot;</span><span class="o">)</span> <span class="cp">}}</span>
 <span class="x">    Click me!</span>
 <span class="cp">{%</span> <span class="k">endcall</span> <span class="cp">%}</span>
 </code></pre></div>
@@ -1355,13 +1393,13 @@ definition, pages will not break because of invalid call payload.</p>
 <p>When implementing theme components, ensure proper accessibility support by using appropriate ARIA attributes and semantic HTML:</p>
 <div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">href</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">,</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">if</span> <span class="nv">href</span> -<span class="cp">%}</span>
-<span class="x">        &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;aria&quot;</span><span class="o">:</span> <span class="o">{</span><span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="nv">content</span><span class="cp">}}</span><span class="x">) }}</span>
+<span class="x">        &lt;a </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;aria-label&quot;</span><span class="o">:</span> <span class="nv">content</span><span class="o">})</span> <span class="cp">}}</span>
 <span class="x">           href=&quot;</span><span class="cp">{{</span> <span class="nv">href</span> <span class="cp">}}</span><span class="x">&quot;</span>
 <span class="x">           class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
 <span class="x">            </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
 <span class="x">        &lt;/a&gt;</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">else</span> -<span class="cp">%}</span>
-<span class="x">        &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;aria&quot;</span><span class="o">:</span> <span class="o">{</span><span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="nv">content</span><span class="cp">}}</span><span class="x">) }}</span>
+<span class="x">        &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;aria-label&quot;</span><span class="o">:</span> <span class="nv">content</span><span class="o">})</span> <span class="cp">}}</span>
 <span class="x">                type=&quot;</span><span class="cp">{{</span> <span class="nv">type</span> <span class="cp">}}</span><span class="x">&quot;</span>
 <span class="x">                class=&quot;btn btn-</span><span class="cp">{{</span> <span class="nv">style</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
 <span class="x">            </span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span>
@@ -1370,7 +1408,7 @@ definition, pages will not break because of invalid call payload.</p>
 <span class="cp">{%</span>- <span class="k">endmacro</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span>- <span class="k">macro</span> <span class="nv">input</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="nv">name</span><span class="o">,</span> <span class="nv">id</span><span class="o">,</span> <span class="nv">label</span><span class="o">,</span> <span class="nv">value</span><span class="o">,</span> <span class="nv">required</span><span class="o">,</span> <span class="nv">placeholder</span><span class="o">,</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="o">,</span> <span class="nv">errors</span><span class="o">=[])</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">field_id</span> <span class="o">=</span> <span class="nv">id</span> <span class="k">or</span> <span class="o">(</span><span class="s2">&quot;field-&quot;</span> <span class="o">~</span> <span class="nv">name</span><span class="o">)</span> <span class="k">if</span> <span class="nv">name</span> <span class="k">else</span> <span class="nv">ui.util.id</span><span class="o">()</span> <span class="k">if</span> <span class="nv">label</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">field_id</span> <span class="o">=</span> <span class="nv">id</span> <span class="k">or</span> <span class="o">(</span><span class="nv">name</span> <span class="k">and</span> <span class="o">(</span><span class="s2">&quot;field-&quot;</span> <span class="o">~</span> <span class="nv">name</span><span class="o">))</span> <span class="k">or</span> <span class="o">(</span><span class="nv">label</span> <span class="k">and</span> <span class="nv">ui.util.id</span><span class="o">())</span> <span class="k">or</span> <span class="s2">&quot;&quot;</span> -<span class="cp">%}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">error_id</span> <span class="o">=</span> <span class="nv">ui.util.id</span><span class="o">()</span> <span class="k">if</span> <span class="nv">errors</span> -<span class="cp">%}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">set</span> <span class="nv">help_id</span> <span class="o">=</span> <span class="nv">ui.util.id</span><span class="o">()</span> <span class="k">if</span> <span class="nv">content</span> -<span class="cp">%}</span>
 
@@ -1426,32 +1464,27 @@ ckan<span class="w"> </span>theme<span class="w"> </span>create<span class="w"> 
 ckan<span class="w"> </span>theme<span class="w"> </span>create<span class="w"> </span>mytheme<span class="w"> </span>/path/to/themes
 </code></pre></div>
 <h3 id="component-management">Component Management</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># List available components for the configured theme</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># List available components for the current theme</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>list
 
-<span class="c1"># List available components for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>mytheme
-
-<span class="c1"># Analyze UI components and their implementations</span>
+<span class="c1"># Analyze UI components and their implementations.</span>
+<span class="c1"># Specify component names to reduce output</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>analyze
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>analyze<span class="w"> </span>link<span class="w"> </span>button<span class="w"> </span>card
 
-<span class="c1"># Check if a theme implements all required UI components</span>
+<span class="c1"># Check if a theme implements all known UI components</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>check
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>check<span class="w"> </span>-t<span class="w"> </span>mytheme
 </code></pre></div>
 <h3 id="template-management">Template Management</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># List template files in a theme</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># List template files</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>list
-ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>mytheme
 
 <span class="c1"># Verify that a theme contains all required templates</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>check
-ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>check<span class="w"> </span>-t<span class="w"> </span>mytheme
 
 <span class="c1"># Analyze theme templates and their structure</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze
-ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze<span class="w"> </span>_header.html<span class="w"> </span>_footer.html
+ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze<span class="w"> </span>header.html<span class="w"> </span>package/search.html
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze<span class="w"> </span>--relative-filename
 </code></pre></div>
 <h3 id="endpoint-analysis">Endpoint Analysis</h3>
@@ -1466,9 +1499,6 @@ ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"
 ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>observe<span class="w"> </span>dataset.search
 ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>observe<span class="w"> </span>dataset.read<span class="w"> </span><span class="nv">id</span><span class="o">=</span>my-dataset<span class="w"> </span>-v
 ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>observe<span class="w"> </span>dataset.read<span class="w"> </span>--auth-user<span class="w"> </span>admin<span class="w"> </span><span class="nv">id</span><span class="o">=</span>my-dataset
-
-<span class="c1"># Dump templates and context variables used by Flask endpoints in JSON format</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--auth-user<span class="w"> </span>admin<span class="w"> </span>--user<span class="w"> </span>testuser<span class="w"> </span>--package<span class="w"> </span>testpkg<span class="w"> </span>--resource<span class="w"> </span>testres<span class="w"> </span>--resource-view<span class="w"> </span>testview<span class="w"> </span>--organization<span class="w"> </span>testorg<span class="w"> </span>--group<span class="w"> </span>testgroup
 </code></pre></div>
 <h2 id="configuration">Configuration</h2>
 <p>To use a theme, configure it in your CKAN configuration:</p>
