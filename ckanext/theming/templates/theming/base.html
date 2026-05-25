@@ -1,0 +1,25 @@
+{%- extends "page.html" -%}
+
+{%- block page_layout -%}
+    sidebar-start
+{%- endblock %}
+
+{%- block subtitle -%}
+    {{ ui.subtitle_item("Theming") }}
+    {{- super() }}
+{%- endblock %}
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{- ui.breadcrumb(_("Theming"), href=h.url_for("theming.index"), active=request.endpoint == "theming.index") }}
+{%- endblock %}
+
+{#
+{%- block secondary_content -%}
+    {%- call ui.util.call(ui.sidebar_section, title="Theming") -%}
+        {%- call ui.util.call(ui.sidebar_nav_wrapper) -%}
+            {{ ui.sidebar_nav_item(_("Components"), href=h.url_for("theming.component"), active=request.endpoint == "theming.component") }}
+        {%- endcall %}
+    {%- endcall %}
+{%- endblock %}
+#}

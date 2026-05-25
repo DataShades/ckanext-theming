@@ -29,7 +29,7 @@ from werkzeug.routing import BuildError, Rule
 import ckan.plugins.toolkit as tk
 from ckan import model, types
 
-from . import lib, reference
+from . import config, lib, reference
 
 log = logging.getLogger(__name__)
 
@@ -75,7 +75,7 @@ def theme():
 
 def theme_callback(ctx: click.Context, param: click.Parameter, name: str | None):  # pyright: ignore[reportUnusedParameter]
     if not name:
-        name = tk.config["ckan.ui.theme"]
+        name = config.theme()
 
     if not name:
         tk.error_shout("Theme is not configured")

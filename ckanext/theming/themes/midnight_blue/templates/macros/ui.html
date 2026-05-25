@@ -99,3 +99,11 @@
     </div>
 {%- endmacro %}
 {%- set page_action_wrapper = page_action_wrapper or _page_action_wrapper -%}
+
+
+{%- macro _sidebar_nav_wrapper(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "nav nav-options flex-column"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
+{%- set sidebar_nav_wrapper = sidebar_nav_wrapper or _sidebar_nav_wrapper -%}

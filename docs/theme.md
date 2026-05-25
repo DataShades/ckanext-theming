@@ -144,7 +144,7 @@ defined inside blocks are invisible for external code.
 
 ///
 
-/// details | Flexible themes
+/// details | Reusable themes
     type: tip
 
 When macros created directly inside `ui.html` or unconditionaly re-exported as

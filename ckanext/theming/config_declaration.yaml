@@ -6,3 +6,9 @@ groups:
         example: midnight-blue
         description: |
           The theme to use for the CKAN UI.
+
+      - key: ckan.ui.enable_theming_views
+        type: bool
+        description: |
+            Whether to enable theming views. These views contain examples of UI
+            components and usually are not required in production.

@@ -4,7 +4,6 @@ import logging
 from typing import Any, cast
 
 import ckan.plugins as p
-import ckan.plugins.toolkit as tk
 from ckan import types
 
 from .interfaces import ITheme
@@ -22,9 +21,6 @@ def register_themes():
 
 
 def update_config(config: Any):
-    if config["testing"]:
-        tk.add_template_directory(config, "tests/templates")
-
     collect_themes()
     if theme := config.get("ckan.ui.theme"):
         enable_theme(theme, config)
