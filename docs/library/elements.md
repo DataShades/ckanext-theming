@@ -1,3 +1,4 @@
+{%raw%}
 # Elements
 
 Element components are the basic building blocks of the UI. They provide
@@ -517,3 +518,4 @@ user experience without causing performance or accessibility issues.
 {{ ui.video(src="/path/to/video.mp4", controls=true) }}
 ```
 ///
+{%endraw%}

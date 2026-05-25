@@ -1,4 +1,5 @@
-
+{% from "_macros.html" import parameters_table %}
+{%raw%}
 # Containers
 
 Container components form the building blocks of page layouts, providing
@@ -9,7 +10,7 @@ elements, and [`grid`][] containers work with [`column`][] elements.
 
 ## Accordion
 
-The [`accordion`][] component creates collapsible content sections that allow
+The `accordion` component creates collapsible content sections that allow
 users to expand and collapse content as needed. This component is particularly
 useful for organizing large amounts of information in a space-efficient manner,
 allowing users to focus on relevant sections while keeping the interface
@@ -18,18 +19,8 @@ uncluttered.
 Accordions are commonly used for FAQ sections, detailed metadata displays, and
 any content that benefits from progressive disclosure. The component typically
 includes a header that serves as the toggle control and a content area that
-expands or collapses. It works with [`accordion_wrapper`][accordion-wrapper] to
+expands or collapses. It works with `accordion_wrapper` to
 provide consistent grouping of multiple accordion sections.
-
-/// admonition | Relationship
-    type: info
-
-The [`accordion`][] component works with
-[`accordion_wrapper`][accordion-wrapper] to create organized accordion
-groups. While individual accordions handle single collapsible sections, the
-wrapper provides the container for multiple accordions.
-
-///
 
 /// admonition | Usage Example
     type: example
@@ -37,24 +28,23 @@ wrapper provides the container for multiple accordions.
 ```jinja2
 <!-- Simple accordion -->
 {%- call ui.util.call(ui.accordion_wrapper) -%}
-    {%- call ui.util.call(ui.accordion, title="More Information") -%}
-        Detailed information about this section
-    {%- endcall %}
+    {{ ui.accordion(lipsum(1), title="First accordion") }}
+    {{ ui.accordion(lipsum(1), title="Second accordion") }}
 {%- endcall %}
 
 <!-- Open accordion by default -->
-{{ ui.accordion_wrapper(
-    ui.accordion(content="This content is visible by default", title="Default Open", open=true)
-) }}
+{%- call ui.util.call(ui.accordion_wrapper) -%}
+    {{ ui.accordion(lipsum(1), title="Initially open accordion", open=true) }}
+{%- endcall %}
 ```
+
 ///
 
-| Parameter | Type   | Default | Description                                            |
-|-----------|--------|---------|--------------------------------------------------------|
-| `content` | string | -       | The content to display when the accordion is expanded. |
-| `title`   | string | -       | The title displayed in the accordion header.           |
-| `open`    | bool   | -       | Whether the accordion should be open by default.       |
+{%endraw%}
 
+{{parameters_table(component_ref.accordion)}}
+
+{%raw%}
 /// details | Theme-Specific Parameters
     type: tip
 
@@ -415,3 +405,4 @@ create structured lists. While the list provides the container, individual list
 items provide the content elements within that container.
 
 ///
+{%endraw%}

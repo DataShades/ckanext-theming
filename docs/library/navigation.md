@@ -1,3 +1,4 @@
+{%raw%}
 # Navigation
 
 Navigation components help users move through the application and find
@@ -374,3 +375,4 @@ consistent appearance and behavior across different dropdown contexts.
 
 - `disabled` (bool): Whether the dropdown item is disabled
 ///
+{%endraw%}

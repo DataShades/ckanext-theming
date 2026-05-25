@@ -21,11 +21,11 @@
     {{ super() }}
     {%- if available_components -%}
 
-            {%- call ui.util.call(ui.sidebar_nav_wrapper) -%}
-                {%- for name in available_components -%}
-                    {{ ui.sidebar_nav_item(name|replace("_", " ")|title, href=h.url_for("theming.component", component=name), active=component==name) }}
-                {%- endfor %}
-            {%- endcall %}
+        {%- call ui.util.call(ui.sidebar_nav_wrapper) -%}
+            {%- for name in available_components -%}
+                {{ ui.sidebar_nav_item(name|replace("_", " ")|title, href=h.url_for("theming.component", component=name), active=component==name) }}
+            {%- endfor %}
+        {%- endcall %}
 
     {%- endif %}
 {%- endblock %}
@@ -36,4 +36,27 @@
 
 {%- block primary_content_inner -%}
     {%- include "theming/components/" ~ component ~ ".html" -%}
+{%- endblock %}
+
+{%- block styles -%}
+    {{ super() }}
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css">
+         <style>
+         .code {
+         padding: 10px;
+         background: linear-gradient(-90deg, rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(-90deg, rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, .01) 1px, transparent 1px), linear-gradient(transparent 3px, transparent 3px, transparent 78px, transparent 78px), linear-gradient(-90deg, transparent 1px, transparent 1px), linear-gradient(-90deg, transparent 3px, transparent 3px, transparent 78px, transparent 78px), linear-gradient(transparent 1px, transparent 1px), transparent;
+         background-size: 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px, 12px 12px;
+         background-color: #f8f8f8;
+         }
+
+         </style> -->
+{%- endblock %}
+
+{%- block scripts -%}
+    {{ super() }}
+    {%- asset "theming/examples" -%}
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/django.min.js"></script>
+         <script>hljs.highlightAll()</script> -->
 {%- endblock %}

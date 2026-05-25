@@ -1,4 +1,4 @@
-# Creating CKAN Themes
+{%raw%}# Creating CKAN Themes
 
 ## Theme Structure
 
@@ -552,3 +552,4 @@ ckan theme create mytheme
 ```
 
 This creates a new theme based on the bare theme structure with all required components.
+{%endraw%}

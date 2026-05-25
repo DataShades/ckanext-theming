@@ -1,3 +1,4 @@
+{%raw%}
 # Feedback
 
 Feedback components are essential for user interaction and communication. They
@@ -403,3 +404,4 @@ enhances user understanding without requiring dedicated interface space.
 {{ ui.tooltip("Info", tooltip="Additional information", position="top") }}
 ```
 ///
+{%endraw%}

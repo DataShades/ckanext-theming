@@ -1,3 +1,4 @@
+{%raw%}
 # Handles
 
 Handle components are interactive elements that allow users to control other UI
@@ -96,3 +97,4 @@ components to create contextual information displays. While the handle provides
 the trigger mechanism, the popover provides the content container.
 
 ///
+{%endraw%}

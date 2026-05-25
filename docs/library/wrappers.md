@@ -1,3 +1,4 @@
+{%raw%}
 # Wrappers
 
 Wrapper components are used to provide consistent structural patterns for
@@ -6,42 +7,6 @@ output themselves but provide the structural foundation for other
 components. These components work in conjunction with their content
 counterparts - for example, [`accordion_wrapper`][accordion-wrapper] works with
 [`accordion`][] components.
-
-## Accordion Wrapper
-
-The [`accordion_wrapper`][accordion-wrapper] component provides the structural
-container for accordion elements. It establishes the base styling and behavior
-for accordion groups, ensuring consistent appearance and interaction patterns
-across different themes. This wrapper works in conjunction with the
-[`accordion`][] component to create collapsible content sections.
-
-
-| Parameter | Type   | Default | Description                                                                         |
-|-----------|--------|---------|-------------------------------------------------------------------------------------|
-| `content` | string | -       | The content to be wrapped, typically consisting of multiple `accordion` components. |
-
-
-/// admonition | Relationship
-    type: info
-
-The [`accordion_wrapper`][accordion-wrapper] component is designed to work with
-[`accordion`][] components. While the accordion component defines the
-individual collapsible sections, the wrapper provides the container that holds
-multiple accordions together.
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic accordion wrapper -->
-{% call ui.util.call(ui.accordion_wrapper) %}
-    {{ ui.accordion("First section content", title="First Section") }}
-    {{ ui.accordion("Second section content", title="Second Section") }}
-{% endcall %}
-```
-///
 
 ## Account Navigation Wrapper
 
@@ -350,3 +315,4 @@ information maintain consistent styling and layout. This wrapper works with
 {% endcall %}
 ```
 ///
+{%endraw%}

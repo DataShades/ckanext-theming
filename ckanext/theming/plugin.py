@@ -12,7 +12,8 @@ from ckan import types
 
 from ckanext.theming.themes import make_bare_theme
 
-from . import config, make_middleware, register_themes, update_config, views
+from . import config as cfg
+from . import make_middleware, register_themes, update_config, views
 from .interfaces import ITheme
 
 log = logging.getLogger(__name__)
@@ -28,7 +29,9 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.IBlueprint, p.Single
         if config["testing"]:
             tk.add_template_directory(config, "tests/templates")
 
-        tk.add_template_directory(config, "templates")
+        if cfg.enable_views():
+            tk.add_template_directory(config, "templates")
+            tk.add_resource("assets", "theming")
 
     @override
     def register_themes(self):
@@ -41,6 +44,6 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.IBlueprint, p.Single
 
     @override
     def get_blueprint(self) -> list[Blueprint]:
-        if config.enable_views():
+        if cfg.enable_views():
             return [views.bp]
         return []

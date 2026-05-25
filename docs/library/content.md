@@ -1,3 +1,4 @@
+{%raw%}
 # Content
 
 Content components are designed to display information about CKAN's core
@@ -391,3 +392,4 @@ Different themes may support additional parameters for styling and presentation:
 - `show_display_name` (bool): Whether to show user's display name
 - `show_link` (bool): Whether to link to user profile
 ///
+{%endraw%}

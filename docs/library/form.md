@@ -1,3 +1,4 @@
+{%raw%}
 # Form
 
 Form components are essential for user interaction and data input. They provide
@@ -772,3 +773,4 @@ structure and validation capabilities.
 - `rows` (int): Number of visible text rows
 - `cols` (int): Number of visible text columns
 ///
+{%endraw%}

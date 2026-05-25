@@ -38,7 +38,9 @@ plugins:
             docstring_section_style: spacy
   - search:
       separator: '[\s\-\.\_]+'
-  # - macros                      # pip install mkdocs-macros-plugin
+  - macros:
+          include_yaml:
+              - component_ref: ckanext/theming/components.yaml
 
 watch:
   - README.md

@@ -1,3 +1,4 @@
+{%raw%}
 # Sections
 
 Section components help organize content into distinct areas of the page,
@@ -128,3 +129,4 @@ usable across different screen sizes.
 - `collapsible` (bool): Whether the section can be collapsed
 - `icon` (string): Icon to display with the section
 ///
+{%endraw%}

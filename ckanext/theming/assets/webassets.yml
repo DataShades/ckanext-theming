@@ -1,0 +1,14 @@
+examples:
+  filter: rjsmin
+  extra:
+    preload:
+      - theming/examples-css
+  output: ckanext-theming/%(version)s-examples.js
+  contents:
+      - prism.js
+
+examples-css:
+  output: ckanext-theming/%(version)s-examples.css
+  contents:
+      - prism.css
+      - examples.css

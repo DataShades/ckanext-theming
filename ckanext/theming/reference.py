@@ -54,7 +54,7 @@ class Component:
 @dataclasses.dataclass(frozen=True)
 class MacroArgument:
     description: str = ""
-    type: str = "unknown"
+    type: str = "any"
 
 
 @dataclasses.dataclass(frozen=True)

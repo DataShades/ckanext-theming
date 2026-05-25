@@ -1,3 +1,4 @@
+{%raw%}
 # Component Library
 
 Components in the theming system follow predictable patterns that make them
@@ -234,3 +235,4 @@ writing `{{ ui.icon("search") }}` should work in the same way.
 These patterns ensure that components remain flexible, accessible, and
 consistent across different themes while maintaining the separation of content
 structure from visual presentation.
+{%endraw%}

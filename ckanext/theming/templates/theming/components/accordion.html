@@ -1,1 +1,87 @@
-hehe
+{%- block overview -%}
+    <h2>Purpose</h2>
+    <p>
+        The <code>accordion</code> component creates collapsible content sections that allow
+        users to expand and collapse content as needed. This component is particularly
+        useful for organizing large amounts of information in a space-efficient manner,
+        allowing users to focus on relevant sections while keeping the interface
+        uncluttered.
+    </p>
+
+    <p>
+        Accordions are commonly used for FAQ sections, detailed metadata displays, and
+        any content that benefits from progressive disclosure. The component typically
+        includes a header that serves as the toggle control and a content area that
+        expands or collapses. It works with <code>accordion_wrapper</code> to
+        provide consistent grouping of multiple accordion sections.
+    </p>
+{%- endblock %}
+
+{%- block examples -%}
+    {{ ui.divider() }}
+    <h2>Examples</h2>
+
+    {%- block multiple_accordions -%}
+        <h3>Standard</h3>
+        <p>
+            Accordions should always be wrapped in an
+            <code>accordion_wrapper</code> to ensure proper styling and
+            functionality when multiple accordions are used together.
+        </p>
+
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {{ ui.accordion(lipsum(1), title="First accordion") }}
+            {{ ui.accordion(lipsum(1), title="Second accordion") }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.code, language="jinja2") -%}
+            {%- raw %}
+                {%- call ui.util.call(ui.accordion_wrapper) -%}
+                    {{ ui.accordion(lipsum(1), title="First accordion") }}
+                    {{ ui.accordion(lipsum(1), title="Second accordion") }}
+                {%- endcall %}
+            {%- endraw %}
+        {%- endcall %}
+    {%- endblock %}
+
+    {%- block initially_open_accordion -%}
+        <h3>Initially open</h3>
+        <p>
+            By default, accordions are closed when the page loads. However, you
+            can set an accordion to be initially open by passing the <code>open=true</code> argument.
+        </p>
+
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {{ ui.accordion(lipsum(1), title="Initially open accordion", open=true) }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.code, language="django") -%}
+            {%- raw %}
+                {%- call ui.util.call(ui.accordion_wrapper) -%}
+                    {{ ui.accordion(lipsum(1), title="Initially open accordion", open=true) }}
+                {%- endcall %}
+            {%- endraw %}
+        {%- endcall %}
+    {%- endblock %}
+
+    {{ ui.divider() }}
+{%- endblock %}
+
+{%- block parameters -%}
+    <h2>Parameters</h2>
+
+    {%- call ui.util.call(ui.table, striped=true, hover=true) -%}
+        {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, ["Parameter", "Type", "Description"], header=true))) }}
+        {%- call ui.util.call(ui.table_body) -%}
+            {%- for name, info in ref.accordion.arguments.items() -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell(name) }}
+                    {{ ui.table_cell(info.type) }}
+                    {{ ui.table_cell(info.description) }}
+                {%- endcall %}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endcall %}
+
+    {{ ui.divider() }}
+{%- endblock %}

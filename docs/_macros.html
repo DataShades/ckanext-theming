@@ -1,0 +1,7 @@
+{% macro parameters_table(component) -%}
+    | Parameter | Type   | Description |
+    |-----------|--------|-------------|
+    {%- for name, info in component.arguments.items() %}
+        | `{{name}}`    | {{info.type or 'any'}}   | {{info.description}} |
+    {%- endfor %}
+{% endmacro %}

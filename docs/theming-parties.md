@@ -1,3 +1,4 @@
+{%raw%}
 # Theming Parties
 
 Theming in CKAN involves three distinct parties, each with different responsibilities and capabilities. The theming system enables a clear separation of concerns where each party can focus on their specific role without interfering with others.
@@ -182,3 +183,4 @@ When a portal decides to switch themes:
 - Code using raw HTML with theme-specific classes will need updating
 - A gradual approach is recommended to migrate away from theme-specific code
 - Use CLI tools to verify component coverage when switching themes: `ckan theme component check`
+{%endraw%}

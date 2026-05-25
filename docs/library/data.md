@@ -1,3 +1,4 @@
+{%raw%}
 # Data
 
 Data components are designed to present structured information in a clear and
@@ -354,3 +355,4 @@ elements. While the body or head provides the section context, rows provide the
 horizontal organization.
 
 ///
+{%endraw%}

@@ -1,3 +1,4 @@
+{%raw%}
 # Search
 
 Search components enable users to find content within the CKAN instance. They
@@ -367,3 +368,4 @@ search interfaces. While the input provides the query, the submit button
 triggers the search operation.
 
 ///
+{%endraw%}
