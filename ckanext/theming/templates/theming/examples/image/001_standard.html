@@ -1,0 +1,27 @@
+<h3>Standard</h3>
+
+<p>
+    Only <code>src</code> and <code>alt</code> parameters are required for the <code>image</code> component. <code>src</code> specifies
+    the URL of the image to be displayed, while <code>alt</code> provides
+    alternative text for the image, which is important for accessibility and is
+    displayed if the image cannot be loaded. Themes are likely to support
+    additional parameters, such as <code>width</code>, <code>height</code>, or <code>variant</code>,
+    which can be used to customize the appearance of the image, but these are
+    not strict implementation requirements and must be checked in theme's
+    documentation.
+</p>
+
+
+<div>
+    {{ ui.image(src="https://placehold.co/600x400") }}
+    <br/>
+    {{ ui.image(src="https://example.com/not-real.png", alt="Non-existing image") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.image(src="https://placehold.co/600x400") }}
+
+        {{ ui.image(src="https://example.com/not-real.png", alt="Non-existing image") }}
+    {%- endraw %}
+{%- endcall %}

@@ -70,7 +70,7 @@
 {%- endmacro %}
 
 {%- macro tag(content, href) -%}
-    <a {{ ui.util.attrs(kwargs) }} {%- if href %} href="{{ href }}"{%- endif %}>{{ content }}</a>
+    <a {{ ui.util.attrs(kwargs, {"class": "tag"}) }} {%- if href %} href="{{ href }}"{%- endif %}>{{ content }}</a>
 {%- endmacro %}
 
 {%- macro tab(content, active, id) -%}

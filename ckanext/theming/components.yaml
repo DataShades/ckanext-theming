@@ -89,6 +89,14 @@ tab_wrapper:
         content:
             description: Collection of tabs
 
+tab_pane_wrapper:
+    description: |
+        Wrapper for a collection of tab panes.
+    category: recommended
+    arguments:
+        content:
+            description: Collection of tab panes
+
 # content
 activity:
     description: |
@@ -242,7 +250,7 @@ column:
     description: |
         Container for content arranged in a vertical column. Columns are
         typically used within rows to create grid layouts.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Content of the column
@@ -255,7 +263,7 @@ container:
     description: |
         Generic container with restricted width, used to wrap page content and
         center it on the page.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Content of the container
@@ -277,7 +285,7 @@ dropdown:
 grid:
     description: |
         Container for a grid layout, used to arrange content in rows and columns.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Content of the grid, typically rows containing columns
@@ -285,7 +293,7 @@ grid:
 row:
     description: |
         Container for a horizontal row of content. Rows are typically used within grids to create grid layouts.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Content of the row, typically columns containing content
@@ -540,7 +548,7 @@ tooltip:
 avatar:
     description: |
         Avatar image for a user, typically shown as a circle with the user's profile picture.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Usually ignored
@@ -559,7 +567,7 @@ badge:
         content:
             description: Content of the badge
         style:
-            description: Visual style of the badge, either "primary", "secondary", "success", "danger", "warning", "info" or "default"
+            description: Visual style of the badge, either "primary", "secondary", "success", "danger", "warning", or "info"
             type: 'str'
 
 breadcrumb_divider:
@@ -584,7 +592,7 @@ button:
             description: Button type, either "button", "submit" or "reset"
             type: 'str'
         style:
-            description: Visual style of the button, either "primary", "secondary", "success", "danger", "warning", "info" or "default"
+            description: Visual style of the button, either "primary", "secondary", "success", "danger", "warning", or "info"
             type: 'str'
 
 datetime:
@@ -604,6 +612,9 @@ datetime:
         empty:
             description: Text to show if the value is empty or invalid
             type: 'str'
+        relative:
+            description: Whether to show the date as a relative time (e.g. "3 days ago") instead of an absolute date
+            type: 'bool'
 
 divider:
     description: |
@@ -664,7 +675,7 @@ link:
         content:
             description: Link label
         href:
-            description: URL to navigate to when the link is clicked. If not specified, link will not be a link.
+            description: URL to navigate to when the link is clicked.
             type: 'str'
         blank:
             description: Whether to open the link in a new tab
@@ -673,12 +684,12 @@ link:
 tag:
     description: |
         Tag element, used to show a keyword or label for an item.
-    category: essential
+    category: experimental
     arguments:
         content:
             description: Tag label
         href:
-            description: URL to navigate to when the tag is clicked. x
+            description: URL to navigate to when the tag is clicked.
             type: 'str'
 
 tab:
@@ -694,6 +705,23 @@ tab:
         active:
             description: Whether this tab is currently active
             type: 'bool'
+        id:
+            description: Unique identifier for the tab, used to associate it with the corresponding tab content element
+            type: 'str'
+
+tab_pane:
+    description: |
+        Content element for a single tab in a tabbed interface, shown when the corresponding tab is active.
+    category: recommended
+    arguments:
+        content:
+            description: Content of the pane
+        active:
+            description: Whether this pane is currently visible
+            type: 'bool'
+        id:
+            description: Unique identifier for the pane, used to associate it with the corresponding tab handle
+            type: 'str'
 
 video:
     description: |
@@ -705,12 +733,16 @@ video:
         controls:
             description: Whether to show video controls (play, pause, etc.)
             type: 'bool'
+        autoplay:
+            description: Whether to autoplay the video when the page loads
+            type: 'bool'
+
 
 # data ################################################################
 chart:
     description: |
         Chart element, used to show a chart visualization for a dataset.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Chart caption
@@ -738,7 +770,7 @@ code:
 definition_list:
     description: |
         Definition list element, used to show a list of terms and their definitions.
-    category: unstable
+    category: experimental
     arguments:
         items:
             description: List of definition items, each item is a collection of two elements
@@ -1583,7 +1615,7 @@ search_advanced_controls:
     description: |
         Element used to show advanced search controls, typically rendered as a
         collapsible section with additional search options and filters.
-    category: unstable
+    category: experimental
     arguments:
         content:
             description: Usually ignored

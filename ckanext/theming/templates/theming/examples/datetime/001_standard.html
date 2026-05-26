@@ -1,0 +1,23 @@
+<h3>Standard</h3>
+
+<p>
+    <code>datetime</code>  shows only the date by default, but you can also
+    choose to show the time by setting the <code>with_hours</code> parameter to <code>true</code>.
+</p>
+
+
+<div>
+    {%- set now = ui.util.now() -%}
+
+    Today: {{ ui.datetime(now) }}
+    <br/>
+    Now: {{ ui.datetime(now, with_hours=true) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        Today: {{ ui.datetime(now) }}
+        &lt;br/&gt;
+        Now: {{ ui.datetime(now, with_hours=true) }}
+    {%- endraw %}
+{%- endcall %}

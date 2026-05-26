@@ -5,3 +5,7 @@
     box-shadow: none;
     padding: initial;
 }
+
+.component-example:not(:last-child) {
+    margin-bottom: 2rem;
+}

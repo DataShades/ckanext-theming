@@ -1,0 +1,59 @@
+<h3>Standard</h3>
+
+<p>
+    Structur of <code>table</code> components resembles structure of their HTML
+    counterparts, with a main <code>table</code> component that serves as the
+    container for the entire table.
+</p>
+
+<p>
+    Inside the <code>table</code>, there are
+    two main sections: <code>table_head</code> and <code>table_body</code>. The <code>table_head</code> component
+    is used to define the header row of the table, which typically contains
+    column titles. The <code>table_body</code> component contains the data rows
+    of the table, where each row is represented by a <code>table_row</code>,
+    and each cell within a row is represented by a <code>table_cell</code>. This
+    structure allows for clear separation of the table's header and body
+    content, making it easier to organize and style tables effectively.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.table) -%}
+        {%- call ui.util.call(ui.table_head) -%}
+            {{ ui.table_row(ui.util.map(ui.table_cell, ["Key", "Value"], header=true)) }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.table_body) -%}
+            {%- for value in ["A", "B", "C"] -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell(loop.index) }}
+                    {{ ui.table_cell(value) }}
+                {%- endcall %}
+            {%- endfor %}
+
+        {%- endcall %}
+
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.table) -%}
+            {%- call ui.util.call(ui.table_head) -%}
+                {{ ui.table_row(ui.util.map(ui.table_cell, ["Key", "Value"], header=true)) }}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.table_body) -%}
+                {%- for value in ["A", "B", "C"] -%}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell(loop.index) }}
+                        {{ ui.table_cell(value) }}
+                    {%- endcall %}
+                {%- endfor %}
+
+            {%- endcall %}
+
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

@@ -1,0 +1,40 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>tab</code> component creates tab navigation handles that allow users to
+        switch between different content sections within the same page. Tabs are
+        essential for organizing related content in a space-efficient manner while
+        maintaining clear navigation between different sections.
+    </p>
+
+    <p>
+        Tab components handle active state indication, visual styling, and
+        accessibility attributes to ensure tab navigation is both visually clear and
+        functionally accessible.
+    </p>
+
+    <p>
+        The <code>tab_wrapper</code> component provides the structural container
+        for tab-based interfaces.
+    </p>
+
+    <p>
+        There are also <code>tab_pane_wrapper</code> and <code>tab_pane</code> components
+        that work together to create the content areas associated with each
+        tab. The <code>tab_pane_wrapper</code> serves as a container for the individual <code>tab_pane</code> components,
+        which represent the content sections that are shown or hidden based on
+        the active tab selection.
+    </p>
+{%- endblock %}
+
+
+
+{%- block parameters -%}
+    <h3>Tab</h3>
+    {{ super() }}
+
+    <h3>Tab pane</h3>
+    {{ parameters_table("tab_pane") }}
+{%- endblock %}

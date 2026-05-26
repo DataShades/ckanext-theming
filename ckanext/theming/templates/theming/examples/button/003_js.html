@@ -1,0 +1,43 @@
+<h3>Interactive buttons</h3>
+
+
+<p>
+    Buttons can be made interactive by attaching JavaScript event handlers to
+    them. This allows you to define custom behavior when a user interacts with
+    the button, such as clicking it. Just as with any other component, you can
+    use the <code>attrs</code> paramerter of the <code>button</code> component
+    to specify event types and their corresponding JavaScript code(<code>attrs={"onclick": "..."}</code>)
+    or you can use <code>on</code> shortcut(<code>on={"click": "..."}</code>).
+</p>
+
+<p>
+    Using inline JS is not recommended and it's better to attache listeners to
+    elements using data-modules or CSS selectors.
+</p>
+
+
+<div>
+    {{ ui.button("Show alert", on={"click": "alert('CLICK')"}) }}
+
+    {% set id = ui.util.id() %}
+    {{ ui.button("Reload the page", attrs={"id": id}) }}
+    <script>
+        document.getElementById(`{{ id }}`).addEventListener(
+            "click", () => location.reload()
+        )
+    </script>
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.button("Show alert", on={"click": "alert('CLICK')"}) }}
+
+        {%- set id = ui.util.id() -%}
+        {{ ui.button("Reload the page", attrs={"id": id}) }}
+        &lt;script&gt;
+        &nbsp;&nbsp;document.getElementById(`{{ id }}`).addEventListener(
+        &nbsp;&nbsp;&nbsp;&nbsp;"click", () => location.reload()
+        &nbsp;&nbsp;)
+        &lt;/script&gt;
+    {%- endraw %}
+{%- endcall %}

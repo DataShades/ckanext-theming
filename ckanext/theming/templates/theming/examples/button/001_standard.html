@@ -1,0 +1,39 @@
+<h3>Standard</h3>
+
+
+<p>
+    Theming supports multiple button styles that can be used to indicate the
+    purpose or importance of a button. The available styles are: <code>primary</code>,
+    <code>secondary</code>, <code>danger</code>, <code>success</code>, <code>warning</code>, and <code>info</code>. Each
+    style has its own visual appearance, which can be defined in the theme's
+    CSS. By using different styles, you can create a visual hierarchy and guide
+    users' attention to important actions or information on your
+    website. Additionally, theme can provide more styles for buttons. Usually
+    additional styles either available via non-standard value for the <code>style</code>
+    parameter(e.g., <code>style="outline-primary"</code>), or via standard <code>style</code>
+    combined with non-standard attribute <code>variant</code>(e.g., <code>style="primary",
+    variant="outline"</code>)
+</p>
+
+
+<div>
+    {{ ui.button("Default") }}
+    {{ ui.button("Primary", style="primary") }}
+    {{ ui.button("Secondary", style="secondary") }}
+    {{ ui.button("Danger", style="danger") }}
+    {{ ui.button("Success", style="success") }}
+    {{ ui.button("Warning", style="warning") }}
+    {{ ui.button("Info", style="info") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.button("Default") }}
+        {{ ui.button("Default", style="primary") }}
+        {{ ui.button("Default", style="secondary") }}
+        {{ ui.button("Default", style="danger") }}
+        {{ ui.button("Default", style="success") }}
+        {{ ui.button("Default", style="warning") }}
+        {{ ui.button("Default", style="info") }}
+    {%- endraw %}
+{%- endcall %}

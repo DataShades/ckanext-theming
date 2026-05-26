@@ -1,0 +1,25 @@
+<h3>Types</h3>
+
+<p>
+    <code>button</code> component can be rendered in different types, depending on the
+    value of the <code>type</code> parameter. By default, it is rendered as a normal
+    button, but you can also specify it to be a submit button, reset button, or a
+    link. To render a link, you need to set the <code>href</code> parameter to the
+    desired URL.
+</p>
+
+<div>
+    {{ ui.button("Normal button") }}
+    {{ ui.button("Submit", type="submit") }}
+    {{ ui.button("Reset", type="reset") }}
+    {{ ui.button("Link", href="/") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.button("Normal button") }}
+        {{ ui.button("Submit", type="submit") }}
+        {{ ui.button("Reset", type="reset") }}
+        {{ ui.button("Link", href="/") }}
+    {%- endraw %}
+{%- endcall %}

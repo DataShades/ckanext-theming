@@ -1,0 +1,27 @@
+<h3>Standard</h3>
+
+<p>
+    Apart from the content and <code>href</code> parameter, link component can
+    also accept a <code>blank</code> parameter, which indicates whether the
+    link should open in a new tab or not. If <code>blank</code> is set to true,
+    the link will have the attribute <code>target="_blank"</code>, causing it
+    to open in a new browser tab when clicked. If <code>blank</code> is not set
+    or is false, the link will open in the same tab by default. In addition,
+    depending on theme implementation, <code>blank</code> may set <code>noreferrer</code> or <code>noopener</code> as
+    a default value for <code>rel</code> attribute.
+</p>
+
+
+<div>
+    {{ ui.link("Internal link", href="?") }}
+
+    {{ ui.link("External link", href="https://ckan.org", blank=true) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.link("Internal link", href="?") }}
+
+        {{ ui.link("External link", href="https://ckan.org", blank=true) }}
+    {%- endraw %}
+{%- endcall %}

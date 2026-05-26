@@ -1,0 +1,39 @@
+<h3>Standard</h3>
+
+<p>
+    <code>breadcrumb</code> component has a label and link. Additionally, the
+    first breadcrumb can be marked as <code>initial</code> and the last one as active. The
+    component will render a breadcrumb navigation that allows users to
+    understand their current location within the site's hierarchy and navigate
+    back to previous levels if needed.
+</p>
+
+<p>
+    Usually, dividers are automatically added by <code>breadcrumb</code> element. Depending
+    on theme implementation, they can be either added via explicit call to <code>breadcrubm_divider</code>,
+    or via pseudo-css element. In latter case, <code>breadcrumb_divider</code> usually
+    does not produce any output.
+</p>
+
+
+<div>
+    <div class="toolbar">
+        {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+            {{ ui.breadcrumb("Home", href="/", initial=true) }}
+            {{ ui.breadcrumb("Theeming", href="/theming") }}
+            {{ ui.breadcrumb("Component", href="/theming/component", active=true) }}
+        {%- endcall %}
+    </div>
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        &lt;div class="toolbar"&gt;
+        {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+            {{ ui.breadcrumb("Home", href="/", initial=true) }}
+            {{ ui.breadcrumb("Theeming", href="/theming") }}
+            {{ ui.breadcrumb("Component", href="/theming/component", active=true) }}
+        {%- endcall %}
+        &lt;/div&gt;
+    {%- endraw %}
+{%- endcall %}

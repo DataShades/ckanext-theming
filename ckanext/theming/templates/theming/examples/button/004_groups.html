@@ -1,0 +1,35 @@
+<h3>Button groups</h3>
+
+<p>
+    Buttons can be grouped together using the <code>button_group</code> component. Direction
+    of the group can be set to either horizontal or vertical by setting the <code>direction</code> parameter
+    to either "row" or "column".
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.button_group, direction="row") -%}
+        {{ ui.button("First") }}
+        {{ ui.button("Second", style="danger") }}
+    {%- endcall %}
+    &nbsp;
+    {%- call ui.util.call(ui.button_group, direction="column") -%}
+        {{ ui.button(ui.icon("edit")) }}
+        {{ ui.button(ui.icon("trash"), style="danger") }}
+    {%- endcall %}
+
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.button_group, direction="row") -%}
+            {{ ui.button("First") }}
+            {{ ui.button("Second", style="danger") }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.button_group, direction="column") -%}
+            {{ ui.button(ui.icon("edit")) }}
+            {{ ui.button(ui.icon("trash"), style="danger") }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

@@ -1,0 +1,45 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>icon</code> component displays icon elements that provide visual cues, represent
+        actions, or enhance content understanding. Icons are powerful visual elements
+        that can communicate concepts quickly and efficiently, transcending language
+        barriers and providing intuitive interface elements.
+    </p>
+
+    <p>
+        Icon components typically support various icon sets or libraries, allowing
+        themes to implement their preferred icon system while maintaining consistent
+        usage patterns. The component handles sizing, coloring, and accessibility
+        attributes to ensure icons are both visually effective and properly accessible
+        to users with different needs.
+    </p>
+
+    <p>
+        Themes can provide an automatical mapping of icon names from
+        FontAwesome to theme's icon names, allowing users to use familiar
+        FontAwesome icon names while the theme translates them to the
+        appropriate icons in the theme's icon set. This feature enhances
+        usability and flexibility, enabling themes to maintain their unique
+        visual style while supporting a wide range of icons through a familiar
+        naming convention.
+    </p>
+
+    <p>
+        If mapping for specific icon is missing, usually it can be added by
+        creating a child theme and adding the mapping there. This allows themes
+        to extend or customize the icon set without modifying the base theme,
+        ensuring that updates to the base theme do not overwrite custom icon
+        mappings and that the theme can evolve while maintaining its unique
+        visual identity.
+
+        {%- call ui.util.call(ui.code, language="python", dedent=true) %}
+            icon_map = {"FA ICON": "THEME ICON", "trash": "recycle-bin"}
+            Theme(..., parent="parent theme", icon_map=icon_map)
+        {%- endcall %}
+
+    </p>
+
+{%- endblock %}

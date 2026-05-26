@@ -15,12 +15,10 @@ icon_map = {
     "bell-slash": "🔕",
     "bookmark": "🔖",
     "calendar": "📅",
-    "calendar-alt": "🗓️",
     "chart-area": "📉",
     "chart-bar": "📊",
     "chart-line": "📈",
     "chart-pie": "🥧",
-    "chart-scatter": "📊",
     "check": "✔️",  # Success / confirmation
     "check-circle": "✅",
     "chevron-down": "▾",  # Expand
@@ -30,8 +28,8 @@ icon_map = {
     "clipboard": "📋",
     "clock": "⏰",
     "cloud": "☁️",
-    "cloud-download-alt": "☁️⬇️",
-    "cloud-upload-alt": "☁️⬆️",
+    "cloud-download": "☁️⬇️",
+    "cloud-upload": "☁️⬆️",
     "cog": "⚙️",  # Settings / configuration
     "cogs": "🛠️",
     "comment": "💬",
@@ -39,18 +37,16 @@ icon_map = {
     "copy": "📋",
     "database": "🗄️",
     "download": "⬇️",  # Download
-    "download-alt": "⤵️",
     "edit": "✏️",  # Edit / update
     "ellipsis-h": "⋯",
     "ellipsis-v": "⋮",
     "envelope": "✉️",
     "envelope-open": "📬",
     "exclamation-triangle": "⚠️",  # Warning
-    "external-link-alt": "🌐",
+    "external-link": "🌐",
     "eye": "👁️",  # View / show
     "eye-slash": "🙈",
     "file": "📄",
-    "file-alt": "📄",
     "file-csv": "📑",
     "file-excel": "📊",
     "file-pdf": "📕",
@@ -66,10 +62,9 @@ icon_map = {
     "language": "🈯",
     "link": "🔗",
     "list": "📋",
-    "list-alt": "🗒️",
     "lock": "🔒",  # Locked / secure
     "map": "🗺️",
-    "map-marker-alt": "📍",
+    "map-marker": "📍",
     "minus": "➖",  # Remove / reduce
     "pause": "⏸️",
     "play": "▶️",
@@ -80,10 +75,9 @@ icon_map = {
     "save": "💾",
     "search": "🔍",  # Search functionality
     "share": "🔗",
-    "shield-alt": "🛡️",
+    "shield": "🛡️",
     "signal": "📡",
-    "sliders-h": "🎚️",
-    "sliders-v": "🎛️",
+    "sliders": "🎚️",
     "sort": "↕️",
     "sort-down": "⬇️",
     "sort-up": "⬆️",
@@ -98,11 +92,9 @@ icon_map = {
     "times": "❌",  # Close / cancel
     "times-circle": "⛔",
     "trash": "🗑️",  # Delete / trash
-    "trash-alt": "🚮",
     "undo": "↩️",
     "unlock": "🔓",  # Unlocked / open
     "upload": "⬆️",  # Upload
-    "upload-alt": "⤴️",
     "user": "👤",  # User / profile
     "users": "👥",
     "wifi": "📶",

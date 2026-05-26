@@ -1,0 +1,48 @@
+<h3>Using HTML tags</h3>
+
+<p>
+    As long as you use the appropriate HTML structure and classes, you can
+    create tables using native HTML tags.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.table) -%}
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%- for value in ["A", "B", "C"] -%}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {%- endfor %}
+        </tbody>
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.table) -%}
+            &lt;thead&gt;
+            &nbsp;&nbsp;&lt;tr&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Key&lt;/th&gt;
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Value&lt;/th&gt;
+            &nbsp;&nbsp;&lt;/tr&gt;
+            &lt;/thead&gt;
+
+            &lt;tbody&gt;
+            {%- for value in ["A", "B", "C"] -%}
+                &lt;tr&gt;
+                &nbsp;&nbsp;&lt;td&gt;{{ loop.index }}&lt;/td&gt;
+                &nbsp;&nbsp;&lt;td&gt;{{ value }}&lt;/td&gt;
+                &lt;/tr&gt;
+            {%- endfor %}
+            &lt;/tbody&gt;
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

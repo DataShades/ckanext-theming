@@ -1,0 +1,37 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>button</code> component creates interactive buttons that
+        allow users to perform actions, submit forms, or navigate within the
+        application. Buttons are fundamental interactive elements that require
+        consistent styling and behavior to ensure users can easily identify
+        actionable elements throughout the interface.
+    </p>
+
+    <p>
+        Button components typically support different styles for different
+        purposes: primary buttons for main actions, secondary buttons for
+        alternative actions, and various other styles for different
+        contexts. The component handles proper accessibility attributes, hover
+        states, focus indicators, and consistent sizing to ensure buttons are
+        both visually appealing and functionally accessible.
+    </p>
+
+
+    <p>
+        When buttons are semantically related, such as a group of action
+        buttons or toggle buttons, it's important to use the <code>button_group</code>
+        component to visually group them.
+    </p>
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Button</h3>
+    {{ super() }}
+
+    <h3>Button group</h3>
+    {{ parameters_table("button_group") }}
+{%- endblock %}

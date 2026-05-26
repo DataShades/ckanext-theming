@@ -1,0 +1,57 @@
+<h3>Parameters</h3>
+
+
+<p>
+    The <code>table</code> component accepts several parameters that allow you
+    to customize its appearance and behavior. Some of the commonly used
+    parameters include:
+
+    <ul>
+        <li><code>striped</code>: Adds zebra-striping to the table rows for better readability.</li>
+        <li><code>hover</code>: Enables a hover state on table rows to highlight them when the mouse pointer is over them.</li>
+        <li><code>condensed</code>: Makes the table more compact by reducing the padding between cells.</li>
+        <li><code>bordered</code>: Adds borders to all sides of the table and cells for a more defined structure.</li>
+    </ul>
+
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.table, striped=true, hover=true, condensed=true, bordered=true) -%}
+        {%- call ui.util.call(ui.table_head) -%}
+            {{ ui.table_row(ui.util.map(ui.table_cell, ["Key", "Value"], header=true)) }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.table_body) -%}
+            {%- for value in ["A", "B", "C"] -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell(loop.index) }}
+                    {{ ui.table_cell(value) }}
+                {%- endcall %}
+            {%- endfor %}
+
+        {%- endcall %}
+
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.table, striped=true, hover=true, condensed=true, bordered=true) -%}
+            {%- call ui.util.call(ui.table_head) -%}
+                {{ ui.table_row(ui.util.map(ui.table_cell, ["Key", "Value"], header=true)) }}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.table_body) -%}
+                {%- for value in ["A", "B", "C"] -%}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell(loop.index) }}
+                        {{ ui.table_cell(value) }}
+                    {%- endcall %}
+                {%- endfor %}
+
+            {%- endcall %}
+
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

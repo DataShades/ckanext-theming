@@ -1,6 +1,11 @@
 {%- extends "theming/base.html" -%}
 
 {%- set component_title = component|replace("_", " ")|title if component else none -%}
+{%- set styles = {
+            "experimental": "danger",
+            "recommended": "success",
+            "custom": "info",
+    } -%}
 
 
 {%- block subtitle -%}
@@ -19,21 +24,20 @@
 
 {%- block secondary_content -%}
     {{ super() }}
+
     {%- if available_components -%}
 
-        {%- call ui.util.call(ui.sidebar_nav_wrapper) -%}
+        {%- call ui.util.call(ui.sidebar_nav_wrapper, title=_("Components")) -%}
             {%- for name in available_components -%}
                 {%- call ui.util.call(ui.sidebar_nav_item, href=h.url_for("theming.component", component=name), active=component==name) -%}
                     {{ name|replace("_", " ")|title }}
-                    {%- with category=ref[component].category -%}
-                        {{ ui.badge(category.value) if category.name != "ESSENTIAL" }}
+                    {%- with category=ref[name].category -%}
+                        {{ ui.badge(category.value, style=styles[category.value]) if category.value != "essential" }}
                     {%- endwith %}
-
                 {%- endcall %}
 
             {%- endfor %}
         {%- endcall %}
-
     {%- endif %}
 {%- endblock %}
 

@@ -1,0 +1,29 @@
+<h3>Standard</h3>
+
+<p>
+    Tabs are rendered by using a combination of <code>tab_wrapper</code> and <code>tab</code> components. The <code>tab_wrapper</code> component
+    serves as a container for the tabs, while the <code>tab</code>
+    component represents each individual tab. To indicate which tab is
+    currently active, you can set the <code>active</code> parameter to <code>true</code> for
+    the desired tab. This will typically apply a different style to the active
+    tab, making it visually distinct from the others.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.tab_wrapper) -%}
+        {{ ui.tab("First") }}
+        {{ ui.tab("Second", active=true) }}
+        {{ ui.tab("Third") }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.tab_wrapper) -%}
+            {{ ui.tab("First") }}
+            {{ ui.tab("Second", active=true) }}
+            {{ ui.tab("Third") }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

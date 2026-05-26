@@ -1,0 +1,23 @@
+<h3>Standard</h3>
+
+<p>
+    Usually tags have <code>href</code> attribute, which makes them clickable
+    and allows users to navigate to a specific URL when the tag is
+    clicked. However, if the <code>href</code> attribute
+    is not provided, the tag will be rendered as a non-clickable element,
+    serving as a visual label or indicator without any navigation
+    functionality.
+</P>
+
+
+<div>
+    {{ ui.tag("Hello", href="#") }}
+    {{ ui.tag("World") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.tag("Hello", href="#") }}
+        {{ ui.tag("World") }}
+    {%- endraw %}
+{%- endcall %}

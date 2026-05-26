@@ -1,0 +1,22 @@
+<h3>Format</h3>
+
+<p>
+    You can specify the date format using the <code>date_format</code> parameter. It
+    accepts a string that follows the Python's <code>strftime</code> format. For
+    example, if you want to show the year and month, you can set <code>date_format="%Y-%m"</code>. If
+    you also want to show the time, you can include the time format as well,
+    for example: <code>date_format="%Y-%m, %H:%M"</code>.
+</p>
+
+
+<div>
+    {%- set now = ui.util.now() -%}
+    {{ ui.datetime(now, date_format="%Y-%m, %H:%M") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set now = ui.util.now() -%}
+        {{ ui.datetime(now, date_format="%Y-%m, %H:%M") }}
+    {%- endraw %}
+{%- endcall %}

@@ -1,0 +1,46 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>table</code> component creates table containers that organize
+        data in rows and columns, providing a structured format for displaying
+        related information. Tables are fundamental for presenting tabular data in
+        an organized, scannable format that allows users to compare values and
+        identify patterns.
+    </p>
+
+    <p>
+        Table components work with several related components to create complete
+        table structures: <code>table_head</code> for headers,
+        <code>table_body</code> for main content, <code>table_row</code> for
+        individual rows, and <code>table_cell</code> for individual data
+        cells. This component provides the overall container structure and handles
+        responsive behavior to ensure tables remain usable across different
+        devices.
+    </p>
+
+    <p>
+        Usually <code>table</code> is implemented using native HTML <code>&lt;table&gt;</code> elements,
+        which provide inherent accessibility and semantic structure for tabular
+        data. The component ensures that tables are styled consistently with
+        the overall design system while maintaining proper spacing, borders,
+        and alignment to enhance readability and usability.
+    </p>
+
+    <p>
+        Nevertheless, some themes may implement <code>table</code> using
+        different HTML elements. Because of it, it's safer to user <code>table_row</code>, <code>table_cell</code>, <code>table_head</code>, and <code>table_body</code> components instead of <code>tr</code>, <code>td</code>, <code>thead</code>, and <code>tbody</code> HTML
+        tags unless you are sure that the theme you are using implements <code>table</code> component
+        using native HTML table elements.
+    </p>
+{%- endblock %}
+
+
+{%- block parameters -%}
+    <h3>Table</h3>
+    {{ super() }}
+
+    <h3>Table cell</h3>
+    {{ parameters_table("table_cell") }}
+{%- endblock %}

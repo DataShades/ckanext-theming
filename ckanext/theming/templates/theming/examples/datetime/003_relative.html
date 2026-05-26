@@ -1,0 +1,24 @@
+<h3>Relative</h3>
+
+<p>
+    By setting the <code>relative</code> parameter to <code>true</code>, the
+    component will display the date in a relative format. For example, if the
+    date is today, it will show "today". If the date is yesterday, it will show
+    "yesterday". If the date is in the future, it will show "in X days". This
+    provides a more human-friendly way to display dates relative to the current
+    time.
+</p>
+
+
+<div>
+    {%- set now = ui.util.now() -%}
+    {%- set date = now.year ~ "-01-01" -%}
+    {{ ui.datetime(date, relative=true) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set date = "1970-01-01" -%}
+        {{ ui.datetime(date, relative=true) }}
+    {%- endraw %}
+{%- endcall %}

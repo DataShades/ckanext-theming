@@ -11,16 +11,16 @@
 
 <div>
     {%- call ui.util.call(ui.pagination_wrapper) -%}
-        {{ ui.pagination_item("1", href="?page=1") }}
-        {{ ui.pagination_item("2", href="?page=2", active=true) }}
+        {{ ui.pagination_item("Show older records", href="?before=today") }}
+        {{ ui.pagination_item("Show newer records", href="?after=today") }}
     {%- endcall %}
 </div>
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
         {%- call ui.util.call(ui.pagination_wrapper) -%}
-            {{ ui.pagination_item("1", href="?page=1") }}
-            {{ ui.pagination_item("2", href="?page=2", active=true) }}
+            {{ ui.pagination_item("Show older records", href="?before=today") }}
+            {{ ui.pagination_item("Show newer records", href="?after=today") }}
         {%- endcall %}
     {%- endraw %}
 {%- endcall %}

@@ -1,0 +1,26 @@
+<h3>Standard</h3>
+
+<p>
+    Usually, <code>icon</code> component accepts a single parameter, which is
+    the name of the icon to be displayed. Themes can support additional
+    parameters, such as <code>variant</code> or <code>size</code>,
+    which can be used to customize the appearance of the icon, but these are
+    not strict implementation requirements and often ignored.
+</p>
+
+
+<div>
+    {{ ui.icon("home") }}
+    {{ ui.icon("trash") }}
+    {{ ui.icon("edit") }}
+    {{ ui.icon("add") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.icon("home") }}
+        {{ ui.icon("trash") }}
+        {{ ui.icon("edit") }}
+        {{ ui.icon("add") }}
+    {%- endraw %}
+{%- endcall %}

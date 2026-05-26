@@ -40,7 +40,7 @@ class Source(msgspec.Struct):
 class Category(enum.Enum):
     ESSENTIAL = "essential"
     RECOMMENDED = "recommended"
-    UNSTABLE = "unstable"
+    EXPERIMENTAL = "experimental"
     CUSTOM = "custom"
 
 

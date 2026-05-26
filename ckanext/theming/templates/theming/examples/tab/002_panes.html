@@ -1,0 +1,55 @@
+<h3>Panes</h3>
+
+<p>
+    Tabs can be associated with panes, which are sections of content that are
+    displayed when a specific tab is active. To link a tab to a pane, you can
+    use the <code>id</code> parameter
+    for both the tab and the pane, ensuring they match. When a user clicks on a
+    tab, the corresponding pane will be shown while hiding the others. This
+    allows for an organized and interactive way to display different content
+    sections without navigating away from the current page.
+</p>
+
+<p>
+    Tabs that have <code>href</code> attribute instead if <code>id</code> are
+    rendered as links and can be used to navigate between different pages. This
+    option can be used when content associated with the tab is not available on
+    the same page, but is located on a different page. Tabs with <code>href</code> attribute
+    are not associated with any panes and do not affect their visibility when
+    clicked.
+</p>
+
+
+<div>
+    {%- set first_pane_id = ui.util.id() -%}
+    {%- set second_pane_id = ui.util.id() -%}
+
+    {%- call ui.util.call(ui.tab_wrapper) -%}
+        {{ ui.tab("Link tab", href="") }}
+        {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
+        {{ ui.tab("Pane 2", id=second_pane_id) }}
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.tab_pane_wrapper) -%}
+        {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
+        {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set first_pane_id = ui.util.id() -%}
+        {%- set second_pane_id = ui.util.id() -%}
+
+        {%- call ui.util.call(ui.tab_wrapper) -%}
+            {{ ui.tab("Link tab", href="") }}
+            {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
+            {{ ui.tab("Pane 2", id=second_pane_id) }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.tab_pane_wrapper) -%}
+            {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
+            {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

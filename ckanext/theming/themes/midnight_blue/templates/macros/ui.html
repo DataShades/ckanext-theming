@@ -102,8 +102,14 @@
 
 
 {%- macro _sidebar_nav_wrapper(content) -%}
-    <ul {{ ui.util.attrs(kwargs, {"class": "nav nav-options flex-column"}) }}>
-        {{ content }}
-    </ul>
+    <section class="module">
+        <div class="module-group">
+            {{ ui.heading(title, level=2, attrs={"class": "module-heading bg-primary text-bg-primary"}) if title }}
+
+            <ul {{ ui.util.attrs(kwargs, {"class": "nav nav-options flex-column"}) }}>
+                {{ content }}
+            </ul>
+        </div>
+    </section>
 {%- endmacro %}
 {%- set sidebar_nav_wrapper = sidebar_nav_wrapper or _sidebar_nav_wrapper -%}
