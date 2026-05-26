@@ -27,7 +27,7 @@ different needs and work well across different devices and screen sizes.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic chart component -->
 {{ ui.chart(data=[[1,2,3], [3,2,4]], type="bar") }}
 {{ ui.chart(data=[[1,2,3], [3,2,4]], type="line") }}
@@ -67,7 +67,7 @@ content.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic code component -->
 {{ ui.code("print('Hello World')") }}
 ```
@@ -104,7 +104,7 @@ configuration details.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic definition list -->
 {{ ui.definition_list([
     ["Hello", "Praesent augue."],
@@ -143,7 +143,7 @@ tables remain usable across different devices.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic table component -->
 {%- call ui.util.call(ui.table) -%}
     {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, ["Header 1", "Header 2"]))) }}
@@ -198,7 +198,7 @@ makes the information easy to scan and understand.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic table body component -->
 {%- call ui.util.call(ui.table) -%}
     {%- call ui.util.call(ui.table_body) -%}
@@ -238,7 +238,7 @@ structure.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic table cell component -->
 {%- call ui.util.call(ui.table) -%}
     {%- call ui.util.call(ui.table_row) -%}
@@ -288,7 +288,7 @@ often implementing features like sticky headers for large tables.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic table head component -->
 {%- call ui.util.call(ui.table) -%}
     {{ ui.table_head(ui.table_row(ui.table_cell("Header 1") ~ ui.table_cell("Header 2"))) }}
@@ -331,7 +331,7 @@ maintain proper alignment and spacing within the overall table structure.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic table row component -->
 {%- call ui.util.call(ui.table) -%}
     {%- call ui.util.call(ui.table_row) -%}

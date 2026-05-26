@@ -1,3 +1,5 @@
+{% from "_macros.html" import parameters_table %}
+
 {%raw%}
 # Navigation
 
@@ -30,7 +32,7 @@ levels deep.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic breadcrumb -->
 {{ ui.breadcrumb("Home", href="/", initial=true) }}
 {{ ui.breadcrumb("Datasets", href="/datasets") }}
@@ -72,7 +74,7 @@ different navigation contexts.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic navigation item -->
 {{ ui.nav_item("Home", href="/") }}
 
@@ -114,7 +116,7 @@ maintaining consistency with the overall navigation design.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic main navigation item -->
 {{ ui.main_nav_item("Datasets", href="/dataset") }}
 
@@ -156,7 +158,7 @@ navigation contexts.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic account navigation item -->
 {{ ui.account_nav_item("Profile", href="/user/me") }}
 
@@ -197,7 +199,7 @@ styling and positioning within content navigation contexts.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic content navigation item -->
 {{ ui.content_nav_item("About", href="/dataset/my-dataset") }}
 
@@ -233,7 +235,7 @@ importance.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Add dataset action -->
 {{ ui.page_action("Add Dataset", href="/dataset/new") }}
 ```
@@ -272,7 +274,7 @@ appropriate styling and positioning.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic content action -->
 {{ ui.content_action("Edit", href="/dataset/edit/my-dataset") }}
 
@@ -298,7 +300,7 @@ appropriate styling and positioning.
 
 ## Pagination
 
-The [`pagination`][] component creates pagination controls that allow users to
+The `pagination` component creates pagination controls that allow users to
 navigate through multiple pages of content. Pagination is essential for
 content-heavy sections where displaying all items on a single page would be
 impractical or overwhelming.
@@ -310,24 +312,40 @@ understand their position within larger content collections. The component
 ensures pagination controls are clearly visible and easily accessible while
 maintaining appropriate styling and positioning.
 
+If you want to construct a pagination control from low-level components, you can
+use `pagination_wrapper` and `pagination_item`. The former
+serves as a container for pagination items, while the latter represents an
+individual page link. You can customize the appearance and behavior of each
+pagination item by passing appropriate parameters to it, such as `href`
+for the link URL or `active` to indicate the current page.
+
+
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic pagination -->
 {{ ui.pagination(page=1, total=10) }}
 
 <!-- Pagination with custom parameters -->
 {{ ui.pagination(page=3, total=20, url_generator=h.pager_url, padding=3) }}
+
+<!-- Low-level pagination -->
+{%- call ui.util.call(ui.pagination_wrapper) -%}
+    {{ ui.pagination_item("1", href="?page=1") }}
+    {{ ui.pagination_item("2", href="?page=2") }}
+{%- endcall %}
 ```
 ///
 
-| Parameter       | Type     | Default | Description                                           |
-|-----------------|----------|---------|-------------------------------------------------------|
-| `page`          | int      | -       | The current page number.                              |
-| `total`         | int      | -       | The total number of pages.                            |
-| `url_generator` | function | -       | Function to generate URLs for different pages.        |
-| `padding`       | int      | -       | Number of page links to show around the current page. |
+{%endraw%}
+### Pagination
+{{parameters_table(component_ref.pagination)}}
+
+### Pagination item
+{{parameters_table(component_ref.pagination_item)}}
+
+{%raw%}
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -353,7 +371,7 @@ consistent appearance and behavior across different dropdown contexts.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic dropdown item -->
 {{ ui.dropdown_item("Action", href="/action") }}
 

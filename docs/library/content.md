@@ -25,7 +25,7 @@ such as dataset creation, updates, and user interactions.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic activity component -->
 {%- call ui.util.call(ui.activity_list) -%}
     {{ ui.activity("User created a new dataset", activity=activity_data) }}
@@ -68,7 +68,7 @@ wrapper and section components provide the structural container.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic facet component -->
 {%- call ui.util.call(ui.facet_list) -%}
     {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
@@ -113,7 +113,7 @@ component interface remains consistent across implementations.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic license component -->
 {{ ui.license("Creative Commons Attribution", url="https://creativecommons.org/licenses/by/4.0/") }}
 
@@ -166,7 +166,7 @@ layout when displaying multiple groups together.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic group component -->
 {%- call ui.util.call(ui.group_list) -%}
     {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
@@ -216,7 +216,7 @@ styling and layout when displaying multiple organizations together.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic organization component -->
 {%- call ui.util.call(ui.organization_list) -%}
     {{ ui.organization(organization={"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
@@ -266,7 +266,7 @@ and layout when displaying multiple packages together.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic package component -->
 {%- call ui.util.call(ui.package_list) -%}
     {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
@@ -316,7 +316,7 @@ and layout when displaying multiple resources together.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic resource component -->
 {%- call ui.util.call(ui.resource_list) -%}
     {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
@@ -368,7 +368,7 @@ users together.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic user component -->
 {%- call ui.util.call(ui.user_list) -%}
     {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}

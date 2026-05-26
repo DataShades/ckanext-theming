@@ -39,7 +39,7 @@ based on their purpose.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Simple badge -->
 {{ ui.badge("New") }}
 
@@ -74,7 +74,7 @@ location within the site structure.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Default divider -->
 {{ ui.breadcrumb_divider() }}
 
@@ -129,7 +129,7 @@ to ensure buttons are both visually appealing and functionally accessible.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Primary button -->
 {{ ui.button("Submit Form", style="primary") }}
 
@@ -177,7 +177,7 @@ considerations to ensure accurate representation of temporal information.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Display datetime with default format -->
 {{ ui.datetime("2023-01-01T12:00:00Z") }}
 
@@ -216,7 +216,7 @@ primary content for attention.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Simple divider -->
 {{ ui.divider() }}
 
@@ -246,7 +246,7 @@ flexibility to adapt to different content requirements and design contexts.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Main page heading -->
 {{ ui.heading("Dataset Overview", level=1) }}
 
@@ -290,7 +290,7 @@ to users with different needs.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic icon -->
 {{ ui.icon("home") }}
 {{ ui.icon("search") }}
@@ -332,7 +332,7 @@ issues.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic image -->
 {{ ui.image(src="/path/to/image.jpg", alt="Descriptive text") }}
 
@@ -376,7 +376,7 @@ visual harmony with the overall design.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Internal link -->
 {{ ui.link("View Dataset", href="/dataset/my-dataset") }}
 
@@ -419,7 +419,7 @@ maintaining readability and appropriate spacing for tag collections.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic tag -->
 {{ ui.tag("Data") }}
 
@@ -452,7 +452,7 @@ mechanism, the content areas provide the display for different sections.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic tab -->
 {{ ui.tab("Tab 1", href="/tab1") }}
 
@@ -510,7 +510,7 @@ user experience without causing performance or accessibility issues.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic video -->
 {{ ui.video(src="/path/to/video.mp4") }}
 

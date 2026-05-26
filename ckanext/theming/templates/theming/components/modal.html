@@ -1,1 +1,54 @@
-haha
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+    <p>
+        The <code>modal</code> component creates modal dialog containers that
+        overlay the main content to focus user attention on specific tasks or
+        information. Modals are used for forms, detailed views, settings, and
+        any content that requires focused user attention without navigating
+        away from the current page.
+    </p>
+
+    <p>
+        Modal components handle overlay backgrounds, positioning, and
+        interaction patterns to ensure they capture user attention
+        appropriately while remaining accessible. They typically include close
+        mechanisms and may prevent interaction with the background content
+        until dismissed. The component works with <code>modal_handle</code> and
+        <code>modal_close_handle</code> components to provide complete modal
+        interaction experiences.
+    </p>
+
+    <p>
+        There is a special version of modal dialog called
+        <code>confirm_modal</code>. The <code>confirm_modal</code> component
+        creates confirmation dialog modals that require user acknowledgment
+        before proceeding with potentially important or destructive
+        actions. These modals are essential for preventing accidental data loss
+        or unintended operations by requiring explicit user confirmation.
+    </p>
+
+    <p>
+        Confirmation modals typically include clear messaging about the action to be
+        confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and
+        sometimes additional context about the consequences of the action.
+    </p>
+
+    <p>
+        The confirm modal works by submitting a form when the user confirms the
+        action. In simple cases, it submits an empty form via POST, but you can
+        specify the ID of an existing form when building the
+        <code>confirm_modal</code> - in this case, that specific form will be
+        submitted upon confirmation. This allows for integration with existing
+        form workflows.
+    </p>
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Modal</h3>
+    {{ super() }}
+
+    <h3>Confirm modal</h3>
+    {{ parameters_table("confirm_modal") }}
+{%- endblock %}

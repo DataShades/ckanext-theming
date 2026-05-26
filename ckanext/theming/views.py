@@ -19,10 +19,21 @@ def index():
 
 
 @bp.route("/component")
-@bp.route("/component/<component>")
+@bp.route("/component/<component>", methods=["GET", "POST"])  # handle confirm_modal example
 def component(component: str | None = None):
-    templates = sorted(current_app.jinja_env.list_templates(filter_func=lambda s: s.startswith("theming/components/")))
-    available_components = [name for tpl in templates if (name := os.path.splitext(os.path.basename(tpl))[0])]
+    templates = current_app.jinja_env.list_templates(
+        filter_func=lambda s: s.startswith(("theming/components/", f"theming/examples/{component}/"))
+    )
+
+    available_components: list[str] = []
+    examples: list[str] = []
+
+    for tpl in templates:
+        parts = tpl.split("/")
+        if parts[1] == "components":
+            available_components.append(os.path.splitext(parts[2])[0])
+        elif parts[1] == "examples" and parts[2] == component:
+            examples.append(os.path.splitext(parts[3])[0])
 
     if component and component not in available_components:
         return tk.abort(404, tk._("Component not found"))
@@ -33,6 +44,7 @@ def component(component: str | None = None):
     extra_vars = {
         "component": component,
         "available_components": available_components,
+        "examples": examples,
         "ref": reference.components,
     }
     return tk.render("theming/component.html", extra_vars)
@@ -43,7 +55,6 @@ def component(component: str | None = None):
 # account_nav_wrapper
 # activity
 # activity_list
-# alert
 # avatar
 # badge
 # breadcrumb
@@ -56,7 +67,6 @@ def component(component: str | None = None):
 # checkbox
 # code
 # column
-# confirm_modal
 # container
 # content_action
 # content_action_wrapper
@@ -104,9 +114,6 @@ def component(component: str | None = None):
 # main_nav_wrapper
 # markdown
 # markdown_popover
-# modal
-# modal_close_handle
-# modal_handle
 # nav_item
 # nav_wrapper
 # organization
@@ -115,9 +122,6 @@ def component(component: str | None = None):
 # package_list
 # page_action
 # page_action_wrapper
-# pagination
-# pagination_item
-# pagination_wrapper
 # popover
 # popover_handle
 # progress

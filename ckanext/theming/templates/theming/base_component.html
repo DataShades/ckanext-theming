@@ -1,0 +1,37 @@
+{%- macro parameters_table(component) -%}
+    {%- call ui.util.call(ui.table, striped=true, hover=true) -%}
+        {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, ["Parameter", "Type", "Description"], header=true))) }}
+        {%- call ui.util.call(ui.table_body) -%}
+            {%- for name, info in ref[component].arguments.items() -%}
+                {%- call ui.util.call(ui.table_row) -%}
+                    {{ ui.table_cell(name) }}
+                    {{ ui.table_cell(info.type) }}
+                    {{ ui.table_cell(info.description) }}
+                {%- endcall %}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endcall %}
+{%- endmacro %}
+
+<h2>Purpose</h2>
+{%- block overview -%}
+{%- endblock %}
+
+
+{%- if examples -%}
+    {{ ui.divider() }}
+
+    <h2>Examples</h2>
+    {%- block examples -%}
+        {%- for example in examples -%}
+            {%- include "theming/examples/{}/{}.html".format(component, example) -%}
+        {%- endfor %}
+    {%- endblock %}
+{%- endif %}
+
+{{ ui.divider() }}
+
+<h2>Parameters</h2>
+{%- block parameters -%}
+    {{ parameters_table(component) }}
+{%- endblock %}

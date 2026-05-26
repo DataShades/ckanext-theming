@@ -1,0 +1,43 @@
+<h3>Custom confirmation form</h3>
+
+<p>
+    It's possible to include a form in the confirm modal by setting the
+    <code>form_id</code> parameter to the id of the form. This allows users to
+    submit the form directly from the modal, and the modal will be closed upon
+    submission. This is particularly useful for scenarios where you want to
+    gather additional information from the user before confirming an action,
+    such as asking for a reason for deletion or requesting additional details
+    before proceeding with a task. By integrating a form into the confirm
+    modal, you can streamline user interactions and make it easier for users to
+    provide necessary input without navigating away from the current page.
+</p>
+
+<div>
+    {%- set id = ui.util.id() -%}
+    {%- set form_id = ui.util.id() -%}
+
+    {{ ui.form(method="GET", attrs={"id": form_id}) }}
+
+    {{ ui.modal_handle("Custom form", id=id) }}
+    {{ ui.confirm_modal(
+            ui.input(name="answer", label=_("Answer"), attrs={"form": form_id}),
+             title="Custom form",
+            id=id,
+            form_id=form_id) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set id = ui.util.id() -%}
+        {%- set form_id = ui.util.id() -%}
+
+        {{ ui.form(method="GET", attrs={"id": form_id}) }}
+
+        {{ ui.modal_handle("Custom form", id=id) }}
+        {{ ui.confirm_modal(
+            ui.input(name="answer", label=_("Answer"), attrs={"form": form_id}),
+             title="Custom form",
+            id=id,
+            form_id=form_id) }}
+    {%- endraw %}
+{%- endcall %}

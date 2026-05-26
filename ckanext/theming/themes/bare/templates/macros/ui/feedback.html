@@ -19,7 +19,7 @@
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro modal(content, title, footer, dismissible, id) -%}
+{%- macro modal(content, title, footer, id, dismissible=true) -%}
     <dialog {{ ui.util.attrs(kwargs) }} id="{{ id }}" closedby="{{ 'any' if dismissible else 'closerequest' }}">
         {%- if title %}
             {{ ui.heading(title, level=2) }}

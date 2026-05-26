@@ -25,7 +25,7 @@ contexts where user identification is important.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic account component -->
 {{ ui.account() }}
 ```
@@ -49,7 +49,7 @@ consistency and familiar navigation patterns for users.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic header component -->
 {{ ui.header(title="Title", subtitle="Subtitle") }}
 ```
@@ -73,7 +73,7 @@ across different page types and content lengths.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic footer component -->
 {{ ui.footer() }}
 ```
@@ -87,7 +87,7 @@ the page title.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic subtitle item -->
 {{ ui.subtitle_item("Additional information") }}
 ```

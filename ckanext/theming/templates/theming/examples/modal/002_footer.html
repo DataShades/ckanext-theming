@@ -1,0 +1,37 @@
+<h3>Footer</h3>
+
+<p>
+    Modals can have an optional footer section, which is typically used to
+    display action buttons related to the modal content. The footer can be
+    added by passing a string or a UI component to the <code>footer</code>
+    parameter of the <code>modal</code>. It's common to include
+    buttons such as "Save", "Cancel", or "Close" in the footer to allow users
+    to easily interact with the modal and perform actions based on its content.
+</p>
+
+<p>
+    <code>modal_close_handle</code> is a special UI component that can be used
+    in the footer to create a button that closes the modal when clicked. It
+    takes the same <code>id</code> as the modal it should close, ensuring that the correct
+    modal is dismissed when the button is activated.
+</p>
+
+<div>
+    {%- set id = ui.util.id() -%}
+    {{ ui.modal_handle("Modal with actions", id=id) }}
+    {{ ui.modal(lipsum(1),
+            title="Modal with footer",
+            id=id,
+            footer=ui.button("Do nothing") ~ ui.modal_close_handle("Close", id=id)) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set id = ui.util.id() -%}
+        {{ ui.modal_handle("Modal with actions", id=id) }}
+        {{ ui.modal(lipsum(1),
+            title="Modal with footer",
+            id=id,
+            footer=ui.button("Do nothing") ~ ui.modal_close_handle("Close", id=id)) }}
+    {%- endraw %}
+{%- endcall %}

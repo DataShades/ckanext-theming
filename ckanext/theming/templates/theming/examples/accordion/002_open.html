@@ -1,0 +1,17 @@
+<h3>Initially open</h3>
+<p>
+    By default, accordions are closed when the page loads. However, you
+    can set an accordion to be initially open by passing the <code>open=true</code> argument.
+</p>
+
+{%- call ui.util.call(ui.accordion_wrapper) -%}
+    {{ ui.accordion(lipsum(1), title="Initially open accordion", open=true) }}
+{%- endcall %}
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {{ ui.accordion(lipsum(1), title="Initially open accordion", open=true) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

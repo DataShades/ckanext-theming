@@ -20,7 +20,7 @@ styling.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic account navigation wrapper -->
 {% call ui.util.call(ui.account_nav_wrapper) %}
     {{ ui.account_nav_item("Profile", href="/profile") }}
@@ -40,7 +40,7 @@ structured format.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic activity wrapper -->
 {% call ui.util.call(ui.activity_list) %}
     {{ ui.activity("User created a dataset", activity=activity_data) }}
@@ -59,7 +59,7 @@ create a cohesive navigation experience.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic breadcrumb wrapper -->
 {% call ui.util.call(ui.breadcrumb_wrapper) %}
     {{ ui.breadcrumb("Home", href="/", initial=True) }}
@@ -80,7 +80,7 @@ are consistently positioned and styled. This component typically wraps
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic content action wrapper -->
 {% call ui.util.call(ui.content_action_wrapper) %}
     {{ ui.content_action("Edit", href="/edit") }}
@@ -100,7 +100,7 @@ appearance.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic content navigation wrapper -->
 {% call ui.util.call(ui.content_nav_wrapper) %}
     {{ ui.content_nav_item("Info", href="/info") }}
@@ -129,7 +129,7 @@ filter controls and display elements.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic facet wrapper -->
 {% call ui.util.call(ui.facet_list) %}
     {{ ui.facet("Government", key="org", value="gov", count=15) }}
@@ -148,7 +148,7 @@ with [`group`][] components to display organizational structures within CKAN.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic group wrapper -->
 {% call ui.util.call(ui.group_list) %}
     {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
@@ -166,7 +166,7 @@ component typically wraps [`main_nav_item`][main-nav-item] elements.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic main navigation wrapper -->
 {% call ui.util.call(ui.main_nav_wrapper) %}
     {{ ui.main_nav_item("Datasets", href="/datasets") }}
@@ -186,7 +186,7 @@ ensure consistency.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic navigation wrapper -->
 {% call ui.util.call(ui.nav_wrapper) %}
     {{ ui.nav_item("Home", href="/") }}
@@ -205,7 +205,7 @@ members, and related content within CKAN.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic organization wrapper -->
 {% call ui.util.call(ui.organization_list) %}
     {{ ui.organization(organization={"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
@@ -224,7 +224,7 @@ information effectively.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic package wrapper -->
 {% call ui.util.call(ui.package_list) %}
     {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
@@ -242,7 +242,7 @@ pages. This component typically wraps [`page_action`][page-action] elements.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic page action wrapper -->
 {% call ui.util.call(ui.page_action_wrapper) %}
     {{ ui.page_action("Add Dataset", href="/dataset/new") }}
@@ -261,7 +261,7 @@ with [`resource`][] components to display resource information effectively.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic resource wrapper -->
 {% call ui.util.call(ui.resource_list) %}
     {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
@@ -289,7 +289,7 @@ between tabs.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic tab wrapper -->
 {% call ui.util.call(ui.tab_wrapper) %}
     {{ ui.tab("Tab 1", href="/tab1") }}
@@ -308,7 +308,7 @@ information maintain consistent styling and layout. This wrapper works with
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic user wrapper -->
 {% call ui.util.call(ui.user_list) %}
     {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}

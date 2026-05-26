@@ -11,7 +11,7 @@ Most components that accept content as their primary input follow a consistent
 pattern where the first argument is the content, followed by named arguments
 for styling and behavior:
 
-```jinja
+```django
 {{ ui.button("Click Me") }}
 {{ ui.card("Card content here", title="My Card") }}
 {{ ui.alert("Success message", style="success") }}
@@ -26,7 +26,7 @@ Some components in the "content" category (such as `group`, `package`,
 `resource`, `user`, etc.) work differently and typically accept structured data
 objects rather than simple content strings:
 
-```jinja
+```django
 {{ ui.package(package=dataset_dict) }}
 {{ ui.organization(organization=org_dict) }}
 {{ ui.user(user=user_dict) }}
@@ -40,7 +40,7 @@ All arguments after the first content argument (if applicable) should be passed
 by name. This approach provides flexibility for different themes to implement
 their own variations of components with varying numbers of parameters:
 
-```jinja
+```django
 {{ ui.button("Save", style="primary", rounded=true, size="large") }}
 {{ ui.input(type="text", placeholder="Enter text", required=true) }}
 ```
@@ -51,7 +51,7 @@ Every component accepts arbitrary named parameters. If a component doesn't know
 how to handle a particular parameter, it will be ignored. This allows for
 maximum flexibility when working with different themes:
 
-```jinja
+```django
 {{ ui.button("Submit", custom_param="ignored", style="primary") }}
 ```
 
@@ -61,7 +61,7 @@ maximum flexibility when working with different themes:
 
 HTML attributes can be passed via the `attrs` dictionary parameter:
 
-```jinja
+```django
 {{ ui.button("Submit",
     attrs={"disabled": true, "id": "submit-btn", "class": "custom-button"}
 ) }}
@@ -73,7 +73,7 @@ Attributes from common namespaces (`data-`, `aria-`, `hx-`, and `on` event
 handlers) can be passed either inside the `attrs` dictionary or via separate
 parameters:
 
-```jinja
+```django
 {{ ui.button("Submit",
     attrs={"data-module": "form-submitter"},
     aria={"labelledby": "label-id"},
@@ -93,7 +93,7 @@ than ones from `attrs` dictionary.
 Attributes passed via arguments have higher precedence than attributes defined
 in the macro implementation. This allows you to override default behavior:
 
-```jinja
+```django
 {# This will use "custom-class" instead of the theme's default button classes #}
 {{ ui.button("Text", attrs={"class": "custom-class"}) }}
 ```
@@ -105,12 +105,12 @@ in the macro implementation. This allows you to override default behavior:
 Components that accept content as their first parameter can be used in two ways:
 
 1. **Inline usage** for simple content:
-```jinja
+```django
 {{ ui.button("Simple Button") }}
 ```
 
 2. **Block usage** via `ui.util.call` for complex content:
-```jinja
+```django
 {% call ui.util.call(ui.button, style="primary") %}
     {{ ui.icon("search") }}
     Search Datasets
@@ -125,7 +125,7 @@ implementation.
 
 Multiple items can be processed and concatenated using `ui.util.map`:
 
-```jinja
+```django
 {# Renders an icon for each item in the list #}
 {{ ui.util.map(ui.icon, ["search", "home", "user"]) }}
 
@@ -135,7 +135,7 @@ Multiple items can be processed and concatenated using `ui.util.map`:
 
 Alternatively, you can concatenate components as Jinja2 strings:
 
-```jinja
+```django
 {{ ui.icon("search") ~ ui.icon("home") ~ ui.icon("user") }}
 ```
 
@@ -147,7 +147,7 @@ Handle components (like modal handles, dialog handles, etc.) are typically
 connected to their corresponding interactive elements via matching `id`
 parameters:
 
-```jinja
+```django
 {# Create a modal handle #}
 {{ ui.modal_handle("Open Modal", id="my-modal") }}
 
@@ -159,7 +159,7 @@ parameters:
 
 To guarantee ID uniqueness, use the `ui.util.id()` helper instead of hardcoding IDs:
 
-```jinja
+```django
 {# Generate a random unique ID with optional prefix #}
 {% set modal_id = ui.util.id(prefix="modal-") %}
 {{ ui.modal_handle("Open Modal", id=modal_id) }}
@@ -180,7 +180,7 @@ ID attributes, allowing you to obfuscate the value in a reproducible manner.
 
 Current datetime can be obtained via `ui.util.now()`:
 
-```jinja
+```django
 {{ ui.datetime(ui.util.now(), date_format="%Y-%m-%d") }}
 ```
 
@@ -189,7 +189,7 @@ Current datetime can be obtained via `ui.util.now()`:
 Data can be stored during a request using `ui.util.keep_item()` and retrieved
 later with `ui.util.pop_items()`:
 
-```jinja
+```django
 {# Store a notification message anywhere in the template #}
 {{ ui.util.keep_item(
     "notifications",
@@ -214,7 +214,7 @@ together at the appropriate place further in the layout.
 Icons can be normalized using `ui.util.icon()` which maps common icon names to
 their corresponding names in the theme's icon set:
 
-```jinja
+```django
 {# Maps "search" to theme-specific icon name like "magnifying-glass" #}
 {{ ui.icon(ui.util.icon("search")) }}
 ```

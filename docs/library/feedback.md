@@ -1,3 +1,5 @@
+{% from "_macros.html" import parameters_table %}
+
 {%raw%}
 # Feedback
 
@@ -5,12 +7,12 @@ Feedback components are essential for user interaction and communication. They
 provide ways to show notifications, request confirmations, display loading
 states, and handle other interactive feedback mechanisms. Many of these
 components work in pairs - for example, [`modal`][] components work with
-[`modal_handle`][modal-handle] components, and [`popover`][] components work
-with [`popover_handle`][popover-handle] components.
+`modal_handle` components, and [`popover`][] components work with
+`popover_handle` components.
 
 ## Alert
 
-The [`alert`][] component displays notification and alert messages to users,
+The `alert` component displays notification and alert messages to users,
 providing feedback about system status, errors, warnings, or successful
 operations. Alerts are crucial for user experience as they provide immediate
 feedback about actions taken or system conditions that users should be aware
@@ -26,7 +28,7 @@ based on their importance and type.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic alert -->
 {{ ui.alert("Operation completed successfully") }}
 
@@ -38,11 +40,9 @@ based on their importance and type.
 ```
 ///
 
-| Parameter     | Type   | Default | Description                                                              |
-|---------------|--------|---------|--------------------------------------------------------------------------|
-| `message`     | string | -       | The content to display in the alert.                                     |
-| `dismissible` | bool   | -       | Whether the alert can be dismissed by the user.                          |
-| `style`       | string | -       | Visual style of the alert (e.g., "success", "warning", "error", "info"). |
+{%endraw%}
+{{parameters_table(component_ref.alert)}}
+{%raw%}
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -53,96 +53,10 @@ based on their importance and type.
 - `icon` (string): Icon to display in the alert
 ///
 
-## Confirm Modal
-
-The [`confirm_modal`][confirm-modal] component creates confirmation dialog modals that require
-user acknowledgment before proceeding with potentially important or destructive
-actions. These modals are essential for preventing accidental data loss or
-unintended operations by requiring explicit user confirmation.
-
-Confirmation modals typically include clear messaging about the action to be
-confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and
-sometimes additional context about the consequences of the action. The
-component works with [`modal_handle`][modal-handle] components to trigger the
-confirmation dialog when needed.
-
-The confirm modal works by submitting a form when the user confirms the
-action. In simple cases, it submits an empty form via POST, but you can specify
-the ID of an existing form when building the confirm_modal - in this case, that
-specific form will be submitted upon confirmation. This allows for integration
-with existing form workflows.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic confirm modal -->
-{% call ui.util.call(ui.confirm_modal, title="Confirm Action", id="confirm-action") %}
-    <p>Are you sure you want to perform this action?</p>
-{% endcall %}
-{{ ui.modal_handle("Open", id="confirm-action") }}
-
-<!-- Confirm modal with custom form -->
-{{ ui.confirm_modal(
-    "Are you sure you want to delete this item? This action cannot be undone.",
-    title="Confirm Delete",
-    id="confirm-delete",
-    form_id="delete-form"
-) }}
-
-{{ ui.form(
-    ui.input(name="id", value="123"),
-    method="POST",
-    action="/dataset/delete",
-    attrs={"id": "delete-form"}
-) }}
-
-{{ ui.modal_handle("Open", id="confirm-delete") }}
-
-<!-- Confirm modal with custom buttons -->
-{{ ui.confirm_modal(
-    "Please confirm that you want to proceed with this operation.",
-    title="Confirm Operation",
-    id="confirm-operation",
-    confirm_label="Yes, Proceed",
-    cancel_label="No, Cancel"
-) %}
-
-{{ ui.modal_handle("Open", id="confirm-operation") }}
-```
-///
-
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `content` | string | - | The main content to display in the confirmation modal. |
-| `title` | string | - | The title displayed in the modal header. |
-| `id` | string | - | Unique identifier for the modal. |
-| `form_id` | string | - | ID of an existing form to submit when confirmed (instead of submitting an empty form). |
-| `confirm_label` | string | "Confirm" | Label for the confirm button. |
-| `cancel_label` | string | "Cancel" | Label for the cancel button. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `size` (string): Size of the modal (e.g., "sm", "md", "lg")
-- `style` (string): Style variant (e.g., "primary", "danger")
-- `backdrop` (string): Backdrop behavior (e.g., "static", "true")
-- `animation` (bool): Whether to use open/close animations
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`confirm_modal`][confirm-modal] component works with
-[`modal_handle`][modal-handle] components to create interactive confirmation
-experiences. While the modal provides the dialog structure, the handle provides
-the trigger mechanism.
-
-///
 
 ## Modal
 
-The [`modal`][] component creates modal dialog containers that overlay the main
+The `modal` component creates modal dialog containers that overlay the main
 content to focus user attention on specific tasks or information. Modals are
 used for forms, detailed views, settings, and any content that requires focused
 user attention without navigating away from the current page.
@@ -151,27 +65,42 @@ Modal components handle overlay backgrounds, positioning, and interaction
 patterns to ensure they capture user attention appropriately while remaining
 accessible. They typically include close mechanisms and may prevent interaction
 with the background content until dismissed. The component works with
-[`modal_handle`][modal-handle] and [`modal_close_handle`][modal-close-handle]
-components to provide complete modal interaction experiences.
+`modal_handle` and `modal_close_handle` components to provide complete modal
+interaction experiences.
+
+There is a special version of modal dialog called `confirm_modal`. The
+`confirm_modal` component creates confirmation dialog modals that require user
+acknowledgment before proceeding with potentially important or destructive
+actions. These modals are essential for preventing accidental data loss or
+unintended operations by requiring explicit user confirmation.
+
+Confirmation modals typically include clear messaging about the action to be
+confirmed, prominent action buttons (usually "Confirm" and "Cancel"), and
+sometimes additional context about the consequences of the action.
+
+The confirm modal works by submitting a form when the user confirms the
+action. In simple cases, it submits an empty form via POST, but you can specify
+the ID of an existing form when building the `confirm_modal` - in this case,
+that specific form will be submitted upon confirmation. This allows for
+integration with existing form workflows.
+
 
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic modal -->
-{% call ui.util.call(ui.modal, title="Modal Title", id="my-modal", footer=ui.modal_close_handle("Close", id="my-modal")) %}
-    Modal content goes here
-{% endcall %}
-{{ ui.modal_handle("Open", id="my-modal") }}
+{%- set id = ui.util.id() -%}
+{{ ui.modal_handle("Open modal", id=id) }}
+{{ ui.modal(lipsum(1), title="Standard modal", id=id) }}
 
 <!-- Modal with multiple buttons -->
-{% set close = ui.modal_close_handle("Close", id="modal-with-footer") %}
-{% set save = ui.button("Save") %}
-
-{% call ui.util.call(ui.modal, title="Modal with Actions", id="modal-with-footer", footer=close ~ save) %}
-    Content with footer
-{% endcall %}
-{{ ui.modal_handle("Open", id="modal-with-footer") }}
+{%- set id = ui.util.id() -%}
+{{ ui.modal_handle("Modal with actions", id=id) }}
+{{ ui.modal(lipsum(1),
+    title="Modal with footer",
+    id=id,
+    footer=ui.button("Do nothing") ~ ui.modal_close_handle("Close", id=id)) }}
 
 <!-- Dismissible modal -->
 {% call ui.util.call(ui.modal, title="Dismissible Modal", id="dismissible-modal", dismissible=true) %}
@@ -179,16 +108,26 @@ components to provide complete modal interaction experiences.
 {% endcall %}
 {{ ui.modal_handle("Open", id="dismissible-modal") }}
 
+<!-- Confirmation modal -->
+{%- set id = ui.util.id() -%}
+{{ ui.modal_handle("Confirm modal", id=id) }}
+{{ ui.confirm_modal(lipsum(1), title="Confirmation", id=id) }}
+
 ```
 ///
 
-| Parameter       | Type   | Default | Description                                                                |
-|-----------------|--------|---------|----------------------------------------------------------------------------|
-| `content`       | string | -       | The main content to display in the modal.                                  |
-| `title`         | string | -       | The title displayed in the modal header.                                   |
-| `id`            | string | -       | Unique identifier for the modal.                                           |
-| `footer`        | string | -       | Content for the modal footer (typically action buttons).                   |
-| `dismissible`   | bool   | -       | Whether the modal can be dismissed by clicking outside or pressing escape. |
+{%endraw%}
+
+#### Modal
+
+{{parameters_table(component_ref.modal)}}
+
+#### Confirm modal
+
+{{parameters_table(component_ref.confirm_modal)}}
+
+{%raw%}
+
 
 /// details | Theme-Specific Parameters
     type: tip
@@ -200,15 +139,6 @@ components to provide complete modal interaction experiences.
 - `animation` (bool): Whether to use open/close animations
 ///
 
-/// admonition | Relationship
-    type: info
-
-The [`modal`][] component works with [`modal_handle`][modal-handle] and
-[`modal_close_handle`][modal-close-handle] components to create complete modal
-experiences. The modal provides the container, handles provide the interaction
-mechanisms.
-
-///
 
 ## Popover
 
@@ -226,7 +156,7 @@ mechanism for showing and hiding popovers.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic popover -->
 {% call ui.util.call(ui.popover, title="Help Information", id="help-popover") %}
     <p>This is helpful information about the current element.</p>
@@ -276,7 +206,7 @@ reassurance that the system is still responsive during longer operations.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic progress indicator -->
 {{ ui.progress(value=50, max=100) }}
 
@@ -314,7 +244,7 @@ confidence during operations that might otherwise appear to hang or freeze.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic spinner -->
 {{ ui.spinner() }}
 
@@ -356,7 +286,7 @@ user tasks.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic toast notification -->
 {{ ui.toast("Operation completed successfully") }}
 
@@ -396,7 +326,7 @@ enhances user understanding without requiring dedicated interface space.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic tooltip -->
 {{ ui.tooltip("Button", tooltip="Click to submit the form") }}
 

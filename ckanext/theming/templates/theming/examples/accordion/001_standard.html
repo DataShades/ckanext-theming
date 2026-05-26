@@ -1,0 +1,20 @@
+<h3>Standard</h3>
+<p>
+    Accordions should always be wrapped in an
+    <code>accordion_wrapper</code> to ensure proper styling and
+    functionality when multiple accordions are used together.
+</p>
+
+{%- call ui.util.call(ui.accordion_wrapper) -%}
+    {{ ui.accordion(lipsum(1), title="First accordion") }}
+    {{ ui.accordion(lipsum(1), title="Second accordion") }}
+{%- endcall %}
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.accordion_wrapper) -%}
+            {{ ui.accordion(lipsum(1), title="First accordion") }}
+            {{ ui.accordion(lipsum(1), title="Second accordion") }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

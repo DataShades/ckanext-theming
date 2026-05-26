@@ -25,7 +25,7 @@ provide consistent grouping of multiple accordion sections.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Simple accordion -->
 {%- call ui.util.call(ui.accordion_wrapper) -%}
     {{ ui.accordion(lipsum(1), title="First accordion") }}
@@ -69,7 +69,7 @@ grouped buttons, regardless of the underlying CSS framework.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Group of action buttons -->
 {{ ui.button_group(
     ui.button("Edit", href="/edit")
@@ -116,7 +116,7 @@ themes while maintaining the flexibility to accommodate various content types.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic card -->
 {{ ui.card("Dataset description goes here", title="Dataset Title") }}
 
@@ -165,7 +165,7 @@ responsive layouts that work well across desktop, tablet, and mobile devices.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Simple column (1/12) -->
 {%- call ui.util.call(ui.grid) -%}
     {{ ui.column("Content in a column") }}
@@ -218,7 +218,7 @@ framework.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic container -->
 {{ ui.container("Content within a container") }}
 
@@ -251,7 +251,7 @@ components to create consistent menu experiences across different themes.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic dropdown -->
 {% call ui.util.call(ui.dropdown, title="Dropdown") %}
     {{ ui.dropdown_item("Option 1", href="/option1") }}
@@ -276,7 +276,7 @@ appropriately on different devices while maintaining visual consistency.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic grid -->
 {%- call ui.util.call(ui.grid) -%}
     {{ ui.column("Item 1", span={"xs": 12, "md": 6}) }}
@@ -323,7 +323,7 @@ lists while maintaining consistent styling across different themes.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic list -->
 {%- call ui.util.call(ui.list) -%}
     {{ ui.list_item("Item 1") }}
@@ -372,7 +372,7 @@ within the broader list structure.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic list item -->
 {{ ui.list_item("Simple list item") }}
 

@@ -23,7 +23,7 @@ and can easily modify their search parameters.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search active filters -->
 {{ ui.search_active_filters(
     active_filters={"organization": ["gov"], "format": ["csv"]},
@@ -65,7 +65,7 @@ cluttering the interface for users who prefer simple searches.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search advanced controls -->
 {{ ui.search_advanced_controls() }}
 ```
@@ -88,7 +88,7 @@ and requirements.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search form box -->
 {% call ui.util.call(ui.search_form_box) %}
     {{ ui.search_input(name="q", value="") }}
@@ -142,7 +142,7 @@ application.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search form -->
 {{ ui.search_form(
     query="search term",
@@ -215,7 +215,7 @@ to search functionality.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search input -->
 {{ ui.search_input(name="q", value="search term", placeholder="Search...") }}
 
@@ -261,7 +261,7 @@ result counts, and search errors if there are any.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search results text -->
 {{ ui.search_results_text(count=25) }}
 
@@ -302,7 +302,7 @@ ability to reorganize their results based on their specific needs.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search sort control -->
 {{ ui.search_sort_control(
     selected="relevance",
@@ -335,7 +335,7 @@ initiation mechanism.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic search submit button -->
 {{ ui.search_submit_button("Search") }}
 

@@ -25,7 +25,7 @@ interface.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic facet section -->
 {% call ui.util.call(ui.facet_section, title="Organization") %}
     {% call ui.util.call(ui.facet_list, title="Organization") %}
@@ -76,7 +76,7 @@ different themes while maintaining flexibility for various content types.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic section -->
 {{ ui.section("Content for this section", title="Section title") }}
 ```
@@ -112,7 +112,7 @@ usable across different screen sizes.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic sidebar section -->
 {{ ui.sidebar_section("Sidebar content", title="Sidebar title") }}
 ```

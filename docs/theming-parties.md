@@ -65,7 +65,7 @@ Extension developers create reusable CKAN extensions that should work across dif
 /// admonition | Example
     type: example
 
-```jinja2
+```django
 <!-- Good: Using UI components -->
 {{ ui.button(_("Submit"), type="submit", style="primary") }}
 {{ ui.card(title=_("Dataset Information"), content=dataset.description) }}

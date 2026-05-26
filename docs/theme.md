@@ -459,7 +459,7 @@ Use proper ARIA attributes (`aria-label`, `aria-describedby`, `aria-invalid`, `a
 Once a theme is activated by setting its name as a value for `ckan.ui.theme`
 config option, UI macros can be used in templates:
 
-```jinja
+```django
 {{ ui.button("Click Me", style="primary", type="button") }}
 {{ ui.card("Card content here", title="My Card") }}
 {{ ui.alert("Success message", style="success") }}

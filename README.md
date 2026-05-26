@@ -107,7 +107,7 @@ class MyThemePlugin(ITheme, p.SingletonPlugin):
 
 Once a theme is active, UI macros can be used in templates:
 
-```jinja
+```django
 {{ ui.button("Click Me", style="primary", type="button") }}
 {{ ui.card("Card content here", title="My Card") }}
 {{ ui.alert("Success message", style="success") }}

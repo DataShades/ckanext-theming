@@ -1,0 +1,23 @@
+<h3>Standard</h3>
+<p>
+    <code>pagination</code> component has two main parameters:
+    <code>page</code> and <code>total</code>. <code>page</code> indicates the
+    current page, while <code>total</code> specifies the total number of pages
+    available. The component will render a pagination control that allows users
+    to navigate between pages, highlighting the current page and providing
+    links to other pages based on the total number specified.
+</p>
+
+<div>
+    {{ ui.pagination(page=1, total=10) }}
+    {{ ui.pagination(page=5, total=10) }}
+    {{ ui.pagination(page=10, total=10) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.pagination(page=1, total=10) }}
+        {{ ui.pagination(page=5, total=10) }}
+        {{ ui.pagination(page=10, total=10) }}
+    {%- endraw %}
+{%- endcall %}

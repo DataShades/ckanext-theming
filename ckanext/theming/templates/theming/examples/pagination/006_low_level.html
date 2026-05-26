@@ -1,0 +1,26 @@
+<h3>Construct pagination</h3>
+
+<p>
+    If you want to construct a pagination control from low-level components, you can
+    use <code>pagination_wrapper</code> and <code>pagination_item</code>. The former
+    serves as a container for pagination items, while the latter represents an
+    individual page link. You can customize the appearance and behavior of each
+    pagination item by passing appropriate parameters to it, such as <code>href</code>
+    for the link URL or <code>active</code> to indicate the current page.
+</p>
+
+<div>
+    {%- call ui.util.call(ui.pagination_wrapper) -%}
+        {{ ui.pagination_item("1", href="?page=1") }}
+        {{ ui.pagination_item("2", href="?page=2", active=true) }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.pagination_wrapper) -%}
+            {{ ui.pagination_item("1", href="?page=1") }}
+            {{ ui.pagination_item("2", href="?page=2", active=true) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

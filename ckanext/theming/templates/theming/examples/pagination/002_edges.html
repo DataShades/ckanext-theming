@@ -1,0 +1,32 @@
+<h3>Edges</h3>
+<p>
+    Edges are links to the first and last page. Most commonly they are rendered
+    as normal page links for the 1st page and page with the number of the last
+    page, as icons, or as links with labels "First"/"Last". You can choose to
+    hide them by setting <code>hide_edges</code> parameter to
+    <code>true</code>. If you want to show them, but instead of page numbers
+    you want to have custom labels, you can set <code>start_label</code> and
+    <code>end_label</code> parameters to the desired values.
+</p>
+
+<div>
+    {{ ui.pagination(page=5, total=10, hide_edges=true) }}
+    {{ ui.pagination(
+            page=5,
+            total=10,
+            hide_edges=false,
+            start_label="First",
+            end_label="Last") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.pagination(page=5, total=10, hide_edges=true) }}
+        {{ ui.pagination(
+            page=5,
+            total=10,
+            hide_edges=false,
+            start_label="First",
+            end_label="Last") }}
+    {%- endraw %}
+{%- endcall %}

@@ -167,6 +167,8 @@ class Util(BaseUtil):
         the target macro. Any other positional and named arguments of the
         `ui.util.call` will be redirected into `ui.button` as well.
         """
+        # if isinstance(el, Macro) and el.caller and el.arguments and el.arguments[0] != "content":
+        #     return el(*args, caller=caller, **kwargs)
         return el(caller(), *args, **kwargs)
 
     @override

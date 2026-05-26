@@ -1,0 +1,41 @@
+<h3>Confirm modal</h3>
+
+<p>
+    A confirm modal is a special type of modal that is used to ask users to
+    confirm an action before it is performed. It typically contains a message
+    asking the user to confirm their choice, along with buttons for confirming
+    or canceling the action. The confirm modal can be created using the
+    <code>confirm_modal</code> function, which provides a convenient way to
+    generate a modal with a standard confirmation layout and behavior.
+</p>
+
+<div>
+    {%- set id = ui.util.id() -%}
+    {%- set another_id = ui.util.id() -%}
+    {{ ui.modal_handle("Confirm modal", id=id) }}
+    {{ ui.modal_handle("Custom  modal", id=another_id) }}
+
+    {{ ui.confirm_modal(lipsum(1), title="Custom confirmation", id=id) }}
+
+    {{ ui.confirm_modal(lipsum(1),
+            title="Custom confirmation",
+            id=another_id,
+            cancel_label=_("Not agree"),
+            confirm_label=_("Agree")) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set id = ui.util.id() -%}
+        {{ ui.modal_handle("Confirm modal", id=id) }}
+        {{ ui.confirm_modal(lipsum(1), title="Confirmation", id=id) }}
+
+        {%- set another_id = ui.util.id() -%}
+        {{ ui.modal_handle("Custom modal", id=another_id) }}
+        {{ ui.confirm_modal(lipsum(1),
+            title="Custom confirmation",
+            id=another_id,
+            cancel_label=_("Not agree"),
+            confirm_label=_("Agree")) }}
+    {%- endraw %}
+{%- endcall %}

@@ -37,7 +37,7 @@
 {%- endmacro %}
 
 {%- macro form(content, method, action, enctype, include_csrf=true) -%}
-    {{ ui.form_start(method, action, enctype, **kwargs) }}
+    {{ ui.form_start(method=method, action=action, enctype=enctype, **kwargs) }}
     {{ h.csrf_input() if include_csrf and method and method|upper != "GET" }}
     {{ content }}
     {{ ui.form_end() }}
@@ -75,6 +75,7 @@
 {%- endmacro %}
 
 {%- macro input(content, name, id, label, value, required, placeholder, type, icon, errors=[]) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -84,7 +85,7 @@
               "type": type,
               "error": errors,
               "is_required": required,
-              "attrs": kwargs.attrs or {'class': 'form-control'},
+              "attrs": kwargs.attrs,
         } -%}
     {%- set func = _form.input -%}
     {%- if kwargs.prefix -%}
@@ -105,6 +106,7 @@
 {%- endmacro %}
 
 {%- macro checkbox(content, name, id, checked, label, required, placeholder, value="", errors=[]) -%}
+    {%- do kwargs.setdefault("attrs", {}) -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -114,7 +116,7 @@
               "placeholder": placeholder,
               "error": errors,
               "is_required": required,
-              "attrs": kwargs.attrs or {},
+              "attrs": kwargs.attrs,
         } -%}
     {%- call _form.checkbox(**params) -%}{{ content }}{%- endcall %}
 {%- endmacro %}
@@ -150,6 +152,7 @@
 {%- endmacro %}
 
 {%- macro markdown(content, name, id, label, value, placeholder, required, errors=[], group_class="form-group control-full") -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -158,7 +161,7 @@
               "placeholder": placeholder,
               "error": errors,
               "is_required": required,
-              "attrs": kwargs.attrs or {'class': 'form-control'},
+              "attrs": kwargs.attrs,
         } -%}
     {%- call _form.markdown(**params) -%}{{ content }}{%- endcall %}
 {%- endmacro %}
@@ -181,6 +184,7 @@
 {%- endmacro %}
 
 {%- macro select(content, name, id, label, options, selected) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -189,7 +193,7 @@
               "selected": selected,
               "error": errors,
               "is_required": required,
-              "attrs": kwargs.attrs or {'class': 'form-control'},
+              "attrs": kwargs.attrs,
         } -%}
     {%- call _form.select(**params) -%}{{ content }}{%- endcall %}
 {%- endmacro %}
@@ -230,6 +234,7 @@
 {%- endmacro %}
 
 {%- macro textarea(content, name, id, label, value, placeholder, required, errors=[], group_class="form-group control-full") -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -238,7 +243,7 @@
               "placeholder": placeholder,
               "error": errors,
               "is_required": required,
-              "attrs": kwargs.attrs or {'class': 'form-control'},
+              "attrs": kwargs.attrs,
         } -%}
     {%- call _form.textarea(**params) -%}{{ content }}{%- endcall %}
 {%- endmacro %}

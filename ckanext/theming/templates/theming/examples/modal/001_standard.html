@@ -1,0 +1,38 @@
+<h3>Simple</h3>
+
+<p>
+    A simple modal with an optional title and some content. Modals are opened by clicking
+    on a modal handle, which is a button that triggers the modal to open. The
+    content of the modal can be anything, but it's usually some form of text or
+    a form.
+</p>
+
+<p>
+    Modal and its handle are connected by a unique <code>id</code>. When the
+    handle is clicked, the modal with the corresponding <code>id</code> is
+    opened. To guarantee that <code>id</code> is unique and there are no
+    conflicts when multiple modals are used on the same page, use
+    <code>ui.util.id()</code> function to generate it.
+</p>
+
+<div>
+    {%- set id = ui.util.id() -%}
+    {{ ui.modal_handle("Open modal", id=id) }}
+    {{ ui.modal(lipsum(1), title="Standard modal", id=id) }}
+
+    {%- set another_id = ui.util.id() -%}
+    {{ ui.modal_handle("Open modal without title", id=another_id) }}
+    {{ ui.modal(lipsum(1), id=another_id) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set id = ui.util.id() -%}
+        {{ ui.modal_handle("Open modal", id=id) }}
+        {{ ui.modal(lipsum(1), title="Standard modal", id=id) }}
+
+        {%- set another_id = ui.util.id() -%}
+        {{ ui.modal_handle("Open modal without title", id=another_id) }}
+        {{ ui.modal(lipsum(1), id=another_id) }}
+    {%- endraw %}
+{%- endcall %}

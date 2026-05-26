@@ -1,0 +1,24 @@
+<h3>Padding</h3>
+<p>
+    Pagination component can show adjascent pages to the current one, which is
+    called padding. You can control how many adjacent pages are shown by
+    setting the <code>padding</code> parameter to the desired value. If you
+    want to show no adjacent pages, set <code>padding</code> to 0 and
+    optionally specify a label for the gap between the current page and the
+    first/last page using the <code>padding_label</code> parameter.
+</p>
+
+<div>
+    {{ ui.pagination(page=5, total=10, padding=2) }}
+    {{ ui.pagination(page=5, total=10, padding=0, padding_label="~~~") }}
+    {{ ui.pagination(page=5, total=10, padding=0, padding_label="", hide_edges=true, hide_siblings=false) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.pagination(page=5, total=10, padding=2) }}
+        {{ ui.pagination(page=5, total=10, padidng=0, padding_label="~~~") }}
+        {{ ui.pagination(page=5, total=10, padding=0, padding_label="",
+            hide_edges=true, hide_siblings=false) }}
+    {%- endraw %}
+{%- endcall %}

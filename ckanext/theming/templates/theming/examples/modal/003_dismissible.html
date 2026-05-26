@@ -1,0 +1,59 @@
+<h3>Dismissible</h3>
+
+<p>
+    Dismissible modals can be dismissed by clicking outside of the modal content or by
+    pressing the <code>Escape</code> key. This behavior can be enabled by setting
+    <code>dismissible</code> parameter to <code>true</code>.
+</p>
+
+<p>
+    When dismissible flag is disabled, the modal can only be closed by clicking
+    on a close-handle inside the modal. Rendering non-dismissible modal without
+    close-handle may lock user out from further interactions with the page.
+</p>
+
+<p>
+    Using <code>dismissible</code> flag is recommended for accessibility
+    reasons, as it allows users to easily close the modal without having to
+    navigate to a specific close button. However, there may be cases where a
+    non-dismissible modal is necessary, such as when the modal contains
+    critical information that must be acknowledged before proceeding. In such
+    cases, it's important to provide clear instructions on how to close the
+    modal and ensure that it can be closed using keyboard navigation for
+    accessibility purposes.
+</p>
+
+<p>
+    <code>dismissible</code> flag is recommended for implementation, but some
+    themes may choose to ignore it and always render modals as dismissible.
+</p>
+
+<div>
+    {%- set id = ui.util.id() -%}
+    {{ ui.modal_handle("Dismissible", id=id) }}
+    {{ ui.modal(lipsum(1), title="Dismissible modal", id=id, dismissible=true) }}
+
+    {%- set another_id = ui.util.id() -%}
+    {{ ui.modal_handle("Non-dismissible", id=another_id) }}
+    {{ ui.modal(lipsum(1),
+            title="Non-dismissible modal",
+            id=another_id,
+            dismissible=false,
+            footer=ui.modal_close_handle(_("Close"), id=another_id)) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set id = ui.util.id() -%}
+        {{ ui.modal_handle("Dismissible", id=id) }}
+        {{ ui.modal(lipsum(1), title="Dismissible modal", id=id, dismissible=true) }}
+
+        {%- set another_id = ui.util.id() -%}
+        {{ ui.modal_handle("Non-dismissible", id=another_id) }}
+        {{ ui.modal(lipsum(1),
+            title="Non-dismissible modal",
+            id=another_id,
+            dismissible=false,
+            footer=ui.modal_close_handle(_("Close"), id=another_id)) }}
+    {%- endraw %}
+{%- endcall %}

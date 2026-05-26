@@ -35,7 +35,7 @@
     {%- endif %}
     <section {{ ui.util.attrs(kwargs, {"class": "module" ~ (' module-narrow' if narrow else "") ~ (' module-shallow' if shallow else "")}) }}>
         <div class="module-group">
-            {{ ui.heading(title, level, attrs={"class": "module-heading"}) if title }}
+            {{ ui.heading(title, level=level, attrs={"class": "module-heading"}) if title }}
             <div class="module-content">
                 {{ content }}
             </div>

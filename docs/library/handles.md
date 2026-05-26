@@ -4,66 +4,8 @@
 Handle components are interactive elements that allow users to control other UI
 components. They typically trigger actions like opening modals, or showing
 popovers. These components work in close relationship with their target
-components - for example, [`modal_handle`][modal-handle] components work with
+components - for example, `modal_handle` components work with
 [`modal`][] components.
-
-## Modal Close Handle
-
-The [`modal_close_handle`][modal-close-handle] component provides interactive
-elements specifically designed for closing modal dialogs. This component
-creates the close button or other interface elements that allow users to
-dismiss modal content and return to the main interface.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic modal close handle -->
-{{ ui.modal_close_handle("Close", id="my-modal") }}
-```
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`modal_close_handle`][modal-close-handle] component works with [`modal`][]
-components to provide complete modal interaction experiences. While the modal
-provides the content container, the close handle provides the dismissal
-mechanism.
-
-///
-
-## Modal Handle
-
-The [`modal_handle`][modal-handle] component provides interactive elements that
-trigger the opening of modal dialogs. This component creates buttons, links, or
-other interface elements that, when activated, display modal content to the
-user.
-
-Modal handles are the primary interface for initiating modal experiences,
-whether for forms, detailed views, confirmations, or other content that
-benefits from focused attention. The component handles proper event binding,
-accessibility attributes, and ensures smooth modal opening transitions. It
-works closely with [`modal`][] components to create complete modal experiences.
-
-/// admonition | Usage Example
-    type: example
-
-```jinja2
-<!-- Basic modal handle -->
-{{ ui.modal_handle("Open Modal", id="modal-handle") }}
-{{ ui.modal("Modal content", id="modal-handle") }}
-```
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`modal_handle`][modal-handle] component works with [`modal`][] components
-to create complete modal experiences. While the handle provides the trigger
-mechanism, the modal provides the content container.
-
-///
 
 
 ## Popover Handle
@@ -83,7 +25,7 @@ experiences.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic popover handle -->
 {{ ui.popover_handle("?", id="help-popover") }}
 ```

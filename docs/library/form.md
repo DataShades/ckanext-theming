@@ -24,7 +24,7 @@ components to create comprehensive input experiences.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic checkbox -->
 {{ ui.checkbox(name="terms", label="Accept terms", value="yes") }}
 
@@ -48,7 +48,7 @@ dynamic form experiences where users can add as many fields as needed.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic extra field -->
 {{ ui.extra_field(index=0) }}
 
@@ -97,7 +97,7 @@ cohesive dynamic form experiences.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic extra fields collection -->
 {{ ui.extra_fields_collection(extras=[{"key": "field1", "value": "value1"}, {"key": "field2", "value": "value2"}]) }}
 
@@ -142,7 +142,7 @@ fields and providing appropriate ARIA attributes.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic field errors -->
 {{ ui.field_errors(["Field is required", "Must be at least 3 characters"]) }}
 ```
@@ -163,7 +163,7 @@ different browsers and devices.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic file input -->
 {{ ui.file_input(name="upload", label="Upload File") }}
 
@@ -196,7 +196,7 @@ functionality while maintaining consistency across different form types.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic form -->
 {{ ui.form(ui.input(name="name", label="Name") ~ ui.submit("Submit")) }}
 
@@ -245,7 +245,7 @@ submission and navigation flow.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic form actions -->
 {{ ui.form_actions(ui.button("Save", type="submit") ~ ui.button("Cancel", href="/cancel")) }}
 ```
@@ -286,7 +286,7 @@ processing.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic form end -->
 {{ ui.form_end() }}
 ```
@@ -320,7 +320,7 @@ resolve the issues.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic form errors -->
 {{ ui.form_errors(errors={"Name": "Name is required", "Email": "Invalid email format"}) }}
 ```
@@ -355,7 +355,7 @@ and encoding types that are necessary for proper form processing.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic form start -->
 {{ ui.form_start(method="POST", action="/submit") }}
 
@@ -401,7 +401,7 @@ proper form functionality.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic hidden input -->
 {{ ui.hidden_input(name="csrf_token", value="abc123") }}
 ```
@@ -427,7 +427,7 @@ maintaining consistency across different input contexts.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic text input -->
 {{ ui.input(name="username", label="Username", placeholder="Enter your username") }}
 
@@ -469,7 +469,7 @@ them suitable for various content creation scenarios.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic markdown component -->
 {{ ui.markdown(name="content", label="Content", placeholder="Enter markdown content...") }}
 
@@ -501,7 +501,7 @@ feedback about the current selection.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic radio component -->
 {{ ui.radio(content="Option 1", name="choice", value="option1") }}
 
@@ -532,7 +532,7 @@ interaction patterns.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic range input -->
 {{ ui.range_input(min_value=0, max_value=100) }}
 
@@ -573,7 +573,7 @@ with proper structure and functionality.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic select with options as list -->
 {{ ui.select(name="category", label="Category", options=["Option 1", "Option 2", "Option 3"]) }}
 
@@ -627,7 +627,7 @@ different themes.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic select box -->
 {% call ui.util.call(ui.select_box) %}
     {{ ui.select_option("Option 1", value="opt1") }}
@@ -671,7 +671,7 @@ each option.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic select option -->
 {% call ui.util.call(ui.select_box) %}
     {{ ui.select_option("Option Text", value="option_value") }}
@@ -714,7 +714,7 @@ action.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic submit button -->
 {{ ui.submit("Save Changes", name="save") }}
 
@@ -744,7 +744,7 @@ structure and validation capabilities.
 /// admonition | Usage Example
     type: example
 
-```jinja2
+```django
 <!-- Basic textarea -->
 {{ ui.textarea(name="description", label="Description", placeholder="Enter description here...") }}
 
