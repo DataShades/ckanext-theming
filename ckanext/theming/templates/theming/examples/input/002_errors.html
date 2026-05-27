@@ -1,0 +1,18 @@
+<h3>Field errors</h3>
+
+<p>
+    <code>errors</code> parameter of the input accepts list of error
+    messages. When there are errors, the input will be styled with error styles
+    and error messages will be shown below the input.
+</p>
+
+
+<div>
+    {{ ui.input(name="name", label="Name", errors=["Cannot be empty", "Letters only"]) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.input(name="name", label="Name", errors=["Cannot be empty", "Letters only"]) }}
+    {%- endraw %}
+{%- endcall %}

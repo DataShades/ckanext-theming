@@ -1,0 +1,30 @@
+<h3>Form parts</h3>
+
+<p>
+    It also possible to use form parts separately, without the form wrapper. In
+    this case, you need to include CSRF token manually if the form method is
+    <code>POST</code>.
+</p>
+
+
+<div>
+    {{ ui.form_start(method="POST") }}
+    {{ h.csrf_input() }}
+
+    {%- call ui.util.call(ui.form_actions) -%}
+        {{ ui.button("Submit", type="submit") }}
+    {%- endcall %}
+    {{ ui.form_end() }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.form_start(method="POST") }}
+        {{ h.csrf_input() }}
+
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.button("Submit", type="submit") }}
+        {%- endcall %}
+        {{ ui.form_end() }}
+    {%- endraw %}
+{%- endcall %}

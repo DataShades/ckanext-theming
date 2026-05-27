@@ -1,0 +1,42 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>input</code> component creates general text input fields for
+        collecting user text input. This is one of the most fundamental form
+        components, used for collecting various types of text data including names,
+        email addresses, search terms, and other textual information.
+    </p>
+
+    <p>
+        Input components handle various input types such as text, email, password,
+        and number fields, providing appropriate validation and formatting for each
+        type.
+    </p>
+
+    <p>
+        There are also specialized input components built on top of the base <code>input</code> component,
+        such as <code>checkbox</code>, <code>file_input</code>, and <code>range_input</code>,
+        which provide additional context-specific behavior and attributes to
+        ensure proper handling of specific types of input data.
+    </p>
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Input</h3>
+    {{ super() }}
+
+    <h3>File input</h3>
+    {{ parameters_table("file_input") }}
+
+    <h3>Checkbox</h3>
+    {{ parameters_table("checkbox") }}
+
+    <h3>Radio</h3>
+    {{ parameters_table("radio") }}
+
+    <h3>Range input</h3>
+    {{ parameters_table("range_input") }}
+{%- endblock %}

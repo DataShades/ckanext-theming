@@ -75,7 +75,7 @@
 {%- endmacro %}
 
 {%- macro input(content, name, id, label, value, required, placeholder, type, icon, errors=[]) -%}
-    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
+    {%- do ui.util.augment_attrs(kwargs, {"class": "form-control"}) -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -106,7 +106,7 @@
 {%- endmacro %}
 
 {%- macro checkbox(content, name, id, checked, label, required, placeholder, value="", errors=[]) -%}
-    {%- do kwargs.setdefault("attrs", {}) -%}
+    {%- do ui.util.augment_attrs(kwargs, {"class": "form-checkbox"}) -%}
     {%- set params = {
               "name": name,
               "id": id,
@@ -167,19 +167,23 @@
 {%- endmacro %}
 
 {%- macro radio(content, checked, value="on") -%}
+    {%- do ui.util.augment_attrs(kwargs, {"class": "form-checkbox"}) -%}
     {{ ui.input(content, checked=checked, value=value or "on", type="radio", **kwargs) }}
 {%- endmacro %}
 
 {%- macro range_input(content, min_value, max_value, step) -%}
+    {%- set defaults = {"class": "form-checkbox"} -%}
     {%- if min_value is defined -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("min", min_value) -%}
+        {%- do defaults.update({"min": min_value}) -%}
     {%- endif %}
     {%- if max_value is defined -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("max", max_value) -%}
+        {%- do defaults.update({"max": max_value}) -%}
     {%- endif %}
     {%- if step is defined -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("step", step) -%}
+        {%- do defaults.update({"step": step}) -%}
     {%- endif %}
+
+    {%- do ui.util.augment_attrs(kwargs, defaults) -%}
     {{ ui.input(content, type="range", **kwargs) }}
 {%- endmacro %}
 
