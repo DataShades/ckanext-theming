@@ -20,6 +20,9 @@ class BaseUtil(abc.ABC):
     def __init__(self, theme: BaseTheme): ...
 
     @abc.abstractmethod
+    def augment_attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None) -> dict[str, Any]: ...
+
+    @abc.abstractmethod
     def attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None) -> str: ...
 
     @abc.abstractmethod

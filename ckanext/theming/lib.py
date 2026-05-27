@@ -64,6 +64,14 @@ class Util(BaseUtil):
         self._theme = theme
 
     @override
+    def augment_attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Helper method to combine provided attributes with default attributes."""
+        if defaults:
+            defaults.update(kwargs.get("attrs", {}))
+            kwargs["attrs"] = defaults
+        return kwargs
+
+    @override
     def attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None) -> str:
         """Helper method to render HTML attributes from a dictionary.
 
@@ -93,25 +101,23 @@ class Util(BaseUtil):
         :return: A Markup object containing the rendered HTML attributes.
 
         """
-        if not kwargs and not defaults:
+        kwargs = self.augment_attrs(kwargs, defaults)
+        if not kwargs:
             return ""
-        defaults = {} if not defaults else defaults.copy()
 
-        if attrs := kwargs.get("attrs"):
-            defaults.update(attrs)
-
+        attrs = kwargs.get("attrs", {}).copy()
         for key, prefix in self._attr_groups:
             group = kwargs.get(key, {})
             if not group:
                 continue
 
             for k, v in group.items():
-                defaults[f"{prefix}{k}"] = v
+                attrs[f"{prefix}{k}"] = v
 
         if extra_class := kwargs.get("_extra_class"):
-            defaults["class"] = " ".join([defaults.get("class", ""), extra_class])
+            attrs["class"] = " ".join([attrs.get("class", ""), extra_class])
 
-        parts = [f'{k}="{self._escape_attr_value(str(v))}"' for k, v in defaults.items()]
+        parts = [f'{k}="{self._escape_attr_value(str(v))}"' for k, v in attrs.items()]
 
         return h.literal(" ".join(parts)) if parts else ""
 

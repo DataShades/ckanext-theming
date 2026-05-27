@@ -1,0 +1,45 @@
+<h3>Account nav item</h3>
+
+<p>
+    The <code>account_nav_item</code> component creates navigation items
+    specifically for account-related navigation menus. Account navigation usually wrapped in the <code>account</code> component
+    and may look broken outside of it.
+</p>
+
+<div>
+    {%- call ui.util.call(ui.account_nav_wrapper) -%}
+        {{ ui.account_nav_item("First", href="") }}
+        {{ ui.account_nav_item("Second", href="", active=true) }}
+        {{ ui.account_nav_item("Third", href="") }}
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.account) -%}
+        <div class="account">
+            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+                {{ ui.account_nav_item("First", href="") }}
+                {{ ui.account_nav_item("Second", href="", active=true) }}
+                {{ ui.account_nav_item("Third", href="") }}
+            {%- endcall %}
+        </div>
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.account_nav_wrapper) -%}
+            {{ ui.account_nav_item("First", href="") }}
+            {{ ui.account_nav_item("Second", href="", active=true) }}
+            {{ ui.account_nav_item("Third", href="") }}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.account) -%}
+            &lt;div class="account"&gt;
+            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+                {{ ui.account_nav_item("First", href="") }}
+                {{ ui.account_nav_item("Second", href="", active=true) }}
+                {{ ui.account_nav_item("Third", href="") }}
+            {%- endcall %}
+            &lt;/div&gt;
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

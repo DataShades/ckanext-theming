@@ -3,7 +3,11 @@
     <div {{ ui.util.attrs(kwargs, {"class": "accordion"}) }} {% if id -%}id="{{ id }}"{%- endif %}>{{ content }}</div>
 {%- endmacro %}
 
-{%- macro account_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
+{%- macro account_nav_wrapper(content) -%}
+    <ul {{ ui.util.attrs(kwargs, {"class": "list-unstyled"}) }}>
+        {{ content }}
+    </ul>
+{%- endmacro %}
 
 {%- macro breadcrumb_wrapper(content) -%}
     <ol {{ ui.util.attrs(kwargs, {"class": "breadcrumb"}) }}>
@@ -18,19 +22,17 @@
 {%- endmacro %}
 
 {%- macro content_nav_wrapper(content) -%}
-    <ul {{ ui.util.attrs(kwargs, {"class": "nav nav-taba"}) }}>
-        {{ content }}
-    </ul>
+    {{ ui.nav_wrapper(content, **ui.util.augment_attrs(kwargs, {"class": "nav nav-tabs"})) }}
 {%- endmacro %}
 
 {%- macro main_nav_wrapper(content) -%}
-    <ul {{ ui.util.attrs(kwargs, {"class": "navbar-nav ms-auto mb-2 mb-lg-0"}) }}>
-        {{ content }}
-    </ul>
+    {{ ui.nav_wrapper(content, **ui.util.augment_attrs(kwargs, {"class": "navbar-nav ms-auto mb-2 mb-lg-0"})) }}
 {%- endmacro %}
 
 {%- macro nav_wrapper(content) -%}
-    {{ ui.list(content, **kwargs) }}
+    <ul {{ ui.util.attrs(kwargs, {"class": "nav"}) }}>
+        {{ content }}
+    </ul>
 {%- endmacro %}
 
 {%- macro page_action_wrapper(content) -%}

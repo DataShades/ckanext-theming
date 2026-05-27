@@ -1,0 +1,24 @@
+<h3>Content action</h3>
+
+<p>
+    The <code>content_action</code> component is designed for actions that are
+    related to the content of a page, such as editing or deleting an item.
+</p>
+
+<div>
+    {%- call ui.util.call(ui.content_action_wrapper) -%}
+        {{ ui.content_action("First", href="") }}
+        {{ ui.content_action("Second", href="", active=true) }}
+        {{ ui.content_action("Third", href="") }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.content_action_wrapper) -%}
+            {{ ui.content_action("First", href="") }}
+            {{ ui.content_action("Second", href="", active=true) }}
+            {{ ui.content_action("Third", href="") }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

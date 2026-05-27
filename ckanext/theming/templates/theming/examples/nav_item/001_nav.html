@@ -1,0 +1,28 @@
+<h3>Nav item</h3>
+
+<p>
+    <code>nav_item</code> is rarely used directly. Depending on the specific
+    navigation menu, one of the specialized components such as <code>main_nav_item</code>, <code>account_nav_item</code>, <code>content_nav_item</code>, <code>page_action</code>,
+    or <code>content_action</code> is
+    typically used to create navigation items that are appropriate for specific
+    navigation menus and contexts.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.nav_wrapper) -%}
+        {{ ui.nav_item("First", href="") }}
+        {{ ui.nav_item("Second", href="", active=true) }}
+        {{ ui.nav_item("Third", href="") }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.nav_wrapper) -%}
+            {{ ui.nav_item("First", href="") }}
+            {{ ui.nav_item("Second", href="", active=true) }}
+            {{ ui.nav_item("Third", href="") }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

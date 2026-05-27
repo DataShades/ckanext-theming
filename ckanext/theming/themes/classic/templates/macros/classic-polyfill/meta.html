@@ -6,7 +6,7 @@
 
 {%- macro account(content, title, subtitle, logo) -%}
     <div {{ ui.util.attrs(kwargs, {"class": "account-masthead"}) }}>
-        {{ ui.container(content) }}
+        {{ content }}
     </div>
 {%- endmacro %}
 

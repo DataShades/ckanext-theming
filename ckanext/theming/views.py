@@ -51,8 +51,6 @@ def component(component: str | None = None):
 
 
 # account
-# account_nav_item
-# account_nav_wrapper
 # activity
 # activity_list
 # avatar
@@ -62,10 +60,6 @@ def component(component: str | None = None):
 # code
 # column
 # container
-# content_action
-# content_action_wrapper
-# content_nav_item
-# content_nav_wrapper
 # definition_list
 # dropdown
 # dropdown_item
@@ -98,18 +92,12 @@ def component(component: str | None = None):
 # license
 # list
 # list_item
-# main_nav_item
-# main_nav_wrapper
 # markdown
 # markdown_popover
-# nav_item
-# nav_wrapper
 # organization
 # organization_list
 # package
 # package_list
-# page_action
-# page_action_wrapper
 # popover
 # popover_handle
 # progress
@@ -130,8 +118,6 @@ def component(component: str | None = None):
 # select
 # select_box
 # select_option
-# sidebar_nav_item
-# sidebar_nav_wrapper
 # sidebar_section
 # spinner
 # submit

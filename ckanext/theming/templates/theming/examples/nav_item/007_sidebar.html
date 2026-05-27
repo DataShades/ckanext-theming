@@ -1,0 +1,31 @@
+<h3>Sidebar nav item</h3>
+
+<p>
+    The <code>sidebar_nav_item</code> usually requires wrapper with sidebar
+    classes, like <code>secondary</code>. Additionally,
+    it often supports <code>title</code> parameter
+    that can be used to add a title to the navigation section.
+</p>
+
+<div>
+    <div class="secondary">
+        {%- call ui.util.call(ui.sidebar_nav_wrapper, title="Sidebar navigation") -%}
+            {{ ui.sidebar_nav_item("First", href="") }}
+            {{ ui.sidebar_nav_item("Second", href="", active=true) }}
+            {{ ui.sidebar_nav_item("Third", href="") }}
+        {%- endcall %}
+    </div>
+
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        &lt;div class="secondary"&gt;
+        {%- call ui.util.call(ui.sidebar_nav_wrapper, title="Sidebar navigation") -%}
+            {{ ui.sidebar_nav_item("First", href="") }}
+            {{ ui.sidebar_nav_item("Second", href="", active=true) }}
+            {{ ui.sidebar_nav_item("Third", href="") }}
+        {%- endcall %}
+        &lt;/div&gt;
+    {%- endraw %}
+{%- endcall %}

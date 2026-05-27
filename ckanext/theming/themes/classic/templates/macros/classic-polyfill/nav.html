@@ -14,7 +14,11 @@
 {%- endmacro %}
 
 {%- macro main_nav_item(content, href, active) -%}
-    {{ ui.nav_item(content, href, active, **kwargs) }}
+    {%- call ui.util.call(ui.list_item, attrs={"class": "nav-item" ~ (" active"  if active else "")}) -%}
+        <a {{ ui.util.attrs(kwargs, {"class": (" active" if active else "")}) }} href="{{ href }}">
+            {{ content }}
+        </a>
+    {%- endcall %}
 {%- endmacro %}
 
 {%- macro sidebar_nav_item(content, href, active) -%}
@@ -22,13 +26,12 @@
 {%- endmacro %}
 
 {%- macro account_nav_item(content, href, active) -%}
-    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "btn btn-primary") -%}
-    {{ ui.nav_item(content, href, active, **kwargs) }}
+    {{ ui.nav_item(content, href, active, **ui.util.augment_attrs(kwargs, {"class": ""})) }}
 {%- endmacro %}
 
 {%- macro content_nav_item(content, href, active, icon) -%}
     {%- set prefix = (ui.icon(icon) ~ " ") if icon else "" -%}
-    <li {% if active %}class="active"{% endif %}>{{ ui.link(prefix ~ content, href, **kwargs) }}</li>
+    {{ ui.nav_item(prefix ~ content, href=href, active=active, **kwargs) }}
 {%- endmacro %}
 
 {%- macro page_action(content, href) -%}

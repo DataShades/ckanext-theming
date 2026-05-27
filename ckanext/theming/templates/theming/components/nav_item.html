@@ -1,0 +1,160 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>nav_item</code> component creates navigation menu items that serve
+        as individual elements within navigation structures. These components are the
+        fundamental building blocks of navigation menus, providing the clickable
+        elements that allow users to move between different sections of the site.
+    </p>
+
+    <p>
+        Nav item components handle proper styling, active state indication, and
+        accessibility attributes to ensure navigation is both visually clear and
+        functionally accessible. They can contain various types of content including
+        text, icons, or other components, making them flexible for different navigation
+        requirements. The component ensures consistent appearance and behavior across
+        different navigation contexts.
+    </p>
+
+    <p>
+        Collection of <code>nav_item</code> components must be wrapped into <code>nav_wrapper</code>.
+    </p>
+
+    <p>
+        Usually, <code>nav_item</code> component is not used directly. Instead,
+        depending on the context, one of the following specialized components is
+        used to create navigation items that are appropriate for specific
+        navigation menus and contexts:
+    </p>
+
+    <ul>
+        <li><code>main_nav_item</code>: For main site navigation menus.</li>
+        <li><code>account_nav_item</code>: For account-related navigation menus.</li>
+        <li><code>content_nav_item</code>: For content-specific navigation menus.</li>
+        <li><code>sidebar_nav_item</code>: For sidebar navigation menus.</li>
+        <li><code>page_action</code>: For page-specific action items.</li>
+        <li><code>content_action</code>: For content-specific action items.</li>
+    </ul>
+
+    <p>
+        These components are built on top of the base <code>nav_item</code> component
+        in most cases, providing additional styling, context-specific behavior, and
+        appropriate attributes to ensure they fit seamlessly into their respective
+        navigation structures. Additionally, they must be wrapped into appropriate form of <code>nav_wrapper</code> components
+        to ensure consistent layout and styling across the site:
+    </p>
+
+    <ul>
+        <li><code>main_nav_wrapper</code>: For main site navigation.</li>
+        <li><code>account_nav_wrapper</code>: For account-related navigation.</li>
+        <li><code>content_nav_wrapper</code>: For content-specific navigation.</li>
+        <li><code>sidebar_nav_wrapper</code>: For sidebar navigation.</li>
+        <li><code>page_action_wrapper</code>: For page-specific action items.</li>
+        <li><code>content_action_wrapper</code>: For content-specific action items.</li>
+    </ul>
+
+
+    <h3>Main navigation</h3>
+
+    <p>
+        The <code>main_nav_item</code> component creates navigation items
+        specifically for the main site navigation menu. These components represent
+        the primary navigation options that users will encounter on most pages,
+        typically linking to major sections of the site like datasets,
+        organizations, groups, or user accounts.
+    </p>
+
+    <p>
+        Main nav items are designed to be prominent and easily identifiable, often
+        featuring larger text, distinctive styling, or other visual elements that
+        make them stand out as primary navigation options.
+    </p>
+
+
+    <h3>Account navigation</h3>
+
+    <p>
+        The <code>account_nav_item</code> component creates navigation
+        items specifically for account-related navigation menus. These components
+        provide links to account-specific sections such as profile management,
+        dashboard, settings, or other user account functions.
+    </p>
+
+    <p>
+        Account nav items are typically displayed in account-related contexts or in
+        persistent account menus that appear when users are logged in.
+    </p>
+
+
+    <h3>Content navigation</h3>
+
+    <p>
+        The <code>content_nav_item</code> component creates navigation
+        items for content-specific navigation menus. These components provide
+        navigation options related to specific content items, such as tabs for
+        different aspects of a dataset, organization, or other content entity.
+    </p>
+
+    <p>
+        Content nav items are context-sensitive and typically appear on
+        content-specific pages where users need to navigate between different
+        aspects or views of the same content.
+    </p>
+
+
+    <h3>Sidebar navigation</h3>
+
+    <p>
+        The <code>sidebar_nav_item</code> component creates navigation items for
+        sidebar navigation menus. These components are designed to be used within
+        sidebar navigation structures, providing links to various sections or
+        features of the site that are relevant to the sidebar context.
+    </p>
+
+
+    <h3>Page actions</h3>
+
+    <p>
+        The <code>page_action</code> component creates page-specific action
+        items that provide quick access to actions related to the current page or
+        context. These components typically appear as buttons or links that allow
+        users to perform actions like "Add Dataset", "Create Group", or other
+        page-specific functions.
+    </p>
+
+
+    <h3>Content actions</h3>
+
+    <p>
+        The <code>content_action</code> component creates content-specific
+        action items that provide actions related to specific content items. These
+        components typically appear near or within content displays and allow users
+        to perform actions like editing, sharing, or managing specific content
+        items.
+    </p>
+
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Main navigation</h3>
+    {{ parameters_table("main_nav_item") }}
+
+    <h3>Account navigation</h3>
+    {{ parameters_table("account_nav_item") }}
+
+    <h3>Content navigation</h3>
+    {{ parameters_table("content_nav_item") }}
+
+    <h3>Sidebar navigation</h3>
+    {{ parameters_table("sidebar_nav_item") }}
+
+    <h3>Page actions</h3>
+    {{ parameters_table("page_action") }}
+
+    <h3>Content actions</h3>
+    {{ parameters_table("content_action") }}
+
+{%- endblock %}

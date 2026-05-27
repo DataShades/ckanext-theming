@@ -1,0 +1,27 @@
+<h3>Page action</h3>
+
+<p>
+    The <code>page_action</code> component creates page-specific action items
+    that provide quick access to actions related to the current page or
+    context. These components typically appear as buttons or links that allow
+    users to perform actions like "Add Dataset", "Create Group", or other
+    page-specific functions.
+</p>
+
+<div>
+    {%- call ui.util.call(ui.page_action_wrapper) -%}
+        {{ ui.page_action("First", href="") }}
+        {{ ui.page_action("Second", href="", active=true) }}
+        {{ ui.page_action("Third", href="") }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.page_action_wrapper) -%}
+            {{ ui.page_action("First", href="") }}
+            {{ ui.page_action("Second", href="", active=true) }}
+            {{ ui.page_action("Third", href="") }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
