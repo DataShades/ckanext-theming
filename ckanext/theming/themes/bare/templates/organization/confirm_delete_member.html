@@ -12,7 +12,7 @@
     {%- call ui.util.call(ui.form, method="POST") -%}
         {%- call ui.util.call(ui.form_actions) -%}
             {{ ui.button(_("Cancel"), href=h.url_for(group_type ~ ".edit", id=group_id)) }}
-            {{ ui.submit(_("Confirm Delete"), style="danger", name="delete") }}
+            {{ ui.button(_("Confirm Delete"), style="danger", attrs={"name": "delete"}, type="submit") }}
         {%- endcall %}
     {%- endcall %}
 

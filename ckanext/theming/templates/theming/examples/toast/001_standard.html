@@ -1,0 +1,26 @@
+<h3>Standard</h3>
+
+<p>
+    Most often <code>toast</code> is placed inside a block with fixed
+    position, to appear on top of the content in the screen corner. Because of
+    it, toast messages in the example below may look a bit different from the
+    actual toasts for the active theme.
+</p>
+
+<div>
+    {{ ui.toast("Hello, world!", title="Toast") }}
+    {{ ui.toast("Hello, world!", title="Toast", style="success") }}
+    {{ ui.toast("Hello, world!", title="Toast", style="warning") }}
+    {{ ui.toast("Hello, world!", title="Toast", style="danger") }}
+    {{ ui.toast("Hello, world!", title="Toast", style="info") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.toast("Hello, world!", title="Toast") }}
+        {{ ui.toast("Hello, world!", title="Toast", style="success") }}
+        {{ ui.toast("Hello, world!", title="Toast", style="warning") }}
+        {{ ui.toast("Hello, world!", title="Toast", style="danger") }}
+        {{ ui.toast("Hello, world!", title="Toast", style="info") }}
+    {%- endraw %}
+{%- endcall %}

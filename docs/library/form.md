@@ -198,10 +198,10 @@ functionality while maintaining consistency across different form types.
 
 ```django
 <!-- Basic form -->
-{{ ui.form(ui.input(name="name", label="Name") ~ ui.submit("Submit")) }}
+{{ ui.form(ui.input(name="name", label="Name") ~ ui.button("Submit", type="submit")) }}
 
 <!-- Form with method and action -->
-{{ ui.form(ui.input(name="email", label="Email") ~ ui.submit("Save"), method="POST", action="/save") }}
+{{ ui.form(ui.input(name="email", label="Email") ~ ui.button("Save", type="submit"), method="POST", action="/save") }}
 ```
 ///
 
@@ -700,34 +700,6 @@ container, options provide the available selections.
 
 ///
 
-## Submit
-
-The [`submit`][] component creates form submission buttons that trigger form
-processing when clicked. Submit buttons are essential for form completion and
-must be clearly identifiable and appropriately styled to encourage user action.
-
-Submit components handle form submission functionality, validation triggering,
-and appropriate visual styling to distinguish them from other buttons. They
-ensure proper accessibility and provide clear feedback about the submission
-action.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic submit button -->
-{{ ui.submit("Save Changes", name="save") }}
-
-<!-- Submit with confirmation -->
-{{ ui.submit("Delete", name="delete", attrs={"onclick": "return confirm('Are you sure?')"}) }}
-```
-///
-
-| Parameter | Type   | Default | Description                               |
-|-----------|--------|---------|-------------------------------------------|
-| `content` | string | -       | The text to display on the submit button. |
-| `name`    | string | -       | Name attribute for the submit button.     |
-| `value`   | string | -       | Value attribute for the submit button.    |
 
 ## Textarea
 

@@ -14,7 +14,7 @@
         </p>
 
         {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.submit(_('Cancel'), name="cancel") }}
+            {{ ui.button(_('Cancel'), type="submit", {"name": "cancel"}) }}
             {{ ui.button(_('Confirm Delete'), type="submit", attrs={"name": "action", "value": ent_type}) }}
         {%- endcall %}
     {%- endcall %}

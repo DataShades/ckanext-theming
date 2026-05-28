@@ -1,0 +1,15 @@
+<h3>Dismissible</h3>
+
+<p>
+    Toasts can be dismissible, allowing users to close them manually.
+</p>
+
+<div>
+    {{ ui.toast("Hello, world!", title="Toast", dismissible=true) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.toast("Hello, world!", title="Toast", dismissible=true) }}
+    {%- endraw %}
+{%- endcall %}

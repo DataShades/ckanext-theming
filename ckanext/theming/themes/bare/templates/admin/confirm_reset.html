@@ -13,8 +13,8 @@
         <p>{{ _('Are you sure you want to reset the config?') }}</p>
 
         {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.submit(_('Cancel'), name="cancel") }}
-            {{ ui.submit(_('Confirm Reset'), name="delete") }}
+            {{ ui.button(_('Cancel'), type="submit", {"name": "cancel"}) }}
+            {{ ui.button(_('Confirm Reset'), type="submit", {"name": "delete"}) }}
         {%- endcall %}
     {%- endcall %}
 

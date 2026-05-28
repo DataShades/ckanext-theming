@@ -833,7 +833,7 @@
                     {%- call ui.util.call(ui.form, action="/submit", method="post") -%}
                         {{ ui.input(name="name", label="Name", placeholder="Enter your name") }}
                         {%- call ui.util.call(ui.form_actions) -%}
-                            {{ ui.submit("Save") }}
+                            {{ ui.button("Save", type="submit") }}
                             {{ ui.button("Cancel", style="secondary") }}
                         {%- endcall %}
                     {%- endcall %}
@@ -842,7 +842,7 @@
             {%- call ui.util.call(ui.form, action="/submit", method="post") -%}
                 {{ ui.input(name="name", label="Name", placeholder="Enter your name") }}
                 {%- call ui.util.call(ui.form_actions) -%}
-                    {{ ui.submit("Save") }}
+                    {{ ui.button("Save", type="submit") }}
                     {{ ui.button("Cancel", style="secondary") }}
                 {%- endcall %}
             {%- endcall %}
@@ -932,10 +932,10 @@
             {{ ui.heading(_("Basic submit"), level=4) }}
             {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
                 {%- raw %}
-                    {{ ui.submit("Submit Form") }}
+                    {{ ui.button("Submit Form", type="submit") }}
                 {%- endraw %}
             {%- endcall -%}
-            {{ ui.submit("Submit Form") }}
+            {{ ui.button("Submit Form", type="submit") }}
             {{ ui.divider() }}
         </div>
 

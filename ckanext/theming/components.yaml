@@ -1243,20 +1243,6 @@ select_option:
             description: Whether this option is selected by default
             type: 'bool'
 
-submit:
-    description: |
-        Submit button element, used to submit a form when clicked.
-    category: essential
-    arguments:
-        content:
-            description: Button label
-        value:
-            description: Value submitted when the button is clicked
-            type: 'str'
-        name:
-            description: Name of the form field, used as the key when submitting the form
-            type: 'str'
-
 textarea:
     description: |
         Textarea input element, used to show a multi-line text input in a form.

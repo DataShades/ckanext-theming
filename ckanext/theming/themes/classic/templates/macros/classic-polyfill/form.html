@@ -234,13 +234,6 @@
     <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
 {%- endmacro %}
 
-{%- macro submit(content, value, name) -%}
-    {%- set attrs = kwargs.setdefault("attrs", {}) -%}
-    {%- if value -%}{%- do attrs.update({"value": value}) -%}{%- endif %}
-    {%- if name -%}{%- do attrs.update({"name": name}) -%}{%- endif %}
-    {{- ui.button(content, type="submit", **kwargs) }}
-{%- endmacro %}
-
 {%- macro textarea(content, name, id, label, value, placeholder, required, errors=[], group_class="form-group control-full") -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {

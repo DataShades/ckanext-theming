@@ -7,12 +7,12 @@
 {%- endblock %}
 
 {%- block primary_content_inner -%}
-  <p>{{ _('Are you sure you want to delete group - {name}?').format(name=group_dict.name) }}</p>
+    <p>{{ _('Are you sure you want to delete group - {name}?').format(name=group_dict.name) }}</p>
 
-  {%- call ui.util.call(ui.form, method="POST") -%}
-    {%- call ui.util.call(ui.form_actions) -%}
-      {{ ui.button(_("Cancel"), href=h.url_for(group_dict.type ~ ".edit", id=group_dict.name)) }}
-      {{ ui.submit(_("Confirm Delete"), style="danger", name="delete") }}
+    {%- call ui.util.call(ui.form, method="POST") -%}
+        {%- call ui.util.call(ui.form_actions) -%}
+            {{ ui.button(_("Cancel"), href=h.url_for(group_dict.type ~ ".edit", id=group_dict.name)) }}
+            {{ ui.button(_("Confirm Delete"), style="danger", attrs={"name": "delete"}, type="submit") }}
+        {%- endcall %}
     {%- endcall %}
-  {%- endcall %}
 {%- endblock %}
