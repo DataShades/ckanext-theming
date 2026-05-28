@@ -766,6 +766,9 @@ code:
         language:
             description: Programming language of the code content, used for syntax highlighting
             type: 'str'
+        dedent:
+            description: Whether to remove common leading whitespace from each line in the code content
+            type: 'bool'
 
 definition_list:
     description: |
@@ -1101,19 +1104,6 @@ markdown:
         errors:
             description: List of error messages to show for this field
             type: 'list[str]'
-
-
-markdown_popover:
-    description: |
-        Popover widget containing brief markdown explanation of Markdown syntax.
-    category: recommended
-    arguments:
-        id:
-            description: Unique identifier for the popover, used to target it with a popover_handle.
-            type: 'str'
-        title:
-            description: Title shown in the popover header
-            type: 'str'
 
 radio:
     description: |
@@ -1599,8 +1589,8 @@ search_active_filters:
     category: recommended
     arguments:
         active_filters:
-            description: List of active filters
-            type: 'list[str]'
+            description: List of currently active filters
+            type: 'list[tuple[str, str]]'
         facet_titles:
             description: Mapping of facet names to their display titles, used to show user-friendly filter labels
             type: 'dict[str, str]'
@@ -1652,7 +1642,7 @@ search_form:
             type: 'dict[str, str]'
         active_filters:
             description: List of currently active filters, used to show which filters are currently applied to the search
-            type: 'list[str]'
+            type: 'list[tuple[str, str]]'
         use_htmx:
             description: Whether to use HTMX for the search form, which allows for dynamic updating of search results without a full page reload
             type: 'bool'

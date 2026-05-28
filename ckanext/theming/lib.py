@@ -8,7 +8,8 @@ Themes can be registered by CKAN plugins using the ITheme interface.
 
 Example usage::
 
-    theme = get_theme(config["ckan.ui.theme"])
+    from ckanext.theming import config as cfg
+    theme = get_theme(cfg.theme())
     ui = theme.build_ui(app)
     btn = ui.link("Click me!", href="https://ckan.org")
 """
@@ -33,10 +34,10 @@ from werkzeug.local import LocalProxy
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 from ckan import types
-from ckan.common import config
 from ckan.exceptions import CkanConfigurationException
 from ckan.lib.helpers import helper_functions as h
 
+from . import config as cfg
 from .base import UI, BaseTheme, BaseUtil, PElement
 from .interfaces import ITheme
 
@@ -334,7 +335,7 @@ class MacroUI(UI):
     def __getattr__(self, name: str):
         # reset macro cache at the beginning of the request in debug mode. This
         # allows to edit UI macros without restarting the server.
-        if config["debug"] and not getattr(tk.g, "_ui_compiled", False):
+        if tk.config["debug"] and not getattr(tk.g, "_ui_compiled", False):
             for tpl in (self.__env.get_template(source) for source in self.__sources):
                 tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
 
@@ -439,7 +440,7 @@ def resolve_paths(theme: str | None) -> list[str]:
     return paths
 
 
-def enable_theme(name: str, config: Any):
+def enable_theme(name: str, config_: Any):
     """Enable the specified theme.
 
     This function updates the CKAN configuration to include template and
@@ -474,13 +475,13 @@ def enable_theme(name: str, config: Any):
 
     for theme in reversed(enabled_themes):
         if (path := theme.template_path()) and os.path.isdir(path):
-            tk.add_template_directory(config, os.path.relpath(path, here))
+            tk.add_template_directory(config_, os.path.relpath(path, here))
 
         if (path := theme.asset_path()) and os.path.isdir(path):
             tk.add_resource(os.path.relpath(path, here), f"theming/{theme.name}")
 
         if (path := theme.public_path()) and os.path.isdir(path):
-            tk.add_public_directory(config, os.path.relpath(path, here))
+            tk.add_public_directory(config_, os.path.relpath(path, here))
 
     UIManager.reset()
 
@@ -492,7 +493,7 @@ class UIManager:
     def get(cls):
         """Get the current UI instance. Creates one if it doesn't exist."""
         if cls.ui is None:
-            cls.set(tk.config["ckan.ui.theme"])
+            cls.set(cfg.theme())
 
         return cls.ui
 

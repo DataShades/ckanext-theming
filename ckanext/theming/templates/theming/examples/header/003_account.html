@@ -1,0 +1,40 @@
+<h3>Account</h3>
+
+<p>
+    The <code>account</code> block often rendered above the <code>header</code>. Themes
+    can implement it in a different way, but it is typically used to display
+    account-related information and navigation options. This block can include
+    elements such as the user's name, profile picture, and links to account
+    settings, profile management, or logout functionality. The content of the <code>account</code> block
+    is usually dynamic and changes based on the user's authentication status
+    and permissions.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.account) -%}
+        <div class="account">
+            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+                {{ ui.account_nav_item("Profile", href="") }}
+                {{ ui.account_nav_item("Dashboard", href="") }}
+            {%- endcall %}
+        </div>
+    {%- endcall %}
+
+    {{ ui.header(ui.main_nav_wrapper(ui.main_nav_item("Datasets", "/dataset"))) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.account) -%}
+            &lt;div class="account"&gt;
+            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+                {{ ui.account_nav_item("Profile", href="") }}
+                {{ ui.account_nav_item("Dashboard", href="") }}
+            {%- endcall %}
+            &lt;/div&gt;
+        {%- endcall %}
+
+        {{ ui.header(ui.main_nav_wrapper(ui.main_nav_item("Datasets", "/dataset"))) }}
+    {%- endraw %}
+{%- endcall %}

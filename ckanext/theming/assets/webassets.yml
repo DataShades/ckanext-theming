@@ -5,10 +5,11 @@ examples:
       - theming/examples-css
   output: ckanext-theming/%(version)s-examples.js
   contents:
-      - prism.js
+      # - prism.js
+      - examples.js
 
 examples-css:
   output: ckanext-theming/%(version)s-examples.css
   contents:
-      - prism.css
+      # - prism.css
       - examples.css

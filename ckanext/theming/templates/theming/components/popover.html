@@ -1,0 +1,24 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    The <code>popover</code> component creates popover content containers that appear near
+    specific elements to provide additional information or controls. Popovers are
+    less intrusive than modals and are typically used for contextual help, quick
+    actions, or supplementary information that doesn't require full user focus.
+
+    Popover components handle positioning relative to their trigger elements,
+    ensuring they remain visible and accessible. They often appear on hover or
+    click and disappear when the user moves away or clicks elsewhere. The component
+    works with <code>popover_handle</code> components to provide the trigger
+    mechanism for showing and hiding popovers.
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Popover</h3>
+    {{ super() }}
+
+    <h3>Handle</h3>
+    {{ parameters_table("popover_handle") }}
+{%- endblock %}

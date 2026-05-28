@@ -1,0 +1,96 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>search_form</code> component creates complete search forms that
+        organize all search-related elements into a cohesive unit. This component
+        provides the overall structure for search interfaces and handles form
+        submission and validation for search operations.
+    </p>
+
+    <p>
+        When <code>search_form</code> requires customization that goes beyond
+        the the capabilities of the base component, the <code>search_form_box</code> can
+        be used with other form parts to build  the custom interface.
+    </p>
+
+    <p>
+        The <code>search_form_box</code> component creates the container for
+        search forms, providing the form element structure and HTMX integration for
+        enhanced search functionality. This component serves as the foundational
+        wrapper for search forms, handling form submission and accessibility
+        requirements.
+    </p>
+
+    <p>
+        The <code>search_input</code> component creates search input fields where
+        users enter their search queries. This component handles the primary text input
+        for search operations and often includes features like search suggestions,
+        history, or instant search capabilities.
+    </p>
+
+    <p>
+        The <code>search_results_text</code> component creates headers
+        for search results displays, providing context and organization for the search
+        results. This component typically includes information about the search query,
+        result counts, and search errors if there are any.
+    </p>
+
+    <p>
+        The <code>search_active_filters</code> component displays the
+        currently active filters in search interfaces, showing users which filters are
+        currently applied to their search results. This component is crucial for search
+        usability, allowing users to understand what filters are affecting their
+        results and providing easy ways to remove or modify active filters.
+    </p>
+
+    <p>
+        Active filters are typically displayed as removable tags or badges that show
+        the filter type and value. Users can click these elements to remove specific
+        filters, providing immediate feedback and control over their search
+        criteria. The component ensures that users always know which filters are active
+        and can easily modify their search parameters.
+    </p>
+
+    <p>
+        The <code>search_sort_control</code> component provides controls
+        for sorting search results in different ways, allowing users to organize their
+        results by relevance, date, name, or other criteria.
+    </p>
+
+    <p>
+        The <code>search_submit_button</code> component creates search
+        submission buttons that trigger search operations when clicked. This component
+        provides the primary action for initiating searches and must be clearly
+        identifiable and appropriately styled to encourage user action.
+    </p>
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Search form</h3>
+    {{ super() }}
+
+    <h3>Search form box</h3>
+    {{ parameters_table("search_form_box") }}
+
+    <h3>Search input</h3>
+    {{ parameters_table("search_input") }}
+
+    <h3>Submit button</h3>
+    {{ parameters_table("search_submit_button") }}
+
+    <h3>Sort control</h3>
+    {{ parameters_table("search_sort_control") }}
+
+    <h3>Results text</h3>
+    {{ parameters_table("search_results_text") }}
+
+    <h3>Active filters</h3>
+    {{ parameters_table("search_active_filters") }}
+
+    <h3>Advanced controls</h3>
+    {{ parameters_table("search_advanced_controls") }}
+
+{%- endblock %}

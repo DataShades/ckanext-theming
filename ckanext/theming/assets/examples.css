@@ -1,11 +1,3 @@
-.token.tag {
-    display: initial;
-    background: none;
-    border: none;
-    box-shadow: none;
-    padding: initial;
-}
-
 .component-example:not(:last-child) {
     margin-bottom: 2rem;
 }

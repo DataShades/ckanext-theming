@@ -1,0 +1,24 @@
+<h3>Header</h3>
+
+<p>
+    Headers typically include main navigation and title.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.header, title="Site title") -%}
+        {%- call ui.util.call(ui.main_nav_wrapper) -%}
+            {{ ui.main_nav_item("Datasets", "/dataset") }}
+        {%- endcall %}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.header, title="Site title") -%}
+            {%- call ui.util.call(ui.main_nav_wrapper) -%}
+                {{ ui.main_nav_item("Datasets", "/dataset") }}
+            {%- endcall %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

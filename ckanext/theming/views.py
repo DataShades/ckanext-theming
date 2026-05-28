@@ -57,43 +57,22 @@ def component(component: str | None = None):
     return tk.render("theming/component.html", extra_vars)
 
 
-# account
 # activity
 # activity_list
 # avatar
 # card
 # chart
-# code
 # column
 # container
 # definition_list
-# dropdown
-# dropdown_item
 # empty
 # extra_field
 # extra_fields_collection
-# footer
-# footer_main
-# footer_secondary
 # grid
-# header
-# header_logo
 # license
-# markdown_popover
-# popover
-# popover_handle
 # progress
 # row
-# search_active_filters
-# search_advanced_controls
-# search_form
-# search_form_box
-# search_input
-# search_results_text
-# search_sort_control
-# search_submit_button
 # spinner
 # submit
 # subtitle_item
 # toast
-# tooltip

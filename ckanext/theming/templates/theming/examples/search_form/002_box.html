@@ -1,0 +1,34 @@
+<h3>Search box</h3>
+
+<p>
+    When search form requires only a single input field, the <code>search_form_box</code> component
+    can be used to create a compact search form with a single input field and a
+    submit button.
+</p>
+
+<p>
+    Depending on implementation of search form, it may be impossible to achieve
+    exactly the same appearance of the form as in <code>search_form</code> component. For
+    example, in <code>search_form</code>, input and submit button may share the
+    same wrapepr and render inline. At the same time, inside <code>search_form_box</code> they
+    are likely to be rendered inside separate conainers. As result, they will
+    be shown on different lines.
+</p>
+
+<div>
+    {%- call ui.util.call(ui.search_form_box) -%}
+        {{ ui.search_input() }}
+        {{ ui.divider() }}
+        {{ ui.search_submit_button() }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.search_form_box) -%}
+            {{ ui.search_input() }}
+            {{ ui.divider() }}
+            {{ ui.search_submit_button() }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

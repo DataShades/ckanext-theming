@@ -1,0 +1,27 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>dropdown</code> component provides the structural
+        foundation for dropdown menus. It ensures proper positioning, styling, and
+        behavior for dropdown components. This wrapper works with dropdown-related
+        components to create consistent menu experiences across different themes.
+    </p>
+
+    <p>
+        The <code>dropdown_item</code> component creates individual items within
+        dropdown menus, providing the clickable elements that appear when dropdown
+        menus are activated.
+    </p>
+
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Dropdown</h3>
+    {{ super() }}
+
+    <h3>Dropdown item</h3>
+    {{ parameters_table("dropdown_item") }}
+{%- endblock %}

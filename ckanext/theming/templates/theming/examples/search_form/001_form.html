@@ -1,0 +1,45 @@
+<h3>Search form</h3>
+
+<p>
+    The <code>search_form</code> component is a recommended tool for rendering
+    standard search form. It supports variety of parameters that partially
+    overlap with parameters for CKAN's native search snippet
+</p>
+
+<p>
+    <code>active_filters</code> parameter can cause a problem if it receives
+    fake value. To see how it looks, apply filter to the current page by
+    opening {{ ui.link("this link", "?organization=gov") }}.
+</p>
+
+<div>
+    {{ ui.search_form() }}
+
+    {{ ui.search_form(
+        query="term",
+        sorting_options=[("Title", "title asc"), ("Rating", "rating desc")],
+        sorting="rating desc",
+        count=4,
+        type="group",
+        active_filters=[("organization", request.args.organization)] if request.args.organization else [],
+        facets={"organization": {"items": [{"name": "gov", "display_name": "Government"}]}},
+        facet_titles={"organization": "Organization"},
+        use_htmx=false) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.search_form() }}
+
+        {{ ui.search_form(
+            query="term",
+            sorting_options=[("Title", "title asc"), ("Rating", "rating desc")],
+            sorting="rating desc",
+            count=4,
+            type="group",
+            active_filters=[("organization", request.args.organization)] if request.args.organization else [],
+            facets={"organization": {"items": [{"name": "gov", "display_name": "Government"}]}},
+            facet_titles={"organization": "Organization"},
+            use_htmx=false) }}
+    {%- endraw %}
+{%- endcall %}

@@ -1,0 +1,52 @@
+<h3>Standard</h3>
+
+<p>
+    The <code>code</code> component accepts optional <code>language</code> parameter. When
+    syntax highlighting is available, <code>language</code> is used to
+    determing syntax of the element.
+</p>
+
+<p>
+    To remove extra spacing from the left, <code>dedent</code> parameter can be
+    used. When set to <code>true</code>, the component will try to determine the minimum
+    indentation of all lines and remove it from the beginning of each line.
+</p>
+
+<div>
+    {%- call ui.util.call(ui.code) -%}
+        {%- raw %}
+            {%- for i in range(3) -%}
+                {{ i }}
+            {%- endfor %}
+        {%- endraw %}
+    {%- endcall %}
+
+    {%- call ui.util.call(ui.code, language="jinja2", dedent=True) -%}
+        {%- raw %}
+            {%- for i in range(3) -%}
+                {{ i }}
+            {%- endfor %}
+        {%- endraw %}
+    {%- endcall %}
+
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.code) -%}
+            &#123;%- raw %}
+            {%- for i in range(3) -%}
+                {{ i }}
+            {%- endfor %}
+            &#123;%- endraw %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+            &#123;%- raw %}
+            {%- for i in range(3) -%}
+                {{ i }}
+            {%- endfor %}
+            &#123;%- endraw %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

@@ -1,0 +1,50 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>footer</code> component creates page footers that provide consistent
+        information and navigation elements at the bottom of pages. Footers typically
+        contain site information, legal notices, secondary navigation, contact
+        information, and other elements that users might need but don't require
+        prominent placement.
+    </p>
+
+
+    <p>
+        While <code>footer</code> component itself often can be used to render
+        the whole footer, often in contains two nested components: <code>footer_main</code> and <code>footer_secondary</code>.
+    </p>
+
+    <p>
+        The <code>footer_main</code> component is used for the main part of
+        the footer, which typically includes important information such as
+        copyright notices, contact details, and key links. This section is
+        designed to be the primary area of the footer where users can find
+        essential information about the site or organization.
+    </p>
+
+    <p>
+        The <code>footer_secondary</code> component is used for the secondary
+        part of the footer, which may include additional navigation links,
+        social media icons, attribution, or other supplementary
+        information. This section is designed to provide extra resources or
+        links that users might find useful but are not as critical as the
+        information in the main footer section.
+    </p>
+
+{%- endblock %}
+
+
+
+{%- block parameters -%}
+    <h3>Footer</h3>
+    {{ super() }}
+
+    <h3>Main footer</h3>
+    {{ parameters_table("footer_secondary") }}
+
+    <h3>Secondary footer</h3>
+    {{ parameters_table("footer_main") }}
+
+{%- endblock %}

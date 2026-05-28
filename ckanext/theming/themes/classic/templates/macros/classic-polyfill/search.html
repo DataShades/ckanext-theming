@@ -47,6 +47,7 @@
                 <span class="facet">{{ facet_titles.get(key, key) }}:</span>
                 {%- for _key, value in values %}
                     <span class="filtered pill">
+                        {{ ui.input(name=key, value=value) }}
                         {{ h.list_dict_filter(items, 'name', 'display_name', value) }}
                         {%- call ui.util.call(ui.tooltip, tooltip=_('Remove')) -%}
                             <a href="{{ h.remove_url_param(key, value) }}" class="remove" aria-label="{{ _('Remove applied filter: {value}').format(value=value) }}" hx-boost="{{ 'true' if use_htmx else 'false' }}">
@@ -75,6 +76,11 @@
 {%- endmacro %}
 
 {%- macro search_form(query, sorting, sorting_options, error, count, facets, facet_titles, active_filters, use_htmx, query_name="q", sorting_name="sort", type="dataset") -%}
+    {%- set facet_fields = {} -%}
+    {%- for k, v in active_filters -%}
+        {%- do facet_fields.setdefault(k, []).append(v) -%}
+    {%- endfor %}
+
     {%- set params = {
         "query": query,
         "error": error,
@@ -83,8 +89,8 @@
         "sorting_selected": sorting,
         "sorting": sorting_options ,
         "form_id": kwargs.setdefault("attrs", {}).id ,
-        "fields": active_filters ,
-        "facets": {"titles": facet_titles, "search": facets} ,
+        "fields": active_filters,
+        "facets": {"titles": facet_titles, "search": facets, "fields": facet_fields, "remove_field": h.remove_url_param} ,
         "type": type ,
         } -%}
     {%- do params.update(kwargs) -%}

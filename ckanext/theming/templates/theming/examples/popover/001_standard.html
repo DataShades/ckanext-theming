@@ -1,0 +1,40 @@
+<h3>Standard</h3>
+
+<p>
+    The <code>popover</code> is triggered by <code>popover_handle</code>, which
+    often has no CSS applied to it. This allows developers to use any element
+    as a popover handle, such as an icon, link, or button.
+</p>
+
+
+<div>
+    {%- set id = ui.util.id() -%}
+
+    {%- call ui.util.call(ui.popover, title="Popover", id=id) -%}
+        {{ lipsum(1) }}
+        <hr/>
+        {{ lipsum(1) }}
+    {%- endcall %}
+
+    <p>
+        Usually {{ ui.popover_handle("[popover handle]", id=id) }} does not have custom appearance.
+    </p>
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {% set id = ui.util.id() -%}
+
+        {%- call ui.util.call(ui.popover, title="Popover", id=id) -%}
+            {{ lipsum(1) }}
+            &lt;hr/&gt;
+            {{ lipsum(1) }}
+        {%- endcall %}
+
+        &lt;p&gt;
+        Usually {{ ui.popover_handle("popover handle", id=id) }}
+        does not have custom appearance.
+        &lt;/p&gt;
+
+    {%- endraw %}
+{%- endcall %}

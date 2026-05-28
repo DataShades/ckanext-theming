@@ -4,8 +4,10 @@ import logging
 from typing import Any, cast
 
 import ckan.plugins as p
+import ckan.plugins.toolkit as tk
 from ckan import types
 
+from . import config as cfg
 from .interfaces import ITheme
 from .lib import collect_themes, enable_theme, ui
 from .themes import make_classic_polyfill, make_mb_polyfill
@@ -20,13 +22,20 @@ def register_themes():
     return [make_classic_polyfill(), make_mb_polyfill()]
 
 
-def update_config(config: Any):
+def update_config(config_: Any):
     collect_themes()
-    if theme := config.get("ckan.ui.theme"):
-        enable_theme(theme, config)
+    theme = cfg.theme()
+    if not theme:
+        if tk.config.get("ckan.base_templates_folder") == "templates-midnight-blue":
+            theme = "midnight-blue-polyfill"
+        else:
+            theme = "classic-polyfill"
+
+    if theme:
+        enable_theme(theme, config_)
 
 
-def make_middleware(app: types.CKANApp, config: Any) -> types.CKANApp:  # pyright: ignore[reportUnusedParameter]
+def make_middleware(app: types.CKANApp, config_: Any) -> types.CKANApp:  # pyright: ignore[reportUnusedParameter]
     if hasattr(app, "jinja_env"):
         app.jinja_env.add_extension("jinja2.ext.debug")
         app.jinja_env.globals.update({"ui": cast(Any, ui)})
@@ -40,14 +49,14 @@ class ThemingMixin:
     p.implements(p.IMiddleware, inherit=True)
     p.implements(ITheme, inherit=True)
 
-    def update_config(self, config: Any):
-        if "theming" not in config["ckan.plugins"]:
-            update_config(config)
+    def update_config(self, config_: Any):
+        if "theming" not in config_["ckan.plugins"]:
+            update_config(config_)
 
     def register_themes(self):
         return register_themes()
 
-    def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
-        if "theming" not in config["ckan.plugins"]:
-            make_middleware(app, config)
+    def make_middleware(self, app: types.CKANApp, config_: Any) -> types.CKANApp:
+        if "theming" not in config_["ckan.plugins"]:
+            make_middleware(app, config_)
         return app
