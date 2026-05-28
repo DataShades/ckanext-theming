@@ -87,43 +87,6 @@ content.
 - `dedent` (bool): Remove common leading whitespaces
 ///
 
-## Definition List
-
-The [`definition_list`][definition-list] component displays definition lists
-that present key-value pairs in a structured format. Definition lists are
-particularly useful for displaying metadata, configuration information, or any
-content that consists of terms and their corresponding definitions or values.
-
-Definition list components handle proper semantic markup and consistent styling
-for terms and their definitions. They provide clear visual separation between
-different term-definition pairs and ensure the relationship between terms and
-definitions remains clear. This component is especially valuable for displaying
-structured information like dataset metadata, user profiles, or system
-configuration details.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic definition list -->
-{{ ui.definition_list([
-    ["Hello", "Praesent augue."],
-    ["World", "Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus."]
-]) }}
-```
-///
-
-| Parameter | Type                  | Default | Description                                    |
-|-----------|-----------------------|---------|------------------------------------------------|
-| `items`   | list[tuple[str, str]] | -       | The content to display in the definition list. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `striped` (bool): Whether to use striped styling
-- `bordered` (bool): Whether to show borders
-- `compact` (bool): Whether to use compact spacing
-///
 
 ## Table
 

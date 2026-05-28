@@ -770,15 +770,6 @@ code:
             description: Whether to remove common leading whitespace from each line in the code content
             type: 'bool'
 
-definition_list:
-    description: |
-        Definition list element, used to show a list of terms and their definitions.
-    category: experimental
-    arguments:
-        items:
-            description: List of definition items, each item is a collection of two elements
-            type: 'list[tuple[str, str]]'
-
 table:
     description: |
         Table element, used to show tabular data.

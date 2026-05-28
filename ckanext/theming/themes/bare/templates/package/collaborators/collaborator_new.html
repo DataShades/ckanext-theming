@@ -44,16 +44,15 @@
 
 {%- block secondary_content %}
     {{ ui.heading(_('What are the available roles?'), level=2) }}
-    {%- set items = [
-[_("Editor:"), _("Editors can edit the dataset and its resources, as well accessing the dataset if private.")],
-[_("Member:"), _("Members can access the dataset if private, but not edit it.")]
-    ] -%}
-    {% if h.check_config_permission('allow_admin_collaborators') %}
-        {%- set items = [
-[_("Admin:"), _("In addition to managing the dataset, admins can add and remove collaborators from a dataset.")]
-        ] + items -%}
-    {% endif %}
-
-    {{ ui.definition_list(items) }}
+    <dl>
+        {% if h.check_config_permission('allow_admin_collaborators') %}
+            <dt>{{ _("Admin:") }}</dt>
+            <dd>{{ _("In addition to managing the dataset, admins can add and remove collaborators from a dataset.") }}</dd>
+        {% endif %}
+        <dt>{{ _("Editor:") }}</dt>
+        <dd>{{ _("Editors can edit the dataset and its resources, as well accessing the dataset if private.") }}</dd>
+        <dt>{{ _("Member:") }}</dt>
+        <dd>{{ _("Members can access the dataset if private, but not edit it.") }}</dd>
+    </dl>
 
 {%- endblock %}

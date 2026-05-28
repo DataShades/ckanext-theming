@@ -66,12 +66,9 @@ def component(component: str | None = None):
 # column
 # grid
 # row
-# definition_list
 # empty
 # extra_field
 # extra_fields_collection
 # license
 # progress
-# spinner
-# submit
 # subtitle_item

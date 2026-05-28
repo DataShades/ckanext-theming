@@ -47,12 +47,14 @@
 
 {%- block secondary_content %}
     {%- call ui.util.call(ui.sidebar_section, title=_('What are roles?')) -%}
-        {{ ui.definition_list([
-[_("Admin:"), _("Can add/edit and delete datasets, as well as manage organization members.")],
-[_("Editor:"), _("Can add and edit datasets, but not manage organization members.")],
-[_("Member:"), _("Can view the organization's private datasets, but not add new datasets.")]
-        ]) }}
-
+        <dl>
+            <dt>{{ _("Admin:") }}</dt>
+            <dd>{{ _("Can add/edit and delete datasets, as well as manage organization members.") }}</dd>
+            <dt>{{ _("Editor:") }}</dt>
+            <dd>{{ _("Can add and edit datasets, but not manage organization members.") }}</dd>
+            <dt>{{ _("Member:") }}</dt>
+            <dd>{{ _("Can view the organization's private datasets, but not add new datasets.") }}</dd>
+        </dl>
     {%- endcall %}
 
 {%- endblock %}

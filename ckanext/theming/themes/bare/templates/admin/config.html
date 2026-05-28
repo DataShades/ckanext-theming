@@ -58,16 +58,20 @@
 {%- block secondary_content -%}
     {%- call ui.util.call(ui.sidebar_section, title=_("CKAN config options")) -%}
         {% block admin_form_help %}
-
-            {{ ui.definition_list([
-[_("Site Title"), _("This is the title of this CKAN instance. It appears in various places throughout CKAN.")],
-[_("Custom Stylesheet"), _("Define an alternative main CSS file.")],
-[_("Site Tag Logo"), _("This is the logo that appears in the header of all the CKAN instance templates.")],
-[_("About"), _("This text will appear on this CKAN instances about page.")],
-[_("Intro Text"), _("This text will appear on this CKAN instances home page as a welcome to visitors.")],
-[_("Custom CSS"), _("This is a block of CSS that appears on every page. If you wish to customize the templates more fully we recommend reading the documentation.")],
-            ]) }}
-
+            <dl>
+                <dt>{{ _("Site Title") }}</dt>
+                <dd>{{ _("This is the title of this CKAN instance. It appears in various places throughout CKAN.") }}</dd>
+                <dt>{{ _("Custom Stylesheet") }}</dt>
+                <dd>{{ _("Define an alternative main CSS file.") }}</dd>
+                <dt>{{ _("Site Tag Logo") }}</dt>
+                <dd>{{ _("This is the logo that appears in the header of all the CKAN instance templates.") }}</dd>
+                <dt>{{ _("About") }}</dt>
+                <dd>{{ _("This text will appear on this CKAN instances about page.") }}</dd>
+                <dt>{{ _("Intro Text") }}</dt>
+                <dd>{{ _("This text will appear on this CKAN instances home page as a welcome to visitors.") }}</dd>
+                <dt>{{ _("Custom CSS") }}</dt>
+                <dd>{{ _("This is a block of CSS that appears on every page. If you wish to customize the templates more fully we recommend reading the documentation.") }}</dd>
+            </dl>
         {% endblock %}
     {%- endcall %}
 {%- endblock %}

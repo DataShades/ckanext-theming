@@ -47,11 +47,12 @@
 
 {%- block secondary_content %}
     {%- call ui.util.call(ui.sidebar_section, title=_('What are roles?')) -%}
-        {{ ui.definition_list([
-[_("Admin:"), _("Can edit group information, as well as manage organization members.")],
-[_("Member:"), _("Can add/remove datasets from groups.")]
-        ]) }}
-
+        <dl>
+            <dt>{{ _("Admin:") }}</dt>
+            <dd>{{ _("Can edit group information, as well as manage organization members.") }}</dd>
+            <dt>{{ _("Member:") }}</dt>
+            <dd>{{ _("Can add/remove datasets from groups.") }}</dd>
+        </dl>
     {%- endcall %}
 
 {%- endblock %}
