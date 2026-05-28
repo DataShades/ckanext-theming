@@ -132,7 +132,7 @@ facet:
 license:
     description: |
         Link/logo/title of a single license.
-    category: essential
+    category: experimental
     arguments:
         content:
             description: License title("Creative Commons Attribution", etc.)
@@ -263,7 +263,7 @@ container:
     description: |
         Generic container with restricted width, used to wrap page content and
         center it on the page.
-    category: experimental
+    category: essential
     arguments:
         content:
             description: Content of the container
@@ -545,20 +545,6 @@ tooltip:
 
 
 # elements
-avatar:
-    description: |
-        Avatar image for a user, typically shown as a circle with the user's profile picture.
-    category: experimental
-    arguments:
-        content:
-            description: Usually ignored
-        username:
-            description: Username of the user, used to generate avatar image URL
-            type: 'str'
-        size:
-            description: Size of the avatar image in pixels
-            type: 'int'
-
 badge:
     description: |
         Small badge element, used to show a status or label for an item.

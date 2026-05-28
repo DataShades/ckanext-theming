@@ -1,8 +1,3 @@
-{%- macro avatar(content, username, size) -%}
-    {%- do kwargs -%}
-    {{ h.user_image(username, size) }}
-{%- endmacro %}
-
 {%- macro badge(content, style) -%}
     <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}

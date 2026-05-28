@@ -1,0 +1,43 @@
+<h3>Standard</h3>
+
+<p>
+    The <code>subtitle_item</code> inserts configured divider between
+    items. When the  <code>initial</code> parameter set to <code>true</code>,
+    divider after such segment is not added.
+</p>
+
+<p>
+    This component modifies title of the page and usually reflects the state of
+    breadcrumbs:
+
+    {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+        {%- raw %}
+            {%- block subtitle -%}
+                {{ ui.subtitle_item("Edit") }}
+                {{ ui.subtitle_item("Dataset") }}
+                {{ super() }}
+            {%- endblock %}
+
+            {%- block breadcrumb_content -%}
+                {{ super() }}
+                {{ ui.breadcrumb("Dataset", href="") }}
+                {{ ui.breadcrumb("Edit", href="") }}
+            {%- endblock %}
+        {%- endraw %}
+
+    {%- endcall %}
+</p>
+
+<div>
+    {{ ui.subtitle_item("Hello") }}
+    {{ ui.subtitle_item("World") }}
+    {{ ui.subtitle_item("CKAN", initial=true) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.subtitle_item("Hello") }}
+        {{ ui.subtitle_item("World") }}
+        {{ ui.subtitle_item("CKAN", initial=true) }}
+    {%- endraw %}
+{%- endcall %}

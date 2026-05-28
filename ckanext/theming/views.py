@@ -59,16 +59,11 @@ def component(component: str | None = None):
 
 # activity
 # activity_list
-# avatar
 # card
 # chart
-# container
 # column
 # grid
 # row
-# empty
 # extra_field
 # extra_fields_collection
 # license
-# progress
-# subtitle_item
