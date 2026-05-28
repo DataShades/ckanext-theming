@@ -1,0 +1,21 @@
+<h3>Sidebar section</h3>
+
+<p>
+    The <code>sidebar_section</code> component is used to create sections in
+    the sidebar.
+</p>
+
+
+<div>
+    <div class="secondary">
+        {{ ui.sidebar_section(lipsum(1), title="Title") }}
+    </div>
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        &lt;div class="secondary"&gt;
+        {{ ui.sidebar_section(lipsum(1), title="Title") }}
+        &lt;/div&gt;
+    {%- endraw %}
+{%- endcall %}

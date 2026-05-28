@@ -1,0 +1,18 @@
+<h3>Textarea</h3>
+
+<p>
+    The <code>textarea</code> component resembles <code>input</code> and mainly
+    differs only in appearing as a larger text area that allows for multiple
+    lines of input.
+</p>
+
+
+<div>
+    {{ ui.textarea(ui.field_info("Help text"), name="area", label="Area") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.textarea(ui.field_info("Help text"), name="area", label="Area") }}
+    {%- endraw %}
+{%- endcall %}

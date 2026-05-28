@@ -187,8 +187,12 @@
     {{ ui.input(content, type="range", **kwargs) }}
 {%- endmacro %}
 
-{%- macro select(content, name, id, label, options, selected) -%}
-    {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
+{%- macro select(content, name, id, label, options, selected, multiple) -%}
+    {%- set defaults = {"class": "form-control"} -%}
+    {%- if multiple -%}
+        {%- do defaults.update({"multiple": true}) -%}
+    {%- endif %}
+    {%- do ui.util.augment_attrs(kwargs, defaults) -%}
     {%- set params = {
               "name": name,
               "id": id,

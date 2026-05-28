@@ -1,0 +1,25 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>List item</h3>
+    {{ parameters_table("list_item") }}
+
+    <h3>Package</h3>
+    {{ parameters_table("package") }}
+
+    <h3>Resource</h3>
+    {{ parameters_table("resource") }}
+
+    <h3>User</h3>
+    {{ parameters_table("user") }}
+
+    <h3>Organization</h3>
+    {{ parameters_table("organization") }}
+
+    <h3>Group</h3>
+    {{ parameters_table("group") }}
+
+{%- endblock %}

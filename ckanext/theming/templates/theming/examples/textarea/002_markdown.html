@@ -1,0 +1,17 @@
+<h3>Markdown</h3>
+
+<p>
+    The <code>markdown</code> component usually is rendered as <code>textarea</code> with
+    additional block explaining Markdown syntax.
+</p>
+
+
+<div>
+    {{ ui.markdown(name="area", label="Area") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.markdown(name="area", label="Area") }}
+    {%- endraw %}
+{%- endcall %}

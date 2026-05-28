@@ -1,0 +1,26 @@
+<h3>Fieldset</h3>
+
+<p>
+    The <code>fieldset</code> component is used to group related fields within
+    a form. It can have an optional <code>legend</code> that
+    serves as a title for the group of fields.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.form) -%}
+        {%- call ui.util.call(ui.fieldset, legend="Fieldset") -%}
+            {{ ui.input(name="field", label="Field") }}
+        {%- endcall %}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.form) -%}
+            {%- call ui.util.call(ui.fieldset, legend="Fieldset") -%}
+                {{ ui.input(name="field", label="Field") }}
+            {%- endcall %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

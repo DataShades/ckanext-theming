@@ -1,0 +1,25 @@
+<h3>List</h3>
+
+<p>
+    Generic list component, used for example in the sidebar. It is a simple
+    collection with some spacing between items.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.list) -%}
+        {%- for i in range(3) -%}
+            {{ ui.list_item(i) }}
+        {%- endfor %}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.list) -%}
+            {%- for i in range(3) -%}
+                {{ ui.list_item(i) }}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

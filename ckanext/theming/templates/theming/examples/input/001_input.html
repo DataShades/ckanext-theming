@@ -10,12 +10,14 @@
 
 <div>
     {{ ui.input(name="name", label="Label", value="Hello", required=true) }}
-    {{ ui.input(name="password", label="Password", type="password", placeholder="Your password") }}
+    {{ ui.input(name="password", label="Password", type="password",
+            placeholder="Your password") }}
 </div>
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
         {{ ui.input(name="name", label="Label", value="Hello", required=true) }}
-        {{ ui.input(name="password", label="Password", type="password", placeholder="Your password") }}
+        {{ ui.input(name="password", label="Password", type="password",
+            placeholder="Your password") }}
     {%- endraw %}
 {%- endcall %}

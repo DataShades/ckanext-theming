@@ -1,0 +1,36 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>section</code> component provides a general-purpose container
+        for organizing content into distinct sections within a page. This
+        component creates clear visual separation between different content
+        areas and helps establish a logical information hierarchy.
+    </p>
+
+    <p>
+        The <code>sidebar_section</code> component creates dedicated sections
+        within sidebar areas.
+    </p>
+
+    <p>
+        The <code>facet_section</code> component creates dedicated sections for
+        facet filter displays, organizing filter options into logical groups within the
+        filtering interface. This component is specifically designed for search and
+        filtering functionality.
+    </p>
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Section</h3>
+    {{ super() }}
+
+    <h3>Sidebar section</h3>
+    {{ parameters_table("sidebar_section") }}
+
+    <h3>Facet section</h3>
+    {{ parameters_table("facet_section") }}
+
+{%- endblock %}

@@ -1,0 +1,27 @@
+<h3>Package list</h3>
+
+<p>
+    A list of packages. This is a more specific version of the generic list
+    component, and is used to display packages in a consistent way across the
+    site. It can be used in a variety of contexts, such as search results,
+    related packages, or a list of all packages.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.package_list) -%}
+        {%- for pkg in packages -%}
+            {{ ui.package(package=pkg) }}
+        {%- endfor %}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.package_list) -%}
+            {%- for pkg in packages -%}
+                {{ ui.package(package=pkg) }}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

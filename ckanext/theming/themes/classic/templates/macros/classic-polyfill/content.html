@@ -1,8 +1,10 @@
 {%- macro group(content, group) -%}
+    {%- do kwargs.setdefault("position", 0) -%}
     {{ h.snippet("group/snippets/group_item.html", group=group, **kwargs) }}
 {%- endmacro %}
 
 {%- macro organization(content, organization) -%}
+    {%- do kwargs.setdefault("position", 0) -%}
     {{ h.snippet("organization/snippets/organization_item.html", organization=organization, **kwargs) }}
 {%- endmacro %}
 
@@ -11,7 +13,7 @@
 {%- endmacro %}
 
 {%- macro resource(content, resource, package) -%}
-    {{ h.snippet('package/snippets/resource_item.html', res=resource, package=package, **kwargs) }}
+    {{ h.snippet('package/snippets/resource_item.html', res=resource, pkg=package, **kwargs) }}
 {%- endmacro %}
 
 {%- macro user(content, user) -%}

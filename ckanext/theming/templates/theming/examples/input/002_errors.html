@@ -6,13 +6,31 @@
     and error messages will be shown below the input.
 </p>
 
+<p>
+    There is a separate component <code>field_errors</code> that renders list
+    of errors, but it may require placing input and errors in the same wrapper
+    element to work properly, so using the <code>errors</code> parameter
+    of the input is usually easier.
+</p>
+
 
 <div>
-    {{ ui.input(name="name", label="Name", errors=["Cannot be empty", "Letters only"]) }}
+    {{ ui.input(name="name", label="Name",
+            errors=["Cannot be empty", "Letters only"]) }}
+
+    {%- call ui.util.call(ui.input, name="errors", label="Manual errors") -%}
+        {{ ui.field_errors(["First error", "Second error"]) }}
+    {%- endcall %}
 </div>
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
-        {{ ui.input(name="name", label="Name", errors=["Cannot be empty", "Letters only"]) }}
+        {{ ui.input(name="name", label="Name",
+            errors=["Cannot be empty", "Letters only"]) }}
+
+        {%- call ui.util.call(ui.input, name="errors", label="Manual errors") -%}
+            {{ ui.field_errors(["First error", "Second error"]) }}
+        {%- endcall %}
+
     {%- endraw %}
 {%- endcall %}

@@ -47,6 +47,13 @@ def component(component: str | None = None):
         "examples": examples,
         "ref": reference.components,
     }
+    if component == "list":
+        extra_vars["resources"] = tk.get_action("resource_search")({}, {"limit": 2, "query": "url:"})["results"]
+        extra_vars["packages"] = tk.get_action("package_search")({}, {"rows": 2})["results"]
+        extra_vars["users"] = tk.get_action("user_list")({}, {"limit": 2})[:2]
+        extra_vars["organizations"] = tk.get_action("organization_list")({}, {"limit": 2, "all_fields": True})
+        extra_vars["groups"] = tk.get_action("group_list")({}, {"limit": 2, "all_fields": True})
+
     return tk.render("theming/component.html", extra_vars)
 
 
@@ -65,34 +72,17 @@ def component(component: str | None = None):
 # empty
 # extra_field
 # extra_fields_collection
-# facet
-# facet_list
-# facet_section
-# field_errors
-# field_info
-# fieldset
 # footer
 # footer_main
 # footer_secondary
 # grid
-# group
-# group_list
 # header
 # header_logo
 # license
-# list
-# list_item
-# markdown
 # markdown_popover
-# organization
-# organization_list
-# package
-# package_list
 # popover
 # popover_handle
 # progress
-# resource
-# resource_list
 # row
 # search_active_filters
 # search_advanced_controls
@@ -102,16 +92,8 @@ def component(component: str | None = None):
 # search_results_text
 # search_sort_control
 # search_submit_button
-# section
-# select
-# select_box
-# select_option
-# sidebar_section
 # spinner
 # submit
 # subtitle_item
-# textarea
 # toast
 # tooltip
-# user
-# user_list

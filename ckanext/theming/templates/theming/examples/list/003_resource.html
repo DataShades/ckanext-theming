@@ -1,0 +1,27 @@
+<h3>Resource list</h3>
+
+<p>
+    Collection of resources. Usually, <code>resource</code> component expects <code>package</code> parameter
+    to provide more context and render more information about the resource.
+</p>
+
+
+<div>
+    {%- set package = packages[0] -%}
+
+    {%- call ui.util.call(ui.resource_list) -%}
+        {%- for res in resources -%}
+            {{ ui.resource(resource=res, package=package) }}
+        {%- endfor %}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.resource_list) -%}
+            {%- for res in resources -%}
+                {{ ui.resource(resource=res, package=package) }}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

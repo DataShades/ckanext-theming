@@ -1,0 +1,18 @@
+<h3>Standard section</h3>
+
+<p>
+    A section is a container for content, with an optional title. It can be
+    used to group related content together, and to provide a visual
+    separation between different sections of a page.
+</p>
+
+
+<div>
+    {{ ui.section(lipsum(1), title="Title") }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.section(lipsum(1), title="Title") }}
+    {%- endraw %}
+{%- endcall %}
