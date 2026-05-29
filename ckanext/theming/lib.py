@@ -65,11 +65,20 @@ class Util(BaseUtil):
         self._theme = theme
 
     @override
-    def augment_attrs(self, kwargs: dict[str, Any], defaults: dict[str, Any] | None = None) -> dict[str, Any]:
+    def augment_attrs(
+        self,
+        kwargs: dict[str, Any],
+        defaults: dict[str, Any] | None = None,
+        key: str | None = "attrs",
+    ) -> dict[str, Any]:
         """Helper method to combine provided attributes with default attributes."""
         if defaults:
-            defaults.update(kwargs.get("attrs", {}))
-            kwargs["attrs"] = defaults
+            data = kwargs.setdefault(key, {}) if key else kwargs
+            # overwrite defaults with existing values
+            defaults.update(data)
+
+            # write augmented dictionary back to source
+            data.update(defaults)
         return kwargs
 
     @override

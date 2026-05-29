@@ -1,0 +1,23 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    The <code>extra_field</code> component creates additional form fields that
+    can be dynamically added to forms. This component is particularly useful for
+    forms where users might need to add custom metadata, tags, or other variable
+    information that isn't part of the standard form structure.
+
+    The <code>extra_fields_collection</code> component manages
+    collections of extra fields within forms, providing the structural container
+    for dynamically added fields. This component ensures that all extra fields are
+    properly organized and processed as a group.
+
+{%- endblock %}
+
+{%- block parameters -%}
+    <h3>Extra field</h3>
+    {{ super() }}
+
+    <h3>Extra field collection</h3>
+    {{ parameters_table("extra_fields_collection") }}
+{%- endblock %}

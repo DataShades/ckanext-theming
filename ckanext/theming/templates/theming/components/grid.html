@@ -1,0 +1,40 @@
+{%- extends "theming/base_component.html" -%}
+
+{%- block overview -%}
+
+    <p>
+        The <code>grid</code> component creates structured grid layouts that
+        organize content in rows and columns. It works with <code>row</code> and <code>column</code> components
+        to define the overall layout structure, providing responsive behavior and
+        consistent spacing between elements.
+    </p>
+
+    <p>
+        The <code>row</code> component defines horizontal rows within the grid
+        layout. It serves as a container for columns, ensuring that they are
+        properly aligned and spaced. Rows typically handle spacing between columns
+        and may also provide responsive behavior to adjust the layout based on
+        screen size.
+    </p>
+
+    <p>
+        The <code>column</code> component defines individual columns within grid
+        layouts. The column component typically accepts parameters for responsive
+        behavior, allowing developers to specify how many columns an element should
+        span on different screen sizes.
+    </p>
+
+{%- endblock %}
+
+
+{%- block parameters -%}
+    <h3>Grid</h3>
+    {{ super() }}
+
+    <h3>Row</h3>
+    {{ parameters_table("row") }}
+
+    <h3>Column</h3>
+    {{ parameters_table("column") }}
+
+{%- endblock %}

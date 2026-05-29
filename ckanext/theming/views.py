@@ -59,11 +59,3 @@ def component(component: str | None = None):
 
 # activity
 # activity_list
-# card
-# chart
-# column
-# grid
-# row
-# extra_field
-# extra_fields_collection
-# license

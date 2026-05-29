@@ -1,0 +1,26 @@
+<h3>Collection</h3>
+
+<p>
+    The <code>extra_fields_collection</code> is a component that can be used to
+    display a collection of extra fields. It takes a list of dictionaries with
+    "key" and "value" as keys, and an optional limit parameter to specify how
+    many fields must be displayed initially. The <code>limit</code> cannot be
+    less than number of items in <code>extras</code>.
+</p>
+
+
+<div>
+    {{ ui.extra_fields_collection(extras=[
+        {"key": "key1", "value": "value2"},
+        {"key": "key2", "value": "value2"}],
+        limit=4) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.extra_fields_collection(extras=[
+            {"key": "key1", "value": "value2"},
+            {"key": "key2", "value": "value2"}],
+            limit=4) }}
+    {%- endraw %}
+{%- endcall %}

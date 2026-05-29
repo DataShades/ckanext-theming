@@ -1,0 +1,21 @@
+<h3>Pie chart</h3>
+
+<p>
+    A pie chart is a circular statistical graphic, which is divided into slices
+    to illustrate numerical proportion.
+</p>
+
+
+<div>
+    {{ ui.chart(type="pie",
+            data=[1,2,3],
+            labels=["1", "2", "3"]) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.chart(type="pie",
+            data=[1,2,3],
+            labels=["1", "2", "3"]) }}
+    {%- endraw %}
+{%- endcall %}

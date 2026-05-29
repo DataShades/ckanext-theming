@@ -1,0 +1,58 @@
+<h3>Grid</h3>
+
+<p>
+    A grid layout example.
+</p>
+
+
+<div>
+    {%- call ui.util.call(ui.grid) -%}
+        {%- call ui.util.call(ui.row) -%}
+            {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
+                {{ lipsum(1) }}
+            {%- endcall %}
+            {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
+                {{ lipsum(1) }}
+            {%- endcall %}
+        {%- endcall %}
+
+        {%- call ui.util.call(ui.row) -%}
+            {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
+                {{ lipsum(1) }}
+            {%- endcall %}
+            {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
+                {{ lipsum(1) }}
+            {%- endcall %}
+            {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
+                {{ lipsum(1) }}
+            {%- endcall %}
+        {%- endcall %}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- call ui.util.call(ui.grid) -%}
+            {%- call ui.util.call(ui.row) -%}
+                {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
+                    {{ lipsum(1) }}
+                {%- endcall %}
+                {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
+                    {{ lipsum(1) }}
+                {%- endcall %}
+            {%- endcall %}
+
+            {%- call ui.util.call(ui.row) -%}
+                {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
+                    {{ lipsum(1) }}
+                {%- endcall %}
+                {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
+                    {{ lipsum(1) }}
+                {%- endcall %}
+                {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
+                    {{ lipsum(1) }}
+                {%- endcall %}
+            {%- endcall %}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

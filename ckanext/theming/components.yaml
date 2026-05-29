@@ -129,20 +129,6 @@ facet:
             description: Whether this facet value is currently active.
             type: 'bool'
 
-license:
-    description: |
-        Link/logo/title of a single license.
-    category: experimental
-    arguments:
-        content:
-            description: License title("Creative Commons Attribution", etc.)
-        id:
-            description: License ID (e.g. "cc-by", "odc-pddl-1.0", etc.)
-            type: 'str'
-        url:
-            description: URL of the license
-            type: 'str'
-
 group:
     description: |
         Details of a single group.
@@ -246,19 +232,6 @@ card:
             type: 'str'
             description: URL of the image shown in the card
 
-column:
-    description: |
-        Container for content arranged in a vertical column. Columns are
-        typically used within rows to create grid layouts.
-    category: experimental
-    arguments:
-        content:
-            description: Content of the column
-        span:
-            type: 'dict'
-            description: >-
-                Number of grid columns to span depending on breakpoint (e.g. {"xs": 12, "sm": 6, "md": 4, "lg": 3}).
-
 container:
     description: |
         Generic container with restricted width, used to wrap page content and
@@ -289,6 +262,9 @@ grid:
     arguments:
         content:
             description: Content of the grid, typically rows containing columns
+        fluid:
+            type: 'bool'
+            description: Whether the grid should be full-width (i.e. not restricted to a max width)
 
 row:
     description: |
@@ -297,6 +273,42 @@ row:
     arguments:
         content:
             description: Content of the row, typically columns containing content
+        align:
+            type: 'start|center|end|stretch'
+            description: Vertical alignment of columns within the row
+        justify:
+            type: 'start | center | end | between | around | evenly'
+            description: Horizontal justification of columns within the row
+        gap:
+            type: 'xs|sm|md|lg|xl'
+            description: Gap size between columns
+        wrap:
+            type: 'bool'
+            description: Whether columns should wrap to the next line if they exceed the row width
+
+column:
+    description: |
+        Container for content arranged in a vertical column. Columns are
+        typically used within rows to create grid layouts.
+    category: experimental
+    arguments:
+        content:
+            description: Content of the column
+        span:
+            type: 'dict'
+            description: >-
+                Number of grid columns to span depending on breakpoint
+                (e.g. {"xs": 12, "sm": 6, "md": 4, "lg": 3}).
+        offset:
+            type: 'dict'
+            description: >-
+                Number of grid columns to offset from the left depending on
+                breakpoint (e.g. {"xs": 0, "sm": 0, "md": 2, "lg": 3}).
+        order:
+            type: 'dict'
+            description: >-
+                Order of the column depending on breakpoint (e.g. {"xs": 1,
+                "sm": 2, "md": 3, "lg": 4}).
 
 list:
     description: |
@@ -851,7 +863,7 @@ extra_field:
             description: Index of the extra field in the list of extra fields, used to generate unique input names and ids
             type: 'int'
         data:
-            description: Dictionary with "<PREFIX>key" and "<PREFIX>value" for the extra field, used to populate the input values
+            description: Dictionary with "key" and "value" for the extra field, used to populate the input values
             type: 'dict'
         errors:
             description: >-

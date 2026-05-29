@@ -1,0 +1,23 @@
+<h3>Extra field</h3>
+
+<p>
+    The <code>extra_field</code> renders widget for custom metadata, provided
+    as a key-value pair. It is used in the dataset page to render custom
+    metadata fields, but can be used anywhere in the CKAN interface. The
+    component accepts a dictionary with two keys: <code>key</code> and <code>value</code>.
+</p>
+
+<p>
+    This component may not work by itself, and usually is indirectly rendered by <code>extra_fields_collection</code>.
+</p>
+
+
+<div>
+    {{ ui.extra_field(index=10, data={"key": "key value", "value": "value"}) }}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {{ ui.extra_field(data={"key": "key value", "value": "value"}) }}
+    {%- endraw %}
+{%- endcall %}

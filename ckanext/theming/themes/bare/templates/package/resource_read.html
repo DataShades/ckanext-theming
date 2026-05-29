@@ -82,7 +82,7 @@
 
                         {%- call ui.util.call(ui.table_row) -%}
                             {{ ui.table_cell(_('License'), header=true) }}
-                            {{ ui.table_cell(ui.license(pkg_dict.license_title, id=pkg_dict.license_id, url=pkg_dict.license_url)) }}
+                            {{ ui.table_cell(pkg_dict.license_title) }}
                         {%- endcall %}
 
                         {% for key, value in h.format_resource_items(resource.items()) if key not in ('created', 'metadata modified', 'last modified', 'format') %}

@@ -1,0 +1,26 @@
+<h3>Standard</h3>
+
+<p>
+    This is the simplest form of a card, with a title and footer.
+</p>
+
+
+<div>
+    {%- set btn = ui.button("Click") -%}
+    {%- set img = "https://placehold.co/300x200" -%}
+
+    {%- call ui.util.call(ui.card, title="Title", footer=btn, img=img) -%}
+        {{ lipsum(1) }}
+    {%- endcall %}
+</div>
+
+{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+    {%- raw %}
+        {%- set btn = ui.button("Click") -%}
+        {%- set img = "https://placehold.co/300x200" -%}
+
+        {%- call ui.util.call(ui.card, title="Title", footer=btn, img=img) -%}
+            {{ lipsum(1) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

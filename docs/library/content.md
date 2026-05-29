@@ -98,49 +98,6 @@ Different themes may support additional parameters for styling and behavior:
 - `disabled` (bool): Whether the facet is disabled
 ///
 
-## License
-
-The [`license`][] component displays license information for datasets and other
-content. It presents licensing terms in a clear and accessible way, helping
-users understand the terms under which they can use, share, and modify the
-data. The component typically shows license name, URL, and description.
-
-License components are important for data governance and compliance, ensuring
-that users understand the permissions and restrictions associated with
-datasets. Different themes may present license information differently, but the
-component interface remains consistent across implementations.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic license component -->
-{{ ui.license("Creative Commons Attribution", url="https://creativecommons.org/licenses/by/4.0/") }}
-
-<!-- License without link -->
-{{ ui.license("Open Data Commons") }}
-```
-///
-
-
-| Parameter | Type   | Default | Description                       |
-|-----------|--------|---------|-----------------------------------|
-| `content` | string | -       | The license name or display text. |
-| `id`      | string | -       | The license identifier.           |
-| `url`     | string | -       | The URL to the license details.   |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and presentation:
-
-- `variant` (string): Style variant (e.g., "full", "abbreviated")
-- `show_icon` (bool): Whether to show license icon
-- `inline` (bool): Whether to display inline with text
-- `size` (string): Size of the license display (e.g., "sm", "lg")
-- `show_url` (bool): Whether to show the license URL
-
-///
 
 ## Group
 
