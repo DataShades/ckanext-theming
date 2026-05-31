@@ -95,7 +95,7 @@ class Util(BaseUtil):
         list of default classes provided by component. Example:
 
             # definition
-            {% macro button(content, **kwargs) %}
+            {% macro button(content) %}
               {% set defaults = {"class": "btn btn-primary"} %}
               <button {{ ui.attrs(kwargs, defaults) }}>{{ content }}</button>
             {% endmacro %}

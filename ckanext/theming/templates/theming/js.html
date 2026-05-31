@@ -1,0 +1,64 @@
+{%- extends "theming/base.html" -%}
+
+{%- block subtitle -%}
+    {{- ui.subtitle_item(util) if util }}
+    {{- ui.subtitle_item("JavaScript") }}
+    {{- super() }}
+{%- endblock %}
+
+
+{%- block breadcrumb_content -%}
+    {{ super() }}
+    {{- ui.breadcrumb(_("JavaScript"), href=h.url_for("theming.js"), active=not util) }}
+    {{- ui.breadcrumb(util, href=h.url_for("theming.js", util=util), active=true) if util }}
+{%- endblock %}
+
+
+{%- block content_primary_nav -%}
+    {{ ui.content_nav_item("Overview", href=h.url_for("theming.js"), active=request.endpoint == "theming.js") }}
+{%- endblock %}
+
+
+{%- block secondary_content -%}
+    {{ super() }}
+
+    {%- if available_utils -%}
+
+        {%- call ui.util.call(ui.sidebar_nav_wrapper, title=_("JS Utilities")) -%}
+            {%- for name in available_utils -%}
+                {{ ui.sidebar_nav_item(name, href=h.url_for("theming.js", util=name), active=util==name) }}
+            {%- endfor %}
+        {%- endcall %}
+    {%- endif %}
+{%- endblock %}
+
+
+{%- block primary_content_inner -%}
+    {%- if util -%}
+        {%- include "theming/js/" ~ util ~ ".html" -%}
+    {%- else -%}
+        <h1>JavaScript utilities</h1>
+
+        <p>
+            Theming extension registers a set of JS functions inside <code>Sandbox</code> object. To
+            access them, initialize <code>Sandbox</code> and use its <code>ui</code> attribute. Inside
+            data-modules <code>Sandbox</code> object is available as <code>this.sandbox</code>:
+
+            {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+                // outside of a data-module
+                const sandbox = ckan.sandbox()
+                const btn = sandbox.ui.button()
+
+                // inside the data module
+                ckan.module("...", function() {
+                &nbsp;&nbsp;return {
+                &nbsp;&nbsp;&nbsp;&nbsp;initialize() {
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const btn = this.sandbox.ui.button()
+                &nbsp;&nbsp;&nbsp;&nbsp;}
+                &nbsp;&nbsp;}
+                })
+            {%- endcall %}
+        </p>
+    {%- endif %}
+
+{%- endblock %}

@@ -1,0 +1,21 @@
+<div class="util-example">
+    <h2><code>ui.util.now</code></h2>
+
+    <p>
+        Get the current UTC datetime.
+    </p>
+
+    <p>
+        Example:
+
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {{ ui.util.now() }}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <div>
+        {{ ui.util.now() }}
+    </div>
+</div>

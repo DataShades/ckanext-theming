@@ -15,12 +15,35 @@ __all__ = ["bp"]
 
 @bp.route("/")
 def index():
-    return tk.redirect_to("theming.component")
+    return tk.render("theming/index.html")
 
 
-@bp.route("/component")
+@bp.route("/util/", defaults={"util": "attrs"})
+@bp.route("/util/<util>")
+def util(util: str):
+    templates = current_app.jinja_env.list_templates(filter_func=lambda s: s.startswith("theming/utils/"))
+    available_utils: list[str] = sorted([os.path.splitext(os.path.basename(u))[0] for u in templates])
+    if util not in available_utils:
+        return tk.abort(404, tk._("Utility function not found"))
+    extra_vars = {"util": util, "available_utils": available_utils}
+    return tk.render("theming/util.html", extra_vars)
+
+
+@bp.route("/js/")
+@bp.route("/js/<util>")
+def js(util: str | None = None):
+    templates = current_app.jinja_env.list_templates(filter_func=lambda s: s.startswith("theming/js/"))
+    available_utils: list[str] = sorted([os.path.splitext(os.path.basename(u))[0] for u in templates])
+    if util and util not in available_utils:
+        return tk.abort(404, tk._("Utility function not found"))
+    extra_vars = {"util": util, "available_utils": available_utils}
+
+    return tk.render("theming/js.html", extra_vars)
+
+
+@bp.route("/component/", defaults={"component": "accordion"})
 @bp.route("/component/<component>", methods=["GET", "POST"])  # handle confirm_modal example
-def component(component: str | None = None):
+def component(component: str):
     templates = current_app.jinja_env.list_templates(
         filter_func=lambda s: s.startswith(("theming/components/", f"theming/examples/{component}/"))
     )
@@ -35,11 +58,8 @@ def component(component: str | None = None):
         elif parts[1] == "examples" and parts[2] == component:
             examples.append(os.path.splitext(parts[3])[0])
 
-    if component and component not in available_components:
+    if component not in available_components:
         return tk.abort(404, tk._("Component not found"))
-
-    if not component and available_components:
-        component = available_components[0]
 
     extra_vars = {
         "component": component,

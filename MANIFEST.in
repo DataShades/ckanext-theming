@@ -1,6 +1,7 @@
 include README.rst
 include LICENSE
 include requirements.txt
+include types.d.ts
 recursive-include ckanext/theming *.html *.json *.js *.less *.css *.mo *.yml *.yaml
 recursive-include ckanext/theming/migration *.ini *.py *.mako
 recursive-include ckanext/theming/public *.*

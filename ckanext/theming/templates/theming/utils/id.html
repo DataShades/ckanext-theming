@@ -1,0 +1,48 @@
+<div class="util-example">
+    <h2><code>ui.util.id</code></h2>
+
+    <p>
+        Generate a unique identifier.
+    </p>
+
+    <p>
+        If <code>value</code> is provided, a UUID5 based on the value is generated,
+        otherwise a random UUID4 is generated.
+    </p>
+
+    <p>
+        Call without arguments produces a different UUID every time:
+
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {{ ui.util.id() }}
+                {{ ui.util.id() }}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <div>
+        {{ ui.util.id() }}
+        <br/>
+        {{ ui.util.id() }}
+    </div>
+
+    <p>
+        When called with <code>value</code>, which is first positional
+        argument, the same UUID is returned for every call:
+
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {{ ui.util.id("test") }}
+                {{ ui.util.id("test") }}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <div>
+        {{ ui.util.id("test") }}
+        <br/>
+        {{ ui.util.id("test") }}
+    </div>
+
+</div>

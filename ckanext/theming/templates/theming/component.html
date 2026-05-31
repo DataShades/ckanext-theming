@@ -48,8 +48,3 @@
 {%- block primary_content_inner -%}
     {%- include "theming/components/" ~ component ~ ".html" -%}
 {%- endblock %}
-
-{%- block scripts -%}
-    {{ super() }}
-    {%- asset "theming/examples" -%}
-{%- endblock %}

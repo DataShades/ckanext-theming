@@ -1,0 +1,114 @@
+<div class="util-example">
+    <h2><code>ui.util.attrs</code></h2>
+
+    <p>
+        Helper method to render HTML attributes from a dictionary with
+        additional macro arguments.
+    </p>
+    <p>
+        This method takes a dictionary that contains optional <code>attrs</code> element,
+        and an optional dictionary of default attributes. It combines the
+        two dictionaries, giving precedence to the provided attributes, and
+        renders them as a string of HTML attributes.
+    </p>
+    <p>
+        Example:
+
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {% macro button(content) %}
+                    {% set defaults = {"class": "btn btn-primary"} %}
+                    &lt;button {{ ui.util.attrs(kwargs, defaults) }}&gt;{{ content }}&lt;/button&gt;
+                {% endmacro %}
+                {{ ui.button("Click me!", attrs={"name": "action"}) }}
+            {%- endraw %}
+        {%- endcall %}
+
+    </p>
+    <div>
+        {%- filter forceescape -%}
+            <button name="action" class="btn btn-primary" type="button">Click me!</button>!
+        {%- endfilter  %}
+    </div>
+
+    <p>
+        Note, this function expects dictionary <strong>with <code>attrs</code> element</strong>,
+        not the <code>attrs</code> itself. For example, following example
+        <strong>is incorrect</strong>:
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {% macro button(content) %}
+                    &lt;button {{ ui.util.attrs(kwargs.attrs) }}&gt;{{ content }}&lt;/button&gt;
+                {% endmacro %}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <p>
+        Instead, the whole <code>kwargs</code> must be passed into
+        function. Or, if <code>kwargs</code> is not available, you can wrap <code>attrs</code> into
+        a dictionary. Here are correct versions:
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {% macro button(content) %}
+                    &lt;button {{ ui.util.attrs(kwargs) }}&gt;{{ content }}&lt;/button&gt;
+                {% endmacro %}
+
+                {% macro button(content) %}
+                    &lt;button {{ ui.util.attrs({"attrs": kwargs.attrs}) }}&gt;{{ content }}&lt;/button&gt;
+                {% endmacro %}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <p>
+        The reason for this is that <code>ui.util.attrs</code> expects to
+        receive the whole set of arguments, so it can extract the <code>attrs</code> element
+        and combine it with defaults. If only <code>attrs</code> is passed, the
+        function will not be able to access other arguments that might be
+        needed for default values or other logic.
+    </p>
+
+    <p>
+        One of the features relying on other values of <code>kwargs</code> is
+        attribute shortcuts. Every attribute with <code>data-</code>, <code>aria-</code>, <code>hx-</code>,
+        and <code>on</code> prefix can be specified inside separate item of <code>kwargs</code>. Example
+
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {{ ui.button("Click me!",
+                    data={"id": "123"},
+                    aria={"label": "Button"},
+                    hx={"boost": "true"},
+                    on={"click": "alert(1)"}) }}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <div>
+        {%- filter forceescape -%}
+            <button data-id="123" aria-label="Button" hx-boost="true" on-click="alert(1)" type="button">Click me!</button>
+        {%- endfilter  %}
+    </div>
+
+    <p>
+        All these shortcuts can be used together with <code>attrs</code>, and
+        specific attributes will have higher precedence than <code>attrs</code>.
+
+        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
+            {%- raw %}
+                {{ ui.button("Click me!",
+                    attrs={"data-id": "123", "aria-label": "Button"},
+                    data={"id": "456"},
+                    aria={"label": "Overridden"}) }}
+            {%- endraw %}
+        {%- endcall %}
+    </p>
+
+    <div>
+        {%- filter forceescape -%}
+            <button data-id="456" aria-label="Overridden" type="button">Click me!</button>
+        {%- endfilter  %}
+    </div>
+
+</div>
