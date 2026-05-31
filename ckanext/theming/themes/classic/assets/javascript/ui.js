@@ -170,7 +170,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
         },
         notification(content, title, props = {}) {
             const notify = ckan.sandbox().notify;
-            const el = notify.create(typeof title === "string" ? title : title.textContent, typeof content === "string" ? content : content.textContent, props.style || "default");
+            const el = notify.create(title && (typeof title === "string" ? title : title.textContent), typeof content === "string" ? content : content.textContent, props.style || "default");
             return new Notification(el[0]);
         },
         getNotification(id) {
@@ -185,7 +185,9 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
                 throw "Only string tooltips are supported";
             }
             target.dataset.bsTitle = content;
-            target.dataset.placement = props.position || "bottom";
+            if (props.position) {
+                target.dataset.bsPlacement = props.position;
+            }
             return new Tooltip(target);
         },
         getTooltip(id) {

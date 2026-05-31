@@ -35,12 +35,10 @@ declare global {
      *
      * @property dismissible - Whether the modal can be dismissed by clicking outside or pressing ESC.
      * @property dismissLabel - Content for the dismiss button.
-     * @property style - Additional style classes for the modal.
      */
     interface IModalParams extends IParams {
       dismissible?: boolean;
       dismissLabel?: Content;
-      style?: string;
     }
 
     /**
@@ -48,12 +46,10 @@ declare global {
      *
      * @property style - Additional style classes for the notification.
      * @property dismissible - Whether the notification can be dismissed by the user.
-     * @property timeout - Duration in milliseconds before the notification auto-dismisses.
      */
     interface INotificationParams extends IParams {
       style?: string;
       dismissible?: boolean;
-      timeout?: number;
     }
 
     /**
@@ -189,8 +185,8 @@ declare global {
      */
     modal: (
       content: Theming.Content,
-      title: Theming.Content,
-      actions: HTMLElement[],
+      title?: Theming.Content,
+      actions?: HTMLElement[],
       params?: Theming.IModalParams,
     ) => IModal;
 
@@ -216,8 +212,8 @@ declare global {
      */
     notification: (
       content: Theming.Content,
-      title: Theming.Content,
-      props: Theming.INotificationParams,
+      title?: Theming.Content,
+      props?: Theming.INotificationParams,
     ) => INotification;
 
     /**
@@ -230,8 +226,8 @@ declare global {
     popover: (
       content: Theming.Content,
       target: HTMLElement,
-      title: string | null,
-      props: Theming.IPopoverParams,
+      title?: string | null,
+      props?: Theming.IPopoverParams,
     ) => IPopover;
 
     /**
@@ -245,7 +241,7 @@ declare global {
     tooltip: (
       content: Theming.Content,
       target: HTMLElement,
-      props: Theming.ITooltipParams,
+      props?: Theming.ITooltipParams,
     ) => ITooltip;
 
     /**

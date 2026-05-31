@@ -190,8 +190,8 @@
     notification(content, title, props = {}) {
       const notify = ckan.sandbox().notify;
       const el = notify.create(
-        typeof title === "string" ? title : title.textContent!,
-        typeof content === "string" ? content : content.textContent!,
+        title && (typeof title === "string" ? title : title.textContent),
+        typeof content === "string" ? content : content.textContent,
         props.style || "default",
       );
 
@@ -211,7 +211,10 @@
         throw "Only string tooltips are supported";
       }
       target.dataset.bsTitle = content;
-      target.dataset.placement = props.position || "bottom";
+        if (props.position) {
+            target.dataset.bsPlacement = props.position;
+        }
+
       return new Tooltip(target);
     },
 

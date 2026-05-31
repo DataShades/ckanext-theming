@@ -1,0 +1,112 @@
+<h1><code>tooltip</code></h1>
+
+<p>
+    Creates a tooltip.
+</p>
+
+<p>
+    It accepts <code>conent</code> of the tooltip as a first argument, which
+    can be either text or DOM node. The second required argument is a target of
+    the tooltip(the element next to which tooltip is shown). The object
+    produced by the function has methods <code>show</code> and <code>close</code> that
+    change visibility of the tooltip. Usually tooltip's visibility is toggled
+    when cursor is over the element, so this object is required only when you
+    want to add an additional behavior.
+
+    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+        const tooltipTarget = document.getElementById(id)
+        const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget)
+    {%- endcall %}
+
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div>
+        <mark id="{{ id }}">I'm the target of tooltip</mark>
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+
+                const tooltipTarget = document.getElementById(`{{ id }}`)
+                const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget)
+            })
+        </script>
+    </div>
+{%- endwith %}
+{{ ui.divider() }}
+
+
+<p>
+    The third argument is an object with tooltip options:
+
+    {%- call ui.util.call(ui.list) -%}
+        {%- call ui.util.call(ui.list_item) -%}
+            <code>position</code>: string, position of the tooltip relative to
+            the target. Possible values are "top", "right", "bottom" and
+            "left".
+        {%- endcall %}
+    {%- endcall %}
+
+
+    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+        const tooltipTarget = document.getElementById(id)
+        const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget, {
+        &nbsp;&nbsp;position: "left"
+        })
+    {%- endcall %}
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div>
+        <mark id="{{ id }}">I'm the target of tooltip</mark>
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+
+                const tooltipTarget = document.getElementById(`{{ id }}`)
+                const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget, {position: "left"})
+            })
+        </script>
+    </div>
+{%- endwith %}
+{{ ui.divider() }}
+
+
+<p>
+    To access existing tooltip, rendered with <code>ui.tooltip</code> macro, use <code>getTooltip</code> method
+    available in the JS. This method accepts ID of the tooltip target.
+
+    {%- call ui.util.call(ui.code, language="jinja2", dedent=true) %}
+        {%- raw %}
+            {% set tooltip_id = ui.util.id() -%}
+            {{ ui.tooltip("I'm the target of tooltip", tooltip="Hello world", attrs={"id": tooltip_id}) }}
+
+            &lt;script&gt;
+            &nbsp;&nbsp;const tooltip = sandbox.ui.getTooltip(`{{ tooltip_id }}`)
+            &nbsp;&nbsp;const btn = sandbox.ui.button("Toggle tooltip on hover");
+            &nbsp;&nbsp;btn.addEventListener("mouseenter", () => tooltip.show())
+            &nbsp;&nbsp;btn.addEventListener("mouseleave", () => tooltip.close())
+            &nbsp;&nbsp;document.getElementById(id).appendChild(btn)
+            &lt;/script&gt;
+        {%- endraw %}
+    {%- endcall %}
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div id="{{ id }}">
+        {% set tooltip_id = ui.util.id() -%}
+        {{ ui.tooltip("I'm the target of tooltip", tooltip="Hello world", attrs={"id": tooltip_id}) }}
+
+        <br/>
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+                const tooltip = sandbox.ui.getTooltip(`{{ tooltip_id }}`)
+                const btn = sandbox.ui.button("Toggle tooltip on hover");
+                btn.addEventListener("mouseenter", () => tooltip.show())
+                btn.addEventListener("mouseleave", () => tooltip.close())
+                document.getElementById(`{{ id }}`).appendChild(btn)
+            })
+        </script>
+    </div>
+{%- endwith %}

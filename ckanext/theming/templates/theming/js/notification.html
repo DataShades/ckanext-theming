@@ -1,0 +1,89 @@
+<h1><code>notification</code></h1>
+
+<p>
+    Creates a notification.
+</p>
+
+<p>
+    It accepts <code>conent</code> of the notification as a first argument,
+    which can be either text or DOM node. The object produced by the function
+    has methods <code>show</code> and <code>close</code> that change visibility
+    of the notification. Initially notification is hidden, and you need to call
+    its <code>show</code> method to display the notification
+
+    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+        const notification = sandbox.ui.notification("Hello world")
+        const btn = sandbox.ui.button("Show notification");
+        btn.addEventListener("click", () => notification.show())
+        document.getElementById(id).appendChild(btn)
+
+        const hideBtn = sandbox.ui.button("Hide notification");
+        hideBtn.addEventListener("click", () => notification.close())
+        document.getElementById(id).appendChild(hideBtn)
+    {%- endcall %}
+
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div id="{{ id }}">
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+
+                const notification = sandbox.ui.notification("Hello world")
+                const btn = sandbox.ui.button("Show notification");
+                btn.addEventListener("click", () => notification.show())
+                document.getElementById(`{{ id }}`).appendChild(btn)
+
+                const hideBtn = sandbox.ui.button("Hide notification");
+                hideBtn.addEventListener("click", () => notification.close())
+                document.getElementById(`{{ id }}`).appendChild(hideBtn)
+            })
+        </script>
+    </div>
+{%- endwith %}
+{{ ui.divider() }}
+
+
+<p>
+    The second argument is a title of the notification, and the third argument is an
+    object with notification options:
+
+    {%- call ui.util.call(ui.list) -%}
+        {%- call ui.util.call(ui.list_item) -%}
+            <code>dismissible</code>: boolean, whether notification can be closed by user.
+        {%- endcall %}
+        {%- call ui.util.call(ui.list_item) -%}
+            <code>style</code>: changes the color of the notification.
+        {%- endcall %}
+    {%- endcall %}
+
+
+    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+        const btn = sandbox.ui.button("Show notification");
+        btn.addEventListener("click", () => sandbox.ui.notification("Hello world", "Title", {
+        &nbsp;&nbsp;style: "danger",
+        &nbsp;&nbsp;dismissible: true,
+        }).show())
+
+        document.getElementById(id).appendChild(btn)
+    {%- endcall %}
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div id="{{ id }}">
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+
+                const btn = sandbox.ui.button("Show notification");
+                btn.addEventListener("click", () => sandbox.ui.notification("Hello world", "Title", {
+                    style: "danger",
+                    dismissible: true,
+                }).show())
+
+                document.getElementById(`{{ id }}`).appendChild(btn)
+            })
+        </script>
+    </div>
+{%- endwith %}

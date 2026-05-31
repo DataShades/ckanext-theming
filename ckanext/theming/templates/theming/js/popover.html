@@ -1,0 +1,116 @@
+<h1><code>popover</code></h1>
+
+<p>
+    Creates a popover.
+</p>
+
+<p>
+    It accepts <code>conent</code> of the popover as a first argument, which
+    can be either text or DOM node. The second required argument is a target of
+    the popover(the element next to which popover is shown). The object
+    produced by the function has methods <code>show</code> and <code>close</code> that
+    change visibility of the popover. Usually popover's visibility is toggled
+    after every click on target, so this object is required only when you want
+    to add an additional behavior.
+
+    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+        const popoverTarget = document.getElementById(id)
+        const popover = sandbox.ui.popover("Hello world", popoverTarget)
+    {%- endcall %}
+
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div>
+        <mark id="{{ id }}">I'm the target of popover</mark>
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+
+                const popoverTarget = document.getElementById(`{{ id }}`)
+                const popover = sandbox.ui.popover("Hello world", popoverTarget)
+            })
+        </script>
+    </div>
+{%- endwith %}
+{{ ui.divider() }}
+
+
+<p>
+    The third argument is a title of the popover, and the fourth argument is an
+    object with popover options:
+
+    {%- call ui.util.call(ui.list) -%}
+        {%- call ui.util.call(ui.list_item) -%}
+            <code>trigger</code>: string with the name of event that trigger
+            popover. Usually it supoorts <code>click</code>, <code>hover</code> and <code>focus</code>.
+        {%- endcall %}
+    {%- endcall %}
+
+
+    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
+        const popoverTarget = document.getElementById(id)
+        const popover = sandbox.ui.popover("Hello world", popoverTarget, "Title", {
+        &nbsp;&nbsp;trigger: "hover"
+        })
+    {%- endcall %}
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div>
+        <mark id="{{ id }}">I'm the target of popover</mark>
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+
+                const popoverTarget = document.getElementById(`{{ id }}`)
+                const popover = sandbox.ui.popover("Hello world", popoverTarget, "Title", {trigger: "hover"})
+            })
+        </script>
+    </div>
+{%- endwith %}
+{{ ui.divider() }}
+
+
+<p>
+    To access existing popover, rendered with <code>ui.popover</code> macro, use <code>getPopover</code> method
+    available in the JS. This method accepts ID of the <em>popover target</em>(not the ID of the popover itself).
+
+    {%- call ui.util.call(ui.code, language="jinja2", dedent=true) %}
+        {%- raw %}
+            {% set popover_id = ui.util.id() -%}
+            {%- set popover_target_id = ui.util.id() -%}
+            {{ ui.popover("Content", title="Title", id=popover_id) }}
+            {{ ui.popover_handle("I'm popover target", id=popover_id, attrs={"id": popover_target_id}) }}
+
+            &lt;script&gt;
+            &nbsp;&nbsp;const popover = sandbox.ui.getPopover(`{{ popover_target_id }}`)
+            &nbsp;&nbsp;const btn = sandbox.ui.button("Toggle popover on hover");
+            &nbsp;&nbsp;btn.addEventListener("mouseenter", () => popover.show())
+            &nbsp;&nbsp;btn.addEventListener("mouseleave", () => popover.close())
+            &nbsp;&nbsp;document.getElementById(id).appendChild(btn)
+            &lt;/script&gt;
+        {%- endraw %}
+    {%- endcall %}
+</p>
+
+{%- with id = ui.util.id() -%}
+    <div id="{{ id }}">
+        {% set popover_id = ui.util.id() -%}
+        {%- set popover_target_id = ui.util.id() -%}
+
+        {{ ui.popover("Content", title="Title", id=popover_id) }}
+        {{ ui.popover_handle("I'm popover target", id=popover_id, attrs={"id": popover_target_id}) }}
+        <br/>
+        <script>
+            window.addEventListener("load", () => {
+                const sandbox = ckan.sandbox()
+                const popover = sandbox.ui.getPopover(`{{ popover_target_id }}`)
+                const btn = sandbox.ui.button("Toggle popover on hover");
+                btn.addEventListener("mouseenter", () => popover.show())
+                btn.addEventListener("mouseleave", () => popover.close())
+                document.getElementById(`{{ id }}`).appendChild(btn)
+            })
+        </script>
+    </div>
+{%- endwith %}
