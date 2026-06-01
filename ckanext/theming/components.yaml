@@ -424,7 +424,7 @@ sidebar_section:
 
 # # feedback
 alert:
-    description: Notification message shown to the user, typically with a colored background to indicate the type of message (error, warning, success, etc.)
+    description: Notification message shown to the user, typically with a colored background to indicate the type of message (danger, warning, success, etc.)
     category: essential
     arguments:
         content:
@@ -433,7 +433,7 @@ alert:
             description: Whether the alert can be dismissed by the user
             type: 'bool'
         style:
-            description: Visual style of the alert, either "error", "warning", "success" or "info"
+            description: Visual style of the alert, either "danger", "warning", "success" or "info"
             type: 'str'
 
 modal:
@@ -535,7 +535,7 @@ toast:
             description: Optional title shown in the toast notification
             type: 'str'
         style:
-            description: Visual style of the toast, either "error", "warning", "success" or "info"
+            description: Visual style of the toast, either "danger", "warning", "success" or "info"
             type: 'str'
         dismissible:
             description: Whether the toast can be dismissed by the user
