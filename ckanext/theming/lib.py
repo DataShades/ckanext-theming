@@ -26,6 +26,7 @@ from collections.abc import Iterable, Iterator
 from typing import Any, cast
 
 from flask import current_app
+from jinja2 import Undefined
 from jinja2.runtime import Macro
 from markupsafe import Markup
 from typing_extensions import override
@@ -49,6 +50,7 @@ NAMESPACE_UI = uuid.uuid5(uuid.NAMESPACE_OID, "ui")
 class Util(BaseUtil):
     _storage_key: str = "ui_storage"
     _theme: Theme
+    _extra_class_attr: str = "_extra_class"
     _attr_groups: list[tuple[str, str]] = [
         ("aria", "aria-"),
         ("data", "data-"),
@@ -69,7 +71,9 @@ class Util(BaseUtil):
         self,
         kwargs: dict[str, Any],
         defaults: dict[str, Any] | None = None,
+        /,
         key: str | None = "attrs",
+        extra_class: str | None = None,
     ) -> dict[str, Any]:
         """Helper method to combine provided attributes with default attributes."""
         if defaults:
@@ -79,6 +83,11 @@ class Util(BaseUtil):
 
             # write augmented dictionary back to source
             data.update(defaults)
+
+        if extra_class:
+            cls = kwargs.setdefault(self._extra_class_attr, "")
+            kwargs[self._extra_class_attr] = f"{cls} {extra_class}".lstrip()
+
         return kwargs
 
     @override
@@ -124,10 +133,14 @@ class Util(BaseUtil):
             for k, v in group.items():
                 attrs[f"{prefix}{k}"] = v
 
-        if extra_class := kwargs.get("_extra_class"):
-            attrs["class"] = " ".join([attrs.get("class", ""), extra_class])
+        if extra_class := kwargs.get(self._extra_class_attr):
+            attrs["class"] = " ".join([attrs.get("class", ""), extra_class]).lstrip()
 
-        parts = [f'{k}="{self._escape_attr_value(str(v))}"' for k, v in attrs.items()]
+        parts = [
+            k if v is None else f'{k}="{self._escape_attr_value(str(v))}"'
+            for k, v in attrs.items()
+            if not isinstance(v, Undefined)
+        ]
 
         return h.literal(" ".join(parts)) if parts else ""
 
@@ -183,8 +196,11 @@ class Util(BaseUtil):
         the target macro. Any other positional and named arguments of the
         `ui.util.call` will be redirected into `ui.button` as well.
         """
-        # if isinstance(el, Macro) and el.caller and el.arguments and el.arguments[0] != "content":
-        #     return el(*args, caller=caller, **kwargs)
+        if caller.catch_kwargs:
+            log.error("Rename `kwargs` outside the call block and use alias instead")
+            msg = "`kwargs` inside call block shadows outer `kwargs`"
+            raise ValueError(msg)
+
         return el(caller(), *args, **kwargs)
 
     @override
