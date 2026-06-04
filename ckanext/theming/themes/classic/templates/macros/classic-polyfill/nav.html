@@ -39,6 +39,7 @@
 {%- macro footer_main_nav_item(content, href, active) -%}
     <li>{{ ui.link(content, href=href, **kwargs) }}</li>
 {%- endmacro %}
+
 {%- macro footer_secondary_nav_item(content, href, active) -%}{{ ui.nav_item(content, href, active, **kwargs) }}{%- endmacro %}
 
 {%- macro page_action(content, href) -%}

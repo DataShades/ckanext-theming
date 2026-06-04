@@ -259,6 +259,14 @@ container:
             type: 'bool'
             description: Whether the container should be full-width (i.e. not restricted to a max width)
 
+filters:
+    description: |
+        Container for search filters, typically shown in the sidebar of search results page.
+    category: essential
+    arguments:
+        content:
+            description: Collection of facet sections
+
 dropdown:
     description: |
         Container for a dropdown menu, which is shown when the trigger element is clicked.

@@ -3,10 +3,11 @@
 <p>
     A facet section, typically used in a sidebar for filtering search
     results. It contains <code>facet_list</code> with series of <code>facet</code> components.
+
 </p>
 
 <div>
-    <div class="secondary filters">
+    {%- call ui.util.call(ui.filters) -%}
         {{ ui.facet_section(lipsum(1), title="Nothing") }}
 
         {%- set items = [
@@ -27,32 +28,32 @@
                 {%- endfor %}
             {%- endcall %}
         {%- endcall %}
-    </div>
+    {%- endcall %}
 </div>
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
-        &lt;div class="secondary filters"&gt;
-        {{ ui.facet_section(lipsum(1), title="Nothing") }}
+        {%- call ui.util.call(ui.filters) -%}
+            {{ ui.facet_section(lipsum(1), title="Nothing") }}
 
-        {%- set items = [
+            {%- set items = [
               {"name": "one", "count": 1},
               {"name": "ten", "count": 10, "active": true},
               {"name": "hundreed", "count": 100},
-            ] -%}
+                ] -%}
 
-        {%- call ui.util.call(ui.facet_section, title="Something", items=items, has_more=true) -%}
-            {%- call ui.util.call(ui.facet_list) -%}
-                {%- for item in items -%}
-                    {{ ui.facet(
+            {%- call ui.util.call(ui.facet_section, title="Something", items=items, has_more=true) -%}
+                {%- call ui.util.call(ui.facet_list) -%}
+                    {%- for item in items -%}
+                        {{ ui.facet(
                             "Facet " ~ item.name,
                             key="",
                             value=item.name,
                             count=item.count,
                             active=item.active) }}
-                {%- endfor %}
+                    {%- endfor %}
+                {%- endcall %}
             {%- endcall %}
         {%- endcall %}
-        &lt;/div&gt;
     {%- endraw %}
 {%- endcall %}

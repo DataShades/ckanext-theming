@@ -14,6 +14,10 @@
 
 {%- macro user_list(content) -%}{{ ui.list(content, **kwargs) }}{%- endmacro %}
 
+{%- macro filters(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "filters"}) }}>{{ content }}</div>
+{%- endmacro %}
+
 {%- macro accordion(content, title, open) -%}
     <details {{ ui.util.attrs(kwargs) }} {{ "open" if open}}>
         <summary role="button" aria-expanded="{{ 'true' if open else 'false' }}">{{ title }}</summary>

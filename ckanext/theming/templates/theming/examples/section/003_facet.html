@@ -2,7 +2,7 @@
 
 <p>
     A facet section, typically used in a sidebar for filtering search
-    results.
+    results. It's recommended to wrap facet sections into <code>filters</code> component.
 </p>
 
 <p>
@@ -10,15 +10,16 @@
 </p>
 
 <div>
-    <div class="secondary filters">
+    {%- call ui.util.call(ui.filters) -%}
         {{ ui.facet_section(lipsum(1), title="Nothing") }}
-    </div>
+    {%- endcall %}
+
 </div>
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
-        &lt;div class="secondary filters"&gt;
-        {{ ui.facet_section(lipsum(1), title="Nothing") }}
-        &lt;/div&gt;
+        {%- call ui.util.call(ui.filters) -%}
+            {{ ui.facet_section(lipsum(1), title="Nothing") }}
+        {%- endcall %}
     {%- endraw %}
 {%- endcall %}

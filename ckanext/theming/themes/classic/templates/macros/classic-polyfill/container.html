@@ -8,6 +8,10 @@
     <ul {{ ui.util.attrs(kwargs, {"class": "list-unstyled nav nav-simple nav-facet"}) }}>{{ content }}</ul>
 {%- endmacro %}
 
+{%- macro filters(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "filters"}) }}>{{ content }}</div>
+{%- endmacro %}
+
 {%- macro group_list(content) -%}
     <ul {{ ui.util.attrs(kwargs, {"class": "media-grid", "data-module": "media-grid"}) }}>
         {{ content }}

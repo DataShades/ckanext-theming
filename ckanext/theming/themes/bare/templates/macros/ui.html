@@ -33,6 +33,7 @@
 {% set resource = resource | default(_content.resource) %}
 {% set user = user | default(_content.user) %}
 
+{% set filters = filters | default(_container.filters) %}
 {% set accordion = accordion | default(_container.accordion) %}
 {% set button_group = button_group | default(_container.button_group) %}
 {% set card = card | default(_container.card) %}
