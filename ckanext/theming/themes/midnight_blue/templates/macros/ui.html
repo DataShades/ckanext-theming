@@ -91,20 +91,20 @@
 {%- endmacro %}
 {%- set content_action_wrapper = content_action_wrapper or _content_action_wrapper -%}
 
-{%- macro _content_nav_wrapper(content) -%}
+{%- macro _content_nav(content) -%}
     <ul {{ ui.util.attrs(kwargs, {"class": "nav nav-pills"}) }}>
         {{ content }}
     </ul>
 {%- endmacro %}
-{%- set content_nav_wrapper = content_nav_wrapper or _content_nav_wrapper -%}
+{%- set content_nav = content_nav or _content_nav -%}
 
 
-{%- macro _main_nav_wrapper(content) -%}
+{%- macro _main_nav(content) -%}
     <ul {{ ui.util.attrs(kwargs, {"class": "navbar-nav mb-2 mb-lg-0 col-md-10"}) }}>
         {{ content }}
     </ul>
 {%- endmacro %}
-{%- set main_nav_wrapper = main_nav_wrapper or _main_nav_wrapper -%}
+{%- set main_nav = main_nav or _main_nav -%}
 
 {%- macro _page_action_wrapper(content, variant) -%}
     {%- set classes = "mb-3 mb-md-0 ms-3 pull-right" -%}
@@ -118,7 +118,7 @@
 {%- set page_action_wrapper = page_action_wrapper or _page_action_wrapper -%}
 
 
-{%- macro _sidebar_nav_wrapper(content) -%}
+{%- macro _sidebar_nav(content) -%}
     <section class="module">
         <div class="module-group">
             {{ ui.heading(title, level=2, attrs={"class": "module-heading bg-primary text-bg-primary"}) if title }}
@@ -129,4 +129,4 @@
         </div>
     </section>
 {%- endmacro %}
-{%- set sidebar_nav_wrapper = sidebar_nav_wrapper or _sidebar_nav_wrapper -%}
+{%- set sidebar_nav = sidebar_nav or _sidebar_nav -%}

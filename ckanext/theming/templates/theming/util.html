@@ -26,7 +26,7 @@
 
     {%- if available_utils -%}
 
-        {%- call ui.util.call(ui.sidebar_nav_wrapper, title=_("Utilities")) -%}
+        {%- call ui.util.call(ui.sidebar_nav, title=_("Utilities")) -%}
             {%- for name in available_utils -%}
                 {{ ui.sidebar_nav_item(name, href=h.url_for("theming.util", util=name), active=util==name) }}
             {%- endfor %}

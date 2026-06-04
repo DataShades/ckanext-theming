@@ -7,7 +7,7 @@
 </p>
 
 <div>
-    {%- call ui.util.call(ui.account_nav_wrapper) -%}
+    {%- call ui.util.call(ui.account_nav) -%}
         {{ ui.account_nav_item("First", href="") }}
         {{ ui.account_nav_item("Second", href="", active=true) }}
         {{ ui.account_nav_item("Third", href="") }}
@@ -15,7 +15,7 @@
 
     {%- call ui.util.call(ui.account) -%}
         <div class="account">
-            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+            {%- call ui.util.call(ui.account_nav) -%}
                 {{ ui.account_nav_item("First", href="") }}
                 {{ ui.account_nav_item("Second", href="", active=true) }}
                 {{ ui.account_nav_item("Third", href="") }}
@@ -26,7 +26,7 @@
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
-        {%- call ui.util.call(ui.account_nav_wrapper) -%}
+        {%- call ui.util.call(ui.account_nav) -%}
             {{ ui.account_nav_item("First", href="") }}
             {{ ui.account_nav_item("Second", href="", active=true) }}
             {{ ui.account_nav_item("Third", href="") }}
@@ -34,7 +34,7 @@
 
         {%- call ui.util.call(ui.account) -%}
             &lt;div class="account"&gt;
-            {%- call ui.util.call(ui.account_nav_wrapper) -%}
+            {%- call ui.util.call(ui.account_nav) -%}
                 {{ ui.account_nav_item("First", href="") }}
                 {{ ui.account_nav_item("Second", href="", active=true) }}
                 {{ ui.account_nav_item("Third", href="") }}

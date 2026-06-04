@@ -16,7 +16,7 @@
 
 
 {%- block secondary_content -%}
-    {%- call ui.util.call(ui.sidebar_nav_wrapper, title=_("Theming")) -%}
+    {%- call ui.util.call(ui.sidebar_nav, title=_("Theming")) -%}
         {{ ui.sidebar_nav_item(_("Components"), href=h.url_for("theming.component"), active=request.endpoint=="theming.component") }}
         {{ ui.sidebar_nav_item(_("Util"), href=h.url_for("theming.util"), active=request.endpoint=="theming.util") }}
         {{ ui.sidebar_nav_item(_("JavaScript"), href=h.url_for("theming.js"), active=request.endpoint=="theming.js") }}

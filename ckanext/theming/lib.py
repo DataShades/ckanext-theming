@@ -124,17 +124,19 @@ class Util(BaseUtil):
         if not kwargs:
             return ""
 
-        attrs = kwargs.get("attrs", {}).copy()
-        for key, prefix in self._attr_groups:
-            group = kwargs.get(key, {})
-            if not group:
-                continue
+        attrs = kwargs.setdefault("attrs", {}).copy()
+        # skip the loop if attrs is the only item in the dictionary
+        if len(kwargs) > 1:
+            for key, prefix in self._attr_groups:
+                group = kwargs.get(key, {})
+                if not group:
+                    continue
 
-            for k, v in group.items():
-                attrs[f"{prefix}{k}"] = v
+                for k, v in group.items():
+                    attrs[f"{prefix}{k}"] = v
 
-        if extra_class := kwargs.get(self._extra_class_attr):
-            attrs["class"] = " ".join([attrs.get("class", ""), extra_class]).lstrip()
+            if extra_class := kwargs.get(self._extra_class_attr):
+                attrs["class"] = " ".join([attrs.get("class", ""), extra_class]).lstrip()
 
         parts = [
             k if v is None else f'{k}="{self._escape_attr_value(str(v))}"'

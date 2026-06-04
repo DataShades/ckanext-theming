@@ -10,7 +10,7 @@ counterparts - for example, [`accordion_wrapper`][accordion-wrapper] works with
 
 ## Account Navigation Wrapper
 
-The [`account_nav_wrapper`][account-navigation-wrapper] component creates a
+The [`account_nav`][account-navigation-wrapper] component creates a
 consistent container for account-related navigation elements. It ensures that
 user account navigation maintains a uniform appearance and structure across
 different themes and pages. This component typically wraps
@@ -22,7 +22,7 @@ styling.
 
 ```django
 <!-- Basic account navigation wrapper -->
-{% call ui.util.call(ui.account_nav_wrapper) %}
+{% call ui.util.call(ui.account_nav) %}
     {{ ui.account_nav_item("Profile", href="/profile") }}
     {{ ui.account_nav_item("Settings", href="/settings") }}
 {% endcall %}
@@ -91,7 +91,7 @@ are consistently positioned and styled. This component typically wraps
 
 ## Content Navigation Wrapper
 
-The [`content_nav_wrapper`][content-navigation-wrapper] component creates a
+The [`content_nav`][content-navigation-wrapper] component creates a
 container for navigation elements related to specific content. It provides
 consistent styling and positioning for content navigation, typically wrapping
 [`content_nav_item`][content-nav-item] components to maintain a uniform
@@ -102,7 +102,7 @@ appearance.
 
 ```django
 <!-- Basic content navigation wrapper -->
-{% call ui.util.call(ui.content_nav_wrapper) %}
+{% call ui.util.call(ui.content_nav) %}
     {{ ui.content_nav_item("Info", href="/info") }}
     {{ ui.content_nav_item("Resources", href="/resources") }}
 {% endcall %}
@@ -158,7 +158,7 @@ with [`group`][] components to display organizational structures within CKAN.
 
 ## Main Navigation Wrapper
 
-The [`main_nav_wrapper`][main-navigation-wrapper] component creates a container
+The [`main_nav`][main-navigation-wrapper] component creates a container
 for the primary site navigation. It ensures that the main navigation maintains
 consistent styling and behavior across different pages and themes. This
 component typically wraps [`main_nav_item`][main-nav-item] elements.
@@ -168,7 +168,7 @@ component typically wraps [`main_nav_item`][main-nav-item] elements.
 
 ```django
 <!-- Basic main navigation wrapper -->
-{% call ui.util.call(ui.main_nav_wrapper) %}
+{% call ui.util.call(ui.main_nav) %}
     {{ ui.main_nav_item("Datasets", href="/datasets") }}
     {{ ui.main_nav_item("Organizations", href="/organizations") }}
 {% endcall %}
@@ -178,7 +178,7 @@ component typically wraps [`main_nav_item`][main-nav-item] elements.
 
 ## Navigation Wrapper
 
-The [`nav_wrapper`][navigation-wrapper] component serves as a general container
+The [`nav`][navigation-wrapper] component serves as a general container
 for navigation elements. It provides the structural foundation for various
 navigation patterns and works with different navigation item components to
 ensure consistency.
@@ -188,7 +188,7 @@ ensure consistency.
 
 ```django
 <!-- Basic navigation wrapper -->
-{% call ui.util.call(ui.nav_wrapper) %}
+{% call ui.util.call(ui.nav) %}
     {{ ui.nav_item("Home", href="/") }}
     {{ ui.nav_item("About", href="/about") }}
 {% endcall %}
