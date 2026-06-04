@@ -1,27 +1,22 @@
-{%- macro header(content, title, subtitle, logo) -%}
+{%- macro header(content, title, subtitle, logo, href=h.url_for('home.index')) -%}
     <header {{ ui.util.attrs(kwargs) }} id="header">
         {%- call ui.util.call(ui.container) -%}
-            {{ ui.header_logo(logo=logo, title=title, subtitle=subtitle, href=href or h.url_for('home.index')) }}
+            {% if logo -%}
+                {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, attrs={"class": "logo"}) }}
+
+            {%- else -%}
+                <div>
+                    {{ ui.heading(ui.link(title, href=href, **kwargs), level=1) }}
+                    {% if subtitle %}
+                        {{ ui.heading(subtitle, level=2) }}
+                    {% endif %}
+                </div>
+            {%- endif %}
 
             {{ content }}
         {%- endcall %}
     </header>
 {%- endmacro %}
-
-{%- macro header_logo(href, logo, title, subtitle) -%}
-    {% if logo -%}
-        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, attrs={"class": "logo"}) }}
-
-    {%- else -%}
-        <div>
-            {{ ui.heading(ui.link(title, href=href, **kwargs), level=1) }}
-            {% if subtitle %}
-                {{ ui.heading(subtitle, level=2) }}
-            {% endif %}
-        </div>
-    {%- endif %}
-{%- endmacro %}
-
 
 {%- macro footer(content) -%}
     <footer {{ ui.util.attrs(kwargs) }} id="footer">

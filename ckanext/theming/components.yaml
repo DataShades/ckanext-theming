@@ -1343,23 +1343,6 @@ header:
             description: URL to navigate to when the header or logo is clicked, typically the site home page
             type: 'str'
 
-header_logo:
-    description: Element for the site logo in the page header, typically rendered as an image.
-    category: recommended
-    arguments:
-        href:
-            description: URL to navigate to when the logo is clicked, typically the site home page
-            type: 'str'
-        logo:
-            description: URL of the logo image
-            type: 'str'
-        title:
-            description: Site title, shown next to logo or used as alt text when logo is not specified
-            type: 'str'
-        subtitle:
-            description: Site subtitle or tagline, shown next to logo or used as alt text when logo is not specified
-            type: 'str'
-
 footer:
     description: Wrapper element for the page footer, typically containing copyright information and links to legal and support pages.
     category: recommended

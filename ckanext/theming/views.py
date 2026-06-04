@@ -41,6 +41,17 @@ def js(util: str | None = None):
     return tk.render("theming/js.html", extra_vars)
 
 
+@bp.route("/component/<component>/<example>", methods=["GET", "POST"])  # handle confirm_modal example
+def component_example(component: str, example: str):
+    return tk.render(
+        "theming/component_example.html",
+        {
+            "component": component,
+            "example": example,
+        },
+    )
+
+
 @bp.route("/component/", defaults={"component": "accordion"})
 @bp.route("/component/<component>", methods=["GET", "POST"])  # handle confirm_modal example
 def component(component: str):

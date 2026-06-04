@@ -25,7 +25,9 @@
     {%- block examples -%}
         {%- for example in examples -%}
             <div class="component-example">
+                {{ ui.link("Open in new tab", href=h.url_for('theming.component_example', component=component, example=example), blank=true) }}
                 {%- include "theming/examples/{}/{}.html".format(component, example) -%}
+
             </div>
         {%- endfor %}
     {%- endblock %}
