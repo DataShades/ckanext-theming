@@ -153,7 +153,7 @@ this.parentNode.insertBefore(tpl, this);
     </div>
 {%- endmacro %}
 
-{%- macro markdown_popover(id, title=_("Markdown formatting")) -%}
+{%- macro _markdown_popover(id, title=_("Markdown formatting")) -%}
     {%- call ui.util.call(ui.popover, title=title, id=id, **kwargs) -%}
         {%- if content -%}
             {{ content }}
@@ -187,7 +187,7 @@ this.parentNode.insertBefore(tpl, this);
     {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
     {%- set help_id = ui.util.id() if content -%}
     {% set popover_id = ui.util.id() %}
-    {{ ui.markdown_popover(id=popover_id) }}
+    {{ _markdown_popover(id=popover_id) }}
 
     <div>
         {%- if label -%}

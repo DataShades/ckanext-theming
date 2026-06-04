@@ -121,36 +121,6 @@
     {%- call _form.checkbox(**params) -%}{{ content }}{%- endcall %}
 {%- endmacro %}
 
-{%- macro markdown_popover(id, title=_("Markdown quick reference")) -%}
-    {%- call ui.util.call(ui.popover, title=title, id=id, **kwargs) -%}
-        {%- if content -%}
-            {{ content }}
-        {%- else -%}
-            {%- trans -%}
-            <p>__Bold text__ or _italic text_</p>
-            <p># title
-                <br>## secondary title
-                <br>### etc
-            </p>
-            <p>* list
-                <br>* of
-                <br>* items
-            </p>
-            <p>http://auto.link.ed/</p>
-            <p>
-                <strong>
-                    <a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'>Full markdown syntax</a>
-                </strong>
-            </p>
-            <p>
-                <strong>Please note:</strong>
-                HTML tags are stripped out for security reasons
-            </p>
-            {%- endtrans %}
-        {%- endif %}
-    {%- endcall -%}
-{%- endmacro %}
-
 {%- macro markdown(content, name, id, label, value, placeholder, required, errors=[], group_class="form-group control-full") -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {

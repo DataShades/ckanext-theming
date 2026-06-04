@@ -16,6 +16,8 @@
 {% set breadcrumb_wrapper = breadcrumb_wrapper | default(_wrapper.breadcrumb_wrapper) %}
 {% set content_action_wrapper = content_action_wrapper | default(_wrapper.content_action_wrapper) %}
 {% set content_nav_wrapper = content_nav_wrapper | default(_wrapper.content_nav_wrapper) %}
+{% set footer_secondary_nav_wrapper = footer_secondary_nav_wrapper | default(_wrapper.footer_secondary_nav_wrapper) %}
+{% set footer_main_nav_wrapper = footer_main_nav_wrapper | default(_wrapper.footer_main_nav_wrapper) %}
 {% set main_nav_wrapper = main_nav_wrapper | default(_wrapper.main_nav_wrapper) %}
 {% set nav_wrapper = nav_wrapper | default(_wrapper.nav_wrapper) %}
 {% set page_action_wrapper = page_action_wrapper | default(_wrapper.page_action_wrapper) %}
@@ -103,7 +105,6 @@
 {% set hidden_input = hidden_input | default(_form.hidden_input) %}
 {% set input = input | default(_form.input) %}
 {% set markdown = markdown | default(_form.markdown) %}
-{% set markdown_popover = markdown_popover | default(_form.markdown_popover) %}
 {% set radio = radio | default(_form.radio) %}
 {% set range_input = range_input | default(_form.range_input) %}
 {% set select = select | default(_form.select) %}
@@ -127,6 +128,8 @@
 {% set account_nav_item = account_nav_item | default(_nav.account_nav_item) %}
 {% set breadcrumb = breadcrumb | default(_nav.breadcrumb) %}
 {% set content_action = content_action | default(_nav.content_action) %}
+{% set footer_main_nav_item = footer_main_nav_item | default(_nav.footer_main_nav_item) %}
+{% set footer_secondary_nav_item = footer_secondary_nav_item | default(_nav.footer_secondary_nav_item) %}
 {% set content_nav_item = content_nav_item | default(_nav.content_nav_item) %}
 {% set dropdown_item = dropdown_item | default(_nav.dropdown_item) %}
 {% set main_nav_item = main_nav_item | default(_nav.main_nav_item) %}

@@ -12,6 +12,15 @@
 
 {%- macro content_nav_wrapper(content) -%}{{ ui.tab_wrapper(content, **kwargs) }}{%- endmacro %}
 
+{%- macro footer_main_nav_wrapper(content) -%}
+    {{ ui.nav_wrapper(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro footer_secondary_nav_wrapper(content) -%}
+    {{ ui.nav_wrapper(content, **kwargs) }}
+{%- endmacro %}
+
+
 {%- macro main_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 {%- macro sidebar_nav_wrapper(content) -%}{{ ui.nav_wrapper(content, **kwargs) }}{%- endmacro %}
 

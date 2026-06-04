@@ -15,6 +15,21 @@ account_nav_wrapper:
         content:
             description: Account navigation items
 
+footer_main_nav_wrapper:
+    description: |
+        Wrapper for footer main navigation items.
+    category: recommended
+    arguments:
+        content:
+            description: Footer main navigation items
+
+footer_secondary_nav_wrapper:
+    description: |
+        Wrapper for footer secondary navigation items.
+    category: recommended
+    arguments:
+        content:
+            description: Footer secondary navigation items
 
 breadcrumb_wrapper:
     description: |
@@ -1415,6 +1430,27 @@ main_nav_item:
             description: Whether this navigation item represents the current page
             type: 'bool'
 
+footer_main_nav_item:
+    description: |
+        Navigation item for the main navigation menu in the page footer.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
+
+footer_secondary_nav_item:
+    description: |
+        Navigation item for the main navigation menu in the secondary page footer.
+    category: essential
+    arguments:
+        content:
+            description: Navigation item label
+        href:
+            description: URL to navigate to when the navigation item is clicked
+            type: 'str'
 
 sidebar_nav_item:
     description: |
