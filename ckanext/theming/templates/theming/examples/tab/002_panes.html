@@ -11,28 +11,23 @@
 </p>
 
 <p>
-    Tabs that have <code>href</code> attribute instead if <code>id</code> are
-    rendered as links and can be used to navigate between different pages. This
-    option can be used when content associated with the tab is not available on
-    the same page, but is located on a different page. Tabs with <code>href</code> attribute
-    are not associated with any panes and do not affect their visibility when
-    clicked.
+    Depending on implementation, theme may require <code>tab_wrapper</code> and <code>tab_pane_wrapper</code> to
+    be placed inside <code>tabbed_content</code>
 </p>
-
 
 <div>
     {%- set first_pane_id = ui.util.id() -%}
     {%- set second_pane_id = ui.util.id() -%}
+    {%- call ui.util.call(ui.tabbed_content) -%}
+        {%- call ui.util.call(ui.tab_wrapper) -%}
+            {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
+            {{ ui.tab("Pane 2", id=second_pane_id) }}
+        {%- endcall %}
 
-    {%- call ui.util.call(ui.tab_wrapper) -%}
-        {{ ui.tab("Link tab", href="") }}
-        {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
-        {{ ui.tab("Pane 2", id=second_pane_id) }}
-    {%- endcall %}
-
-    {%- call ui.util.call(ui.tab_pane_wrapper) -%}
-        {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
-        {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
+        {%- call ui.util.call(ui.tab_pane_wrapper) -%}
+            {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
+            {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
+        {%- endcall %}
     {%- endcall %}
 </div>
 
@@ -41,15 +36,16 @@
         {%- set first_pane_id = ui.util.id() -%}
         {%- set second_pane_id = ui.util.id() -%}
 
-        {%- call ui.util.call(ui.tab_wrapper) -%}
-            {{ ui.tab("Link tab", href="") }}
-            {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
-            {{ ui.tab("Pane 2", id=second_pane_id) }}
-        {%- endcall %}
+        {%- call ui.util.call(ui.tabbed_content) -%}
+            {%- call ui.util.call(ui.tab_wrapper) -%}
+                {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
+                {{ ui.tab("Pane 2", id=second_pane_id) }}
+            {%- endcall %}
 
-        {%- call ui.util.call(ui.tab_pane_wrapper) -%}
-            {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
-            {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
+            {%- call ui.util.call(ui.tab_pane_wrapper) -%}
+                {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
+                {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
+            {%- endcall %}
         {%- endcall %}
     {%- endraw %}
 {%- endcall %}

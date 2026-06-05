@@ -30,7 +30,7 @@
             {%- for name in available_components -%}
                 {%- call ui.util.call(ui.sidebar_nav_item, href=h.url_for("theming.component", component=name), active=component==name) -%}
                     {{ (name[0]|upper ~ name[1:])|replace("_", " ") }}
-                    {%- with category=ref[name].category -%}
+                    {%- with category=ref[name].category %}
                         {{ ui.badge(category.value, style=styles[category.value]) if category.value != "essential" }}
                     {%- endwith %}
                 {%- endcall %}

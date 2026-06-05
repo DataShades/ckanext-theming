@@ -96,6 +96,15 @@ pagination_wrapper:
         content:
             description: Pagination controls
 
+tabbed_content:
+    description: |
+        Wrapper for a collection of tabbed content, typically containing both
+        the tab handles and the corresponding tab panes.
+    category: recommended
+    arguments:
+        content:
+            description: Collection of tabs
+
 tab_wrapper:
     description: |
         Wrapper for a collection of tabs.
