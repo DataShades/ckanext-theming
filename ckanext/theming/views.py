@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any
 
 from flask import Blueprint, current_app
 
@@ -43,12 +44,15 @@ def js(util: str | None = None):
 
 @bp.route("/component/<component>/<example>", methods=["GET", "POST"])  # handle confirm_modal example
 def component_example(component: str, example: str):
+    extra_vars = {
+        "component": component,
+        "example": example,
+    }
+    if component == "list":
+        _add_list_vars(extra_vars)
     return tk.render(
         "theming/component_example.html",
-        {
-            "component": component,
-            "example": example,
-        },
+        extra_vars,
     )
 
 
@@ -79,13 +83,16 @@ def component(component: str):
         "ref": reference.components,
     }
     if component == "list":
-        extra_vars["resources"] = tk.get_action("resource_search")({}, {"limit": 2, "query": "url:"})["results"]
-        extra_vars["packages"] = tk.get_action("package_search")({}, {"rows": 2})["results"]
-        extra_vars["users"] = tk.get_action("user_list")({}, {"limit": 2})[:2]
-        extra_vars["organizations"] = tk.get_action("organization_list")({}, {"limit": 2, "all_fields": True})
-        extra_vars["groups"] = tk.get_action("group_list")({}, {"limit": 2, "all_fields": True})
-
+        _add_list_vars(extra_vars)
     return tk.render("theming/component.html", extra_vars)
+
+
+def _add_list_vars(extra_vars: dict[str, Any]):
+    extra_vars["resources"] = tk.get_action("resource_search")({}, {"limit": 2, "query": "url:"})["results"]
+    extra_vars["packages"] = tk.get_action("package_search")({}, {"rows": 2})["results"]
+    extra_vars["users"] = tk.get_action("user_list")({}, {"limit": 2})[:2]
+    extra_vars["organizations"] = tk.get_action("organization_list")({}, {"limit": 2, "all_fields": True})
+    extra_vars["groups"] = tk.get_action("group_list")({}, {"limit": 2, "all_fields": True})
 
 
 # activity

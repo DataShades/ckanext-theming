@@ -573,6 +573,17 @@ toast:
             description: Whether the toast can be dismissed by the user
             type: 'bool'
 
+toast_stack:
+    description: |
+        Wrapper for a stack of toast notifications, used to show multiple toast notifications at the same time.
+    category: recommended
+    arguments:
+        content:
+            description: Collection of toast notifications
+        position:
+            description: Position of the toast stack on the screen, either "top-right", "top-left", "bottom-right" or "bottom-left"
+            type: 'str'
+
 tooltip:
     description: |
         Tooltip element, used to show brief messages to the user when they hover over or focus on an element.
@@ -940,6 +951,9 @@ fieldset:
             description: Content of the fieldset, typically form fields
         legend:
             description: Optional legend text shown at the top of the fieldset
+            type: 'str'
+        description:
+            description: Optional description text shown below the legend
             type: 'str'
 
 file_input:

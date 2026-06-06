@@ -12,13 +12,11 @@
 
     {%- call ui.util.call(ui.popover, title="Popover", id=id) -%}
         {{ lipsum(1) }}
-        <hr/>
+        {{ ui.divider() }}
         {{ lipsum(1) }}
     {%- endcall %}
 
-    <p>
-        Usually {{ ui.popover_handle("[popover handle]", id=id) }} does not have custom appearance.
-    </p>
+    Usually {{ ui.popover_handle("[popover handle]", id=id) }} does not have custom appearance.
 </div>
 
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
@@ -27,14 +25,12 @@
 
         {%- call ui.util.call(ui.popover, title="Popover", id=id) -%}
             {{ lipsum(1) }}
-            &lt;hr/&gt;
+            {{ ui.divider() }}
             {{ lipsum(1) }}
         {%- endcall %}
 
-        &lt;p&gt;
         Usually {{ ui.popover_handle("popover handle", id=id) }}
         does not have custom appearance.
-        &lt;/p&gt;
 
     {%- endraw %}
 {%- endcall %}

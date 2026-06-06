@@ -15,7 +15,7 @@
 {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
     {%- raw %}
         {{ ui.progress("Loading..", value=50) }}
-        {{ ui.progress(value=0) }}
+        {{ ui.progress("Not loading", value=0) }}
         {{ ui.progress(value=10, max=10) }}
     {%- endraw %}
 {%- endcall %}

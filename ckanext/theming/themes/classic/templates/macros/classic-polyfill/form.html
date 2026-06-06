@@ -219,10 +219,11 @@
     {%- call _form.textarea(**params) -%}{{ content }}{%- endcall %}
 {%- endmacro %}
 
-{%- macro fieldset(content, legend) -%}
+{%- macro fieldset(content, legend, description) -%}
     <fieldset {{ ui.util.attrs(kwargs) }}>
         {%- if legend -%}
             <legend>{{ legend }}</legend>
+            {{ description }}
         {%- endif %}
         {{ content }}
     </fieldset>

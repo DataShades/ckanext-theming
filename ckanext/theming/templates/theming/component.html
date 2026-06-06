@@ -1,6 +1,6 @@
 {%- extends "theming/base.html" -%}
 
-{%- set component_title = component|replace("_", " ")|title if component else none -%}
+{%- set component_title = (component[0]|upper ~ component[1:])|replace("_", " ") if component else none -%}
 {%- set styles = {
             "experimental": "danger",
             "recommended": "success",
