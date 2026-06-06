@@ -122,17 +122,6 @@ tab_pane_wrapper:
             description: Collection of tab panes
 
 # content
-activity:
-    description: |
-        Details of a single activity record.
-    category: essential
-    arguments:
-        content:
-            description: Usually ignored
-        activity:
-            description: Dictionary with activity details
-            type: 'dict'
-
 facet:
     description: |
         Control link for a facet filter.
@@ -357,14 +346,6 @@ list_item:
     arguments:
         content:
             description: Content of the list item
-
-activity_list:
-    description: |
-        Wrapper for a collection of activity records.
-    category: recommended
-    arguments:
-        content:
-            description: Activity records
 
 facet_list:
     description: |

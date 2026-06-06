@@ -29,25 +29,6 @@ styling.
 ```
 ///
 
-## Activity Wrapper
-
-The [`activity_list`][activity-list] component provides a structural
-container for activity stream content. It ensures that activity entries are
-properly formatted and styled consistently. This wrapper works with the
-[`activity`][] component to display user actions and system events in a
-structured format.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic activity wrapper -->
-{% call ui.util.call(ui.activity_list) %}
-    {{ ui.activity("User created a dataset", activity=activity_data) }}
-    {{ ui.activity("User updated profile", activity=activity_data2) }}
-{% endcall %}
-```
-///
 
 ## Breadcrumb Wrapper
 

@@ -8,40 +8,6 @@ relationships. These components often work in conjunction with their
 corresponding wrapper components to provide complete structural and visual
 representations.
 
-## Activity
-
-The [`activity`][] component displays individual activity stream entries,
-showing user actions and system events in a structured format. It presents
-information about what happened, who performed the action, and when it
-occurred. This component is typically wrapped by the
-[`activity_list`][activity-list] to provide consistent grouping and
-styling of multiple activity entries.
-
-Activity components are essential for showing the dynamic nature of a CKAN
-instance, allowing users to track changes, updates, and interactions with
-datasets and other content. The component handles various types of activities
-such as dataset creation, updates, and user interactions.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic activity component -->
-{%- call ui.util.call(ui.activity_list) -%}
-    {{ ui.activity("User created a new dataset", activity=activity_data) }}
-{%- endcall %}
-```
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`activity`][] component works with [`activity_list`][activity-list]
-to create organized activity streams. While the activity component handles
-individual entries, the wrapper provides the container for multiple entries.
-
-///
-
 ## Facet
 
 The [`facet`][] component displays individual facet filter options, allowing

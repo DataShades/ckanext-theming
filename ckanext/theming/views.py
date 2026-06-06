@@ -93,7 +93,3 @@ def _add_list_vars(extra_vars: dict[str, Any]):
     extra_vars["users"] = tk.get_action("user_list")({}, {"limit": 2})[:2]
     extra_vars["organizations"] = tk.get_action("organization_list")({}, {"limit": 2, "all_fields": True})
     extra_vars["groups"] = tk.get_action("group_list")({}, {"limit": 2, "all_fields": True})
-
-
-# activity
-# activity_list
