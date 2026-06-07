@@ -6,16 +6,17 @@
 
 <p>
     It accepts <code>conent</code> of the tooltip as a first argument, which
-    can be either text or DOM node. The second required argument is a target of
-    the tooltip(the element next to which tooltip is shown). The object
+    can be either text or DOM node. The second argument is an object with
+    options. It has one required option - <code>target</code> of
+    the tooltip(the HTML node next to which tooltip is shown). The object
     produced by the function has methods <code>show</code> and <code>close</code> that
     change visibility of the tooltip. Usually tooltip's visibility is toggled
     when cursor is over the element, so this object is required only when you
     want to add an additional behavior.
 
     {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const tooltipTarget = document.getElementById(id)
-        const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget)
+        const target = document.getElementById(id)
+        const tooltip = sandbox.ui.tooltip("Hello world", {target})
     {%- endcall %}
 
 </p>
@@ -27,8 +28,8 @@
             window.addEventListener("load", () => {
                 const sandbox = ckan.sandbox()
 
-                const tooltipTarget = document.getElementById(`{{ id }}`)
-                const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget)
+                const target = document.getElementById(`{{ id }}`)
+                const tooltip = sandbox.ui.tooltip("Hello world", {target})
             })
         </script>
     </div>
@@ -37,20 +38,18 @@
 
 
 <p>
-    The third argument is an object with tooltip options:
+    Other tooltip options:
 
-    {%- call ui.util.call(ui.list) -%}
-        {%- call ui.util.call(ui.list_item) -%}
-            <code>position</code>: string, position of the tooltip relative to
+    <ul>
+        <li><code>position</code>: string, position of the tooltip relative to
             the target. Possible values are "top", "right", "bottom" and
-            "left".
-        {%- endcall %}
-    {%- endcall %}
-
+            "left".</li>
+    </ul>
 
     {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
         const tooltipTarget = document.getElementById(id)
-        const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget, {
+        const tooltip = sandbox.ui.tooltip("Hello world", {
+        &nbsp;&nbsp;target,
         &nbsp;&nbsp;position: "left"
         })
     {%- endcall %}
@@ -63,8 +62,11 @@
             window.addEventListener("load", () => {
                 const sandbox = ckan.sandbox()
 
-                const tooltipTarget = document.getElementById(`{{ id }}`)
-                const tooltip = sandbox.ui.tooltip("Hello world", tooltipTarget, {position: "left"})
+                const target = document.getElementById(`{{ id }}`)
+                const tooltip = sandbox.ui.tooltip("Hello world", {
+                    target,
+                    position: "left"
+                })
             })
         </script>
     </div>

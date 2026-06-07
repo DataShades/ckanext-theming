@@ -37,6 +37,8 @@ declare global {
      * @property dismissLabel - Content for the dismiss button.
      */
     interface IModalParams extends IParams {
+      title?: Content;
+      actions?: HTMLElement[];
       dismissible?: boolean;
       dismissLabel?: Content;
     }
@@ -50,6 +52,7 @@ declare global {
     interface INotificationParams extends IParams {
       style?: string;
       dismissible?: boolean;
+      title?: Content;
     }
 
     /**
@@ -58,14 +61,17 @@ declare global {
      * @property position - Position of the tooltip relative to the target element ("top", "bottom", "left", or "right").
      */
     interface ITooltipParams extends IParams {
-      position?: "top"|"bottom"|"left"|"right";
+      position?: "top" | "bottom" | "left" | "right";
+      target: HTMLElement;
     }
 
     /**
      * Parameters for popover functionality.
      */
     interface IPopoverParams extends IParams {
-      trigger?: string,
+      trigger?: string;
+      target: HTMLElement;
+      title?: string | null;
     }
 
     /**
@@ -112,52 +118,15 @@ declare global {
    * Interface for the sandbox environment.
    *
    * @property setup - Method to initialize the sandbox with a callback function.
-   * @property ui - Object containing UI components and utility functions.
+   * @property ui - Object containing UI components.
    */
   interface ISandboxFactory {
     setup: (callback: (sandbox: ISandbox) => void) => void;
     (): ISandbox;
   }
   interface ISandbox {
-    ui: IUi & { util: IUtil };
+    ui: IUi;
     notify: any;
-  }
-
-  /**
-   * Interface for utility functions.
-   *
-   * @property applyListeners - Method to attach event listeners to an element.
-   * @property applyProps - Method to set properties on an element.
-   * @property applyAttrs - Method to set attributes on an element.
-   */
-  interface IUtil {
-
-    /**
-     * Attach event listeners to an element.
-     *
-     * @param el The target HTML element.
-     * @param listeners An object containing event listeners to attach.
-     */
-    applyListeners(
-      el: HTMLElement,
-      listeners: { [key: string]: Theming.Listener | Theming.ComplexListener },
-    ): void;
-
-    /**
-     * Set properties on an element.
-     *
-     * @param el The target HTML element.
-     * @param props An object containing properties to set on the element.
-     */
-    applyProps(el: HTMLElement, props: { [key: string]: any }): void;
-
-    /**
-     * Set attributes on an element.
-     *
-     * @param el The target HTML element.
-     * @param attrs An object containing attributes to set on the element.
-     */
-    applyAttrs(el: HTMLElement, attrs: { [key: string]: string }): void;
   }
 
   /**
@@ -183,12 +152,7 @@ declare global {
      * @param params Configuration parameters for the modal.
      * @returns Modal instance.
      */
-    modal: (
-      content: Theming.Content,
-      title?: Theming.Content,
-      actions?: HTMLElement[],
-      params?: Theming.IModalParams,
-    ) => IModal;
+    modal: (content: Theming.Content, params?: Theming.IModalParams) => IModal;
 
     /**
      * Create a button element.
@@ -212,7 +176,6 @@ declare global {
      */
     notification: (
       content: Theming.Content,
-      title?: Theming.Content,
       props?: Theming.INotificationParams,
     ) => INotification;
 
@@ -225,8 +188,6 @@ declare global {
      */
     popover: (
       content: Theming.Content,
-      target: HTMLElement,
-      title?: string | null,
       props?: Theming.IPopoverParams,
     ) => IPopover;
 
@@ -240,7 +201,6 @@ declare global {
      */
     tooltip: (
       content: Theming.Content,
-      target: HTMLElement,
       props?: Theming.ITooltipParams,
     ) => ITooltip;
 

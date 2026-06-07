@@ -46,22 +46,18 @@
 
 
 <p>
-    The second argument is a title of the notification, and the third argument is an
-    object with notification options:
+    The second argument is an object with notification options:
 
-    {%- call ui.util.call(ui.list) -%}
-        {%- call ui.util.call(ui.list_item) -%}
-            <code>dismissible</code>: boolean, whether notification can be closed by user.
-        {%- endcall %}
-        {%- call ui.util.call(ui.list_item) -%}
-            <code>style</code>: changes the color of the notification.
-        {%- endcall %}
-    {%- endcall %}
-
+    <ul>
+        <li><code>title</code>: title of the notification.</li>
+        <li><code>dismissible</code>: boolean, whether notification can be closed by user.</li>
+        <li><code>style</code>: changes the color of the notification.</li>
+    </ul>
 
     {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
         const btn = sandbox.ui.button("Show notification");
-        btn.addEventListener("click", () => sandbox.ui.notification("Hello world", "Title", {
+        btn.addEventListener("click", () => sandbox.ui.notification("Hello world", {
+        &nbsp;&nbsp;title: "Title",
         &nbsp;&nbsp;style: "danger",
         &nbsp;&nbsp;dismissible: true,
         }).show())
@@ -77,7 +73,8 @@
                 const sandbox = ckan.sandbox()
 
                 const btn = sandbox.ui.button("Show notification");
-                btn.addEventListener("click", () => sandbox.ui.notification("Hello world", "Title", {
+                btn.addEventListener("click", () => sandbox.ui.notification("Hello world", {
+                    title: "Title",
                     style: "danger",
                     dismissible: true,
                 }).show())

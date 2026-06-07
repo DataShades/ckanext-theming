@@ -6,16 +6,17 @@
 
 <p>
     It accepts <code>conent</code> of the popover as a first argument, which
-    can be either text or DOM node. The second required argument is a target of
-    the popover(the element next to which popover is shown). The object
-    produced by the function has methods <code>show</code> and <code>close</code> that
+    can be either text or DOM node. The second required argument is an object
+    with options, that has required element <code>target</code> - the HTML node
+    element next to which popover is shown. The object produced by the function
+    has methods <code>show</code> and <code>close</code> that
     change visibility of the popover. Usually popover's visibility is toggled
     after every click on target, so this object is required only when you want
     to add an additional behavior.
 
     {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const popoverTarget = document.getElementById(id)
-        const popover = sandbox.ui.popover("Hello world", popoverTarget)
+        const target = document.getElementById(id)
+        const popover = sandbox.ui.popover("Hello world", {target})
     {%- endcall %}
 
 </p>
@@ -27,8 +28,8 @@
             window.addEventListener("load", () => {
                 const sandbox = ckan.sandbox()
 
-                const popoverTarget = document.getElementById(`{{ id }}`)
-                const popover = sandbox.ui.popover("Hello world", popoverTarget)
+                const target = document.getElementById(`{{ id }}`)
+                const popover = sandbox.ui.popover("Hello world", {target})
             })
         </script>
     </div>
@@ -37,20 +38,25 @@
 
 
 <p>
-    The third argument is a title of the popover, and the fourth argument is an
-    object with popover options:
+    Other popover options:
 
+    <ul>
+        <li><code>title</code>: title of the popover.</li>
+        <li><code>trigger</code>: string with the name of event that trigger
+            popover. Usually it supoorts <code>click</code>, <code>hover</code> and <code>focus</code>.</li>
+    </ul>
     {%- call ui.util.call(ui.list) -%}
         {%- call ui.util.call(ui.list_item) -%}
-            <code>trigger</code>: string with the name of event that trigger
-            popover. Usually it supoorts <code>click</code>, <code>hover</code> and <code>focus</code>.
+
         {%- endcall %}
     {%- endcall %}
 
 
     {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const popoverTarget = document.getElementById(id)
-        const popover = sandbox.ui.popover("Hello world", popoverTarget, "Title", {
+        const target = document.getElementById(id)
+        const popover = sandbox.ui.popover("Hello world", {
+        &nbsp;&nbsp;target,
+        &nbsp;&nbsp;title: "Title",
         &nbsp;&nbsp;trigger: "hover"
         })
     {%- endcall %}
@@ -63,8 +69,12 @@
             window.addEventListener("load", () => {
                 const sandbox = ckan.sandbox()
 
-                const popoverTarget = document.getElementById(`{{ id }}`)
-                const popover = sandbox.ui.popover("Hello world", popoverTarget, "Title", {trigger: "hover"})
+                const target = document.getElementById(`{{ id }}`)
+                const popover = sandbox.ui.popover("Hello world", {
+                    target,
+                    title: "Title",
+                    trigger: "hover"
+                })
             })
         </script>
     </div>
