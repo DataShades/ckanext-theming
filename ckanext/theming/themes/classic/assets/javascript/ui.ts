@@ -1,32 +1,28 @@
 /// <reference path="../../../../../../types.d.ts" />
 
 ((ckan) => {
-  const util = {
-    applyAttrs(el: HTMLElement, attrs: { [key: string]: string }) {
-      Object.entries(attrs).forEach(([key, value]) =>
-        el.setAttribute(key, value),
-      );
-    },
+  function applyAttrs(el: HTMLElement, attrs: { [key: string]: string }) {
+    Object.entries(attrs).forEach(([key, value]) =>
+      el.setAttribute(key, value),
+    );
+  }
 
-    applyProps(el: HTMLElement, props: { [key: string]: any }) {
-      Object.entries(props).forEach(
-        ([key, value]) => ((el as any)[key] = value),
-      );
-    },
+  function applyProps(el: HTMLElement, props: { [key: string]: any }) {
+    Object.entries(props).forEach(([key, value]) => ((el as any)[key] = value));
+  }
 
-    applyListeners(
-      el: HTMLElement,
-      listeners: { [key: string]: Theming.Listener | Theming.ComplexListener },
-    ) {
-      Object.entries(listeners).forEach(([key, value]) => {
-        if (typeof value == "function") {
-          el.addEventListener(key, value);
-        } else {
-          el.addEventListener(key, value.listener, value.options);
-        }
-      });
-    },
-  };
+  function applyListeners(
+    el: HTMLElement,
+    listeners: { [key: string]: Theming.Listener | Theming.ComplexListener },
+  ) {
+    Object.entries(listeners).forEach(([key, value]) => {
+      if (typeof value == "function") {
+        el.addEventListener(key, value);
+      } else {
+        el.addEventListener(key, value.listener, value.options);
+      }
+    });
+  }
 
   class Modal implements IModal<HTMLElement> {
     #modal!: bootstrap.Modal;
@@ -45,6 +41,70 @@
 
     close() {
       this.#modal.hide();
+    }
+
+    static create(
+      content: Theming.Content,
+      params: Theming.IModalParams = {},
+    ): Modal {
+      const html = `
+        <div class="modal fade" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header"></div>
+              <div class="modal-body"></div>
+              <div class="modal-footer"></div>
+            </div>
+          </div>
+        </div>`;
+
+      document.body.insertAdjacentHTML("beforeend", html);
+      const modal = document.body.lastElementChild! as HTMLElement;
+
+      if (params.title) {
+        modal
+          .querySelector(".modal-header")
+          ?.insertAdjacentHTML(
+            "beforeend",
+            `<h5 class="modal-title">${params.title}</h5>`,
+          );
+      }
+
+      if (params.dismissible) {
+        modal
+          .querySelector(".modal-header")
+          ?.insertAdjacentHTML(
+            "beforeend",
+            `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`,
+          );
+      }
+
+      modal.querySelector(".modal-body")?.append(content);
+
+      const actions = params.actions || [];
+      if (params.dismissLabel) {
+        actions.unshift(
+          ui.button(params.dismissLabel, {
+            props: { onclick: () => result.close() },
+            style: "secondary",
+          }),
+        );
+      }
+
+      if (actions.length) {
+        modal.querySelector(".modal-footer")?.append(...actions);
+      }
+
+      const result = new Modal(modal);
+
+      return result;
+    }
+    static byId(id: string): Modal | null {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Modal(<HTMLElement>el);
     }
   }
 
@@ -66,6 +126,30 @@
     destroy() {
       this.#alert.remove();
     }
+    static create(
+      content: Theming.Content,
+      props: Theming.INotificationParams = {},
+    ): Notification {
+      const notify = ckan.sandbox().notify;
+      const el = notify.create(
+        props.title &&
+          (typeof props.title === "string"
+            ? props.title
+            : props.title.textContent),
+        typeof content === "string" ? content : content.textContent,
+        props.style || "default",
+      );
+
+      return new Notification(el[0]);
+    }
+
+    static byId(id: string): Notification | null {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Notification(el);
+    }
   }
 
   class Tooltip implements ITooltip {
@@ -82,6 +166,29 @@
     }
     destroy() {
       this.#tooltip.dispose();
+    }
+
+    static create(
+      content: Theming.Content,
+      props: Theming.ITooltipParams = { target: document.body },
+    ): Tooltip {
+      if (typeof content !== "string") {
+        throw "Only string tooltips are supported";
+      }
+      props.target.dataset.bsTitle = content;
+      if (props.position) {
+        props.target.dataset.bsPlacement = props.position;
+      }
+
+      return new Tooltip(props.target);
+    }
+
+    static byId(id: string): Tooltip | null {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Tooltip(el);
     }
   }
 
@@ -100,6 +207,31 @@
     destroy() {
       this.#popover.dispose();
     }
+
+    static create(
+      content: Theming.Content,
+      props: Theming.IPopoverParams = { target: document.body },
+    ): Popover {
+      props.target.dataset.bsContent =
+        typeof content === "string" ? content : content.textContent!;
+      props.target.dataset.bsHtml = "true";
+      if (props.title) {
+        props.target.dataset.bsTitle = props.title;
+      }
+      if (props.trigger) {
+        props.target.dataset.bsTrigger = props.trigger;
+      }
+
+      return new Popover(props.target);
+    }
+
+    static byId(id: string): Popover | null {
+      const el = document.getElementById(id);
+      if (!el) {
+        return null;
+      }
+      return new Popover(el);
+    }
   }
 
   const ui: IUi = {
@@ -114,145 +246,33 @@
       }
 
       if (params.attrs) {
-        util.applyAttrs(btn, params.attrs);
+        applyAttrs(btn, params.attrs);
       }
       if (params.props) {
-        util.applyProps(btn, params.props);
+        applyProps(btn, params.props);
       }
       if (params.on) {
-        util.applyListeners(btn, params.on);
+        applyListeners(btn, params.on);
       }
       [];
       return btn;
     },
 
-    modal(content, title, actions = [], params = {}) {
-      const html = `
-        <div class="modal fade" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header"></div>
-              <div class="modal-body"></div>
-              <div class="modal-footer"></div>
-            </div>
-          </div>
-        </div>`;
+    modal: Modal.create,
+    getModal: Modal.byId,
 
-      document.body.insertAdjacentHTML("beforeend", html);
-      const modal = document.body.lastElementChild! as HTMLElement;
+    notification: Notification.create,
+    getNotification: Notification.byId,
 
-      if (title) {
-        modal
-          .querySelector(".modal-header")
-          ?.insertAdjacentHTML(
-            "beforeend",
-            `<h5 class="modal-title">${title}</h5>`,
-          );
-      }
+    tooltip: Tooltip.create,
+    getTooltip: Tooltip.byId,
 
-      if (params.dismissible) {
-        modal
-          .querySelector(".modal-header")
-          ?.insertAdjacentHTML(
-            "beforeend",
-            `<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`,
-          );
-      }
-
-      modal.querySelector(".modal-body")?.append(content);
-
-      if (params.dismissLabel) {
-        actions.unshift(
-          ui.button(params.dismissLabel, {
-            props: { onclick: () => result.close() },
-            style: "secondary",
-          }),
-        );
-      }
-
-      if (actions.length) {
-        modal.querySelector(".modal-footer")?.append(...actions);
-      }
-
-      const result = new Modal(modal);
-
-      return result;
-    },
-
-    getModal(id) {
-      const el = document.getElementById(id);
-      if (!el) {
-        return null;
-      }
-      return new Modal(<HTMLElement>el);
-    },
-
-    notification(content, title, props = {}) {
-      const notify = ckan.sandbox().notify;
-      const el = notify.create(
-        title && (typeof title === "string" ? title : title.textContent),
-        typeof content === "string" ? content : content.textContent,
-        props.style || "default",
-      );
-
-      return new Notification(el[0]);
-    },
-
-    getNotification(id) {
-      const el = document.getElementById(id);
-      if (!el) {
-        return null;
-      }
-      return new Notification(el);
-    },
-
-    tooltip(content, target, props = {}) {
-      if (typeof content !== "string") {
-        throw "Only string tooltips are supported";
-      }
-      target.dataset.bsTitle = content;
-        if (props.position) {
-            target.dataset.bsPlacement = props.position;
-        }
-
-      return new Tooltip(target);
-    },
-
-    getTooltip(id) {
-      const el = document.getElementById(id);
-      if (!el) {
-        return null;
-      }
-      return new Tooltip(el);
-    },
-
-    popover(content, target, title, props = {}) {
-      target.dataset.bsContent =
-        typeof content === "string" ? content : content.textContent!;
-      target.dataset.bsHtml = "true";
-      if (title) {
-        target.dataset.bsTitle = title;
-      }
-      if (props.trigger) {
-        target.dataset.bsTrigger = props.trigger;
-      }
-
-      return new Popover(target);
-    },
-
-    getPopover(id) {
-      const el = document.getElementById(id);
-      if (!el) {
-        return null;
-      }
-      return new Popover(el);
-    },
+    popover: Popover.create,
+    getPopover: Popover.byId,
   };
 
   ckan.sandbox.setup((sb) => {
     sb.ui = sb.ui || {};
-    sb.ui.util = sb.ui.util || {};
     Object.assign(sb.ui, ui);
-    Object.assign(sb.ui.util, util);
   });
 })(window.ckan);
