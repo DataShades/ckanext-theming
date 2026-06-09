@@ -74,6 +74,9 @@
 
     {%- call ui.util.call(show_example) -%}
         {%- raw %}
+            {% set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
+
             {% set popover_id = ui.util.id() -%}
             {%- set popover_target_id = ui.util.id() -%}
 
