@@ -37,9 +37,3 @@
         {{ ui.container(content) }}
     </header>
 {%- endmacro %}
-
-{%- macro subtitle_item(content, initial) -%}
-    {%- do kwargs -%}
-    {{ content }}
-    {%- if not initial %} {{ g.template_title_delimiter }} {% endif %}
-{%- endmacro %}

@@ -326,12 +326,13 @@ class MacroUI(UI):
 
         self.__env = app.jinja_env
 
-        sources = self._base_sources.copy()
+        default: list[str] = []
+        additional: list[str] = []
         for plugin in p.PluginImplementations(ITheme):
-            sources += plugin.get_additional_theme_ui_sources()
+            default += plugin.get_default_theme_ui_sources()
+            additional += plugin.get_additional_theme_ui_sources()
 
-        self.__sources = sources
-
+        self.__sources = default + self._base_sources + additional
         self._collect_macros()
 
     @override

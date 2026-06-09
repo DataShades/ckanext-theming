@@ -35,6 +35,10 @@ def update_config(config_: Any):
         enable_theme(theme, config_)
 
 
+def default_ui_sources() -> list[str]:
+    return ["macros/theming_default_ui.html"]
+
+
 def make_middleware(app: types.CKANApp, config_: Any) -> types.CKANApp:  # pyright: ignore[reportUnusedParameter]
     if hasattr(app, "jinja_env"):
         app.jinja_env.add_extension("jinja2.ext.debug")
@@ -50,11 +54,16 @@ class ThemingMixin:
     p.implements(ITheme, inherit=True)
 
     def update_config(self, config_: Any):
+        tk.add_template_directory(config_, "templates")
+
         if "theming" not in config_["ckan.plugins"]:
             update_config(config_)
 
     def register_themes(self):
         return register_themes()
+
+    def get_default_theme_ui_sources(self) -> list[str]:
+        return default_ui_sources()
 
     def make_middleware(self, app: types.CKANApp, config_: Any) -> types.CKANApp:
         if "theming" not in config_["ckan.plugins"]:

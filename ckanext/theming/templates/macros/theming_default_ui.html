@@ -1,0 +1,140 @@
+{%- macro code(content, language, dedent) -%}
+    <pre {{ ui.util.attrs(kwargs, {"class": "code"})}}><code class="language-{{ language or 'text' }}">
+        {%- if dedent -%}
+            {%- set ns = namespace(skip=none) -%}
+            {%- for line in content.splitlines() -%}
+                {%- if ns.skip is none and loop.index < 3 and line -%}
+                    {%- set ns.skip = line|length - line.lstrip(" ")|length -%}
+                {%- endif -%}
+                {{ line[ns.skip or 0:] ~ "\n" if line or not loop.first}}
+            {%- endfor -%}
+        {%- else -%}
+            {{ content }}
+        {%- endif -%}
+
+    </code></pre>
+{%- endmacro %}
+
+{%- macro table_head(content) -%}
+    <thead {{ ui.util.attrs(kwargs) }}>{{ content }}</thead>
+{%- endmacro %}
+
+{%- macro table_body(content) -%}
+    <tbody {{ ui.util.attrs(kwargs) }}>{{ content }}</tbody>
+{%- endmacro %}
+
+{%- macro table_row(content) -%}
+    <tr {{ ui.util.attrs(kwargs) }}>
+        {{ content }}
+    </tr>
+{%- endmacro %}
+
+{%- macro table_cell(content, header) -%}
+    {{ ui.util.tag(content, "th" if header else "td", **kwargs) }}
+{%- endmacro %}
+
+{%- macro datetime(dt, date_format, with_hours, relative, empty="") -%}
+    <time {{ ui.util.attrs(kwargs) }}
+        datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%d' ~ ('T%H:%M:%S%z' if with_hours else '')) }}">
+        {%- if relative -%}
+            {%- set value = h.time_ago_from_timestamp(dt) -%}
+            {{  value if value != "Unknown" else empty }}
+        {%- else -%}
+            {{ h.render_datetime(dt, date_format=date_format, with_hours=with_hours) or empty }}
+        {%- endif -%}
+    </time>
+{%- endmacro %}
+
+{%- macro divider(content) -%}
+    <hr {{ ui.util.attrs(kwargs) }}>
+{%- endmacro %}
+
+{%- macro heading(content, level=1) -%}
+    {{ ui.util.tag(content, "h" ~ level, **kwargs) }}
+{%- endmacro %}
+
+{%- macro image(src, alt, height, width) -%}
+    {%- set defaults = {"src": src, "alt": alt, "height": height, "width": width} -%}
+    {%- if not alt -%}
+        {%- do defaults.update({"role": "presentation"}) -%}
+    {%- endif -%}
+    <img {{ ui.util.attrs(kwargs, defaults) }}>
+{%- endmacro %}
+
+
+{%- macro link(content, href, blank) -%}
+    {%- set defaults = {"target": "_blank", "rel": "noopener"} if blank else {} -%}
+    <a {{ ui.util.attrs(kwargs, defaults) }} href="{{ href }}">{{ content }}</a>
+{%- endmacro %}
+
+{%- macro video(src, controls, autoplay) -%}
+    <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }} {{ "autoplay" if autoplay }}></video>
+{%- endmacro %}
+
+
+{%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label, href) -%}
+    {%- if not form_id -%}
+        {% set form_id = ui.util.id() %}
+        {{ ui.form(method="POST", attrs={"id": form_id}, action=href) }}
+    {%- endif %}
+
+    {%- set close_button = ui.modal_close_handle(cancel_label or _("Close"), id=id, style="secondary") %}
+    {%- set confirm_button = ui.modal_close_handle(confirm_label or _("Confirm"), id=id, type="submit", attrs={"form": form_id}) %}
+
+    {{ ui.modal(content, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) }}
+{%- endmacro %}
+
+{%- macro form(content, method, action, enctype, include_csrf=true) -%}
+    {{ ui.form_start(method=method, action=action, enctype=enctype, **kwargs) }}
+    {{ h.csrf_input() if include_csrf and method and method|upper != "GET" }}
+    {{ content }}
+    {{ ui.form_end() }}
+{%- endmacro %}
+
+{%- macro form_start(content, method, action, enctype) -%}
+    <form
+        {{ ui.util.attrs(kwargs) }}
+        {%- if method %} method="{{ method }}"{%- endif %}
+        {%- if action %} action="{{ action }}"{%- endif %}
+        {%- if enctype %} enctype="{{ enctype }}"{%- endif -%}
+    >
+        {{ content }}
+{%- endmacro %}
+
+{%- macro form_end(content) -%}
+    {%- do kwargs -%}
+    {{ content }}
+    </form>
+{%- endmacro %}
+
+{%- macro form_actions(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "form-actions"}) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro hidden_input(name, value) -%}
+    <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value|empty_and_escape or "" }}">
+{%- endmacro %}
+
+{%- macro fieldset(content, legend, description) -%}
+    <fieldset {{ ui.util.attrs(kwargs) }}>
+        {%- if legend -%}
+            <legend>{{ legend }}</legend>
+            {{ description }}
+        {%- endif %}
+        {{ content }}
+    </fieldset>
+{%- endmacro %}
+
+{%- macro select_option(content, value, selected) -%}
+    <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
+{%- endmacro %}
+
+{%- macro subtitle_item(content, initial) -%}
+    {%- do kwargs -%}
+    {{ content }}
+    {%- if not initial %} {{ g.template_title_delimiter }} {% endif %}
+{%- endmacro %}
+
+{%- macro search_advanced_controls() -%}
+    {%- do kwargs -%}
+{%- endmacro %}

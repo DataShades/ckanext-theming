@@ -36,38 +36,10 @@
     {{ ui.input(content, type="file", **kwargs) }}
 {%- endmacro %}
 
-{%- macro form(content, method, action, enctype, include_csrf=true) -%}
-    {{ ui.form_start(method=method, action=action, enctype=enctype, **kwargs) }}
-    {{ h.csrf_input() if include_csrf and method and method|upper != "GET" }}
-    {{ content }}
-    {{ ui.form_end() }}
-{%- endmacro %}
-
-{%- macro form_actions(content) -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "form-actions"}) }}>{{ content }}</div>
-{%- endmacro %}
-
-{%- macro form_end(content) -%}
-    {%- do kwargs -%}
-    {{ content }}
-    </form>
-{%- endmacro %}
-
 {%- macro form_errors(errors) -%}
     {%- do kwargs -%}
     {{ _form.errors(errors) if errors }}
 {%- endmacro %}
-
-{%- macro form_start(content, method, action, enctype) -%}
-    <form
-        {{ ui.util.attrs(kwargs) }}
-        {%- if method %} method="{{ method }}"{%- endif %}
-        {%- if action %} action="{{ action }}"{%- endif %}
-        {%- if enctype %} enctype="{{ enctype }}"{%- endif -%}
-    >
-        {{ content }}
-{%- endmacro %}
-
 
 {%- macro hidden_input(name, value) -%}
     {%- do kwargs -%}
@@ -200,10 +172,6 @@
     </div>
 {%- endmacro %}
 
-{%- macro select_option(content, value, selected) -%}
-    <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
-{%- endmacro %}
-
 {%- macro textarea(content, name, id, label, value, placeholder, required, errors=[], group_class="form-group control-full") -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("class", "form-control") -%}
     {%- set params = {
@@ -217,14 +185,4 @@
               "attrs": kwargs.attrs,
         } -%}
     {%- call _form.textarea(**params) -%}{{ content }}{%- endcall %}
-{%- endmacro %}
-
-{%- macro fieldset(content, legend, description) -%}
-    <fieldset {{ ui.util.attrs(kwargs) }}>
-        {%- if legend -%}
-            <legend>{{ legend }}</legend>
-            {{ description }}
-        {%- endif %}
-        {{ content }}
-    </fieldset>
 {%- endmacro %}

@@ -2,7 +2,9 @@
 
 
 {%- macro _header(content, title, subtitle, logo, href=h.url_for('home.index')) -%}
-    <header {{ ui.util.attrs(kwargs, {"class": "masthead"}) }}>
+    {%- set item_kwargs = kwargs -%}
+
+    <header {{ ui.util.attrs(item_kwargs, {"class": "masthead"}) }}>
         {%- call ui.util.call(ui.container) -%}
             {% if g.debug and not g.debug_supress_header %}
                 <div class="debug">Blueprint : {{ g.blueprint }}<br />View : {{ g.view }}</div>
@@ -11,10 +13,10 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="{{ g.header_class }} navbar-left col-md-2">
                     {% if logo -%}
-                        {%- do kwargs.setdefault("attrs", {}).setdefault("class", "logo") -%}
-                        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, **kwargs) }}
+                        {%- do item_kwargs.setdefault("attrs", {}).setdefault("class", "logo") -%}
+                        {{ ui.link(ui.image(h.url_for_static_or_external(logo), alt=title, aria={"label": _('Navigate to Home - {site_title}').format(site_title=title)}), href=href, **item_kwargs) }}
                     {%- else -%}
-                        {{ ui.link(title, href=href, **kwargs) }}
+                        {{ ui.link(title, href=href, **item_kwargs) }}
                         {%- if subtitle -%}
                             <p class="mb-0">{{ subtitle }}</p>
                         {%- endif %}

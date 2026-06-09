@@ -8,8 +8,7 @@ content. They provide consistent navigation patterns and help maintain user
 orientation within the site. Many navigation components work in hierarchical
 relationships - for example, [`nav_item`][nav-item] components work within
 navigation containers, and [`breadcrumb`][] components work with
-[`breadcrumb_wrapper`][breadcrumb-wrapper] and
-[`breadcrumb_divider`][breadcrumb-divider] components.
+[`breadcrumb_wrapper`][breadcrumb-wrapper] component.
 
 ## Breadcrumb
 
@@ -21,11 +20,9 @@ parent sections.
 
 Breadcrumb components typically display a series of linked navigation items
 that represent the path from the site root to the current page. They work with
-[`breadcrumb_wrapper`][breadcrumb-wrapper] and
-[`breadcrumb_divider`][breadcrumb-divider] components to create complete
+[`breadcrumb_wrapper`][breadcrumb-wrapper]  component to create complete
 breadcrumb experiences with proper visual separation and structural
-organization. [`breadcrumb_divider`][breadcrumb-divider] is usually called
-automatically inside [`breadcrumb`][]. Breadcrumbs are particularly valuable
+organization. Breadcrumbs are particularly valuable
 for sites with deep hierarchical structures where users might navigate several
 levels deep.
 
@@ -37,11 +34,6 @@ levels deep.
 {{ ui.breadcrumb("Home", href="/", initial=true) }}
 {{ ui.breadcrumb("Datasets", href="/datasets") }}
 {{ ui.breadcrumb("Dataset Name") }}
-
-<!-- Breadcrumb with leading divider -->
-{{ ui.breadcrumb("Home", href="/", initial=true) }}
-{{ ui.breadcrumb("Datasets", href="/datasets") }}
-{{ ui.breadcrumb_divider() }}
 ```
 ///
 
@@ -49,8 +41,7 @@ levels deep.
     type: info
 
 The [`breadcrumb`][] component works with
-[`breadcrumb_wrapper`][breadcrumb-wrapper] and
-[`breadcrumb_divider`][breadcrumb-divider] components to create complete
+[`breadcrumb_wrapper`][breadcrumb-wrapper] component to create complete
 breadcrumb navigation experiences. While breadcrumbs provide the navigation
 structure, the wrapper provides the container and dividers provide visual
 separation.

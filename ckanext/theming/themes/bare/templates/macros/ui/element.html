@@ -2,10 +2,6 @@
     <sup><mark {{ ui.util.attrs(kwargs) }}>{{ content }}</mark></sup>
 {%- endmacro %}
 
-{%- macro breadcrumb_divider(content="/") -%}
-    <span {{ ui.util.attrs(kwargs) }} class="breadcrumb-divider">{{ content }}</span>
-{%- endmacro %}
-
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
         <a {{ ui.util.attrs(kwargs) }} href="{{ href }}" class="btn btn--{{ style }}">{{ content }}</a>
@@ -14,55 +10,14 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro datetime(dt, date_format, with_hours, empty="") -%}
-    <time {{ ui.util.attrs(kwargs) }} datetime="{{ h.render_datetime(dt, date_format='%Y-%m-%dT%H:%M:%S%z') }}">
-        {{- h.render_datetime(dt, date_format=date_format, with_hours=with_hours) or empty -}}
-    </time>
-{%- endmacro %}
-
-{%- macro divider(content) -%}
-    {%- if content -%}
-        <div {{ ui.util.attrs(kwargs) }} class="divider divider-with-content">
-            <hr><span>{{ content }}</span><hr>
-        </div>
-    {%- else -%}
-        <hr {{ ui.util.attrs(kwargs) }} class="divider">
-    {%- endif %}
-{%- endmacro %}
-
 {%- macro empty(content) -%}
     <p {{ ui.util.attrs(kwargs) }} class="text-muted empty">{{ content }}</p>
-{%- endmacro %}
-
-{%- macro heading(content, level) -%}
-    {%- set tag =  "h" ~ level %}
-    <{{ tag }} {{ ui.util.attrs(kwargs) }}>{{ content }}</{{ tag }}>
 {%- endmacro %}
 
 {%- macro icon(name) -%}
     <span {{ ui.util.attrs(kwargs) }} class="icon-{{ name }}">{{ ui.util.icon(name) }}</span>
 {%- endmacro %}
 
-{%- macro image(src, alt, height, width) -%}
-    {%- if not alt -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("role", "presentation") -%}
-    {%- endif -%}
-    <img
-        {{ ui.util.attrs(kwargs) }}
-        src="{{ src }}"
-        alt="{{ alt or "" }}"
-        {%- if height %} height="{{ height }}"{% endif %}
-        {%- if width %} width="{{ width }}"{% endif %}
-    >
-{%- endmacro %}
-
-{%- macro link(content, href, blank) -%}
-    {%- if blank -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("target", "_blank") -%}
-        {%- do kwargs.setdefault("attrs", {}).setdefault("rel", "noopener noreferrer") -%}
-    {%- endif %}
-    <a {{ ui.util.attrs(kwargs) }} href="{{ href }}">{{ content }}</a>
-{%- endmacro %}
 
 {%- macro tag(content, href) -%}
     <a {{ ui.util.attrs(kwargs, {"class": "tag"}) }} {%- if href %} href="{{ href }}"{%- endif %}>{{ content }}</a>
@@ -74,8 +29,4 @@
         {%- do kwargs.setdefault("attrs", {}).setdefault("class", "active") -%}
     {%- endif %}
     {{ ui.link(content, "#" ~ id, **kwargs) }}
-{%- endmacro %}
-
-{%- macro video(src, controls) -%}
-    <video {{ ui.util.attrs(kwargs) }} src="{{ src }}" {{ "controls" if controls }}></video>
 {%- endmacro %}

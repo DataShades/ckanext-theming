@@ -9,18 +9,6 @@
     </div>
 {%- endmacro %}
 
-{%- macro confirm_modal(content, title, id, form_id, cancel_label, confirm_label, href) -%}
-    {%- if not form_id -%}
-        {% set form_id = ui.util.id() %}
-        {{ ui.form(method="POST", attrs={"id": form_id}, action=href) }}
-    {%- endif %}
-
-    {%- set close_button = ui.modal_close_handle(cancel_label or _("Close"), id=id, style="secondary") %}
-    {%- set confirm_button = ui.modal_close_handle(confirm_label or _("Confirm"), id=id, type="submit", attrs={"form": form_id}) %}
-
-    {{ ui.modal(content, title=title or _("Confirm"), id=id, footer=close_button ~ confirm_button, **kwargs) }}
-{%- endmacro %}
-
 {%- macro modal(content, title, footer, id, size, dismissible=true) -%}
     {%- set class = "modal fade" -%}
     {%- if size -%}

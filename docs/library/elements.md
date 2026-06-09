@@ -52,48 +52,6 @@ based on their purpose.
 ///
 
 
-## Breadcrumb Divider
-
-The [`breadcrumb_divider`][breadcrumb-divider] component displays dividers
-between breadcrumb navigation items, creating visual separation and indicating
-the hierarchical relationship between navigation levels. These dividers are
-subtle but important elements that enhance the readability and understanding of
-breadcrumb trails.
-
-Breadcrumb dividers typically use simple visual elements like chevrons, arrows,
-or simple separators to indicate the progression from one level to another in
-the navigation hierarchy. The component works in conjunction with
-[`breadcrumb`][] and [`breadcrumb_wrapper`][breadcrumb-wrapper] components to
-create cohesive navigation experiences that help users understand their current
-location within the site structure.
-
-| Parameter | Type   | Default | Description                                  |
-|-----------|--------|---------|----------------------------------------------|
-| `content` | string | -       | The character or text to use as the divider. |
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Default divider -->
-{{ ui.breadcrumb_divider() }}
-
-<!-- Custom divider -->
-{{ ui.breadcrumb_divider(">") }}
-```
-///
-
-/// admonition | Relationship
-    type: info
-
-The [`breadcrumb_divider`][breadcrumb-divider] component works with
-[`breadcrumb`][] and [`breadcrumb_wrapper`][breadcrumb-wrapper] components to
-create complete breadcrumb navigation experiences. While breadcrumbs provide
-the navigation structure, dividers provide the visual separation between
-levels.
-
-///
-
 
 ## Button
 

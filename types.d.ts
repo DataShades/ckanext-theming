@@ -48,11 +48,14 @@ declare global {
      *
      * @property style - Additional style classes for the notification.
      * @property dismissible - Whether the notification can be dismissed by the user.
+     * @property title - Title text displayed in the notification header.
+     * @property delay - Time in milliseconds before auto-hide.
      */
     interface INotificationParams extends IParams {
       style?: string;
       dismissible?: boolean;
       title?: Content;
+      delay?: number;
     }
 
     /**

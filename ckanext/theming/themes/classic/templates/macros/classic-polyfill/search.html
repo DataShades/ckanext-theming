@@ -61,10 +61,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro search_advanced_controls() -%}
-    {%- do kwargs -%}
-{%- endmacro %}
-
 {%- macro search_form_box(content, use_htmx) -%}
     {%- do kwargs.setdefault("attrs", {}).setdefault("class", "search-form") -%}
     {%- if use_htmx -%}

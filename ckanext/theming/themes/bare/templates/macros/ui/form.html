@@ -70,23 +70,6 @@ this.parentNode.insertBefore(tpl, this);
     {{ ui.input(content, type="file", **kwargs) }}
 {%- endmacro %}
 
-{%- macro form(content, method, action, enctype, include_csrf=true) -%}
-    {{ ui.form_start(method=method, action=action, enctype=enctype, **kwargs) }}
-    {{ h.csrf_input() if include_csrf and method and method|upper != "GET" }}
-    {{ content }}
-    {{ ui.form_end() }}
-{%- endmacro %}
-
-{%- macro form_actions(content) -%}
-    <div{{ ui.util.attrs(kwargs) }}>{{ content }}</div>
-{%- endmacro %}
-
-{%- macro form_end(content) -%}
-    {%- do kwargs -%}
-    {{ content }}
-    </form>
-{%- endmacro %}
-
 {%- macro form_errors(errors) -%}
     {% if errors %}
         <div {{ ui.util.attrs(kwargs) }}>
@@ -100,18 +83,6 @@ this.parentNode.insertBefore(tpl, this);
     {% endif %}
 {%- endmacro %}
 
-{%- macro form_start(method, action, enctype) -%}
-    <form
-        {{ ui.util.attrs(kwargs) }}
-        {%- if method %} method="{{ method }}"{%- endif %}
-        {%- if action %} action="{{ action }}"{%- endif %}
-        {%- if enctype %} enctype="{{ enctype }}"{%- endif -%}
-    >
-{%- endmacro %}
-
-{%- macro hidden_input(name, value) -%}
-    <input {{ ui.util.attrs(kwargs) }} type="hidden" name="{{ name }}" value="{{ value or "" }}">
-{%- endmacro %}
 
 {%- macro form_annotation() -%}
     {%- do kwargs -%}
@@ -276,10 +247,6 @@ this.parentNode.insertBefore(tpl, this);
     </div>
 {%- endmacro %}
 
-{%- macro select_option(content, value, selected) -%}
-    <option {{ ui.util.attrs(kwargs) }} value="{{ value }}" {{ "selected" if selected }}>{{ content }}</option>
-{%- endmacro %}
-
 {%- macro submit(content, value, name) -%}
     {%- do kwargs.setdefault("attrs", {}).update({"value": value, "name": name}) -%}
     {{ ui.button(content, type="submit", **kwargs) }}
@@ -314,12 +281,3 @@ this.parentNode.insertBefore(tpl, this);
 {% macro image_upload()  %}
     {{ _image_upload(*varargs, **kwargs) }}
 {%- endmacro -%}
-
-{%- macro fieldset(content, legend) -%}
-    <fieldset {{ ui.util.attrs(kwargs) }}>
-        {%- if legend -%}
-            <legend>{{ legend }}</legend>
-        {%- endif %}
-        {{ content }}
-    </fieldset>
-{%- endmacro %}

@@ -592,14 +592,6 @@ badge:
             description: Visual style of the badge, either "primary", "secondary", "success", "danger", "warning", or "info"
             type: 'str'
 
-breadcrumb_divider:
-    description: |
-        Divider element used in breadcrumb navigation.
-    category: recommended
-    arguments:
-        content:
-            description: Divider content, typically a "/" or ">" character
-
 button:
     description: |
         Button element, used to trigger an action when clicked.
