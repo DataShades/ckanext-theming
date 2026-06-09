@@ -1,0 +1,91 @@
+<h2><code>ui.util.augment_attrs</code></h2>
+
+<div class="theming-example">
+    <p>
+        Apply default values to the <code>attrs</code> item of the dictionary.
+    </p>
+
+    <p>
+        This function is used internally inside <code>ui.util.attrs</code>. Following
+        two examples are approximately the same.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- set kwargs = {} -%}
+            {%- set default_attrs = {"class": "hello"} -%}
+
+            {{ ui.util.attrs(kwargs, default_attrs) }}
+        {%- endraw %}
+    {%- endcall %}
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- set kwargs = {} -%}
+            {%- set default_attrs = {"class": "hello"} -%}
+
+            {%- set extended_kwargs = ui.util.augment_attrs(kwargs, default_attrs)-%}
+
+            {{ ui.util.attrs(extended_kwargs) }}
+        {%- endraw %}
+    {%- endcall %}
+
+</div>
+
+<div class="theming-example">
+    <p>
+        This function can be called when macro needs to set default attributes
+        before delegating call to a different macro.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- macro button_with_id(content, id) -%}
+                {%- set updated_kwargs = ui.util.augment_attrs(kwargs, {"id": id}) -%}
+
+                {{ ui.button(content, **updated_kwargs) }}
+            {%- endmacro %}
+
+            {{ button_with_id("Click", id="test-id") }}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        By default it updates <code>attrs</code> item in the dictionary, but
+        you can change this behavior by providing <code>key</code> argument. If
+        it's non-empty string, corresponding item will be updated. If it's a
+        falsy value, the top-level will be updated
+    </p>
+
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- set data = {} -%}
+            {%- do ui.util.augment_attrs(data, {"x": 1}) -%}
+            {%- do ui.util.augment_attrs(data, {"y": 2}, key="aria") -%}
+            {%- do ui.util.augment_attrs(data, {"z": 3}, key=none) -%}
+
+            {{ data | tojson }}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+
+
+<div class="theming-example">
+    <p>
+        Only missing items will be applied. If target item already contains
+        value for the one of default keys, it will remain unchanged.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- set data = {"attrs": {"a": 42}} -%}
+            {%- do ui.util.augment_attrs(data, {"a": 1, "b": 2}) -%}
+
+            {{ data | tojson }}
+        {%- endraw %}
+    {%- endcall %}
+</div>

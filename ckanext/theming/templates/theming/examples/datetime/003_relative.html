@@ -10,15 +10,10 @@
 </p>
 
 
-<div>
-    {%- set now = ui.util.now() -%}
-    {%- set date = now.year ~ "-01-01" -%}
-    {{ ui.datetime(date, relative=true) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-        {%- set date = "1970-01-01" -%}
+        {%- set now = ui.util.now() -%}
+        {%- set date = now.year ~ "-01-01" -%}
         {{ ui.datetime(date, relative=true) }}
     {%- endraw %}
 {%- endcall %}

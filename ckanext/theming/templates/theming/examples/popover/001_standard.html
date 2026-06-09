@@ -7,21 +7,9 @@
 </p>
 
 
-<div>
-    {%- set id = ui.util.id() -%}
-
-    {%- call ui.util.call(ui.popover, title="Popover", id=id) -%}
-        {{ lipsum(1) }}
-        {{ ui.divider() }}
-        {{ lipsum(1) }}
-    {%- endcall %}
-
-    Usually {{ ui.popover_handle("[popover handle]", id=id) }} does not have custom appearance.
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-        {% set id = ui.util.id() -%}
+        {%- set id = ui.util.id() -%}
 
         {%- call ui.util.call(ui.popover, title="Popover", id=id) -%}
             {{ lipsum(1) }}
@@ -29,8 +17,6 @@
             {{ lipsum(1) }}
         {%- endcall %}
 
-        Usually {{ ui.popover_handle("popover handle", id=id) }}
-        does not have custom appearance.
-
+        Usually {{ ui.popover_handle("[popover handle]", id=id) }} does not have custom appearance.
     {%- endraw %}
 {%- endcall %}

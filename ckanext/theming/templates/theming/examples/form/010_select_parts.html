@@ -1,0 +1,34 @@
+<h3>Select parts</h3>
+
+<p>
+    This example shows how to use the lower level API to create a more complex
+    select box with optgroups and help text. It also can be used, when select
+    options are not represented by an iterable of <code>{"value": VALUE, "text": LABEL}</code> objects.
+</p>
+
+<p>
+    <code>select_box</code> accepts the same arguments as <code>select</code>,
+    except for <code>options</code> and <code>selected</code>. These parameters
+    are handled by code responsible for rendering <code>select_option</code> components.
+</p>
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {%- set help_text = ui.field_info("Help text") -%}
+        {%- call ui.util.call(ui.select_box, label="Complex select", nested_content=help_text) -%}
+            {%- set values = range(10) -%}
+
+            <optgroup label="Even">
+                {%- for num in values|select("even") -%}
+                    {{ ui.select_option(num, value=num) }}
+                {%- endfor %}
+            </optgroup>
+            <optgroup label="Odd">
+                {%- for num in values|select("odd") -%}
+                    {{ ui.select_option(num, value=num, selected=num==7) }}
+                {%- endfor %}
+            </optgroup>
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

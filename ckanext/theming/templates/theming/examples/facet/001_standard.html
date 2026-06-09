@@ -6,41 +6,16 @@
 
 </p>
 
-<div>
-    {%- call ui.util.call(ui.filters) -%}
-        {{ ui.facet_section(lipsum(1), title="Nothing") }}
-
-        {%- set items = [
-              {"name": "one", "count": 1},
-              {"name": "ten", "count": 10, "active": true},
-              {"name": "hundreed", "count": 100},
-            ] -%}
-
-        {%- call ui.util.call(ui.facet_section, title="Something", items=items, has_more=true) -%}
-            {%- call ui.util.call(ui.facet_list) -%}
-                {%- for item in items -%}
-                    {{ ui.facet(
-                            "Facet " ~ item.name,
-                            key="",
-                            value=item.name,
-                            count=item.count,
-                            active=item.active) }}
-                {%- endfor %}
-            {%- endcall %}
-        {%- endcall %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.filters) -%}
             {{ ui.facet_section(lipsum(1), title="Nothing") }}
 
             {%- set items = [
-              {"name": "one", "count": 1},
-              {"name": "ten", "count": 10, "active": true},
-              {"name": "hundreed", "count": 100},
-                ] -%}
+                  {"name": "one", "count": 1},
+                  {"name": "ten", "count": 10, "active": true},
+                  {"name": "hundreed", "count": 100},
+             ] -%}
 
             {%- call ui.util.call(ui.facet_section, title="Something", items=items, has_more=true) -%}
                 {%- call ui.util.call(ui.facet_list) -%}

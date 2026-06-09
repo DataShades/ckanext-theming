@@ -6,18 +6,12 @@
 </p>
 
 
-<div>
-    {%- set now = ui.util.now() -%}
-
-    Today: {{ ui.datetime(now) }}
-    <br/>
-    Now: {{ ui.datetime(now, with_hours=true) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
+        {%- set now = ui.util.now() -%}
+
         Today: {{ ui.datetime(now) }}
-        &lt;br/&gt;
+        <br/>
         Now: {{ ui.datetime(now, with_hours=true) }}
     {%- endraw %}
 {%- endcall %}

@@ -28,21 +28,7 @@
     themes may choose to ignore it and always render modals as dismissible.
 </p>
 
-<div>
-    {%- set id = ui.util.id() -%}
-    {{ ui.modal_handle("Dismissible", id=id) }}
-    {{ ui.modal(lipsum(1), title="Dismissible modal", id=id, dismissible=true) }}
-
-    {%- set another_id = ui.util.id() -%}
-    {{ ui.modal_handle("Non-dismissible", id=another_id) }}
-    {{ ui.modal(lipsum(1),
-            title="Non-dismissible modal",
-            id=another_id,
-            dismissible=false,
-            footer=ui.modal_close_handle(_("Close"), id=another_id)) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set id = ui.util.id() -%}
         {{ ui.modal_handle("Dismissible", id=id) }}

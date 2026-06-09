@@ -5,12 +5,7 @@
     <code>true</code>.
 </p>
 
-<div>
-    {{ ui.alert(lipsum(1, 1, 5), dismissible=true) }}
-    {{ ui.alert(lipsum(1, 1, 5), dismissible=false) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.alert(lipsum(1, 1, 5), dismissible=true) }}
         {{ ui.alert(lipsum(1, 1, 5), dismissible=false) }}

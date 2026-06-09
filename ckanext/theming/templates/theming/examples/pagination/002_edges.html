@@ -9,17 +9,7 @@
     <code>end_label</code> parameters to the desired values.
 </p>
 
-<div>
-    {{ ui.pagination(page=5, total=10, hide_edges=true) }}
-    {{ ui.pagination(
-            page=5,
-            total=10,
-            hide_edges=false,
-            start_label="First",
-            end_label="Last") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.pagination(page=5, total=10, hide_edges=true) }}
         {{ ui.pagination(

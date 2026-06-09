@@ -1,4 +1,5 @@
 <h3>Standard</h3>
+
 <p>
     The standard alert component is a simple way to display important messages
     to users. It can be used to show information, warnings, errors, or success
@@ -8,14 +9,7 @@
     and take appropriate action if needed.
 </p>
 
-<div>
-    {{ ui.alert(lipsum(1, 1, 5)) }}
-    {{ ui.alert(lipsum(1, 1, 5), style="success") }}
-    {{ ui.alert(lipsum(1, 1, 5), style="danger") }}
-    {{ ui.alert(lipsum(1, 1, 5), style="warning") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.alert(lipsum(1, 1, 5)) }}
         {{ ui.alert(lipsum(1, 1, 5), style="success") }}

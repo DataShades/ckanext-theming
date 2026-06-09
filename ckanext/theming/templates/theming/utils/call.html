@@ -1,66 +1,82 @@
-<div class="util-example">
-    <h2><code>ui.util.call</code></h2>
+<h2><code>ui.util.call</code></h2>
 
-    <p>
-        Call an inline element as a block element.
-    </p>
+<p>
+    Call an inline element as a block element.
+</p>
 
+<div class="theming-example">
     <p>
         This function allows passing complex content into an element using a Jinja2
         caller. For example, following simple macro does not contain <code>caller()</code>:
-
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {% macro button(content) %}
-                    &lt;button&gt;{{ content }}&lt;/button&gt;
-                {% endmacro %}
-            {%- endraw %}
-        {%- endcall %}
     </p>
 
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {% macro button(content) %}
+                <button>{{ content }}</button>
+            {% endmacro %}
+
+            {#
+                You'll get an exception during evaluation of this block:
+
+                {%- call button() -%}Click{%- endcall %}
+
+                #}
+
+            {# It's still ok to make an inline invocation #}
+            {{ button("Click") }}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+
+<div class="theming-example">
     <p>
-        As result, it cannot be called in form <code>{%- raw -%}{% call ui.button() %}{%- endraw %}</code> and
+        Such components  cannot be called in form <code>{%- raw -%}{% call ui.button() %}{%- endraw %}</code> and
         rendering button with nested HTML turns into a verbose task. But using <code>ui.util.call</code>,
-        the button can be used with <code>call</code>:
-
-
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {% call ui.util.call(button) %}
-                    &lt;i class="icon"&gt;&lt;/i&gt;
-                    Click!
-                {% endcall %}
-            {%- endraw %}
-        {%- endcall %}
+        the button can be used with <code>call</code>
     </p>
-    <div>
-        {%- filter forceescape -%}
-            <button>
-                <i class="icon"></i>
-                Click!
-            </button>
-        {%- endfilter  %}
-    </div>
 
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {% macro button(content) %}
+                <button>{{ content }}</button>
+            {% endmacro %}
+
+            {% call ui.util.call(button) %}
+                <i class="fa fa-home"></i>
+                Click!
+            {% endcall %}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
     <p>
         The content of the <code>call</code> block will be passed as a first argument into
         the target macro. Any other positional and named arguments of the
         <code>ui.util.call</code> will be redirected into the button macro as
         well.
-
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {% call ui.util.call(button, attrs={"data-id": "123"}) %}
-                    Click!
-                {% endcall %}
-            {%- endraw %}
-        {%- endcall %}
     </p>
-    <div>
-        {%- filter forceescape -%}
-            <button data-id="123">
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {% macro button(content) %}
+                <button {{ ui.util.attrs(kwargs) }}>{{ content }}</button>
+            {% endmacro %}
+
+            {% call ui.util.call(button, data={"id": "42"}) %}
+                <i class="fa fa-home"></i>
                 Click!
-            </button>
-        {%- endfilter  %}
-    </div>
+            {% endcall %}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        Unless component documentation says otherwise, it's safe to assume that
+        component will cause an exception when used with <code>call</code> directly. Always
+        wrap component calls into <code>ui.util.call</code>.
+    </p>
 </div>

@@ -8,17 +8,7 @@
     to the desired values.
 </p>
 
-<div>
-    {{ ui.pagination(page=5, total=10, hide_siblings=true) }}
-    {{ ui.pagination(
-            page=5,
-            total=10,
-            hide_siblings=false,
-            next_label="Next",
-            previous_label="Prev") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.pagination(page=5, total=10, hide_siblings=true) }}
         {{ ui.pagination(

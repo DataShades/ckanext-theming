@@ -5,15 +5,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.organization_list) -%}
-        {%- for organization in organizations -%}
-            {{ ui.organization(organization=organization) }}
-        {%- endfor %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.organization_list) -%}
             {%- for organization in organizations -%}

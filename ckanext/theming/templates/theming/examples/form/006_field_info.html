@@ -7,11 +7,7 @@
 </p>
 
 
-<div>
-    {{ ui.input(ui.field_info("Help text here"), name="name", label="Name") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.input(ui.field_info("Help text here"), name="name", label="Name") }}
     {%- endraw %}

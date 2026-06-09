@@ -4,111 +4,99 @@
     Creates a tooltip.
 </p>
 
-<p>
-    It accepts <code>conent</code> of the tooltip as a first argument, which
-    can be either text or DOM node. The second argument is an object with
-    options. It has one required option - <code>target</code> of
-    the tooltip(the HTML node next to which tooltip is shown). The object
-    produced by the function has methods <code>show</code> and <code>close</code> that
-    change visibility of the tooltip. Usually tooltip's visibility is toggled
-    when cursor is over the element, so this object is required only when you
-    want to add an additional behavior.
+<div class="theming-example">
+    <p>
+        It accepts <code>conent</code> of the tooltip as a first argument, which
+        can be either text or DOM node. The second argument is an object with
+        options. It has one required option - <code>target</code> of
+        the tooltip(the HTML node next to which tooltip is shown). The object
+        produced by the function has methods <code>show</code> and <code>close</code> that
+        change visibility of the tooltip. Usually tooltip's visibility is toggled
+        when cursor is over the element, so this object is required only when you
+        want to add an additional behavior.
+    </p>
 
-    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const target = document.getElementById(id)
-        const tooltip = sandbox.ui.tooltip("Hello world", {target})
-    {%- endcall %}
-
-</p>
-
-{%- with id = ui.util.id() -%}
-    <div>
-        <mark id="{{ id }}">I'm the target of tooltip</mark>
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-
-                const target = document.getElementById(`{{ id }}`)
-                const tooltip = sandbox.ui.tooltip("Hello world", {target})
-            })
-        </script>
-    </div>
-{%- endwith %}
-{{ ui.divider() }}
-
-
-<p>
-    Other tooltip options:
-
-    <ul>
-        <li><code>position</code>: string, position of the tooltip relative to
-            the target. Possible values are "top", "right", "bottom" and
-            "left".</li>
-    </ul>
-
-    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const tooltipTarget = document.getElementById(id)
-        const tooltip = sandbox.ui.tooltip("Hello world", {
-        &nbsp;&nbsp;target,
-        &nbsp;&nbsp;position: "left"
-        })
-    {%- endcall %}
-</p>
-
-{%- with id = ui.util.id() -%}
-    <div>
-        <mark id="{{ id }}">I'm the target of tooltip</mark>
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-
-                const target = document.getElementById(`{{ id }}`)
-                const tooltip = sandbox.ui.tooltip("Hello world", {
-                    target,
-                    position: "left"
-                })
-            })
-        </script>
-    </div>
-{%- endwith %}
-{{ ui.divider() }}
-
-
-<p>
-    To access existing tooltip, rendered with <code>ui.tooltip</code> macro, use <code>getTooltip</code> method
-    available in the JS. This method accepts ID of the tooltip target.
-
-    {%- call ui.util.call(ui.code, language="jinja2", dedent=true) %}
+    {%- call ui.util.call(show_example) -%}
         {%- raw %}
+            {% set id = ui.util.id() -%}
+            <mark id="{{ id }}">I'm the target of tooltip</mark>
+
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+
+                    const target = document.getElementById(`{{ id }}`)
+                    const tooltip = sandbox.ui.tooltip("Hello world", {target})
+                })
+            </script>
+
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        Other tooltip options:
+
+        <ul>
+            <li><code>position</code>: string, position of the tooltip relative to
+                the target. Possible values are "top", "right", "bottom" and
+                "left".</li>
+        </ul>
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- set id = ui.util.id() -%}
+            <mark id="{{ id }}">I'm the target of tooltip</mark>
+
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+
+                    const target = document.getElementById(`{{ id }}`)
+                    const tooltip = sandbox.ui.tooltip("Hello world", {
+                        target,
+                        position: "left"
+                    })
+                })
+            </script>
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+
+<div class="theming-example">
+    <p>
+        To access existing tooltip, rendered with <code>ui.tooltip</code> macro, use <code>getTooltip</code> method
+        available in the JS. This method accepts ID of the tooltip target.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {% set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
+
             {% set tooltip_id = ui.util.id() -%}
             {{ ui.tooltip("I'm the target of tooltip", tooltip="Hello world", attrs={"id": tooltip_id}) }}
 
-            &lt;script&gt;
-            &nbsp;&nbsp;const tooltip = sandbox.ui.getTooltip(`{{ tooltip_id }}`)
-            &nbsp;&nbsp;const btn = sandbox.ui.button("Toggle tooltip on hover");
-            &nbsp;&nbsp;btn.addEventListener("mouseenter", () => tooltip.show())
-            &nbsp;&nbsp;btn.addEventListener("mouseleave", () => tooltip.close())
-            &nbsp;&nbsp;document.getElementById(id).appendChild(btn)
-            &lt;/script&gt;
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+                    const tooltip = sandbox.ui.getTooltip(`{{ tooltip_id }}`)
+                    const btn = sandbox.ui.button("Toggle tooltip on hover");
+                    btn.addEventListener("mouseenter", () => tooltip.show())
+                    btn.addEventListener("mouseleave", () => tooltip.close())
+                    document.getElementById(`{{ id }}`).appendChild(btn)
+                })
+            </script>
+
         {%- endraw %}
+
     {%- endcall %}
-</p>
+</div>
 
 {%- with id = ui.util.id() -%}
     <div id="{{ id }}">
-        {% set tooltip_id = ui.util.id() -%}
-        {{ ui.tooltip("I'm the target of tooltip", tooltip="Hello world", attrs={"id": tooltip_id}) }}
-
-        <br/>
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-                const tooltip = sandbox.ui.getTooltip(`{{ tooltip_id }}`)
-                const btn = sandbox.ui.button("Toggle tooltip on hover");
-                btn.addEventListener("mouseenter", () => tooltip.show())
-                btn.addEventListener("mouseleave", () => tooltip.close())
-                document.getElementById(`{{ id }}`).appendChild(btn)
-            })
-        </script>
     </div>
 {%- endwith %}

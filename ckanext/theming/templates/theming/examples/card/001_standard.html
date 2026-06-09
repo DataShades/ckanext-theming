@@ -5,16 +5,7 @@
 </p>
 
 
-<div>
-    {%- set btn = ui.button("Click") -%}
-    {%- set img = "https://placehold.co/300x200" -%}
-
-    {%- call ui.util.call(ui.card, title="Title", footer=btn, img=img) -%}
-        {{ lipsum(1) }}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set btn = ui.button("Click") -%}
         {%- set img = "https://placehold.co/300x200" -%}

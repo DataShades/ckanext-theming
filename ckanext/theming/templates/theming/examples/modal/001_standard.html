@@ -15,17 +15,7 @@
     <code>ui.util.id()</code> function to generate it.
 </p>
 
-<div>
-    {%- set id = ui.util.id() -%}
-    {{ ui.modal_handle("Open modal", id=id) }}
-    {{ ui.modal(lipsum(1), title="Standard modal", id=id) }}
-
-    {%- set another_id = ui.util.id() -%}
-    {{ ui.modal_handle("Open modal without title", id=another_id) }}
-    {{ ui.modal(lipsum(1), id=another_id) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set id = ui.util.id() -%}
         {{ ui.modal_handle("Open modal", id=id) }}

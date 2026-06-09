@@ -5,12 +5,7 @@
 </p>
 
 
-<div>
-    {%- set options = [{"value":"1", "text": "First"}, {"value":"2", "text": "Second"}] -%}
-    {{ ui.select(name="select", label="List", options=options, selected="2") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set options = [{"value":"1", "text": "First"}, {"value":"2", "text": "Second"}] -%}
         {{ ui.select(name="select", label="List", options=options, selected="2") }}

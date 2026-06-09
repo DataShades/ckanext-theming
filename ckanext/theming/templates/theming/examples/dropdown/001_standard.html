@@ -7,14 +7,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.dropdown, title="Dropdown") -%}
-        {{ ui.dropdown_item("Link", href="?") }}
-        {{ ui.dropdown_item("Action", on={"click": "alert(1)"}) }}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.dropdown, title="Dropdown") -%}
             {{ ui.dropdown_item("Link", href="?") }}

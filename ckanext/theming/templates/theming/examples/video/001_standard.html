@@ -10,11 +10,7 @@
 </p>
 
 
-<div>
-    {{ ui.video(src="https://lorem.video/240p", controls=true) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.video(src="https://lorem.video/240p", controls=true) }}
     {%- endraw %}

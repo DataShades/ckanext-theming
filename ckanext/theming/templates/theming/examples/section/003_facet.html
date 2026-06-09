@@ -9,14 +9,7 @@
     Content of the facet section must be generated using <code>facet_list</code> and <code>facet</code> components.
 </p>
 
-<div>
-    {%- call ui.util.call(ui.filters) -%}
-        {{ ui.facet_section(lipsum(1), title="Nothing") }}
-    {%- endcall %}
-
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.filters) -%}
             {{ ui.facet_section(lipsum(1), title="Nothing") }}

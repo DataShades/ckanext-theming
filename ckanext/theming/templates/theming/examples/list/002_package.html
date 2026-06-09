@@ -8,15 +8,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.package_list) -%}
-        {%- for pkg in packages -%}
-            {{ ui.package(package=pkg) }}
-        {%- endfor %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.package_list) -%}
             {%- for pkg in packages -%}

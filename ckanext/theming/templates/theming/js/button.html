@@ -7,39 +7,32 @@
 <p>
     It accepts <code>conent</code> of the button as a first argument, which can
     be either text or DOM node. The second argument is an object with options:
-
-    {%- call ui.util.call(ui.list) -%}
-        {%- call ui.util.call(ui.list_item) -%}
-            <code>type</code>: can be <code>button</code>, <code>submit</code>, or <code>reset</code>.
-        {%- endcall %}
-        {%- call ui.util.call(ui.list_item) -%}
-            <code>style</code>: any style supported by theme, e.g. <code>primary</code>, <code>secondary</code>, <code>danger</code>,
-            etc.
-        {%- endcall %}
-    {%- endcall %}
 </p>
 
-{%- set id1 = ui.util.id() -%}
+<ul>
+    <li><code>type</code>: can be <code>button</code>, <code>submit</code>, or <code>reset</code>.</li>
+    <li><code>style</code>: any style supported by theme, e.g. <code>primary</code>, <code>secondary</code>, <code>danger</code>,
+        etc.</li>
+</ul>
 
-<p>
-    The function returns standard <code>HTMLElement</code> that can be added to the DOM.
 
-    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const btn = sandbox.ui.button("Click me", {"style": "danger"});
-        btn.addEventListener("click", () => alert(1))
+<div class="theming-example">
+    <p>
+        The function returns standard <code>HTMLElement</code> that can be added to the DOM.
+    </p>
+    {%- call ui.util.call(show_example) %}
+        {%- raw %}
+            {%- set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
 
-        document.getElementById(id).appendChild(btn)
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+                    const btn = sandbox.ui.button("Click me", {"style": "danger"});
+                    btn.addEventListener("click", () => alert(1))
+                    document.getElementById(`{{ id }}`).appendChild(btn)
+                })
+            </script>
+        {%- endraw %}
     {%- endcall %}
-
-</p>
-
-<div id="{{ id1 }}">
-    <script>
-        window.addEventListener("load", () => {
-            const sandbox = ckan.sandbox()
-            const btn = sandbox.ui.button("Click me", {"style": "danger"});
-            btn.addEventListener("click", () => alert(1))
-            document.getElementById(`{{ id1 }}`).appendChild(btn)
-        })
-    </script>
 </div>

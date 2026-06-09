@@ -15,27 +15,10 @@
     be placed inside <code>tabbed_content</code>
 </p>
 
-<div>
-    {%- set first_pane_id = ui.util.id() -%}
-    {%- set second_pane_id = ui.util.id() -%}
-    {%- call ui.util.call(ui.tabbed_content) -%}
-        {%- call ui.util.call(ui.tab_wrapper) -%}
-            {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}
-            {{ ui.tab("Pane 2", id=second_pane_id) }}
-        {%- endcall %}
-
-        {%- call ui.util.call(ui.tab_pane_wrapper) -%}
-            {{ ui.tab_pane(lipsum(1), active=true, id=first_pane_id) }}
-            {{ ui.tab_pane(lipsum(1), id=second_pane_id) }}
-        {%- endcall %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set first_pane_id = ui.util.id() -%}
         {%- set second_pane_id = ui.util.id() -%}
-
         {%- call ui.util.call(ui.tabbed_content) -%}
             {%- call ui.util.call(ui.tab_wrapper) -%}
                 {{ ui.tab("Pane 1", active=true, id=first_pane_id) }}

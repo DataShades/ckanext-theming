@@ -16,25 +16,7 @@
     this case it usually not rendered at all.
 </p>
 
-<div>
-    {%- call ui.util.call(ui.footer) -%}
-        {%- call ui.util.call(ui.footer_main) -%}
-            {%- call ui.util.call(ui.footer_main_nav) -%}
-                {{ ui.footer_main_nav_item("first", href="?") }}
-                {{ ui.footer_main_nav_item("second", href="?") }}
-            {%- endcall %}
-        {%- endcall %}
-
-        {%- call ui.util.call(ui.footer_secondary) -%}
-            {%- call ui.util.call(ui.footer_secondary_nav) -%}
-                {{ ui.footer_secondary_nav_item("secondary first", href="?") }}
-                {{ ui.footer_secondary_nav_item("secondary second", href="?") }}
-            {%- endcall %}
-        {%- endcall %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.footer) -%}
             {%- call ui.util.call(ui.footer_main) -%}

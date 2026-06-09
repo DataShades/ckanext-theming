@@ -10,12 +10,7 @@
 </P>
 
 
-<div>
-    {{ ui.tag("Hello", href="#") }}
-    {{ ui.tag("World") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.tag("Hello", href="#") }}
         {{ ui.tag("World") }}

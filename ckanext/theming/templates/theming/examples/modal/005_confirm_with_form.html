@@ -12,21 +12,7 @@
     provide necessary input without navigating away from the current page.
 </p>
 
-<div>
-    {%- set id = ui.util.id() -%}
-    {%- set form_id = ui.util.id() -%}
-
-    {{ ui.form(method="GET", attrs={"id": form_id}) }}
-
-    {{ ui.modal_handle("Custom form", id=id) }}
-    {{ ui.confirm_modal(
-            ui.input(name="answer", label=_("Answer"), attrs={"form": form_id}),
-             title="Custom form",
-            id=id,
-            form_id=form_id) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set id = ui.util.id() -%}
         {%- set form_id = ui.util.id() -%}

@@ -17,16 +17,7 @@
     routing structure or include specific parameters as needed.
 </p>
 
-<div>
-    {{ ui.pagination(page=5, total=10, url_params={"extra": "value"}) }}
-
-    {%- macro url_generator(page) -%}
-        {{ request.url }}?p={{page}}&{{ kwargs.items()|map("join", "=")|join("&") }}
-    {%- endmacro %}
-    {{ ui.pagination(page=5, total=10, url_generator=url_generator) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.pagination(page=5, total=10, url_params={"extra": "value"}) }}
 

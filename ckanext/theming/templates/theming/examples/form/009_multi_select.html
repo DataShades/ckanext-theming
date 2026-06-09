@@ -7,12 +7,7 @@
 </p>
 
 
-<div>
-    {%- set options = [{"value":"a"}, {"value":"b"}, {"value":"c"}, {"value":"d"}] -%}
-    {{ ui.select(label="List", multiple=true, options=options, selected=["b", "c"]) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set options = [{"value":"a"}, {"value":"b"}, {"value":"c"}, {"value":"d"}] -%}
         {{ ui.select(label="List", multiple=true, options=options, selected=["b", "c"]) }}

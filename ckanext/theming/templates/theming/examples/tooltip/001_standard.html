@@ -8,12 +8,8 @@
 </p>
 
 
-<div>
-    {{ ui.tooltip("Normal text", tooltip="Tooltip content") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-
+        {{ ui.tooltip("Normal text", tooltip="Tooltip content") }}
     {%- endraw %}
 {%- endcall %}

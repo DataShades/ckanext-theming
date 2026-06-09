@@ -1,41 +1,49 @@
 {%- macro parameters_table(component) -%}
-    {%- call ui.util.call(ui.table, striped=true, hover=true) -%}
-        {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, ["Parameter", "Type", "Description"], header=true))) }}
-        {%- call ui.util.call(ui.table_body) -%}
-            {%- for name, info in ref[component].arguments.items() -%}
-                {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(name) }}
-                    {{ ui.table_cell(info.type) }}
-                    {{ ui.table_cell(info.description) }}
-                {%- endcall %}
-            {%- endfor %}
+
+    {%- call ui.util.call(ui.section, title=ui.util.tag(component, "code"), level=3) -%}
+        {%- call ui.util.call(ui.table, striped=true, hover=true) -%}
+            {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, ["Parameter", "Type", "Description"], header=true))) }}
+            {%- call ui.util.call(ui.table_body) -%}
+                {%- for name, info in ref[component].arguments.items() -%}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell(name) }}
+                        {{ ui.table_cell(info.type) }}
+                        {{ ui.table_cell(info.description|e) }}
+                    {%- endcall %}
+                {%- endfor %}
+            {%- endcall %}
         {%- endcall %}
     {%- endcall %}
 {%- endmacro %}
 
-<h2>Purpose</h2>
-{%- block overview -%}
-{%- endblock %}
+{%- set parametrized = parametrized or [component] -%}
 
+
+{%- call ui.util.call(ui.section, title=_("Overview"), level=2) -%}
+    {%- block overview -%}
+    {%- endblock %}
+{%- endcall %}
 
 {%- if examples -%}
-    {{ ui.divider() }}
 
-    <h2>Examples</h2>
-    {%- block examples -%}
-        {%- for example in examples -%}
-            <div class="component-example">
-                {{ ui.link("Open in new tab", href=h.url_for('theming.component_example', component=component, example=example), blank=true) }}
-                {%- include "theming/examples/{}/{}.html".format(component, example) -%}
+    {%- call ui.util.call(ui.section, title=_("Examples"), level=2) -%}
+        {%- block examples -%}
+            {%- for example in examples -%}
+                <div class="theming-example">
+                    {{ ui.link("Open in new tab", href=h.url_for('theming.component_example', component=component, example=example), blank=true) }}
+                    {%- include "theming/examples/{}/{}.html".format(component, example) -%}
 
-            </div>
-        {%- endfor %}
-    {%- endblock %}
+                </div>
+            {%- endfor %}
+        {%- endblock %}
+    {%- endcall %}
 {%- endif %}
 
-{{ ui.divider() }}
+{%- if parametrized -%}
+    {%- call ui.util.call(ui.section, title=_("Parameters"), level=2) -%}
+        {%- block parameters -%}
+            {{ ui.util.map(parameters_table, parametrized) }}
+        {%- endblock %}
 
-<h2>Parameters</h2>
-{%- block parameters -%}
-    {{ parameters_table(component) }}
-{%- endblock %}
+    {%- endcall %}
+{%- endif %}

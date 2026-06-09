@@ -1,10 +1,19 @@
-<div class="util-example">
-    <h2><code>ui.util.tag</code></h2>
+<h2><code>ui.util.tag</code></h2>
 
+<div class="theming-example">
     <p>
         Helper method to render an HTML tag with the specified content, tag name, and attributes.
     </p>
 
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {{ ui.util.tag("Content", "h2") }}
+        {%- endraw %}
+    {%- endcall %}
+
+</div>
+
+<div class="theming-example">
     <p>
         Empty tag name will render content without any wrapper - this can be
         used to apply wrapper conditionally. For example, <code>ui.util.tag(content,
@@ -12,66 +21,25 @@
         <code>condition</code> is truthy, and just <code>content</code> without wrapper otherwise.
     </p>
 
-    <p>
-        Example:
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {{ ui.util.tag("Content", "") }}
+        {%- endraw %}
+    {%- endcall %}
 
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {{ ui.util.tag("Content", "h2") }}
-            {%- endraw %}
-        {%- endcall %}
-    </p>
+</div>
 
-    <div>
-        {%- filter forceescape -%}
-            <h2>Content</h2>
-        {%- endfilter  %}
-    </div>
-
+<div class="theming-example">
     <p>
         <code>ui.uti.tag</code> takes into account additional named arguments
         and processes them using <code>ui.util.attrs</code>:
+    </p>
 
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {{ ui.util.tag("click", "button",
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {{ ui.util.tag("click", "button",
                     attrs={"style": "background: lime;font-size: 2rem;"},
                     on={"click": "alert(1)"}) }}
-            {%- endraw %}
-        {%- endcall %}
-    </p>
-
-    <div>
-        {%- filter forceescape -%}
-            <button style="background: lime;font-size: 2rem;" onclick="alert(1)">click</button>
-        {%- endfilter  %}
-    </div>
-
-    <p>
-        This function can be used to apply different wrapping tag depending on
-        conditional expression, or to omit wrapper completely:
-
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {%- call ui.util.call(ui.util.tag, "div" if wrap else "") -%}
-                    content
-                {%- endcall %}
-            {%- endraw %}
-        {%- endcall %}
-    </p>
-
-    <div>
-        When <code>wrap=true</code>: <br/>
-        {%- filter forceescape -%}
-            <div>content</div>
-        {%- endfilter  %}
-
-        <br/>
-        When <code>wrap=false</code>: <br/>
-        {%- filter forceescape -%}
-            content
-        {%- endfilter  %}
-    </div>
-
-
+        {%- endraw %}
+    {%- endcall %}
 </div>

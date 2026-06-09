@@ -16,28 +16,17 @@
 </p>
 
 
-<div>
-    {{ ui.button("Show alert", on={"click": "alert('CLICK')"}) }}
-
-    {% set id = ui.util.id() %}
-    {{ ui.button("Reload the page", attrs={"id": id}) }}
-    <script>
-        document.getElementById(`{{ id }}`).addEventListener(
-            "click", () => location.reload()
-        )
-    </script>
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.button("Show alert", on={"click": "alert('CLICK')"}) }}
 
-        {%- set id = ui.util.id() -%}
+        {% set id = ui.util.id() %}
         {{ ui.button("Reload the page", attrs={"id": id}) }}
-        &lt;script&gt;
-        &nbsp;&nbsp;document.getElementById(`{{ id }}`).addEventListener(
-        &nbsp;&nbsp;&nbsp;&nbsp;"click", () => location.reload()
-        &nbsp;&nbsp;)
-        &lt;/script&gt;
+
+        <script>
+            document.getElementById(`{{ id }}`).addEventListener(
+                "click", () => location.reload()
+            )
+        </script>
     {%- endraw %}
 {%- endcall %}

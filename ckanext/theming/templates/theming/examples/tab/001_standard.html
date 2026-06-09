@@ -10,15 +10,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.tab_wrapper) -%}
-        {{ ui.tab("First") }}
-        {{ ui.tab("Second", active=true) }}
-        {{ ui.tab("Third") }}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.tab_wrapper) -%}
             {{ ui.tab("First") }}

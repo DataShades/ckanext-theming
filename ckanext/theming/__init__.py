@@ -3,6 +3,9 @@ from __future__ import annotations
 import logging
 from typing import Any, cast
 
+from jinja2 import pass_context
+from jinja2.runtime import Context
+
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 from ckan import types
@@ -39,10 +42,22 @@ def default_ui_sources() -> list[str]:
     return ["macros/theming_default_ui.html"]
 
 
+@pass_context
+def _render_string_filter(context: Context, source_string: str, scope: dict[str, Any] | None = None):
+    """Evaluates a raw string as a live Jinja template using the active context."""
+    # Convert context to a flat dictionary
+    ctx_dict = context.get_all()
+    if scope:
+        ctx_dict.update(scope)
+    # Use the environment to compile and render the string
+    return context.environment.from_string(source_string).render(**ctx_dict)
+
+
 def make_middleware(app: types.CKANApp, config_: Any) -> types.CKANApp:  # pyright: ignore[reportUnusedParameter]
     if hasattr(app, "jinja_env"):
         app.jinja_env.add_extension("jinja2.ext.debug")
         app.jinja_env.globals.update({"ui": cast(Any, ui)})
+        app.jinja_env.filters["render_string"] = _render_string_filter  # pyright: ignore[reportArgumentType]
     else:
         log.warning("Cannot initialize UI in the non-flask application")
     return app

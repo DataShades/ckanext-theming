@@ -7,15 +7,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.form) -%}
-        {%- call ui.util.call(ui.fieldset, legend="Fieldset") -%}
-            {{ ui.input(name="field", label="Field") }}
-        {%- endcall %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.form) -%}
             {%- call ui.util.call(ui.fieldset, legend="Fieldset") -%}

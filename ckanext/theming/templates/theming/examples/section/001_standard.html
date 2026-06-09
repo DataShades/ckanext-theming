@@ -7,11 +7,7 @@
 </p>
 
 
-<div>
-    {{ ui.section(lipsum(1), title="Title") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.section(lipsum(1), title="Title") }}
     {%- endraw %}

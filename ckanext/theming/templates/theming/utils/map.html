@@ -1,0 +1,28 @@
+<h2><code>ui.util.map</code></h2>
+
+<div class="theming-example">
+    <p>
+        Apply given component to the list of items. Use it to render multiple
+        similar elements, that have different content.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {{ ui.util.map(ui.button, ["Click", "Press", "Push"]) }}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        The rest of arguments will be passed to every individual component
+        call.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {{ ui.util.map(ui.button, ["Click", "Press", "Push"], style="danger") }}
+        {%- endraw %}
+    {%- endcall %}
+
+</div>

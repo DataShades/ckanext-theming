@@ -1,5 +1,32 @@
 {%- extends "page.html" -%}
 
+{%- macro show_example(content, language, escape=false) -%}
+    {%- set example_id = ui.util.id(prefix="example-") -%}
+    {%- set code_id = ui.util.id(prefix="code-") -%}
+
+    {%- call ui.util.call(ui.tabbed_content) -%}
+        {%- call ui.util.call(ui.tab_wrapper) -%}
+            {{ ui.tab("Example", id=example_id, active=true) }}
+            {{ ui.tab("Code", id=code_id) }}
+        {%- endcall %}
+        {%- call ui.util.call(ui.tab_pane_wrapper) -%}
+            {%- call ui.util.call(ui.tab_pane, id=example_id, active=true) -%}
+                <div class="theming-example-output {{ 'theming-example-output--escaped' if escape }}">
+                    {%- if escape -%}
+                        {{ content | render_string }}
+                    {%- else -%}
+                        {{ content | render_string | safe }}
+                    {%- endif %}
+                </div>
+            {%- endcall %}
+            {%- call ui.util.call(ui.tab_pane, id=code_id, _extra_class="theming-example-code") -%}
+                {{ ui.code(content|forceescape, language=language, dedent=true) }}
+            {%- endcall %}
+        {%- endcall %}
+    {%- endcall %}
+{%- endmacro %}
+
+
 {%- block page_layout -%}
     sidebar-start
 {%- endblock %}
@@ -24,9 +51,12 @@
 
 {%- endblock %}
 
-
-
 {%- block scripts -%}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-light.min.css" integrity="sha512-o5v54Kh5PH0dgnf9ei0L+vMRsbm5fvIvnR/XkrZZjN4mqdaeH7PW66tumBoQVIaKNVrLCZiBEfHzRY4JJSMK/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/django.min.js" integrity="sha512-bAR1FVCWQlHkrDzUD3vCcEp3yJ1YznHY8XtwIzT7eSxKpwL3R3OcVaWY3TCCAYC4F/sFMwx1FNy6qF8cFEtcXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     {{ super() }}
     {%- asset "theming/examples" -%}
+
 {%- endblock %}

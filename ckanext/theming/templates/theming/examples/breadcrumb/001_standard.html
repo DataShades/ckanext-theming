@@ -8,27 +8,14 @@
     back to previous levels if needed.
 </p>
 
-
-
-
-<div>
-    <div class="toolbar">
-        {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-            {{ ui.breadcrumb("Home", href="/", initial=true) }}
-            {{ ui.breadcrumb("Theeming", href="/theming") }}
-            {{ ui.breadcrumb("Component", href="/theming/component", active=true) }}
-        {%- endcall %}
-    </div>
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-        &lt;div class="toolbar"&gt;
-        {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-            {{ ui.breadcrumb("Home", href="/", initial=true) }}
-            {{ ui.breadcrumb("Theeming", href="/theming") }}
-            {{ ui.breadcrumb("Component", href="/theming/component", active=true) }}
-        {%- endcall %}
-        &lt;/div&gt;
+        <div class="toolbar">
+            {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+                {{ ui.breadcrumb("Home", href="/", initial=true) }}
+                {{ ui.breadcrumb("Theeming", href="/theming") }}
+                {{ ui.breadcrumb("Component", href="/theming/component", active=true) }}
+            {%- endcall %}
+        </div>
     {%- endraw %}
 {%- endcall %}

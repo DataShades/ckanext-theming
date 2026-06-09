@@ -5,32 +5,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.grid) -%}
-        {%- call ui.util.call(ui.row, justify="between") -%}
-            {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
-                {{ lipsum(1) }}
-            {%- endcall %}
-            {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
-                {{ lipsum(1) }}
-            {%- endcall %}
-        {%- endcall %}
-
-        {%- call ui.util.call(ui.row, align="end") -%}
-            {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
-                {{ lipsum(1) }}
-            {%- endcall %}
-            {%- call ui.util.call(ui.column, span={"xs": 6}) -%}
-                {{ lipsum(1) }}
-            {%- endcall %}
-            {%- call ui.util.call(ui.column, span={"xs": 3}) -%}
-                {{ lipsum(1) }}
-            {%- endcall %}
-        {%- endcall %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.grid) -%}
             {%- call ui.util.call(ui.row, justify="between") -%}

@@ -6,16 +6,10 @@
 </p>
 
 
-<div>
-    <div class="secondary">
-        {{ ui.sidebar_section(lipsum(1), title="Title") }}
-    </div>
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-        &lt;div class="secondary"&gt;
-        {{ ui.sidebar_section(lipsum(1), title="Title") }}
-        &lt;/div&gt;
+        <div class="secondary">
+            {{ ui.sidebar_section(lipsum(1), title="Title") }}
+        </div>
     {%- endraw %}
 {%- endcall %}

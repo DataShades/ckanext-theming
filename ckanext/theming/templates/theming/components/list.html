@@ -1,25 +1,14 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["list", "list_item",
+    "package", "resource", "user", "group", "organization",
+    "package_list", "resource_list", "user_list", "group_list", "organization_list",
+    ] -%}
 
 {%- block overview -%}
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>List item</h3>
-    {{ parameters_table("list_item") }}
-
-    <h3>Package</h3>
-    {{ parameters_table("package") }}
-
-    <h3>Resource</h3>
-    {{ parameters_table("resource") }}
-
-    <h3>User</h3>
-    {{ parameters_table("user") }}
-
-    <h3>Organization</h3>
-    {{ parameters_table("organization") }}
-
-    <h3>Group</h3>
-    {{ parameters_table("group") }}
-
+    <p>
+        Lists are used to display multiple items of the same type, such as
+        packages, resources, users, groups, or organizations. Each item in the
+        list can be rendered using a specific template that defines how the
+        item should be displayed.
+    </p>
 {%- endblock %}

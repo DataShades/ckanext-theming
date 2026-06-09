@@ -1,0 +1,23 @@
+<h2><code>ui.util.icon</code></h2>
+
+<div class="theming-example">
+    <p>
+        Map standard icon name(FontAwesome) to the icon name from theme's icon
+        library. For eample, if theme created with <code>Theme(..., icon_map={"home": "building"})</code>,
+        call of the function with the <code>home</code> will return <code>buildingg</code>.
+    </p>
+
+    <p>
+        This function mainly used by the <code>icon</code> macro.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- macro icon(name) -%}
+                <span class="material-icons">{{ ui.util.icon(name) }}</span>
+            {%- endmacro %}
+
+            {{ icon("home") }}
+        {%- endraw %}
+    {%- endcall %}
+</div>

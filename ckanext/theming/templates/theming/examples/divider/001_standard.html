@@ -7,22 +7,12 @@
     content is ignored.
 </p>
 
-
-<div>
-    Divider without content:
-    {{ ui.divider() }}
-
-    Divider with content:
-    {{ ui.divider("CONTENT") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         Divider without content:
         {{ ui.divider() }}
 
         Divider with content:
         {{ ui.divider("CONTENT") }}
-
     {%- endraw %}
 {%- endcall %}

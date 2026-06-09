@@ -45,7 +45,7 @@ class BaseUtil(abc.ABC):
 
     @abc.abstractmethod
     def pop_items(
-        self, category: str, key: str | None = None, default: Any = None, keep: bool = False
+        self, category: str, key: str | None = None, default: Any = None, /, keep: bool = False
     ) -> dict[str, Any] | Any: ...
 
     @abc.abstractmethod

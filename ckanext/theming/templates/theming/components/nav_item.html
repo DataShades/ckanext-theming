@@ -1,5 +1,15 @@
 {%- extends "theming/base_component.html" -%}
 
+{%- set parametrized = parametrized or [
+   "main_nav", "main_nav_item",
+   "account_nav", "account_nav_item",
+   "sidebar_nav", "sidebar_nav_item",
+   "content_nav", "content_nav_item",
+   "page_action", "page_action_wrapper",
+   "content_action", "content_action_wrapper",
+
+    ] -%}
+
 {%- block overview -%}
 
     <p>
@@ -135,26 +145,5 @@
         items.
     </p>
 
-
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Main navigation</h3>
-    {{ parameters_table("main_nav_item") }}
-
-    <h3>Account navigation</h3>
-    {{ parameters_table("account_nav_item") }}
-
-    <h3>Content navigation</h3>
-    {{ parameters_table("content_nav_item") }}
-
-    <h3>Sidebar navigation</h3>
-    {{ parameters_table("sidebar_nav_item") }}
-
-    <h3>Page actions</h3>
-    {{ parameters_table("page_action") }}
-
-    <h3>Content actions</h3>
-    {{ parameters_table("content_action") }}
 
 {%- endblock %}

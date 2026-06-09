@@ -1,0 +1,69 @@
+<h2><code>ui.util.keep_item</code> / <code>ui.util.pop_items</code></h2>
+
+<div class="theming-example">
+    <p>
+        This pair of function stores and returns arbitrary data during the
+        request. It's similar to flash messages, but can store any kind of data
+        and removes data after request is finished.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- do ui.util.keep_item("random", "a", 1) -%}
+            {%- do ui.util.keep_item("random", "b", 2) -%}
+
+            {{ ui.util.pop_items("random") | tojson }}
+
+            {# `c` remains unused and will be dropped after request is finished #}
+            {%- do ui.util.keep_item("random", "c", 3) -%}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        Data is stored as 2-dimensional map. The first level defines category,
+        the second level contains key of the item. It can be used by <code>ui.util.pop_items</code> which
+        accepts either a single argument(category) and returns dictionary with
+        all keys for the category, or two arguments(category and key) and
+        returns just a single item from the category.
+    </p>
+
+    <p>
+        Note, in Jinja2 you do not need to declare <code>kwargs</code> inside macro
+        signature. Just use variable with name <code>kwargs</code> somewhere inside
+        macro code and Jinja2 collect all additional arguments into it implicitly.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- do ui.util.keep_item("data", "a", 1) -%}
+            {%- do ui.util.keep_item("data", "b", 2) -%}
+            {%- do ui.util.keep_item("data", "c", 3) -%}
+
+
+            C is {{ ui.util.pop_items("data", "c") }}.
+
+            The rest if {{ ui.util.pop_items("data") | tojson }}
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        <code>ui.util.pop_items</code> removes the item/category upon
+        access. If you want to check the content, but without removing it,
+        enable <code>keep</code> flag.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- do ui.util.keep_item("data", "a", 1) -%}
+
+            Peek: {{ ui.util.pop_items("data", "a", keep=true) }}.
+            Pop: {{ ui.util.pop_items("data", "a") }}.
+            Now it's empty: {{ ui.util.pop_items("data", "a") }}.
+
+        {%- endraw %}
+    {%- endcall %}
+</div>

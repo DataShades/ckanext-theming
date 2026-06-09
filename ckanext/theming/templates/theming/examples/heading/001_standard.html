@@ -7,16 +7,7 @@
 </p>
 
 
-<div>
-    {{ ui.heading("H1", level=1) }}
-    {{ ui.heading("H2", level=2) }}
-    {{ ui.heading("H3", level=3) }}
-    {{ ui.heading("H4", level=4) }}
-    {{ ui.heading("H5", level=5) }}
-    {{ ui.heading("H6", level=6) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.heading("H1", level=1) }}
         {{ ui.heading("H2", level=2) }}

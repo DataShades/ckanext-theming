@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrizedd or ["button", "button_group"] -%}
 
 {%- block overview -%}
 
@@ -26,12 +27,4 @@
         component to visually group them.
     </p>
 
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Button</h3>
-    {{ super() }}
-
-    <h3>Button group</h3>
-    {{ parameters_table("button_group") }}
 {%- endblock %}

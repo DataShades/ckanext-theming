@@ -9,29 +9,15 @@
     generate a modal with a standard confirmation layout and behavior.
 </p>
 
-<div>
-    {%- set id = ui.util.id() -%}
-    {%- set another_id = ui.util.id() -%}
-    {{ ui.modal_handle("Confirm modal", id=id) }}
-    {{ ui.modal_handle("Custom  modal", id=another_id) }}
-
-    {{ ui.confirm_modal(lipsum(1), title="Custom confirmation", id=id) }}
-
-    {{ ui.confirm_modal(lipsum(1),
-            title="Custom confirmation",
-            id=another_id,
-            cancel_label=_("Not agree"),
-            confirm_label=_("Agree")) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set id = ui.util.id() -%}
-        {{ ui.modal_handle("Confirm modal", id=id) }}
-        {{ ui.confirm_modal(lipsum(1), title="Confirmation", id=id) }}
-
         {%- set another_id = ui.util.id() -%}
-        {{ ui.modal_handle("Custom modal", id=another_id) }}
+        {{ ui.modal_handle("Confirm modal", id=id) }}
+        {{ ui.modal_handle("Custom  modal", id=another_id) }}
+
+        {{ ui.confirm_modal(lipsum(1), title="Custom confirmation", id=id) }}
+
         {{ ui.confirm_modal(lipsum(1),
             title="Custom confirmation",
             id=another_id,

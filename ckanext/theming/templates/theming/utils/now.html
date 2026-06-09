@@ -1,21 +1,29 @@
-<div class="util-example">
-    <h2><code>ui.util.now</code></h2>
+<h2><code>ui.util.now</code></h2>
 
+<div class="theming-example">
     <p>
         Get the current UTC datetime.
     </p>
 
-    <p>
-        Example:
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {{ ui.util.now() }}
+        {%- endraw %}
+    {%- endcall %}
+</div>
 
-        {%- call ui.util.call(ui.code, dedent=true, language="jinja2") -%}
-            {%- raw %}
-                {{ ui.util.now() }}
-            {%- endraw %}
-        {%- endcall %}
+
+<div class="theming-example">
+    <p>
+        Result of the function is a <code>datetime</code> object, that can be
+        used further.
     </p>
 
-    <div>
-        {{ ui.util.now() }}
-    </div>
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {%- set now = ui.util.now() -%}
+            {{ now.strftime("%B, %Y") }}.
+            New Year was {{ h.time_ago_from_timestamp(now.year ~ "-01-01") }}
+        {%- endraw %}
+    {%- endcall %}
 </div>

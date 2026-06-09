@@ -12,41 +12,22 @@
     indentation of all lines and remove it from the beginning of each line.
 </p>
 
-<div>
-    {%- call ui.util.call(ui.code) -%}
-        {%- raw %}
-            {%- for i in range(3) -%}
-                {{ i }}
-            {%- endfor %}
-        {%- endraw %}
-    {%- endcall %}
-
-    {%- call ui.util.call(ui.code, language="jinja2", dedent=True) -%}
-        {%- raw %}
-            {%- for i in range(3) -%}
-                {{ i }}
-            {%- endfor %}
-        {%- endraw %}
-    {%- endcall %}
-
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.code) -%}
-            &#123;%- raw %}
-            {%- for i in range(3) -%}
-                {{ i }}
-            {%- endfor %}
-            &#123;%- endraw %}
+            {%- filter forceescape %}
+                <script>
+                    alert(1)
+                </script>
+            {%- endfilter %}
         {%- endcall %}
 
-        {%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
-            &#123;%- raw %}
-            {%- for i in range(3) -%}
-                {{ i }}
-            {%- endfor %}
-            &#123;%- endraw %}
+        {%- call ui.util.call(ui.code, language="html", dedent=true) -%}
+            {%- filter forceescape %}
+                <script>
+                    alert(1)
+                </script>
+            {%- endfilter %}
         {%- endcall %}
     {%- endraw %}
 {%- endcall %}

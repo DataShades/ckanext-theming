@@ -9,14 +9,7 @@
     for the link URL or <code>active</code> to indicate the current page.
 </p>
 
-<div>
-    {%- call ui.util.call(ui.pagination_wrapper) -%}
-        {{ ui.pagination_item("Show older records", href="?before=today") }}
-        {{ ui.pagination_item("Show newer records", href="?after=today") }}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.pagination_wrapper) -%}
             {{ ui.pagination_item("Show older records", href="?before=today") }}

@@ -7,11 +7,7 @@
 </p>
 
 
-<div>
-    {{ ui.textarea(ui.field_info("Help text"), name="area", label="Area") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.textarea(ui.field_info("Help text"), name="area", label="Area") }}
     {%- endraw %}

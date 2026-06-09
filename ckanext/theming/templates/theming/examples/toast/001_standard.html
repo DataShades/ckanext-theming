@@ -7,15 +7,7 @@
     actual toasts for the active theme.
 </p>
 
-<div>
-    {{ ui.toast("Hello, world!", title="Toast") }}
-    {{ ui.toast("Hello, world!", title="Toast", style="success") }}
-    {{ ui.toast("Hello, world!", title="Toast", style="warning") }}
-    {{ ui.toast("Hello, world!", title="Toast", style="danger") }}
-    {{ ui.toast("Hello, world!", title="Toast", style="info") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.toast("Hello, world!", title="Toast") }}
         {{ ui.toast("Hello, world!", title="Toast", style="success") }}

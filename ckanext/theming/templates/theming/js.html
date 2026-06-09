@@ -34,6 +34,19 @@
 
 
 {%- block primary_content_inner -%}
+    {%- macro show_example(content, language, escape=false, scope={}) -%}
+        <strong>Code:</strong>
+        <div class="theming-example-code">
+            {{ ui.code(content|forceescape, language=language, dedent=true) }}
+        </div>
+
+        <strong>Result:</strong>
+        <div class="theming-example-output--escaped">
+            {{ content | render_string(scope) |safe}}
+        </div>
+    {%- endmacro %}
+
+
     {%- if util -%}
         {%- include "theming/js/" ~ util ~ ".html" -%}
     {%- else -%}

@@ -6,13 +6,7 @@
 </p>
 
 
-<div>
-    {{ ui.chart(type="pie",
-            data=[1,2,3],
-            labels=["1", "2", "3"]) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.chart(type="pie",
             data=[1,2,3],

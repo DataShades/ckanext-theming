@@ -15,15 +15,7 @@
     be shown on different lines.
 </p>
 
-<div>
-    {%- call ui.util.call(ui.search_form_box) -%}
-        {{ ui.search_input() }}
-        {{ ui.divider() }}
-        {{ ui.search_submit_button() }}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.search_form_box) -%}
             {{ ui.search_input() }}

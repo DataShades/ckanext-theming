@@ -9,14 +9,7 @@
 </p>
 
 
-<div>
-    {{ ui.icon("home") }}
-    {{ ui.icon("trash") }}
-    {{ ui.icon("edit") }}
-    {{ ui.icon("add") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.icon("home") }}
         {{ ui.icon("trash") }}

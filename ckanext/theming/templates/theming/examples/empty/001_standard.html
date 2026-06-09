@@ -5,11 +5,7 @@
 </p>
 
 
-<div>
-    {{ ui.empty("No message here yet") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.empty("No message here yet") }}
     {%- endraw %}

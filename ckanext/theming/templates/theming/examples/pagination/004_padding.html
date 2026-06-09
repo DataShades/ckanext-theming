@@ -8,17 +8,10 @@
     first/last page using the <code>padding_label</code> parameter.
 </p>
 
-<div>
-    {{ ui.pagination(page=5, total=10, padding=2) }}
-    {{ ui.pagination(page=5, total=10, padding=0, padding_label="~~~") }}
-    {{ ui.pagination(page=5, total=10, padding=0, padding_label="", hide_edges=true, hide_siblings=false) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.pagination(page=5, total=10, padding=2) }}
-        {{ ui.pagination(page=5, total=10, padidng=0, padding_label="~~~") }}
-        {{ ui.pagination(page=5, total=10, padding=0, padding_label="",
-            hide_edges=true, hide_siblings=false) }}
+        {{ ui.pagination(page=5, total=10, padding=0, padding_label="~~~") }}
+        {{ ui.pagination(page=5, total=10, padding=0, padding_label="", hide_edges=true, hide_siblings=false) }}
     {%- endraw %}
 {%- endcall %}

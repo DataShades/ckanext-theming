@@ -5,15 +5,7 @@
 </p>
 
 
-<div>
-    {%- call ui.util.call(ui.group_list) -%}
-        {%- for group in groups -%}
-            {{ ui.group(group=group) }}
-        {%- endfor %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- call ui.util.call(ui.group_list) -%}
             {%- for group in groups -%}

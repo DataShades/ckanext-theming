@@ -1,5 +1,15 @@
-{%- extends "page.html" -%}
+{%- extends "theming/base.html" -%}
 
 {%- block page -%}
+    {%- macro show_example(content, language) -%}
+        <div class="theming-example-code">
+            {{ ui.code(content|forceescape, language=language, dedent=true) }}
+        </div>
+
+        <div class="theming-example-output">
+            {{ content | render_string | safe }}
+        </div>
+    {%- endmacro %}
+
     {%- include "theming/examples/{}/{}.html".format(component, example) -%}
 {%- endblock %}

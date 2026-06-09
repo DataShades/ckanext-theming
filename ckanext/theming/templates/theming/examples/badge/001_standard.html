@@ -11,17 +11,7 @@
     experience and ensure that important information is easily recognizable.
 </p>
 
-<div>
-    {{ ui.badge("Default") }}
-    {{ ui.badge("Primary", style="primary") }}
-    {{ ui.badge("Secondary", style="secondary") }}
-    {{ ui.badge("Info", style="info") }}
-    {{ ui.badge("Success", style="success") }}
-    {{ ui.badge("Warning", style="warning") }}
-    {{ ui.badge("Danger", style="danger") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.badge("Default") }}
         {{ ui.badge("Primary", style="primary") }}

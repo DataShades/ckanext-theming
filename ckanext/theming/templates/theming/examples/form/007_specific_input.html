@@ -6,23 +6,7 @@
 </p>
 
 
-<div>
-    {{ ui.hidden_input(name="hidden", value="HIDDEN") }}
-    {{ ui.file_input(name="upload", label="Upload") }}
-    {{ ui.range_input(name="range", label="Range") }}
-
-    {%- call ui.util.call(ui.fieldset, legend="Checkboxes") -%}
-        {{ ui.checkbox(name="check1", label="Do you agree?") }}
-        {{ ui.checkbox(name="check2", label="Are you happy?") }}
-    {%- endcall %}
-
-    {%- call ui.util.call(ui.fieldset, legend="Radio") -%}
-        {{ ui.radio(name="radio", id="radio-1", label="First option") }}
-        {{ ui.radio(name="radio", id="radio-2", label="Second option") }}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.hidden_input(name="hidden", value="HIDDEN") }}
         {{ ui.file_input(name="upload", label="Upload") }}

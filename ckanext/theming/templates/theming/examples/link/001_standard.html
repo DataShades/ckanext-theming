@@ -12,13 +12,7 @@
 </p>
 
 
-<div>
-    {{ ui.link("Internal link", href="?") }}
-
-    {{ ui.link("External link", href="https://ckan.org", blank=true) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.link("Internal link", href="?") }}
 

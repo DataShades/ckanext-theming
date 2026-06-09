@@ -9,12 +9,7 @@
 </p>
 
 
-<div>
-    {%- set now = ui.util.now() -%}
-    {{ ui.datetime(now, date_format="%Y-%m, %H:%M") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {%- set now = ui.util.now() -%}
         {{ ui.datetime(now, date_format="%Y-%m, %H:%M") }}

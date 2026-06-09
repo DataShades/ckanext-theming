@@ -6,171 +6,132 @@
 
 <p>
     It accepts <code>conent</code> of the central part of modal as a first
-    argument, which can be either text or DOM node. The second parameter is an object with options.
+    argument, which can be either text or DOM node. The second parameter is
+    an object with options.
 </p>
 
-<p>
-    The object produced by the
-    function has methods <code>show</code> and <code>close</code> that change
-    visibility of the modal. Initially modal is hidden, and you need to call
-    its <code>show</code> method to display the modal
+<div class="theming-example">
+    <p>
+        The object produced by the
+        function has methods <code>show</code> and <code>close</code> that change
+        visibility of the modal. Initially modal is hidden, and you need to call
+        its <code>show</code> method to display the modal
+    </p>
 
-    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const modal = sandbox.ui.modal("Hello world", {dismissible: true})
-
-        const btn = sandbox.ui.button("Show modal");
-        btn.addEventListener("click", () => modal.show())
-
-        document.getElementById(id).appendChild(btn)
-    {%- endcall %}
-
-</p>
-
-{%- with id = ui.util.id() -%}
-    <div id="{{ id }}">
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-
-                const modal = sandbox.ui.modal("Hello world", {dismissible: true})
-                const btn = sandbox.ui.button("Show modal");
-                btn.addEventListener("click", () => modal.show())
-                document.getElementById(`{{ id }}`).appendChild(btn)
-            })
-        </script>
-    </div>
-{%- endwith %}
-{{ ui.divider() }}
-
-<p>
-    To add title and buttons in the footer to the modal, use its options <code>title</code> and
-    <code>actions</code>.
-
-    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const alertBtn = sandbox.ui.button("Show alert");
-        alertBtn.addEventListener("click", () => alert(1));
-
-        const closeBtn = sandbox.ui.button("Close modal");
-        closeBtn.addEventListener("click", () => modal.close());
-
-        const actions = [alertBtn, closeBtn]
-
-        const modal = sandbox.ui.modal("Hello world", {
-        &nbsp;&nbsp;title: "Modal title",
-        &nbsp;&nbsp;dismissible: true,
-        &nbsp;&nbsp;actions,
-        })
-
-        const btn = sandbox.ui.button("Show modal");
-        btn.addEventListener("click", () => modal.show())
-        document.getElementById(id).appendChild(btn)
-    {%- endcall %}
-</p>
-
-{%- with id = ui.util.id() -%}
-    <div id="{{ id }}">
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-
-                const alertBtn = sandbox.ui.button("Show alert");
-                alertBtn.addEventListener("click", () => alert(1));
-
-                const closeBtn = sandbox.ui.button("Close modal");
-                closeBtn.addEventListener("click", () => modal.close());
-
-                const actions = [alertBtn, closeBtn]
-
-                const modal = sandbox.ui.modal("Hello world", {
-                    title: "Modal title",
-                    dismissible: true,
-                    actions,
-                })
-
-                const btn = sandbox.ui.button("Show modal");
-                btn.addEventListener("click", () => modal.show())
-                document.getElementById(`{{ id }}`).appendChild(btn)
-            })
-        </script>
-    </div>
-{%- endwith %}
-
-{{ ui.divider() }}
-
-
-<p>
-    Other options available for modal:
-
-    <ul>
-        <li><code>dismissible</code>: boolean, whether to add default close-button to the modal.</li>
-        <li><code>dismissLabel</code>: text of the label for the button that closes the modal, e.g. "Close"</li>
-    </ul>
-
-    {%- call ui.util.call(ui.code, language="javascript", dedent=true) %}
-        const modal = sandbox.ui.modal("Hello world", {
-        &nbsp;&nbsp;dismissible: true,
-        &nbsp;&nbsp;dismissLabel: "Close",
-        &nbsp;&nbsp;style: "danger",
-        })
-
-        const btn = sandbox.ui.button("Show modal");
-        btn.addEventListener("click", () => modal.show())
-        document.getElementById(id).appendChild(btn)
-    {%- endcall %}
-</p>
-
-{%- with id = ui.util.id() -%}
-    <div id="{{ id }}">
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-
-                const modal = sandbox.ui.modal("Hello world", {
-                    dismissible: true,
-                    dismissLabel: "Close",
-                })
-                const btn = sandbox.ui.button("Show modal");
-                btn.addEventListener("click", () => modal.show())
-                document.getElementById(`{{ id }}`).appendChild(btn)
-            })
-        </script>
-    </div>
-{%- endwith %}
-{{ ui.divider() }}
-
-
-<p>
-    To access existing modal, rendered with <code>ui.modal</code> macro, use <code>getModal</code> method
-    available in the JS. This method accepts ID of the modal element.
-
-    {%- call ui.util.call(ui.code, language="jinja2", dedent=true) %}
+    {%- call ui.util.call(show_example) -%}
         {%- raw %}
-            {% set modal_id = ui.util.id() -%}
-            {{ ui.modal("Content", title="Title", dismissible=true, id=modal_id) }}
+            {%- set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
 
-            &lt;script&gt;
-            &nbsp;&nbsp;const modal = sandbox.ui.getModal(`{{ modal_id }}`)
-            &nbsp;&nbsp;const btn = sandbox.ui.button("Show modal");
-            &nbsp;&nbsp;btn.addEventListener("click", () => modal.show())
-            &nbsp;&nbsp;document.getElementById(id).appendChild(btn)
-            &lt;/script&gt;
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+
+                    const modal = sandbox.ui.modal("Hello world", {dismissible: true})
+                    const btn = sandbox.ui.button("Show modal");
+                    btn.addEventListener("click", () => modal.show())
+                    document.getElementById(`{{ id }}`).appendChild(btn)
+                })
+            </script>
         {%- endraw %}
     {%- endcall %}
-</p>
+</div>
 
-{%- with id = ui.util.id() -%}
-    <div id="{{ id }}">
-        {%- set modal_id = ui.util.id() -%}
 
-        {{ ui.modal("Content", title="Title", dismissible=true, id=modal_id) }}
-        <script>
-            window.addEventListener("load", () => {
-                const sandbox = ckan.sandbox()
-                const modal = sandbox.ui.getModal(`{{ modal_id }}`)
-                const btn = sandbox.ui.button("Show modal");
-                btn.addEventListener("click", () => sandbox.ui.getModal(`{{ modal_id }}`).show())
-                document.getElementById(`{{ id }}`).appendChild(btn)
-            })
-        </script>
-    </div>
-{%- endwith %}
+<div class="theming-example">
+    <p>
+        To add title and buttons in the footer to the modal, use its options
+        <code>title</code> and <code>actions</code>.
+    </p>
+
+    {%- call ui.util.call(show_example) %}
+        {%- raw %}
+            {% set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
+
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+
+                    const alertBtn = sandbox.ui.button("Show alert");
+                    alertBtn.addEventListener("click", () => alert(1));
+
+                    const closeBtn = sandbox.ui.button("Close modal");
+                    closeBtn.addEventListener("click", () => modal.close());
+
+                    const actions = [alertBtn, closeBtn]
+
+                    const modal = sandbox.ui.modal("Hello world", {
+                        title: "Modal title",
+                        dismissible: true,
+                        actions,
+                    })
+
+                    const btn = sandbox.ui.button("Show modal");
+                    btn.addEventListener("click", () => modal.show())
+                    document.getElementById(`{{ id }}`).appendChild(btn)
+                })
+            </script>
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+<div class="theming-example">
+    <p>
+        Other options available for modal:
+
+        <ul>
+            <li><code>dismissible</code>: boolean, whether to add default close-button to the modal.</li>
+            <li><code>dismissLabel</code>: text of the label for the button that closes the modal, e.g. "Close"</li>
+        </ul>
+    </p>
+
+    {%- call ui.util.call(show_example) %}
+        {%- raw %}
+            {% set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
+
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+
+                    const modal = sandbox.ui.modal("Hello world", {
+                        dismissible: true,
+                        dismissLabel: "Close",
+                    })
+                    const btn = sandbox.ui.button("Show modal");
+                    btn.addEventListener("click", () => modal.show())
+                    document.getElementById(`{{ id }}`).appendChild(btn)
+                })
+            </script>
+        {%- endraw %}
+    {%- endcall %}
+</div>
+
+
+<div class="theming-example">
+    <p>
+        To access existing modal, rendered with <code>ui.modal</code> macro, use <code>getModal</code> method
+        available in the JS. This method accepts ID of the modal element.
+    </p>
+
+    {%- call ui.util.call(show_example) -%}
+        {%- raw %}
+            {% set id = ui.util.id() -%}
+            <div id="{{ id }}"></div>
+
+            {%- set modal_id = ui.util.id() -%}
+            {{ ui.modal("Content", title="Title", dismissible=true, id=modal_id) }}
+
+            <script>
+                window.addEventListener("load", () => {
+                    const sandbox = ckan.sandbox()
+                    const modal = sandbox.ui.getModal("{{ modal_id }}")
+                    const btn = sandbox.ui.button("Show modal");
+                    btn.addEventListener("click", () => sandbox.ui.getModal("{{ modal_id }}").show())
+                    document.getElementById("{{ id }}").appendChild(btn)
+                })
+            </script>
+        {%- endraw %}
+    {%- endcall %}
+</div>

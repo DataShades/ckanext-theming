@@ -1,4 +1,10 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or [
+    "form", "form_errors", "fieldset",
+    "input", "range_input", "file_input", "checkbox", "radio",
+    "textarea", "markdown",
+    "select", "select_box", "select_option"
+    ] -%}
 
 {%- block overview -%}
 
@@ -16,10 +22,51 @@
         complete form experiences.
     </p>
 
-{%- endblock %}
 
-{%- block parameters -%}
-    <h3>Form</h3>
-    {{ super() }}
+    <p>
+        The <code>input</code> component creates general text input fields for
+        collecting user text input. This is one of the most fundamental form
+        components, used for collecting various types of text data including names,
+        email addresses, search terms, and other textual information.
+    </p>
+
+    <p>
+        Input components handle various input types such as text, email, password,
+        and number fields, providing appropriate validation and formatting for each
+        type.
+    </p>
+
+    <p>
+        There are also specialized input components built on top of the base <code>input</code> component,
+        such as <code>checkbox</code>, <code>file_input</code>, and <code>range_input</code>,
+        which provide additional context-specific behavior and attributes to
+        ensure proper handling of specific types of input data.
+    </p>
+
+
+    <p>
+        The <code>select</code> component creates select input element that
+        allow users to choose from a predefined list of options. Select
+        components handle option display, selection management, and
+        accessibility requirements.
+    </p>
+
+    <p>
+        More complex scenarios may require using <code>select_option</code> and
+        <code>select_box</code> components. They separate rendering of the
+        select input from producing all its options and normally used when
+        options are represented via non-standard source.
+    </p>
+
+    <p>
+        The <code>textarea</code> component creates multi-line text input fields that allow
+        users to enter longer text content.
+    </p>
+
+    <p>
+        The <code>markdown</code> component creates a special version of
+        textarea with explanation of markdown syntax and, optionally, WYSIWYG
+        capabilities or syntax highlighting.
+    </p>
 
 {%- endblock %}

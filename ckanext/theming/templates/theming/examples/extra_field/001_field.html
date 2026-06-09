@@ -12,12 +12,8 @@
 </p>
 
 
-<div>
-    {{ ui.extra_field(index=10, data={"key": "key value", "value": "value"}) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-        {{ ui.extra_field(data={"key": "key value", "value": "value"}) }}
+        {{ ui.extra_field(index=10, data={"key": "key value", "value": "value"}) }}
     {%- endraw %}
 {%- endcall %}

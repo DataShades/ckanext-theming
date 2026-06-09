@@ -1,4 +1,5 @@
 {%- macro header(content, title, subtitle, logo, href=h.url_for('home.index')) -%}
+
     <header {{ ui.util.attrs(kwargs) }} id="header">
         {%- call ui.util.call(ui.container) -%}
             {% if logo -%}
@@ -6,7 +7,7 @@
 
             {%- else -%}
                 <div>
-                    {{ ui.heading(ui.link(title, href=href, **kwargs), level=1) }}
+                    {{ ui.heading(ui.link(title, href=href), level=1) }}
                     {% if subtitle %}
                         {{ ui.heading(subtitle, level=2) }}
                     {% endif %}

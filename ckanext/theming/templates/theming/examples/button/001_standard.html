@@ -16,24 +16,14 @@
 </p>
 
 
-<div>
-    {{ ui.button("Default") }}
-    {{ ui.button("Primary", style="primary") }}
-    {{ ui.button("Secondary", style="secondary") }}
-    {{ ui.button("Danger", style="danger") }}
-    {{ ui.button("Success", style="success") }}
-    {{ ui.button("Warning", style="warning") }}
-    {{ ui.button("Info", style="info") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.button("Default") }}
-        {{ ui.button("Default", style="primary") }}
-        {{ ui.button("Default", style="secondary") }}
-        {{ ui.button("Default", style="danger") }}
-        {{ ui.button("Default", style="success") }}
-        {{ ui.button("Default", style="warning") }}
-        {{ ui.button("Default", style="info") }}
+        {{ ui.button("Primary", style="primary") }}
+        {{ ui.button("Secondary", style="secondary") }}
+        {{ ui.button("Danger", style="danger") }}
+        {{ ui.button("Success", style="success") }}
+        {{ ui.button("Warning", style="warning") }}
+        {{ ui.button("Info", style="info") }}
     {%- endraw %}
 {%- endcall %}

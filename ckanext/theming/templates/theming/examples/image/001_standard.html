@@ -12,16 +12,10 @@
 </p>
 
 
-<div>
-    {{ ui.image(src="https://placehold.co/600x400") }}
-    <br/>
-    {{ ui.image(src="https://example.com/not-real.png", alt="Non-existing image") }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.image(src="https://placehold.co/600x400") }}
-
+        <br/>
         {{ ui.image(src="https://example.com/not-real.png", alt="Non-existing image") }}
     {%- endraw %}
 {%- endcall %}

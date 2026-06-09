@@ -13,22 +13,9 @@
     is automatically included into output. To enforce omission of the token, set <code>include_csrf</code> to <code>false</code>.
 </p>
 
-<div>
-    {%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") -%}
-
-        {{ ui.form_errors({"Title": "Must be provided"}) }}
-
-        {{ ui.form_annotation() }}
-
-        {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.button("Submit", type="submit", attrs={"name": "action", "value": "save"}) }}
-        {%- endcall %}
-    {%- endcall %}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
-        {%- call ui.util.call(ui.form, method="GET", enctype="multipart/form-data") -%}
+        {%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") -%}
 
             {{ ui.form_errors({"Title": "Must be provided"}) }}
 

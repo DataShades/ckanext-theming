@@ -12,34 +12,19 @@
     opening {{ ui.link("this link", "?organization=gov") }}.
 </p>
 
-<div>
-    {{ ui.search_form() }}
-
-    {{ ui.search_form(
-        query="term",
-        sorting_options=[("Title", "title asc"), ("Rating", "rating desc")],
-        sorting="rating desc",
-        count=4,
-        type="group",
-        active_filters=[("organization", request.args.organization)] if request.args.organization else [],
-        facets={"organization": {"items": [{"name": "gov", "display_name": "Government"}]}},
-        facet_titles={"organization": "Organization"},
-        use_htmx=false) }}
-</div>
-
-{%- call ui.util.call(ui.code, language="jinja2", dedent=true) -%}
+{%- call ui.util.call(show_example) -%}
     {%- raw %}
         {{ ui.search_form() }}
 
         {{ ui.search_form(
-            query="term",
-            sorting_options=[("Title", "title asc"), ("Rating", "rating desc")],
-            sorting="rating desc",
-            count=4,
-            type="group",
-            active_filters=[("organization", request.args.organization)] if request.args.organization else [],
-            facets={"organization": {"items": [{"name": "gov", "display_name": "Government"}]}},
-            facet_titles={"organization": "Organization"},
-            use_htmx=false) }}
+             query="term",
+             sorting_options=[("Title", "title asc"), ("Rating", "rating desc")],
+             sorting="rating desc",
+             count=4,
+             type="group",
+             active_filters=[("organization", request.args.organization)] if request.args.organization else [],
+             facets={"organization": {"items": [{"name": "gov", "display_name": "Government"}]}},
+             facet_titles={"organization": "Organization"},
+             use_htmx=false) }}
     {%- endraw %}
 {%- endcall %}
