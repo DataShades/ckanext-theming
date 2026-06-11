@@ -28,8 +28,8 @@
     {%- raw %}
         {%- set url = h.url_for("api.dataset_autocomplete", incomplete="?") -%}
 
-        {{ ui.autocomplete(label="Dataset titles", label_key="title", source=url) }}
-        {{ ui.autocomplete(label="Debounce 5s", debounce=5000, source=url) }}
-        {{ ui.autocomplete(label="5 characters for completion", min_chars=5, source=url) }}
+        {{ ui.autocomplete(label="Dataset titles", label_key="title", source=url, id_key="name") }}
+        {{ ui.autocomplete(label="Debounce 5s", debounce=5000, source=url, id_key="name") }}
+        {{ ui.autocomplete(label="5 characters for completion", min_chars=5, source=url, id_key="name") }}
     {%- endraw %}
 {%- endcall %}

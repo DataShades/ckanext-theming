@@ -10,7 +10,7 @@
 
 {%- call ui.util.call(show_example) -%}
     {%- raw %}
-        {{ ui.autocomplete(label="Remote source",
+        {{ ui.autocomplete(label="Remote source", id_key="name",
             source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
     {%- endraw %}
 {%- endcall %}

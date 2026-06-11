@@ -5,11 +5,25 @@ examples:
       - theming/examples-css
   output: ckanext-theming/%(version)s-examples.js
   contents:
-      # - prism.js
       - examples.js
 
 examples-css:
   output: ckanext-theming/%(version)s-examples.css
   contents:
-      # - prism.css
       - examples.css
+
+
+autocomplete-css:
+  output: ckanext-theming/%(version)s-autocomplete.css
+  contents:
+      - autocomplete.css
+
+autocomplete:
+  output: ckanext-theming/%(version)s-autocomplete.js
+  contents:
+      - autocomplete.js
+      # - autocomplete.select2.js
+      # - autocomplete.tomselect.js
+  extra:
+      preload:
+          - theming/autocomplete-css

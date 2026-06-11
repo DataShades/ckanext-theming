@@ -24,15 +24,10 @@ log = logging.getLogger(__name__)
 class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.IBlueprint, p.SingletonPlugin):
     @override
     def update_config(self, config: Any):
-        tk.add_template_directory(config, "templates")
-
         update_config(config)
 
         if config["testing"]:
             tk.add_template_directory(config, "tests/templates")
-
-        if cfg.enable_views():
-            tk.add_resource("assets", "theming")
 
     @override
     def register_themes(self):

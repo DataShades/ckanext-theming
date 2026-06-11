@@ -1,5 +1,5 @@
 {%- macro code(content, language, dedent) -%}
-    <pre {{ ui.util.attrs(kwargs, {"class": "code"})}}><code class="language-{{ language or 'text' }}">
+    <pre {{ ui.util.attrs(kwargs, {"class": "code-wrapper"})}}><code class="code {{ 'language-' ~ language if language }}">
         {%- if dedent -%}
             {%- set ns = namespace(skip=none) -%}
             {%- for line in content.splitlines() -%}
@@ -11,7 +11,6 @@
         {%- else -%}
             {{ content }}
         {%- endif -%}
-
     </code></pre>
 {%- endmacro %}
 
@@ -159,4 +158,38 @@
 
 {%- macro search_advanced_controls() -%}
     {%- do kwargs -%}
+{%- endmacro %}
+
+{%- macro autocomplete(content, source, options, allow_multiple, allow_new, selected, min_chars, debounce, joined, separator, id_key, label_key) -%}
+    {%- asset "theming/autocomplete" -%}
+    {%- set selected = [selected] if selected and selected is string else selected -%}
+    {%- set container_id = ui.util.id() if 1 or allow_multiple else undefined -%}
+
+    {%- set defaults = {
+            "data-theming-module": "autocomplete",
+            "data-autocomplete-source": source,
+            "data-autocomplete-container-id": container_id,
+            "data-autocomplete-allow-new": "true" if allow_new else "false",
+            "data-autocomplete-joined": "true" if joined else "false",
+            "data-autocomplete-allow-multiple": "true" if allow_multiple else "false",
+            "data-autocomplete-debounce": debounce,
+            "data-autocomplete-min-chars": min_chars,
+            "data-autocomplete-separator": separator,
+            "data-autocomplete-id-key": id_key,
+            "data-autocomplete-label-key": label_key,
+            "data-autocomplete-options": options and options|tojson,
+            "data-autocomplete-selected": selected and selected|tojson,
+        } -%}
+
+    {%- do ui.util.augment_attrs(kwargs, defaults) -%}
+
+    <div data-theming-autocomplete-root>
+        {%- call ui.util.call(ui.input, **kwargs) -%}
+            <strong>This widget exists as a placeholder and must be replaced by theme</strong>
+            {{ content }}
+            {%- if container_id -%}
+                <div id="{{ container_id }}" class="theming-autocomplete__chips"></div>
+            {%- endif %}
+        {%- endcall %}
+    </div>
 {%- endmacro %}

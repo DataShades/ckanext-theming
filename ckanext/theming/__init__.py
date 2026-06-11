@@ -26,6 +26,9 @@ def register_themes():
 
 
 def update_config(config_: Any):
+    tk.add_resource("assets", "theming")
+    tk.add_template_directory(config_, "templates")
+
     collect_themes()
     theme = cfg.theme()
     if not theme:
@@ -69,8 +72,6 @@ class ThemingMixin:
     p.implements(ITheme, inherit=True)
 
     def update_config(self, config_: Any):
-        tk.add_template_directory(config_, "templates")
-
         if "theming" not in config_["ckan.plugins"]:
             update_config(config_)
 

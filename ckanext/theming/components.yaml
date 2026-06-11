@@ -1285,7 +1285,7 @@ autocomplete:
     description: |
         Autocomplete input element, used to show a text input with autocomplete
         suggestions in a form.
-    category: essential
+    category: experimental
     arguments:
         content:
             description: Help text for the input
@@ -1340,13 +1340,13 @@ autocomplete:
                 Debounce delay in milliseconds for fetching autocomplete
                 suggestions from the server when source is specified.
             type: 'int'
-        as_list:
+        joined:
             description: >-
                 Whether to submit the selected options as a list of values or
-                as a single comma-separated string when the form is submitted.
+                join values using separator.
             type: 'bool'
         separator:
-            description: Separator character to use for single-string form(as_list=false)
+            description: Separator character to use for single-string form(joined=true)
             type: 'str'
         id_key:
             description: >-

@@ -16,9 +16,9 @@
     When multiple values are allowed, result can be sent to the server either
     as an array of choices, or as a single comma-separated string. The actual
     choice depends on implementations, but you may be able to enforce specific
-    behavior by setting <code>as_list</code> flag. It's not enforced, but
-    themes are adviced to sent data as array when the flag is enabled, and as
-    list when it's disabled.
+    behavior by setting <code>joined</code> flag. It's not enforced, but
+    themes are adviced to sent data as array when the flag is disabled, and as
+    a comma-separated string when it's enabled.
 </p>
 
 <p>
@@ -33,13 +33,14 @@
 {%- call ui.util.call(show_example) -%}
     {%- raw %}
         {% set value = request.args.getlist("static-single-strict") -%}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
         Submitted value: <mark>{{ value }}</mark>
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="static-single-strict",
-                label="Static, as_list=false, allow_new=false", selected=value,
+                label="Static, joined=true, allow_new=false", selected=value,
                 allow_multiple=true,
-                as_list=false,
+                joined=true,
                 allow_new=false, options=[
                     {"value": "Alpha"},
                     {"value": "Beta"},
@@ -60,9 +61,9 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="static-single",
-                label="Static, as_list=false, allow_new=true", selected=value,
+                label="Static, joined=true, allow_new=true", selected=value,
                 allow_multiple=true,
-                as_list=false,
+                joined=true,
                 allow_new=true, options=[
                     {"value": "Alpha"},
                     {"value": "Beta"},
@@ -83,9 +84,9 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="static-multi-strict",
-                label="Static, as_list=true, allow_new=false", selected=value,
+                label="Static, joined=false, allow_new=false", selected=value,
                 allow_multiple=true,
-                as_list=true,
+                joined=false,
                 allow_new=false, options=[
                     {"value": "Alpha"},
                     {"value": "Beta"},
@@ -106,9 +107,9 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="static-multi",
-                label="Static, as_list=true, allow_new=true", selected=value,
+                label="Static, joined=false, allow_new=true", selected=value,
                 allow_multiple=true,
-                as_list=true,
+                joined=false,
                 allow_new=true, options=[
                     {"value": "Alpha"},
                     {"value": "Beta"},
@@ -129,10 +130,10 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="remote-single-strict",
-                label="Remote, as_list=false, allow_new=false", selected=value,
+                label="Remote, joined=true, allow_new=false", selected=value,
                 allow_multiple=true,
-                as_list=false,
-                allow_new=false, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+                joined=true,
+                allow_new=false, source=h.url_for("api.dataset_autocomplete", incomplete="?"), id_key="name") }}
             {{ ui.form_actions(ui.button("Submit", type="submit")) }}
         {%- endcall %}
     {%- endraw %}
@@ -148,10 +149,10 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="remote-single",
-                label="Remote, as_list=false, allow_new=true", selected=value,
+                label="Remote, joined=true, allow_new=true", selected=value,
                 allow_multiple=true,
-                as_list=false,
-                allow_new=true, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+                joined=true,
+                allow_new=true, source=h.url_for("api.dataset_autocomplete", incomplete="?"), id_key="name") }}
             {{ ui.form_actions(ui.button("Submit", type="submit")) }}
         {%- endcall %}
     {%- endraw %}
@@ -167,10 +168,10 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="remote-multi-strict",
-                label="Remote, as_list=true, allow_new=false", selected=value,
+                label="Remote, joined=false, allow_new=false", selected=value,
                 allow_multiple=true,
-                as_list=true,
-                allow_new=false, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+                joined=false,
+                allow_new=false, source=h.url_for("api.dataset_autocomplete", incomplete="?"), id_key="name") }}
             {{ ui.form_actions(ui.button("Submit", type="submit")) }}
         {%- endcall %}
     {%- endraw %}
@@ -186,10 +187,10 @@
 
         {%- call ui.util.call(ui.form) -%}
             {{ ui.autocomplete(name="remote-multi",
-                label="Remote, as_list=true, allow_new=true", selected=value,
+                label="Remote, joined=false, allow_new=true", selected=value,
                 allow_multiple=true,
-                as_list=true,
-                allow_new=true, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+                joined=false,
+                allow_new=true, source=h.url_for("api.dataset_autocomplete", incomplete="?"), id_key="name") }}
             {{ ui.form_actions(ui.button("Submit", type="submit")) }}
         {%- endcall %}
     {%- endraw %}

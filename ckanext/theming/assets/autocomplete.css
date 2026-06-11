@@ -1,0 +1,268 @@
+/**
+ * autocomplete.css
+ * ================
+ * Framework-agnostic autocomplete styles.
+ *
+ * Scoped entirely to the two root selectors:
+ *   .theming-autocomplete__chips   — the chips / selections container
+ *   .autocomplete__listbox         — the suggestions listbox (JS-inserted)
+ *
+ * No colours, shadows, radii, or typography are hard-coded.
+ * Everything uses CSS custom properties with sensible defaults so any
+ * theme can override just the variables it cares about.
+ *
+ * ── CSS custom properties ─────────────────────────────────────────────────
+ *
+ *   --ac-font               font shorthand for the whole widget
+ *   --ac-radius             border-radius on listbox and chips
+ *   --ac-focus-ring         outline shorthand for focused items
+ *
+ *   --ac-listbox-bg         listbox panel background
+ *   --ac-listbox-border     listbox panel border (full shorthand)
+ *   --ac-listbox-shadow     listbox panel box-shadow
+ *   --ac-listbox-z          listbox z-index
+ *   --ac-listbox-max-height max-height before the panel scrolls
+ *
+ *   --ac-option-color       default option text color
+ *   --ac-option-bg-hover    option background on hover / keyboard focus
+ *   --ac-option-color-hover option text color on hover / keyboard focus
+ *
+ *   --ac-no-results-color   "No results" text color
+ *   --ac-create-color       "Create: …" text color
+ *
+ *   --ac-chip-bg            chip background
+ *   --ac-chip-color         chip text color
+ *   --ac-chip-radius        chip border-radius (defaults to --ac-radius)
+ *   --ac-chip-gap           gap between chips
+ *   --ac-chip-remove-size   size of the remove button hit area
+ *
+ * ── Usage ─────────────────────────────────────────────────────────────────
+ *
+ *   Override any property at the [data-theming-autocomplete-root] element:
+ *
+ *     div[data-theming-autocomplete-root] {
+ *       --ac-chip-bg:    #1a56db;
+ *       --ac-chip-color: #fff;
+ *       --ac-radius:     0.5rem;
+ *     }
+ */
+
+/* ── Property defaults ────────────────────────────────────────────────────── */
+
+@scope ([data-theming-autocomplete-root]) {
+    :scope {
+        --ac-font: inherit;
+
+        --ac-radius: 0.25rem;
+        --ac-focus-ring: 2px solid currentColor;
+
+        --ac-listbox-bg: #fff;
+        --ac-listbox-border: 1px solid #d1d5db;
+        --ac-listbox-shadow:
+            0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --ac-listbox-z: 200;
+        --ac-listbox-max-height: 16rem;
+
+        --ac-option-color: inherit;
+        --ac-option-bg-hover: #f3f4f6;
+        --ac-option-color-hover: inherit;
+
+        --ac-no-results-color: #6b7280;
+        --ac-create-color: #1d4ed8;
+
+        --ac-chip-bg: #1d4ed8;
+        --ac-chip-color: #fff;
+        --ac-chip-radius: var(--ac-radius);
+        --ac-chip-gap: 0.375rem;
+        --ac-chip-remove-size: 1.25rem;
+    }
+
+    /* ── Chips container ──────────────────────────────────────────────────────── */
+
+    .theming-autocomplete__chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--ac-chip-gap);
+        /* No padding/margin — theme provides spacing via the wrapper */
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    /* ── Individual chip ──────────────────────────────────────────────────────── */
+
+    .autocomplete__chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.1875rem 0.375rem 0.1875rem 0.625rem; /* asymmetric: more on left */
+        background: var(--ac-chip-bg);
+        color: var(--ac-chip-color);
+        border-radius: var(--ac-chip-radius);
+        font: var(--ac-font);
+        font-size: 0.875em;
+        line-height: 1.4;
+        max-width: 16rem;
+        /* Ensure chips don't overflow when labels are long */
+        overflow: hidden;
+    }
+
+    .autocomplete__chip-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* ── Chip remove button ───────────────────────────────────────────────────── */
+
+    .autocomplete__chip-remove {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--ac-chip-remove-size);
+        height: var(--ac-chip-remove-size);
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: inherit;
+        opacity: 0.8;
+        cursor: pointer;
+        line-height: 1;
+        font-size: 1em;
+
+        &:hover {
+            opacity: 1;
+            background: rgb(0 0 0 / 0.15);
+        }
+        &:focus-visible {
+            outline: var(--ac-focus-ring);
+            outline-offset: 1px;
+        }
+    }
+
+    /* ── Listbox panel ────────────────────────────────────────────────────────── */
+
+    .autocomplete__listbox {
+        /* Positioning: the input is not position:relative, so we use a slight
+     negative offset trick — themes that need exact anchoring should make
+     the wrapper position:relative and override these rules. */
+        position: absolute;
+        z-index: var(--ac-listbox-z);
+        /* Width matches the input — requires the wrapper to be position:relative */
+        left: 0;
+        right: 0;
+        max-height: var(--ac-listbox-max-height);
+        overflow-y: auto;
+        margin: 0;
+        padding: 0.25rem 0;
+        list-style: none;
+        background: var(--ac-listbox-bg);
+        border: var(--ac-listbox-border);
+        border-radius: var(--ac-radius);
+        box-shadow: var(--ac-listbox-shadow);
+        font: var(--ac-font);
+        /* Separate from the input visually */
+        margin-top: 0.125rem;
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    /* ── Options ──────────────────────────────────────────────────────────────── */
+
+    .autocomplete__option {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--ac-option-color);
+        cursor: pointer;
+        user-select: none;
+        /* Prevent text wrapping from making very long options unreadable */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .autocomplete__option:hover,
+    .autocomplete__option--active {
+        background: var(--ac-option-bg-hover);
+        color: var(--ac-option-color-hover);
+        outline: none;
+    }
+
+    .autocomplete__option--active {
+        /* Keyboard focus — distinct from mouse hover via outline */
+        outline: var(--ac-focus-ring);
+        outline-offset: -2px;
+    }
+
+    /* Match highlight */
+    .autocomplete__option strong {
+        font-weight: 700;
+        /* Inherits color — no override needed */
+    }
+
+    /* ── No-results ───────────────────────────────────────────────────────────── */
+
+    .autocomplete__no-results {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--ac-no-results-color);
+        cursor: default;
+        list-style: none;
+    }
+
+    /* ── Create option ────────────────────────────────────────────────────────── */
+
+    .autocomplete__create-option {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--ac-create-color);
+        cursor: pointer;
+        font-weight: 600;
+        list-style: none;
+        user-select: none;
+    }
+
+    .autocomplete__create-option:hover,
+    .autocomplete__create-option.autocomplete__option--active {
+        background: var(--ac-option-bg-hover);
+        outline: var(--ac-focus-ring);
+        outline-offset: -2px;
+    }
+
+    /* ── Wrapper positioning helper ───────────────────────────────────────────── */
+
+    /*
+     * The listbox uses position:absolute. For it to align to the input width,
+     * the nearest positioned ancestor must wrap both the input and the listbox.
+     *
+     * The JS inserts the listbox right after the input, so wrapping them in
+     * a position:relative container is the cleanest approach:
+     *
+     *   <div class="autocomplete__wrap">
+     *     <div …chips…></div>
+     *     <input data-theming-module="autocomplete" …>
+     *     <!-- listbox is injected here by JS -->
+     *   </div>
+     *
+     * If your markup cannot add this wrapper, set position:relative on
+     * the nearest suitable ancestor and override --ac-listbox-z as needed.
+     */
+
+    .autocomplete__wrap {
+        position: relative;
+    }
+
+    /* ── Reduced motion ───────────────────────────────────────────────────────── */
+
+    @media (prefers-reduced-motion: reduce) {
+        .autocomplete__chip,
+        .autocomplete__listbox {
+            transition: none;
+        }
+    }
+}
