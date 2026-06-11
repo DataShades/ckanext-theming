@@ -1,0 +1,196 @@
+<h3>Multiple choices</h3>
+
+<p>
+    To allow multiple choices, enable <code>allow_multiple</code> flag.
+</p>
+
+<p>
+    To allow creation of new elements, that are not present in the autocomplete
+    source, enable <code>allow_new</code> flag. Some implementations may have
+    restrictions for this flag, like native CKAN's autocomplete that allows
+    <code>allow_new</code> only in combination with <code>allow_multiple</code> and
+    remote source.
+</p>
+
+<p>
+    When multiple values are allowed, result can be sent to the server either
+    as an array of choices, or as a single comma-separated string. The actual
+    choice depends on implementations, but you may be able to enforce specific
+    behavior by setting <code>as_list</code> flag. It's not enforced, but
+    themes are adviced to sent data as array when the flag is enabled, and as
+    list when it's disabled.
+</p>
+
+<p>
+    Due to implementation details, specific combinations of flags may be not
+    supported by the autocomplete widget. All forms below have <code>allow_multiple</code> anabled
+    and combined with different set of other options. Chose few options and
+    submit the field to see whether this specific cobmination of settings work
+    and produce expected result.
+</p>
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("static-single-strict") -%}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="static-single-strict",
+                label="Static, as_list=false, allow_new=false", selected=value,
+                allow_multiple=true,
+                as_list=false,
+                allow_new=false, options=[
+                    {"value": "Alpha"},
+                    {"value": "Beta"},
+                    {"value": "Gamma"},
+                    {"value": "Delta"},
+                ]) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("static-single") -%}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="static-single",
+                label="Static, as_list=false, allow_new=true", selected=value,
+                allow_multiple=true,
+                as_list=false,
+                allow_new=true, options=[
+                    {"value": "Alpha"},
+                    {"value": "Beta"},
+                    {"value": "Gamma"},
+                    {"value": "Delta"},
+                ]) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("static-multi-strict") -%}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="static-multi-strict",
+                label="Static, as_list=true, allow_new=false", selected=value,
+                allow_multiple=true,
+                as_list=true,
+                allow_new=false, options=[
+                    {"value": "Alpha"},
+                    {"value": "Beta"},
+                    {"value": "Gamma"},
+                    {"value": "Delta"},
+                ]) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("static-multi") -%}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="static-multi",
+                label="Static, as_list=true, allow_new=true", selected=value,
+                allow_multiple=true,
+                as_list=true,
+                allow_new=true, options=[
+                    {"value": "Alpha"},
+                    {"value": "Beta"},
+                    {"value": "Gamma"},
+                    {"value": "Delta"},
+                ]) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("remote-single-strict") -%}
+        {% if value|length == 1%}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="remote-single-strict",
+                label="Remote, as_list=false, allow_new=false", selected=value,
+                allow_multiple=true,
+                as_list=false,
+                allow_new=false, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("remote-single") -%}
+        {% if value|length == 1%}{% set value = value|first %}{% endif %}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="remote-single",
+                label="Remote, as_list=false, allow_new=true", selected=value,
+                allow_multiple=true,
+                as_list=false,
+                allow_new=true, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("remote-multi-strict") -%}
+        {% if value|length == 1%}{% set value = value|first %}{% endif %}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="remote-multi-strict",
+                label="Remote, as_list=true, allow_new=false", selected=value,
+                allow_multiple=true,
+                as_list=true,
+                allow_new=false, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {% set value = request.args.getlist("remote-multi") -%}
+        {% if value|length == 1%}{% set value = value|first %}{% endif %}
+        {% if value|length == 1 %}{% set value = value|first %}{% endif %}
+        Submitted value: <mark>{{ value }}</mark>
+
+        {%- call ui.util.call(ui.form) -%}
+            {{ ui.autocomplete(name="remote-multi",
+                label="Remote, as_list=true, allow_new=true", selected=value,
+                allow_multiple=true,
+                as_list=true,
+                allow_new=true, source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+            {{ ui.form_actions(ui.button("Submit", type="submit")) }}
+        {%- endcall %}
+    {%- endraw %}
+{%- endcall %}

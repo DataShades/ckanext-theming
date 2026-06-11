@@ -1281,6 +1281,84 @@ textarea:
             type: 'list[str]'
 
 
+autocomplete:
+    description: |
+        Autocomplete input element, used to show a text input with autocomplete
+        suggestions in a form.
+    category: essential
+    arguments:
+        content:
+            description: Help text for the input
+        name:
+            description: Name of the form field, used as the key when submitting the form
+            type: 'str'
+        id:
+            description: Unique identifier for the input, used to associate it with a label
+            type: 'str'
+        label:
+            description: Label text shown next to the file input
+            type: 'str'
+        placeholder:
+            description: Placeholder text shown in the input when it is empty
+            type: 'str'
+        required:
+            description: Whether this field is required to submit the form
+            type: 'bool'
+        errors:
+            description: List of error messages to show for this field
+            type: 'list[str]'
+        source:
+            description: >-
+                Optional source of the autocomplete suggestions. Must be a URL
+                to fetch options from for ajax suggestions
+            type: 'str'
+        options:
+            description: >-
+                List of autocomplete suggestions, each suggestion is a
+                dictionary with text" and "value". Used when source is missing.
+            type: 'list[dict]'
+        allow_multiple:
+            description: Whether to allow selecting multiple options
+            type: 'bool'
+        allow_new:
+            description: Whether to allow creating new options that are not in the suggestions list
+            type: 'bool'
+        selected:
+            description: >-
+                List of values of the options that should be selected by
+                default. Can be a list of strings or a list of dictionaries
+                with "value" and "label" keys.
+            type: 'list[str]|list[dict]'
+        min_chars:
+            description: >-
+                Minimum number of characters the user must type before the
+                autocomplete suggestions are fetched from the server when
+                source is specified.
+            type: 'int'
+        debounce:
+            description: >-
+                Debounce delay in milliseconds for fetching autocomplete
+                suggestions from the server when source is specified.
+            type: 'int'
+        as_list:
+            description: >-
+                Whether to submit the selected options as a list of values or
+                as a single comma-separated string when the form is submitted.
+            type: 'bool'
+        separator:
+            description: Separator character to use for single-string form(as_list=false)
+            type: 'str'
+        id_key:
+            description: >-
+                Key to use from the suggestion dictionaries for the option values
+                when source is specified.
+            type: 'str'
+        label_key:
+            description: >-
+                Key to use from the suggestion dictionaries for the option labels
+                when source is specified.
+            type: 'str'
+
 # handles
 modal_close_handle:
     description: Element used to trigger closing of a modal dialog, typically rendered as a close button in the modal header or footer.

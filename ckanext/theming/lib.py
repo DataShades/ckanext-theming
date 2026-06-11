@@ -85,7 +85,7 @@ class Util(BaseUtil):
             data.update(defaults)
 
         if extra_class:
-            cls = kwargs.setdefault(self._extra_class_attr, "")
+            cls = kwargs.get(self._extra_class_attr) or ""
             kwargs[self._extra_class_attr] = f"{cls} {extra_class}".lstrip()
 
         return kwargs

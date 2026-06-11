@@ -1,0 +1,16 @@
+<h3>Remote source</h3>
+
+<p>
+    To use remote source, set <code>source</code> instead of <code>options</code>. The
+    source URL must contain a questin mark, which will be replaced by the
+    search term during autocomplete request. If multiple question marks are
+    used in the source URL, only the last one is replaced by the term. This allows
+    specifying term inside query params as <code>/endpoing?incomplete=?</code>.
+</p>
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {{ ui.autocomplete(label="Remote source",
+            source=h.url_for("api.dataset_autocomplete", incomplete="?")) }}
+    {%- endraw %}
+{%- endcall %}

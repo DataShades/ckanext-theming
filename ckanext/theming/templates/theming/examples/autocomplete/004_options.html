@@ -1,0 +1,35 @@
+<h3>Other options</h3>
+
+<p>
+    The rest of options:
+
+    <ul>
+        <li>
+            <code>min_chars</code>: the minimum number of characters to trigger suggestions.
+        </li>
+        <li>
+            <code>debounce</code>: the debounce time in milliseconds for fetching suggestions from remote source.
+        </li>
+        <li>
+            <code>separator</code>: the separator for multiple values, default is comma.
+        </li>
+        <li>
+            <code>id_key</code>: the key to use for the value of the option.
+        </li>
+        <li>
+            <code>label_key</code>: the key to use for the label of the option.
+        </li>
+
+    </ul>
+</p>
+
+
+{%- call ui.util.call(show_example) -%}
+    {%- raw %}
+        {%- set url = h.url_for("api.dataset_autocomplete", incomplete="?") -%}
+
+        {{ ui.autocomplete(label="Dataset titles", label_key="title", source=url) }}
+        {{ ui.autocomplete(label="Debounce 5s", debounce=5000, source=url) }}
+        {{ ui.autocomplete(label="5 characters for completion", min_chars=5, source=url) }}
+    {%- endraw %}
+{%- endcall %}
