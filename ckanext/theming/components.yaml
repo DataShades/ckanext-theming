@@ -803,6 +803,9 @@ table:
         hover:
             description: Whether to highlight rows on hover
             type: 'bool'
+        caption:
+            description: Optional caption for the table
+            type: 'str'
 
 table_body:
     description: |

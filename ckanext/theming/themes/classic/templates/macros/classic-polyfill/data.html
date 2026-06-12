@@ -1,5 +1,5 @@
 
-{%- macro table(content, striped=false, bordered=false, condensed=false, hover=false) -%}
+{%- macro table(content, striped, bordered, condensed, hover, caption) -%}
     {%- set class = "table" -%}
     {%- if bordered -%}
         {%- set class = class ~ ' table-bordered' -%}
@@ -14,6 +14,9 @@
         {%- set class = class ~ ' table-sm' -%}
     {%- endif %}
     <table {{ ui.util.attrs(kwargs, {"class": class}) }}>
+        {%- if caption -%}
+            <caption>{{ caption }}</caption>
+        {%- endif %}
         {{ content }}
     </table>
 {%- endmacro %}

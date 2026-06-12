@@ -1,7 +1,7 @@
 {%- macro parameters_table(component) -%}
 
     {%- call ui.util.call(ui.section, title=ui.util.tag(component, "code"), level=3) -%}
-        {%- call ui.util.call(ui.table, striped=true, hover=true) -%}
+        {%- call ui.util.call(ui.table, striped=true, hover=true, caption=ref[component].description) -%}
             {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, ["Parameter", "Type", "Description"], header=true))) }}
             {%- call ui.util.call(ui.table_body) -%}
                 {%- for name, info in ref[component].arguments.items() -%}
@@ -17,7 +17,6 @@
 {%- endmacro %}
 
 {%- set parametrized = parametrized or [component] -%}
-
 
 {%- call ui.util.call(ui.section, title=_("Overview"), level=2) -%}
     {%- block overview -%}
