@@ -83,16 +83,16 @@ class Autocomplete {
     this.isJoined = this.root.dataset.autocompleteJoined === "true";
 
     // Configurable response key names
-    this.idKey = this.root.dataset.autocompleteIdKey ?? "value";
-    this.labelKey = this.root.dataset.autocompleteLabelKey ?? "text";
+    this.idKey = this.root.dataset.autocompleteIdKey || "value";
+    this.labelKey = this.root.dataset.autocompleteLabelKey || "text";
 
-    this.separator = this.root.dataset.autocompleteSeparator ?? ",";
+    this.separator = this.root.dataset.autocompleteSeparator || ",";
     this.minChars = parseInt(
       this.root.dataset.autocompleteMinChars ?? (this.source ? "2" : "1"),
       10,
     );
     this.debounce = parseInt(
-      this.root.dataset.autocompleteDebounce ?? "300",
+      this.root.dataset.autocompleteDebounce || "300",
       10,
     );
 
@@ -396,7 +396,7 @@ class Autocomplete {
       const display = String(
         opt[this.labelKey] ?? opt[this.idKey] ?? "",
       ).toLowerCase();
-      return display.includes(q);
+    return display.includes(q);
     });
 
     this._renderOptions(matched, query);
@@ -455,6 +455,7 @@ class Autocomplete {
     const hasResults = opts.length > 0;
     const prefix = this.root.id || this.containerId;
 
+    console.log(opts)
     opts.forEach((opt, i) => {
       const value = opt[this.idKey];
       const label = opt[this.labelKey] ?? value;

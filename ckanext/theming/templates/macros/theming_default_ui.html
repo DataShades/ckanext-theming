@@ -167,11 +167,11 @@
 
     {%- set defaults = {
             "data-theming-module": "autocomplete",
-            "data-autocomplete-source": source,
-            "data-autocomplete-container-id": container_id,
             "data-autocomplete-allow-new": "true" if allow_new else "false",
             "data-autocomplete-joined": "true" if joined else "false",
             "data-autocomplete-allow-multiple": "true" if allow_multiple else "false",
+            "data-autocomplete-source": source,
+            "data-autocomplete-container-id": container_id,
             "data-autocomplete-debounce": debounce,
             "data-autocomplete-min-chars": min_chars,
             "data-autocomplete-separator": separator,

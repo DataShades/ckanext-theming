@@ -161,11 +161,12 @@ class TomSelectAutocomplete {
   _buildConfig() {
     const isInputMode = this.root.tagName === 'INPUT'   // joined / CSV mode
 
-    // Resolve the dropdown parent — Tom Select appends its dropdown to <body>
-    // by default; scoping it to the container keeps CSS and z-index sane.
-    const container = this.containerId
-      ? document.getElementById(this.containerId)
-      : this.root.parentElement
+    // Resolve the dropdown parent.
+    // IMPORTANT: do NOT use the chips container — it carries a `hidden`
+    // attribute when empty, and Tom Select's dropdown rendered inside a
+    // hidden element is invisible regardless of its own CSS.
+    // Use the always-visible wrapper instead.
+    const wrapper = this.root.closest('[data-theming-autocomplete-root]')
 
     const cfg = {
       // Tom Select uses "value" and "text" keys internally regardless of
@@ -182,8 +183,8 @@ class TomSelectAutocomplete {
       create:      this.allowNew,
       openOnFocus: true,
 
-      // Scope the dropdown panel to our container element
-      ...(container ? { dropdownParent: container } : {}),
+      // Scope the dropdown panel to our wrapper element
+      ...(wrapper ? { dropdownParent: wrapper } : {}),
 
       // Joined/CSV mode: delimiter on <input type="text">
       ...(isInputMode && this.isJoined ? {
@@ -283,7 +284,6 @@ class TomSelectAutocomplete {
     }))
   }
 }
-
 
 // ── Auto-init ─────────────────────────────────────────────────────────────────
 document

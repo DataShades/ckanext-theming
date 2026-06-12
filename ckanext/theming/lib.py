@@ -349,7 +349,11 @@ class MacroUI(UI):
             for name in dir(mod):
                 if name.startswith("_"):
                     continue
-                self._add_component(name, getattr(mod, name))
+                component = getattr(mod, name)
+                if name in self._inv:
+                    component._theming_chain = self._inv[name]
+
+                self._add_component(name, component)
 
     @override
     def _add_component(self, name: str, component: PElement):

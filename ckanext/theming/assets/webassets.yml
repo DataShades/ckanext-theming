@@ -26,4 +26,5 @@ autocomplete:
       # - autocomplete.tomselect.js
   extra:
       preload:
+          # - vendor/vendor # used by select2 version
           - theming/autocomplete-css
