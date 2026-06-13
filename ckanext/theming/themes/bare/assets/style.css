@@ -90,73 +90,9 @@ a:hover {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
 }
-
-.col-1 { grid-column: span 1; }
-.col-2 { grid-column: span 2; }
-.col-3 { grid-column: span 3; }
-.col-4 { grid-column: span 4; }
-.col-5 { grid-column: span 5; }
-.col-6 { grid-column: span 6; }
-.col-7 { grid-column: span 7; }
-.col-8 { grid-column: span 8; }
-.col-9 { grid-column: span 9; }
-.col-10 { grid-column: span 10; }
-.col-11 { grid-column: span 11; }
-.col-12 { grid-column: span 12; }
-
-@media (max-width: 768px) {
-  .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
-    grid-column: span 12;
-  }
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
-}
-
-.row > [class*="col-"] {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
-/* Flex helpers */
-.flex { display: flex; }
-.justify-between { justify-content: space-between; }
-.items-center { align-items: center; }
-.items-start { align-items: flex-start; }
-.gap-2 { gap: 0.5rem; }
-.mt-4 { margin-top: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.mb-8 { margin-bottom: 2rem; }
-.text-right { text-align: right; }
-.w-full { width: 100%; }
-
-
-/* UI Components */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  border-radius: var(--border-radius);
-  border: var(--border-width) solid transparent;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 0.875rem;
-}
-
-.btn-primary { background: var(--color-primary); color: white; }
-.btn-primary:hover { background: var(--color-primary-dark); }
-.btn-secondary { background: var(--color-light); color: var(--text-primary); border-color: var(--border-color); }
-.btn-secondary:hover { background: var(--color-secondary); color: white; }
-.btn-danger { background: var(--color-danger); color: white; }
 
 .card {
   background: var(--bg-card);
@@ -164,7 +100,22 @@ a:hover {
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
+
+.card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  background: #f8fafc;
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+}
+
 
 .alert {
   padding: 1rem;
@@ -199,6 +150,26 @@ a:hover {
   background: var(--bg-header);
   border-bottom: var(--border-width) solid var(--border-color);
   padding: 1rem 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+}
+
+.nav-vertical {
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #account {

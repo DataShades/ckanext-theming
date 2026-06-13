@@ -1,44 +1,40 @@
 {%- block header_account %}
-    <div id="account">
-        {%- call ui.util.call(ui.container) -%}
-            {%- call ui.util.call(ui.account) -%}
-                {%- call ui.util.call(ui.account_nav) -%}
-                    {%- if current_user.is_authenticated %}
-                        {%- block header_account_logged -%}
+    {%- call ui.util.call(ui.account) -%}
+        {%- call ui.util.call(ui.account_nav) -%}
+            {%- if current_user.is_authenticated %}
+                {%- block header_account_logged -%}
 
-                            {{ ui.account_nav_item(_('Admin'), h.url_for("admin.index"), active=request.endpoint == "admin.index") if current_user.sysadmin }}
+                    {{ ui.account_nav_item(_('Admin'), h.url_for("admin.index"), active=request.endpoint == "admin.index") if current_user.sysadmin }}
 
-                            {%- block header_account_profile -%}
-                                {{ ui.account_nav_item(_('Profile'), h.url_for("user.read", id=current_user.name)) }}
-                            {%- endblock header_account_profile %}
+                    {%- block header_account_profile -%}
+                        {{ ui.account_nav_item(_('Profile'), h.url_for("user.read", id=current_user.name)) }}
+                    {%- endblock header_account_profile %}
 
-                            {%- block header_dashboard -%}
-                                {{ ui.account_nav_item(_('Dashboard'), h.url_for("dashboard.datasets")) }}
-                            {%- endblock %}
+                    {%- block header_dashboard -%}
+                        {{ ui.account_nav_item(_('Dashboard'), h.url_for("dashboard.datasets")) }}
+                    {%- endblock %}
 
-                            {%- block header_account_settings_link -%}
-                                {{ ui.account_nav_item(_('Settings'), h.url_for("user.edit", id=current_user.name)) }}
-                            {%- endblock %}
+                    {%- block header_account_settings_link -%}
+                        {{ ui.account_nav_item(_('Settings'), h.url_for("user.edit", id=current_user.name)) }}
+                    {%- endblock %}
 
-                            {%- block header_account_log_out_link -%}
-                                {%- call ui.util.call(ui.form, method="POST", action=h.url_for('user.logout'), attrs={"id": "form-logout", "style": "display:inline"}) -%}
-                                     {{ ui.button(_('Log out'), type="submit", style="secondary", size="xs") }}
-                                {%- endcall %}
-                            {%- endblock %}
+                    {%- block header_account_log_out_link -%}
+                        {%- call ui.util.call(ui.form, method="POST", action=h.url_for('user.logout'), attrs={"id": "form-logout", "style": "display:inline"}) -%}
+                             {{ ui.button(_('Log out'), type="submit", style="secondary", size="xs") }}
+                        {%- endcall %}
+                    {%- endblock %}
 
-                        {%- endblock %}
+                {%- endblock %}
 
-                    {%- else -%}
-                        {% block header_account_notlogged %}
-                            {{ ui.account_nav_item(_("Log in"), h.url_for("user.login")) }}
-                            {{ ui.account_nav_item(_("Register"), h.url_for("user.register")) if h.check_access("user_create") }}
-                        {% endblock %}
+            {%- else -%}
+                {% block header_account_notlogged %}
+                    {{ ui.account_nav_item(_("Log in"), h.url_for("user.login")) }}
+                    {{ ui.account_nav_item(_("Register"), h.url_for("user.register")) if h.check_access("user_create") }}
+                {% endblock %}
 
-                    {%- endif %}
-                {%- endcall %}
-            {%- endcall %}
+            {%- endif %}
         {%- endcall %}
-    </div>
+    {%- endcall %}
 {%- endblock %}
 
 {%- block header %}

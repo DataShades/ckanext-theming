@@ -21,14 +21,14 @@
 {%- endmacro %}
 
 
-{%- macro main_nav(content) -%}{{ ui.nav(content, **kwargs) }}{%- endmacro %}
-{%- macro sidebar_nav(content) -%}{{ ui.nav(content, **kwargs) }}{%- endmacro %}
+{%- macro main_nav(content) -%}{{ ui.nav(content, _extra_class="main-nav", **kwargs) }}{%- endmacro %}
+{%- macro sidebar_nav(content) -%}{{ ui.nav(content, _extra_class="sidebar-nav nav-vertical", **kwargs) }}{%- endmacro %}
 
 {%- macro nav(content) -%}
-    <nav {{ ui.util.attrs(kwargs) }} role="navigation">{{ content }}</nav>
+    <nav {{ ui.util.attrs(kwargs, {"class": "nav"}) }} role="navigation">{{ content }}</nav>
 {%- endmacro %}
 
-{%- macro page_action_wrapper(content) -%}{{ ui.nav(content, **kwargs) }}{%- endmacro %}
+{%- macro page_action_wrapper(content) -%}{{ ui.nav(content, _extra_class="page-actions", **kwargs) }}{%- endmacro %}
 
 {%- macro tab_wrapper(content) -%}
     <nav {{ ui.util.attrs(kwargs) }} class="tabs" role="tablist">{{ content }}</nav>

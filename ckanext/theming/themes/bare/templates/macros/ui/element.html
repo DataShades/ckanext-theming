@@ -1,12 +1,12 @@
 {%- macro badge(content, style) -%}
-    <span {{ ui.util.attrs(kwargs, {"class": "badge badge-" + (style or "secondary")}) }}>{{ content }}</span>
+    <span {{ ui.util.attrs(kwargs, {"class": "badge badge-" ~ (style or "secondary")}) }}>{{ content }}</span>
 {%- endmacro %}
 
 {%- macro button(content, href, type="button", style="primary") -%}
     {%- if href -%}
-        <a {{ ui.util.attrs(kwargs, {"href": href, "class": "btn btn-" + (style or "primary")}) }}>{{ content }}</a>
+        <a {{ ui.util.attrs(kwargs, {"href": href, "class": "btn btn-" ~ (style or "primary")}) }}>{{ content }}</a>
     {%- else -%}
-        <button {{ ui.util.attrs(kwargs, {"type": type, "class": "btn btn-" + (style or "primary")}) }}>{{ content }}</button>
+        <button {{ ui.util.attrs(kwargs, {"type": type, "class": "btn btn-" ~ (style or "primary")}) }}>{{ content }}</button>
     {%- endif %}
 {%- endmacro %}
 
@@ -17,7 +17,7 @@
 {%- endmacro %}
 
 {%- macro icon(name) -%}
-    <i {{ ui.util.attrs(kwargs, {"class": "icon icon-" + name, "aria-hidden": "true"}) }}></i>
+    <i {{ ui.util.attrs(kwargs, {"class": "icon icon-" ~ name, "aria-hidden": "true"}) }}></i>
 {%- endmacro %}
 
 {%- macro tag(content, href) -%}
@@ -28,38 +28,8 @@
     {%- endif -%}
 {%- endmacro %}
 
-{%- macro tab(content, active, id, href) -%}
+{%- macro tab(content, href, active, id) -%}
     <li class="tab-item {{ 'active' if active }}">
-        {{ ui.link(content, href or "#" + (id or ""), attrs={"class": "tab-link", "role": "tab", "aria-selected": "true" if active else "false", "aria-controls": id}, **kwargs) }}
+        {{ ui.link(content, href or "#" ~ (id or ""), attrs={"class": "tab-link", "role": "tab", "aria-selected": "true" if active else "false", "aria-controls": id}, **kwargs) }}
     </li>
-{%- endmacro %}
-
-{%- macro heading(content, level=1) -%}
-    <h{{ level }} {{ ui.util.attrs(kwargs, {"class": "heading-" ~ level}) }}>{{ content }}</h{{ level }}>
-{%- endmacro %}
-
-{%- macro image(src, alt) -%}
-    <img {{ ui.util.attrs(kwargs, {"src": src, "alt": alt or ""}) }}>
-{%- endmacro %}
-
-{%- macro link(content, href, blank) -%}
-    <a {{ ui.util.attrs(kwargs, {"href": href or "javascript:void(0)", "target": "blank" if blank, "rel": "noopener noreferrer" if blank}) }}>{{ content }}</a>
-{%- endmacro %}
-
-{%- macro datetime(content, date_format, with_hours, empty, relative) -%}
-    {%- if content -%}
-        <time {{ ui.util.attrs(kwargs, {"datetime": content}) }}>
-            {{ h.render_datetime(content, date_format, with_hours) if not relative else h.time_ago_from_timestamp(content) }}
-        </time>
-    {%- else -%}
-        {{ empty or "" }}
-    {%- endif -%}
-{%- endmacro %}
-
-{%- macro divider() -%}
-    <hr {{ ui.util.attrs(kwargs, {"class": "divider"}) }}>
-{%- endmacro %}
-
-{%- macro video(src, controls=true, autoplay=false) -%}
-    <video {{ ui.util.attrs(kwargs, {"src": src, "controls": controls, "autoplay": autoplay}) }}></video>
 {%- endmacro %}

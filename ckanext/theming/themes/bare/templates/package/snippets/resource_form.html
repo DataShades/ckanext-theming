@@ -1,7 +1,7 @@
 {%- set can_delete = data.id and h.check_access('resource_delete', {'id': data.id}) -%}
 {%- if can_delete -%}
     {%- set removal_form_id = ui.util.id() -%}
-    {{ ui.form(method="POST", action=h.url_for(dataset_type ~ 'resource.delete', resource_id=data.id, id=pkg_name), attrs={"id": removal_form_id}) }}
+    {{ ui.form(method="POST", action=h.url_for(dataset_type ~ '_resource.delete', resource_id=data.id, id=pkg_name), attrs={"id": removal_form_id}) }}
 {%- endif %}
 
 

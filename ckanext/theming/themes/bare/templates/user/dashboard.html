@@ -21,9 +21,4 @@
 {%- endblock %}
 
 {%- block primary_content_inner %}
-    {% block dashboard_content %}
-        {%- if h.plugin_loaded("activity") -%}
-            {% include 'user/snippets/news_feed.html' %}
-        {%- endif %}
-    {% endblock %}
 {%- endblock %}

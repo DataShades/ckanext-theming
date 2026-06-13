@@ -14,7 +14,7 @@
     {{ ui.page_action(_('Add Dataset'), href=h.url_for(dataset_type ~ '.new')) if h.check_access('package_create') }}
 {%- endblock %}
 
-{%- block dashboard_content %}
+{%- block  primary_content_inner %}
     {{ ui.heading(h.humanize_entity_type('package', dataset_type, 'my label') or _('My Datasets'), level=2) }}
     {%- if user_dict.datasets %}
         {%- call ui.util.call(ui.package_list) -%}

@@ -9,7 +9,7 @@
 
     {% block basic_fields %}
         {{ ui.input(name='title', label=_('Name'), placeholder=h.humanize_entity_type('group', group_type, 'name placeholder') or _('My Group'), value=data.title, errors=errors.title) }}
-        {{ ui.input(name='name', label=_('URL'), placeholder=_('my-' + group_type), value=data.name, errors=errors.name, required=true) }}
+        {{ ui.input(name='name', label=_('URL'), placeholder=_('my-' ~ group_type), value=data.name, errors=errors.name, required=true) }}
         {{ ui.markdown(name='description', label=_('Description'), placeholder=h.humanize_entity_type('group', group_type, 'description placeholder') or _('A little information about my group...'), value=data.description, errors=errors.description) }}
 
         {% set is_upload = data.image_url and not data.image_url.startswith('http') %}

@@ -22,15 +22,15 @@
 {%- endmacro %}
 
 {%- macro button_group(content, direction="row") -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "btn-group btn-group-" + direction}) }}>
+    <div {{ ui.util.attrs(kwargs, {"class": "btn-group btn-group-" ~ direction}) }}>
         {{- content -}}
     </div>
 {%- endmacro %}
 
-{%- macro card(content, title, footer, img, href) -%}
+{%- macro card(content, title, footer, img, href, img_class) -%}
     <div {{ ui.util.attrs(kwargs, {"class": "card", "role": "article", "aria-label": title if title else _('Card')}) }}>
         {%- if img -%}
-            {{ ui.image(img, **kwargs) }}
+            {{ ui.image(img, _extra_class=img_class, **kwargs) }}
         {%- endif %}
 
         {%- if title -%}
@@ -56,13 +56,13 @@
 {%- endmacro %}
 
 {%- macro column(content, span, offset) -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "col" + (" " + span|join(' ') if span is iterable and span is not string else "")}) }}>
+    <div {{ ui.util.attrs(kwargs, {"class": "col" ~ (" " ~ span|join(' ') if span is iterable and span is not string else "")}) }}>
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro container(content, fluid) -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "container" + ("-fluid" if fluid else "")}) }}>{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs, {"class": "container" ~ ("-fluid" if fluid else "")}) }}>{{ content }}</div>
 {%- endmacro %}
 
 {%- macro grid(content) -%}
@@ -105,7 +105,7 @@
 {%- endmacro %}
 
 {%- macro tab_pane(content, active, id) -%}
-    <div {{ ui.util.attrs(kwargs, {"id": id, "class": "tab-pane" + (" active" if active else ""), "role": "tabpanel"}) }}>
+    <div {{ ui.util.attrs(kwargs, {"id": id, "class": "tab-pane" ~ (" active" if active else ""), "role": "tabpanel"}) }}>
         {{ content }}
     </div>
 {%- endmacro %}

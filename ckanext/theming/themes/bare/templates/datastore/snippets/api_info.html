@@ -21,7 +21,7 @@
 {% block register_examples %}
     {# register examples by including templates here #}
     {% for clang in code_languages %}
-        {% include "/datastore/api_examples/" + clang + ".html" %}
+        {% include "/datastore/api_examples/" ~ clang ~ ".html" %}
     {% endfor %}
 {% endblock %}
 
@@ -80,7 +80,7 @@
                     {# not urlencoding the sql because its clearer #}
                     {% set sql_example_url = h.url_for(
                         'api.action', logic_function='datastore_search_sql', qualified=True
-                        ) + '?sql=SELECT * from "' + resource.id + '" WHERE title LIKE \'jones\'' %}
+                        ) ~ '?sql=SELECT * from "' ~ resource.id ~ '" WHERE title LIKE \'jones\'' %}
                     <strong>{{ _('Query example (via SQL statement)') }}</strong>
                     <p>
                         <code><a href="{{sql_example_url}}" target="blank" rel="noreferrer">{{ sql_example_url }}</a></code>

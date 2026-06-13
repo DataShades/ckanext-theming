@@ -1,41 +1,5 @@
 {% from 'macros/form.html' import image_upload as _image_upload %}
 
-{%- macro form(content, method="POST", action="", enctype="", include_csrf=true) -%}
-    <form {{ ui.util.attrs(kwargs, {"method": method, "action": action, "enctype": enctype}) }}>
-        {%- if include_csrf and method|upper == "POST" and h.toolkit.check_access('package_create') -%}
-            {#- This is a bit hacky way to get CSRF token in CKAN -#}
-            <input type="hidden" name="_ckan_csrf_token" value="{{ h.toolkit.get_endpoint() }}">
-        {%- endif -%}
-        {{ content }}
-    </form>
-{%- endmacro %}
-
-{%- macro form_start(method="POST", action="", enctype="") -%}
-    <form {{ ui.util.attrs(kwargs, {"method": method, "action": action, "enctype": enctype}) }}>
-{%- endmacro %}
-
-{%- macro form_end() -%}
-    </form>
-{%- endmacro %}
-
-{%- macro form_actions(content) -%}
-    <div {{ ui.util.attrs(kwargs, {"class": "form-actions"}) }}>
-        {{ content }}
-    </div>
-{%- endmacro %}
-
-{%- macro fieldset(content, legend, description) -%}
-    <fieldset {{ ui.util.attrs(kwargs) }}>
-        {%- if legend -%}<legend>{{ legend }}</legend>{%- endif -%}
-        {%- if description -%}<p class="fieldset-description">{{ description }}</p>{%- endif -%}
-        {{ content }}
-    </fieldset>
-{%- endmacro %}
-
-{%- macro hidden_input(name, value) -%}
-    <input type="hidden" name="{{ name }}" value="{{ value }}" {{ ui.util.attrs(kwargs) }}>
-{%- endmacro %}
-
 {%- macro checkbox(content, checked, value="on", type="checkbox") -%}
     {{ ui.input(content, value=value or "on", type=type, checked=checked, **kwargs) }}
 {%- endmacro %}
@@ -211,9 +175,6 @@
     </div>
 {%- endmacro %}
 
-{%- macro select_option(content, value, selected) -%}
-    <option value="{{ value }}" {{ 'selected' if selected }} {{ ui.util.attrs(kwargs) }}>{{ content }}</option>
-{%- endmacro %}
 
 {%- macro textarea(content, name, id, label, value, placeholder, required, errors=[]) -%}
     {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
@@ -235,60 +196,3 @@
         </div>
     </div>
 {%- endmacro %}
-
-{%- macro autocomplete(content, name, id, label, placeholder, required, errors=[], source=none, options=[], allow_multiple=false, allow_new=false, selected=[], min_chars=1, debounce=300, joined=false, separator=',', id_key='id', label_key='text') -%}
-    {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
-    {%- set help_id = ui.util.id() if content -%}
-    {%- set selected_list = selected if selected is iterable and selected is not string else ([selected] if selected else []) -%}
-
-    <div class="form-group">
-        {%- if label -%}
-            <label class="form-label" for="{{ field_id }}">
-                {{ label }}
-                {%- if required -%}<span class="form-required" title="{{ _('Required') }}">*</span>{%- endif -%}
-            </label>
-        {%- endif %}
-        <div class="form-controls">
-            <div {{ ui.util.attrs(kwargs, {"class": "autocomplete-wrapper", "data-module": "autocomplete", "data-source": source, "data-allow-multiple": allow_multiple, "data-allow-new": allow_new, "data-min-chars": min_chars, "data-debounce": debounce, "data-joined": joined, "data-separator": separator, "data-id-key": id_key, "data-label-key": label_key}) }}>
-                <select
-                    {%- if name %} name="{{ name }}{{ '[]' if allow_multiple and not joined else '' }}"{%- endif %}
-                    {%- if field_id %} id="{{ field_id }}"{%- endif %}
-                    {%- if required %} required{%- endif %}
-                    {%- if allow_multiple %} multiple{%- endif %}
-                    {%- if content %} aria-describedby="{{ help_id }}"{% endif %}
-                    {%- if errors %} aria-invalid="true"{% endif %}
-                    class="form-control autocomplete-select"
-                >
-                    {%- for opt in options %}
-                        {%- set opt_val = opt.value if opt is mapping else opt -%}
-                        {%- set opt_text = opt.label or opt.text if opt is mapping else opt -%}
-                        {%- set is_selected = false -%}
-                        {%- for s in selected_list -%}
-                            {%- set s_val = s.value if s is mapping else s -%}
-                            {%- if s_val == opt_val -%}{%- set is_selected = true -%}{%- endif -%}
-                        {%- endfor -%}
-                        <option value="{{ opt_val }}" {{ 'selected' if is_selected }}>{{ opt_text }}</option>
-                    {%- endfor %}
-                    {%- for s in selected_list %}
-                        {%- set s_val = s.value if s is mapping else s -%}
-                        {%- set s_text = s.label or s.text if s is mapping else s -%}
-                        {%- set in_options = false -%}
-                        {%- for opt in options -%}
-                            {%- set opt_val = opt.value if opt is mapping else opt -%}
-                            {%- if s_val == opt_val -%}{%- set in_options = true -%}{%- endif -%}
-                        {%- endfor -%}
-                        {%- if not in_options %}
-                            <option value="{{ s_val }}" selected>{{ s_text }}</option>
-                        {%- endif %}
-                    {%- endfor %}
-                </select>
-            </div>
-            {{ ui.field_info(content, attrs={"id": help_id}) if content }}
-            {{ ui.field_errors(errors) if errors }}
-        </div>
-    </div>
-{%- endmacro %}
-
-{% macro image_upload()  %}
-    {{ _image_upload(*varargs, **kwargs) }}
-{%- endmacro -%}

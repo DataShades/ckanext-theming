@@ -48,7 +48,7 @@
                 {%- call ui.util.call(ui.list) -%}
                     {%- if pkg_dict.resources %}
                         {%- for res in pkg_dict.resources[:5] %}
-                            {{ ui.link(res.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "resource.read", id=pkg_dict.name, resource_id=res.id)) }}
+                            {{ ui.link(res.name or _('Unnamed resource'), h.url_for(pkg_dict.type ~ "_resource.read", id=pkg_dict.name, resource_id=res.id)) }}
                         {%- endfor %}
 
                     {%- else %}

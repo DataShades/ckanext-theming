@@ -14,7 +14,7 @@
     {{ ui.page_action(h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), href=h.url_for(group_type ~ '.new')) if h.check_access('group_create') }}
 {%- endblock %}
 
-{%- block dashboard_content %}
+{%- block  primary_content_inner %}
     {{ ui.heading(h.humanize_entity_type('group', group_type, 'my label') or _('My Groups'), level=2) }}
 
     {%- set groups = h.groups_available(am_member=True, include_dataset_count=True, include_member_count=True) %}
