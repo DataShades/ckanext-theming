@@ -1,5 +1,9 @@
-{% from "_macros.html" import parameters_table %}
-{% raw %}
+---
+include_yaml:
+    component_ref: ckanext/theming/components.yaml
+---
+
+
 # Elements
 
 Basic building blocks used throughout the interface.
@@ -9,59 +13,59 @@ Basic building blocks used throughout the interface.
 ### Button
 
 Interactive elements for triggering actions.
-{% endraw %}
-{{parameters_table(component_ref.button, 'button')}}
-{% raw %}
+
+<<parameters_table(component_ref.button, 'button')>>
+
 ### Link
 
 Standard hyperlinks for navigation.
-{% endraw %}
-{{parameters_table(component_ref.link, 'link')}}
-{% raw %}
+
+<<parameters_table(component_ref.link, 'link')>>
+
 ## Content Indicators
 
 ### Badge
 
 Small indicators for counts or status.
-{% endraw %}
-{{parameters_table(component_ref.badge, 'badge')}}
-{% raw %}
+
+<<parameters_table(component_ref.badge, 'badge')>>
+
 ### Tag
 
 Labels for categorizing content.
-{% endraw %}
-{{parameters_table(component_ref.tag, 'tag')}}
-{% raw %}
+
+<<parameters_table(component_ref.tag, 'tag')>>
+
 ## Visual Media
 
 ### Icon
 
 Graphical symbols representing actions or concepts.
-{% endraw %}
-{{parameters_table(component_ref.icon, 'icon')}}
-{% raw %}
+
+<<parameters_table(component_ref.icon, 'icon')>>
+
 ### Image
 
 Displaying images with proper attributes.
-{% endraw %}
-{{parameters_table(component_ref.image, 'image')}}
-{% raw %}
+
+<<parameters_table(component_ref.image, 'image')>>
+
 ### Video
 
 Video player component.
-{% endraw %}
-{{parameters_table(component_ref.video, 'video')}}
-{% raw %}
+
+<<parameters_table(component_ref.video, 'video')>>
+
 ## Utilities
 
 ### Datetime
 
 Formatted and localized date and time display.
-{% endraw %}
-{{parameters_table(component_ref.datetime, 'datetime')}}
-{% raw %}
+
+<<parameters_table(component_ref.datetime, 'datetime')>>
+
 ### Empty
 
 A component shown when there is no content to display.
-{% endraw %}
-{{parameters_table(component_ref.empty, 'empty')}}
+
+<<parameters_table(component_ref.empty, 'empty')>>

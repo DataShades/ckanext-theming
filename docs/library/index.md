@@ -1,4 +1,4 @@
-{% raw %}
+
 # Component Library
 
 The component library is the heart of the theming system. It provides a set of
@@ -32,22 +32,20 @@ For more complex content (like nested HTML or other components), use the `ui.uti
 {% endcall %}
 ```
 
-/// admonition | Note
-    type: info
+!!! note
 
-Keep in mind that `ui.util.call` simply passes the block content into the first
-argument of the called component. The following two ways of rendering
-`something` are identical:
+    Keep in mind that `ui.util.call` simply passes the block content into the first
+    argument of the called component. The following two ways of rendering
+    `something` are identical:
 
-```django
-{{ ui.something("CONTENT", argument="value") }}
+    ```django
+    {{ ui.something("CONTENT", argument="value") }}
 
-{% call ui.util.call(ui.something, argument="value") %}
-    CONTENT
-{% endcall %}
-```
+    {% call ui.util.call(ui.something, argument="value") %}
+        CONTENT
+    {% endcall %}
+    ```
 
-///
 
 ### 3. Entity-based Components
 Some components are designed to work directly with CKAN's data objects (like
@@ -180,27 +178,26 @@ The `ui.util.call` function allows passing complex content (including nested
 components) into elements that don't have a `caller()` block in their
 implementation.
 
-/// admonition | Using `caller()`
-    type: warning
-
-When creating custom components you can use `caller()`, but always provide
-implementation that does not require it. This guarantees that all
-implementations of the component across different themes will not break when
-using safe way of calling via inline expression `ui.<component>` and via block
-call `ui.util.call(ui.<component>)`.
-
-```django
-{% macro something(content) %}
-    {% if content %}
-        {{ content }}
-    {% elif caller %}
-        {{ caller() }}
-    {% endif %}
-{% endmacro %}
-```
+!!! warning "Using `caller()`"
 
 
-///
+    When creating custom components you can use `caller()`, but always provide
+    implementation that does not require it. This guarantees that all
+    implementations of the component across different themes will not break when
+    using safe way of calling via inline expression `ui.<component>` and via block
+    call `ui.util.call(ui.<component>)`.
+
+    ```django
+    {% macro something(content) %}
+        {% if content %}
+            {{ content }}
+        {% elif caller %}
+            {{ caller() }}
+        {% endif %}
+    {% endmacro %}
+    ```
+
+
 
 ### Mapping Over Collections
 
@@ -315,4 +312,3 @@ writing `{{ ui.icon("search") }}` should work in the same way.
 These patterns ensure that components remain flexible, accessible, and
 consistent across different themes while maintaining the separation of content
 structure from visual presentation.
-{%endraw%}

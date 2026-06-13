@@ -1,4 +1,3 @@
-{% raw %}
 # Philosophy & Goals
 
 The `ckanext-theming` extension is a proposal for a more flexible and
@@ -78,4 +77,3 @@ The best way to use `ckanext-theming` is to start small:
 
 Remember: **You are in control.** Use as much or as little of the theming system
 as makes sense for your specific project.
-{% endraw %}

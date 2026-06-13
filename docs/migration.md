@@ -1,4 +1,4 @@
-{% raw %}
+
 # Migration Guide: Snippets to Macros
 
 If you are coming from traditional CKAN development, you are likely used to
@@ -111,4 +111,3 @@ The macro handles the wrapper, label, ID generation, and accessibility attribute
 | **CSS Classes** | Hardcoded in templates | Abstracted into the theme |
 | **Portability** | Locked to one CSS framework | Works with any compatible theme |
 | **Maintenance** | Update HTML in every template | Update macro in one place |
-{% endraw %}

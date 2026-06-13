@@ -67,24 +67,23 @@ that use different icon sets should provide translation via `ui.util.icon()`.
 | `chevron-left`         | Previous/back          |
 | `chevron-right`        | Next/forward           |
 
-/// note
+!!! note ""
 
-Themes should provide icon mapping to translate these names to their specific
-icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).
+    Themes should provide icon mapping to translate these names to their specific
+    icon system (e.g., Bootstrap Icons, Material Icons, custom SVG icons).
 
-```py
-def register_themes(self) -> list[Theme]:
+    ```py
+    def register_themes(self) -> list[Theme]:
 
-    return [
-        Theme(
-            "my_theme",
-            os.path.join(root, "themes/bare"),
-            icon_map={"home": "material-home-icon", "search": "glass", "user": "human-figure", ..}
-        ),
-    ]
-```
+        return [
+            Theme(
+                "my_theme",
+                os.path.join(root, "themes/bare"),
+                icon_map={"home": "material-home-icon", "search": "glass", "user": "human-figure", ..}
+            ),
+        ]
+    ```
 
-///
 
 ## Direction Parameters
 

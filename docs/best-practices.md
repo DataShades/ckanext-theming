@@ -1,4 +1,4 @@
-{% raw %}
+
 # Technical Best Practices
 
 This page explains the technical advantages of the `ckanext-theming` system
@@ -72,4 +72,3 @@ This ensures that if a new version of the extension adds a parameter to a
 standard component, your theme will not break because of a signature mismatch.
 The `**kwargs` (implicit in macros) will safely catch and ignore any parameters
 your specific theme doesn't handle yet.
-{% endraw %}

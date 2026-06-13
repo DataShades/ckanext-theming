@@ -8,11 +8,10 @@ theming tasks.
 If you need to pass custom `data-*` attributes to a component (e.g., for a
 JavaScript module), use the `data` parameter.
 
-{% raw %}
 ```django
 {{ ui.button(_("Save"), data={"module": "my-module"}) }}
 ```
-{% endraw %}
+
 
 ## 2. Adding custom CSS classes
 
@@ -20,11 +19,11 @@ Sometimes you want to add a specific class to a component without overriding
 its entire implementation. Standard components support the `_extra_class`
 parameter for this purpose.
 
-{% raw %}
+
 ```django
 {{ ui.button(_("Big Button"), _extra_class="my-custom-big-class") }}
 ```
-{% endraw %}
+
 
 This will result in:
 `#!html <button class="btn btn-primary my-custom-big-class" ...>`
@@ -34,11 +33,11 @@ This will result in:
 Sometimes you want to wrap content in a tag only if a certain condition is met.
 Use `ui.util.tag` for this.
 
-{% raw %}
+
 ```django
 {{ ui.util.tag(content, "a" if href else "", attrs={"href": href}) }}
 ```
-{% endraw %}
+
 
 If `href` is present, it renders an `<a>` tag. If not, it just prints the
 content as-is.
@@ -49,25 +48,25 @@ When connecting a handle (like a button) to a target (like a modal), you need a
 unique ID. If you have a CKAN object with a unique name, you can use it to
 generate a stable, reproducible ID.
 
-{% raw %}
+
 ```django
 {% set modal_id = ui.util.id(package.name, prefix="modal-") %}
 {{ ui.modal_handle(_("View Details"), id=modal_id) }}
 {{ ui.modal(package.notes, id=modal_id) }}
 ```
-{% endraw %}
+
 
 ## 4. Mapping over a list of items
 
 If you have a list of simple strings and want to render a component for each
 of them, use `ui.util.map`.
 
-{% raw %}
+
 ```django
 {# Renders three badges #}
 {{ ui.util.map(ui.badge, ["New", "Hot", "Trending"], style="primary") }}
 ```
-{% endraw %}
+
 
 ## 5. Overriding a single component in your portal
 

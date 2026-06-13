@@ -1,6 +1,10 @@
-{% from "_macros.html" import parameters_table %}
-{% raw %}
+---
+include_yaml:
+    component_ref: ckanext/theming/components.yaml
+---
+
 # Navigation
+
 
 Navigation components help users move through the application. They range from
 global site navigation to page-specific actions and breadcrumbs.
@@ -22,29 +26,31 @@ Use `nav` and `nav_item` for generic navigation menus.
 {%- endcall %}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.nav, 'nav')}}
-{{parameters_table(component_ref.nav_item, 'nav_item')}}
-{% raw %}
+<< parameters_table(component_ref.nav, 'nav') >>
+
+
+
+<<parameters_table(component_ref.nav_item, 'nav_item')>>
+
 ### Main Site Navigation
 
 The primary navigation usually found in the header.
 
-/// admonition | Usage Example
-    type: example
 
-```django
-{%- call ui.util.call(ui.main_nav) -%}
-    {{ ui.main_nav_item(_("Datasets"), href=h.url_for("dataset.search")) }}
-    {{ ui.main_nav_item(_("Organizations"), href=h.url_for("organization.index")) }}
-    {{ ui.main_nav_item(_("Groups"), href=h.url_for("group.index")) }}
-{%- endcall %}
-```
-///
-{% endraw %}
-{{parameters_table(component_ref.main_nav, 'main_nav')}}
-{{parameters_table(component_ref.main_nav_item, 'main_nav_item')}}
-{% raw %}
+!!! example
+
+    ```django
+    {%- call ui.util.call(ui.main_nav) -%}
+        {{ ui.main_nav_item(_("Datasets"), href=h.url_for("dataset.search")) }}
+        {{ ui.main_nav_item(_("Organizations"), href=h.url_for("organization.index")) }}
+        {{ ui.main_nav_item(_("Groups"), href=h.url_for("group.index")) }}
+    {%- endcall %}
+    ```
+
+
+<<parameters_table(component_ref.main_nav, 'main_nav')>>
+<<parameters_table(component_ref.main_nav_item, 'main_nav_item')>>
+
 ### Account Navigation
 
 ```django
@@ -57,10 +63,10 @@ The primary navigation usually found in the header.
 
 
 User-specific links like "Profile", "Settings", or "Logout".
-{% endraw %}
-{{parameters_table(component_ref.account_nav, 'account_nav')}}
-{{parameters_table(component_ref.account_nav_item, 'account_nav_item')}}
-{% raw %}
+
+<<parameters_table(component_ref.account_nav, 'account_nav')>>
+<<parameters_table(component_ref.account_nav_item, 'account_nav_item')>>
+
 ### Sidebar & Content Navigation
 
 `sidebar_nav` is used for sidebar menus, while `content_nav` is often used for
@@ -74,10 +80,10 @@ tabs within a specific entity page (e.g., Dataset tabs).
 {%- endcall -%}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.sidebar_nav, 'sidebar_nav')}}
-{{parameters_table(component_ref.sidebar_nav_item, 'sidebar_nav_item')}}
-{% raw %}
+
+<<parameters_table(component_ref.sidebar_nav, 'sidebar_nav')>>
+<<parameters_table(component_ref.sidebar_nav_item, 'sidebar_nav_item')>>
+
 ### Footer Navigation
 
 Specialized navigation for the footer area.
@@ -101,10 +107,10 @@ Specialized navigation for the footer area.
 Primary links in the footer rendered by wrapper `footer_main_nav` and
 collection of `footer_main_nav_item`.
 
-{% endraw %}
-{{parameters_table(component_ref.footer_main_nav, 'footer_main_nav')}}
-{{parameters_table(component_ref.footer_main_nav_item, 'footer_main_nav_item')}}
-{% raw %}
+
+<<parameters_table(component_ref.footer_main_nav, 'footer_main_nav')>>
+<<parameters_table(component_ref.footer_main_nav_item, 'footer_main_nav_item')>>
+
 
 #### Secondary footer navigation
 
@@ -112,10 +118,10 @@ Less prominent links in the footer, often for legal or support pages.  Rendered
 by wrapper `footer_secondary_nav` and collection of
 `footer_secondary_nav_item`.
 
-{% endraw %}
-{{parameters_table(component_ref.footer_secondary_nav, 'footer_secondary_nav')}}
-{{parameters_table(component_ref.footer_secondary_nav_item, 'footer_secondary_nav_item')}}
-{% raw %}
+
+<<parameters_table(component_ref.footer_secondary_nav, 'footer_secondary_nav')>>
+<<parameters_table(component_ref.footer_secondary_nav_item, 'footer_secondary_nav_item')>>
+
 ## Actions
 
 Actions are prominent links or buttons used to perform operations on the
@@ -131,11 +137,8 @@ Page-level actions like "Add Dataset".
 {%- endcall -%}
 ```
 
-
-{% endraw %}
-{{parameters_table(component_ref.page_action_wrapper, 'page_action_wrapper')}}
-{{parameters_table(component_ref.page_action, 'page_action')}}
-{% raw %}
+<<parameters_table(component_ref.page_action_wrapper, 'page_action_wrapper')>>
+<<parameters_table(component_ref.page_action, 'page_action')>>
 
 ### Content Actions
 
@@ -150,29 +153,29 @@ Entity-level actions like "Edit", "Manage", or "Delete".
 ```
 
 
-{% endraw %}
-{{parameters_table(component_ref.content_action_wrapper, 'content_action_wrapper')}}
-{{parameters_table(component_ref.content_action, 'content_action')}}
-{% raw %}
+
+<<parameters_table(component_ref.content_action_wrapper, 'content_action_wrapper')>>
+<<parameters_table(component_ref.content_action, 'content_action')>>
+
 ## Breadcrumbs
 
 Breadcrumbs show the user's location in the site hierarchy.
 
-/// admonition | Usage Example
-    type: example
 
-```django
-{%- call ui.util.call(ui.breadcrumb_wrapper) -%}
-    {{ ui.breadcrumb(_("Home"), href="/", initial=true) }}
-    {{ ui.breadcrumb(_("Datasets"), href="/dataset") }}
-    {{ ui.breadcrumb(package.title, active=true) }}
-{%- endcall %}
-```
-///
-{% endraw %}
-{{parameters_table(component_ref.breadcrumb_wrapper, 'breadcrumb_wrapper')}}
-{{parameters_table(component_ref.breadcrumb, 'breadcrumb')}}
-{% raw %}
+!!! example
+
+    ```django
+    {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+        {{ ui.breadcrumb(_("Home"), href="/", initial=true) }}
+        {{ ui.breadcrumb(_("Datasets"), href="/dataset") }}
+        {{ ui.breadcrumb(package.title, active=true) }}
+    {%- endcall %}
+    ```
+
+
+<<parameters_table(component_ref.breadcrumb_wrapper, 'breadcrumb_wrapper')>>
+<<parameters_table(component_ref.breadcrumb, 'breadcrumb')>>
+
 ## Pagination
 
 Pagination controls for moving between pages of results. Can be rendered via
@@ -182,9 +185,8 @@ single `pagination` component in most cases.
 {{ ui.pagination(page=2, total_pages=5) }}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.pagination, 'pagination')}}
-{% raw %}
+<<parameters_table(component_ref.pagination, 'pagination')>>
+
 
 When custom pager required, low-level components `pagination_wrapper` and
 `pagination_item` can be used.
@@ -200,10 +202,10 @@ When custom pager required, low-level components `pagination_wrapper` and
 ```
 
 
-{% endraw %}
-{{parameters_table(component_ref.pagination_wrapper, 'pagination_wrapper')}}
-{{parameters_table(component_ref.pagination_item, 'pagination_item')}}
-{% raw %}
+
+<<parameters_table(component_ref.pagination_wrapper, 'pagination_wrapper')>>
+<<parameters_table(component_ref.pagination_item, 'pagination_item')>>
+
 ## Dropdowns
 
 `dropdown` component provides a toggleable menu.
@@ -216,10 +218,9 @@ When custom pager required, low-level components `pagination_wrapper` and
 {%- endcall -%}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.dropdown, 'dropdown')}}
-{{parameters_table(component_ref.dropdown_item, 'dropdown_item')}}
-{% raw %}
+<<parameters_table(component_ref.dropdown, 'dropdown')>>
+<<parameters_table(component_ref.dropdown_item, 'dropdown_item')>>
+
 ## Tabs
 
 Tabs are used to organize content into different panes within the same page.
@@ -244,9 +245,9 @@ A high-level wrapper that can handle both the tab handles and the panes.
 {%- endcall -%}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.tabbed_content, 'tabbed_content')}}
-{% raw %}
+
+<<parameters_table(component_ref.tabbed_content, 'tabbed_content')>>
+
 
 ### Low-level Tab Components
 
@@ -263,10 +264,8 @@ handles (`tab`)
 {%- endcall -%}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.tab_wrapper, 'tab_wrapper')}}
-{{parameters_table(component_ref.tab, 'tab')}}
-{% raw %}
+<<parameters_table(component_ref.tab_wrapper, 'tab_wrapper')>>
+<<parameters_table(component_ref.tab, 'tab')>>
 
 Tab panes are rendered using `tab_pane_wrapper` and individual panes with `tab_pane`.
 
@@ -278,6 +277,5 @@ Tab panes are rendered using `tab_pane_wrapper` and individual panes with `tab_p
 {%- endcall -%}
 ```
 
-{% endraw %}
-{{parameters_table(component_ref.tab_pane_wrapper, 'tab_pane_wrapper')}}
-{{parameters_table(component_ref.tab_pane, 'tab_pane')}}
+<<parameters_table(component_ref.tab_pane_wrapper, 'tab_pane_wrapper')>>
+<<parameters_table(component_ref.tab_pane, 'tab_pane')>>
