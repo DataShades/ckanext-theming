@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/library/content/">
+        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/library/forms/">
       
       
-        <link rel="prev" href="../navigation/">
+        <link rel="prev" href="../content/">
       
       
-        <link rel="next" href="../forms/">
+        <link rel="next" href="../feedback/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>CKAN Content - ckanext-theming</title>
+        <title>Forms - ckanext-theming</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ckan-content" class="md-skip">
+        <a href="#forms" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CKAN Content
+              Forms
             
           </span>
         </div>
@@ -582,6 +582,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CKAN Content
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -599,7 +622,7 @@
   
   
   <span class="md-ellipsis">
-    CKAN Content
+    Forms
     
   </span>
   
@@ -612,7 +635,7 @@
   
   
   <span class="md-ellipsis">
-    CKAN Content
+    Forms
     
   </span>
   
@@ -635,83 +658,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#datasets-packages" class="md-nav__link">
+  <a href="#form-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      Datasets (Packages)
+      Form Structure
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#organizations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Organizations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#groups" class="md-nav__link">
-    <span class="md-ellipsis">
-      Groups
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      Resources
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#users" class="md-nav__link">
-    <span class="md-ellipsis">
-      Users
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#search-facets" class="md-nav__link">
-    <span class="md-ellipsis">
-      Search &amp; Facets
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Search &amp; Facets">
+    <nav class="md-nav" aria-label="Form Structure">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#facets" class="md-nav__link">
+  <a href="#form-container" class="md-nav__link">
     <span class="md-ellipsis">
-      Facets
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Facets">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#facet-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Facet section
+      Form Container
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#facet-list-and-facet" class="md-nav__link">
+  <a href="#low-level-form-components" class="md-nav__link">
     <span class="md-ellipsis">
-      Facet list and facet
+      Low-level Form Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fieldsets-and-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fieldsets and Annotations
     </span>
   </a>
   
@@ -721,11 +698,39 @@
     </nav>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#input-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Components">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#filters-container" class="md-nav__link">
+  <a href="#text-inputs" class="md-nav__link">
     <span class="md-ellipsis">
-      Filters Container
+      Text Inputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rich-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rich Inputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selection-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selection Inputs
     </span>
   </a>
   
@@ -733,6 +738,24 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-and-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation and Feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-fields-extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Fields (Extras)
+    </span>
+  </a>
   
 </li>
       
@@ -740,29 +763,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../forms/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Forms
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1014,83 +1014,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#datasets-packages" class="md-nav__link">
+  <a href="#form-structure" class="md-nav__link">
     <span class="md-ellipsis">
-      Datasets (Packages)
+      Form Structure
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#organizations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Organizations
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#groups" class="md-nav__link">
-    <span class="md-ellipsis">
-      Groups
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resources" class="md-nav__link">
-    <span class="md-ellipsis">
-      Resources
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#users" class="md-nav__link">
-    <span class="md-ellipsis">
-      Users
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#search-facets" class="md-nav__link">
-    <span class="md-ellipsis">
-      Search &amp; Facets
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Search &amp; Facets">
+    <nav class="md-nav" aria-label="Form Structure">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#facets" class="md-nav__link">
+  <a href="#form-container" class="md-nav__link">
     <span class="md-ellipsis">
-      Facets
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Facets">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#facet-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      Facet section
+      Form Container
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#facet-list-and-facet" class="md-nav__link">
+  <a href="#low-level-form-components" class="md-nav__link">
     <span class="md-ellipsis">
-      Facet list and facet
+      Low-level Form Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fieldsets-and-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fieldsets and Annotations
     </span>
   </a>
   
@@ -1100,11 +1054,39 @@
     </nav>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#input-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Input Components">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#filters-container" class="md-nav__link">
+  <a href="#text-inputs" class="md-nav__link">
     <span class="md-ellipsis">
-      Filters Container
+      Text Inputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rich-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rich Inputs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selection-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selection Inputs
     </span>
   </a>
   
@@ -1112,6 +1094,24 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation-and-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation and Feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-fields-extras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic Fields (Extras)
+    </span>
+  </a>
   
 </li>
       
@@ -1134,316 +1134,27 @@
   
 
 
-<h1 id="ckan-content">CKAN Content</h1>
-<p>Content components are designed to display CKAN's core entities in a consistent
-way. Most entities have a singular component (e.g., <code>package</code>) and a list
-wrapper (e.g., <code>package_list</code>).</p>
-<h2 id="datasets-packages">Datasets (Packages)</h2>
-<p>The <code>package</code> component displays information about a single dataset, typically
-as a snippet in search results or a list.</p>
+<h1 id="forms">Forms</h1>
+<p>Form components handle user input and provide consistent styling and validation
+feedback.</p>
+<h2 id="form-structure">Form Structure</h2>
+<p>Use these components to define the boundaries and overall structure of your
+forms.</p>
+<h3 id="form-container">Form Container</h3>
+<p>The <code>form</code> macro is a high-level wrapper that handles opening and closing tags,
+CSRF tokens, and basic form attributes.</p>
 <div class="admonition example">
 <p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.package_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">pkg</span> <span class="k">in</span> <span class="nv">packages</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.package</span><span class="o">(</span><span class="nv">package</span><span class="o">=</span><span class="nv">pkg</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-</code></pre></div>
-</div>
-<div class="component-parameters-title">
-Parameters for <code>package_list</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Collection of packages</td>
-</tr>
-</tbody>
-</table>
-<div class="component-parameters-title">
-Parameters for <code>package</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Usually ignored</td>
-</tr>
-<tr>
-<td><code>package</code></td>
-<td>dict</td>
-<td>Dictionary with package details</td>
-</tr>
-</tbody>
-</table>
-<h2 id="organizations">Organizations</h2>
-<p>Displays information about a CKAN organization.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.organization_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">org</span> <span class="k">in</span> <span class="nv">organizations</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.organization</span><span class="o">(</span><span class="nv">organization</span><span class="o">=</span><span class="nv">org</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-</code></pre></div>
-</div>
-<div class="component-parameters-title">
-Parameters for <code>organization_list</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Collection of organizations</td>
-</tr>
-</tbody>
-</table>
-<div class="component-parameters-title">
-Parameters for <code>organization</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Usually ignored</td>
-</tr>
-<tr>
-<td><code>organization</code></td>
-<td>dict</td>
-<td>Dictionary with organization details</td>
-</tr>
-</tbody>
-</table>
-<h2 id="groups">Groups</h2>
-<p>Displays information about a CKAN group.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.group_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">group</span> <span class="k">in</span> <span class="nv">groups</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.group</span><span class="o">(</span><span class="nv">group</span><span class="o">=</span><span class="nv">group</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-</code></pre></div>
-</div>
-<div class="component-parameters-title">
-Parameters for <code>group_list</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Collection of groups</td>
-</tr>
-</tbody>
-</table>
-<div class="component-parameters-title">
-Parameters for <code>group</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Usually ignored</td>
-</tr>
-<tr>
-<td><code>group</code></td>
-<td>dict</td>
-<td>Dictionary with group details</td>
-</tr>
-</tbody>
-</table>
-<h2 id="resources">Resources</h2>
-<p>Displays information about a single resource within a dataset.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.resource_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">resource</span> <span class="k">in</span> <span class="nv">resources</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">package</span> <span class="o">=</span> <span class="nv">h.get_package</span><span class="o">(</span><span class="nv">resource.package_id</span><span class="o">)</span> <span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.resource</span><span class="o">(</span><span class="nv">resource</span><span class="o">=</span><span class="nv">resource</span><span class="o">,</span> <span class="nv">package</span><span class="o">=</span><span class="nv">package</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-</code></pre></div>
-</div>
-<div class="component-parameters-title">
-Parameters for <code>resource_list</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Collection of resources</td>
-</tr>
-</tbody>
-</table>
-<div class="component-parameters-title">
-Parameters for <code>resource</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Usually ignored</td>
-</tr>
-<tr>
-<td><code>resource</code></td>
-<td>dict</td>
-<td>Dictionary with resource details</td>
-</tr>
-<tr>
-<td><code>package</code></td>
-<td>dict</td>
-<td>Dictionary with parent package details</td>
-</tr>
-</tbody>
-</table>
-<h2 id="users">Users</h2>
-<p>Displays user profile information.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.user_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">user</span> <span class="k">in</span> <span class="nv">users</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.user</span><span class="o">(</span><span class="nv">user</span><span class="o">=</span><span class="nv">user</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-</code></pre></div>
-</div>
-<div class="component-parameters-title">
-Parameters for <code>user_list</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Collection of users</td>
-</tr>
-</tbody>
-</table>
-<div class="component-parameters-title">
-Parameters for <code>user</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Usually ignored</td>
-</tr>
-<tr>
-<td><code>user</code></td>
-<td>dict</td>
-<td>Dictionary with user details</td>
-</tr>
-</tbody>
-</table>
-<h2 id="search-facets">Search &amp; Facets</h2>
-<p>Components for filtering and exploring content.</p>
-<h3 id="facets">Facets</h3>
-<p><code>facet</code> components are used to filter search results. They are usually grouped
-into a <code>facet_list</code> and further organized into <code>facet_section</code>s.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.facet_section</span><span class="o">,</span> <span class="nv">title</span><span class="o">=</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Organizations&quot;</span><span class="o">))</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.facet_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">item</span> <span class="k">in</span> <span class="nv">facets</span> -<span class="cp">%}</span>
-<span class="x">            </span><span class="cp">{{</span> <span class="nv">ui.facet</span><span class="o">(</span><span class="nv">item.display_name</span><span class="o">,</span> <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;organization&quot;</span><span class="o">,</span> <span class="nv">value</span><span class="o">=</span><span class="nv">item.name</span><span class="o">,</span> <span class="nv">count</span><span class="o">=</span><span class="nv">item.count</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">        </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.form</span><span class="o">,</span> <span class="nv">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{{</span> <span class="nv">ui.input</span><span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="o">,</span> <span class="nv">label</span><span class="o">=</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Title&quot;</span><span class="o">))</span> <span class="cp">}}</span>
+<span class="x">    </span><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.form_actions</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">ui.button</span><span class="o">(</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Save&quot;</span><span class="o">),</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">}}</span>
 <span class="x">    </span><span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
 <span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
 </code></pre></div>
 </div>
-<h4 id="facet-section">Facet section</h4>
 <div class="component-parameters-title">
-Parameters for <code>facet_section</code>
+Parameters for <code>form</code>
 </div>
 
 <table>
@@ -1458,33 +1169,48 @@ Parameters for <code>facet_section</code>
 <tr>
 <td><code>content</code></td>
 <td>any</td>
-<td>List of facets</td>
+<td>Content of the form, typically form fields and a submit button</td>
 </tr>
 <tr>
-<td><code>title</code></td>
+<td><code>method</code></td>
 <td>str</td>
-<td>Optional title of the facet section</td>
+<td>HTTP method to use when submitting the form, either "GET" or "POST"</td>
 </tr>
 <tr>
-<td><code>items</code></td>
-<td>list[dict]</td>
-<td>List of search facets that may be used by section to render empty message of facet-search widget.</td>
-</tr>
-<tr>
-<td><code>key</code></td>
+<td><code>action</code></td>
 <td>str</td>
-<td>Facet key ("organization", "res_format", etc.)</td>
+<td>URL to submit the form to</td>
 </tr>
 <tr>
-<td><code>has_more</code></td>
+<td><code>enctype</code></td>
+<td>str</td>
+<td>Encoding type for the form data, either "application/x-www-form-urlencoded", "multipart/form-data", or "text/plain"</td>
+</tr>
+<tr>
+<td><code>include_csrf</code></td>
 <td>bool</td>
-<td>Whether there are more facet values that can be shown in a "show more" widget.</td>
+<td>Whether to include a CSRF token in the form for protection against CSRF attacks</td>
 </tr>
 </tbody>
 </table>
-<h4 id="facet-list-and-facet">Facet list and facet</h4>
+<h3 id="low-level-form-components">Low-level Form Components</h3>
+<p>Use these when you need more control over the form's HTML structure.</p>
+<div class="admonition example">
+<p class="admonition-title">Usage Example</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.form_start</span><span class="o">(</span><span class="nv">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+
+<span class="cp">{{</span> <span class="nv">h.csrf_input</span><span class="o">()</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">ui.input</span><span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="o">,</span> <span class="nv">label</span><span class="o">=</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Title&quot;</span><span class="o">))</span> <span class="cp">}}</span>
+
+<span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.form_actions</span><span class="o">)</span> -<span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{{</span> <span class="nv">ui.button</span><span class="o">(</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Save&quot;</span><span class="o">),</span> <span class="nv">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
+
+<span class="cp">{{</span> <span class="nv">ui.form_end</span><span class="o">()</span> <span class="cp">}}</span>
+</code></pre></div>
+</div>
 <div class="component-parameters-title">
-Parameters for <code>facet_list</code>
+Parameters for <code>form_start</code>
 </div>
 
 <table>
@@ -1499,74 +1225,182 @@ Parameters for <code>facet_list</code>
 <tr>
 <td><code>content</code></td>
 <td>any</td>
-<td>Collection of search facets</td>
-</tr>
-</tbody>
-</table>
-<div class="component-parameters-title">
-Parameters for <code>facet</code>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>content</code></td>
-<td>any</td>
-<td>Label of the facet item</td>
+<td>Content shown after the opening tag, typically empty or containing hidden inputs.</td>
 </tr>
 <tr>
-<td><code>key</code></td>
+<td><code>method</code></td>
 <td>str</td>
-<td>Facet key ("organization", "res_format", etc.)</td>
+<td>HTTP method to use when submitting the form, either "GET" or "POST"</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>str</td>
+<td>URL to submit the form to</td>
+</tr>
+<tr>
+<td><code>enctype</code></td>
+<td>str</td>
+<td>Encoding type for the form data, either "application/x-www-form-urlencoded", "multipart/form-data", or "text/plain"</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>form_end</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Content shown before the closing tag, typically empty or containing hidden inputs.</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>form_actions</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Form action buttons</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fieldsets-and-annotations">Fieldsets and Annotations</h3>
+<div class="component-parameters-title">
+Parameters for <code>fieldset</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Content of the fieldset, typically form fields</td>
+</tr>
+<tr>
+<td><code>legend</code></td>
+<td>str</td>
+<td>Optional legend text shown at the top of the fieldset</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>str</td>
+<td>Optional description text shown below the legend</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>form_annotation</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Usually ignored</td>
+</tr>
+</tbody>
+</table>
+<h2 id="input-components">Input Components</h2>
+<p>These components represent individual form fields.</p>
+<h3 id="text-inputs">Text Inputs</h3>
+<p>Basic single-line and multi-line text inputs.</p>
+<div class="component-parameters-title">
+Parameters for <code>input</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
 </tr>
 <tr>
 <td><code>value</code></td>
 <td>str</td>
-<td>Facet value (organization name, resource format, etc.)</td>
+<td>Default value of the input</td>
 </tr>
 <tr>
-<td><code>count</code></td>
-<td>int</td>
-<td>Number of items matching this facet value.</td>
-</tr>
-<tr>
-<td><code>active</code></td>
+<td><code>required</code></td>
 <td>bool</td>
-<td>Whether this facet value is currently active.</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>str</td>
+<td>Placeholder text shown in the input when it is empty</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>str</td>
+<td>Type of the input, either "text", "email", "password", "number", etc.</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
 </tr>
 </tbody>
 </table>
-<h3 id="filters-container">Filters Container</h3>
-<p>A high-level container for all search filters, typically shown in the sidebar.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.filters</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.facet_section</span><span class="o">,</span> <span class="nv">title</span><span class="o">=</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Organizations&quot;</span><span class="o">))</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.facet_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">            </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">item</span> <span class="k">in</span> <span class="nv">facets</span> -<span class="cp">%}</span>
-<span class="x">                </span><span class="cp">{{</span> <span class="nv">ui.facet</span><span class="o">(</span><span class="nv">item.display_name</span><span class="o">,</span> <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;organization&quot;</span><span class="o">,</span> <span class="nv">value</span><span class="o">=</span><span class="nv">item.name</span><span class="o">,</span> <span class="nv">count</span><span class="o">=</span><span class="nv">item.count</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">            </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-
-<span class="x">    </span><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.facet_section</span><span class="o">,</span> <span class="nv">title</span><span class="o">=</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Tags&quot;</span><span class="o">))</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{%</span>- <span class="k">call</span> <span class="nv">ui.util.call</span><span class="o">(</span><span class="nv">ui.facet_list</span><span class="o">)</span> -<span class="cp">%}</span>
-<span class="x">            </span><span class="cp">{%</span>- <span class="k">for</span> <span class="nv">item</span> <span class="k">in</span> <span class="nv">tag_facets</span> -<span class="cp">%}</span>
-<span class="x">                </span><span class="cp">{{</span> <span class="nv">ui.facet</span><span class="o">(</span><span class="nv">item.display_name</span><span class="o">,</span> <span class="nv">key</span><span class="o">=</span><span class="s2">&quot;tags&quot;</span><span class="o">,</span> <span class="nv">value</span><span class="o">=</span><span class="nv">item.name</span><span class="o">,</span> <span class="nv">count</span><span class="o">=</span><span class="nv">item.count</span><span class="o">)</span> <span class="cp">}}</span>
-<span class="x">            </span><span class="cp">{%</span>- <span class="k">endfor</span> -<span class="cp">%}</span>
-<span class="x">        </span><span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-<span class="cp">{%</span>- <span class="k">endcall</span> -<span class="cp">%}</span>
-</code></pre></div>
-</div>
 <div class="component-parameters-title">
-Parameters for <code>filters</code>
+Parameters for <code>textarea</code>
 </div>
 
 <table>
@@ -1581,7 +1415,743 @@ Parameters for <code>filters</code>
 <tr>
 <td><code>content</code></td>
 <td>any</td>
-<td>Collection of facet sections</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Default value of the input</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>str</td>
+<td>Placeholder text shown in the input when it is empty</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>hidden_input</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Value to include in the form submission</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rich-inputs">Rich Inputs</h3>
+<p>Specialized inputs for specific data types or enhanced interactivity.</p>
+<div class="component-parameters-title">
+Parameters for <code>markdown</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Default value of the input</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>str</td>
+<td>Placeholder text shown in the input when it is empty</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>autocomplete</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>str</td>
+<td>Placeholder text shown in the input when it is empty</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>str</td>
+<td>Optional source of the autocomplete suggestions. Must be a URL to fetch options from for ajax suggestions</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>list[dict]</td>
+<td>List of autocomplete suggestions, each suggestion is a dictionary with text" and "value". Used when source is missing.</td>
+</tr>
+<tr>
+<td><code>allow_multiple</code></td>
+<td>bool</td>
+<td>Whether to allow selecting multiple options</td>
+</tr>
+<tr>
+<td><code>allow_new</code></td>
+<td>bool</td>
+<td>Whether to allow creating new options that are not in the suggestions list</td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td>list[str]&#124;list[dict]</td>
+<td>List of values of the options that should be selected by default. Can be a list of strings or a list of dictionaries with "value" and "label" keys.</td>
+</tr>
+<tr>
+<td><code>min_chars</code></td>
+<td>int</td>
+<td>Minimum number of characters the user must type before the autocomplete suggestions are fetched from the server when source is specified.</td>
+</tr>
+<tr>
+<td><code>debounce</code></td>
+<td>int</td>
+<td>Debounce delay in milliseconds for fetching autocomplete suggestions from the server when source is specified.</td>
+</tr>
+<tr>
+<td><code>joined</code></td>
+<td>bool</td>
+<td>Whether to submit the selected options as a list of values or join values using separator.</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>str</td>
+<td>Separator character to use for single-string form(joined=true)</td>
+</tr>
+<tr>
+<td><code>id_key</code></td>
+<td>str</td>
+<td>Key to use from the suggestion dictionaries for the option values when source is specified.</td>
+</tr>
+<tr>
+<td><code>label_key</code></td>
+<td>str</td>
+<td>Key to use from the suggestion dictionaries for the option labels when source is specified.</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>file_input</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>accept</code></td>
+<td>str</td>
+<td>Comma-separated list of accepted file types (e.g. "image/*,.pdf")</td>
+</tr>
+<tr>
+<td><code>capture</code></td>
+<td>str</td>
+<td>Whether to allow capturing media directly from the device camera or microphone (e.g. "user", "environment")</td>
+</tr>
+<tr>
+<td><code>multiple</code></td>
+<td>bool</td>
+<td>Whether to allow selecting multiple files</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>range_input</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Default value of the input</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+<tr>
+<td><code>min_value</code></td>
+<td>int</td>
+<td>Minimum value allowed for the input</td>
+</tr>
+<tr>
+<td><code>max_value</code></td>
+<td>int</td>
+<td>Maximum value allowed for the input</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>int</td>
+<td>Step size for the input value</td>
+</tr>
+</tbody>
+</table>
+<h3 id="selection-inputs">Selection Inputs</h3>
+<div class="component-parameters-title">
+Parameters for <code>select</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>multiple</code></td>
+<td>bool</td>
+<td>Whether to allow selecting multiple options</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td>list[str]</td>
+<td>List of values of the options that should be selected by default</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>list[dict]</td>
+<td>List of options to show in the select box, each option is a dictionary with "label" and "value"</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>select_box</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Select options to show in the select box, typically a list of select_option elements</td>
+</tr>
+<tr>
+<td><code>nested_content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the file input</td>
+</tr>
+<tr>
+<td><code>multiple</code></td>
+<td>bool</td>
+<td>Whether to allow selecting multiple options</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>select_option</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Option label shown to the user</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Value submitted when this option is selected</td>
+</tr>
+<tr>
+<td><code>selected</code></td>
+<td>bool</td>
+<td>Whether this option is selected by default</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>checkbox</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the checkbox</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Value submitted when the checkbox is checked</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+<tr>
+<td><code>checked</code></td>
+<td>bool</td>
+<td>Whether the checkbox is checked by default</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>radio</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>str</td>
+<td>Name of the form field, used as the key when submitting the form</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>str</td>
+<td>Unique identifier for the input, used to associate it with a label</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>str</td>
+<td>Label text shown next to the radiobox</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>bool</td>
+<td>Whether this field is required to submit the form</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>str</td>
+<td>Value submitted when the checkbox is checked</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for this field</td>
+</tr>
+<tr>
+<td><code>checked</code></td>
+<td>bool</td>
+<td>Whether the checkbox is checked by default</td>
+</tr>
+</tbody>
+</table>
+<h2 id="validation-and-feedback">Validation and Feedback</h2>
+<div class="component-parameters-title">
+Parameters for <code>form_errors</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td>dict[str, str]</td>
+<td>Dict of error messages to show for the form</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>field_errors</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>errors</code></td>
+<td>list[str]</td>
+<td>List of error messages to show for the field</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>field_info</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the form field</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dynamic-fields-extras">Dynamic Fields (Extras)</h2>
+<p>Used for handling dynamic key-value pairs (e.g., CKAN's extra fields).</p>
+<div class="component-parameters-title">
+Parameters for <code>extra_fields_collection</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>extras</code></td>
+<td>any</td>
+<td>List of extra fields, each item is a dictionary with "key", "value"</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>any</td>
+<td>Dict of error messages for the extra fields</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>int</td>
+<td>Maximum number of extra fields allowed</td>
+</tr>
+</tbody>
+</table>
+<div class="component-parameters-title">
+Parameters for <code>extra_field</code>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>any</td>
+<td>Help text for the input</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td>int</td>
+<td>Index of the extra field in the list of extra fields, used to generate unique input names and ids</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>dict</td>
+<td>Dictionary with "key" and "value" for the extra field, used to populate the input values</td>
+</tr>
+<tr>
+<td><code>errors</code></td>
+<td>dict</td>
+<td>Dictionary with "<PREFIX>key" and "<PREFIX>value" for the extra field, used to show error messages for the inputs</td>
+</tr>
+<tr>
+<td><code>name_template</code></td>
+<td>str</td>
+<td>Template of the prefix for the input names, with "{index}" placeholder for the index of the extra field (e.g. "extras__{index}__")</td>
 </tr>
 </tbody>
 </table>
@@ -1620,7 +2190,7 @@ Parameters for <code>filters</code>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../navigation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Navigation">
+          <a href="../content/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CKAN Content">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1630,20 +2200,20 @@ Parameters for <code>filters</code>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Navigation
+                CKAN Content
               </div>
             </div>
           </a>
         
         
           
-          <a href="../forms/" class="md-footer__link md-footer__link--next" aria-label="Next: Forms">
+          <a href="../feedback/" class="md-footer__link md-footer__link--next" aria-label="Next: Feedback &amp;amp; Overlays">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Forms
+                Feedback &amp; Overlays
               </div>
             </div>
             <div class="md-footer__button md-icon">

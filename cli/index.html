@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://datashades.github.io/ckanext-theming/cli/">
       
       
-        <link rel="prev" href="../parameters/">
+        <link rel="prev" href="../best-practices/">
       
       
-        <link rel="next" href="../theming-parties/">
+        <link rel="next" href="../library/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>CLI - ckanext-theming</title>
+        <title>CLI Reference - ckanext-theming</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli" class="md-skip">
+        <a href="#cli-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CLI
+              CLI Reference
             
           </span>
         </div>
@@ -290,6 +290,94 @@
   
   
     <li class="md-nav__item">
+      <a href="../philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Philosophy &amp; Goals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styleguide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Living Styleguide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration Guide: Snippets to Macros
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recipes &amp; Best Practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../theme/" class="md-nav__link">
         
   
@@ -311,17 +399,245 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../best-practices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Technical Best Practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-create" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme create
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-component-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme component list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-component-analyze" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme component analyze
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-component-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme component check
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-template-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme template list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-template-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme template check
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-template-analyze" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme template analyze
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-endpoint-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme endpoint list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-endpoint-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme endpoint variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-endpoint-observe" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme endpoint observe
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-endpoint-dump" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme endpoint dump
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ckan-theme-template-component-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      ckan theme template component-usage
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
         
           
-        
-      
-        
-      
-        
-      
         
       
         
@@ -350,7 +666,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -367,14 +683,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -389,173 +705,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../library/containers/" class="md-nav__link">
+      <a href="../library/layout/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Containers
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/content/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Content
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/elements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Elements
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/feedback/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Feedback
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/form/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Form
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/handles/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Handles
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/meta/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Meta
+    Layout
     
   </span>
   
@@ -596,6 +751,121 @@
   
   
     <li class="md-nav__item">
+      <a href="../library/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CKAN Content
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback &amp; Overlays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data &amp; Visualization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../library/search/" class="md-nav__link">
         
   
@@ -619,35 +889,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../library/sections/" class="md-nav__link">
+      <a href="../library/structure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Sections
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/wrappers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Wrappers
+    Site Structure
     
   </span>
   
@@ -671,6 +918,50 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Background & Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Background & Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../parameters/" class="md-nav__link">
         
@@ -686,199 +977,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme list
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-create" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme create
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-component-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme component list
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-component-analyze" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme component analyze
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-component-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme component check
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-template-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme template list
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-template-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme template check
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-template-analyze" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme template analyze
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-endpoint-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme endpoint list
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-endpoint-variants" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme endpoint variants
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-endpoint-observe" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme endpoint observe
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-endpoint-dump" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme endpoint dump
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ckan-theme-template-component-usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      ckan theme template component-usage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Options
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -895,6 +997,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -926,6 +1036,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#ckan-theme-list" class="md-nav__link">
     <span class="md-ellipsis">
       ckan theme list
@@ -1042,15 +1161,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#common-options" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Options
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1070,7 +1180,22 @@
   
 
 
-<h1 id="cli">CLI</h1>
+<h1 id="cli-reference">CLI Reference</h1>
+<p>The theming system provides comprehensive CLI tools for theme development,
+auditing, and debugging.</p>
+<h2 id="development-workflow">Development Workflow</h2>
+<p>While developing a theme, you can use these commands to ensure quality and
+completeness:</p>
+<p><strong>Auditing your theme</strong>: Run <code>ckan theme component check</code> to see which
+    standard components you still need to implement.</p>
+<p><strong>Analyzing signatures</strong>: Use <code>ckan theme component analyze link</code> to see the
+    standard signature and arguments for a specific component.</p>
+<p><strong>Checking template coverage</strong>: Use <code>ckan theme template check</code> to verify
+    that your theme implements all required CKAN templates.</p>
+<p><strong>Debugging endpoints</strong>: Use <code>ckan theme endpoint observe dataset.search</code>
+    to see which template and variables are being used by a specific Flask
+    route.</p>
+<hr />
 <h2 id="ckan-theme-list"><code>ckan theme list</code></h2>
 <p>Lists all available themes in the system, showing their paths and inheritance hierarchy.</p>
 <div class="highlight"><pre><span></span><code>ckan<span class="w"> </span>theme<span class="w"> </span>list
@@ -1098,14 +1223,7 @@ ckan<span class="w"> </span>theme<span class="w"> </span>create<span class="w"> 
 <p>Lists all available UI components for a specific theme.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># List components for the configured theme</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>list
-
-<span class="c1"># List components for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>mytheme
 </code></pre></div>
-<p>Options:</p>
-<ul>
-<li><code>-t, --theme</code>: Specify the theme to analyze (defaults to configured theme)</li>
-</ul>
 <h2 id="ckan-theme-component-analyze"><code>ckan theme component analyze</code></h2>
 <p>Analyzes UI components and their implementations, showing detailed information about each component.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Analyze all components for the configured theme</span>
@@ -1113,9 +1231,6 @@ ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w
 
 <span class="c1"># Analyze specific components</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>analyze<span class="w"> </span>link<span class="w"> </span>button<span class="w"> </span>card
-
-<span class="c1"># Analyze components for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>analyze<span class="w"> </span>-t<span class="w"> </span>mytheme
 </code></pre></div>
 <p>Output includes:</p>
 <ul>
@@ -1124,17 +1239,10 @@ ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w
 <li>Category (Essential, Recommended, Custom)</li>
 <li>Signature information</li>
 </ul>
-<p>Options:</p>
-<ul>
-<li><code>-t, --theme</code>: Specify the theme to analyze (defaults to configured theme)</li>
-</ul>
 <h2 id="ckan-theme-component-check"><code>ckan theme component check</code></h2>
 <p>Verifies that a theme implements all required UI components, showing missing and extra components.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Check components for the configured theme</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>check
-
-<span class="c1"># Check components for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>check<span class="w"> </span>-t<span class="w"> </span>mytheme
 </code></pre></div>
 <p>Output includes:</p>
 <ul>
@@ -1142,39 +1250,21 @@ ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w
 <li>Missing components by category</li>
 <li>Extra components (if any)</li>
 </ul>
-<p>Options:</p>
-<ul>
-<li><code>-t, --theme</code>: Specify the theme to check (defaults to configured theme)</li>
-</ul>
 <h2 id="ckan-theme-template-list"><code>ckan theme template list</code></h2>
 <p>Lists all template files in a theme.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># List templates for the configured theme</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>list
-
-<span class="c1"># List templates for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>mytheme
 </code></pre></div>
-<p>Options:</p>
-<ul>
-<li><code>-t, --theme</code>: Specify the theme to analyze (defaults to configured theme)</li>
-</ul>
 <h2 id="ckan-theme-template-check"><code>ckan theme template check</code></h2>
 <p>Validates theme implementation against core CKAN templates, showing missing and extra templates.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Check templates for the configured theme</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>check
-
-<span class="c1"># Check templates for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>check<span class="w"> </span>-t<span class="w"> </span>mytheme
 </code></pre></div>
 <p>Output includes:</p>
 <ul>
 <li>Total number of templates in the theme</li>
 <li>Missing templates by category</li>
 <li>Extra templates (if any)</li>
-</ul>
-<p>Options:</p>
-<ul>
-<li><code>-t, --theme</code>: Specify the theme to check (defaults to configured theme)</li>
 </ul>
 <h2 id="ckan-theme-template-analyze"><code>ckan theme template analyze</code></h2>
 <p>Analyzes theme templates, showing detailed information about their structure and relationships.</p>
@@ -1183,9 +1273,6 @@ ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"
 
 <span class="c1"># Analyze specific templates</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze<span class="w"> </span>_header.html<span class="w"> </span>_footer.html
-
-<span class="c1"># Analyze templates for a specific theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze<span class="w"> </span>-t<span class="w"> </span>mytheme
 
 <span class="c1"># Show relative filenames</span>
 ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"> </span>analyze<span class="w"> </span>--relative-filename
@@ -1206,7 +1293,6 @@ ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"
 </ul>
 <p>Options:</p>
 <ul>
-<li><code>-t, --theme</code>: Specify the theme to analyze (defaults to configured theme)</li>
 <li><code>--relative-filename</code>: Show relative file paths instead of absolute paths</li>
 <li><code>--with-all-blocks</code>: Include all blocks in the output</li>
 </ul>
@@ -1272,14 +1358,17 @@ ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"
 </ul>
 <h2 id="ckan-theme-endpoint-dump"><code>ckan theme endpoint dump</code></h2>
 <p>Dumps templates and context variables used by Flask endpoints in JSON format.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Dump all endpoints with required data</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--auth-user<span class="w"> </span>admin<span class="w"> </span>--user<span class="w"> </span>testuser<span class="w"> </span>--package<span class="w"> </span>testpkg<span class="w"> </span>--resource<span class="w"> </span>testres<span class="w"> </span>--resource-view<span class="w"> </span>testview<span class="w"> </span>--organization<span class="w"> </span>testorg<span class="w"> </span>--group<span class="w"> </span>testgroup
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a dump source file, to provide data for other commands</span>
+ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--show-source<span class="w"> </span>&gt;<span class="w"> </span>/path/to/source.yaml
+
+<span class="c1"># Dump all endpoints using parameter from the source file</span>
+ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--user<span class="w"> </span>admin<span class="w"> </span>--source<span class="w"> </span>/path/to/source.yaml
 
 <span class="c1"># Dump specific endpoints</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--auth-user<span class="w"> </span>admin<span class="w"> </span>--user<span class="w"> </span>testuser<span class="w"> </span>--package<span class="w"> </span>testpkg<span class="w"> </span>--resource<span class="w"> </span>testres<span class="w"> </span>--resource-view<span class="w"> </span>testview<span class="w"> </span>--organization<span class="w"> </span>testorg<span class="w"> </span>--group<span class="w"> </span>testgroup<span class="w"> </span>--endpoints<span class="o">=</span>dataset.search<span class="w"> </span>--endpoints<span class="o">=</span>dataset.read
+ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--user<span class="w"> </span>admin<span class="w">  </span>--endpoints<span class="o">=</span>dataset.search<span class="w"> </span>--endpoints<span class="o">=</span>dataset.read
 
 <span class="c1"># Dump with verbose output</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--auth-user<span class="w"> </span>admin<span class="w"> </span>--user<span class="w"> </span>testuser<span class="w"> </span>--package<span class="w"> </span>testpkg<span class="w"> </span>--resource<span class="w"> </span>testres<span class="w"> </span>--resource-view<span class="w"> </span>testview<span class="w"> </span>--organization<span class="w"> </span>testorg<span class="w"> </span>--group<span class="w"> </span>testgroup<span class="w"> </span>-v
+ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"> </span>dump<span class="w"> </span>--user<span class="w"> </span>admin<span class="w"> </span>-v
 </code></pre></div>
 <p>Output includes:</p>
 <ul>
@@ -1290,13 +1379,7 @@ ckan<span class="w"> </span>theme<span class="w"> </span>endpoint<span class="w"
 </ul>
 <p>Options:</p>
 <ul>
-<li><code>--auth-user</code>: Authenticate as the specified user (required)</li>
-<li><code>--user</code>: User ID to use for endpoint parameters (required)</li>
-<li><code>--package</code>: Package ID to use for endpoint parameters (required)</li>
-<li><code>--resource</code>: Resource ID to use for endpoint parameters (required)</li>
-<li><code>--resource-view</code>: Resource view ID to use for endpoint parameters (required)</li>
-<li><code>--organization</code>: Organization ID to use for endpoint parameters (required)</li>
-<li><code>--group</code>: Group ID to use for endpoint parameters (required)</li>
+<li><code>--user</code>: Authenticate as the specified user (required)</li>
 <li><code>--ignore</code>: Context variables to ignore (can be specified multiple times)</li>
 <li><code>--endpoints</code>: Specific endpoints to dump (can be specified multiple times)</li>
 <li><code>-v, --verbose</code>: Show full context variables instead of just their types</li>
@@ -1317,18 +1400,8 @@ ckan<span class="w"> </span>theme<span class="w"> </span>template<span class="w"
 </ul>
 <p>Options:</p>
 <ul>
-<li><code>-t, --theme</code>: Specify the theme to analyze (defaults to configured theme)</li>
 <li><code>--include-frequency</code>: Show component count</li>
 </ul>
-<h2 id="common-options">Common Options</h2>
-<p>Most theme commands support the <code>--theme</code> option to specify which theme to operate on:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Use the configured theme (from ckan.ui.theme config)</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>list
-
-<span class="c1"># Explicitly specify a theme</span>
-ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w"> </span>list<span class="w"> </span>-t<span class="w"> </span>mytheme
-</code></pre></div>
-<p>If no theme is specified, the commands will use the theme configured in the <code>ckan.ui.theme</code> configuration option.</p>
 
 
 
@@ -1364,7 +1437,7 @@ ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../parameters/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Standard Parameter Values">
+          <a href="../best-practices/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Technical Best Practices">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1374,20 +1447,20 @@ ckan<span class="w"> </span>theme<span class="w"> </span>component<span class="w
                 Previous
               </span>
               <div class="md-ellipsis">
-                Standard Parameter Values
+                Technical Best Practices
               </div>
             </div>
           </a>
         
         
           
-          <a href="../theming-parties/" class="md-footer__link md-footer__link--next" aria-label="Next: Theming Parties">
+          <a href="../library/" class="md-footer__link md-footer__link--next" aria-label="Next: Component Library">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Theming Parties
+                Component Library
               </div>
             </div>
             <div class="md-footer__button md-icon">

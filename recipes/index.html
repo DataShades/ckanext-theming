@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/library/meta/">
+        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/recipes/">
       
       
-        <link rel="prev" href="../handles/">
+        <link rel="prev" href="../migration/">
       
       
-        <link rel="next" href="../navigation/">
+        <link rel="next" href="../theme/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
     
     
       
-        <title>Meta - ckanext-theming</title>
+        <title>Recipes & Best Practices - ckanext-theming</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#meta" class="md-skip">
+        <a href="#recipes-best-practices" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="ckanext-theming" class="md-header__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
+    <a href=".." title="ckanext-theming" class="md-header__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Meta
+              Recipes &amp; Best Practices
             
           </span>
         </div>
@@ -238,7 +238,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="ckanext-theming" class="md-nav__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
+    <a href=".." title="ckanext-theming" class="md-nav__button md-logo" aria-label="ckanext-theming" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -268,7 +268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   
@@ -290,12 +290,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../theme/" class="md-nav__link">
+      <a href="../philosophy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Creating CKAN Themes
+    Philosophy &amp; Goals
     
   </span>
   
@@ -307,96 +307,17 @@
     
       
       
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
-              
-  
-  
-  <span class="md-ellipsis">
-    Component library
-    
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            Component library
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../containers/" class="md-nav__link">
+      <a href="../styleguide/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Containers
+    The Living Styleguide
     
   </span>
   
@@ -405,21 +326,20 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
   
     <li class="md-nav__item">
-      <a href="../content/" class="md-nav__link">
+      <a href="../migration/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Content
+    Migration Guide: Snippets to Macros
     
   </span>
   
@@ -428,125 +348,9 @@
     </li>
   
 
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Data
     
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../elements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Elements
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../feedback/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Feedback
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../form/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Form
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../handles/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Handles
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
+      
+      
   
   
     
@@ -566,7 +370,7 @@
   
   
   <span class="md-ellipsis">
-    Meta
+    Recipes &amp; Best Practices
     
   </span>
   
@@ -579,7 +383,7 @@
   
   
   <span class="md-ellipsis">
-    Meta
+    Recipes &amp; Best Practices
     
   </span>
   
@@ -602,36 +406,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#account" class="md-nav__link">
+  <a href="#1-adding-custom-data-attributes" class="md-nav__link">
     <span class="md-ellipsis">
-      Account
+      1. Adding custom data attributes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#header" class="md-nav__link">
+  <a href="#2-adding-custom-css-classes" class="md-nav__link">
     <span class="md-ellipsis">
-      Header
+      2. Adding custom CSS classes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#footer" class="md-nav__link">
+  <a href="#3-conditional-wrappers" class="md-nav__link">
     <span class="md-ellipsis">
-      Footer
+      3. Conditional wrappers
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#subtitle-item" class="md-nav__link">
+  <a href="#3-persistent-unique-ids" class="md-nav__link">
     <span class="md-ellipsis">
-      Subtitle Item
+      3. Persistent unique IDs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mapping-over-a-list-of-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mapping over a list of items
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-overriding-a-single-component-in-your-portal" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Overriding a single component in your portal
     </span>
   </a>
   
@@ -644,6 +466,164 @@
     </li>
   
 
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../theme/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Creating CKAN Themes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../best-practices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Technical Best Practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../library/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    Component library
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Component library
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
             
               
@@ -653,7 +633,30 @@
   
   
     <li class="md-nav__item">
-      <a href="../navigation/" class="md-nav__link">
+      <a href="../library/layout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Layout
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/navigation/" class="md-nav__link">
         
   
   
@@ -676,7 +679,122 @@
   
   
     <li class="md-nav__item">
-      <a href="../search/" class="md-nav__link">
+      <a href="../library/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CKAN Content
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback &amp; Overlays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data &amp; Visualization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/search/" class="md-nav__link">
         
   
   
@@ -699,35 +817,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../sections/" class="md-nav__link">
+      <a href="../library/structure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Sections
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../wrappers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Wrappers
+    Site Structure
     
   </span>
   
@@ -751,8 +846,52 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Background & Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Background & Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../parameters/" class="md-nav__link">
+      <a href="../parameters/" class="md-nav__link">
         
   
   
@@ -766,37 +905,16 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../theming-parties/" class="md-nav__link">
+      <a href="../theming-parties/" class="md-nav__link">
         
   
   
@@ -807,6 +925,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -838,36 +964,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#account" class="md-nav__link">
+  <a href="#1-adding-custom-data-attributes" class="md-nav__link">
     <span class="md-ellipsis">
-      Account
+      1. Adding custom data attributes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#header" class="md-nav__link">
+  <a href="#2-adding-custom-css-classes" class="md-nav__link">
     <span class="md-ellipsis">
-      Header
+      2. Adding custom CSS classes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#footer" class="md-nav__link">
+  <a href="#3-conditional-wrappers" class="md-nav__link">
     <span class="md-ellipsis">
-      Footer
+      3. Conditional wrappers
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#subtitle-item" class="md-nav__link">
+  <a href="#3-persistent-unique-ids" class="md-nav__link">
     <span class="md-ellipsis">
-      Subtitle Item
+      3. Persistent unique IDs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mapping-over-a-list-of-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Mapping over a list of items
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-overriding-a-single-component-in-your-portal" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Overriding a single component in your portal
     </span>
   </a>
   
@@ -892,75 +1036,78 @@
   
 
 
-<h1 id="meta">Meta</h1>
-<p>Meta components form the structural foundation of the page, providing
-consistent navigation and layout elements that appear across multiple pages and
-sections of the application. These components establish the primary layout
-framework and provide the consistent structural elements that users expect to
-find on every page.</p>
-<h2 id="account">Account</h2>
-<p>The <a class="autorefs autorefs-internal" title="Account" href="#account"><code>account</code></a> component provides account-related meta elements that appear
-consistently across pages where user account information is relevant. This
-component typically displays user profile information, account status, or
-account-specific navigation elements that are important for user identification
-and account management.</p>
-<p>Account components are essential for maintaining user awareness of their
-account status and providing quick access to account-related functions. They
-often include elements like user avatars, display names, notification
-indicators, or quick access to account settings. The component ensures
-consistent presentation of account information across different pages and
-contexts where user identification is important.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic account component --&gt;
-{{ ui.account() }}
+<h1 id="recipes-best-practices">Recipes &amp; Best Practices</h1>
+<p>This page contains a collection of common patterns and solutions for real-world
+theming tasks.</p>
+<h2 id="1-adding-custom-data-attributes">1. Adding custom data attributes</h2>
+<p>If you need to pass custom <code>data-*</code> attributes to a component (e.g., for a
+JavaScript module), use the <code>data</code> parameter.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.button</span><span class="o">(</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Save&quot;</span><span class="o">),</span> <span class="nv">data</span><span class="o">={</span><span class="s2">&quot;module&quot;</span><span class="o">:</span> <span class="s2">&quot;my-module&quot;</span><span class="o">})</span> <span class="cp">}}</span>
 </code></pre></div>
-</div>
-<h2 id="header">Header</h2>
-<p>The <a class="autorefs autorefs-internal" title="Header" href="#header"><code>header</code></a> component creates page headers that establish the top-level
-structure of pages and provide consistent navigation and branding
-elements. Headers are fundamental to page structure, typically containing site
-branding, primary navigation, search functionality, and other elements that
-appear on every page.</p>
-<p>Header components handle complex layout requirements including responsive
-behavior, navigation menus, search bars, and branding elements. They ensure
-consistent positioning and styling of header content while adapting to
-different page types and content requirements. The component provides the
-structural foundation for the top portion of every page, creating visual
-consistency and familiar navigation patterns for users.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic header component --&gt;
-{{ ui.header(title=&quot;Title&quot;, subtitle=&quot;Subtitle&quot;) }}
+<h2 id="2-adding-custom-css-classes">2. Adding custom CSS classes</h2>
+<p>Sometimes you want to add a specific class to a component without overriding
+its entire implementation. Standard components support the <code>_extra_class</code>
+parameter for this purpose.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.button</span><span class="o">(</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;Big Button&quot;</span><span class="o">),</span> <span class="nv">_extra_class</span><span class="o">=</span><span class="s2">&quot;my-custom-big-class&quot;</span><span class="o">)</span> <span class="cp">}}</span>
 </code></pre></div>
-</div>
-<h2 id="footer">Footer</h2>
-<p>The <a class="autorefs autorefs-internal" title="Footer" href="#footer"><code>footer</code></a> component creates page footers that provide consistent
-information and navigation elements at the bottom of pages. Footers typically
-contain site information, legal notices, secondary navigation, contact
-information, and other elements that users might need but don't require
-prominent placement.</p>
-<p>Footer components handle various content types and layout requirements,
-ensuring that important but less frequently accessed information remains
-accessible to users. They provide consistent positioning and styling for footer
-content while maintaining visual harmony with the overall page design. The
-component ensures that footer elements remain accessible and properly formatted
-across different page types and content lengths.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic footer component --&gt;
-{{ ui.footer() }}
+<p>This will result in:
+<code class="highlight"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;btn btn-primary my-custom-big-class&quot;</span> <span class="err">...</span><span class="p">&gt;</span></code></p>
+<h2 id="3-conditional-wrappers">3. Conditional wrappers</h2>
+<p>Sometimes you want to wrap content in a tag only if a certain condition is met.
+Use <code>ui.util.tag</code> for this.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{{</span> <span class="nv">ui.util.tag</span><span class="o">(</span><span class="nv">content</span><span class="o">,</span> <span class="s2">&quot;a&quot;</span> <span class="k">if</span> <span class="nv">href</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="o">,</span> <span class="nv">attrs</span><span class="o">={</span><span class="s2">&quot;href&quot;</span><span class="o">:</span> <span class="nv">href</span><span class="o">})</span> <span class="cp">}}</span>
 </code></pre></div>
-</div>
-<h2 id="subtitle-item">Subtitle Item</h2>
-<p>The <a class="autorefs autorefs-internal" title="Subtitle Item" href="#subtitle-item"><code>subtitle_item</code></a> component is used to create a segment of
-the page title.</p>
-<div class="admonition example">
-<p class="admonition-title">Usage Example</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Basic subtitle item --&gt;
-{{ ui.subtitle_item(&quot;Additional information&quot;) }}
+<p>If <code>href</code> is present, it renders an <code>&lt;a&gt;</code> tag. If not, it just prints the
+content as-is.</p>
+<h2 id="3-persistent-unique-ids">3. Persistent unique IDs</h2>
+<p>When connecting a handle (like a button) to a target (like a modal), you need a
+unique ID. If you have a CKAN object with a unique name, you can use it to
+generate a stable, reproducible ID.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">set</span> <span class="nv">modal_id</span> <span class="o">=</span> <span class="nv">ui.util.id</span><span class="o">(</span><span class="nv">package.name</span><span class="o">,</span> <span class="nv">prefix</span><span class="o">=</span><span class="s2">&quot;modal-&quot;</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">ui.modal_handle</span><span class="o">(</span><span class="kp">_</span><span class="o">(</span><span class="s2">&quot;View Details&quot;</span><span class="o">),</span> <span class="nv">id</span><span class="o">=</span><span class="nv">modal_id</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="nv">ui.modal</span><span class="o">(</span><span class="nv">package.notes</span><span class="o">,</span> <span class="nv">id</span><span class="o">=</span><span class="nv">modal_id</span><span class="o">)</span> <span class="cp">}}</span>
 </code></pre></div>
-</div>
+<h2 id="4-mapping-over-a-list-of-items">4. Mapping over a list of items</h2>
+<p>If you have a list of simple strings and want to render a component for each
+of them, use <code>ui.util.map</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c">{# Renders three badges #}</span>
+<span class="cp">{{</span> <span class="nv">ui.util.map</span><span class="o">(</span><span class="nv">ui.badge</span><span class="o">,</span> <span class="o">[</span><span class="s2">&quot;New&quot;</span><span class="o">,</span> <span class="s2">&quot;Hot&quot;</span><span class="o">,</span> <span class="s2">&quot;Trending&quot;</span><span class="o">],</span> <span class="nv">style</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="o">)</span> <span class="cp">}}</span>
+</code></pre></div>
+<h2 id="5-overriding-a-single-component-in-your-portal">5. Overriding a single component in your portal</h2>
+<p>If you like a theme but want to change just one specific component (e.g., the
+<code>footer</code>) for your portal:</p>
+<ol>
+<li>Create a new theme in your local extension that extends the base theme.</li>
+<li>In your <code>register_themes()</code>:
+   <div class="highlight"><pre><span></span><code><span class="n">Theme</span><span class="p">(</span><span class="s2">&quot;my_portal_theme&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;classic-polyfill&quot;</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Create <code>templates/macros/ui.html</code> in your extension.</li>
+<li>Redefine only the <code>footer</code> macro. Everything else will fall back to the
+   parent theme.</li>
+<li>Enable your theme by setting <code>ckan.ui.theme = my_portal_theme</code> in the config
+   file.</li>
+</ol>
+<p>As an alternative approach, you can add additional file with macro definitions,
+instead of extending the theme. This approach works better when your extension
+provides a set of theme-agnostic components that must be automatically
+registered whenever your extension is enabled, but it can be used for component
+overrides as well:</p>
+<ol>
+<li>Create a new file with macross in your extension. The name does not matter
+   as long as it does not match existing template
+   name. <code>macros/my_extension_components.html</code> is a good choice.</li>
+<li>Implement <code>ITheme.get_additional_theme_ui_sources() -&gt; list[str]</code> method:
+   <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_additional_theme_ui_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;macros/my_extension_components.html&quot;</span><span class="p">]</span>
+</code></pre></div></li>
+<li>Define only the <code>footer</code> macro. This macro will be registered after theme
+   macros and will take place of the existing <code>footer</code> macro.</li>
+</ol>
+<p>Both approaches result in exactly the same macro structure. The former focuses
+of the fact that you are overriding parts of the theme, while the latter
+implies that you are adding new components, unrelated to the existing
+theme. Depending on your intention you can choose either of them, but
+registering a custom theme is more correct according to the goal.</p>
 
 
 
@@ -996,7 +1143,7 @@ the page title.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../handles/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Handles">
+          <a href="../migration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Migration Guide: Snippets to Macros">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1006,20 +1153,20 @@ the page title.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Handles
+                Migration Guide: Snippets to Macros
               </div>
             </div>
           </a>
         
         
           
-          <a href="../navigation/" class="md-footer__link md-footer__link--next" aria-label="Next: Navigation">
+          <a href="../theme/" class="md-footer__link md-footer__link--next" aria-label="Next: Creating CKAN Themes">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Navigation
+                Creating CKAN Themes
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1057,10 +1204,10 @@ the page title.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.footer", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tooltips", "content.footnote.tooltips"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.footer", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate", "content.tooltips", "content.footnote.tooltips"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>

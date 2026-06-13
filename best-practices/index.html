@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/blocks/">
+        <link rel="canonical" href="https://datashades.github.io/ckanext-theming/best-practices/">
       
       
+        <link rel="prev" href="../advanced/">
+      
+      
+        <link rel="next" href="../cli/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Template Blocks - ckanext-theming</title>
+        <title>Technical Best Practices - ckanext-theming</title>
       
     
     
@@ -72,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#template-blocks" class="md-skip">
+        <a href="#technical-best-practices" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Template Blocks
+              Technical Best Practices
             
           </span>
         </div>
@@ -286,6 +290,94 @@
   
   
     <li class="md-nav__item">
+      <a href="../philosophy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Philosophy &amp; Goals
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styleguide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Living Styleguide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Migration Guide: Snippets to Macros
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recipes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recipes &amp; Best Practices
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../theme/" class="md-nav__link">
         
   
@@ -307,17 +399,218 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Technical Best Practices
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Technical Best Practices
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#performance-macros-vs-snippets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance: Macros vs. Snippets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance: Macros vs. Snippets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compiled-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compiled Code
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-reduced-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Reduced I/O
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessibility-a11y" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessibility (a11y)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessibility (a11y)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-always-use-uiutilattrskwargs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Always use ui.util.attrs(kwargs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-semantic-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Semantic HTML
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-keyboard-navigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Keyboard Navigation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintenance-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maintenance &amp; Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintenance &amp; Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avoid-positional-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avoid Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     
     
       
         
           
-        
-      
-        
-      
-        
-      
         
       
         
@@ -346,7 +639,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -363,14 +656,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_10" id="__nav_10_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
             <span class="md-nav__icon md-icon"></span>
             Component library
           </label>
@@ -385,173 +678,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../library/containers/" class="md-nav__link">
+      <a href="../library/layout/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Containers
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/content/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Content
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/elements/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Elements
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/feedback/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Feedback
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/form/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Form
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/handles/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Handles
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/meta/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Meta
+    Layout
     
   </span>
   
@@ -592,6 +724,121 @@
   
   
     <li class="md-nav__item">
+      <a href="../library/content/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CKAN Content
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Forms
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/feedback/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Feedback &amp; Overlays
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data &amp; Visualization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../library/search/" class="md-nav__link">
         
   
@@ -615,35 +862,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../library/sections/" class="md-nav__link">
+      <a href="../library/structure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Sections
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../library/wrappers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Wrappers
+    Site Structure
     
   </span>
   
@@ -667,6 +891,50 @@
   
   
   
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Background & Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Background & Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../parameters/" class="md-nav__link">
         
@@ -682,31 +950,10 @@
     </li>
   
 
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../cli/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    CLI
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -723,6 +970,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -754,37 +1009,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#generic-blocks-available-on-all-pages" class="md-nav__link">
+  <a href="#performance-macros-vs-snippets" class="md-nav__link">
     <span class="md-ellipsis">
-      Generic Blocks (Available on All Pages)
+      Performance: Macros vs. Snippets
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Generic Blocks (Available on All Pages)">
+    <nav class="md-nav" aria-label="Performance: Macros vs. Snippets">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#page-structure-blocks" class="md-nav__link">
+  <a href="#1-compiled-code" class="md-nav__link">
     <span class="md-ellipsis">
-      Page Structure Blocks
+      1. Compiled Code
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#layout-blocks" class="md-nav__link">
+  <a href="#2-reduced-io" class="md-nav__link">
     <span class="md-ellipsis">
-      Layout Blocks
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#content-blocks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Content Blocks
+      2. Reduced I/O
     </span>
   </a>
   
@@ -796,100 +1042,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#page-specific-blocks" class="md-nav__link">
+  <a href="#accessibility-a11y" class="md-nav__link">
     <span class="md-ellipsis">
-      Page-Specific Blocks
+      Accessibility (a11y)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Page-Specific Blocks">
+    <nav class="md-nav" aria-label="Accessibility (a11y)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dataset-pages-packagereadhtml" class="md-nav__link">
+  <a href="#1-always-use-uiutilattrskwargs" class="md-nav__link">
     <span class="md-ellipsis">
-      Dataset Pages (package/read.html)
+      1. Always use ui.util.attrs(kwargs)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dataset-search-packagesearchhtml" class="md-nav__link">
+  <a href="#2-semantic-html" class="md-nav__link">
     <span class="md-ellipsis">
-      Dataset Search (package/search.html)
+      2. Semantic HTML
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#organization-pages-organizationreadhtml" class="md-nav__link">
+  <a href="#3-keyboard-navigation" class="md-nav__link">
     <span class="md-ellipsis">
-      Organization Pages (organization/read.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#group-pages-groupreadhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Group Pages (group/read.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#user-pages-userreadhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      User Pages (user/read.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dashboard-pages-userdashboardhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dashboard Pages (user/dashboard.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#admin-pages-adminindexhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Admin Pages (admin/index.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#home-page-homeindexhtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Home Page (home/index.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#about-page-homeabouthtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      About Page (home/about.html)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#error-pages-error_document_templatehtml" class="md-nav__link">
-    <span class="md-ellipsis">
-      Error Pages (error_document_template.html)
+      3. Keyboard Navigation
     </span>
   </a>
   
@@ -901,29 +1084,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#block-relationships" class="md-nav__link">
+  <a href="#maintenance-stability" class="md-nav__link">
     <span class="md-ellipsis">
-      Block Relationships
+      Maintenance &amp; Stability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maintenance &amp; Stability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avoid-positional-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avoid Positional Arguments
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#overriding-blocks" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overriding Blocks
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Best Practices
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -946,155 +1126,58 @@
   
 
 
-<h1 id="template-blocks">Template Blocks</h1>
-<p>CKAN theming system provides a comprehensive set of template blocks that allow themes to customize different parts of the page layout. These blocks are defined in the base templates and can be overridden by child templates to customize the appearance and content of specific sections.</p>
-<h2 id="generic-blocks-available-on-all-pages">Generic Blocks (Available on All Pages)</h2>
-<p>These blocks are defined in <code>_base.html</code> and <code>_layout.html</code> templates and are available on all pages throughout the application:</p>
-<h3 id="page-structure-blocks">Page Structure Blocks</h3>
-<ul>
-<li><code>title</code>: Sets the page title in the <code>&lt;title&gt;</code> tag</li>
-<li><code>meta</code>: Contains meta tags in the head section</li>
-<li><code>head_extras</code>: Additional head content (CSS, favicons, etc.)</li>
-<li><code>body_extras</code>: Additional attributes for the body tag</li>
-<li><code>flash</code>: Displays flash messages</li>
-<li><code>skip</code>: Skip navigation links for accessibility</li>
-<li><code>masthead</code>: Site header/masthead section</li>
-<li><code>skip_primary_nav</code>: Skip link for primary navigation</li>
-<li><code>primary_nav</code>: Main navigation menu</li>
-<li><code>content</code>: Main content area</li>
-<li><code>footer</code>: Page footer content</li>
-</ul>
-<h3 id="layout-blocks">Layout Blocks</h3>
-<ul>
-<li><code>prelude</code>: Content before the main layout</li>
-<li><code>layout</code>: The main layout structure</li>
-<li><code>main_content</code>: The main content section</li>
-<li><code>secondary_content</code>: Sidebar or secondary content area</li>
-<li><code>tertiary_content</code>: Additional content area (if needed)</li>
-<li><code>page_header</code>: Page-specific header content</li>
-<li><code>page_title</code>: Page title display</li>
-<li><code>breadcrumbs</code>: Breadcrumb navigation</li>
-<li><code>actions_content</code>: Action buttons or links area</li>
-</ul>
-<h3 id="content-blocks">Content Blocks</h3>
-<ul>
-<li><code>primary_content_inner</code>: Inner content of the main content area</li>
-<li><code>secondary_content_inner</code>: Inner content of the secondary area</li>
-<li><code>tertiary_content_inner</code>: Inner content of the tertiary area</li>
-<li><code>content_action</code>: Content-specific action buttons</li>
-<li><code>content_toolbar</code>: Toolbar for content actions</li>
-<li><code>content_footer</code>: Footer for content area</li>
-</ul>
-<h2 id="page-specific-blocks">Page-Specific Blocks</h2>
-<p>These blocks are available on specific page types and provide fine-grained control over page content:</p>
-<h3 id="dataset-pages-packagereadhtml">Dataset Pages (<code>package/read.html</code>)</h3>
-<ul>
-<li><code>package_header</code>: Dataset-specific header</li>
-<li><code>package_social</code>: Social sharing buttons for dataset</li>
-<li><code>package_description</code>: Dataset description area</li>
-<li><code>package_tags</code>: Dataset tags display</li>
-<li><code>package_resources</code>: Dataset resources section</li>
-<li><code>package_info</code>: Dataset metadata information</li>
-<li><code>package_license</code>: License information</li>
-<li><code>package_organization</code>: Organization information</li>
-<li><code>package_groups</code>: Groups information</li>
-<li><code>package_activity</code>: Activity stream for dataset</li>
-</ul>
-<h3 id="dataset-search-packagesearchhtml">Dataset Search (<code>package/search.html</code>)</h3>
-<ul>
-<li><code>dataset_search_title</code>: Title for dataset search page</li>
-<li><code>dataset_search_form</code>: Dataset search form</li>
-<li><code>dataset_search_results</code>: Search results display</li>
-<li><code>dataset_facets</code>: Facet filters for dataset search</li>
-<li><code>dataset_search_adv_filters</code>: Advanced filters</li>
-</ul>
-<h3 id="organization-pages-organizationreadhtml">Organization Pages (<code>organization/read.html</code>)</h3>
-<ul>
-<li><code>organization_header</code>: Organization header</li>
-<li><code>organization_description</code>: Organization description</li>
-<li><code>organization_content</code>: Main organization content</li>
-<li><code>organization_facets</code>: Organization-specific facets</li>
-<li><code>organization_menu</code>: Organization navigation menu</li>
-</ul>
-<h3 id="group-pages-groupreadhtml">Group Pages (<code>group/read.html</code>)</h3>
-<ul>
-<li><code>group_header</code>: Group header</li>
-<li><code>group_description</code>: Group description</li>
-<li><code>group_content</code>: Main group content</li>
-<li><code>group_facets</code>: Group-specific facets</li>
-<li><code>group_menu</code>: Group navigation menu</li>
-</ul>
-<h3 id="user-pages-userreadhtml">User Pages (<code>user/read.html</code>)</h3>
-<ul>
-<li><code>user_header</code>: User header</li>
-<li><code>user_about</code>: User about section</li>
-<li><code>user_content</code>: Main user content</li>
-<li><code>user_menu</code>: User navigation menu</li>
-<li><code>user_followers</code>: User followers section</li>
-<li><code>user_activity</code>: User activity stream</li>
-</ul>
-<h3 id="dashboard-pages-userdashboardhtml">Dashboard Pages (<code>user/dashboard.html</code>)</h3>
-<ul>
-<li><code>dashboard_header</code>: Dashboard header</li>
-<li><code>dashboard_activity_stream</code>: Activity stream for dashboard</li>
-<li><code>dashboard_datasets</code>: User's datasets</li>
-<li><code>dashboard_organizations</code>: User's organizations</li>
-<li><code>dashboard_groups</code>: User's groups</li>
-</ul>
-<h3 id="admin-pages-adminindexhtml">Admin Pages (<code>admin/index.html</code>)</h3>
-<ul>
-<li><code>admin_content</code>: Main admin content area</li>
-<li><code>admin_tabs</code>: Administrative tabs</li>
-<li><code>admin_system_info</code>: System information display</li>
-</ul>
-<h3 id="home-page-homeindexhtml">Home Page (<code>home/index.html</code>)</h3>
-<ul>
-<li><code>home_header</code>: Home page header</li>
-<li><code>home_introduction</code>: Introduction section</li>
-<li><code>home_main</code>: Main home page content</li>
-<li><code>home_sidebar</code>: Home page sidebar</li>
-<li><code>home_tertiary</code>: Tertiary content area for home page</li>
-</ul>
-<h3 id="about-page-homeabouthtml">About Page (<code>home/about.html</code>)</h3>
-<ul>
-<li><code>about_header</code>: About page header</li>
-<li><code>about_main</code>: Main about page content</li>
-<li><code>about_sidebar</code>: About page sidebar</li>
-</ul>
-<h3 id="error-pages-error_document_templatehtml">Error Pages (<code>error_document_template.html</code>)</h3>
-<ul>
-<li><code>error_title</code>: Error page title</li>
-<li><code>error_message</code>: Error message display</li>
-<li><code>error_content</code>: Main error page content</li>
-</ul>
-<h2 id="block-relationships">Block Relationships</h2>
-<p>Many blocks work in relationship with each other:</p>
-<ul>
-<li><code>primary_content</code> contains <code>primary_content_inner</code></li>
-<li><code>secondary_content</code> contains <code>secondary_content_inner</code></li>
-<li><code>content_action</code> appears in context of specific content types</li>
-<li><code>page_header</code> contains <code>page_title</code> and <code>breadcrumbs</code></li>
-</ul>
-<h2 id="overriding-blocks">Overriding Blocks</h2>
-<p>To override a block in a child template:</p>
-<div class="highlight"><pre><span></span><code>{% block title %}My Custom Page Title{% endblock %}
-
-{% block content %}
-    &lt;div class=&quot;my-custom-content&quot;&gt;
-        {{ super() }}  {# Include parent content #}
-        &lt;!-- Additional custom content --&gt;
-    &lt;/div&gt;
-{% endblock %}
-</code></pre></div>
-<p>The <code>super()</code> function can be used to include content from the parent template while adding custom content.</p>
-<h2 id="best-practices">Best Practices</h2>
-<ol>
-<li>Use <code>super()</code> when you want to extend rather than replace parent content</li>
-<li>Maintain semantic structure when overriding blocks</li>
-<li>Respect accessibility features when customizing navigation blocks</li>
-<li>Keep related content together within appropriate blocks</li>
-<li>Use consistent styling patterns across similar block types</li>
-</ol>
+<h1 id="technical-best-practices">Technical Best Practices</h1>
+<p>This page explains the technical advantages of the <code>ckanext-theming</code> system
+and how to ensure your themes are high-quality, performant, and accessible.</p>
+<h2 id="performance-macros-vs-snippets">Performance: Macros vs. Snippets</h2>
+<p>One of the secondary benefits of this system is improved rendering performance.</p>
+<h3 id="1-compiled-code">1. Compiled Code</h3>
+<p>Standard CKAN snippets (<code>{% snippet ... %}</code>) are processed at runtime. Every
+time a snippet is called, Jinja2 (potentially) checks the filesystem and
+performs a search through the template directories.</p>
+<p>In contrast, <strong>Macros</strong> are compiled into Python code by Jinja2 when the
+template is first loaded. Calling a macro is effectively a native Python
+function call, which is significantly faster than snippet resolution.</p>
+<h3 id="2-reduced-io">2. Reduced I/O</h3>
+<p>Because all components for a theme are typically defined in one or two macro
+files (loaded via <code>get_default_theme_ui_sources</code> or <code>macros/ui.html</code>), the
+number of individual file lookups on the server is drastically reduced.</p>
+<hr />
+<h2 id="accessibility-a11y">Accessibility (a11y)</h2>
+<p>Accessibility is a core goal of this project. To maintain it, theme authors
+must follow these guidelines:</p>
+<h3 id="1-always-use-uiutilattrskwargs">1. Always use <code>ui.util.attrs(kwargs)</code></h3>
+<p>The most common mistake is to hardcode attributes inside a macro and forget to
+render the attributes passed by the user.</p>
+<p><strong>Incorrect (Loses accessibility attributes):</strong>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="x">  &lt;button class=&quot;btn&quot;&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/button&gt;</span>
+<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
+</code></pre></div></p>
+<p><strong>Correct (Preserves ARIA, data, and event attributes):</strong>
+<div class="highlight"><pre><span></span><code><span class="cp">{%</span> <span class="k">macro</span> <span class="nv">button</span><span class="o">(</span><span class="nv">content</span><span class="o">)</span> <span class="cp">%}</span>
+<span class="x">  &lt;button </span><span class="cp">{{</span> <span class="nv">ui.util.attrs</span><span class="o">(</span><span class="nv">kwargs</span><span class="o">,</span> <span class="o">{</span><span class="s2">&quot;class&quot;</span><span class="o">:</span> <span class="s2">&quot;btn&quot;</span><span class="o">})</span> <span class="cp">}}</span><span class="x">&gt;</span><span class="cp">{{</span> <span class="nv">content</span> <span class="cp">}}</span><span class="x">&lt;/button&gt;</span>
+<span class="cp">{%</span> <span class="k">endmacro</span> <span class="cp">%}</span>
+</code></pre></div></p>
+<p>By using <code>ui.util.attrs</code>, you ensure that if an extension developer calls
+<code>{{ ui.button("Search", aria={"label": "Search datasets"}) }}</code>, the resulting
+HTML will correctly include <code>aria-label="Search datasets"</code>.</p>
+<h3 id="2-semantic-html">2. Semantic HTML</h3>
+<p>Whenever possible, use semantic HTML tags. The system provides <code>ui.util.tag</code>
+to help you render dynamic wrappers while keeping the inner content semantic.</p>
+<h3 id="3-keyboard-navigation">3. Keyboard Navigation</h3>
+<p>Ensure that interactive components (buttons, links, inputs) have visible focus
+states and correct <code>tabindex</code> behavior if you are using non-standard elements
+(like a <code>&lt;div&gt;</code> styled as a button—though we highly recommend against this).</p>
+<hr />
+<h2 id="maintenance-stability">Maintenance &amp; Stability</h2>
+<h3 id="avoid-positional-arguments">Avoid Positional Arguments</h3>
+<p>Except for the first <code>content</code> argument (when applicable), <strong>always use named
+arguments</strong>.</p>
+<p>This ensures that if a new version of the extension adds a parameter to a
+standard component, your theme will not break because of a signature mismatch.
+The <code>**kwargs</code> (implicit in macros) will safely catch and ignore any parameters
+your specific theme doesn't handle yet.</p>
 
 
 
@@ -1125,6 +1208,44 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../advanced/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Advanced Development">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Advanced Development
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cli/" class="md-footer__link md-footer__link--next" aria-label="Next: CLI Reference">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                CLI Reference
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
