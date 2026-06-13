@@ -9,13 +9,15 @@ easier upgrades and maintenance.
 
 Theme implementations:
 
-| Theme                                                                               | Description                                                      |
-|-------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| [Midnight blue portable][midnight-blue-portable] | CKAN's built-in theme(v2.12) rewritten according to theming flow |
+| Theme                                            | Description                                          |
+|--------------------------------------------------|------------------------------------------------------|
+| [Midnight blue portable][midnight-blue-portable] | CKAN's built-in theme(v2.12) rewritten with macros   |
+| [NSW Design system][nsw-ds]                      | Mapping of [NSW DS][nsw-ds] components to CKAN theme |
 
 
 [midnight-blue-portable]: https://github.com/dataShades/ckanext-midnight-blue-theme
-
+[nsw-ds-theme]: https://github.com/DataShades/ckanext-nswdesignsystem
+[nsw-ds]: https://designsystem.nsw.gov.au/
 ## Requirements
 
 Compatibility with core CKAN versions:
@@ -52,12 +54,11 @@ Suggested macro-based approach
    classes
  - Provides a consistent API regardless of the underlying CSS framework
 
+## Core Philosophy
 
-The key benefit is the complete separation of content structure from styling. This means users can
-completely change the visual appearance of their CKAN instance (from Bootstrap to Tailwind, for example) by
-just changing the theme configuration, without modifying any templates or code.
+`ckanext-theming` is designed to be **optional and non-intrusive**. You don't have to rewrite your existing code to use it. You can adopt it incrementally, using it only for new features or specific components where you want to benefit from theme portability.
 
-
+For a deeper dive into what this project is (and isn't), check out the [Philosophy & Goals](https://datashades.github.io/ckanext-theming/philosophy/) page in our documentation.
 
 ## Installation
 

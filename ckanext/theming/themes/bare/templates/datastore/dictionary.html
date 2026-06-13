@@ -1,4 +1,4 @@
-{%- extends "package/_resource_edit_base.html" -%}
+{%- extends "package/resource_edit_base.html" -%}
 
 {%- set options = [
         {'name': '', 'value': ''},
@@ -25,13 +25,13 @@
 
 
                         {% block datapusher_xloader_fields scoped %}
-                            {{ ui.select(name='info__' ~ position ~ '__type_override', label=_('Type Override'), options=options, selected=field.get('info', {}).get('type_override', '')) }}
+                            {{ ui.select(name='info__' ~ position ~ '_type_override', label=_('Type Override'), options=options, selected=field.get('info', {}).get('type_override', '')) }}
                         {% endblock %}
 
                         {% block standard_fields scoped %}
-                            {{ ui.input(name='info__' ~ position ~ '__label', label=_('Label'), value=field.get('info', {}).get('label', '')) }}
+                            {{ ui.input(name='info__' ~ position ~ '_label', label=_('Label'), value=field.get('info', {}).get('label', '')) }}
 
-                            {{ ui.markdown(name='info__' ~ position ~ '__notes', label=_('Description'), value=field.get('info', {}).get('notes', '')) }}
+                            {{ ui.markdown(name='info__' ~ position ~ '_notes', label=_('Description'), value=field.get('info', {}).get('notes', '')) }}
                         {% endblock %}
 
                         {% block additional_fields scoped %}

@@ -1,387 +1,283 @@
 {% from "_macros.html" import parameters_table %}
-
-{%raw%}
+{% raw %}
 # Navigation
 
-Navigation components help users move through the application and find
-content. They provide consistent navigation patterns and help maintain user
-orientation within the site. Many navigation components work in hierarchical
-relationships - for example, [`nav_item`][nav-item] components work within
-navigation containers, and [`breadcrumb`][] components work with
-[`breadcrumb_wrapper`][breadcrumb-wrapper] component.
+Navigation components help users move through the application. They range from
+global site navigation to page-specific actions and breadcrumbs.
 
-## Breadcrumb
+## Menu Navigation
 
-The [`breadcrumb`][] component creates breadcrumb navigation trails that show
-users their current location within the site hierarchy. Breadcrumbs are
-essential for user orientation, helping users understand where they are in
-relation to the overall site structure and providing easy navigation back to
-parent sections.
+Most navigation menus consist of a wrapper component and multiple item
+components.
 
-Breadcrumb components typically display a series of linked navigation items
-that represent the path from the site root to the current page. They work with
-[`breadcrumb_wrapper`][breadcrumb-wrapper]  component to create complete
-breadcrumb experiences with proper visual separation and structural
-organization. Breadcrumbs are particularly valuable
-for sites with deep hierarchical structures where users might navigate several
-levels deep.
+### Generic Navigation
 
-/// admonition | Usage Example
-    type: example
+Use `nav` and `nav_item` for generic navigation menus.
 
 ```django
-<!-- Basic breadcrumb -->
-{{ ui.breadcrumb("Home", href="/", initial=true) }}
-{{ ui.breadcrumb("Datasets", href="/datasets") }}
-{{ ui.breadcrumb("Dataset Name") }}
+{%- call ui.util.call(ui.nav) -%}
+    {{ ui.nav_item(_("Home"), href="/") }}
+    {{ ui.nav_item(_("Datasets"), href="/dataset") }}
+    {{ ui.nav_item(_("Organizations"), href="/organization") }}
+{%- endcall %}
 ```
-///
 
-/// admonition | Relationship
-    type: info
+{% endraw %}
+{{parameters_table(component_ref.nav, 'nav')}}
+{{parameters_table(component_ref.nav_item, 'nav_item')}}
+{% raw %}
+### Main Site Navigation
 
-The [`breadcrumb`][] component works with
-[`breadcrumb_wrapper`][breadcrumb-wrapper] component to create complete
-breadcrumb navigation experiences. While breadcrumbs provide the navigation
-structure, the wrapper provides the container and dividers provide visual
-separation.
-
-///
-
-## Nav Item
-
-The [`nav_item`][nav-item] component creates navigation menu items that serve
-as individual elements within navigation structures. These components are the
-fundamental building blocks of navigation menus, providing the clickable
-elements that allow users to move between different sections of the site.
-
-Nav item components handle proper styling, active state indication, and
-accessibility attributes to ensure navigation is both visually clear and
-functionally accessible. They can contain various types of content including
-text, icons, or other components, making them flexible for different navigation
-requirements. The component ensures consistent appearance and behavior across
-different navigation contexts.
+The primary navigation usually found in the header.
 
 /// admonition | Usage Example
     type: example
 
 ```django
-<!-- Basic navigation item -->
-{{ ui.nav_item("Home", href="/") }}
-
-<!-- Active navigation item -->
-{{ ui.nav_item("Datasets", href="/datasets", active=true) }}
-
-<!-- Navigation item with icon -->
-{{ ui.nav_item((ui.icon("home") ~ " Home"), href="/") }}
-```
-///
-
-| Parameter | Type   | Default | Description                                               |
-|-----------|--------|---------|-----------------------------------------------------------|
-| `content` | string | -       | The text or content to display in the navigation item.    |
-| `href`    | string | -       | The URL that the navigation item links to.                |
-| `active`  | bool   | -       | Whether the navigation item is currently active/selected. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `disabled` (bool): Whether the navigation item is disabled
-- `external` (bool): Whether it's an external link
-///
-
-## Main Nav Item
-
-The [`main_nav_item`][main-nav-item] component creates navigation items
-specifically for the main site navigation menu. These components represent the
-primary navigation options that users will encounter on most pages, typically
-linking to major sections of the site like datasets, organizations, groups, or
-user accounts.
-
-Main nav items are designed to be prominent and easily identifiable, often
-featuring larger text, distinctive styling, or other visual elements that make
-them stand out as primary navigation options. The component ensures these
-important navigation elements are clearly visible and accessible while
-maintaining consistency with the overall navigation design.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic main navigation item -->
-{{ ui.main_nav_item("Datasets", href="/dataset") }}
-
-<!-- Active main navigation item -->
-{{ ui.main_nav_item("Organizations", href="/organization", active=true) }}
-
-<!-- Main navigation item with icon -->
-{{ ui.main_nav_item((ui.icon("building") ~ " Organizations"), href="/organization") }}
-```
-///
-
-| Parameter | Type   | Default | Description                                               |
-|-----------|--------|---------|-----------------------------------------------------------|
-| `content` | string | -       | The text or content to display in the navigation item.    |
-| `href`    | string | -       | The URL that the navigation item links to.                |
-| `active`  | bool   | -       | Whether the navigation item is currently active/selected. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `disabled` (bool): Whether the navigation item is disabled
-- `dropdown` (bool): Whether the item has a dropdown menu
-- `external` (bool): Whether it's an external link
-///
-
-## Account Nav Item
-
-The [`account_nav_item`][account-nav-item] component creates navigation items
-specifically for account-related navigation menus. These components provide
-links to account-specific sections such as profile management, dashboard,
-settings, or other user account functions.
-
-Account nav items are typically displayed in account-related contexts or in
-persistent account menus that appear when users are logged in. The component
-ensures these navigation options are clearly associated with account
-functionality and maintain appropriate styling and positioning within account
-navigation contexts.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic account navigation item -->
-{{ ui.account_nav_item("Profile", href="/user/me") }}
-
-<!-- Active account navigation item -->
-{{ ui.account_nav_item("Dashboard", href="/dashboard", active=true) }}
-
-<!-- Account navigation item with icon -->
-{{ ui.account_nav_item((ui.icon("cog") ~ " Settings"), href="/user/edit") }}
-```
-///
-
-| Parameter | Type   | Default | Description                                               |
-|-----------|--------|---------|-----------------------------------------------------------|
-| `content` | string | -       | The text or content to display in the navigation item.    |
-| `href`    | string | -       | The URL that the navigation item links to.                |
-| `active`  | bool   | -       | Whether the navigation item is currently active/selected. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `disabled` (bool): Whether the navigation item is disabled
-- `external` (bool): Whether it's an external link
-///
-
-## Content Nav Item
-
-The [`content_nav_item`][content-nav-item] component creates navigation items
-for content-specific navigation menus. These components provide navigation
-options related to specific content items, such as tabs for different aspects
-of a dataset, organization, or other content entity.
-
-Content nav items are context-sensitive and typically appear on
-content-specific pages where users need to navigate between different aspects
-or views of the same content. The component ensures these navigation options
-are clearly associated with the current content and maintain appropriate
-styling and positioning within content navigation contexts.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic content navigation item -->
-{{ ui.content_nav_item("About", href="/dataset/my-dataset") }}
-
-<!-- Active content navigation item -->
-{{ ui.content_nav_item("Resources", href="/dataset/my-dataset/resources", active=true) }}
-
-<!-- Content navigation item with count -->
-{{ ui.content_nav_item("Groups" ~ ui.badge("5"), href="/dataset/my-dataset/groups") }}
-```
-///
-
-| Parameter | Type   | Default | Description                                               |
-|-----------|--------|---------|-----------------------------------------------------------|
-| `content` | string | -       | The text or content to display in the navigation item.    |
-| `href`    | string | -       | The URL that the navigation item links to.                |
-| `active`  | bool   | -       | Whether the navigation item is currently active/selected. |
-
-## Page Action
-
-The [`page_action`][page-action] component creates page-specific action items
-that provide quick access to actions related to the current page or
-context. These components typically appear as buttons or links that allow users
-to perform actions like "Add Dataset", "Create Group", or other page-specific
-functions.
-
-Page action components are context-sensitive and provide immediate access to
-the most relevant actions for the current page. They're typically positioned
-prominently to ensure users can easily find and access important actions
-without having to navigate to other sections of the site. The component ensures
-these actions are clearly visible and appropriately styled for their
-importance.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Add dataset action -->
-{{ ui.page_action("Add Dataset", href="/dataset/new") }}
-```
-///
-
-
-| Parameter | Type   | Default | Description                             |
-|-----------|--------|---------|-----------------------------------------|
-| `content` | string | -       | The text to display in the page action. |
-| `href`    | string | -       | The URL that the action links to.       |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and behavior:
-
-- `style` (string): Button style (e.g., "primary", "secondary", "danger")
-- `disabled` (bool): Whether the action is disabled
-- `icon` (string): Icon to display with the action
-///
-
-## Content Action
-
-The [`content_action`][content-action] component creates content-specific
-action items that provide actions related to specific content items. These
-components typically appear near or within content displays and allow users to
-perform actions like editing, sharing, or managing specific content items.
-
-Content action components are closely associated with specific content and
-provide immediate access to relevant actions for that content. They might
-include options like "Edit Dataset", "Delete Resource", or "Share Content" that
-are directly related to the content being displayed. The component ensures
-these actions are clearly associated with the relevant content and maintain
-appropriate styling and positioning.
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic content action -->
-{{ ui.content_action("Edit", href="/dataset/edit/my-dataset") }}
-
-<!-- Content action with icon -->
-{{ ui.content_action((ui.icon("edit") ~ " Edit"), href="/dataset/edit/my-dataset") }}
-```
-///
-
-| Parameter | Type   | Default | Description                                   |
-|-----------|--------|---------|-----------------------------------------------|
-| `content` | string | -       | The text or content to display in the action. |
-| `href`    | string | -       | The URL that the action links to.             |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `style` (string): Button style (e.g., "primary", "secondary")
-- `variant` (string): Style variant (e.g., "outline", "link")
-- `disabled` (bool): Whether the action is disabled
-- `icon` (string): Icon to display with the action
-///
-
-
-## Pagination
-
-The `pagination` component creates pagination controls that allow users to
-navigate through multiple pages of content. Pagination is essential for
-content-heavy sections where displaying all items on a single page would be
-impractical or overwhelming.
-
-Pagination components handle complex navigation patterns including page
-numbers, next/previous controls, and page size selection. They provide clear
-indication of current page position and total content extent, helping users
-understand their position within larger content collections. The component
-ensures pagination controls are clearly visible and easily accessible while
-maintaining appropriate styling and positioning.
-
-If you want to construct a pagination control from low-level components, you can
-use `pagination_wrapper` and `pagination_item`. The former
-serves as a container for pagination items, while the latter represents an
-individual page link. You can customize the appearance and behavior of each
-pagination item by passing appropriate parameters to it, such as `href`
-for the link URL or `active` to indicate the current page.
-
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic pagination -->
-{{ ui.pagination(page=1, total=10) }}
-
-<!-- Pagination with custom parameters -->
-{{ ui.pagination(page=3, total=20, url_generator=h.pager_url, padding=3) }}
-
-<!-- Low-level pagination -->
-{%- call ui.util.call(ui.pagination_wrapper) -%}
-    {{ ui.pagination_item("1", href="?page=1") }}
-    {{ ui.pagination_item("2", href="?page=2") }}
+{%- call ui.util.call(ui.main_nav) -%}
+    {{ ui.main_nav_item(_("Datasets"), href=h.url_for("dataset.search")) }}
+    {{ ui.main_nav_item(_("Organizations"), href=h.url_for("organization.index")) }}
+    {{ ui.main_nav_item(_("Groups"), href=h.url_for("group.index")) }}
 {%- endcall %}
 ```
 ///
+{% endraw %}
+{{parameters_table(component_ref.main_nav, 'main_nav')}}
+{{parameters_table(component_ref.main_nav_item, 'main_nav_item')}}
+{% raw %}
+### Account Navigation
 
-{%endraw%}
-### Pagination
-{{parameters_table(component_ref.pagination)}}
+```django
+{%- call ui.util.call(ui.account_nav) -%}
+    {{ ui.account_nav_item(_("Profile"), href=h.url_for("user.profile")) }}
+    {{ ui.account_nav_item(_("Settings"), href=h.url_for("user.settings")) }}
+    {{ ui.account_nav_item(_("Logout"), href=h.url_for("user.logout")) }}
+{%- endcall -%}
+```
 
-### Pagination item
-{{parameters_table(component_ref.pagination_item)}}
 
-{%raw%}
+User-specific links like "Profile", "Settings", or "Logout".
+{% endraw %}
+{{parameters_table(component_ref.account_nav, 'account_nav')}}
+{{parameters_table(component_ref.account_nav_item, 'account_nav_item')}}
+{% raw %}
+### Sidebar & Content Navigation
 
-/// details | Theme-Specific Parameters
-    type: tip
+`sidebar_nav` is used for sidebar menus, while `content_nav` is often used for
+tabs within a specific entity page (e.g., Dataset tabs).
 
-- `alignment` (string): Alignment of pagination controls (e.g., "start", "center", "end")
-- `hide_edges` (bool): Whether to show first and last page links
-- `hide_siblings` (bool): Whether to show previous and next page links
-///
+```django
+{%- call ui.util.call(ui.sidebar_nav) -%}
+    {{ ui.sidebar_nav_item(_("Overview"), href=h.url_for("dataset.read", id=package.id)) }}
+    {{ ui.sidebar_nav_item(_("Resources"), href=h.url_for("dataset.resources", id=package.id)) }}
+    {{ ui.sidebar_nav_item(_("Activity"), href=h.url_for("dataset.activity", id=package.id)) }}
+{%- endcall -%}
+```
 
-## Dropdown Item
+{% endraw %}
+{{parameters_table(component_ref.sidebar_nav, 'sidebar_nav')}}
+{{parameters_table(component_ref.sidebar_nav_item, 'sidebar_nav_item')}}
+{% raw %}
+### Footer Navigation
 
-The [`dropdown_item`][dropdown-item] component creates individual items within
-dropdown menus, providing the clickable elements that appear when dropdown
-menus are activated. These components are the fundamental building blocks of
-dropdown navigation systems.
+Specialized navigation for the footer area.
 
-Dropdown item components handle proper styling, active state indication, and
-accessibility attributes to ensure dropdown menus are both visually clear and
-functionally accessible. They can contain various types of content and often
-include sub-menus or other complex navigation structures. The component ensures
-consistent appearance and behavior across different dropdown contexts.
+```django
+{%- call ui.util.call(ui.footer) -%}
+    {%- call ui.util.call(ui.footer_main_nav) -%}
+        {{ ui.footer_main_nav_item(_("Home"), href="/") }}
+        {{ ui.footer_main_nav_item(_("Datasets"), href="/dataset") }}
+        {{ ui.footer_main_nav_item(_("Organizations"), href="/organization") }}
+    {%- endcall -%}
+    {%- call ui.util.call(ui.footer_secondary_nav) -%}
+        {{ ui.footer_secondary_nav_item(_("Contact Us"), href="/contact") }}
+        {{ ui.footer_secondary_nav_item(_("Privacy Policy"), href="/privacy") }}
+    {%- endcall -%}
+{%- endcall %}
+```
+
+#### Main footer navigation
+
+Primary links in the footer rendered by wrapper `footer_main_nav` and
+collection of `footer_main_nav_item`.
+
+{% endraw %}
+{{parameters_table(component_ref.footer_main_nav, 'footer_main_nav')}}
+{{parameters_table(component_ref.footer_main_nav_item, 'footer_main_nav_item')}}
+{% raw %}
+
+#### Secondary footer navigation
+
+Less prominent links in the footer, often for legal or support pages.  Rendered
+by wrapper `footer_secondary_nav` and collection of
+`footer_secondary_nav_item`.
+
+{% endraw %}
+{{parameters_table(component_ref.footer_secondary_nav, 'footer_secondary_nav')}}
+{{parameters_table(component_ref.footer_secondary_nav_item, 'footer_secondary_nav_item')}}
+{% raw %}
+## Actions
+
+Actions are prominent links or buttons used to perform operations on the
+current page or entity.
+
+### Page Actions
+
+Page-level actions like "Add Dataset".
+
+```django
+{%- call ui.util.call(ui.page_action_wrapper) -%}
+    {{ ui.page_action(_("Add Dataset"), href=h.url_for("dataset.new") , style="primary") }}
+{%- endcall -%}
+```
+
+
+{% endraw %}
+{{parameters_table(component_ref.page_action_wrapper, 'page_action_wrapper')}}
+{{parameters_table(component_ref.page_action, 'page_action')}}
+{% raw %}
+
+### Content Actions
+
+Entity-level actions like "Edit", "Manage", or "Delete".
+
+```django
+{%- call ui.util.call(ui.content_action_wrapper) -%}
+    {{ ui.content_action(_("Edit"), href=h.url_for("dataset.edit", id=package.id)) }}
+    {{ ui.content_action(_("Manage"), href=h.url_for("dataset.manage", id=package.id)) }}
+    {{ ui.content_action(_("Delete"), href=h.url_for("dataset.delete", id=package.id), style="danger") }}
+{%- endcall -%}
+```
+
+
+{% endraw %}
+{{parameters_table(component_ref.content_action_wrapper, 'content_action_wrapper')}}
+{{parameters_table(component_ref.content_action, 'content_action')}}
+{% raw %}
+## Breadcrumbs
+
+Breadcrumbs show the user's location in the site hierarchy.
 
 /// admonition | Usage Example
     type: example
 
 ```django
-<!-- Basic dropdown item -->
-{{ ui.dropdown_item("Action", href="/action") }}
-
-<!-- Active dropdown item -->
-{{ ui.dropdown_item("Active Action", href="/active", active=true) }}
-
-<!-- Dropdown item with icon -->
-{{ ui.dropdown_item((ui.icon("edit") ~ " Edit"), href="/edit") }}
+{%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+    {{ ui.breadcrumb(_("Home"), href="/", initial=true) }}
+    {{ ui.breadcrumb(_("Datasets"), href="/dataset") }}
+    {{ ui.breadcrumb(package.title, active=true) }}
+{%- endcall %}
 ```
 ///
+{% endraw %}
+{{parameters_table(component_ref.breadcrumb_wrapper, 'breadcrumb_wrapper')}}
+{{parameters_table(component_ref.breadcrumb, 'breadcrumb')}}
+{% raw %}
+## Pagination
 
-| Parameter | Type   | Default | Description                                             |
-|-----------|--------|---------|---------------------------------------------------------|
-| `content` | string | -       | The text or content to display in the dropdown item.    |
-| `href`    | string | -       | The URL that the dropdown item links to.                |
+Pagination controls for moving between pages of results. Can be rendered via
+single `pagination` component in most cases.
 
-/// details | Theme-Specific Parameters
-    type: tip
+```django
+{{ ui.pagination(page=2, total_pages=5) }}
+```
 
-- `disabled` (bool): Whether the dropdown item is disabled
-///
-{%endraw%}
+{% endraw %}
+{{parameters_table(component_ref.pagination, 'pagination')}}
+{% raw %}
+
+When custom pager required, low-level components `pagination_wrapper` and
+`pagination_item` can be used.
+
+```django
+{%- call ui.util.call(ui.pagination_wrapper) -%}
+    {{ ui.pagination_item(_("Previous"), href="#", disabled=true) }}
+    {{ ui.pagination_item("1", href="#", active=true) }}
+    {{ ui.pagination_item("2", href="#") }}
+    {{ ui.pagination_item("3", href="#") }}
+    {{ ui.pagination_item(_("Next"), href="#") }}
+{%- endcall -%}
+```
+
+
+{% endraw %}
+{{parameters_table(component_ref.pagination_wrapper, 'pagination_wrapper')}}
+{{parameters_table(component_ref.pagination_item, 'pagination_item')}}
+{% raw %}
+## Dropdowns
+
+`dropdown` component provides a toggleable menu.
+
+```django
+{%- call ui.util.call(ui.dropdown, label=_("Actions")) -%}
+    {{ ui.dropdown_item(_("Edit"), href=h.url_for("dataset.edit", id=package.id)) }}
+    {{ ui.dropdown_item(_("Manage"), href=h.url_for("dataset.manage", id=package.id)) }}
+    {{ ui.dropdown_item(_("Delete"), href=h.url_for("dataset.delete", id=package.id), style="danger") }}
+{%- endcall -%}
+```
+
+{% endraw %}
+{{parameters_table(component_ref.dropdown, 'dropdown')}}
+{{parameters_table(component_ref.dropdown_item, 'dropdown_item')}}
+{% raw %}
+## Tabs
+
+Tabs are used to organize content into different panes within the same page.
+
+### Tabbed Content
+
+A high-level wrapper that can handle both the tab handles and the panes.
+
+```django
+{%- call ui.util.call(ui.tabbed_content) -%}
+    {% call ui.util.call(ui.tab_wrapper) -%}
+        {{ ui.tab(_("Overview"), active=true) }}
+        {{ ui.tab(_("Resources")) }}
+        {{ ui.tab(_("Activity")) }}
+    {%- endcall -%}
+
+    {%- call ui.util.call(ui.tab_pane_wrapper) -%}
+        {{ ui.tab_pane("Overview content here", active=true) }}
+        {{ ui.tab_pane("Resources content here") }}
+        {{ ui.tab_pane("Activity content here") }}
+    {%- endcall -%}
+{%- endcall -%}
+```
+
+{% endraw %}
+{{parameters_table(component_ref.tabbed_content, 'tabbed_content')}}
+{% raw %}
+
+### Low-level Tab Components
+
+Use these for more control over tab layout.
+
+Tab navigation itself consists of a wrapper (`tab_wrapper`) and individual tab
+handles (`tab`)
+
+```django
+{%- call ui.util.call(ui.tab_wrapper) -%}
+    {{ ui.tab(_("Overview"), active=true) }}
+    {{ ui.tab(_("Resources")) }}
+    {{ ui.tab(_("Activity")) }}
+{%- endcall -%}
+```
+
+{% endraw %}
+{{parameters_table(component_ref.tab_wrapper, 'tab_wrapper')}}
+{{parameters_table(component_ref.tab, 'tab')}}
+{% raw %}
+
+Tab panes are rendered using `tab_pane_wrapper` and individual panes with `tab_pane`.
+
+```django
+{%- call ui.util.call(ui.tab_pane_wrapper) -%}
+    {{ ui.tab_pane("Overview content here", active=true) }}
+    {{ ui.tab_pane("Resources content here") }}
+    {{ ui.tab_pane("Activity content here") }}
+{%- endcall -%}
+```
+
+{% endraw %}
+{{parameters_table(component_ref.tab_pane_wrapper, 'tab_pane_wrapper')}}
+{{parameters_table(component_ref.tab_pane, 'tab_pane')}}

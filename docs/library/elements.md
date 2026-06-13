@@ -1,479 +1,67 @@
-{%raw%}
+{% from "_macros.html" import parameters_table %}
+{% raw %}
 # Elements
 
-Element components are the basic building blocks of the UI. They provide
-consistent styling and behavior for fundamental interface elements that are
-used throughout the application. These components ensure that basic UI elements
-maintain consistent appearance and behavior across different themes and
-contexts.
-
-
-## Badge
-
-The [`badge`][] component displays status badges and indicators that provide
-quick visual information about states, counts, or categories. Badges are
-compact elements that draw attention to important information without requiring
-significant interface space. They're commonly used for showing notification
-counts, status indicators, or categorizing content.
-
-Badge components typically come in different styles to indicate different types
-of information: success badges for positive states, warning badges for
-cautionary information, error badges for problems, and neutral badges for
-general information. The component handles consistent sizing, coloring, and
-positioning to ensure badges are visually distinct and appropriately styled
-based on their purpose.
-
-| Parameter | Type   | Default | Description                                             |
-|-----------|--------|---------|---------------------------------------------------------|
-| `content` | string | -       | The text or number to display in the badge.             |
-| `style`   | string | -       | Style variant (e.g., "primary", "secondary", "danger"). |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `variant` (string): Variant of the badge shape (e.g., "pill", "square")
-- `size` (string): Size of the badge (e.g., "sm", "lg")
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Simple badge -->
-{{ ui.badge("New") }}
-
-<!-- Count badge -->
-{{ ui.badge("12") }}
-
-<!-- Status badge -->
-{{ ui.badge("Active") }}
-```
-///
-
-
-
-## Button
-
-The [`button`][] component creates interactive buttons that allow users to perform
-actions, submit forms, or navigate within the application. Buttons are
-fundamental interactive elements that require consistent styling and behavior
-to ensure users can easily identify actionable elements throughout the
-interface.
-
-Button components typically support different styles for different purposes:
-primary buttons for main actions, secondary buttons for alternative actions,
-and various other styles for different contexts. The component handles proper
-accessibility attributes, hover states, focus indicators, and consistent sizing
-to ensure buttons are both visually appealing and functionally accessible.
-
-| Parameter | Type   | Default   | Description                                                                     |
-|-----------|--------|-----------|---------------------------------------------------------------------------------|
-| `content` | string | -         | The text to display on the button.                                              |
-| `href`    | string | -         | If provided, the button will be rendered as a link instead of a button element. |
-| `type`    | string | "button"  | The type attribute for button elements (e.g., "button", "submit", "reset").     |
-| `style`   | string | "primary" | The visual style of the button (e.g., "primary", "secondary", "danger").        |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `size` (string): Size of the button (e.g., "sm", "lg")
-- `outline` (bool): Whether to use outline style
-- `block` (bool): Whether to make the button full-width
-- `disabled` (bool): Whether the button is disabled
-- `variant` (string): Additional style variant (e.g., "icon", "fab")
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Primary button -->
-{{ ui.button("Submit Form", style="primary") }}
-
-<!-- Secondary button -->
-{{ ui.button("Cancel", style="secondary") }}
-
-<!-- Link styled as button -->
-{{ ui.button("View Details", href="/details") }}
-
-<!-- Button with attributes -->
-{{ ui.button("Button with callback", type="submit", style="danger", attrs={"onclick": "return confirm('Are you sure?')"}) }}
-```
-///
-
-
-## Datetime
-
-The [`datetime`][] component displays date and time information in a consistent,
-localized format. This component is crucial for showing when content was
-created, updated, or when events occurred, providing temporal context that
-helps users understand the relevance and freshness of information.
-
-Datetime components handle various formatting options and localization
-requirements, ensuring that dates and times are displayed in formats
-appropriate for the user's locale and preferences. The component can display
-relative times (like "2 hours ago") or absolute times, and handles time zone
-considerations to ensure accurate representation of temporal information.
-
-| Parameter     | Type     | Default | Description                                                                     |
-|---------------|----------|---------|---------------------------------------------------------------------------------|
-| `dt`          | datetime | -       | The datetime object or string to format and display.                            |
-| `date_format` | string   | -       | The format string to use for displaying the date/time (e.g., "%Y-%m-%d %H:%M"). |
-| `with_hours`  | bool     | -       | Whether to include hours in the display.                                        |
-| `empty`       | string   | ""      | Text to display if the datetime is empty or invalid.                            |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `relative` (bool): Whether to display relative time (e.g., "2 hours ago")
-- `timezone` (string): Timezone to use for display
-- `locale` (string): Locale for formatting
-- `format_short` (string): Short format string for compact display
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Display datetime with default format -->
-{{ ui.datetime("2023-01-01T12:00:00Z") }}
-
-<!-- Display with custom format -->
-{{ ui.datetime("2023-01-01T12:00:00Z", date_format="%Y-%m-%d %H:%M") }}
-
-<!-- Display with hours -->
-{{ ui.datetime("2023-01-01T12:00:00Z", with_hours=True) }}
-```
-///
-
-
-## Divider
-
-The [`divider`][] component creates visual dividers between content sections,
-providing clear separation without adding significant visual weight. Dividers
-are important for organizing content and creating visual hierarchy, helping
-users distinguish between different sections or groups of related information.
-
-Divider components can be simple horizontal lines or more complex elements that
-include text or other content. They provide subtle but effective visual
-separation that helps organize content without adding clutter or competing with
-primary content for attention.
-
-| Parameter | Type   | Default | Description                                              |
-|-----------|--------|---------|----------------------------------------------------------|
-| `content` | string | -       | Text or content to display in the middle of the divider. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `orientation` (string): Orientation of the divider (e.g., "horizontal", "vertical")
-- `variant` (string): Style variant (e.g., "solid", "dashed", "dotted")
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Simple divider -->
-{{ ui.divider() }}
-
-<!-- Divider with content -->
-{{ ui.divider("Section Break") }}
-```
-///
-
-
-## Heading
-
-The [`heading`][] component creates page and section headings that establish
-document structure and visual hierarchy. Headings are fundamental for
-accessibility and SEO, providing semantic structure that helps both users and
-search engines understand the organization and importance of content.
-
-Heading components support different levels (typically h1 through h6) to create
-proper document structure and visual hierarchy. The component ensures
-consistent styling and appropriate semantic markup while maintaining the
-flexibility to adapt to different content requirements and design contexts.
-
-| Parameter | Type   | Default | Description                                                           |
-|-----------|--------|---------|-----------------------------------------------------------------------|
-| `content` | string | -       | The text to display in the heading.                                   |
-| `level`   | int    | -       | The heading level (1-6) which determines the HTML tag (h1, h2, etc.). |
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Main page heading -->
-{{ ui.heading("Dataset Overview", level=1) }}
-
-<!-- Section heading -->
-{{ ui.heading("Dataset Information", level=2) }}
-
-<!-- Subsection heading -->
-{{ ui.heading("Metadata", level=3) }}
-```
-///
-
-
-## Icon
-
-The [`icon`][] component displays icon elements that provide visual cues, represent
-actions, or enhance content understanding. Icons are powerful visual elements
-that can communicate concepts quickly and efficiently, transcending language
-barriers and providing intuitive interface elements.
-
-Icon components typically support various icon sets or libraries, allowing
-themes to implement their preferred icon system while maintaining consistent
-usage patterns. The component handles sizing, coloring, and accessibility
-attributes to ensure icons are both visually effective and properly accessible
-to users with different needs.
-
-| Parameter | Type   | Default | Description                                                       |
-|-----------|--------|---------|-------------------------------------------------------------------|
-| `name`    | string | -       | The name of the icon to display (e.g., "home", "search", "user"). |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `size` (string): Size of the icon (e.g., "sm", "lg", "2x", "3x")
-- `style` (string): Color of the icon
-- `flip` (string): Flip direction (e.g., "horizontal", "vertical")
-- `rotate` (int): Rotation angle (e.g., 90, 180, 270)
-- `spin` (bool): Whether to animate rotation
-- `variant` (bool): Variant of the icon (e.g., "outlined", "thin", "regular")
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic icon -->
-{{ ui.icon("home") }}
-{{ ui.icon("search") }}
-{{ ui.icon("save") }}
-```
-///
-
-
-## Image
-
-The [`image`][] component displays images with appropriate handling for sizing,
-loading, and accessibility. Images are important for visual communication and
-content enhancement, but require careful handling to ensure they load
-efficiently and remain accessible to all users.
-
-Image components handle various aspects of image display including responsive
-sizing, lazy loading for performance, alt text for accessibility, and fallback
-handling when images fail to load. The component ensures images contribute
-positively to the user experience without causing performance or accessibility
-issues.
-
-| Parameter | Type   | Default | Description                         |
-|-----------|--------|---------|-------------------------------------|
-| `src`     | string | -       | The URL or path to the image file.  |
-| `alt`     | string | -       | Alternative text for accessibility. |
-| `height`  | int    | -       | The height of the image in pixels.  |
-| `width`   | int    | -       | The width of the image in pixels.   |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `rounded` (bool): Whether to apply rounded corners
-- `thumbnail` (bool): Whether to apply thumbnail styling
-- `responsive` (bool): Whether to make the image responsive
-- `lazy` (string): Enable lazy-Loading
-- `crossorigin` (string): Cross-origin policy for the image
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic image -->
-{{ ui.image(src="/path/to/image.jpg", alt="Descriptive text") }}
-
-<!-- Image with dimensions -->
-{{ ui.image(src="/path/to/image.jpg", alt="Descriptive text", width=300, height=200) }}
-
-<!-- Image with attributes -->
-{{ ui.image(src="/path/to/image.jpg", alt="Descriptive text", attrs={"loading": "lazy"}) }}
-```
-///
-
-
-## Link
-
-The [`link`][] component creates hyperlinks that allow users to navigate
-between pages or to external resources. Links are fundamental navigation
-elements that require consistent styling and behavior to ensure users can
-easily identify and interact with them.
-
-Link components handle various states including normal, hover, visited, and
-active states to provide clear visual feedback about link status and
-interactivity. The component ensures proper accessibility attributes and
-consistent styling that makes links easily identifiable while maintaining
-visual harmony with the overall design.
-
-| Parameter | Type   | Default | Description                                   |
-|-----------|--------|---------|-----------------------------------------------|
-| `content` | string | -       | The text to display in the link.              |
-| `href`    | string | -       | The URL or path that the link points to.      |
-| `blank`   | bool   | -       | Whether to open the link in a new tab/window. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `style` (string): Style variant (e.g., "primary", "secondary", "link")
-- `underline` (string): Underline behavior (e.g., "always", "hover", "never")
-- `external` (bool): Whether to add external link indicators
-- `download` (bool): Whether the link is for downloading
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Internal link -->
-{{ ui.link("View Dataset", href="/dataset/my-dataset") }}
-
-<!-- External link -->
-{{ ui.link("Visit External Site", href="https://example.com", blank=true) }}
-
-<!-- Link with attributes -->
-{{ ui.link("Download", href="/download/file", attrs={"download": true}) }}
-```
-///
-
-
-## Tag
-
-The [`tag`][] component displays tag elements that categorize or label content,
-making it easier to organize and discover related items. Tags are important for
-content discovery and organization, allowing users to quickly identify content
-themes or categories.
-
-Tag components typically provide consistent styling for tag elements while
-supporting various states such as active, inactive, or selected tags. The
-component ensures tags are visually distinct from other content while
-maintaining readability and appropriate spacing for tag collections.
-
-| Parameter | Type   | Default | Description                     |
-|-----------|--------|---------|---------------------------------|
-| `content` | string | -       | The text to display in the tag. |
-| `href`    | string | -       | The URL that the tag links to.  |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `style` (string): Style variant (e.g., "primary", "secondary", "success")
-- `size` (string): Size of the tag (e.g., "sm", "lg")
-- `rounded` (bool): Whether to apply rounded corners
-- `outline` (bool): Whether to use outline style
-- `removable` (bool): Whether to include a remove button
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic tag -->
-{{ ui.tag("Data") }}
-
-<!-- Linked tag -->
-{{ ui.tag("Government", href="/dataset?tags=government") }}
-```
-///
-
-
-## Tab
-
-The [`tab`][tab] component creates tab navigation handles that allow users to
-switch between different content sections within the same page. Tabs are
-essential for organizing related content in a space-efficient manner while
-maintaining clear navigation between different sections.
-
-Tab components handle active state indication, visual styling, and
-accessibility attributes to ensure tab navigation is both visually clear and
-functionally accessible.
-
-/// admonition | Relationship
-    type: info
-
-The [`tab`][tab] component works with tab content areas to create
-complete tabbed interface experiences. While tabs provide the navigation
-mechanism, the content areas provide the display for different sections.
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic tab -->
-{{ ui.tab("Tab 1", href="/tab1") }}
-
-<!-- Active tab -->
-{{ ui.tab("Tab 2", href="/tab2", active=true) }}
-```
-///
-
-
-| Parameter | Type   | Default | Description                                   |
-|-----------|--------|---------|-----------------------------------------------|
-| `content` | string | -       | The text to display in the tab.               |
-| `href`    | string | -       | The URL that the tab links to.                |
-| `active`  | bool   | -       | Whether the tab is currently active/selected. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and behavior:
-
-- `disabled` (bool): Whether the tab is disabled
-- `icon` (string): Icon to display with the tab
-
-///
-
-## Video
-
-The [`video`][] component displays video content with appropriate handling for
-different video formats, responsive sizing, and accessibility features. Video
-components are important for rich media content but require careful
-implementation to ensure they work well across different devices and user
-contexts.
-
-Video components handle various aspects of video display including responsive
-sizing, playback controls, accessibility features, and fallback handling when
-video content cannot be displayed. The component ensures videos enhance the
-user experience without causing performance or accessibility issues.
-
-| Parameter  | Type   | Default | Description                        |
-|------------|--------|---------|------------------------------------|
-| `src`      | string | -       | The URL or path to the video file. |
-| `controls` | bool   | -       | Whether to show video controls.    |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-- `autoplay` (bool): Whether to autoplay the video
-- `loop` (bool): Whether to loop the video
-- `muted` (bool): Whether to mute the video by default
-- `poster` (string): Poster image URL to show before video plays
-- `preload` (string): Preload behavior (e.g., "auto", "metadata", "none")
-- `responsive` (bool): Whether to make the video responsive
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic video -->
-{{ ui.video(src="/path/to/video.mp4") }}
-
-<!-- Video with controls -->
-{{ ui.video(src="/path/to/video.mp4", controls=true) }}
-```
-///
-{%endraw%}
+Basic building blocks used throughout the interface.
+
+## Action Elements
+
+### Button
+
+Interactive elements for triggering actions.
+{% endraw %}
+{{parameters_table(component_ref.button, 'button')}}
+{% raw %}
+### Link
+
+Standard hyperlinks for navigation.
+{% endraw %}
+{{parameters_table(component_ref.link, 'link')}}
+{% raw %}
+## Content Indicators
+
+### Badge
+
+Small indicators for counts or status.
+{% endraw %}
+{{parameters_table(component_ref.badge, 'badge')}}
+{% raw %}
+### Tag
+
+Labels for categorizing content.
+{% endraw %}
+{{parameters_table(component_ref.tag, 'tag')}}
+{% raw %}
+## Visual Media
+
+### Icon
+
+Graphical symbols representing actions or concepts.
+{% endraw %}
+{{parameters_table(component_ref.icon, 'icon')}}
+{% raw %}
+### Image
+
+Displaying images with proper attributes.
+{% endraw %}
+{{parameters_table(component_ref.image, 'image')}}
+{% raw %}
+### Video
+
+Video player component.
+{% endraw %}
+{{parameters_table(component_ref.video, 'video')}}
+{% raw %}
+## Utilities
+
+### Datetime
+
+Formatted and localized date and time display.
+{% endraw %}
+{{parameters_table(component_ref.datetime, 'datetime')}}
+{% raw %}
+### Empty
+
+A component shown when there is no content to display.
+{% endraw %}
+{{parameters_table(component_ref.empty, 'empty')}}

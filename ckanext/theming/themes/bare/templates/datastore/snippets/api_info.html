@@ -30,7 +30,7 @@
     <p><strong>{{ _('Access resource data via a web API with powerful query support') }}</strong>.
         {% trans url="https://docs.ckan.org/en/latest/maintaining/datastore.html#api-reference" %}
         Further information in the
-        <a href="{{ url }}" target="_blank">main CKAN Data API and DataStore documentation</a>.
+        <a href="{{ url }}" target="blank">main CKAN Data API and DataStore documentation</a>.
         {% endtrans %}
     </p>
 
@@ -70,11 +70,11 @@
                 <p>{{ _('Some API endpoints may be accessed using a GET query string.') }}</p>
                 <strong>{{ _('Query example (first 5 results)') }}</strong>
                 <p>
-                    <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}" target="_blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}</a></code>
+                    <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}" target="blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, limit=5, qualified=True) }}</a></code>
                 </p>
                 <strong>{{ _('Query example (results containing \'jones\')') }}</strong>
                 <p>
-                    <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}" target="_blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}</a></code>
+                    <code><a href="{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}" target="blank" rel="noreferrer">{{ h.url_for('api.action', logic_function='datastore_search', resource_id=resource.id, q='jones', qualified=True) }}</a></code>
                 </p>
                 {% if h.datastore_search_sql_enabled() %}
                     {# not urlencoding the sql because its clearer #}
@@ -83,7 +83,7 @@
                         ) + '?sql=SELECT * from "' + resource.id + '" WHERE title LIKE \'jones\'' %}
                     <strong>{{ _('Query example (via SQL statement)') }}</strong>
                     <p>
-                        <code><a href="{{sql_example_url}}" target="_blank" rel="noreferrer">{{ sql_example_url }}</a></code>
+                        <code><a href="{{sql_example_url}}" target="blank" rel="noreferrer">{{ sql_example_url }}</a></code>
                     </p>
                 {% endif %}
             {% endblock %}

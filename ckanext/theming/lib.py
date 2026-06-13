@@ -371,8 +371,9 @@ class MacroUI(UI):
             for tpl in (self.__env.get_template(source) for source in self.__sources):
                 tpl._module = tpl.make_module()  # pyright: ignore[reportPrivateUsage]
 
-            tk.g._ui_compiled = True
+            self._inv.clear()
             self._collect_macros()
+            tk.g._ui_compiled = True
 
         if name not in self._inv:
             raise AttributeError(name)

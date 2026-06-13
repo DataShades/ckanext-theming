@@ -13,6 +13,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.blocks.admonition
   - pymdownx.blocks.details
+  - pymdownx.blocks.caption
   - pymdownx.blocks.tab:
       alternate_style: true
   - pymdownx.emoji:
@@ -87,24 +88,28 @@ theme:
 
 nav:
   - index.md
+  - philosophy.md
+  - styleguide.md
+  - migration.md
+  - recipes.md
   - theme.md
+  - advanced.md
+  - best-practices.md
+  - cli.md
   - Component library:
       - library/index.md
-      - library/containers.md
-      - library/content.md
-      - library/data.md
-      - library/elements.md
-      - library/feedback.md
-      - library/form.md
-      - library/handles.md
-      - library/meta.md
+      - library/layout.md
       - library/navigation.md
+      - library/content.md
+      - library/forms.md
+      - library/feedback.md
+      - library/elements.md
+      - library/data.md
       - library/search.md
-      - library/sections.md
-      - library/wrappers.md
-  - parameters.md
-  - cli.md
-  - theming-parties.md
+      - library/structure.md
+  - Background & Reference:
+      - parameters.md
+      - theming-parties.md
   # - blocks.md
 
 extra:

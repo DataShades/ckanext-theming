@@ -1,5 +1,23 @@
 {%raw%}# Creating CKAN Themes
 
+Creating a new theme is the best way to fully control the visual identity of
+your CKAN portal. Whether you want to use a modern framework like Tailwind CSS
+or just want to refine the existing Bootstrap look, the theming system provides
+the structure you need.
+
+## Quick Start: The 3-Step Theme
+
+If you want to create a theme from scratch, here is the minimal workflow:
+
+1.  **Generate the structure**: Use the CLI to create a theme based on the `bare` template.
+    ```bash
+    ckan theme create my_new_theme
+    ```
+2.  **Implement components**: Open `templates/macros/ui.html` and start defining your macros (buttons, inputs, etc.) using your preferred HTML and CSS.
+3.  **Activate it**: Set `ckan.ui.theme = my_new_theme` in your `.ini` file.
+
+---
+
 ## Theme Structure
 
 A CKAN theme should be organized in the following directory structure:
@@ -103,8 +121,9 @@ macros fall back to the parent theme.
 /// details | Additional macro sources
     type: tip
 
-To load macros from an additional file(in addition to `macros/ui.html`),
-implement `ITheme.get_additional_theme_ui_sources`:
+When you need to register few components inside `ui.` namespace, without
+creating a new theme, implement `ITheme.get_additional_theme_ui_sources`. This
+hook is designed for extensions that provide theme-agnostic components.
 
 ```python
 def get_additional_theme_ui_sources(self) -> list[str]:
@@ -325,7 +344,7 @@ complex content with nested HTML into element.
 {% call%}
 
 {# approximately the same but less readable version #}
-{{ ui.call('<i class="fa fa-info-circle"></i> Click'|safe, type="submit") }}
+{{ ui.button('<i class="fa fa-info-circle"></i> Click'|safe, type="submit") }}
 ```
 ///
 

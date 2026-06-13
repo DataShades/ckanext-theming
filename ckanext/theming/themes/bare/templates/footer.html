@@ -1,0 +1,15 @@
+{%- call ui.util.call(ui.footer) %}
+    <div class="row">
+        <div class="col-md-8">
+            {%- call ui.util.call(ui.footer_main) -%}
+                <p><strong>{{ g.site_title }}</strong></p>
+                <p>{{ g.site_description }}</p>
+            {%- endcall -%}
+        </div>
+        <div class="col-md-4 text-right">
+             {%- call ui.util.call(ui.footer_secondary) -%}
+                {{ ui.language_selector() }}
+            {%- endcall -%}
+        </div>
+    </div>
+{%- endcall %}

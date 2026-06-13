@@ -88,7 +88,7 @@ class Autocomplete {
 
     this.separator = this.root.dataset.autocompleteSeparator || ",";
     this.minChars = parseInt(
-      this.root.dataset.autocompleteMinChars ?? (this.source ? "2" : "1"),
+      this.root.dataset.autocompleteMinChars || (this.source ? "2" : "1"),
       10,
     );
     this.debounce = parseInt(

@@ -1,4 +1,4 @@
-{% extends "admin/_base.html" %}
+{% extends "admin/base.html" %}
 
 {%- block breadcrumb_content -%}
     {{ super() }}
@@ -51,7 +51,7 @@
         </p>
         <p>
             {%- with docs_url = "https://docs.ckan.org/en/{0}/sysadmin-guide.html".format(g.ckan_doc_version) -%}
-                {{ ui.link(_("Sysadmin guide"), href=docs_url, attrs={"target": "_blank", "rel": "noreferrer"}) }}
+                {{ ui.link(_("Sysadmin guide"), href=docs_url, attrs={"target": "blank", "rel": "noreferrer"}) }}
             {%- endwith -%}
         </p>
     {%- endcall %}

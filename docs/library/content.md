@@ -1,318 +1,182 @@
-{%raw%}
-# Content
+{% from "_macros.html" import parameters_table %}
+{% raw %}
+# CKAN Content
 
-Content components are designed to display information about CKAN's core
-entities in a consistent and structured way. They handle the presentation of
-complex data structures like packages, organizations, users, and their
-relationships. These components often work in conjunction with their
-corresponding wrapper components to provide complete structural and visual
-representations.
+Content components are designed to display CKAN's core entities in a consistent
+way. Most entities have a singular component (e.g., `package`) and a list
+wrapper (e.g., `package_list`).
 
-## Facet
+## Datasets (Packages)
 
-The [`facet`][] component displays individual facet filter options, allowing
-users to refine search results and browse content by specific criteria. Facets
-are crucial for data discovery and exploration in CKAN, enabling users to
-filter datasets by organization, group, license, format, and other attributes.
-
-The facet component typically displays the filter name, available options, and
-selection status. It works in conjunction with [`facet_list`][facet-list]
-and [`facet_section`][facet-section] components to create comprehensive
-filtering interfaces. Facets are particularly important for large data portals
-where users need to narrow down results efficiently.
-
-/// admonition | Relationship
-    type: info
-
-The [`facet`][] component is closely related to
-[`facet_list`][facet-list] and [`facet_section`][facet-section]
-components. The facet component displays individual filter options, while the
-wrapper and section components provide the structural container.
-
-///
+The `package` component displays information about a single dataset, typically
+as a snippet in search results or a list.
 
 /// admonition | Usage Example
     type: example
 
 ```django
-<!-- Basic facet component -->
-{%- call ui.util.call(ui.facet_list) -%}
-    {{ ui.facet("My Organization", key="org", value="my-org", count=15) }}
-{%- endcall %}
-
-<!-- Active facet component -->
-{%- call ui.util.call(ui.facet_list) -%}
-    {{ ui.facet("CSV", key="format", value="csv", count=8, active=true) }}
-{%- endcall %}
-```
-///
-
-| Parameter | Type   | Default | Description                                     |
-|-----------|--------|---------|-------------------------------------------------|
-| `content` | string | -       | The text to display in the facet.               |
-| `key`     | string | -       | The facet key (e.g., "organization", "format"). |
-| `value`   | string | -       | The specific value for this facet option.       |
-| `count`   | int    | -       | Number of items matching this facet option.     |
-| `active`  | bool   | -       | Whether this facet option is currently active.  |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and behavior:
-
-- `icon` (string): Icon to display with the facet
-- `disabled` (bool): Whether the facet is disabled
-///
-
-
-## Group
-
-The [`group`][] component displays information about CKAN groups, which are used to
-organize datasets around specific topics or themes. It presents group metadata
-including name, description, image, and associated datasets. Groups help users
-discover related datasets and understand the thematic organization of content.
-
-The group component often includes links to view group details, browse datasets
-within the group, and access group-specific information. It works with
-[`group_list`][group-list] to provide consistent presentation of multiple
-groups in listings and search results.
-
-/// admonition | Relationship
-    type: info
-
-The [`group`][] component is typically wrapped by
-[`group_list`][group-list] components to provide consistent styling and
-layout when displaying multiple groups together.
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic group component -->
-{%- call ui.util.call(ui.group_list) -%}
-    {{ ui.group(group={"name": "test-group", "title": "Test Group", "description": "A test group", "type": "group"}) }}
-{%- endcall %}
-```
-///
-
-
-| Parameter | Type   | Default | Description                                         |
-|-----------|--------|---------|-----------------------------------------------------|
-| `group`   | object | -       | The group data object containing group information. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and presentation:
-
-- `variant` (string): Style variant (e.g., "card", "list")
-- `size` (string): Size of the group display (e.g., "sm", "lg")
-- `show_datasets` (bool): Whether to show dataset count
-- `show_description` (bool): Whether to show group description
-- `show_image` (bool): Whether to show group image
-///
-
-## Organization
-
-The [`organization`][] component displays information about CKAN organizations,
-which represent institutions, departments, or other entities that publish
-datasets. It presents organizational metadata including name, description,
-image, and published datasets. Organizations are fundamental to CKAN's data
-governance model.
-
-The organization component typically includes information about the
-organization's datasets, members, and administrative structure. It works with
-[`organization_list`][organization-list] to provide consistent
-presentation when displaying multiple organizations or organization listings.
-
-/// admonition | Relationship
-    type: info
-
-The [`organization`][] component is typically wrapped by
-[`organization_list`][organization-list] components to provide consistent
-styling and layout when displaying multiple organizations together.
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic organization component -->
-{%- call ui.util.call(ui.organization_list) -%}
-    {{ ui.organization(organization={"name": "test-organization", "title": "Test Organization", "description": "A test organization", "type": "organization"}) }}
-{%- endcall %}
-```
-///
-
-
-| Parameter      | Type   | Default | Description                                                       |
-|----------------|--------|---------|-------------------------------------------------------------------|
-| `organization` | object | -       | The organization data object containing organization information. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and presentation:
-
-- `variant` (string): Style variant (e.g., "card", "list")
-- `size` (string): Size of the organization display (e.g., "sm", "lg")
-- `show_datasets` (bool): Whether to show dataset count
-- `show_description` (bool): Whether to show organization description
-- `show_image` (bool): Whether to show organization image
-///
-
-## Package
-
-The [`package`][] component displays information about CKAN packages
-(datasets), which are the core content items in CKAN. It presents dataset
-metadata including title, description, resources, tags, and other relevant
-information. The package component is central to CKAN's data discovery
-functionality.
-
-The component handles complex dataset information including multiple resources,
-metadata fields, and relationships with organizations and groups. It works with
-[`package_list`][package-list] to provide consistent presentation in
-search results, listings, and related dataset displays.
-
-/// admonition | Relationship
-    type: info
-
-The [`package`][] component is typically wrapped by
-[`package_list`][package-list] components to provide consistent styling
-and layout when displaying multiple packages together.
-
-///
-
-/// admonition | Usage Example
-    type: example
-
-```django
-<!-- Basic package component -->
 {%- call ui.util.call(ui.package_list) -%}
-    {{ ui.package(package={"name": "test-dataset", "title": "Test Dataset", "description": "A test dataset", "type": "dataset"}) }}
-{%- endcall %}
+    {%- for pkg in packages -%}
+        {{ ui.package(package=pkg) }}
+    {%- endfor -%}
+{%- endcall -%}
 ```
 ///
+{% endraw %}
+{{parameters_table(component_ref.package_list, 'package_list')}}
+{{parameters_table(component_ref.package, 'package')}}
+{% raw %}
+## Organizations
 
-
-| Parameter | Type   | Default | Description                                                     |
-|-----------|--------|---------|-----------------------------------------------------------------|
-| `package` | object | -       | The package/dataset data object containing dataset information. |
-
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and presentation:
-
-- `variant` (string): Style variant (e.g., "card", "list")
-- `size` (string): Size of the package display (e.g., "sm", "lg")
-- `show_resources` (bool): Whether to show resource count
-- `show_description` (bool): Whether to show dataset description
-- `show_badges` (bool): Whether to show status badges
-///
-
-## Resource
-
-The [`resource`][] component displays information about individual resources
-within packages. Resources represent the actual data files or links within a
-dataset, including file format, size, description, and download links. The
-component handles various resource types including uploaded files, external
-links, and API endpoints.
-
-Resource components are crucial for data access, providing users with the means
-to download, view, or interact with the actual data contained in datasets. The
-component works with [`resource_list`][resource-list] to provide
-consistent presentation when displaying multiple resources within a package.
-
-/// admonition | Relationship
-    type: info
-
-The [`resource`][] component is typically wrapped by
-[`resource_list`][resource-list] components to provide consistent styling
-and layout when displaying multiple resources together.
-
-///
+Displays information about a CKAN organization.
 
 /// admonition | Usage Example
     type: example
 
 ```django
-<!-- Basic resource component -->
+{%- call ui.util.call(ui.organization_list) -%}
+    {%- for org in organizations -%}
+        {{ ui.organization(organization=org) }}
+    {%- endfor -%}
+{%- endcall -%}
+```
+///
+
+
+{% endraw %}
+{{parameters_table(component_ref.organization_list, 'organization_list')}}
+{{parameters_table(component_ref.organization, 'organization')}}
+{% raw %}
+## Groups
+
+Displays information about a CKAN group.
+
+
+/// admonition | Usage Example
+    type: example
+
+```django
+{%- call ui.util.call(ui.group_list) -%}
+    {%- for group in groups -%}
+        {{ ui.group(group=group) }}
+    {%- endfor -%}
+{%- endcall -%}
+```
+///
+
+{% endraw %}
+{{parameters_table(component_ref.group_list, 'group_list')}}
+{{parameters_table(component_ref.group, 'group')}}
+{% raw %}
+## Resources
+
+Displays information about a single resource within a dataset.
+
+
+/// admonition | Usage Example
+    type: example
+
+```django
 {%- call ui.util.call(ui.resource_list) -%}
-    {{ ui.resource(resource={"name": "test-group", "id": "test-resource", "description": "A test group", "package_id": "test-package"}) }}
-{%- endcall %}
-
+    {%- for resource in resources -%}
+        {% set package = h.get_package(resource.package_id) %}
+        {{ ui.resource(resource=resource, package=package) }}
+    {%- endfor -%}
+{%- endcall -%}
 ```
 ///
 
+{% endraw %}
+{{parameters_table(component_ref.resource_list, 'resource_list')}}
+{{parameters_table(component_ref.resource, 'resource')}}
+{% raw %}
+## Users
 
-| Parameter  | Type   | Default | Description                                                     |
-|------------|--------|---------|-----------------------------------------------------------------|
-| `resource` | object | -       | The resource data object containing resource information.       |
-| `package`  | object | -       | The package/dataset data object containing dataset information. |
+Displays user profile information.
 
-/// details | Theme-Specific Parameters
-    type: tip
-
-Different themes may support additional parameters for styling and presentation:
-
-- `variant` (string): Style variant (e.g., "card", "list")
-- `size` (string): Size of the resource display (e.g., "sm", "lg")
-- `show_download` (bool): Whether to show download button
-- `show_format` (bool): Whether to show file format
-- `show_size` (bool): Whether to show file size
-///
-
-## User
-
-The [`user`][] component displays information about CKAN users, including
-profile information, activity, and contributions. It presents user metadata
-such as name, display name, bio, and associated content like created datasets
-or organizations. The component handles both public profile information and
-user-specific details when appropriate.
-
-User components are important for community features and understanding content
-provenance. They work with [`user_list`][user-list] to provide consistent
-presentation when displaying multiple users or user listings, such as member
-lists or contributor information.
-
-/// admonition | Relationship
-    type: info
-
-The [`user`][] component is typically wrapped by [`user_list`][user-list]
-components to provide consistent styling and layout when displaying multiple
-users together.
-
-///
 
 /// admonition | Usage Example
     type: example
 
 ```django
-<!-- Basic user component -->
 {%- call ui.util.call(ui.user_list) -%}
-    {{ ui.user(user={"name": "test-user", "fullname": "Test User", "id": "test-user"}) }}
-{%- endcall %}
+    {%- for user in users -%}
+        {{ ui.user(user=user) }}
+    {%- endfor -%}
+{%- endcall -%}
 ```
 ///
 
 
-| Parameter | Type   | Default | Description                                       |
-|-----------|--------|---------|---------------------------------------------------|
-| `user`    | object | -       | The user data object containing user information. |
+{% endraw %}
+{{parameters_table(component_ref.user_list, 'user_list')}}
+{{parameters_table(component_ref.user, 'user')}}
+{% raw %}
+## Search & Facets
 
-/// details | Theme-Specific Parameters
-    type: tip
+Components for filtering and exploring content.
 
-Different themes may support additional parameters for styling and presentation:
+### Facets
 
-- `variant` (string): Style variant (e.g., "card", "inline")
-- `size` (string): Size of the user display (e.g., "sm", "lg")
-- `show_avatar` (bool): Whether to show user avatar
-- `show_display_name` (bool): Whether to show user's display name
-- `show_link` (bool): Whether to link to user profile
+`facet` components are used to filter search results. They are usually grouped
+into a `facet_list` and further organized into `facet_section`s.
+
+/// admonition | Usage Example
+    type: example
+
+```django
+{%- call ui.util.call(ui.facet_section, title=_("Organizations")) -%}
+    {%- call ui.util.call(ui.facet_list) -%}
+        {%- for item in facets -%}
+            {{ ui.facet(item.display_name, key="organization", value=item.name, count=item.count) }}
+        {%- endfor -%}
+    {%- endcall -%}
+{%- endcall -%}
+```
 ///
-{%endraw%}
+
+#### Facet section
+
+{% endraw %}
+{{parameters_table(component_ref.facet_section, 'facet_section')}}
+
+{% raw %}
+#### Facet list and facet
+
+{% endraw %}
+{{parameters_table(component_ref.facet_list, 'facet_list')}}
+{{parameters_table(component_ref.facet, 'facet')}}
+{% raw %}
+### Filters Container
+
+A high-level container for all search filters, typically shown in the sidebar.
+
+
+/// admonition | Usage Example
+    type: example
+
+```django
+{%- call ui.util.call(ui.filters) -%}
+    {%- call ui.util.call(ui.facet_section, title=_("Organizations")) -%}
+        {%- call ui.util.call(ui.facet_list) -%}
+            {%- for item in facets -%}
+                {{ ui.facet(item.display_name, key="organization", value=item.name, count=item.count) }}
+            {%- endfor -%}
+        {%- endcall -%}
+    {%- endcall -%}
+
+    {%- call ui.util.call(ui.facet_section, title=_("Tags")) -%}
+        {%- call ui.util.call(ui.facet_list) -%}
+            {%- for item in tag_facets -%}
+                {{ ui.facet(item.display_name, key="tags", value=item.name, count=item.count) }}
+            {%- endfor -%}
+        {%- endcall -%}
+{%- endcall -%}
+
+```
+///
+
+
+
+{% endraw %}
+{{parameters_table(component_ref.filters, 'filters')}}

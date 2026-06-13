@@ -9,9 +9,9 @@
   page=page,
   query_error=query_error,
   fields=fields -%}
-    {% include "package/snippets/_search_results.html" %}
+    {% include "package/snippets/search_results.html" %}
 {%- endwith %}
 
 {%- with facet_titles=facet_titles, search_facets=search_facets -%}
-    {%- include "package/snippets/_search_facets.html" -%}
+    {%- include "package/snippets/search_facets.html" -%}
 {%- endwith %}

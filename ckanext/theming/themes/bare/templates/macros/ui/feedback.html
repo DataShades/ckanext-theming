@@ -1,37 +1,58 @@
 {%- macro alert(content, dismissible, style) -%}
-    <div {{ ui.util.attrs(kwargs) }} style="padding: 0.5rem;border: 1px solid;">
-        {{ content }}
-        {{ ui.button("&times;"|safe, on={"click": "this.parentNode.remove()"}) if dismissible }}
+    <div {{ ui.util.attrs(kwargs, {"class": "alert alert-" + (style or "info")}) }}>
+        <div class="alert-content">{{ content }}</div>
+        {{ ui.button("&times;"|safe, class="alert-dismiss", on={"click": "this.parentNode.remove()"}) if dismissible }}
     </div>
 {%- endmacro %}
 
 {%- macro modal(content, title, footer, id, dismissible=true) -%}
-    <dialog {{ ui.util.attrs(kwargs) }} id="{{ id }}" closedby="{{ 'any' if dismissible else 'closerequest' }}">
-        {%- if title %}
-            {{ ui.heading(title, level=2) }}
-        {%- endif %}
+    <dialog {{ ui.util.attrs(kwargs, {"id": id, "class": "modal"}) }}>
+        <div class="modal-content">
+            {%- if title %}
+            <div class="modal-header">
+                {{ ui.heading(title, level=2) }}
+                {{ ui.modal_close_handle(id=id) if dismissible }}
+            </div>
+            {%- endif %}
 
-        <div>
-            {{ content }}
-        </div>
-        {%- if footer -%}
-            <div>
+            <div class="modal-body">
+                {{ content }}
+            </div>
+
+            {%- if footer -%}
+            <div class="modal-footer">
                 {{ footer }}
             </div>
-        {%- endif %}
+            {%- endif %}
+        </div>
     </dialog>
 {%- endmacro %}
 
+{%- macro confirm_modal(content, title, id, cancel_label, confirm_label, href, form_id, dismissible=true) -%}
+    {%- set footer -%}
+        {{ ui.button(cancel_label or _('Cancel'), on={"click": "document.getElementById('" + id + "').close()"}) }}
+        {%- if form_id -%}
+            {{ ui.button(confirm_label or _('Confirm'), style="primary", type="submit", form=form_id) }}
+        {%- else -%}
+            <form action="{{ href }}" method="POST" style="display: inline;">
+                {{ ui.button(confirm_label or _('Confirm'), style="primary", type="submit") }}
+            </form>
+        {%- endif -%}
+    {%- endset -%}
+    {{ ui.modal(content, title=title, footer=footer, id=id, dismissible=dismissible, **kwargs) }}
+{%- endmacro %}
 
 {%- macro popover(content, title, id) -%}
-    <div {{ ui.util.attrs(kwargs) }} popover id="{{ id }}">
-        {{ ui.heading(title, level=4) if title }}
-        <div>{{ content }}</div>
+    <div {{ ui.util.attrs(kwargs, {"id": id}) }} popover>
+        <div class="popover-content">
+            {{ ui.heading(title, level=4) if title }}
+            <div>{{ content }}</div>
+        </div>
     </div>
 {%- endmacro %}
 
 {%- macro progress(content, value=0, max=100) -%}
-    <div {{ ui.util.attrs(kwargs) }} class="progress">
+    <div {{ ui.util.attrs(kwargs, {"class": "progress"}) }}>
         <div class="progress-bar" style="width: {{ (value / max) * 100 }}%" role="progressbar" aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ max }}">
             {%- if content %}{{ content }}{% else %}{{ value }} / {{ max }}{% endif %}
         </div>
@@ -39,15 +60,24 @@
 {%- endmacro %}
 
 {%- macro spinner(content, style, size) -%}
-    <span {{ ui.util.attrs(kwargs) }} class="spinner spinner-{{ size or 'md' }}"></span>
+    <span {{ ui.util.attrs(kwargs, {"class": "spinner spinner-" + (size or "md") + " spinner-" + (style or "primary")}) }}></span>
 {%- endmacro %}
 
 {%- macro toast(content, title, style, dismissible) -%}
-    <div {{ ui.util.attrs(kwargs) }}>
+    <div {{ ui.util.attrs(kwargs, {"class": "toast toast-" + (style or "info")}) }}>
+        {%- if title -%}
+            <div class="toast-header">{{ title }}</div>
+        {%- endif -%}
+        <div class="toast-body">{{ content }}</div>
+    </div>
+{%- endmacro %}
+
+{%- macro toast_stack(content, position="top-right") -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "toast-stack toast-stack-" + position}) }}>
         {{ content }}
     </div>
 {%- endmacro %}
 
 {%- macro tooltip(content, tooltip, position="bottom") -%}
-    <span {{ ui.util.attrs(kwargs) }} data-tooltip="{{ tooltip }}" data-tooltip-position="{{ position }}">{{ content }}</span>
+    <span {{ ui.util.attrs(kwargs, {"class": "tooltip-wrapper", "data-tooltip": tooltip, "data-tooltip-position": position}) }}>{{ content }}</span>
 {%- endmacro %}

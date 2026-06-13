@@ -1,40 +1,87 @@
-{%raw%}
+{% raw %}
 # Component Library
 
-Components in the theming system follow predictable patterns that make them
-easy to use and understand. The system is built around Jinja2 macros that are
-accessible through the `ui` global variable in templates.
+The component library is the heart of the theming system. It provides a set of
+high-level, semantic building blocks that you use to construct your user
+interface.
 
-### Content Components
+Instead of wrestling with raw HTML and CSS classes, you call these components
+using Jinja2 macros. The active theme takes care of rendering the correct HTML
+for its chosen CSS framework.
 
-Most components that accept content as their primary input follow a consistent
-pattern where the first argument is the content, followed by named arguments
-for styling and behavior:
+## How to use components
+
+Most components follow a simple, predictable pattern.
+
+### 1. Simple Content
+For components that just take text or a simple string, pass it as the first
+argument:
 
 ```django
 {{ ui.button("Click Me") }}
-{{ ui.card("Card content here", title="My Card") }}
 {{ ui.alert("Success message", style="success") }}
 ```
 
-In this example, `"Click Me"` is the content passed positionally as the first
-argument, while `style="success"` is passed as a named argument.
+### 2. Complex Content (Block Usage)
+For more complex content (like nested HTML or other components), use the `ui.util.call` helper:
 
-### Entity Components
+```django
+{% call ui.util.call(ui.card, title="Dataset Info") %}
+    <p>This is a <strong>very important</strong> dataset.</p>
+    {{ ui.button("Download", href="/...") }}
+{% endcall %}
+```
 
-Some components in the "content" category (such as `group`, `package`,
-`resource`, `user`, etc.) work differently and typically accept structured data
-objects rather than simple content strings:
+/// admonition | Note
+    type: info
+
+Keep in mind that `ui.util.call` simply passes the block content into the first
+argument of the called component. The following two ways of rendering
+`something` are identical:
+
+```django
+{{ ui.something("CONTENT", argument="value") }}
+
+{% call ui.util.call(ui.something, argument="value") %}
+    CONTENT
+{% endcall %}
+```
+
+///
+
+### 3. Entity-based Components
+Some components are designed to work directly with CKAN's data objects (like
+datasets, organizations, or users):
 
 ```django
 {{ ui.package(package=dataset_dict) }}
-{{ ui.organization(organization=org_dict) }}
 {{ ui.user(user=user_dict) }}
 ```
 
-## Parameter Handling
+## Key Benefits
 
-### Named Arguments Convention
+**Semantic Code**: Your templates describe *what* an element is (a button, a card), not *how* it should look.
+
+**Theme Interoperability**: Write your extension once, and it will look great on any theme that implements the standard library.
+
+**Clean Templates**: Drastically reduce the amount of boilerplate HTML in your templates.
+
+## Diving Deeper
+
+While you can get very far with just the basics, the system offers powerful
+features for advanced use cases:
+
+- [Standard Parameter Values](../parameters.md): Learn about the consistent naming for sizes, styles, and directions.
+- [HTML Attributes](#html-attributes): How to pass arbitrary data, aria, or event attributes.
+- [Interactive Element Coordination](#interactive-element-coordination): Using unique IDs and handles for modals and popovers.
+
+---
+
+## Technical Details
+
+### Parameter Handling
+
+#### Named Arguments Convention
 
 All arguments after the first content argument (if applicable) should be passed
 by name. This approach provides flexibility for different themes to implement
@@ -75,7 +122,7 @@ parameters:
 
 ```django
 {{ ui.button("Submit",
-    attrs={"data-module": "form-submitter"},
+    attrs={"data-role": "form-submitter"},
     aria={"labelledby": "label-id"},
     data={"module": "autocomplete"},
     hx={"boost": "true"},
@@ -97,6 +144,18 @@ in the macro implementation. This allows you to override default behavior:
 {# This will use "custom-class" instead of the theme's default button classes #}
 {{ ui.button("Text", attrs={"class": "custom-class"}) }}
 ```
+
+### Custom CSS Classes
+
+If you want to *add* a class to the default ones instead of replacing them
+entirely, use the `_extra_class` parameter:
+
+```django
+{# This will add "my-class" to the button's class list #}
+{{ ui.button("Text", _extra_class="my-class") }}
+```
+
+---
 
 ## Block Elements and Complex Content
 
@@ -120,6 +179,28 @@ Components that accept content as their first parameter can be used in two ways:
 The `ui.util.call` function allows passing complex content (including nested
 components) into elements that don't have a `caller()` block in their
 implementation.
+
+/// admonition | Using `caller()`
+    type: warning
+
+When creating custom components you can use `caller()`, but always provide
+implementation that does not require it. This guarantees that all
+implementations of the component across different themes will not break when
+using safe way of calling via inline expression `ui.<component>` and via block
+call `ui.util.call(ui.<component>)`.
+
+```django
+{% macro something(content) %}
+    {% if content %}
+        {{ content }}
+    {% elif caller %}
+        {{ caller() }}
+    {% endif %}
+{% endmacro %}
+```
+
+
+///
 
 ### Mapping Over Collections
 
@@ -230,7 +311,6 @@ writing `{{ ui.icon("search") }}` should work in the same way.
 4. **Progressive Enhancement**: Use `hx-*` attributes for enhanced interactivity
 5. **Unique IDs**: Use `ui.util.id()` for generating unique identifiers
 6. **Complex Content**: Use `ui.util.call()` for components with complex nested content
-7. **Data Flow**: Use `ui.util.*_item()` functions for managing request-scoped data
 
 These patterns ensure that components remain flexible, accessible, and
 consistent across different themes while maintaining the separation of content

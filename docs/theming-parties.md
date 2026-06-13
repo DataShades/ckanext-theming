@@ -1,9 +1,11 @@
 {%raw%}
 # Theming Parties
 
-Theming in CKAN involves three distinct parties, each with different responsibilities and capabilities. The theming system enables a clear separation of concerns where each party can focus on their specific role without interfering with others.
+Theming in CKAN involves three distinct roles. Understanding these roles helps
+clarify why the system is designed the way it is—and why it remains **completely
+optional** for everyone involved.
 
-## 1. Theme Developers
+## 1. Theme Developers (The Architects)
 
 Theme developers create complete themes that define the visual appearance and UI component implementations for CKAN instances.
 
@@ -108,6 +110,18 @@ Portal maintainers configure specific CKAN portals and have knowledge of the cho
 - Should prefer UI components over raw HTML for consistency
 - Limited to the components and features provided by the selected theme
 ///
+
+## Why this separation matters
+
+This "three-party" system ensures that:
+
+1.  **Extensions are portable**: An extension developer doesn't need to know
+    what theme you are using.
+2.  **Themes are swappable**: A portal maintainer can change the theme without
+    breaking extensions.
+3.  **Everything is optional**: If you don't want to use this system, you don't
+    have to. You can still write raw HTML in your templates, just like in
+    traditional CKAN development.
 
 ## Component Categories
 

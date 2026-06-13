@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{%- set PAGE_LAYOUT | trim  -%}
+{%- block page_layout -%}
+    {{ "sidebar-start" if self.secondary()|trim else "no-sidebar" }}
+{%- endblock %}
+{%- endset -%}
+
+
+{%- block zone_main %}
+    {%- call ui.util.call(ui.container) -%}
+        <div id="zone-main">
+            {%- if PAGE_LAYOUT == "no-sidebar" -%}
+                <div id="zone-primary">{{ self.zone_primary() }}</div>
+
+            {%- elif PAGE_LAYOUT == "sidebar-end" -%}
+                <div id="zone-primary">{{ self.zone_primary() }}</div>
+                <div id="zone-secondary">{{ self.zone_secondary() }}</div>
+
+            {%- else -%}
+                <div id="zone-secondary">{{ self.zone_secondary() }}</div>
+                <div id="zone-primary">{{ self.zone_primary() }}</div>
+
+            {%- endif %}
+        </div>
+    {%- endcall %}
+{%- endblock %}

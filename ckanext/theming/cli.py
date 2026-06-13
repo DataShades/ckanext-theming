@@ -165,7 +165,7 @@ def component_list(ctx: click.Context, theme: lib.Theme):
 @click.option("--with-custom-args", type=click.Choice(["both", "missing", "additional"]))
 @theme_option
 @click.argument("components", nargs=-1)
-def component_analyze(  # noqa: C901, PLR0912
+def component_analyze(  # noqa: C901, PLR0912, PLR0915
     ctx: click.Context,
     components: Collection[str],
     theme: lib.Theme,
@@ -224,10 +224,17 @@ def component_analyze(  # noqa: C901, PLR0912
 
                 sig = f"({sig})"
                 comp_type = "Callable macro" if comp_func.caller else "Macro"
-
+                source_file = inspect.getsourcefile(comp_func._func)  # pyright: ignore[reportPrivateUsage]
             else:
                 sig = str(inspect.signature(comp_func))
                 comp_type = type(comp_func).__name__
+                source_file = inspect.getsourcefile(comp_func)
+
+            chain: list[str | None] = []
+            chain_member = comp_func
+            while chain_parent := getattr(chain_member, "_theming_chain", None):
+                chain.append(inspect.getsourcefile(chain_parent._func))
+                chain_member = chain_parent
 
             click.secho(f"{component}", bold=True)
             click.secho(click.style("Type: ", fg="yellow") + comp_type)
@@ -249,6 +256,15 @@ def component_analyze(  # noqa: C901, PLR0912
                         else no_description
                     )
                     click.secho(f"\t{key}: {description}")
+
+            if source_file:
+                click.secho(click.style("Defined in: ", fg="yellow") + os.path.relpath(source_file))
+
+            if chain:
+                click.secho(click.style("Overrides: ", fg="yellow"))
+                for item in chain:
+                    if item:
+                        click.echo(f"\t{os.path.relpath(item)}")
 
             click.echo()
 

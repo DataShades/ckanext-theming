@@ -41,6 +41,7 @@ class Category(enum.Enum):
     ESSENTIAL = "essential"
     RECOMMENDED = "recommended"
     EXPERIMENTAL = "experimental"
+    PLUGIN = "plugin"
     CUSTOM = "custom"
 
 

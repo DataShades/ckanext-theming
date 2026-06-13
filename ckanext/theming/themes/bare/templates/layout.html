@@ -1,0 +1,97 @@
+{#
+    Base page template.
+#}
+{% extends "base.html" %}
+
+{%- block page %}
+    <div id="zone-header">
+        {%- block zone_header -%}
+            {%- block header %}
+                {% include "header.html" %}
+            {%- endblock header %}
+        {%- endblock zone_header -%}
+    </div>
+
+    <div id="zone-toolbar">
+        {%- call ui.util.call(ui.container) -%}
+            {%- block zone_toolbar %}
+                {%- block breadcrumb %}
+                    {%- call ui.util.call(ui.breadcrumb_wrapper) -%}
+                        {{ ui.breadcrumb(_("Home"), h.url_for("home.index"), initial=true) }}
+                        {%- block breadcrumb_content %}{% endblock %}
+                    {%- endcall %}
+                {%- endblock breadcrumb %}
+            {%- endblock -%}
+        {%- endcall %}
+    </div>
+
+    <div id="zone-intro">
+        {%- call ui.util.call(ui.container) -%}
+            {%- block zone_intro %}
+                <div id="flash-messages" class="mt-4">
+                    {%- for category, message in h.get_flashed_messages(with_categories=true) %}
+                        {{ ui.alert(h.literal(message), style=category, dismissible=true) }}
+                    {%- endfor -%}
+                </div>
+            {%- endblock %}
+        {%- endcall %}
+    </div>
+
+    <div id="zone-content">
+        {%- block zone_content %}
+            {%- block content -%}
+                {%- block zone_main -%}
+                {%- endblock zone_main -%}
+            {%- endblock content %}
+        {%- endblock zone_content -%}
+    </div>
+
+    <div id="zone-footer">
+        {%- block zone_footer -%}
+            {%- block footer %}
+                {%- include "footer.html" -%}
+            {% endblock footer %}
+        {%- endblock zone_footer -%}
+    </div>
+{%- endblock %}
+
+{%- block zone_secondary -%}
+    {%- block secondary %}
+        <aside id="sidebar">
+            {%- block secondary_content %}
+            {%- endblock secondary_content %}
+        </aside>
+    {%- endblock secondary -%}
+{%- endblock zone_secondary -%}
+
+{%- block zone_primary -%}
+    {%- block primary -%}
+        <main id="main">
+            <article>
+                {%- block primary_content %}
+                    {%- block page_header %}
+                        <div class="mb-6">
+                            {%- call ui.util.call(ui.content_nav) -%}
+                                {%- block content_nav %}{% endblock -%}
+                            {%- endcall %}
+                        </div>
+                    {% endblock -%}
+
+                    <div class="flex justify-between items-start mb-6">
+                        {%- call ui.util.call(ui.content_action_wrapper) -%}
+                            {%- block content_action %}{% endblock -%}
+                        {%- endcall %}
+
+                        {%- call ui.util.call(ui.page_action_wrapper) -%}
+                            {%- block page_action %}{% endblock -%}
+                        {%- endcall %}
+                    </div>
+
+                    {%- block primary_content_inner %}
+                    {% endblock -%}
+
+                {%- endblock primary_content %}
+            </article>
+        </main>
+    {%- endblock primary %}
+{%- endblock zone_primary -%}

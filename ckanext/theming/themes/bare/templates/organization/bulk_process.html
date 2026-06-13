@@ -1,4 +1,4 @@
-{% extends "organization/_edit_base.html" %}
+{% extends "organization/edit_base.html" %}
 {%- block page_layout -%}sidebar-start{%- endblock %}
 
 {%- set dataset_type = h.default_package_type() %}
@@ -57,6 +57,6 @@
 
 {%- block secondary_content -%}
     {%- with facet_titles=facet_titles, search_facets=search_facets, disable_htmx=true -%}
-        {%- include "package/snippets/_search_facets.html" -%}
+        {%- include "package/snippets/search_facets.html" -%}
     {%- endwith %}
 {%- endblock %}
