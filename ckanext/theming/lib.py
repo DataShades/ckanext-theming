@@ -136,7 +136,8 @@ class Util(BaseUtil):
                     attrs[f"{prefix}{k}"] = v
 
             if extra_class := kwargs.get(self._extra_class_attr):
-                attrs["class"] = " ".join([attrs.get("class", ""), extra_class]).lstrip()
+                cls = attrs.get("class", "")
+                attrs["class"] = f"{cls} {extra_class}"
 
         parts = [
             k if v is None else f'{k}="{self._escape_attr_value(str(v))}"'
@@ -299,7 +300,15 @@ class Util(BaseUtil):
         :return: The name of the corresponding icon provided by theme
 
         """
-        return self._theme.icon_map.get(name, name)
+        theme = self._theme
+        while True:
+            if icon := theme.icon_map.get(name):
+                return icon
+
+            if theme.parent:
+                theme = get_theme(theme.parent)
+            else:
+                return name
 
 
 class MacroUI(UI):
@@ -322,7 +331,7 @@ class MacroUI(UI):
 
         self._inv = {}
         if hasattr(app, "_wsgi_app"):
-            app = cast(types.CKANApp, app._wsgi_app)  # pyright: ignore[reportAttributeAccessIssue]
+            app = cast(types.CKANApp, app._wsgi_app)
 
         self.__env = app.jinja_env
 

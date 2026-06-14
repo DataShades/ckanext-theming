@@ -13,76 +13,76 @@
  *
  * ── CSS custom properties ─────────────────────────────────────────────────
  *
- *   --ac-font               font shorthand for the whole widget
- *   --ac-radius             border-radius on listbox and chips
- *   --ac-focus-ring         outline shorthand for focused items
+ *   --theming-ac-font               font shorthand for the whole widget
+ *   --theming-ac-radius             border-radius on listbox and chips
+ *   --theming-ac-focus-ring         outline shorthand for focused items
  *
- *   --ac-listbox-bg         listbox panel background
- *   --ac-listbox-border     listbox panel border (full shorthand)
- *   --ac-listbox-shadow     listbox panel box-shadow
- *   --ac-listbox-z          listbox z-index
- *   --ac-listbox-max-height max-height before the panel scrolls
+ *   --theming-ac-listbox-bg         listbox panel background
+ *   --theming-ac-listbox-border     listbox panel border (full shorthand)
+ *   --theming-ac-listbox-shadow     listbox panel box-shadow
+ *   --theming-ac-listbox-z          listbox z-index
+ *   --theming-ac-listbox-max-height max-height before the panel scrolls
  *
- *   --ac-option-color       default option text color
- *   --ac-option-bg-hover    option background on hover / keyboard focus
- *   --ac-option-color-hover option text color on hover / keyboard focus
+ *   --theming-ac-option-color       default option text color
+ *   --theming-ac-option-bg-hover    option background on hover / keyboard focus
+ *   --theming-ac-option-color-hover option text color on hover / keyboard focus
  *
- *   --ac-no-results-color   "No results" text color
- *   --ac-create-color       "Create: …" text color
+ *   --theming-ac-no-results-color   "No results" text color
+ *   --theming-ac-create-color       "Create: …" text color
  *
- *   --ac-chip-bg            chip background
- *   --ac-chip-color         chip text color
- *   --ac-chip-radius        chip border-radius (defaults to --ac-radius)
- *   --ac-chip-gap           gap between chips
- *   --ac-chip-remove-size   size of the remove button hit area
+ *   --theming-ac-chip-bg            chip background
+ *   --theming-ac-chip-color         chip text color
+ *   --theming-ac-chip-radius        chip border-radius (defaults to --theming-ac-radius)
+ *   --theming-ac-chip-gap           gap between chips
+ *   --theming-ac-chip-remove-size   size of the remove button hit area
  *
  * ── Usage ─────────────────────────────────────────────────────────────────
  *
  *   Override any property at the [data-theming-autocomplete-root] element:
  *
  *     div[data-theming-autocomplete-root] {
- *       --ac-chip-bg:    #1a56db;
- *       --ac-chip-color: #fff;
- *       --ac-radius:     0.5rem;
+ *       --theming-ac-chip-bg:    #1a56db;
+ *       --theming-ac-chip-color: #fff;
+ *       --theming-ac-radius:     0.5rem;
  *     }
  */
 
 /* ── Property defaults ────────────────────────────────────────────────────── */
 
-@scope ([data-theming-autocomplete-root]) {
-    :scope {
-        --ac-font: inherit;
+:root {
+        --theming-ac-font: inherit;
 
-        --ac-radius: 0.25rem;
-        --ac-focus-ring: 2px solid currentColor;
+        --theming-ac-radius: 0.25rem;
+        --theming-ac-focus-ring: 2px solid currentColor;
 
-        --ac-listbox-bg: #fff;
-        --ac-listbox-border: 1px solid #d1d5db;
-        --ac-listbox-shadow:
+        --theming-ac-listbox-bg: #fff;
+        --theming-ac-listbox-border: 1px solid #d1d5db;
+        --theming-ac-listbox-shadow:
             0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-        --ac-listbox-z: 200;
-        --ac-listbox-max-height: 16rem;
+        --theming-ac-listbox-z: 200;
+        --theming-ac-listbox-max-height: 16rem;
 
-        --ac-option-color: inherit;
-        --ac-option-bg-hover: #f3f4f6;
-        --ac-option-color-hover: inherit;
+        --theming-ac-option-color: inherit;
+        --theming-ac-option-bg-hover: #f3f4f6;
+        --theming-ac-option-color-hover: inherit;
 
-        --ac-no-results-color: #6b7280;
-        --ac-create-color: #1d4ed8;
+        --theming-ac-no-results-color: #6b7280;
+        --theming-ac-create-color: #1d4ed8;
 
-        --ac-chip-bg: #1d4ed8;
-        --ac-chip-color: #fff;
-        --ac-chip-radius: var(--ac-radius);
-        --ac-chip-gap: 0.375rem;
-        --ac-chip-remove-size: 1.25rem;
-    }
+        --theming-ac-chip-bg: #1d4ed8;
+        --theming-ac-chip-color: #fff;
+        --theming-ac-chip-radius: var(--theming-ac-radius);
+        --theming-ac-chip-gap: 0.375rem;
+        --theming-ac-chip-remove-size: 1.25rem;
+}
 
+@scope ([data-theming-autocomplete-root]) {
     /* ── Chips container ──────────────────────────────────────────────────────── */
 
     .theming-autocomplete__chips {
         display: flex;
         flex-wrap: wrap;
-        gap: var(--ac-chip-gap);
+        gap: var(--theming-ac-chip-gap);
         /* No padding/margin — theme provides spacing via the wrapper */
 
         &[hidden] {
@@ -97,10 +97,10 @@
         align-items: center;
         gap: 0.25rem;
         padding: 0.1875rem 0.375rem 0.1875rem 0.625rem; /* asymmetric: more on left */
-        background: var(--ac-chip-bg);
-        color: var(--ac-chip-color);
-        border-radius: var(--ac-chip-radius);
-        font: var(--ac-font);
+        background: var(--theming-ac-chip-bg);
+        color: var(--theming-ac-chip-color);
+        border-radius: var(--theming-ac-chip-radius);
+        font: var(--theming-ac-font);
         font-size: 0.875em;
         line-height: 1.4;
         max-width: 16rem;
@@ -121,8 +121,8 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: var(--ac-chip-remove-size);
-        height: var(--ac-chip-remove-size);
+        width: var(--theming-ac-chip-remove-size);
+        height: var(--theming-ac-chip-remove-size);
         padding: 0;
         border: none;
         border-radius: 50%;
@@ -138,101 +138,12 @@
             background: rgb(0 0 0 / 0.15);
         }
         &:focus-visible {
-            outline: var(--ac-focus-ring);
+            outline: var(--theming-ac-focus-ring);
             outline-offset: 1px;
         }
     }
 
-    /* ── Listbox panel ────────────────────────────────────────────────────────── */
 
-    .autocomplete__listbox {
-        /* Positioning: the input is not position:relative, so we use a slight
-     negative offset trick — themes that need exact anchoring should make
-     the wrapper position:relative and override these rules. */
-        position: absolute;
-        z-index: var(--ac-listbox-z);
-        /* Width matches the input — requires the wrapper to be position:relative */
-        left: 0;
-        right: 0;
-        max-height: var(--ac-listbox-max-height);
-        overflow-y: auto;
-        margin: 0;
-        padding: 0.25rem 0;
-        list-style: none;
-        background: var(--ac-listbox-bg);
-        border: var(--ac-listbox-border);
-        border-radius: var(--ac-radius);
-        box-shadow: var(--ac-listbox-shadow);
-        font: var(--ac-font);
-        /* Separate from the input visually */
-        margin-top: 0.125rem;
-
-        &[hidden] {
-            display: none;
-        }
-    }
-
-    /* ── Options ──────────────────────────────────────────────────────────────── */
-
-    .autocomplete__option {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: var(--ac-option-color);
-        cursor: pointer;
-        user-select: none;
-        /* Prevent text wrapping from making very long options unreadable */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .autocomplete__option:hover,
-    .autocomplete__option--active {
-        background: var(--ac-option-bg-hover);
-        color: var(--ac-option-color-hover);
-        outline: none;
-    }
-
-    .autocomplete__option--active {
-        /* Keyboard focus — distinct from mouse hover via outline */
-        outline: var(--ac-focus-ring);
-        outline-offset: -2px;
-    }
-
-    /* Match highlight */
-    .autocomplete__option strong {
-        font-weight: 700;
-        /* Inherits color — no override needed */
-    }
-
-    /* ── No-results ───────────────────────────────────────────────────────────── */
-
-    .autocomplete__no-results {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: var(--ac-no-results-color);
-        cursor: default;
-        list-style: none;
-    }
-
-    /* ── Create option ────────────────────────────────────────────────────────── */
-
-    .autocomplete__create-option {
-        display: block;
-        padding: 0.5rem 0.75rem;
-        color: var(--ac-create-color);
-        cursor: pointer;
-        font-weight: 600;
-        list-style: none;
-        user-select: none;
-    }
-
-    .autocomplete__create-option:hover,
-    .autocomplete__create-option.autocomplete__option--active {
-        background: var(--ac-option-bg-hover);
-        outline: var(--ac-focus-ring);
-        outline-offset: -2px;
-    }
 
     /* ── Wrapper positioning helper ───────────────────────────────────────────── */
 
@@ -250,7 +161,7 @@
      *   </div>
      *
      * If your markup cannot add this wrapper, set position:relative on
-     * the nearest suitable ancestor and override --ac-listbox-z as needed.
+     * the nearest suitable ancestor and override --theming-ac-listbox-z as needed.
      */
 
     .autocomplete__wrap {
@@ -266,3 +177,100 @@
         }
     }
 }
+
+    /* ── Listbox panel ────────────────────────────────────────────────────────── */
+
+@scope(.autocomplete__listbox) {
+        /* Positioning: the input is not position:relative, so we use a slight
+     negative offset trick — themes that need exact anchoring should make
+     the wrapper position:relative and override these rules. */
+    :scope {
+
+        position: absolute;
+        z-index: var(--theming-ac-listbox-z);
+        /* Width matches the input — requires the wrapper to be position:relative */
+        left: 0;
+        right: 0;
+        max-height: var(--theming-ac-listbox-max-height);
+        overflow-y: auto;
+        margin: 0;
+        padding: 0.25rem 0;
+        list-style: none;
+        background: var(--theming-ac-listbox-bg);
+        border: var(--theming-ac-listbox-border);
+        border-radius: var(--theming-ac-radius);
+        box-shadow: var(--theming-ac-listbox-shadow);
+        font: var(--theming-ac-font);
+        /* Separate from the input visually */
+        margin-top: 0.125rem;
+        &[hidden] {
+            display: none;
+        }
+
+    }
+
+
+    /* ── Options ──────────────────────────────────────────────────────────────── */
+
+    .autocomplete__option {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--theming-ac-option-color);
+        cursor: pointer;
+        user-select: none;
+        /* Prevent text wrapping from making very long options unreadable */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .autocomplete__option:hover,
+    .autocomplete__option--active {
+        background: var(--theming-ac-option-bg-hover);
+        color: var(--theming-ac-option-color-hover);
+        outline: none;
+    }
+
+    .autocomplete__option--active {
+        /* Keyboard focus — distinct from mouse hover via outline */
+        outline: var(--theming-ac-focus-ring);
+        outline-offset: -2px;
+    }
+
+    /* Match highlight */
+    .autocomplete__option strong {
+        font-weight: 700;
+        /* Inherits color — no override needed */
+    }
+
+    /* ── No-results ───────────────────────────────────────────────────────────── */
+
+    .autocomplete__no-results {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--theming-ac-no-results-color);
+        cursor: default;
+        list-style: none;
+        &[hidden] { display: none; }
+    }
+
+    /* ── Create option ────────────────────────────────────────────────────────── */
+
+    .autocomplete__create-option {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        color: var(--theming-ac-create-color);
+        cursor: pointer;
+        font-weight: 600;
+        list-style: none;
+        user-select: none;
+        &[hidden] { display: none; }
+    }
+
+    .autocomplete__create-option:hover,
+    .autocomplete__create-option.autocomplete__option--active {
+        background: var(--theming-ac-option-bg-hover);
+        outline: var(--theming-ac-focus-ring);
+        outline-offset: -2px;
+    }
+    }
