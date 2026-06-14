@@ -161,7 +161,6 @@
 {%- endmacro %}
 
 {%- macro autocomplete(content, source, options, allow_multiple, allow_new, selected, min_chars, debounce, joined, separator, id_key, label_key) -%}
-    {%- asset "theming/autocomplete" -%}
     {%- set selected = [selected] if selected and selected is string else selected -%}
     {%- set container_id = ui.util.id() if 1 or allow_multiple else undefined -%}
 

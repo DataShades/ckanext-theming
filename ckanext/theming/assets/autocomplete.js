@@ -597,5 +597,5 @@ class Autocomplete {
 
 // ── Auto-init ─────────────────────────────────────────────────────────────────
 document
-  .querySelectorAll('[data-theming-module="autocomplete"]')
+  .querySelectorAll('[data-theming-module|="autocomplete"]')
   .forEach(el => new Autocomplete(el).init())

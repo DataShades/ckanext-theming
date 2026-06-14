@@ -12,19 +12,16 @@ examples-css:
   contents:
       - examples.css
 
-
-autocomplete-css:
-  output: ckanext-theming/%(version)s-autocomplete.css
+modules-css:
+  output: ckanext-theming/%(version)s-modules.css
   contents:
       - autocomplete.css
 
-autocomplete:
-  output: ckanext-theming/%(version)s-autocomplete.js
+modules:
+  output: ckanext-theming/%(version)s-modules.js
   contents:
       - autocomplete.js
-      # - autocomplete.select2.js
-      # - autocomplete.tomselect.js
+      - change-submit.js
   extra:
       preload:
-          # - vendor/vendor # used by select2 version
-          - theming/autocomplete-css
+          - theming/modules-css
