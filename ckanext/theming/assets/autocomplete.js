@@ -241,7 +241,7 @@ class Autocomplete {
 
   _onInput() {
     const q = this.combobox.value
-    if (q.length < this.minChars) { this._close(); return }
+    if (q.length < this.minChars) { return true }
     this.source ? this._debouncedFetch(q) : this._suggest(q)
   }
 
