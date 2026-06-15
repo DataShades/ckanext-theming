@@ -395,8 +395,13 @@ def template_check(theme: lib.Theme, show_extra: bool):
 @theme_option
 @click.argument("templates", nargs=-1)
 @click.option("--relative-filename", is_flag=True)
+@click.option("--hierarchy-blocks", is_flag=True)
 def template_analyze(  # noqa: C901
-    ctx: click.Context, templates: Collection[str], theme: lib.Theme, relative_filename: bool
+    ctx: click.Context,
+    templates: Collection[str],
+    theme: lib.Theme,
+    relative_filename: bool,
+    hierarchy_blocks: bool,
 ):
     """Analyze theme templates."""
     root = theme.template_path()
@@ -432,7 +437,7 @@ def template_analyze(  # noqa: C901
         if includes := RE_INCLUDE.findall(content):
             click.secho(click.style("Includes: ", fg="yellow") + ", ".join(i for i in sorted(set(includes))))
 
-        all_blocks: set[str] = set(tpl.blocks)
+        all_blocks: dict[str | None, set[str]] = {tpl.filename: set(tpl.blocks)}
         hierarchy: list[str] = []
 
         hierarchy_break = _discover_template_hierarchy(env, tpl, hierarchy, all_blocks)
@@ -441,7 +446,9 @@ def template_analyze(  # noqa: C901
         if hierarchy:
             click.secho("Hierarchy: ", fg="yellow")
             for item in hierarchy:
-                click.echo(f"\t{os.path.relpath(item, os.getcwd()) if relative_filename else item}")
+                click.echo(f"    {os.path.relpath(item, os.getcwd()) if relative_filename else item}")
+                if hierarchy_blocks:
+                    click.secho(f"        {', '.join(sorted(all_blocks[item]))}", bold=True)
 
         if hierarchy_break:
             click.secho(click.style("Hierarchy detection interrupted on: ", fg="red") + hierarchy_break)
@@ -449,7 +456,7 @@ def template_analyze(  # noqa: C901
         if tpl.blocks:
             click.secho(click.style("Explicit blocks: ", fg="yellow") + ", ".join(sorted(tpl.blocks)))
 
-        implicit_blocks = all_blocks.difference(tpl.blocks)
+        implicit_blocks = {block for blocks in all_blocks.values() for block in blocks} - set(tpl.blocks)
         if implicit_blocks:
             click.secho(click.style("Implicit blocks: ", fg="yellow") + ", ".join(sorted(implicit_blocks)))
 
@@ -457,7 +464,7 @@ def template_analyze(  # noqa: C901
 
 
 def _discover_template_hierarchy(
-    env: Environment, tpl: Template, hierarchy: list[str], all_blocks: set[str] | None = None
+    env: Environment, tpl: Template, hierarchy: list[str], all_blocks: dict[str | None, set[str]] | None = None
 ) -> str | None:
     parent_name = None
 
@@ -480,9 +487,10 @@ def _discover_template_hierarchy(
     except TemplateNotFound:
         return parent_name
 
-    hierarchy.append(os.path.normpath(parent_tpl.filename))  # pyright: ignore[reportArgumentType, reportCallIssue]
+    canonical: str = os.path.normpath(parent_tpl.filename)   # pyright: ignore[reportArgumentType, reportCallIssue, reportUnknownVariableType]
+    hierarchy.append(canonical)
     if all_blocks is not None:
-        all_blocks.update(parent_tpl.blocks)
+        all_blocks[canonical] = set(parent_tpl.blocks)
 
     return _discover_template_hierarchy(env, parent_tpl, hierarchy, all_blocks)
 
