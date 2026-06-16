@@ -22,6 +22,7 @@ modules:
   contents:
       - autocomplete.js
       - change-submit.js
+      - copy-to-clipboard.js
   extra:
       preload:
           - theming/modules-css
