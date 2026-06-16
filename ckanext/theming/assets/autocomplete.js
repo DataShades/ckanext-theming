@@ -60,14 +60,58 @@ ckan.module("theming-autocomplete", () => {
       separator: ",",
       minChars: null,
       debounce: 300,
-      options: "[]",
-      selected: "[]",
+      options: [],
+      selected: [],
     },
 
     initialize() {
       this.root = this.el[0];
       this.combobox = this.root;
 
+      this._setupOptions();
+      this._parseStaticAndInitialSelections();
+      this._resetRuntimeState();
+
+      // Find the autocomplete root
+      this.autocompleteRoot = this.root.closest("[data-theming-autocomplete-root]");
+      this._addedRootAttribute = false;
+      if (!this.autocompleteRoot) {
+        this.autocompleteRoot = this.root.parentElement;
+        if (this.autocompleteRoot) {
+          this.autocompleteRoot.setAttribute("data-theming-autocomplete-root", "");
+          this._addedRootAttribute = true;
+        }
+      }
+
+      this._bindHandlers();
+
+      if (!this._createDOMElements()) return;
+
+      this._bindEvents();
+      this._hydrate();
+
+      this.combobox.classList.add("theming-autocomplete--ready");
+    },
+
+    teardown() {
+      this._unbindEvents();
+
+      if (this.listbox) this.listbox.remove();
+      if (this.storage) this.storage.remove();
+      if (this.liveStatus) this.liveStatus.remove();
+      if (this._addedSelections && this.selections) this.selections.remove();
+
+      if (this._addedRootAttribute && this.autocompleteRoot) {
+        this.autocompleteRoot.removeAttribute("data-theming-autocomplete-root");
+      }
+
+      if (this.root) this.root.name = this.name;
+      this._removeComboboxAttributes();
+    },
+
+    // ── Setup & Scaffolding ──────────────────────────────────────────────────
+
+    _setupOptions() {
       this.source = this.options.source || null;
       this.containerId = this.options.containerId;
       this.isMultiple = this.options.allowMultiple === true || this.options.allowMultiple === "true";
@@ -83,72 +127,90 @@ ckan.module("theming-autocomplete", () => {
         10,
       );
       this.debounce = parseInt(this.options.debounce ?? "300", 10);
+    },
 
-      // Static options from options
+    _parseStaticAndInitialSelections() {
       this._staticOptions = [];
-      if (!this.source && this.options.options) {
-        try {
-          this._staticOptions = this.options.options.map((item) =>
-            typeof item === "string"
-              ? { [this.idKey]: item, [this.labelKey]: item }
-              : item,
-          );
-        } catch (_) {}
+      const rawOptions = this.options.options;
+      if (!this.source && Array.isArray(rawOptions)) {
+        this._staticOptions = rawOptions.map((item) =>
+          typeof item === "string"
+            ? { [this.idKey]: item, [this.labelKey]: item }
+            : item,
+        );
       }
 
-      // Pre-selected items from selected attribute
       this._initialSelection = [];
-      if (this.options.selected) {
-        try {
-          let selected = this.options.selected;
-          if (this.isJoined && selected.length === 1 && typeof selected[0] === "string") {
-            selected = selected[0].split(this.separator).filter(Boolean);
-          }
-          this._initialSelection = selected.map((v) =>
-            typeof v === "string" ? { [this.idKey]: v, [this.labelKey]: v } : v,
-          );
-        } catch (_) {}
+      let selected = this.options.selected;
+      if (Array.isArray(selected)) {
+        if (this.isJoined && selected.length === 1 && typeof selected[0] === "string") {
+          selected = selected[0].split(this.separator).filter(Boolean);
+        }
+        this._initialSelection = selected.map((v) =>
+          typeof v === "string" ? { [this.idKey]: v, [this.labelKey]: v } : v,
+        );
       }
+    },
 
-      // DOM refs
-      this.storage = null; // the hidden input or select that holds values for submission
+    _resetRuntimeState() {
+      this.storage = null;
       this.listbox = null;
       this.selections = null;
       this.noResults = null;
       this.createOption = null;
+      this.liveStatus = null;
 
-      // Runtime state
       this._open = false;
       this._activeIdx = -1;
       this._fetchCtrl = null;
       this._selections = [];
       this._prevStorageValue = null;
+    },
 
-      // Bound handlers
+    _bindHandlers() {
       this._onInput = this._onInput.bind(this);
       this._onKeydown = this._onKeydown.bind(this);
       this._onFocus = this._onFocus.bind(this);
       this._onListboxClick = this._onListboxClick.bind(this);
       this._onChipClick = this._onChipClick.bind(this);
       this._onDocClick = this._onDocClick.bind(this);
+      this._reposition = this._reposition.bind(this);
       this._debouncedFetch = this._debounce(
         this._fetchOptions.bind(this),
         this.debounce,
       );
+    },
 
-      this.selections = document.getElementById(this.containerId);
+    _createDOMElements() {
+      this.selections = this.containerId ? document.getElementById(this.containerId) : null;
+      this._addedSelections = false;
+
       if (!this.selections) {
-        console.warn(
-          `[autocomplete]: container #${this.containerId} not found`,
-          this.root,
-        );
-        return;
+        if (!this.containerId) {
+          this.containerId = (this.combobox.id || "autocomplete") + "-chips";
+        }
+        this.selections = document.createElement("div");
+        this.selections.id = this.containerId;
+        this.selections.className = "theming-autocomplete__chips";
+        this.selections.setAttribute("hidden", "");
+
+        // Append immediately after the autocomplete input element (this.root)
+        this.root.after(this.selections);
+        this._addedSelections = true;
       }
 
       this.name = this.root.name;
       this.root.name = ""; // prevent raw text from being submitted
 
-      // Create the storage element
+      this._createStorageElement();
+      this._setupComboboxAttributes();
+      this._createListboxElement();
+      this._createLiveStatusElement();
+
+      return true;
+    },
+
+    _createStorageElement() {
       if (!this.isJoined) {
         this.storage = document.createElement("select");
         if (this.isMultiple) this.storage.multiple = true;
@@ -161,15 +223,18 @@ ckan.module("theming-autocomplete", () => {
       this.root.after(this.storage);
 
       this._prevStorageValue = this._getStorageValue();
+    },
 
+    _setupComboboxAttributes() {
       this.combobox.setAttribute("role", "combobox");
       this.combobox.setAttribute("aria-autocomplete", "list");
       this.combobox.setAttribute("aria-expanded", "false");
       this.combobox.setAttribute("aria-haspopup", "listbox");
       this.combobox.setAttribute("autocomplete", "off");
       this.combobox.setAttribute("spellcheck", "false");
+    },
 
-      // Build listbox <ul>, inserted at the end of body to avoid layout issues
+    _createListboxElement() {
       const listboxId = (this.combobox.id || this.containerId) + "-listbox";
       this.listbox = document.createElement("ul");
       this.listbox.id = listboxId;
@@ -202,10 +267,27 @@ ckan.module("theming-autocomplete", () => {
       this.noResults.setAttribute("aria-disabled", "true");
       this.noResults.className = "autocomplete__no-results";
       this.listbox.appendChild(this.noResults);
+    },
 
-      this._bindEvents();
+    _createLiveStatusElement() {
+      this.liveStatus = document.createElement("div");
+      this.liveStatus.className = "autocomplete__live-status";
+      // Screen-reader visually hidden utility styles
+      this.liveStatus.style.position = "absolute";
+      this.liveStatus.style.width = "1px";
+      this.liveStatus.style.height = "1px";
+      this.liveStatus.style.padding = "0";
+      this.liveStatus.style.margin = "-1px";
+      this.liveStatus.style.overflow = "hidden";
+      this.liveStatus.style.clip = "rect(0, 0, 0, 0)";
+      this.liveStatus.style.border = "0";
+      this.liveStatus.setAttribute("aria-live", "polite");
+      this.liveStatus.setAttribute("aria-atomic", "true");
+      document.body.appendChild(this.liveStatus);
+    },
 
-      // Hydrate pre-selections
+    _hydrate() {
+      // Hydrate pre-selections silently
       this._initialSelection.forEach((item) => {
         const value = item[this.idKey];
         let label = item[this.labelKey];
@@ -215,37 +297,15 @@ ckan.module("theming-autocomplete", () => {
         }
         this._addSelection(value, label, false, true);
       });
-
-      this.combobox.classList.add("theming-autocomplete--ready");
     },
 
-    teardown() {
-      if (this.combobox) {
-        this.combobox.removeEventListener("input", this._onInput);
-        this.combobox.removeEventListener("keydown", this._onKeydown);
-        this.combobox.removeEventListener("focus", this._onFocus);
-      }
-      if (this.listbox) {
-        this.listbox.removeEventListener("click", this._onListboxClick);
-        this.listbox.remove();
-      }
-      if (this.selections) {
-        this.selections.removeEventListener("click", this._onChipClick);
-      }
-      document.removeEventListener("click", this._onDocClick);
-
-      if (this.storage) {
-        this.storage.remove();
-      }
-
-      if (this.root) {
-        this.root.name = this.name;
-      }
+    _removeComboboxAttributes() {
       if (this.combobox) {
         this.combobox.removeAttribute("role");
         this.combobox.removeAttribute("aria-autocomplete");
         this.combobox.removeAttribute("aria-expanded");
         this.combobox.removeAttribute("aria-haspopup");
+        this.combobox.removeAttribute("aria-activedescendant");
         this.combobox.classList.remove("theming-autocomplete--ready");
       }
     },
@@ -258,12 +318,11 @@ ckan.module("theming-autocomplete", () => {
     remove(value) {
       this._removeSelection(String(value));
     },
-
     value() {
       return [...this._selections];
     },
 
-    // ── Private: events ───────────────────────────────────────────────────────
+    // ── Events ────────────────────────────────────────────────────────────────
 
     _bindEvents() {
       this.combobox.addEventListener("input", this._onInput);
@@ -272,6 +331,23 @@ ckan.module("theming-autocomplete", () => {
       this.listbox.addEventListener("click", this._onListboxClick);
       this.selections.addEventListener("click", this._onChipClick);
       document.addEventListener("click", this._onDocClick);
+      window.addEventListener("resize", this._reposition);
+    },
+
+    _unbindEvents() {
+      if (this.combobox) {
+        this.combobox.removeEventListener("input", this._onInput);
+        this.combobox.removeEventListener("keydown", this._onKeydown);
+        this.combobox.removeEventListener("focus", this._onFocus);
+      }
+      if (this.listbox) {
+        this.listbox.removeEventListener("click", this._onListboxClick);
+      }
+      if (this.selections) {
+        this.selections.removeEventListener("click", this._onChipClick);
+      }
+      document.removeEventListener("click", this._onDocClick);
+      window.removeEventListener("resize", this._reposition);
     },
 
     _onFocus() {
@@ -377,7 +453,7 @@ ckan.module("theming-autocomplete", () => {
       }
     },
 
-    // ── Private: static filter ────────────────────────────────────────────────
+    // ── Static filter ─────────────────────────────────────────────────────────
 
     _suggest(query) {
       const q = query.trim().toLowerCase();
@@ -394,7 +470,7 @@ ckan.module("theming-autocomplete", () => {
       this._renderOptions(matched, query);
     },
 
-    // ── Private: ajax fetch ───────────────────────────────────────────────────
+    // ── Ajax fetch ────────────────────────────────────────────────────────────
 
     async _fetchOptions(query) {
       if (this._fetchCtrl) this._fetchCtrl.abort();
@@ -405,6 +481,8 @@ ckan.module("theming-autocomplete", () => {
       const url = idx >= 0
         ? this.source.slice(0, idx) + q + this.source.slice(idx + 1)
         : this.source + q;
+
+      this._setLoadingState(true);
 
       try {
         const res = await fetch(url, { signal: this._fetchCtrl.signal });
@@ -427,20 +505,52 @@ ckan.module("theming-autocomplete", () => {
           console.error("Autocomplete fetch error:", err);
           this._renderOptions([], query);
         }
+      } finally {
+        if (!this._fetchCtrl || this._fetchCtrl.signal.aborted) {
+          this._setLoadingState(false);
+        }
       }
     },
 
-    // ── Private: render ───────────────────────────────────────────────────────
+    _setLoadingState(isLoading) {
+      if (isLoading) {
+        this.combobox.classList.add("autocomplete--loading");
+        this.combobox.setAttribute("aria-busy", "true");
+      } else {
+        this.combobox.classList.remove("autocomplete--loading");
+        this.combobox.removeAttribute("aria-busy");
+      }
+    },
+
+    // ── Render Helpers ────────────────────────────────────────────────────────
 
     _renderOptions(opts, query) {
-      this.listbox.querySelectorAll(".autocomplete__option").forEach((el) => el.remove());
-      this._activeIdx = -1;
-      this.combobox.removeAttribute("aria-activedescendant");
+      this._clearOptions();
 
       const q = query.trim();
-      const hasResults = opts.length > 0;
-      const prefix = this.combobox.id || this.containerId;
+      this._buildOptionElements(opts, q);
+      this._updateStatusElements(opts, q);
+      this._announceStatus(opts.length);
 
+      this._open = true;
+      this.listbox.removeAttribute("hidden");
+      this._reposition();
+
+      this.combobox.setAttribute("aria-expanded", "true");
+    },
+
+    _clearOptions() {
+      if (this.listbox) {
+        this.listbox.querySelectorAll(".autocomplete__option").forEach((el) => el.remove());
+      }
+      this._activeIdx = -1;
+      if (this.combobox) {
+        this.combobox.removeAttribute("aria-activedescendant");
+      }
+    },
+
+    _buildOptionElements(opts, q) {
+      const prefix = this.combobox.id || this.containerId;
       opts.forEach((opt, i) => {
         const value = opt[this.idKey];
         const label = opt[this.labelKey] ?? value;
@@ -454,7 +564,10 @@ ckan.module("theming-autocomplete", () => {
         li.innerHTML = this._highlight(String(label), q);
         this.listbox.insertBefore(li, this.createOption);
       });
+    },
 
+    _updateStatusElements(opts, q) {
+      const hasResults = opts.length > 0;
       this.noResults.hidden = hasResults || (this.allowNew && q.length > 0);
       this.createOption.hidden = !(this.allowNew && q.length > 0 && !hasResults);
 
@@ -464,11 +577,21 @@ ckan.module("theming-autocomplete", () => {
         this.createOption.dataset.label = q;
         this.createOption.dataset.isNew = "true";
       }
+    },
 
-      this._open = true;
-      this.listbox.removeAttribute("hidden");
+    _announceStatus(count) {
+      if (!this.liveStatus) return;
+      if (count === 0) {
+        this.liveStatus.textContent = this.allowNew && this.combobox.value.trim().length > 0
+          ? "No matching options. Select to create new."
+          : "No results found.";
+      } else {
+        this.liveStatus.textContent = `${count} result${count === 1 ? "" : "s"} found. Use up and down arrows to review.`;
+      }
+    },
 
-      // Position listbox
+    _reposition() {
+      if (!this._open || !this.listbox || !this.root) return;
       const rect = this.root.getBoundingClientRect();
       this.listbox.style.left = rect.x.toFixed(0) + "px";
       this.listbox.style.width = rect.width.toFixed(0) + "px";
@@ -480,8 +603,6 @@ ckan.module("theming-autocomplete", () => {
         this.listbox.style.top = (window.scrollY + rect.y + rect.height).toFixed(0) + "px";
         this.listbox.style.bottom = "auto";
       }
-
-      this.combobox.setAttribute("aria-expanded", "true");
     },
 
     _highlight(label, query) {
@@ -501,10 +622,12 @@ ckan.module("theming-autocomplete", () => {
       return String(str)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#x27;");
     },
 
-    // ── Private: selection management ─────────────────────────────────────────
+    // ── Selection management ──────────────────────────────────────────────────
 
     _selectOption(optEl) {
       const value = optEl.dataset.value;
@@ -607,7 +730,7 @@ ckan.module("theming-autocomplete", () => {
       this.selections.appendChild(chip);
     },
 
-    // ── Private: storage sync ─────────────────────────────────────────────────
+    // ── Storage sync ──────────────────────────────────────────────────────────
 
     _getStorageValue() {
       if (!this.storage) return null;
@@ -661,6 +784,7 @@ ckan.module("theming-autocomplete", () => {
         this._fetchCtrl.abort();
         this._fetchCtrl = null;
       }
+      this._setLoadingState(false);
 
       // If not multiple, ensure combobox value matches current selection
       if (!this.isMultiple) {
@@ -689,7 +813,7 @@ ckan.module("theming-autocomplete", () => {
         options[this._activeIdx].setAttribute("aria-selected", "false");
       }
 
-      this._activeIdx = clamped
+      this._activeIdx = clamped;
       const active = options[clamped];
       active.classList.add("autocomplete__option--active");
       active.setAttribute("aria-selected", "true");
