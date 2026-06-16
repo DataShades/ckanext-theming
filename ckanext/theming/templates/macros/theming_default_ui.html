@@ -165,19 +165,19 @@
     {%- set container_id = ui.util.id() if 1 or allow_multiple else undefined -%}
 
     {%- set defaults = {
-            "data-theming-module": "autocomplete",
-            "data-autocomplete-allow-new": "true" if allow_new else "false",
-            "data-autocomplete-joined": "true" if joined else "false",
-            "data-autocomplete-allow-multiple": "true" if allow_multiple else "false",
-            "data-autocomplete-source": source,
-            "data-autocomplete-container-id": container_id,
-            "data-autocomplete-debounce": debounce,
-            "data-autocomplete-min-chars": min_chars,
-            "data-autocomplete-separator": separator,
-            "data-autocomplete-id-key": id_key,
-            "data-autocomplete-label-key": label_key,
-            "data-autocomplete-options": options and options|tojson,
-            "data-autocomplete-selected": selected and selected|tojson,
+            "data-module": "theming-autocomplete",
+            "data-module-allow-new": "true" if allow_new else "false",
+            "data-module-joined": "true" if joined else "false",
+            "data-module-allow-multiple": "true" if allow_multiple else "false",
+            "data-module-source": source,
+            "data-module-container-id": container_id,
+            "data-module-debounce": debounce,
+            "data-module-min-chars": min_chars,
+            "data-module-separator": separator,
+            "data-module-id-key": id_key,
+            "data-module-label-key": label_key,
+            "data-module-options": options and options|tojson,
+            "data-module-selected": selected and selected|tojson,
         } -%}
 
     {%- do ui.util.augment_attrs(kwargs, defaults) -%}

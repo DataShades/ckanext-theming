@@ -156,7 +156,7 @@
      *
      *   <div class="autocomplete__wrap">
      *     <div …chips…></div>
-     *     <input data-theming-module="autocomplete" …>
+     *     <input data-module="autocomplete" …>
      *     <!-- listbox is injected here by JS -->
      *   </div>
      *

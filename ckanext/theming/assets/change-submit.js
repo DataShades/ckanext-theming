@@ -1,51 +1,52 @@
 /**
  * change-submit.js
- * ===============
+ * =================
  * Automatically submits a form when a 'change' event is detected.
  *
  * Usage:
- * <form data-theming-module="change-submit" data-change-submit-selector="select">
+ * <form data-module="change-submit" data-module-selector="select">
  *   <select name="sort">...</select>
  * </form>
  *
  * Configuration:
- * data-change-submit-selector: (Optional) CSS selector to filter which elements
- *                              trigger the submission. If omitted, any change
- *                              within the container triggers it.
+ * data-module-selector: (Optional) CSS selector to filter which elements
+ *                       trigger the submission. If omitted, any change
+ *                       within the container triggers it.
  */
 
-class ChangeSubmit {
-  constructor(element) {
-    this.root = element;
-    this.form = element.tagName === 'FORM' ? element : element.closest('form');
-    this.selector = element.dataset.changeSubmitSelector || null;
+ckan.module("change-submit", () => {
+  return {
+    options: {
+      selector: null,
+    },
 
-    this._onChange = this._onChange.bind(this);
-  }
+    initialize() {
+      this.root = this.el[0];
+      this.form = this.root.tagName === "FORM" ? this.root : this.root.closest("form");
 
-  init() {
-    if (!this.form) {
-      console.warn('ChangeSubmit: No parent form found for', this.root);
-      return;
-    }
-    this.root.addEventListener('change', this._onChange);
-  }
+      if (!this.form) {
+        console.warn("[change-submit]: No parent form found for", this.root);
+        return;
+      }
 
-  _onChange(event) {
-    // If a selector is provided, only submit if the target matches
-    if (this.selector && !event.target.matches(this.selector)) {
-      return;
-    }
+      this._onChange = this._onChange.bind(this);
+      this.root.addEventListener("change", this._onChange);
+    },
 
-    this.form.requestSubmit();
-  }
+    _onChange(event) {
+      const { selector } = this.options;
+      // If a selector is provided, only submit if the target matches
+      if (selector && !event.target.matches(selector)) {
+        return;
+      }
 
-  destroy() {
-    this.root.removeEventListener('change', this._onChange);
-  }
-}
+      this.form.requestSubmit();
+    },
 
-// Auto-init
-document
-  .querySelectorAll('[data-theming-module|="change-submit"]')
-  .forEach(el => new ChangeSubmit(el).init());
+    teardown() {
+      if (this.root) {
+        this.root.removeEventListener("change", this._onChange);
+      }
+    },
+  };
+});

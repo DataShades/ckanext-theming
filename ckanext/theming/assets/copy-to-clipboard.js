@@ -4,16 +4,16 @@
  * Copies text content to the clipboard when clicked.
  *
  * Usage:
- * <button data-theming-module="copy-to-clipboard" data-copy-to-clipboard-value="text to copy">Copy</button>
+ * <button data-module="theming-copy-to-clipboard" data-module-value="text to copy">Copy</button>
  * or
- * <button data-theming-module="copy-to-clipboard" data-copy-to-clipboard-selector="#target-element">Copy</button>
+ * <button data-module="theming-copy-to-clipboard" data-module-selector="#target-element">Copy</button>
  *
  * Configuration:
- * data-copy-to-clipboard-value: Actual value to copy.
- * data-copy-to-clipboard-selector: CSS selector for the target element to copy textContent from.
+ * data-module-value: Actual value to copy.
+ * data-module-selector: CSS selector for the target element to copy textContent from.
  */
 
-ckan.module("copy-to-clipboard", () => {
+ckan.module("theming-copy-to-clipboard", () => {
   return {
     options: {
       value: null,
@@ -39,13 +39,15 @@ ckan.module("copy-to-clipboard", () => {
           textToCopy = target.textContent;
         } else {
           console.warn(
-            "CopyToClipboard: Target element not found for selector",
+            "[copy-to-clipboard] Target element not found for selector",
             selector,
           );
           return;
         }
       } else {
-        console.warn("CopyToClipboard: Neither value nor selector specified.");
+        console.warn(
+          "[copy-to-clipboard] Neither value nor selector specified.",
+        );
         return;
       }
 
@@ -60,7 +62,7 @@ ckan.module("copy-to-clipboard", () => {
             this._onSuccess(text);
           })
           .catch((err) => {
-            console.error("CopyToClipboard: Secure copy failed", err);
+            console.error("[copy-to-clipboard] Secure copy failed", err);
             this._fallbackCopy(text);
           });
       } else {
@@ -96,7 +98,7 @@ ckan.module("copy-to-clipboard", () => {
           throw new Error("execCommand returned false");
         }
       } catch (err) {
-        console.error("CopyToClipboard: Fallback copy failed", err);
+        console.error("[copy-to-clipboard]: Fallback copy failed", err);
       }
     },
 
