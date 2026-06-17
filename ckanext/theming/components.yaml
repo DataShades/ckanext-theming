@@ -397,7 +397,9 @@ user_list:
 
 # sections
 facet_section:
-    description: Sidebar section containing facet controls for search
+    description: |
+        Sidebar section containing facet controls for search. Usually renders
+        empty-message when receives no content
     category: essential
     arguments:
         content:
@@ -405,9 +407,6 @@ facet_section:
         title:
             description: Optional title of the facet section
             type: 'str'
-        items:
-            description: List of search facets that may be used by section to render empty message of facet-search widget.
-            type: 'list[dict]'
         key:
             description: Facet key ("organization", "res_format", etc.)
             type: 'str'

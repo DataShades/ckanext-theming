@@ -18,19 +18,26 @@ ckan.module("change-submit", () => {
   return {
     options: {
       selector: null,
+      externalTracking: false,
     },
 
     initialize() {
       this.root = this.el[0];
-      this.form = this.root.tagName === "FORM" ? this.root : this.root.closest("form");
+      this.isForm = this.root.tagName === "FORM";
+      this.isExternalTracking = this.options.externalTracking;
 
-      if (!this.form) {
-        console.warn("[change-submit]: No parent form found for", this.root);
-        return;
-      }
+      this.form = this.root.form ||
+                  (this.root.getAttribute("form") ? document.getElementById(this.root.getAttribute("form")) : null) ||
+                  (this.isForm ? this.root : this.root.closest("form"));
 
       this._onChange = this._onChange.bind(this);
-      this.root.addEventListener("change", this._onChange);
+
+      if (this.isForm && this.isExternalTracking) {
+        // Intercept global change events to catch external fields associated with this form
+        document.addEventListener("change", this._onChange);
+      } else {
+        this.root.addEventListener("change", this._onChange);
+      }
     },
 
     _onChange(event) {
@@ -40,11 +47,27 @@ ckan.module("change-submit", () => {
         return;
       }
 
-      this.form.requestSubmit();
+      const form = event.target.form ||
+                   (event.target.getAttribute("form") ? document.getElementById(event.target.getAttribute("form")) : null) ||
+                   event.target.closest("form");
+
+      if (this.isForm && this.isExternalTracking) {
+        if (form === this.root) {
+          this.root.requestSubmit();
+        }
+      } else {
+        if (form) {
+          form.requestSubmit();
+        } else {
+          console.warn("[change-submit]: No parent or associated form found for change event");
+        }
+      }
     },
 
     teardown() {
-      if (this.root) {
+      if (this.isForm && this.isExternalTracking) {
+        document.removeEventListener("change", this._onChange);
+      } else if (this.root) {
         this.root.removeEventListener("change", this._onChange);
       }
     },
