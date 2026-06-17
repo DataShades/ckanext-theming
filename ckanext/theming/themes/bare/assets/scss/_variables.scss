@@ -13,47 +13,47 @@ $breakpoints: (
 /* CSS Custom Properties (Variables) - Define design tokens */
 :root {
   /* Colors */
-  --color-primary: #007bff;
-  --color-primary-dark: #0069d9;
-  --color-primary-light: #daeaff;
-  --color-primary-rgb: 0, 123, 255;
-  --color-secondary: #6c757d;
-  --color-secondary-rgb: 108, 117, 125;
-  --color-success: #28a745;
-  --color-success-rgb: 40, 167, 69;
-  --color-info: #17a2b8;
-  --color-info-rgb: 23, 162, 184;
-  --color-warning: #ffc107;
-  --color-warning-rgb: 255, 193, 7;
-  --color-danger: #dc3545;
-  --color-danger-rgb: 220, 53, 69;
-  --color-light: #f8f9fa;
-  --color-light-rgb: 248, 249, 250;
-  --color-dark: #343a40;
-  --color-dark-rgb: 52, 58, 64;
-  --color-white: #fff;
-  --color-black: #000;
+  --color-primary: #0056b3;
+  --color-primary-dark: #004085;
+  --color-primary-light: #e6f0fa;
+  --color-primary-rgb: 0, 86, 179;
+  --color-secondary: #475569;
+  --color-secondary-rgb: 71, 85, 105;
+  --color-success: #16a34a;
+  --color-success-rgb: 22, 163, 74;
+  --color-info: #0284c7;
+  --color-info-rgb: 2, 132, 199;
+  --color-warning: #ea580c;
+  --color-warning-rgb: 234, 88, 12;
+  --color-danger: #dc2626;
+  --color-danger-rgb: 220, 38, 38;
+  --color-light: #f8fafc;
+  --color-light-rgb: 248, 250, 252;
+  --color-dark: #0f172a;
+  --color-dark-rgb: 15, 23, 42;
+  --color-white: #ffffff;
+  --color-black: #000000;
 
   /* Text colors */
-  --text-primary: #212529;
-  --text-secondary: #6c757d;
-  --text-muted: #6c757d;
-  --text-white: #fff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-white: #ffffff;
   --text-link: var(--color-primary);
-  --text-disabled: #6c757d;
+  --text-disabled: #94a3b8;
 
   /* Background colors */
-  --bg-body: #cef;
-  --bg-card: #fff;
-  --bg-input: #fff;
-  --bg-input-disabled: #e9ecef;
-  --bg-sidebar: #f8f9fa;
-  --bg-header: #8e8;
-  --bg-account: #fce;
-  --bg-footer: #f8f9fa;
-  --bg-breadcrumb: #fec;
-  --bg-table: #fff;
-  --bg-table-striped: #f2f2f2;
+  --bg-body: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-input-disabled: #f1f5f9;
+  --bg-sidebar: #ffffff;
+  --bg-header: #ffffff;
+  --bg-account: #f8fafc;
+  --bg-footer: #0f172a;
+  --bg-breadcrumb: transparent;
+  --bg-table: #ffffff;
+  --bg-table-striped: #f8fafc;
 
   /* Border colors */
   --border-color: #dee2e6;

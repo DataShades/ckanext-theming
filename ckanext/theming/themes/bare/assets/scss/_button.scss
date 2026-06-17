@@ -62,6 +62,7 @@ fieldset:disabled .btn {
  * Modifiers: btn--*
  * Different button styles
  */
+.btn-primary,
 .btn--primary {
   --btn-color: var(--color-white);
   --btn-bg: var(--color-primary);
@@ -79,6 +80,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-primary);
 }
 
+.btn-secondary,
 .btn--secondary {
   --btn-color: var(--color-white);
   --btn-bg: var(--color-secondary);
@@ -96,6 +98,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-secondary);
 }
 
+.btn-success,
 .btn--success {
   --btn-color: var(--color-white);
   --btn-bg: var(--color-success);
@@ -113,6 +116,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-success);
 }
 
+.btn-info,
 .btn--info {
   --btn-color: var(--color-white);
   --btn-bg: var(--color-info);
@@ -130,6 +134,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-info);
 }
 
+.btn-warning,
 .btn--warning {
   --btn-color: var(--color-dark);
   --btn-bg: var(--color-warning);
@@ -147,6 +152,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-warning);
 }
 
+.btn-danger,
 .btn--danger {
   --btn-color: var(--color-white);
   --btn-bg: var(--color-danger);
@@ -164,6 +170,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-danger);
 }
 
+.btn-light,
 .btn--light {
   --btn-color: var(--color-dark);
   --btn-bg: var(--color-light);
@@ -181,6 +188,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-light);
 }
 
+.btn-dark,
 .btn--dark {
   --btn-color: var(--color-white);
   --btn-bg: var(--color-dark);
@@ -202,6 +210,8 @@ fieldset:disabled .btn {
  * Modifiers: btn--size-*
  * Different button sizes
  */
+.btn-sm,
+.btn-size-sm,
 .btn--size-sm {
   --btn-padding-x: 0.5rem;
   --btn-padding-y: 0.25rem;
@@ -209,6 +219,8 @@ fieldset:disabled .btn {
   --btn-border-radius: var(--border-radius-sm);
 }
 
+.btn-lg,
+.btn-size-lg,
 .btn--size-lg {
   --btn-padding-x: 1rem;
   --btn-padding-y: 0.5rem;
@@ -220,6 +232,7 @@ fieldset:disabled .btn {
  * Modifiers: btn--outline-*
  * Outline button variant
  */
+.btn-outline-primary,
 .btn--outline-primary {
   --btn-color: var(--color-primary);
   --btn-bg: transparent;
@@ -237,6 +250,7 @@ fieldset:disabled .btn {
   --btn-disabled-border-color: var(--color-primary);
 }
 
+.btn-outline-secondary,
 .btn--outline-secondary {
   --btn-color: var(--color-secondary);
   --btn-bg: transparent;

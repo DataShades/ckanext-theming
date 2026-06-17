@@ -7,39 +7,39 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-    {{ ui.breadcrumb(_("Config"), h.url_for("admin.config")) }}
+    {{ ui.breadcrumb(_("Config"), h.url_for("admin.config"), active=true) }}
 {%- endblock %}
 
 
 {%- block primary_content_inner -%}
     {% set modal_id = ui.util.id() %}
 
-    {{ ui.heading(_("Configuration", level=2)) }}
+    {%- call ui.util.call(ui.section, title=_('Configuration')) -%}
+        {{ ui.form_errors(error_summary) }}
 
-    {{ ui.form_errors(error_summary) }}
+        {%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") -%}
+            {%- block admin_form -%}
+                {{ ui.input(id='field-ckan-site-title', label=_('Site Title'), name='ckan.site_title', value=data['ckan.site_title'], errors=errors["ckan.site_title"]) }}
 
-    {%- call ui.util.call(ui.form, method="POST", enctype="multipart/form-data") -%}
-        {%- block admin_form -%}
-            {{ ui.input(id='field-ckan-site-title', label=_('Site Title'), name='ckan.site_title', value=data['ckan.site_title'], errors=errors["ckan.site_title"]) }}
+                {{ ui.input(id='field-theme', label=_('Custom Stylesheet'), name='ckan.theme', value=data['ckan.theme'], errors=errors['ckan.theme']) }}
 
-            {{ ui.input(id='field-theme', label=_('Custom Stylesheet'), name='ckan.theme', value=data['ckan.theme'], errors=errors['ckan.theme']) }}
+                {{ ui.input(id='field-ckan-site-description', label=_('Site Tag Line'), name='ckan.site_description', value=data['ckan.site_description'], errors=errors['ckan.site_description']) }}
 
-            {{ ui.input(id='field-ckan-site-description', label=_('Site Tag Line'), name='ckan.site_description', value=data['ckan.site_description'], errors=errors['ckan.site_description']) }}
+                {{ ui.markdown(id='field-ckan-site-about', label=_('About'), name='ckan.site_about', value=data['ckan.site_about'], errors=errors['ckan.site_about'], placeholder=_('About page text')) }}
 
-            {{ ui.markdown(id='field-ckan-site-about', label=_('About'), name='ckan.site_about', value=data['ckan.site_about'], errors=errors['ckan.site_about'], placeholder=_('About page text')) }}
+                {{ ui.markdown(id='field-ckan-site-intro-text', label=_('Intro Text'), name='ckan.site_intro_text', value=data['ckan.site_intro_text'], errors=errors['ckan.site_intro_text'], placeholder=_('Text on home page')) }}
 
-            {{ ui.markdown(id='field-ckan-site-intro-text', label=_('Intro Text'), name='ckan.site_intro_text', value=data['ckan.site_intro_text'], errors=errors['ckan.site_intro_text'], placeholder=_('Text on home page')) }}
+                {{ ui.textarea(id='field-ckan-site-custom-css', label=_('Custom CSS'), name='ckan.site_custom_css', value=data['ckan.site_custom_css'], errors=errors['ckan.site_custom_css'], placeholder=_('Customisable css inserted into the page header')) }}
 
-            {{ ui.textarea(id='field-ckan-site-custom-css', label=_('Custom CSS'), name='ckan.site_custom_css', value=data['ckan.site_custom_css'], errors=errors['ckan.site_custom_css'], placeholder=_('Customisable css inserted into the page header')) }}
+                {{ ui.input(label="Site logo URL", name="ckan.site_logo", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = '';"}) }}
+                {{ ui.input(label="Site logo upload", name="logo_upload", type="file", value=data["logo_upload"], errors=errors["logo_upload"], attrs={"onchange": "this.form['ckan.site_logo'].value = '';"}) }}
 
-            {{ ui.input(label="Site logo URL", name="ckan.site_logo", value=data["ckan.site_logo"], errors=errors["ckan.site_logo"], attrs={"onchange": "this.form['logo_upload'].value = '';"}) }}
-            {{ ui.input(label="Site logo upload", name="logo_upload", type="file", value=data["logo_upload"], errors=errors["logo_upload"], attrs={"onchange": "this.form['ckan.site_logo'].value = '';"}) }}
+            {%- endblock %}
 
-        {%- endblock %}
-
-        {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.modal_handle(_('Reset'), id=modal_id) }}
-            {{ ui.button(_('Update Config'), type="submit", attrs={"name": "save"}) }}
+            {%- call ui.util.call(ui.form_actions) -%}
+                {{ ui.modal_handle(_('Reset'), id=modal_id) }}
+                {{ ui.button(_('Update Config'), type="submit", attrs={"name": "save"}) }}
+            {%- endcall %}
         {%- endcall %}
     {%- endcall %}
 

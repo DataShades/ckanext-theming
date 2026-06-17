@@ -85,5 +85,9 @@ Here is a minimal `ui.html` implementation mapping standard fields:
 {%- endmacro -%}
 ```
 
-> [!IMPORTANT]
-> Always use `ui.util.attrs(kwargs, defaults)` to merge attributes. This ensures custom attributes, ARIA tags, and events passed by extension templates (like `data-module`, `aria-label`, or HTMX bindings) are correctly rendered on your tags.
+!!! note
+
+     Always use `ui.util.attrs(kwargs, defaults)` to merge attributes. This ensures
+     custom attributes, ARIA tags, and events passed by extension templates (like
+     `data-module`, `aria-label`, or HTMX bindings) are correctly rendered on your
+     tags.

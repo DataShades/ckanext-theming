@@ -1,6 +1,6 @@
 {%- set item_kwargs = kwargs -%}
 
-{%- call ui.util.call(ui.column) -%}
+{%- call ui.util.call(ui.column, span={"xs": 12, "sm": 6, "md": 4}) -%}
     {% set img = group.image_display_url or h.url_for_static('/base/images/placeholder-' ~ ('organization' if group.is_organization else 'group') ~ '.png') %}
     {% set title = group.title or group.name  %}
     {% set body = h.markdown_extract(group.description, 120)|urlize %}

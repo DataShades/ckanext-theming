@@ -1,22 +1,41 @@
 {% from 'macros/form.html' import image_upload as _image_upload %}
 
-{%- macro checkbox(content, checked, value="on", type="checkbox") -%}
-    {{ ui.input(content, value=value or "on", type=type, checked=checked, **kwargs) }}
+{%- macro checkbox(content, name=None, id=None, label=None, required=false, value="on", errors=None, checked=false) -%}
+    {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
+    {%- set help_id = ui.util.id() if content -%}
+    <div class="form-group form-checkbox">
+        <div class="form-controls">
+            <label class="form-checkbox-label" for="{{ field_id }}">
+                <input type="checkbox"
+                    {{ ui.util.attrs(kwargs, {"name": name, "id": field_id, "value": value or "on", "required": required, "checked": checked, "aria-describedby": help_id if content, "aria-invalid": "true" if errors}) }}
+                >
+                {{ label or "" }}
+                {%- if required -%}<span class="form-required" title="{{ _('Required') }}">*</span>{%- endif -%}
+            </label>
+            {{ ui.field_info(content, attrs={"id": help_id}) if content }}
+            {{ ui.field_errors(errors) if errors }}
+        </div>
+    </div>
 {%- endmacro %}
 
-{%- macro extra_field(index, data={}, errors={}, name_template='extras__{index}__') -%}
+{%- macro extra_field(content, index=None, data=None, errors=None, name_template='extras__{index}__') -%}
     {%- set prefix = name_template.format(index=index) -%}
+    {%- set data = data or {} -%}
+    {%- set errors = errors or {} -%}
     <fieldset {{ ui.util.attrs(kwargs, {"class": "extra-field"}) }}>
         <legend>{{ _('Custom Field') }}</legend>
         <div class="grid">
-            {{ ui.input(name=prefix ~ "key", label=_("Key"), value=data.key, errors=errors[prefix~"key"]) }}
-            {{ ui.input(name=prefix ~ "value", label=_("Value"), value=data.value, errors=errors[prefix~"value"]) }}
+            {{ ui.input(name=prefix ~ "key", label=_("Key"), value=data.key, errors=errors.get(prefix~"key")) }}
+            {{ ui.input(name=prefix ~ "value", label=_("Value"), value=data.value, errors=errors.get(prefix~"value")) }}
         </div>
+        {{ content }}
         {{ ui.button(_("Remove"), style="danger", on={"click": "this.closest('fieldset').remove()"}) }}
     </fieldset>
 {%- endmacro %}
 
-{%- macro extra_fields_collection(extras=[], errors={}, limit=3) -%}
+{%- macro extra_fields_collection(extras=None, errors=None, limit=3) -%}
+    {%- set extras = extras or [] -%}
+    {%- set errors = errors or {} -%}
     <div {{ ui.util.attrs(kwargs, {"class": "extra-fields-collection", "data-module": "custom-fields"}) }}>
         {%- for extra in extras -%}
             {{ ui.extra_field(index=loop.index0, data=extra, errors=errors) }}
@@ -46,7 +65,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro field_errors(errors) -%}
+{%- macro field_errors(errors=None) -%}
     {%- if errors -%}
         <div {{ ui.util.attrs(kwargs, {"class": "field-errors", "role": "alert"}) }}>
             {%- for error in errors -%}
@@ -56,11 +75,11 @@
     {%- endif %}
 {%- endmacro %}
 
-{%- macro file_input(content, accept, capture, multiple) -%}
-    {{ ui.input(content, type="file", accept=accept, capture=capture, multiple=multiple, **kwargs) }}
+{%- macro file_input(content, accept=None, capture=None, multiple=false, name=None, id=None, label=None, required=false, errors=None) -%}
+    {{ ui.input(content, name=name, id=id, label=label, required=required, errors=errors, type="file", accept=accept, capture=capture, multiple=multiple, **kwargs) }}
 {%- endmacro %}
 
-{%- macro form_errors(errors) -%}
+{%- macro form_errors(errors=None) -%}
     {% if errors %}
         <div {{ ui.util.attrs(kwargs, {"class": "form-errors", "role": "alert"}) }}>
             <p><strong>{{ _('The form contains invalid entries:') }}</strong></p>
@@ -81,7 +100,7 @@
     <div {{ ui.util.attrs(kwargs, {"class": "field-info"}) }}>{{ content }}</div>
 {%- endmacro %}
 
-{%- macro input(content, name, id, label, value, required, placeholder, type, errors=[]) -%}
+{%- macro input(content, name=None, id=None, label=None, value=None, required=false, placeholder=None, type="text", errors=None) -%}
     {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
     {%- set help_id = ui.util.id() if content -%}
 
@@ -102,7 +121,7 @@
     </div>
 {%- endmacro %}
 
-{%- macro markdown(content, name, id, label, value, placeholder, required, errors=[]) -%}
+{%- macro markdown(content, name=None, id=None, label=None, value=None, placeholder=None, required=false, errors=None) -%}
     {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
     {%- set help_id = ui.util.id() if content -%}
     {% set popover_id = ui.util.id() %}
@@ -130,17 +149,31 @@
     </div>
 {%- endmacro %}
 
-{%- macro radio(content, checked, value="on") -%}
-    {{ ui.checkbox(content, checked=checked, value=value or "on", type="radio", **kwargs) }}
+{%- macro radio(content, name=None, id=None, label=None, required=false, value="on", errors=None, checked=false) -%}
+    {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
+    {%- set help_id = ui.util.id() if content -%}
+    <div class="form-group form-radio">
+        <div class="form-controls">
+            <label class="form-radio-label" for="{{ field_id }}">
+                <input type="radio"
+                    {{ ui.util.attrs(kwargs, {"name": name, "id": field_id, "value": value or "on", "required": required, "checked": checked, "aria-describedby": help_id if content, "aria-invalid": "true" if errors}) }}
+                >
+                {{ label or "" }}
+                {%- if required -%}<span class="form-required" title="{{ _('Required') }}">*</span>{%- endif -%}
+            </label>
+            {{ ui.field_info(content, attrs={"id": help_id}) if content }}
+            {{ ui.field_errors(errors) if errors }}
+        </div>
+    </div>
 {%- endmacro %}
 
-{%- macro range_input(content, min_value, max_value, step) -%}
-    {{ ui.input(content, type="range", min=min_value, max=max_value, step=step, **kwargs) }}
+{%- macro range_input(content, name=None, id=None, label=None, value=None, required=false, errors=None, min_value=None, max_value=None, step=None) -%}
+    {{ ui.input(content, name=name, id=id, label=label, value=value, required=required, errors=errors, type="range", min=min_value, max=max_value, step=step, **kwargs) }}
 {%- endmacro %}
 
-{%- macro select(content, selected, options) -%}
+{%- macro select(content, name=None, id=None, label=None, multiple=false, required=false, errors=None, selected=None, options=None) -%}
     {%- set selected_values = selected if selected is not string and selected is iterable else ([selected or ""]) %}
-    {%- call ui.util.call(ui.select_box, content, selected=selected, options=options or [], **kwargs) -%}
+    {%- call ui.util.call(ui.select_box, content, name=name, id=id, label=label, multiple=multiple, required=required, errors=errors, **kwargs) -%}
         {%- for option in (options or []) %}
             {%- if option is string %}
                 {% set value, text = option, option %}
@@ -153,7 +186,7 @@
     {%- endcall %}
 {%- endmacro %}
 
-{%- macro select_box(content, nested_content, name, id, label, multiple, required, errors=[]) -%}
+{%- macro select_box(content, nested_content=None, name=None, id=None, label=None, multiple=false, required=false, errors=None) -%}
     {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
     {%- set help_id = ui.util.id() if nested_content -%}
     <div class="form-group">
@@ -175,8 +208,7 @@
     </div>
 {%- endmacro %}
 
-
-{%- macro textarea(content, name, id, label, value, placeholder, required, errors=[]) -%}
+{%- macro textarea(content, name=None, id=None, label=None, value=None, placeholder=None, required=false, errors=None) -%}
     {%- set field_id = id or (name and "field-" ~ name) or (label and ui.util.id()) or "" -%}
     {%- set help_id = ui.util.id() if content -%}
 

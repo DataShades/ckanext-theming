@@ -2,20 +2,19 @@
 
 {%- block breadcrumb_content -%}
     {{ super() }}
-
     {{ ui.breadcrumb(_("Config"), h.url_for("admin.config")) }}
-    {{ ui.breadcrumb(_("Confirm Reset"), h.url_for("admin.reset_config")) }}
+    {{ ui.breadcrumb(_("Confirm Reset"), h.url_for("admin.reset_config"), active=true) }}
 {%- endblock %}
 
-
 {%- block primary_content_inner -%}
-    {%- call ui.util.call(ui.form, method="POST") -%}
-        <p>{{ _('Are you sure you want to reset the config?') }}</p>
+    {%- call ui.util.call(ui.section, title=_('Confirm Reset')) -%}
+        {%- call ui.util.call(ui.form, method="POST") -%}
+            <p>{{ _('Are you sure you want to reset the config?') }}</p>
 
-        {%- call ui.util.call(ui.form_actions) -%}
-            {{ ui.button(_('Cancel'), type="submit", {"name": "cancel"}) }}
-            {{ ui.button(_('Confirm Reset'), type="submit", {"name": "delete"}) }}
+            {%- call ui.util.call(ui.form_actions) -%}
+                {{ ui.button(_('Cancel'), type="submit", attrs={"name": "cancel"}) }}
+                {{ ui.button(_('Confirm Reset'), type="submit", style="danger", attrs={"name": "delete"}) }}
+            {%- endcall %}
         {%- endcall %}
     {%- endcall %}
-
 {%- endblock %}

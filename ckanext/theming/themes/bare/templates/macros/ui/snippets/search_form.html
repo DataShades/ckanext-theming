@@ -18,6 +18,8 @@
 
     {{ ui.search_active_filters(active_filters=active_filters, facet_titles=facet_titles, facets=facets, use_htmx=use_htmx) }}
 
+    {{ content }}
+
     {{ ui.search_advanced_controls() }}
 
 {%- endcall %}

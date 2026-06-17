@@ -1,13 +1,19 @@
-{%- macro badge(content, style) -%}
+{%- macro badge(content, style=None) -%}
     <span {{ ui.util.attrs(kwargs, {"class": "badge badge-" ~ (style or "secondary")}) }}>{{ content }}</span>
 {%- endmacro %}
 
-{%- macro button(content, href, type="button", style="primary") -%}
+{%- macro button(content, href=None, type="button", style="primary") -%}
     {%- if href -%}
         <a {{ ui.util.attrs(kwargs, {"href": href, "class": "btn btn-" ~ (style or "primary")}) }}>{{ content }}</a>
     {%- else -%}
         <button {{ ui.util.attrs(kwargs, {"type": type, "class": "btn btn-" ~ (style or "primary")}) }}>{{ content }}</button>
     {%- endif %}
+{%- endmacro %}
+
+{%- macro button_group(content, direction="row") -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "btn-group btn-group-" ~ direction}) }}>
+        {{- content -}}
+    </div>
 {%- endmacro %}
 
 {%- macro empty(content) -%}
@@ -17,10 +23,11 @@
 {%- endmacro %}
 
 {%- macro icon(name) -%}
-    <i {{ ui.util.attrs(kwargs, {"class": "icon icon-" ~ name, "aria-hidden": "true"}) }}></i>
+    {%- set icon_char = ui.util.icon(name) -%}
+    <i {{ ui.util.attrs(kwargs, {"class": "icon icon-" ~ name, "aria-hidden": "true"}) }}>{{ icon_char if icon_char != name else "" }}</i>
 {%- endmacro %}
 
-{%- macro tag(content, href) -%}
+{%- macro tag(content, href=None) -%}
     {%- if href -%}
         <a {{ ui.util.attrs(kwargs, {"href": href, "class": "tag tag-link"}) }}>{{ content }}</a>
     {%- else -%}
@@ -28,7 +35,7 @@
     {%- endif -%}
 {%- endmacro %}
 
-{%- macro tab(content, href, active, id) -%}
+{%- macro tab(content, href=None, active=false, id=None) -%}
     <li class="tab-item {{ 'active' if active }}">
         {{ ui.link(content, href or "#" ~ (id or ""), attrs={"class": "tab-link", "role": "tab", "aria-selected": "true" if active else "false", "aria-controls": id}, **kwargs) }}
     </li>

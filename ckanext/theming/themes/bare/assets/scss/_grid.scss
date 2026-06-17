@@ -1,102 +1,116 @@
+@use "sass:math";
 @use "variables" as v;
 @use "mixins" as m;
 
-/* GRID WRAPPER */
+/* GRID & CONTAINERS */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 1rem; /* optional */
+  display: block;
+  width: 100%;
 }
 
-/* DEFAULT: span 1 column */
-.col { grid-column: span 1; }
+/* ROWS */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
 
-/* Base (no breakpoint) 1–12 spans */
-.col-1  { grid-column: span 1;  }
-.col-2  { grid-column: span 2;  }
-.col-3  { grid-column: span 3;  }
-.col-4  { grid-column: span 4;  }
-.col-5  { grid-column: span 5;  }
-.col-6  { grid-column: span 6;  }
-.col-7  { grid-column: span 7;  }
-.col-8  { grid-column: span 8;  }
-.col-9  { grid-column: span 9;  }
-.col-10 { grid-column: span 10; }
-.col-11 { grid-column: span 11; }
-.col-12 { grid-column: span 12; }
+  &.wrap {
+    flex-wrap: wrap;
+  }
 
-/* BREAKPOINTS */
-@include m.breakpoint(sm) { /* sm */
-  .col-sm-1  { grid-column: span 1; }
-  .col-sm-2  { grid-column: span 2; }
-  .col-sm-3  { grid-column: span 3; }
-  .col-sm-4  { grid-column: span 4; }
-  .col-sm-5  { grid-column: span 5; }
-  .col-sm-6  { grid-column: span 6; }
-  .col-sm-7  { grid-column: span 7; }
-  .col-sm-8  { grid-column: span 8; }
-  .col-sm-9  { grid-column: span 9; }
-  .col-sm-10 { grid-column: span 10; }
-  .col-sm-11 { grid-column: span 11; }
-  .col-sm-12 { grid-column: span 12; }
+  /* Alignment */
+  &.align-start { align-items: flex-start; }
+  &.align-center { align-items: center; }
+  &.align-end { align-items: flex-end; }
+  &.align-stretch { align-items: stretch; }
+  &.align-baseline { align-items: baseline; }
+
+  /* Justification */
+  &.justify-start { justify-content: flex-start; }
+  &.justify-center { justify-content: center; }
+  &.justify-end { justify-content: flex-end; }
+  &.justify-between { justify-content: space-between; }
+  &.justify-around { justify-content: space-around; }
+  &.justify-evenly { justify-content: space-evenly; }
+
+  /* Gaps */
+  &.gap-sm {
+    margin-left: -0.25rem; margin-right: -0.25rem; row-gap: 0.5rem;
+    & > [class*="col"] { padding-left: 0.25rem; padding-right: 0.25rem; }
+  }
+  &.gap-md {
+    margin-left: -0.5rem; margin-right: -0.5rem; row-gap: 1rem;
+    & > [class*="col"] { padding-left: 0.5rem; padding-right: 0.5rem; }
+  }
+  &.gap-lg {
+    margin-left: -1rem; margin-right: -1rem; row-gap: 2rem;
+    & > [class*="col"] { padding-left: 1rem; padding-right: 1rem; }
+  }
 }
 
-@include m.breakpoint(md) { /* md */
-  .col-md-1  { grid-column: span 1; }
-  .col-md-2  { grid-column: span 2; }
-  .col-md-3  { grid-column: span 3; }
-  .col-md-4  { grid-column: span 4; }
-  .col-md-5  { grid-column: span 5; }
-  .col-md-6  { grid-column: span 6; }
-  .col-md-7  { grid-column: span 7; }
-  .col-md-8  { grid-column: span 8; }
-  .col-md-9  { grid-column: span 9; }
-  .col-md-10 { grid-column: span 10; }
-  .col-md-11 { grid-column: span 11; }
-  .col-md-12 { grid-column: span 12; }
+/* COLUMNS */
+[class*="col"] {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 
-@include m.breakpoint(lg) { /* lg */
-  .col-lg-1  { grid-column: span 1; }
-  .col-lg-2  { grid-column: span 2; }
-  .col-lg-3  { grid-column: span 3; }
-  .col-lg-4  { grid-column: span 4; }
-  .col-lg-5  { grid-column: span 5; }
-  .col-lg-6  { grid-column: span 6; }
-  .col-lg-7  { grid-column: span 7; }
-  .col-lg-8  { grid-column: span 8; }
-  .col-lg-9  { grid-column: span 9; }
-  .col-lg-10 { grid-column: span 10; }
-  .col-lg-11 { grid-column: span 11; }
-  .col-lg-12 { grid-column: span 12; }
+.col {
+  flex: 1 0 0%;
 }
 
-@include m.breakpoint(xl) { /* xl */
-  .col-xl-1  { grid-column: span 1; }
-  .col-xl-2  { grid-column: span 2; }
-  .col-xl-3  { grid-column: span 3; }
-  .col-xl-4  { grid-column: span 4; }
-  .col-xl-5  { grid-column: span 5; }
-  .col-xl-6  { grid-column: span 6; }
-  .col-xl-7  { grid-column: span 7; }
-  .col-xl-8  { grid-column: span 8; }
-  .col-xl-9  { grid-column: span 9; }
-  .col-xl-10 { grid-column: span 10; }
-  .col-xl-11 { grid-column: span 11; }
-  .col-xl-12 { grid-column: span 12; }
+/* Base spans (1-12) */
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    flex: 0 0 auto;
+    width: math.div($i, 12) * 100%;
+  }
 }
 
-@include m.breakpoint(xxl) { /* xxl */
-  .col-xxl-1  { grid-column: span 1; }
-  .col-xxl-2  { grid-column: span 2; }
-  .col-xxl-3  { grid-column: span 3; }
-  .col-xxl-4  { grid-column: span 4; }
-  .col-xxl-5  { grid-column: span 5; }
-  .col-xxl-6  { grid-column: span 6; }
-  .col-xxl-7  { grid-column: span 7; }
-  .col-xxl-8  { grid-column: span 8; }
-  .col-xxl-9  { grid-column: span 9; }
-  .col-xxl-10 { grid-column: span 10; }
-  .col-xxl-11 { grid-column: span 11; }
-  .col-xxl-12 { grid-column: span 12; }
+/* Base offsets */
+@for $i from 0 through 11 {
+  .offset-#{$i} {
+    margin-left: math.div($i, 12) * 100%;
+  }
+}
+
+/* Breakpoint-specific spans & offsets */
+@each $breakpoint, $value in v.$breakpoints {
+  @if $breakpoint != xs {
+    @include m.breakpoint($breakpoint) {
+      .col-#{$breakpoint} {
+        flex: 1 0 0%;
+      }
+
+      @for $i from 1 through 12 {
+        .col-#{$breakpoint}-#{$i} {
+          flex: 0 0 auto;
+          width: math.div($i, 12) * 100%;
+        }
+      }
+
+      @for $i from 0 through 11 {
+        .offset-#{$breakpoint}-#{$i} {
+          margin-left: math.div($i, 12) * 100%;
+        }
+      }
+    }
+  } @else {
+    /* xs is default, but support explicit col-xs-X classes */
+    @for $i from 1 through 12 {
+      .col-xs-#{$i} {
+        flex: 0 0 auto;
+        width: math.div($i, 12) * 100%;
+      }
+    }
+    @for $i from 0 through 11 {
+      .offset-xs-#{$i} {
+        margin-left: math.div($i, 12) * 100%;
+      }
+    }
+  }
 }

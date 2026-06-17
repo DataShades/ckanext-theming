@@ -1,38 +1,29 @@
 {% extends "admin/base.html" %}
 
-{%- block breadcrumb_content -%}
-    {{ super() }}
-    {{ ui.breadcrumb(_("Sysadmins"), h.url_for("admin.index")) }}
-{%- endblock %}
-
 {%- block primary_content_inner %}
 
-    {{ ui.heading(_('Current Sysadmins'), level=2) }}
+    {%- call ui.util.call(ui.section, title=_('Current Sysadmins')) -%}
+        {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
+            {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('User'), ''], header=true))) }}
 
-    {%- call ui.util.call(ui.table, bordered=true, striped=true) -%}
-        {{ ui.table_head(ui.table_row(ui.util.map(ui.table_cell, [_('User'), ''], header=true))) }}
-
-        {%- call ui.util.call(ui.table_body) -%}
-            {%- for user in sysadmins %}
-                {%- call ui.util.call(ui.table_row) -%}
-                    {{ ui.table_cell(h.linked_user(user)) }}
-                    {%- call ui.util.call(ui.table_cell) -%}
-                        {%- call ui.util.call(ui.form, method="POST", action=h.url_for('user.sysadmin')) -%}
-                            <input type="hidden" value="{{ user }}" name="username" />
-                            <input type="hidden" value="0" name="status" />
-                            {{ ui.button(_('Revoke'), type="submit", stye="danger") }}
+            {%- call ui.util.call(ui.table_body) -%}
+                {%- for user in sysadmins %}
+                    {%- call ui.util.call(ui.table_row) -%}
+                        {{ ui.table_cell(h.linked_user(user)) }}
+                        {%- call ui.util.call(ui.table_cell) -%}
+                            {%- call ui.util.call(ui.form, method="POST", action=h.url_for('user.sysadmin')) -%}
+                                <input type="hidden" value="{{ user }}" name="username" />
+                                <input type="hidden" value="0" name="status" />
+                                {{ ui.button(_('Revoke'), type="submit", style="danger") }}
+                            {%- endcall %}
                         {%- endcall %}
                     {%- endcall %}
-                {%- endcall %}
-            {%- endfor %}
+                {%- endfor %}
+            {%- endcall %}
         {%- endcall %}
-
     {%- endcall %}
 
-    {{ ui.divider() }}
-
-    <div>
-        {{ ui.heading(_('Promote user to Sysadmin'), level=2) }}
+    {%- call ui.util.call(ui.section, title=_('Promote user to Sysadmin')) -%}
         {%- call ui.util.call(ui.form, method="POST", action=h.url_for('user.sysadmin')) -%}
             {{ ui.input(name="username", label=_('Username'), placeholder=_('Username'),
                     data={"module": "autocomplete", "module-source": "/api/2/util/user/autocomplete?ignore_self=true&q=?"}
@@ -40,7 +31,7 @@
             <input type="hidden" value="1" name="status" />
             {{ ui.form_actions(ui.button(_('Promote'), type="submit")) }}
         {%- endcall %}
-    </div>
+    {%- endcall %}
 
 {%- endblock %}
 

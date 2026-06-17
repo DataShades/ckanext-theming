@@ -79,6 +79,8 @@ Instead of defining macros directly, write fallback bindings:
 
 ## Why Create a Standalone Component Library?
 
-1. **Reusability**: You can write the complex markup and class rules for a framework (such as Tailwind CSS or Bulma) once.
-2. **Layout Independence**: Multiple portals can define completely different page layouts (one with a sidebar navigation, another with a header drawer) while using the same component library to maintain a unified visual system.
-3. **Framework Upgrades**: If you upgrade the underlying design system version (e.g., Bootstrap 4 to 5, or Tailwind 3 to 4), you only modify the macros and stylesheets inside the component library. Any theme inheriting from it automatically updates.
+**Reusability**: You can write the complex markup and class rules for a framework (such as Tailwind CSS or Bulma) once.
+
+**Layout Independence**: Multiple portals can define completely different page layouts (one with a sidebar navigation, another with a header drawer) while using the same component library to maintain a unified visual system.
+
+**Framework Upgrades**: If you upgrade the underlying design system version (e.g., Bootstrap 4 to 5, or Tailwind 3 to 4), you only modify the macros and stylesheets inside the component library. Any theme inheriting from it automatically updates.

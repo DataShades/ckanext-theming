@@ -1,11 +1,13 @@
-{%- macro alert(content, dismissible, style) -%}
+{%- macro alert(content, dismissible=false, style=None) -%}
     <div {{ ui.util.attrs(kwargs, {"class": "alert alert-" ~ (style or "info")}) }}>
         <div class="alert-content">{{ content }}</div>
-        {{ ui.button("&times;"|safe, class="alert-dismiss", on={"click": "this.parentNode.remove()"}) if dismissible }}
+        {% if dismissible %}
+            <button type="button" class="alert-dismiss" onclick="this.parentNode.remove()">&times;</button>
+        {% endif %}
     </div>
 {%- endmacro %}
 
-{%- macro modal(content, title, footer, id, dismissible=true) -%}
+{%- macro modal(content, title=None, footer=None, dismissible=true, id=None) -%}
     <dialog {{ ui.util.attrs(kwargs, {"id": id, "class": "modal"}) }}>
         <div class="modal-content">
             {%- if title %}
@@ -28,8 +30,8 @@
     </dialog>
 {%- endmacro %}
 
-{%- macro popover(content, title, id) -%}
-    <div {{ ui.util.attrs(kwargs, {"id": id}) }} popover>
+{%- macro popover(content, title=None, id=None) -%}
+    <div {{ ui.util.attrs(kwargs, {"id": id, "popover": "auto"}) }}>
         <div class="popover-content">
             {{ ui.heading(title, level=4) if title }}
             <div>{{ content }}</div>
@@ -45,11 +47,11 @@
     </div>
 {%- endmacro %}
 
-{%- macro spinner(content, style, size) -%}
-    <span {{ ui.util.attrs(kwargs, {"class": "spinner spinner-" ~ (size or "md") ~ " spinner-" ~ (style or "primary")}) }}></span>
+{%- macro spinner(content, style=None, size=None) -%}
+    <span {{ ui.util.attrs(kwargs, {"class": "spinner spinner-" ~ (size or "md") ~ " spinner-" ~ (style or "primary")}) }}>{{ content }}</span>
 {%- endmacro %}
 
-{%- macro toast(content, title, style, dismissible) -%}
+{%- macro toast(content, title=None, style=None, dismissible=false) -%}
     <div {{ ui.util.attrs(kwargs, {"class": "toast toast-" ~ (style or "info")}) }}>
         {%- if title -%}
             <div class="toast-header">{{ title }}</div>
@@ -64,6 +66,24 @@
     </div>
 {%- endmacro %}
 
-{%- macro tooltip(content, tooltip, position="bottom") -%}
+{%- macro tooltip(content, tooltip=None, position="bottom") -%}
     <span {{ ui.util.attrs(kwargs, {"class": "tooltip-wrapper", "data-tooltip": tooltip, "data-tooltip-position": position}) }}>{{ content }}</span>
+{%- endmacro %}
+
+{%- macro popover_handle(content, id=None) -%}
+    <span {{ ui.util.attrs(kwargs) }} onclick="document.getElementById('{{ id }}').togglePopover()" style="cursor: pointer;">
+        {{ content }}
+    </span>
+{%- endmacro %}
+
+{%- macro modal_handle(content, id=None) -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("onclick", "ckan.sandbox().ui.getModal('{id}').show()".format(id=id)) -%}
+    {{ ui.button(content, **kwargs) }}
+{%- endmacro %}
+
+{%- macro modal_close_handle(content=None, id=None) -%}
+    {%- set content = content or "&times;"|safe -%}
+    {%- do kwargs.setdefault("attrs", {}).setdefault("onclick", "ckan.sandbox().ui.getModal('{id}').close()".format(id=id)) -%}
+    {%- do kwargs.setdefault("class", "modal-close-btn") -%}
+    {{ ui.button(content, **kwargs) }}
 {%- endmacro %}

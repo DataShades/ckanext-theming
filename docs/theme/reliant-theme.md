@@ -80,6 +80,7 @@ For example, your custom `templates/header.html` page template might look like t
 ```
 
 When CKAN renders this header:
+
 1. The templates are pulled from the layout theme `my-reliant-theme`.
 2. The `ui.image`, `ui.nav`, `ui.link`, and `ui.button` macros are resolved from the parent theme `my-component-library`.
 
@@ -87,6 +88,8 @@ When CKAN renders this header:
 
 ## Key Advantages
 
-- **Shared Styling**: Multiple reliant themes (e.g. `nsw-design-system-dark`, `nsw-design-system-minimal`) can share the exact same component definitions in `nds-ui`, making them look consistent while rearranging the layout grids.
-- **Easy Theme Swapping**: If you want to switch your design framework (e.g., from Bootstrap 5 to Tailwind), you only swap the parent library setting from `parent="bootstrap-lib"` to `parent="tailwind-lib"`. Your structural templates remain unchanged.
-- **Simpler Upgrades**: The templates in your reliant theme are standard HTML skeletons calling semantic functions. They are insulated from changes in CSS class names or framework markup.
+**Shared Styling**: Multiple reliant themes (e.g. `nsw-design-system-dark`, `nsw-design-system-minimal`) can share the exact same component definitions in `nds-ui`, making them look consistent while rearranging the layout grids.
+
+**Easy Theme Swapping**: If you want to switch your design framework (e.g., from Bootstrap 5 to Tailwind), you only swap the parent library setting from `parent="bootstrap-lib"` to `parent="tailwind-lib"`. Your structural templates remain unchanged.
+
+**Simpler Upgrades**: The templates in your reliant theme are standard HTML skeletons calling semantic functions. They are insulated from changes in CSS class names or framework markup.

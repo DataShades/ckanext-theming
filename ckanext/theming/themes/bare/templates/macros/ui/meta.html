@@ -1,4 +1,5 @@
-{%- macro header(content, title, subtitle, logo, href=h.url_for('home.index')) -%}
+{%- macro header(content, title=None, subtitle=None, logo=None, href=None) -%}
+    {%- set href = href or h.url_for('home.index') -%}
     <header {{ ui.util.attrs(kwargs, {"id": "header", "class": "site-header"}) }}>
         {%- call ui.util.call(ui.container) -%}
             <div class="header-inner">

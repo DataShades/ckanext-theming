@@ -12,19 +12,19 @@
     {%- call ui.util.call(ui.grid) -%}
         {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
             {%- block promoted %}
-                <div class="promoted-content">
-                    {{ ui.heading(_('Welcome to CKAN'), level=2) }}
+                {%- call ui.util.call(ui.section, title=_('Welcome to CKAN')) -%}
                     <p>{{ _('This is a place where you can find and share data with others.') }}</p>
-                </div>
+                {%- endcall %}
             {%- endblock %}
         {%- endcall %}
 
         {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
             {%- block search %}
-                {{ ui.heading(_('Discover Datasets'), level=3) }}
-                {%- call ui.util.call(ui.form, action=h.url_for('dataset.search')) -%}
-                    {{ ui.input(name="q", placeholder=_('Search datasets...')) }}
-                    {{ ui.button(_("Search"), type="submit") }}
+                {%- call ui.util.call(ui.section, title=_('Discover Datasets'), level=3) -%}
+                    {%- call ui.util.call(ui.search_form_box, action=h.url_for('dataset.search')) -%}
+                        {{ ui.search_input(placeholder=_('Search datasets...')) }}
+                        {{ ui.search_submit_button(_("Search")) }}
+                    {%- endcall %}
                 {%- endcall %}
             {%- endblock %}
         {%- endcall %}
@@ -32,10 +32,8 @@
 
     {%- call ui.util.call(ui.grid) -%}
         {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
-
             {%- block featured_group %}
-                <div class="featured-group">
-                    {{ ui.heading(_('Featured Groups'), level=3) }}
+                {%- call ui.util.call(ui.section, title=_('Featured Groups'), level=3) -%}
                     {%- set groups = h.get_featured_groups() -%}
                     {%- if groups -%}
                         {%- call ui.util.call(ui.group_list) -%}
@@ -43,20 +41,16 @@
                                 {{ ui.group(group=group) }}
                             {%- endfor %}
                         {%- endcall %}
-
                     {%- else -%}
                         <p>{{ _('A featured group would appear here.') }}</p>
-
                     {%- endif %}
-                </div>
+                {%- endcall %}
             {%- endblock %}
         {%- endcall %}
 
         {%- call ui.util.call(ui.column, span={"xs": 12, "md": 6}) -%}
-
             {%- block featured_organization %}
-                <div class="featured-organization">
-                    {{ ui.heading(_('Featured Organizations'), level=3) }}
+                {%- call ui.util.call(ui.section, title=_('Featured Organizations'), level=3) -%}
                     {%- set organizations = h.get_featured_organizations() -%}
                     {%- if organizations -%}
                         {%- call ui.util.call(ui.organization_list) -%}
@@ -65,12 +59,10 @@
                             {%- endfor %}
                         {%- endcall %}
                     {%- else -%}
-                            <p>{{ _('A featured organization would appear here.') }}</p>
-
+                        <p>{{ _('A featured organization would appear here.') }}</p>
                     {%- endif %}
-                </div>
+                {%- endcall %}
             {%- endblock %}
         {%- endcall %}
     {%- endcall %}
-
 {%- endblock %}

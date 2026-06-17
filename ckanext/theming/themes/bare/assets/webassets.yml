@@ -12,6 +12,8 @@ scripts:
   extra:
     preload:
       - base/main
+      - theming/modules
+
   output: ckanext-theming/%(version)s-bare.js
   contents:
     - script.js

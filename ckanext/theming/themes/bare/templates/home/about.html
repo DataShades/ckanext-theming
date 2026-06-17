@@ -8,19 +8,16 @@
 
 {%- block breadcrumb_content %}
     {{ super() }}
-    {{ ui.breadcrumb("About", h.url_for("home.about")) }}
+    {{ ui.breadcrumb(_("About"), h.url_for("home.about"), active=true) }}
 {%- endblock %}
 
 
 {%- block primary_content_inner %}
-    {%- if g.site_about %}
-        <div>
+    {%- call ui.util.call(ui.section, title=_("About")) -%}
+        {%- if g.site_about %}
             {{ h.render_markdown(g.site_about) }}
-        </div>
-
-    {%- else %}
-        {{ ui.heading( _("About"), level=1) }}
-        {% include "home/about_text.html" %}
-
-    {%- endif %}
+        {%- else %}
+            {% include "home/about_text.html" %}
+        {%- endif %}
+    {%- endcall %}
 {%- endblock %}

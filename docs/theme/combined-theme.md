@@ -2,7 +2,7 @@
 
 A **Combined Theme** provides both page-level templates and its own UI component library together in a single package. It registers a theme name that does not inherit from any parent (except perhaps standard fallbacks) and overrides both structural layouts and component macros inside its own directory.
 
-The built-in `midnight-blue-portable` theme is a prime example of a combined theme.
+The `midnight-blue-portable` theme is a prime example of a combined theme.
 
 ---
 
@@ -61,6 +61,8 @@ In a combined theme:
 
 ## When to Build a Combined Theme
 
-1. **Tight Visual Coupling**: If the layout elements (e.g., sidebars, grids, headers) are tightly dependent on component styles (e.g. card sizes, button paddings) and the design cannot easily be separated into an independent layout wrapper.
-2. **Dedicated Corporate Portals**: When you are building a custom portal for a single organization with a highly specific design system. You don't expect the layout templates to be reused elsewhere, so packaging everything together simplifies the repository.
-3. **Quick Prototyping**: Bundling templates and macros in one directory is faster for initial development since you can iterate on both structural pages and atomic components in the same codebase.
+**Tight Visual Coupling**: If the layout elements (e.g., sidebars, grids, headers) are tightly dependent on component styles (e.g. card sizes, button paddings) and the design cannot easily be separated into an independent layout wrapper.
+
+**Dedicated Corporate Portals**: When you are building a custom portal for a single organization with a highly specific design system. You don't expect the layout templates to be reused elsewhere, so packaging everything together simplifies the repository.
+
+**Quick Prototyping**: Bundling templates and macros in one directory is faster for initial development since you can iterate on both structural pages and atomic components in the same codebase.

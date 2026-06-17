@@ -1,0 +1,117 @@
+{%- macro accordion(content, title=None, open=false) -%}
+    <details {{ ui.util.attrs(kwargs) }} {{ "open" if open }}>
+        <summary role="button" aria-expanded="{{ 'true' if open else 'false' }}">{{ title }}</summary>
+        <div role="region">{{ content }}</div>
+    </details>
+{%- endmacro %}
+
+{%- macro card(content, title=None, footer=None, img=None, href=None, img_class=None) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "card", "role": "article", "aria-label": title if title else _('Card')}) }}>
+        {%- if img -%}
+            {{ ui.image(img, _extra_class=img_class, **kwargs) }}
+        {%- endif %}
+
+        {%- if title -%}
+        <div class="card-header">
+            <strong>
+                {%- if href -%}
+                    {{ ui.link(title, href=href) }}
+                {%- else -%}
+                    {{ title }}
+                {%- endif %}
+            </strong>
+        </div>
+        {%- endif %}
+
+        {%- if content -%}
+            <div class="card-body">{{ content }}</div>
+        {%- endif %}
+
+        {%- if footer -%}
+            <div class="card-footer">{{ footer }}</div>
+        {%- endif %}
+    </div>
+{%- endmacro %}
+
+{%- macro column(content, span=None, offset=None, order=None) -%}
+    {%- set classes = [] -%}
+    {%- if span is mapping -%}
+        {%- for bp, size in span.items() -%}
+            {%- do classes.append("col-" ~ bp ~ "-" ~ size) -%}
+        {%- endfor -%}
+    {%- elif span is iterable and span is not string -%}
+        {%- for s in span -%}
+            {%- do classes.append(s) -%}
+        {%- endfor -%}
+    {%- elif span -%}
+        {%- do classes.append("col-" ~ span) -%}
+    {%- endif -%}
+
+    {%- if offset is mapping -%}
+        {%- for bp, size in offset.items() -%}
+            {%- do classes.append("offset-" ~ bp ~ "-" ~ size) -%}
+        {%- endfor -%}
+    {%- elif offset -%}
+        {%- do classes.append("offset-" ~ offset) -%}
+    {%- endif -%}
+
+    <div {{ ui.util.attrs(kwargs, {"class": "col" ~ (" " ~ classes|join(' ') if classes else "")}) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro container(content, fluid=false) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "container" ~ ("-fluid" if fluid else "")}) }}>{{ content }}</div>
+{%- endmacro %}
+
+{%- macro grid(content, fluid=false) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "grid" ~ ("-fluid" if fluid else "")}) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro row(content, align=None, justify=None, gap=None, wrap=None) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "row" ~ (" align-" ~ align if align) ~ (" justify-" ~ justify if justify) ~ (" gap-" ~ gap if gap) ~ (" wrap" if wrap)}) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro section(content, title, level=2) -%}
+    <section {{ ui.util.attrs(kwargs) }}>
+        {{ ui.heading(title, level) if title }}
+        <div>
+            {{ content }}
+        </div>
+    </section>
+{%- endmacro %}
+
+{%- macro sidebar_section(content, title=None) -%}
+    {%- set id = ui.util.id() -%}
+    <aside {{ ui.util.attrs(kwargs) }} role="complementary"{{ ' aria-labelledby="section-title-' ~ id ~ '"' if title }}>
+        {{ ui.heading(title, level=2, attrs={"id": "section-title-" ~ id}) if title }}
+        <div>
+            {{ content }}
+        </div>
+    </aside>
+{%- endmacro %}
+
+{%- macro list(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "list"}) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro list_item(content) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "list-item"}) }}>
+        {{ content }}
+    </div>
+{%- endmacro %}
+
+{%- macro dropdown(content, title=None) -%}
+    <div {{ ui.util.attrs(kwargs, {"class": "dropdown", "role": "menu", "aria-haspopup": "true"}) }}>
+        {{ ui.button(title, aria={"haspopup": "true"}) }}
+        <ul class="dropdown-menu" role="menu">
+            {{ content }}
+        </ul>
+    </div>
+{%- endmacro %}

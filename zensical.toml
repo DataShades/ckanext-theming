@@ -37,9 +37,7 @@ nav = [
     "library/search.md",
     "library/structure.md",
   ] },
-  { "Background & Reference" = [
-    "parameters.md",
-  ] },
+  "parameters.md",
 
 ]
 
@@ -47,7 +45,7 @@ nav = [
 #extra_javascript = ["javascripts/extra.js"]
 
 [project.theme]
-variant = "classic"
+# variant = "classic"
 #custom_dir = "overrides"
 favicon = "img/favicon.ico"
 
