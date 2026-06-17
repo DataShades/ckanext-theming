@@ -11,7 +11,17 @@ nav = [
   "styleguide.md",
   "migration.md",
   "recipes.md",
-  "theme.md",
+  { "Theme Development" = [
+    "theme/basic.md",
+    "theme/component-library.md",
+    "theme/reliant-theme.md",
+    "theme/combined-theme.md",
+  ] },
+  { "Role Guides" = [
+    "roles/theme-developers.md",
+    "roles/extension-developers.md",
+    "roles/portal-maintainers.md",
+  ] },
   "advanced.md",
   "best-practices.md",
   "cli.md",
@@ -29,7 +39,6 @@ nav = [
   ] },
   { "Background & Reference" = [
     "parameters.md",
-    "theming-parties.md",
   ] },
 
 ]
