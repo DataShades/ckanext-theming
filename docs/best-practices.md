@@ -64,11 +64,65 @@ states and correct `tabindex` behavior if you are using non-standard elements
 
 ## Maintenance & Stability
 
-### Avoid Positional Arguments
-Except for the first `content` argument (when applicable), **always use named
-arguments**.
+### 1. Avoid Positional Arguments
+Except for the first `content` argument (when applicable), **always use named arguments**.
 
-This ensures that if a new version of the extension adds a parameter to a
-standard component, your theme will not break because of a signature mismatch.
-The `**kwargs` (implicit in macros) will safely catch and ignore any parameters
-your specific theme doesn't handle yet.
+This ensures that if a new version of the extension adds a parameter to a standard component, your theme will not break because of a signature mismatch. The `**kwargs` (implicit in macros) will safely catch and ignore any parameters your specific theme doesn't handle yet.
+
+**Incorrect:**
+```django
+{{ ui.link("New Dataset", "/dataset/new", _extra_class="nav-link") }}
+```
+
+**Correct:**
+```django
+{{ ui.link("New Dataset", href="/dataset/new", _extra_class="nav-link") }}
+```
+
+
+## Modifying Attributes: `ui.util.augment_attrs`
+
+When building macros, you often need to merge default attributes (like default styles, roles, or actions) with user-provided arguments in `kwargs`. **Never** pass an `attrs` dictionary directly if you are forwarding `kwargs` (e.g. `attrs={"class": "foo"}, **kwargs`), as this will completely overwrite any custom attributes the user passes.
+
+Instead, always use the helper utility `ui.util.augment_attrs`.
+
+### Function Signature
+```python
+def augment_attrs(
+    kwargs: dict[str, Any],
+    defaults_dict: dict[str, Any] | None = None,
+    /,
+    key: str | None = "attrs",
+    extra_class: str | None = None
+) -> dict[str, Any]
+```
+
+### Best Practice Rules for `augment_attrs`
+1. **Targeting Attributes Sub-dictionary (Default):**
+   By default, `key="attrs"`. This merges a dictionary of defaults into the `attrs` sub-dictionary within `kwargs`.
+   ```django
+   {{ ui.util.augment_attrs(kwargs, {"role": "menuitem", "aria-expanded": "false"}) }}
+   ```
+2. **Merging CSS Classes:**
+   Use the `extra_class` argument to safely append a CSS class to the component’s extra classes without overwriting any user-provided classes.
+   ```django
+   {{ ui.util.augment_attrs(kwargs, extra_class="dropdown-item") }}
+   ```
+3. **Modifying Different Targets:**
+   If you want to modify a top-level key or a different nested dictionary within `kwargs`, change the `key` parameter. For example, to modify the main kwargs root:
+   ```django
+   {{ ui.util.augment_attrs(kwargs, {"data-custom": "value"}, key=None) }}
+   ```
+
+### Comprehensive Example
+Here is a robust menu link component that safely combines role attributes and CSS classes:
+```django
+{% macro menu_link(content, href=None) %}
+    {%- set augmented_kwargs = ui.util.augment_attrs(
+        kwargs,
+        {"role": "menuitem"},
+        extra_class="dropdown-item"
+    ) -%}
+    {{ ui.link(content, href=href, **augmented_kwargs) }}
+{% endmacro %}
+```

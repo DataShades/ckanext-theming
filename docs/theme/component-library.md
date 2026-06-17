@@ -4,7 +4,6 @@ A **Component Library** (or UI Library) is a type of theme that only provides UI
 
 This pattern allows you to bundle styling rules, CSS frameworks, and interactions into a modular, reusable design system package that other layout themes can inherit from.
 
----
 
 ## Design System Structure
 
@@ -22,7 +21,6 @@ my_component_library/
  └── theme.py              # Registers the library metadata and icon mappings
 ```
 
----
 
 ## Theme Configuration (`theme.py`)
 
@@ -51,8 +49,6 @@ def make_theme(name: str = "my-component-library"):
     )
 ```
 
----
-
 ## The Macro Registry (`templates/macros/ui.html`)
 
 In a component library, `ui.html` contains the concrete implementations of all standard components declared in [components.yaml](file:///home/sergey/projects/core/ckanext-theming/ckanext/theming/components.yaml) using the CSS classes of your chosen design system.
@@ -75,7 +71,103 @@ Instead of defining macros directly, write fallback bindings:
 {% set button = button | default(_button) %}
 ```
 
----
+### Modular Macro Files for Large Design Systems
+For large component libraries, putting all macro definitions inside a single `ui.html` file makes it unmaintainable. Instead, split the macros into logical files inside a subdirectory (e.g. `templates/macros/ui/`) and import them with context in the main `ui.html`:
+
+```django
+{# templates/macros/ui.html #}
+{% import "macros/ui/forms.html" as _forms with context %}
+{% import "macros/ui/feedback.html" as _feedback with context %}
+
+{# Mappings with fallback bindings #}
+{% set input = input | default(_forms.input) %}
+{% set alert = alert | default(_feedback.alert) %}
+{% set popover = popover | default(_feedback.popover) %}
+{% set popover_handle = popover_handle | default(_feedback.popover_handle) %}
+```
+
+
+## JavaScript Initialization in Component Libraries
+
+Interactive components (like popovers, modals, or toasts) often require JavaScript. As a best practice, **avoid inline `<script>` tags inside macro definitions**. Inline scripts suffer from several issues:
+
+- They pollute the DOM and degrade page performance.
+- They may execute before the main JavaScript bundle is fully loaded (resulting in `undefined` reference errors).
+- They cause duplicate initialization or fail to bind when components are dynamically injected/re-rendered (e.g. via AJAX/HTMX).
+
+### Recommended Pattern: Declarative Attributes and Global Initializer
+
+**Declare triggers in the macro HTML:**
+
+Instead of writing a `<script>` tag inside the macro, use standard data
+attributes (e.g. `data-bs-toggle="popover"`) or custom targets:
+
+```django
+{%- macro popover_handle(content, id=None) -%}
+    {%- set popover_attrs = {
+        "data-bs-toggle": "popover",
+        "data-bs-content": "(see #" ~ id ~ "-popover-content)",
+        "tabindex": "0"
+    } -%}
+    <span {{ ui.util.attrs(ui.util.augment_attrs(kwargs, popover_attrs)) }}>
+        {{ content }}
+    </span>
+{%- endmacro %}
+```
+
+!!! note
+
+       Make sure to pass `popover_attrs` without specifying `key=None` in
+       `augment_attrs`. Omitting it (which defaults to `key="attrs"`) ensures
+       that fully qualified names like `data-bs-toggle` are correctly nested
+       within the `attrs` sub-dictionary so that they are serialized to HTML
+       attributes.
+
+**Initialize globally in the theme JS asset:**
+
+Create a single initialization script in `assets/js/` (and register it in `webassets.yml`) that runs on `DOMContentLoaded` and targets the elements declaratively:
+
+```javascript
+document.addEventListener("DOMContentLoaded", () => {
+    // Find all declarative popovers
+    const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
+    popovers.forEach((el) => {
+        // Safely resolve content references (if target is in another element)
+        const contentAttr = el.getAttribute('data-bs-content') || '';
+        const match = contentAttr.match(/^\(see\s+(#.+)\)$/);
+        const options = {};
+        if (match && match[1]) {
+            const targetEl = document.querySelector(match[1]);
+            if (targetEl) {
+                options.content = targetEl.innerHTML;
+                options.html = true;
+            }
+        }
+
+        // Initialize idempotently
+        bootstrap.Popover.getOrCreateInstance(el, options);
+    });
+});
+```
+
+**Handle dynamic updates/JS APIs cleanly:**
+
+If your UI library provides a JavaScript API to register components dynamically (e.g. `sandbox.ui.popover(content, {target})`), ensure that any existing instances on the target element are properly disposed of before creating the new one to prevent conflicts:
+```javascript
+popover(content, props) {
+    const target = props.target;
+    // Clean up stale instances first
+    const existing = bootstrap.Popover.getInstance(target);
+    if (existing) {
+        existing.dispose();
+    }
+    // Configure new attributes and instantiate
+    target.setAttribute("data-bs-toggle", "popover");
+    target.setAttribute("data-bs-content", content);
+    return new bootstrap.Popover(target);
+}
+```
+
 
 ## Why Create a Standalone Component Library?
 
