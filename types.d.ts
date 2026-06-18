@@ -78,10 +78,26 @@ declare global {
     }
 
     /**
+     * Parameters for autocomplete functionality.
+     */
+    interface IAutocompleteParams extends IParams {
+      source?: string;
+      options?: Array<string | { [key: string]: any }>;
+      allowMultiple?: boolean;
+      allowNew?: boolean;
+      selected?: Array<string | { [key: string]: any }>;
+      idKey?: string;
+      labelKey?: string;
+      joined?: boolean;
+      separator?: string;
+      minChars?: number;
+      debounce?: number;
+    }
+
+    /**
      * Content type for UI components.
      */
     type Content = string | Node;
-
     /**
      * Simple event listener function.
      *
@@ -208,6 +224,15 @@ declare global {
     ) => ITooltip;
 
     /**
+     * Initialize autocomplete on the given element, or return existing autocomplete instance.
+     *
+     * @param element The input or select element to bind autocomplete to.
+     * @param params Configuration parameters for the autocomplete.
+     * @returns Autocomplete instance.
+     */
+    autocomplete(element: HTMLElement | string, params?: Theming.IAutocompleteParams): IAutocomplete;
+
+    /**
      * Initialize or retrieve a modal by ID.
      *
      * @param id ID of the modal element.
@@ -238,6 +263,14 @@ declare global {
      * @return Notification instance or null if not found.
      */
     getNotification(id: string): INotification | null;
+
+    /**
+     * Retrieve an existing autocomplete instance by ID or element.
+     *
+     * @param id_or_el The element or ID of the autocomplete element.
+     * @returns Autocomplete instance or null if not found.
+     */
+    getAutocomplete(id_or_el: string | HTMLElement): IAutocomplete | null;
   }
 
   /**
@@ -302,6 +335,24 @@ declare global {
     show: () => void;
     close: () => void;
     destroy: () => void;
+    el: T;
+  }
+
+  /**
+   * Interface for Autocomplete component.
+   *
+   * @param T - The type of the underlying HTML element (default is HTMLElement).
+   * @property select - Method to programmatically select a value.
+   * @property unselect - Method to programmatically unselect a value.
+   * @property onchange - Method to subscribe to selection changes.
+   * @property destroy - Method to clean up resources.
+   * @property el - The underlying HTML element.
+   */
+  interface IAutocomplete<T = HTMLElement> {
+    select(value: string, label?: string): void;
+    unselect(value: string): void;
+    onchange(callback: (values: string[]) => void): void;
+    destroy(): void;
     el: T;
   }
 }

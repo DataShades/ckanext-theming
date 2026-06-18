@@ -5,6 +5,7 @@ import { Modal } from "./modal";
 import { Notification } from "./notification";
 import { Tooltip } from "./tooltip";
 import { Popover } from "./popover";
+import { Autocomplete } from "./autocomplete";
 
 ((ckan) => {
   const ui: IUi = {
@@ -21,6 +22,9 @@ import { Popover } from "./popover";
 
     popover: Popover.create,
     getPopover: Popover.byId,
+
+    autocomplete: Autocomplete.create,
+    getAutocomplete: Autocomplete.byId,
   };
 
   ckan.sandbox.setup((sb) => {
