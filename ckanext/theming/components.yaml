@@ -607,6 +607,9 @@ button:
         style:
             description: Visual style of the button, either "primary", "secondary", "success", "danger", "warning", or "info"
             type: 'str'
+        icon:
+            description: Name of the icon to show in the button (search, home, trash, etc.)
+            type: 'str'
 
 datetime:
     description: |

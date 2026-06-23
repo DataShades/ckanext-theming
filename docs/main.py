@@ -23,6 +23,6 @@ def define_env(env: MacroEnv):
         for arg_name, info in component["arguments"].items():
             arg_type = info.get("type", "any").replace("|", "&#124;")
             description = info["description"].replace("|", "&#124;")
-            table += f"""|`{arg_name}`|{arg_type}|{description}|"""
+            table += f"""|`{arg_name}`|{arg_type}|{description}|\n"""
 
         return title + table
