@@ -5,10 +5,10 @@
 
     {%- if activity_stream %}
         {%- block activity_stream -%}
-            {%- call ui.util.call(ui.activity_list) -%}
+            {%- call ui.util.call(ui.list) -%}
                 {%- for activity in activity_stream %}
                     {%- block activity_item scoped -%}
-                        {%- call ui.util.call(ui.activity, activity=activity) -%}
+                        {%- call ui.util.call(ui.list_item, activity=activity) -%}
                             {{ h.linked_user(activity.user_id) }}
                             {{ activity.activity_type }}
 

@@ -15,7 +15,7 @@ The dataset search page provides:
 
 /// admonition | Screenshots
 
-///tab | Default search page
+/// tab | Default search page
 ![normal](../screenshots/dataset-search-normal.jpeg)
 ///
 

@@ -57,11 +57,11 @@ class TestPages:
         sysadmin: dict[str, Any],
         login: Any,
         app: FixtureApp,
-        source_data: dict[str, Any],
+        source_data: reference.Source,
     ):
         url_map = cast("dict[str, list[Rule]]", app.flask_app.url_map._rules_by_endpoint)
         for name, rules in url_map.items():
-            if any(fnmatch.fnmatch(name, pattern) for pattern in source_data.get("ignore", [])):
+            if any(fnmatch.fnmatch(name, pattern) for pattern in source_data.ignore):
                 continue
 
             for rule in rules:

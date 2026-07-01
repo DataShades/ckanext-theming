@@ -49,4 +49,3 @@ The API tokens page allows users to:
 ## Related Pages
 
 - [User Profile](read.md) - User profile
-- [API Documentation](../other/api.md) - API docs

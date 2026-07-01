@@ -99,7 +99,7 @@ def test_views(
     page.goto("/dataset/" + package["name"] + "/resource/" + resource["id"] + "/views")
     doc_screenshot("resource-views")
 
-    add_btn = page.get_by_role("link", name="Add View")
+    add_btn = page.get_by_text("New view")
     add_btn.scroll_into_view_if_needed()
     doc_screenshot("resource-views-add")
 

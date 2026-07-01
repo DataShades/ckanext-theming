@@ -48,4 +48,4 @@ Allows users to:
 
 - [User Profile](read.md) - User profile
 - [Group Index](../group/index.md) - All groups
-- [Dashboard Groups](../dashboard/content.md) - My groups
+- [Dashboard Groups](../dashboard/groups.md) - My groups

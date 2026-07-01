@@ -29,7 +29,6 @@ User pages handle:
 | [User List](list.md)              | All users                      |
 | [API Tokens](api-tokens.md)       | Manage API tokens              |
 | [Request Reset](request-reset.md) | Request password reset         |
-| [Perform Reset](perform-reset.md) | Reset password                 |
 
 ## Related Sections
 

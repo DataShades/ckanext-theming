@@ -22,7 +22,6 @@ Resource pages handle:
 | [New](new.md)                                | Create new resource |
 | [Views](views.md)                            | Manage views        |
 | [Dictionary](dictionary.md)                  | Data dictionary     |
-| [Delete Confirm](confirm-delete-resource.md) | Delete confirmation |
 
 ## Related Sections
 

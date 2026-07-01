@@ -39,4 +39,3 @@ Allows users to:
 ## Related Pages
 
 - [Login](login.md) - User login
-- [Perform Reset](perform-reset.md) - Set new password

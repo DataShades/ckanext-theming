@@ -7,7 +7,7 @@ from playwright.sync_api import Page, expect
 
 import ckan.plugins.toolkit as tk
 
-from .conftest import ElementLocator
+from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
 @pytest.mark.usefixtures("with_plugins")

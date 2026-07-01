@@ -49,4 +49,4 @@ Allows users to:
 ## Related Pages
 
 - [Resource Read](read.md) - View resource
-- [New Resource](../dataset/new-resource.md) - Create resource
+- [New Resource](new.md) - Create resource

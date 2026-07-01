@@ -21,6 +21,10 @@ The organization index page provides:
 ![search empty](../screenshots/organization-index-search-empty.jpeg)
 ///
 
+/// tab | Add button
+![search empty](../screenshots/organization-index-with-add-button.jpeg)
+///
+
 ///
 
 ## URL Pattern

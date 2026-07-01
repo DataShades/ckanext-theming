@@ -34,7 +34,7 @@ nav = [
     "resource/views.md",
     "resource/dictionary.md",
     ]},
-  {"Organization": [
+  {"Organization"= [
     "organization/index.md",
     "organization/search.md",
     "organization/read.md",
@@ -50,7 +50,7 @@ nav = [
     "organization/activity.md",
     "organization/bulk-process.md",
     ]},
-  {"Group": [
+  {"Group"= [
     "group/index.md",
     "group/search.md",
     "group/read.md",
@@ -133,6 +133,9 @@ features = [
 
 logo = "img/logo.png"
 
+[project.extra.vars]
+site_url = "http://localhost:5000"
+
 [[project.theme.palette]]
 scheme = "default"
 primary = "blue"
@@ -145,7 +148,7 @@ toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 
 [project.markdown_extensions.abbr]
-[project.markdown_extensions.admonition]
+# [project.markdown_extensions.admonition]
 [project.markdown_extensions.attr_list]
 [project.markdown_extensions.def_list]
 [project.markdown_extensions.footnotes]
@@ -156,7 +159,7 @@ permalink = true
 generic = true
 [project.markdown_extensions.pymdownx.betterem]
 [project.markdown_extensions.pymdownx.caret]
-[project.markdown_extensions.pymdownx.details]
+# [project.markdown_extensions.pymdownx.details]
 [project.markdown_extensions.pymdownx.emoji]
 emoji_generator = "zensical.extensions.emoji.to_svg"
 emoji_index = "zensical.extensions.emoji.twemoji"
@@ -174,12 +177,17 @@ pygments_lang_class = true
 custom_fences = [
   { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
 ]
-[project.markdown_extensions.pymdownx.tabbed]
-alternate_style = true
-combine_header_slug = true
+# [project.markdown_extensions.pymdownx.tabbed]
+# alternate_style = true
+# combine_header_slug = true
 [project.markdown_extensions.pymdownx.tasklist]
 custom_checkbox = true
 [project.markdown_extensions.pymdownx.tilde]
+[project.markdown_extensions.pymdownx.blocks.admonition]
+[project.markdown_extensions.pymdownx.blocks.details]
+[project.markdown_extensions.pymdownx.blocks.tab]
+alternate_style = true
+
 [project.markdown_extensions.zensical.extensions.macros]
 module_name = "docs/main"
 on_error_fail = true

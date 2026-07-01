@@ -42,4 +42,4 @@ Allows users to:
 
 - [User Profile](read.md) - User profile
 - [Organization Index](../organization/index.md) - All organizations
-- [Dashboard Organizations](../dashboard/content.md) - My organizations
+- [Dashboard Organizations](../dashboard/organizations.md) - My organizations

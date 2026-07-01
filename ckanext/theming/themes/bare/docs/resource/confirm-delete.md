@@ -38,6 +38,6 @@ Prevents accidental deletion of:
 
 ## Related Pages
 
-- [Resource Edit](../resource/edit.md) - Edit resource
-- [Dataset Resources](resources.md) - Manage resources
+- [Resource Edit](edit.md) - Edit resource
+- [Dataset Resources](../dataset/resources.md) - Manage resources
 - [Dataset Delete](confirm-delete.md) - Delete dataset

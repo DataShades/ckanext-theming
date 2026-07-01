@@ -117,5 +117,6 @@ class TestUserActivity:
         """Test that the user activity title is correct."""
         login(user)
         page.goto(tk.url_for("activity.user_activity", id=user["name"]))
+
         expected = title_builder("Activity Stream", user["fullname"], "Users")
         expect(page).to_have_title(expected)
