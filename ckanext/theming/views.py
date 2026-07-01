@@ -7,7 +7,7 @@ from flask import Blueprint, current_app
 
 import ckan.plugins.toolkit as tk
 
-from ckanext.theming import reference
+from ckanext.theming.lib import get_active_theme
 
 bp = Blueprint("theming", __name__, url_prefix="/theming")
 
@@ -80,10 +80,11 @@ def component(component: str):
         "component": component,
         "available_components": available_components,
         "examples": examples,
-        "ref": reference.components,
+        "ref": get_active_theme().component_reference(),
     }
     if component == "list":
         _add_list_vars(extra_vars)
+
     return tk.render("theming/component.html", extra_vars)
 
 

@@ -39,6 +39,7 @@ from ckan.exceptions import CkanConfigurationException
 from ckan.lib.helpers import helper_functions as h
 
 from . import config as cfg
+from . import reference
 from .base import UI, BaseTheme, BaseUtil, PElement
 from .interfaces import ITheme
 
@@ -447,6 +448,26 @@ class Theme(BaseTheme):
         if self.path:
             return os.path.join(self.path, self.asset_folder)
 
+    @override
+    def component_reference(self) -> reference.Glossary[str, reference.Component]:
+        theme = self
+        chain: list[BaseTheme] = [theme]
+
+        while theme.parent:
+            theme = get_theme(theme.parent)
+            chain.append(theme)
+
+        ref = reference.components.clone()
+
+        for theme in reversed(chain):
+            if theme.path:
+                source = os.path.join(theme.path, "components.yaml")
+                if os.path.isfile(source):
+                    for key, value in reference.parse_components(source).items():
+                        ref[key] = value
+
+        return ref
+
 
 def get_theme(name: str):
     """Get theme by name.
@@ -459,7 +480,7 @@ def get_theme(name: str):
 _themes: dict[str, BaseTheme] = {}
 
 
-def collect_themes() -> None:
+def _collect_themes() -> None:
     """Collect available themes from core and plugins."""
     # ckan_root = os.path.dirname(os.path.abspath(ckan.__file__))
     _themes.clear()
@@ -482,7 +503,25 @@ def resolve_paths(theme: str | None) -> list[str]:
     return paths
 
 
-def enable_theme(name: str, config_: Any):
+def get_active_theme():
+    theme = cfg.theme()
+    if not theme:
+        if tk.config.get("ckan.base_templates_folder") == "templates-midnight-blue":
+            theme = "midnight-blue-polyfill"
+        else:
+            theme = "classic-polyfill"
+
+    if not _themes:
+        _collect_themes()
+
+    try:
+        return get_theme(theme)
+    except KeyError as err:
+        msg = f"Active theme '{theme}' is not recognised."
+        raise CkanConfigurationException(msg) from err
+
+
+def enable_theme(theme: BaseTheme, config_: Any):
     """Enable the specified theme.
 
     This function updates the CKAN configuration to include template and
@@ -493,25 +532,23 @@ def enable_theme(name: str, config_: Any):
     :raises CkanConfigurationException: if the theme or its parent is not found
 
     """
-    enabled_themes: list[BaseTheme] = []
+    enabled_themes: list[BaseTheme] = [theme]
+    seen_names: list[str] = [theme.name]
 
-    seen_names: list[str] = []
-    while True:
+    while theme.parent:
         try:
-            theme = get_theme(name)
+            theme = get_theme(theme.parent)
         except KeyError as err:
-            msg = f"Theme '{name}' is not recognised."
+            msg = f"Parent theme '{theme.parent}' is not recognised."
             raise CkanConfigurationException(msg) from err
 
-        seen_names.append(name)
-        enabled_themes.append(theme)
-        if not theme.parent:
-            break
-        name = theme.parent
-        if name in seen_names:
+        if theme.name in seen_names:
             chain = " <- ".join(seen_names)
-            msg = f"Cannot extend '{name}' theme because it's already present in theme chain: {chain}"
+            msg = f"Cannot extend '{theme.name}' theme because it's already present in theme chain: {chain}"
             raise CkanConfigurationException(msg)
+
+        seen_names.append(theme.name)
+        enabled_themes.append(theme)
 
     here = os.path.dirname(__file__)
 

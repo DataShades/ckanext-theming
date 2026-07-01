@@ -10,6 +10,8 @@ from markupsafe import Markup
 
 from ckan import types
 
+from . import reference
+
 
 class PElement(Protocol):
     def __call__(self, *args: Any, **kwargs: Any) -> Markup: ...
@@ -107,3 +109,6 @@ class BaseTheme(abc.ABC):
 
     @abc.abstractmethod
     def asset_path(self) -> str | None: ...
+
+    @abc.abstractmethod
+    def component_reference(self) -> reference.Glossary[str, reference.Component]: ...

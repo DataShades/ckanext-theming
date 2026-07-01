@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
+import copy
 import dataclasses
 import enum
 import fnmatch
 import os
 from collections import defaultdict
-from collections.abc import Mapping
-from typing import Any, Dict
+from collections.abc import Callable, Iterator, Mapping, MutableMapping
+from typing import Any, TypeVar
 
 import msgspec
+from file_keeper.core.registry import Hashable
+from typing_extensions import override
 
 
 class Matcher(msgspec.Struct):
@@ -88,12 +91,60 @@ def make_params(endpoint: str, args: set[str], source: Source, defaults: Mapping
     return params
 
 
-components: dict[str, Component] = defaultdict(Component)
-with open(os.path.join(os.path.dirname(__file__), "components.yaml"), "rb") as src:
-    components.update(msgspec.yaml.decode(src.read(), type=Dict[str, Component]))
+K = TypeVar("K", bound=Hashable)
+V = TypeVar("V", bound=Hashable)
+
+
+class Glossary(MutableMapping[K, V]):
+    __components: dict[K, V]
+    default_factory: Callable[[], V] | None
+
+    def __init__(self, data: dict[K, V] | None = None, default_factory: Callable[[], V] | None = None):
+        if data is None:
+            data = {}
+        self.__components = data
+        self.default_factory = default_factory
+
+    @override
+    def __delitem__(self, key: K):
+        del self.__components[key]
+
+    @override
+    def __setitem__(self, key: K, value: V):
+        self.__components[key] = value
+
+    @override
+    def __getitem__(self, key: K) -> V:
+        if key in self.__components:
+            return self.__components[key]
+
+        if self.default_factory:
+            return self.default_factory()
+
+        raise KeyError(key)
+
+    @override
+    def __iter__(self) -> Iterator[K]:
+        yield from self.__components
+
+    @override
+    def __len__(self):
+        return len(self.__components)
+
+    def clone(self):
+        return type(self)(copy.deepcopy(self.__components), default_factory=self.default_factory)
+
+
+def parse_components(source: str):
+    with open(source, "rb") as src:
+        return msgspec.yaml.decode(src.read(), type=dict[str, Component])
+
+
+components: Glossary[str, Component] = Glossary(default_factory=Component)
+components.update(parse_components(os.path.join(os.path.dirname(__file__), "components.yaml")))
 
 
 templates: dict[str, Template] = defaultdict(Template)
 
 with open(os.path.join(os.path.dirname(__file__), "templates.yaml"), "rb") as src:
-    templates.update(msgspec.yaml.decode(src.read(), type=Dict[str, Template]))
+    templates.update(msgspec.yaml.decode(src.read(), type=dict[str, Template]))

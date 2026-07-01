@@ -45,15 +45,7 @@ class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
         tk.add_resource("assets", "theming")
         tk.add_template_directory(config, "templates")
 
-        lib.collect_themes()
-        theme = cfg.theme()
-        if not theme:
-            if tk.config.get("ckan.base_templates_folder") == "templates-midnight-blue":
-                theme = "midnight-blue-polyfill"
-            else:
-                theme = "classic-polyfill"
-
-        if theme:
+        if theme := lib.get_active_theme():
             lib.enable_theme(theme, config)
 
     @override

@@ -184,7 +184,7 @@ def component_analyze(  # noqa: C901, PLR0912, PLR0915
                 tk.error_shout(f"Unknown component {component}")
                 continue
 
-            ref = reference.components[component]
+            ref = lib.get_active_theme().component_reference()[component]
             if category and ref.category != category:
                 continue
             # Try to get the source or signature information
@@ -276,7 +276,8 @@ def component_analyze(  # noqa: C901, PLR0912, PLR0915
 def component_check(ctx: click.Context, theme: lib.Theme):  # noqa: C901
     """Verify that a theme implements all required UI components."""
     categorized: dict[reference.Category, set[str]] = defaultdict(set)
-    for name, info in reference.components.items():
+    component_ref = lib.get_active_theme().component_reference()
+    for name, info in component_ref.items():
         categorized[info.category].add(name)
 
     with _make_ui(ctx, theme) as ui:
@@ -284,7 +285,7 @@ def component_check(ctx: click.Context, theme: lib.Theme):  # noqa: C901
         theme_components = set(ui)
         missing_components = {name: sorted(items - theme_components) for name, items in categorized.items()}
 
-        extra_components = sorted(theme_components.difference(reference.components))
+        extra_components = sorted(theme_components.difference(component_ref))
 
         click.echo(f"Theme implements {len(theme_components)} components")
 
@@ -536,7 +537,7 @@ def template_component_usage(  # noqa: C901, PLR0912
 
     unused = existing - set(used)
     unknown = set(used) - existing
-    unimplemented = unknown & set(reference.components)
+    unimplemented = unknown & set(lib.get_active_theme().component_reference())
 
     if show_unused:
         if unused:
