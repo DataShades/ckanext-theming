@@ -416,11 +416,6 @@ class Theme(BaseTheme):
     util_factory: type[BaseUtil] = Util
     icon_map: dict[str, str] = dataclasses.field(default_factory=dict)
 
-    def __post_init__(self):
-        if self.name == "theme":
-            msg = "The word `theme` cannot be used as an actual theme's name"
-            raise ValueError(msg)
-
     @override
     def build_ui(self, app: types.CKANApp) -> UI:
         """Build a UI instance for this theme.
@@ -499,7 +494,7 @@ def enable_theme(name: str, config_: Any):
 
     """
     enabled_themes: list[BaseTheme] = []
-    the_theme = name
+
     seen_names: list[str] = []
     while True:
         try:
@@ -526,8 +521,6 @@ def enable_theme(name: str, config_: Any):
 
         if (path := theme.asset_path()) and os.path.isdir(path):
             tk.add_resource(os.path.relpath(path, here), f"theming/{theme.name}")
-            if theme.name == the_theme:
-                tk.add_resource(os.path.relpath(path, here), "theming/theme")
 
         if (path := theme.public_path()) and os.path.isdir(path):
             tk.add_public_directory(config_, os.path.relpath(path, here))
