@@ -1,5 +1,0 @@
-{% import "benchmarks/macros.html" as macro %}
-
-{% for i in range(1, 1001) %}
-    {{ macro.snippet_block(title, content, "legion/" ~ i) }}
-{% endfor %}

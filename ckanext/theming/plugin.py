@@ -26,9 +26,6 @@ class ThemingPlugin(ITheme, p.IConfigurer, p.IMiddleware, p.IBlueprint, p.Single
     def update_config(self, config: Any):
         update_config(config)
 
-        if config["testing"]:
-            tk.add_template_directory(config, "tests/templates")
-
     @override
     def register_themes(self):
         return register_themes() + [make_bare_theme()]

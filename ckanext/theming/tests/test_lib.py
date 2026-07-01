@@ -15,7 +15,7 @@ def util():
 def test_init(app: types.CKANApp):
     """Util class initialized in new UI."""
     theme = lib.Theme("test", None, ui_factory=lib.MacroUI)
-    ui = theme.build_ui(app.flask_app)  # pyright: ignore[reportAttributeAccessIssue]
+    ui = theme.build_ui(app.flask_app)
     assert isinstance(ui.util, lib.Util)
 
 

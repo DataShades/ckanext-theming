@@ -34,16 +34,16 @@ Documentation = "https://datashades.github.io/ckanext-theming/"
 theming = "ckanext.theming.plugin:ThemingPlugin"
 
 [project.optional-dependencies]
-test = ["pytest-ckan", "pytest-benchmark", "pytest-pretty"]
-docs = ["mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]", "mkdocs-autorefs", "mkdocs-macros-plugin", "mkdocs-glightbox"]
-dev = ["pytest-ckan", "pytest-benchmark", "pytest-pretty", "mkdocs", "mkdocs-material", "pymdown-extensions", "mkdocstrings[python]", "pre-commit", "pytest-playwright", "mkdocs-autorefs", "mkdocs-macros-plugin", "mkdocs-glightbox"]
+test = ["pytest-ckan", "pytest-pretty"]
+docs = ["zensical"]
+dev = ["pytest-ckan", "pytest-pretty", "zensical", "pre-commit", "pytest-playwright"]
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py310"
 line-length = 120
 
 [tool.ruff.lint]
@@ -118,11 +118,12 @@ self = ["ckanext.theming"]
 
 [tool.pytest.ini_options]
 addopts = "--ckan-ini test.ini -m 'not benchmark'"
+testpaths = ["ckanext/theming/tests"]
 filterwarnings = [
 ]
 
 [tool.pyright]
-pythonVersion = "3.8"
+pythonVersion = "3.10"
 extraPaths = [
            "../ckan",
 ]

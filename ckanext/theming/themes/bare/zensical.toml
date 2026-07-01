@@ -1,0 +1,189 @@
+[project]
+site_name = "Theme Documentation"
+site_description = "Portal pages documentation for CKAN theme"
+site_author = "Theme author"
+site_url = "https://theme-author.github.io/ckanext-my-theme/"
+repo_url = "https://github.com/theme-author/ckanext-my-theme"
+
+nav = [
+  "index.md",
+  {"Home"=[
+    "home/index.md",
+    "home/home.md",
+    "home/about.md",
+    ]},
+  { "Dataset" =[
+    "dataset/index.md",
+    "dataset/search.md",
+    "dataset/read.md",
+    "dataset/new.md",
+    "dataset/edit.md",
+    "dataset/activity.md",
+    "dataset/followers.md",
+    "dataset/groups.md",
+    "dataset/resources.md",
+    "dataset/confirm-delete.md",
+    "dataset/collaborators.md",
+    ]},
+  {"Resource"=[
+    "resource/index.md",
+    "resource/read.md",
+    "resource/new.md",
+    "resource/edit.md",
+    "resource/confirm-delete.md",
+    "resource/views.md",
+    "resource/dictionary.md",
+    ]},
+  {"Organization": [
+    "organization/index.md",
+    "organization/search.md",
+    "organization/read.md",
+    "organization/about.md",
+    "organization/new.md",
+    "organization/edit.md",
+    "organization/confirm-delete.md",
+    "organization/members.md",
+    "organization/member-new.md",
+    "organization/manage-members.md",
+    "organization/confirm-delete-member.md",
+    "organization/admins.md",
+    "organization/activity.md",
+    "organization/bulk-process.md",
+    ]},
+  {"Group": [
+    "group/index.md",
+    "group/search.md",
+    "group/read.md",
+    "group/about.md",
+    "group/new.md",
+    "group/edit.md",
+    "group/confirm-delete.md",
+    "group/members.md",
+    "group/member-new.md",
+    "group/manage-members.md",
+    "group/confirm-delete-member.md",
+    "group/admins.md",
+    "group/activity.md",
+    "group/followers.md",
+    ]},
+  {"User" =[
+    "user/index.md",
+    "user/login.md",
+    "user/new.md",
+    "user/read.md",
+    "user/edit.md",
+    "user/confirm-delete.md",
+    "user/activity.md",
+    "user/followers.md",
+    "user/organizations.md",
+    "user/groups.md",
+    "user/api-tokens.md",
+    "user/request-reset.md",
+    ]},
+  {"Dashboard"=[
+    "dashboard/index.md",
+    "dashboard/dashboard.md",
+    "dashboard/datasets.md",
+    "dashboard/organizations.md",
+    "dashboard/groups.md",
+    ]},
+  {"Admin" = [
+    "admin/index.md",
+    "admin/sysadmins.md",
+    "admin/config.md",
+    "admin/confirm-reset.md",
+    "admin/trash.md",
+    ]},
+  {"Other" = [
+    "other/index.md",
+    "other/error-pages.md",
+    "other/stats.md",
+    ]}
+]
+
+#extra_css = ["stylesheets/extra.css"]
+#extra_javascript = ["javascripts/extra.js"]
+
+[project.theme]
+# variant = "classic"
+#custom_dir = "overrides"
+favicon = "img/favicon.ico"
+
+features = [
+  "announce.dismiss",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  # "navigation.sections",
+  # "navigation.expand",
+
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "toc.follow",
+  # "toc.integrate",
+]
+
+logo = "img/logo.png"
+
+[[project.theme.palette]]
+scheme = "default"
+primary = "blue"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.toc]
+permalink = true
+[project.markdown_extensions.pymdownx.arithmatex]
+generic = true
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.emoji]
+emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji_index = "zensical.extensions.emoji.twemoji"
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+[project.markdown_extensions.pymdownx.snippets]
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.magiclink]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.smartsymbols]
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+combine_header_slug = true
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+[project.markdown_extensions.pymdownx.tilde]
+[project.markdown_extensions.zensical.extensions.macros]
+module_name = "docs/main"
+on_error_fail = true
+j2_block_start_string = "<%"
+j2_block_end_string = "%>"
+j2_variable_start_string = "<<"
+j2_variable_end_string = ">>"

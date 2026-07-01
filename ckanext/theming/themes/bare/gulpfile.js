@@ -36,7 +36,7 @@ const build = () =>
     // node_modules packages
     .pipe(
       sass({
-        includePaths: ["node_modules"],
+        loadPaths: ["node_modules"],
         silenceDeprecations: ["import", "legacy-js-api"],
       }).on("error", sass.logError),
     )
