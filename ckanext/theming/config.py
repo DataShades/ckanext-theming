@@ -20,4 +20,4 @@ def theme() -> str:
 
 def enable_views() -> bool:
     """Returns True if the theming views are enabled, False otherwise."""
-    return tk.config[ENABLE_VIEWS]
+    return tk.asbool(tk.config.get(ENABLE_VIEWS))

@@ -331,7 +331,7 @@ class MacroUI(UI):
 
         self._inv = {}
         if hasattr(app, "_wsgi_app"):
-            app = cast(types.CKANApp, app._wsgi_app)
+            app = cast(types.CKANApp, app._wsgi_app)  # pyright: ignore[reportAttributeAccessIssue]
 
         self.__env = app.jinja_env
 

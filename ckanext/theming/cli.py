@@ -29,7 +29,8 @@ from werkzeug.routing import BuildError, Rule
 import ckan.plugins.toolkit as tk
 from ckan import model, types
 
-from . import cfg, lib, reference
+from . import config as cfg
+from . import lib, reference
 
 log = logging.getLogger(__name__)
 
@@ -487,7 +488,7 @@ def _discover_template_hierarchy(
     except TemplateNotFound:
         return parent_name
 
-    canonical: str = os.path.normpath(parent_tpl.filename)   # pyright: ignore[reportArgumentType, reportCallIssue, reportUnknownVariableType]
+    canonical: str = os.path.normpath(parent_tpl.filename)  # pyright: ignore[reportArgumentType, reportCallIssue, reportUnknownVariableType]
     hierarchy.append(canonical)
     if all_blocks is not None:
         all_blocks[canonical] = set(parent_tpl.blocks)

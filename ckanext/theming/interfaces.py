@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from typing import ClassVar
 
-from ckan.plugins import Interface
+from ckan.plugins import IConfigurer, Interface
 
 from ckanext.theming.base import UI, BaseTheme
 
 
 class ITheme(Interface):
     """Allow extensions to provide custom themes for CKAN."""
+
+    _reverse_iteration_order: ClassVar[bool] = IConfigurer._reverse_iteration_order
 
     def register_themes(self) -> Iterable[BaseTheme]:
         """Register themes provided by extension.
