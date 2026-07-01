@@ -21,6 +21,11 @@ log = logging.getLogger(__name__)
 
 
 def _is_main_implementation(self: ThemingMixin, config: types.CKANConfig):
+    """Check if the current plugin instance is the main implementation of ThemingMixin.
+
+    The main implementations is either the theming plugin itself it it's
+    loaded, or the last loaded plugin that extends ThemingMixin.
+    """
     if p.plugin_loaded("theming"):
         return self.name == "theming"
 
