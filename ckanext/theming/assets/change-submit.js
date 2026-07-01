@@ -4,7 +4,7 @@
  * Automatically submits a form when a 'change' event is detected.
  *
  * Usage:
- * <form data-module="change-submit" data-module-selector="select">
+ * <form data-module="theming-change-submit" data-module-selector="select">
  *   <select name="sort">...</select>
  * </form>
  *
@@ -14,7 +14,7 @@
  *                       within the container triggers it.
  */
 
-ckan.module("change-submit", () => {
+ckan.module("theming-change-submit", () => {
   return {
     options: {
       selector: null,
@@ -59,7 +59,7 @@ ckan.module("change-submit", () => {
         if (form) {
           form.requestSubmit();
         } else {
-          console.warn("[change-submit]: No parent or associated form found for change event");
+          console.warn("[theming-change-submit]: No parent or associated form found for change event");
         }
       }
     },
