@@ -39,7 +39,7 @@
                 {#- Styles block - contains links to stylesheets -#}
                 {%- block styles %}
                     {%- block styles_theming -%}
-                        {%- asset "theming/bare/styles" %}
+                        {%- asset "theming/theme/styles" %}
                     {%- endblock %}
                 {%- endblock -%}
 
@@ -75,7 +75,7 @@
 
                     {#- Theming scripts block - contains theming related JavaScript files -#}
                     {%- block scripts_theming -%}
-                        {%- asset "theming/bare/scripts" -%}
+                        {%- asset "theming/theme/scripts" -%}
                     {%- endblock %}
                 {% endblock %}
 
