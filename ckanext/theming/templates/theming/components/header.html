@@ -1,4 +1,6 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["header", "account"] -%}
+
 
 {%- block overview -%}
 
@@ -24,14 +26,5 @@
         profile information, account status, or account-specific navigation
         elements that are important for user identification and account management.
     </p>
-
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Header</h3>
-    {{ super() }}
-
-    <h3>Account</h3>
-    {{ parameters_table("account") }}
 
 {%- endblock %}

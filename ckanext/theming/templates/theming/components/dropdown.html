@@ -1,5 +1,8 @@
 {%- extends "theming/base_component.html" -%}
 
+{%- set parametrized = parametrized or ["dropdown", "dropdown_item"] -%}
+
+
 {%- block overview -%}
 
     <p>
@@ -16,12 +19,4 @@
     </p>
 
 
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Dropdown</h3>
-    {{ super() }}
-
-    <h3>Dropdown item</h3>
-    {{ parameters_table("dropdown_item") }}
 {%- endblock %}

@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["footer", "footer_main", "footer_secondary"] -%}
 
 {%- block overview -%}
 
@@ -32,19 +33,5 @@
         links that users might find useful but are not as critical as the
         information in the main footer section.
     </p>
-
-{%- endblock %}
-
-
-
-{%- block parameters -%}
-    <h3>Footer</h3>
-    {{ super() }}
-
-    <h3>Main footer</h3>
-    {{ parameters_table("footer_secondary") }}
-
-    <h3>Secondary footer</h3>
-    {{ parameters_table("footer_main") }}
 
 {%- endblock %}

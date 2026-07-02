@@ -1,4 +1,6 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["extra_fields", "extra_fields_collection"] -%}
+
 
 {%- block overview -%}
 
@@ -12,12 +14,4 @@
     for dynamically added fields. This component ensures that all extra fields are
     properly organized and processed as a group.
 
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Extra field</h3>
-    {{ super() }}
-
-    <h3>Extra field collection</h3>
-    {{ parameters_table("extra_fields_collection") }}
 {%- endblock %}

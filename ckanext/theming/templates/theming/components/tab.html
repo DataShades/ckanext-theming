@@ -1,5 +1,8 @@
 {%- extends "theming/base_component.html" -%}
 
+{%- set parametrized = parametrized or ["tab", "tab_pane", "tab_wrapper", "tab_pane_wrapper"] -%}
+
+
 {%- block overview -%}
 
     <p>
@@ -27,14 +30,4 @@
         which represent the content sections that are shown or hidden based on
         the active tab selection.
     </p>
-{%- endblock %}
-
-
-
-{%- block parameters -%}
-    <h3>Tab</h3>
-    {{ super() }}
-
-    <h3>Tab pane</h3>
-    {{ parameters_table("tab_pane") }}
 {%- endblock %}

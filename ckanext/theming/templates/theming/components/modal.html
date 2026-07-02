@@ -1,4 +1,6 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["modal", "modal_handle", "modal_close_handle", "confirm_modal"] -%}
+
 
 {%- block overview -%}
     <p>
@@ -43,12 +45,4 @@
         form workflows.
     </p>
 
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Modal</h3>
-    {{ super() }}
-
-    <h3>Confirm modal</h3>
-    {{ parameters_table("confirm_modal") }}
 {%- endblock %}

@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["popover", "popover_handle"] -%}
 
 {%- block overview -%}
 
@@ -13,12 +14,4 @@
     works with <code>popover_handle</code> components to provide the trigger
     mechanism for showing and hiding popovers.
 
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Popover</h3>
-    {{ super() }}
-
-    <h3>Handle</h3>
-    {{ parameters_table("popover_handle") }}
 {%- endblock %}

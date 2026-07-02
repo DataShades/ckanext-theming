@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["section", "sidebar_section", "facet_section"] -%}
 
 {%- block overview -%}
 
@@ -20,17 +21,5 @@
         filtering interface. This component is specifically designed for search and
         filtering functionality.
     </p>
-
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Section</h3>
-    {{ super() }}
-
-    <h3>Sidebar section</h3>
-    {{ parameters_table("sidebar_section") }}
-
-    <h3>Facet section</h3>
-    {{ parameters_table("facet_section") }}
 
 {%- endblock %}

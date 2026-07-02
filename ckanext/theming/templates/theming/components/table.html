@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["table", "table_cell", "table_head", "table_body", "table_row"] -%}
 
 {%- block overview -%}
 
@@ -34,13 +35,4 @@
         tags unless you are sure that the theme you are using implements <code>table</code> component
         using native HTML table elements.
     </p>
-{%- endblock %}
-
-
-{%- block parameters -%}
-    <h3>Table</h3>
-    {{ super() }}
-
-    <h3>Table cell</h3>
-    {{ parameters_table("table_cell") }}
 {%- endblock %}

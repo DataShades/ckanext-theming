@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["grid", "row", "column"] -%}
 
 {%- block overview -%}
 
@@ -23,18 +24,5 @@
         behavior, allowing developers to specify how many columns an element should
         span on different screen sizes.
     </p>
-
-{%- endblock %}
-
-
-{%- block parameters -%}
-    <h3>Grid</h3>
-    {{ super() }}
-
-    <h3>Row</h3>
-    {{ parameters_table("row") }}
-
-    <h3>Column</h3>
-    {{ parameters_table("column") }}
 
 {%- endblock %}

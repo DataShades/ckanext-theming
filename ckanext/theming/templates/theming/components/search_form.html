@@ -1,4 +1,5 @@
 {%- extends "theming/base_component.html" -%}
+{%- set parametrized = parametrized or ["search_form", "search_form_box", "search_input", "search_submit_button", "search_sort_control", "search_results_text", "search_active_filters", "search_advanced_controls"] -%}
 
 {%- block overview -%}
 
@@ -65,32 +66,5 @@
         provides the primary action for initiating searches and must be clearly
         identifiable and appropriately styled to encourage user action.
     </p>
-
-{%- endblock %}
-
-{%- block parameters -%}
-    <h3>Search form</h3>
-    {{ super() }}
-
-    <h3>Search form box</h3>
-    {{ parameters_table("search_form_box") }}
-
-    <h3>Search input</h3>
-    {{ parameters_table("search_input") }}
-
-    <h3>Submit button</h3>
-    {{ parameters_table("search_submit_button") }}
-
-    <h3>Sort control</h3>
-    {{ parameters_table("search_sort_control") }}
-
-    <h3>Results text</h3>
-    {{ parameters_table("search_results_text") }}
-
-    <h3>Active filters</h3>
-    {{ parameters_table("search_active_filters") }}
-
-    <h3>Advanced controls</h3>
-    {{ parameters_table("search_advanced_controls") }}
 
 {%- endblock %}
