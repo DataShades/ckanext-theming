@@ -8,11 +8,10 @@ import enum
 import fnmatch
 import os
 from collections import defaultdict
-from collections.abc import Callable, Iterator, Mapping, MutableMapping
+from collections.abc import Callable, Hashable, Iterator, Mapping, MutableMapping
 from typing import Any, TypeVar
 
 import msgspec
-from file_keeper.core.registry import Hashable
 from typing_extensions import override
 
 
