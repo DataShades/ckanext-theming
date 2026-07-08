@@ -1,0 +1,2052 @@
+# Translations template for ckanext-theming.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the ckanext-theming
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-theming 0.0.3\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-07-07 12:59+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ckanext/theming/views.py:28 ckanext/theming/views.py:39
+msgid "Utility function not found"
+msgstr ""
+
+#: ckanext/theming/views.py:77
+msgid "Component not found"
+msgstr ""
+
+#: ckanext/theming/templates/macros/theming_default_ui.html:35
+msgid "No data provided"
+msgstr ""
+
+#: ckanext/theming/templates/macros/theming_default_ui.html:102
+msgid "Close"
+msgstr ""
+
+#: ckanext/theming/templates/macros/theming_default_ui.html:103
+#: ckanext/theming/templates/macros/theming_default_ui.html:105
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:9
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:27
+msgid "Confirm"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base.html:41
+#: ckanext/theming/templates/theming/base.html:46
+msgid "Theming"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base.html:47
+#: ckanext/theming/templates/theming/component.html:19
+#: ckanext/theming/templates/theming/component.html:29
+msgid "Components"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base.html:48
+#: ckanext/theming/templates/theming/util.html:11
+msgid "Util"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base.html:49
+#: ckanext/theming/templates/theming/js.html:12
+msgid "JavaScript"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base_component.html:21
+msgid "Overview"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base_component.html:28
+msgid "Examples"
+msgstr ""
+
+#: ckanext/theming/templates/theming/base_component.html:42
+msgid "Parameters"
+msgstr ""
+
+#: ckanext/theming/templates/theming/js.html:27
+msgid "JS Utilities"
+msgstr ""
+
+#: ckanext/theming/templates/theming/util.html:43
+msgid "Utilities"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/error_document_template.html:8
+#, python-format
+msgid "Error %(error_code)s"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/error_document_template.html:20
+msgid "You might need to login to access this page."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/error_document_template.html:21
+msgid "Click here to login"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/base.html:5
+#: ckanext/theming/themes/bare/templates/admin/base.html:11
+#: ckanext/theming/themes/bare/templates/header.html:7
+msgid "Admin"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/header.html:10
+#: ckanext/theming/themes/bare/templates/user/edit_base.html:8
+msgid "Profile"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/header.html:14
+#: ckanext/theming/themes/bare/templates/user/dashboard.html:5
+#: ckanext/theming/themes/bare/templates/user/dashboard.html:11
+msgid "Dashboard"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/header.html:18
+msgid "Settings"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/header.html:23
+#: ckanext/theming/themes/bare/templates/user/logout_first.html:5
+msgid "Log out"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/header.html:31
+msgid "Log in"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/header.html:32
+#: ckanext/theming/themes/bare/templates/user/new.html:5
+#: ckanext/theming/themes/bare/templates/user/new.html:10
+#: ckanext/theming/themes/bare/templates/user/new.html:14
+msgid "Register"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/layout.html:20
+msgid "Home"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/base.html:16
+msgid "Sysadmins"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/base.html:17
+#: ckanext/theming/themes/bare/templates/admin/config.html:4
+#: ckanext/theming/themes/bare/templates/admin/config.html:10
+#: ckanext/theming/themes/bare/templates/admin/confirm_reset.html:5
+msgid "Config"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/base.html:18
+#: ckanext/theming/themes/bare/templates/admin/snippets/confirm_delete.html:5
+#: ckanext/theming/themes/bare/templates/admin/trash.html:4
+#: ckanext/theming/themes/bare/templates/admin/trash.html:10
+#: ckanext/theming/themes/bare/templates/admin/trash.html:57
+msgid "Trash"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:17
+msgid "Configuration"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:22
+#: ckanext/theming/themes/bare/templates/admin/config.html:62
+msgid "Site Title"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:24
+#: ckanext/theming/themes/bare/templates/admin/config.html:64
+msgid "Custom Stylesheet"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:26
+msgid "Site Tag Line"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:28
+#: ckanext/theming/themes/bare/templates/admin/config.html:68
+#: ckanext/theming/themes/bare/templates/group/about.html:4
+#: ckanext/theming/themes/bare/templates/group/base.html:25
+#: ckanext/theming/themes/bare/templates/home/about.html:5
+#: ckanext/theming/themes/bare/templates/home/about.html:11
+#: ckanext/theming/themes/bare/templates/home/about.html:16
+#: ckanext/theming/themes/bare/templates/organization/about.html:4
+#: ckanext/theming/themes/bare/templates/organization/base.html:25
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:15
+msgid "About"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:28
+msgid "About page text"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:30
+#: ckanext/theming/themes/bare/templates/admin/config.html:70
+msgid "Intro Text"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:30
+msgid "Text on home page"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:32
+#: ckanext/theming/themes/bare/templates/admin/config.html:72
+msgid "Custom CSS"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:32
+msgid "Customisable css inserted into the page header"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:40
+msgid "Reset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:41
+msgid "Update Config"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:51
+#: ckanext/theming/themes/bare/templates/admin/confirm_reset.html:12
+msgid "Are you sure you want to reset the config?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:59
+msgid "CKAN config options"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:63
+msgid ""
+"This is the title of this CKAN instance. It appears in various places "
+"throughout CKAN."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:65
+msgid "Define an alternative main CSS file."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:66
+msgid "Site Tag Logo"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:67
+msgid ""
+"This is the logo that appears in the header of all the CKAN instance "
+"templates."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:69
+msgid "This text will appear on this CKAN instances about page."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:71
+msgid ""
+"This text will appear on this CKAN instances home page as a welcome to "
+"visitors."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/config.html:73
+msgid ""
+"This is a block of CSS that appears on every page. If you wish to customize "
+"the templates more fully we recommend reading the documentation."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/confirm_reset.html:6
+#: ckanext/theming/themes/bare/templates/admin/confirm_reset.html:10
+#: ckanext/theming/themes/bare/templates/admin/confirm_reset.html:16
+msgid "Confirm Reset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/confirm_reset.html:15
+#: ckanext/theming/themes/bare/templates/admin/snippets/confirm_delete.html:17
+#: ckanext/theming/themes/bare/templates/group/confirm_delete.html:14
+#: ckanext/theming/themes/bare/templates/group/confirm_delete_member.html:14
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete.html:14
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete_member.html:14
+#: ckanext/theming/themes/bare/templates/package/collaborators/confirm_delete.html:14
+#: ckanext/theming/themes/bare/templates/package/confirm_delete.html:15
+#: ckanext/theming/themes/bare/templates/package/confirm_delete_resource.html:14
+#: ckanext/theming/themes/bare/templates/user/confirm_delete.html:14
+msgid "Cancel"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:5
+msgid "Current Sysadmins"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:7
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:17
+#: ckanext/theming/themes/bare/templates/group/members.html:12
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:17
+#: ckanext/theming/themes/bare/templates/organization/members.html:12
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:19
+msgid "User"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:17
+msgid "Revoke"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:26
+msgid "Promote user to Sysadmin"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:28
+#: ckanext/theming/themes/bare/templates/group/member_new.html:27
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:27
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:23
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:11
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:5
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:23
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:69
+msgid "Username"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:32
+msgid "Promote"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:39
+msgid "Administer CKAN"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:41
+msgid ""
+"As a sysadmin user you have full control over this CKAN instance. Proceed "
+"with care!"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/index.html:45
+msgid "Sysadmin guide"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:14
+msgid "Deleted datasets"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:15
+msgid "Deleted organizations"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:16
+msgid "Deleted groups"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:20
+msgid "Trash Bin"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:23
+msgid "Purge all"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:25
+#: ckanext/theming/themes/bare/templates/admin/trash.html:38
+msgid "Are you sure you want to purge everything?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:36
+msgid "Purge"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/trash.html:58
+msgid "Purge deleted datasets, organizations or groups forever and irreversibly."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/admin/snippets/confirm_delete.html:6
+#: ckanext/theming/themes/bare/templates/admin/snippets/confirm_delete.html:18
+#: ckanext/theming/themes/bare/templates/group/confirm_delete.html:5
+#: ckanext/theming/themes/bare/templates/group/confirm_delete.html:15
+#: ckanext/theming/themes/bare/templates/group/confirm_delete_member.html:5
+#: ckanext/theming/themes/bare/templates/group/confirm_delete_member.html:15
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete.html:5
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete.html:15
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete_member.html:5
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete_member.html:15
+#: ckanext/theming/themes/bare/templates/package/collaborators/confirm_delete.html:5
+#: ckanext/theming/themes/bare/templates/package/collaborators/confirm_delete.html:15
+#: ckanext/theming/themes/bare/templates/package/confirm_delete.html:5
+#: ckanext/theming/themes/bare/templates/package/confirm_delete.html:16
+#: ckanext/theming/themes/bare/templates/package/confirm_delete_resource.html:5
+#: ckanext/theming/themes/bare/templates/package/confirm_delete_resource.html:15
+#: ckanext/theming/themes/bare/templates/user/confirm_delete.html:5
+#: ckanext/theming/themes/bare/templates/user/confirm_delete.html:15
+msgid "Confirm Delete"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:12
+msgid "Are you sure you want to delete the DataStore and Data Dictionary?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:13
+msgid "Delete from DataStore"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:17
+msgid "Upload to DataStore"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:22
+msgid "Upload error:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:29
+msgid "Error:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:38
+msgid "Error traceback:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:51
+msgid "Status"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:52
+msgid "Last updated"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:52
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_list.html:29
+msgid "Never"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:56
+msgid "Upload Log"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:69
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:78
+#: ckanext/theming/themes/bare/templates/package/base.html:31
+msgid "Details"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datapusher/resource_data.html:85
+msgid "End of log"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:11
+#: ckanext/theming/themes/bare/templates/package/resource_edit_base.html:28
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:103
+msgid "Data Dictionary"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:23
+#, python-brace-format
+msgid "Field {num}."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:23
+msgid "Primary key"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:28
+msgid "Type Override"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:32
+#: ckanext/theming/themes/bare/templates/datastore/snippets/dictionary_view.html:10
+msgid "Label"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:34
+#: ckanext/theming/themes/bare/templates/datastore/snippets/dictionary_view.html:11
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:13
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:13
+#: ckanext/theming/themes/bare/templates/package/new_view.html:31
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:14
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:29
+msgid "Description"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/dictionary.html:46
+#: ckanext/theming/themes/bare/templates/group/member_new.html:35
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:35
+msgid "Save"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:28
+msgid "CKAN Data API"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:30
+msgid "Access resource data via a web API with powerful query support"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:31
+#, python-format
+msgid ""
+"Further information in the <a href=\"%(url)s\" target=\"blank\">main CKAN "
+"Data API and DataStore documentation</a>."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:38
+msgid "Code examples:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:44
+msgid "Querying"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:46
+msgid "Get 5 results containing \"jones\" in any field:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:51
+msgid ""
+"Get results with either \"watershed\" or \"survey\" as subject and \"active\""
+" as its stage:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:56
+msgid "SQL query example:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:68
+msgid "Using the API with this Web Browser"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:70
+msgid "Some API endpoints may be accessed using a GET query string."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:71
+msgid "Query example (first 5 results)"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:75
+msgid "Query example (results containing 'jones')"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/api_info.html:84
+msgid "Query example (via SQL statement)"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/dictionary_view.html:8
+msgid "ID"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/datastore/snippets/dictionary_view.html:9
+msgid "Type"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/about.html:21
+#: ckanext/theming/themes/bare/templates/organization/about.html:21
+msgid "Additional Info"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/about.html:23
+#: ckanext/theming/themes/bare/templates/organization/about.html:23
+#: ckanext/theming/themes/bare/templates/package/read.html:42
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:61
+msgid "Field"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/about.html:23
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:29
+#: ckanext/theming/themes/bare/templates/organization/about.html:23
+#: ckanext/theming/themes/bare/templates/package/read.html:42
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:61
+msgid "Value"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/activity_stream.html:4
+#: ckanext/theming/themes/bare/templates/group/activity_stream.html:10
+#: ckanext/theming/themes/bare/templates/group/base.html:26
+#: ckanext/theming/themes/bare/templates/group/changes.html:11
+#: ckanext/theming/themes/bare/templates/organization/activity_stream.html:4
+#: ckanext/theming/themes/bare/templates/organization/activity_stream.html:10
+#: ckanext/theming/themes/bare/templates/organization/base.html:26
+#: ckanext/theming/themes/bare/templates/organization/changes.html:10
+#: ckanext/theming/themes/bare/templates/package/activity_stream.html:4
+#: ckanext/theming/themes/bare/templates/package/activity_stream.html:10
+#: ckanext/theming/themes/bare/templates/package/base.html:32
+#: ckanext/theming/themes/bare/templates/package/changes.html:11
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:4
+#: ckanext/theming/themes/bare/templates/user/activity_stream.html:4
+#: ckanext/theming/themes/bare/templates/user/activity_stream.html:10
+#: ckanext/theming/themes/bare/templates/user/base.html:32
+msgid "Activity Stream"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/admins.html:4
+#: ckanext/theming/themes/bare/templates/group/admins.html:10
+#: ckanext/theming/themes/bare/templates/group/admins.html:14
+#: ckanext/theming/themes/bare/templates/organization/admins.html:4
+#: ckanext/theming/themes/bare/templates/organization/admins.html:10
+#: ckanext/theming/themes/bare/templates/organization/admins.html:14
+msgid "Administrators"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/base.html:8
+#: ckanext/theming/themes/bare/templates/group/base.html:13
+#: ckanext/theming/themes/bare/templates/group/index.html:5
+#: ckanext/theming/themes/bare/templates/group/index.html:16
+#: ckanext/theming/themes/bare/templates/package/group_list.html:4
+#: ckanext/theming/themes/bare/templates/package/snippets/info.html:24
+#: ckanext/theming/themes/bare/templates/user/base.html:30
+#: ckanext/theming/themes/bare/templates/user/read_groups.html:6
+#: ckanext/theming/themes/bare/templates/user/read_groups.html:12
+#: ckanext/theming/themes/bare/templates/user/read_groups.html:19
+#: ckanext/theming/themes/bare/templates/user/read_organizations.html:12
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:47
+msgid "Groups"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/base.html:18
+#: ckanext/theming/themes/bare/templates/organization/base.html:18
+#: ckanext/theming/themes/bare/templates/package/base.html:26
+#: ckanext/theming/themes/bare/templates/user/base.html:21
+msgid "Manage"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/base.html:23
+#: ckanext/theming/themes/bare/templates/group/snippets/info.html:20
+#: ckanext/theming/themes/bare/templates/organization/base.html:23
+#: ckanext/theming/themes/bare/templates/organization/edit_base.html:13
+#: ckanext/theming/themes/bare/templates/organization/snippets/info.html:19
+#: ckanext/theming/themes/bare/templates/package/base.html:7
+#: ckanext/theming/themes/bare/templates/package/base.html:19
+#: ckanext/theming/themes/bare/templates/user/base.html:28
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:37
+msgid "Datasets"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/base.html:24
+#: ckanext/theming/themes/bare/templates/group/edit_base.html:11
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:4
+#: ckanext/theming/themes/bare/templates/group/members.html:4
+#: ckanext/theming/themes/bare/templates/group/snippets/info.html:25
+#: ckanext/theming/themes/bare/templates/organization/base.html:24
+#: ckanext/theming/themes/bare/templates/organization/edit_base.html:11
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:4
+#: ckanext/theming/themes/bare/templates/organization/members.html:4
+#: ckanext/theming/themes/bare/templates/organization/snippets/info.html:24
+msgid "Members"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/changes.html:4
+#: ckanext/theming/themes/bare/templates/group/changes.html:12
+#: ckanext/theming/themes/bare/templates/group/changes.html:17
+#: ckanext/theming/themes/bare/templates/organization/changes.html:4
+#: ckanext/theming/themes/bare/templates/organization/changes.html:11
+#: ckanext/theming/themes/bare/templates/organization/changes.html:15
+#: ckanext/theming/themes/bare/templates/package/changes.html:4
+#: ckanext/theming/themes/bare/templates/package/changes.html:12
+#: ckanext/theming/themes/bare/templates/package/changes.html:17
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:27
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:30
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:33
+msgid "Changes"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/changes.html:27
+#: ckanext/theming/themes/bare/templates/organization/changes.html:25
+#: ckanext/theming/themes/bare/templates/package/changes.html:27
+#, python-brace-format
+msgid "On {timestamp}, {username}:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/changes.html:40
+#: ckanext/theming/themes/bare/templates/organization/changes.html:38
+#: ckanext/theming/themes/bare/templates/package/changes.html:40
+msgid "Show metadata diff"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/confirm_delete.html:10
+#, python-brace-format
+msgid "Are you sure you want to delete group - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/confirm_delete_member.html:10
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete_member.html:10
+#, python-brace-format
+msgid "Are you sure you want to delete member - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/edit.html:4
+#: ckanext/theming/themes/bare/templates/group/edit.html:10
+#: ckanext/theming/themes/bare/templates/group/edit_base.html:10
+#: ckanext/theming/themes/bare/templates/organization/edit.html:4
+#: ckanext/theming/themes/bare/templates/organization/edit.html:10
+#: ckanext/theming/themes/bare/templates/organization/edit_base.html:10
+#: ckanext/theming/themes/bare/templates/package/edit.html:4
+#: ckanext/theming/themes/bare/templates/package/edit.html:11
+#: ckanext/theming/themes/bare/templates/package/edit_base.html:9
+#: ckanext/theming/themes/bare/templates/package/resource_edit.html:4
+#: ckanext/theming/themes/bare/templates/package/resource_edit.html:10
+#: ckanext/theming/themes/bare/templates/package/resource_edit_base.html:23
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:16
+msgid "Edit"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/edit.html:14
+msgid "Edit Group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/edit_base.html:4
+#: ckanext/theming/themes/bare/templates/organization/edit_base.html:4
+#: ckanext/theming/themes/bare/templates/package/edit_base.html:4
+#: ckanext/theming/themes/bare/templates/package/resource_views.html:4
+msgid "View"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/edit_base.html:12
+#: ckanext/theming/themes/bare/templates/organization/edit_base.html:12
+msgid "Admins"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/followers.html:4
+#: ckanext/theming/themes/bare/templates/group/followers.html:9
+#: ckanext/theming/themes/bare/templates/group/snippets/info.html:14
+#: ckanext/theming/themes/bare/templates/organization/snippets/info.html:13
+#: ckanext/theming/themes/bare/templates/package/followers.html:4
+#: ckanext/theming/themes/bare/templates/package/followers.html:9
+#: ckanext/theming/themes/bare/templates/package/snippets/info.html:13
+#: ckanext/theming/themes/bare/templates/user/followers.html:4
+#: ckanext/theming/themes/bare/templates/user/followers.html:10
+#: ckanext/theming/themes/bare/templates/user/followers.html:14
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:32
+msgid "Followers"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/followers.html:20
+#: ckanext/theming/themes/bare/templates/package/followers.html:20
+#: ckanext/theming/themes/bare/templates/user/followers.html:25
+msgid "No followers"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/index.html:12
+#: ckanext/theming/themes/bare/templates/user/dashboard_groups.html:14
+msgid "Add Group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/index.html:19
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:20
+#: ckanext/theming/themes/bare/templates/organization/index.html:19
+#: ckanext/theming/themes/bare/templates/package/snippets/search_results.html:4
+msgid "Name Ascending"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/index.html:20
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:21
+#: ckanext/theming/themes/bare/templates/organization/index.html:20
+#: ckanext/theming/themes/bare/templates/package/snippets/search_results.html:5
+msgid "Name Descending"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/index.html:36
+#: ckanext/theming/themes/bare/templates/organization/index.html:37
+msgid "There was an error while searching."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/index.html:38
+msgid "No groups found."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:9
+#: ckanext/theming/themes/bare/templates/group/member_new.html:4
+#: ckanext/theming/themes/bare/templates/group/member_new.html:10
+#: ckanext/theming/themes/bare/templates/group/member_new.html:23
+#: ckanext/theming/themes/bare/templates/group/member_new.html:38
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:9
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:4
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:10
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:23
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:38
+msgid "Add Member"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:10
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:10
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:47
+msgid "CSV"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:17
+#: ckanext/theming/themes/bare/templates/group/member_new.html:29
+#: ckanext/theming/themes/bare/templates/group/members.html:12
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:17
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:29
+#: ckanext/theming/themes/bare/templates/organization/members.html:12
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:24
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:19
+msgid "Role"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:28
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:28
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:27
+msgid "Edit role"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:28
+msgid "Edit the role of the user within the group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:31
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:31
+msgid "Delete member"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:31
+msgid "Delete this member from the group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/manage_members.html:32
+#: ckanext/theming/themes/bare/templates/group/member_new.html:21
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:32
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:21
+msgid "Are you sure you want to delete this member?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:14
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:14
+msgid "Back to all members"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:23
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:23
+msgid "Edit Member"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:33
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:32
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:34
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:33
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:32
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:29
+#: ckanext/theming/themes/bare/templates/package/snippets/package_form.html:31
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:50
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:63
+msgid "Delete"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:49
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:49
+msgid "What are roles?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:51
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:51
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:49
+msgid "Admin:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:52
+msgid "Can edit group information, as well as manage organization members."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:53
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:55
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:54
+msgid "Member:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/member_new.html:54
+msgid "Can add/remove datasets from groups."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new.html:3
+msgid "Create a Group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:11
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:11
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:25
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_create_form.html:3
+msgid "Name"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:11
+msgid "My Group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:12
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:12
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:8
+msgid "URL"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:13
+msgid "A little information about my group..."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:34
+msgid "Are you sure you want to delete this Group?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:43
+msgid "Update Group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/group/new_group_form.html:45
+msgid "Create Group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/about_text.html:1
+msgid ""
+"<p>CKAN is the world’s leading open-source data portal platform.</p> <p>CKAN "
+"is a complete out-of-the-box software solution that makes data accessible and"
+" usable – by providing tools to streamline publishing, sharing, finding and "
+"using data (including storage of data and provision of robust data APIs). "
+"CKAN is aimed at data publishers (national and regional governments, "
+"companies and organizations) wanting to make their data open and "
+"available.</p> <p>CKAN is used by governments and user groups worldwide and "
+"powers a variety of official and community data portals including portals for"
+" local, national and international government, such as the UK’s <a "
+"href=\"https://data.gov.uk\">data.gov.uk</a> and the United States <a "
+"href=\"https://catalog.data.gov/\">catalog.data.gov</a>, the Brazilian <a "
+"href=\"https://dados.gov.br/\">dados.gov.br</a>, Dutch and Netherland "
+"government portals, as well as city and municipal sites in the US, UK, "
+"Argentina, Finland and elsewhere.</p> <p>CKAN: <a "
+"href=\"https://ckan.org/\">https://ckan.org/</a><br /> CKAN Showcases: <a "
+"href=\"https://ckan.org/showcase\">https://ckan.org/showcase</a><br /> "
+"Features overview: <a "
+"href=\"https://ckan.org/features/\">https://ckan.org/features/</a></p>"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:5
+msgid "Welcome"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:15
+msgid "Welcome to CKAN"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:16
+msgid "This is a place where you can find and share data with others."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:23
+msgid "Discover Datasets"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:25
+msgid "Search datasets..."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:26
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:1
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:5
+#: ckanext/theming/themes/bare/templates/user/list.html:28
+#: ckanext/theming/themes/bare/templates/user/list.html:29
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:1
+msgid "Search"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:36
+msgid "Featured Groups"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:45
+msgid "A featured group would appear here."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:53
+msgid "Featured Organizations"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/home/index.html:62
+msgid "A featured organization would appear here."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:13
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:111
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:133
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:162
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:196
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:219
+msgid "Required"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:26
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/form.html:9
+msgid "Custom Field"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:28
+msgid "Key"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:32
+#: ckanext/theming/themes/bare/templates/package/group_list.html:33
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:52
+msgid "Remove"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:53
+#: ckanext/theming/themes/bare/templates/package/new_view.html:41
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:79
+msgid "Add"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:85
+msgid "The form contains invalid entries:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:142
+#: ckanext/theming/themes/bare/templates/macros/ui/forms.html:143
+msgid "Markdown formatting"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/layout.html:9
+msgid "Card"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/meta.html:7
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/meta.html:17
+#: ckanext/theming/themes/midnight_blue/templates/macros/ui.html:17
+#, python-brace-format
+msgid "Navigate to Home - {site_title}"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/meta.html:48
+msgid "Language"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:2
+msgid "Accordion"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:47
+msgid "Pagination"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:83
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:63
+msgid "Previous"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:83
+msgid "Next"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:88
+msgid "Go to previous page"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:94
+msgid "Go to first page"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:111
+msgid "Go to last page"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/navigation.html:116
+msgid "Go to next page"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:1
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:1
+msgid "Search..."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:9
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:11
+msgid "Order by"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:16
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:32
+#, python-brace-format
+msgid "Error: {error}"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:19
+#, python-brace-format
+msgid "Found {count} result"
+msgid_plural "Found {count} results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ckanext/theming/themes/bare/templates/macros/ui/search.html:22
+msgid "No results found"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/base.html:8
+#: ckanext/theming/themes/bare/templates/organization/base.html:13
+#: ckanext/theming/themes/bare/templates/organization/index.html:5
+#: ckanext/theming/themes/bare/templates/organization/index.html:16
+#: ckanext/theming/themes/bare/templates/package/base.html:14
+#: ckanext/theming/themes/bare/templates/user/base.html:29
+#: ckanext/theming/themes/bare/templates/user/read_organizations.html:6
+#: ckanext/theming/themes/bare/templates/user/read_organizations.html:19
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:42
+msgid "Organizations"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:7
+msgid "Edit datasets"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:12
+#: ckanext/theming/themes/bare/templates/package/search.html:5
+#: ckanext/theming/themes/bare/templates/user/dashboard_datasets.html:14
+#: ckanext/theming/themes/bare/templates/user/read.html:4
+msgid "Add Dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:19
+#: ckanext/theming/themes/bare/templates/package/snippets/search_results.html:3
+msgid "Relevance"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:22
+#: ckanext/theming/themes/bare/templates/package/snippets/search_results.html:6
+msgid "Last Modified"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:32
+msgid "Make public"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:33
+msgid "Make private"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/bulk_process.html:46
+#: ckanext/theming/themes/bare/templates/package/snippets/search_results.html:19
+msgid "No datasets found."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/confirm_delete.html:10
+#, python-brace-format
+msgid "Are you sure you want to delete organization - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/edit.html:14
+msgid "Edit Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/index.html:12
+#: ckanext/theming/themes/bare/templates/user/dashboard_organizations.html:14
+msgid "Add Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/index.html:39
+msgid "No organizations found."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:28
+msgid "Edit the role of the user within the organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/manage_members.html:31
+msgid "Delete this member from the organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:52
+msgid "Can add/edit and delete datasets, as well as manage organization members."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:53
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:52
+msgid "Editor:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:54
+msgid "Can add and edit datasets, but not manage organization members."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/member_new.html:56
+msgid "Can view the organization's private datasets, but not add new datasets."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/new.html:3
+msgid "Create an Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:11
+msgid "My Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:13
+msgid "A little information about my organization..."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:34
+msgid "Are you sure you want to delete this organization?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:43
+msgid "Update Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/organization/new_organization_form.html:45
+msgid "Create Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/base.html:47
+#: ckanext/theming/themes/bare/templates/package/read.html:28
+#: ckanext/theming/themes/bare/templates/package/resources.html:8
+#: ckanext/theming/themes/bare/templates/package/resources.html:13
+#: ckanext/theming/themes/bare/templates/package/snippets/info.html:19
+msgid "Resources"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/base.html:51
+msgid "Unnamed resource"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/base.html:55
+#: ckanext/theming/themes/bare/templates/package/resources.html:38
+msgid "No resources"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/confirm_delete.html:11
+#, python-brace-format
+msgid "Are you sure you want to delete dataset - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/confirm_delete_resource.html:10
+#, python-brace-format
+msgid "Are you sure you want to delete resource - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/edit_base.html:10
+msgid "Reorder resources"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:4
+#: ckanext/theming/themes/bare/templates/package/edit_base.html:13
+msgid "Collaborators"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/group_list.html:22
+msgid "Add to group"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/group_list.html:32
+#, python-brace-format
+msgid "Unlink {name} from the dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/group_list.html:42
+msgid "There are no groups associated with this dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/history.html:6
+#: ckanext/theming/themes/bare/templates/package/resource_history.html:7
+msgid ""
+"You're currently viewing an old version of this dataset. Data files may not "
+"match the old version of the metadata."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/history.html:7
+msgid "View the current version."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new.html:4
+msgid "Create Dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new.html:10
+msgid "Create"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_resource.html:4
+msgid "Add data to the dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_resource.html:10
+#: ckanext/theming/themes/bare/templates/package/resources.html:42
+msgid "Add New Resource"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:4
+#: ckanext/theming/themes/bare/templates/package/new_view.html:11
+msgid "Edit view"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:4
+#: ckanext/theming/themes/bare/templates/package/new_view.html:14
+#: ckanext/theming/themes/bare/templates/package/resource_views.html:10
+msgid "New view"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:20
+msgid "All views"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:21
+msgid "View view"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:30
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:4
+msgid "Title"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:30
+msgid "eg. My View"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:31
+msgid "eg. Information about my view"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:40
+msgid "Preview"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:41
+msgid "Update"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/new_view.html:47
+msgid "View preview"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:8
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:53
+msgid "Private"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:9
+msgid "Draft"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:10
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:58
+msgid "Deleted"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:39
+msgid "Additional details"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:46
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:4
+msgid "Source"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:50
+#: ckanext/theming/themes/bare/templates/package/read.html:53
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:12
+msgid "Author"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:57
+#: ckanext/theming/themes/bare/templates/package/read.html:60
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:17
+msgid "Maintainer"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:64
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:8
+msgid "Version"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:68
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:58
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:95
+msgid "State"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:72
+msgid "Last Updated"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/read.html:76
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:74
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_list.html:15
+msgid "Created"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_edit_base.html:16
+msgid "View resource"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_edit_base.html:24
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:17
+msgid "Views"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_edit_base.html:25
+#: ckanext/theming/themes/bare/templates/package/resource_edit_base.html:26
+msgid "DataStore"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_history.html:8
+msgid "View the current version"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:38
+msgid "Go to resource"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:43
+msgid "Data API"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:46
+msgid "Download as ..."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:48
+msgid "TSV"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:49
+msgid "JSON"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:50
+msgid "XML"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:58
+msgid "Additional Information"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:64
+msgid "Data last updated"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:65
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:70
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:75
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:80
+msgid "unknown"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:69
+msgid "Metadata last updated"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:79
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:33
+msgid "Format"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:84
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:22
+msgid "License"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:132
+msgid "There are no views created for this resource yet."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:134
+msgid "Here are some reasons you may not be seeing expected views:"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:136
+msgid "No view has been created that is suitable for this resource"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:137
+msgid "The site administrators may not have enabled the relevant view plugins"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_read.html:138
+msgid ""
+"If a view requires the DataStore, the DataStore plugin may not be enabled, or"
+" the data may not have been pushed to the DataStore, or the DataStore hasn't "
+"finished processing the data yet"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/resource_views.html:30
+msgid "This resource has no views"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:4
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:13
+msgid "Edit Collaborator"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:4
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:13
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:36
+msgid "Add Collaborator"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:9
+msgid "Back to all collaborators"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:30
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:32
+msgid "Are you sure you want to delete this collaborator?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:33
+msgid "Update  Collaborator"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:46
+msgid "What are the available roles?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:50
+msgid ""
+"In addition to managing the dataset, admins can add and remove collaborators "
+"from a dataset."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:53
+msgid ""
+"Editors can edit the dataset and its resources, as well accessing the dataset"
+" if private."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborator_new.html:55
+msgid "Members can access the dataset if private, but not edit it."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:9
+msgid "Add Collaborators"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:16
+#, python-brace-format
+msgid "{count} collaborator"
+msgid_plural "{count} collaborators"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/collaborators.html:30
+msgid "Delete collaborator"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/collaborators/confirm_delete.html:10
+#, python-brace-format
+msgid "Are you sure you want to delete collaborator - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:4
+msgid "eg. A descriptive title"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:8
+msgid "eg. my-dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:14
+msgid "eg. Some useful notes about the data"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:18
+msgid "Tags"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:18
+msgid "eg. economy, mental health, government"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:38
+msgid "Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:41
+msgid "No Organization"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:53
+msgid "Visibility"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:53
+msgid "Public"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_basic_fields.html:58
+msgid "Active"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_form.html:33
+msgid "Are you sure you want to delete this dataset?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_form.html:42
+msgid "Unpublish"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_form.html:50
+msgid "Update Dataset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_form.html:52
+msgid "Next: Add Data"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:4
+msgid "https://example.com/dataset.json"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:8
+msgid "1.0"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:12
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:17
+msgid "Joe Bloggs"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:13
+msgid "Author Email"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:13
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:18
+msgid "joe@example.com"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/package_metadata_fields.html:18
+msgid "Maintainer Email"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:20
+msgid "URL Type"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:25
+msgid "eg. January 2011 Gold Prices"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:29
+msgid "Some useful notes about the data"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:33
+msgid "eg. CSV, XML or JSON"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:34
+msgid "This will be guessed automatically. Leave blank if you wish"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:54
+msgid "Are you sure you want to delete this resource?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:68
+msgid "Save & add another"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:74
+msgid "Update Resource"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_form.html:74
+msgid "Publish"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_view.html:6
+msgid "Embed resource view"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_view.html:7
+msgid ""
+"You can copy and paste the embed code into a CMS or blog software that "
+"supports raw HTML"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_view.html:13
+msgid "Fullscreen"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_view.html:14
+msgid "Embed"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/package/snippets/resource_view.html:24
+msgid "This resource view is not available at the moment."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:45
+msgid "Newer activities"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:46
+msgid "Older activities"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/snippets/activity_stream.html:52
+msgid "No activity found"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/snippets/follow_button.html:3
+msgid "Unfollow"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/snippets/follow_button.html:5
+msgid "Follow"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/api_tokens.html:4
+#: ckanext/theming/themes/bare/templates/user/api_tokens.html:10
+#: ckanext/theming/themes/bare/templates/user/api_tokens.html:21
+#: ckanext/theming/themes/bare/templates/user/base.html:31
+#: ckanext/theming/themes/bare/templates/user/edit_base.html:9
+msgid "API Tokens"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/api_tokens.html:15
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_create_form.html:7
+msgid "Create API Token"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/base.html:10
+#: ckanext/theming/themes/bare/templates/user/base.html:15
+#: ckanext/theming/themes/bare/templates/user/list.html:9
+#: ckanext/theming/themes/bare/templates/user/list.html:26
+msgid "Users"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/confirm_delete.html:10
+#, python-brace-format
+msgid "Are you sure you want to delete user - {name}?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard.html:18
+msgid "News feed"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard.html:19
+#: ckanext/theming/themes/bare/templates/user/dashboard_datasets.html:4
+#: ckanext/theming/themes/bare/templates/user/dashboard_datasets.html:10
+#: ckanext/theming/themes/bare/templates/user/dashboard_datasets.html:18
+msgid "My Datasets"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard.html:20
+#: ckanext/theming/themes/bare/templates/user/dashboard_organizations.html:4
+#: ckanext/theming/themes/bare/templates/user/dashboard_organizations.html:10
+#: ckanext/theming/themes/bare/templates/user/dashboard_organizations.html:18
+msgid "My Organizations"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard.html:21
+#: ckanext/theming/themes/bare/templates/user/dashboard_groups.html:4
+#: ckanext/theming/themes/bare/templates/user/dashboard_groups.html:10
+#: ckanext/theming/themes/bare/templates/user/dashboard_groups.html:18
+msgid "My Groups"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard_datasets.html:26
+msgid "You haven't created any datasets."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard_datasets.html:27
+#: ckanext/theming/themes/bare/templates/user/dashboard_groups.html:30
+#: ckanext/theming/themes/bare/templates/user/dashboard_organizations.html:30
+msgid "Create one now?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard_groups.html:29
+#: ckanext/theming/themes/bare/templates/user/read_groups.html:29
+msgid "You are not a member of any groups."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/dashboard_organizations.html:29
+#: ckanext/theming/themes/bare/templates/user/read_organizations.html:30
+msgid "You are not a member of any organizations."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit.html:4
+#: ckanext/theming/themes/bare/templates/user/edit.html:10
+#: ckanext/theming/themes/bare/templates/user/edit.html:14
+msgid "Edit Profile"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:4
+msgid "Are you sure you want to delete this user?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:12
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:6
+msgid "Full Name"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:13
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:7
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:75
+msgid "Email"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:15
+msgid "A little information about yourself"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:17
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:13
+msgid "Profile picture URL"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:19
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:16
+msgid "Profile picture"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:21
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:19
+msgid "Clear Upload"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:28
+msgid ""
+"This account is deactivated, if you want to reactivate it, please click on "
+"checkbox."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:28
+msgid "Reactivate User"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:34
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:50
+msgid "Change password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:35
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:52
+#: ckanext/theming/themes/bare/templates/user/login.html:20
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:8
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:26
+msgid "Password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:36
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:53
+msgid "Confirm Password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:42
+msgid "Sysadmin password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:43
+msgid "Sysadmin Password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:51
+msgid "Old Password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:67
+msgid "Reactivate Profile"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/edit_user_form.html:67
+msgid "Update Profile"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/list.html:4
+msgid "All Users"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/list.html:28
+msgid "Search users"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:4
+#: ckanext/theming/themes/bare/templates/user/login.html:10
+#: ckanext/theming/themes/bare/templates/user/login.html:14
+#: ckanext/theming/themes/bare/templates/user/login.html:30
+msgid "Login"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:19
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:18
+msgid "Username or Email"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:21
+msgid "Remember me"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:38
+msgid "Need an Account?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:39
+msgid "Then sign right up, it only takes a minute."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:40
+msgid "Create an Account"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:44
+msgid "Forgotten your password?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:45
+msgid "No problem, use our password recovery form to reset it."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/login.html:46
+msgid "Forgot your password?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/logout.html:5
+#: ckanext/theming/themes/bare/templates/user/logout.html:10
+msgid "Logged Out"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/logout.html:11
+msgid "You are now logged out."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/logout_first.html:4
+#, python-brace-format
+msgid "You're already logged in as {user}."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/logout_first.html:9
+msgid "You're already logged in"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/logout_first.html:10
+msgid "You need to log out before you can log in with another account."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/logout_first.html:11
+msgid "Log out now"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/new_user_form.html:24
+msgid "Create Account"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:4
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:15
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:4
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:14
+msgid "Reset your password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:10
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:10
+msgid "Password Reset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:22
+msgid "You can also change username. It can not be modified later."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/perform_reset.html:31
+msgid "Update Password"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/read_groups.html:32
+msgid "User isn't a member of any groups."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/read_organizations.html:32
+msgid "User isn't a member of any organizations."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:27
+msgid "Request Reset"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:37
+msgid "How does this work?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/request_reset.html:38
+msgid ""
+"Enter your email address or username into the box and we will send you an "
+"email with a link to enter a new password."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_create_form.html:13
+#, python-brace-format
+msgid ""
+"API Token created: <code style=\"word-break:break-all;\">{token}</code> "
+"<br>Make sure to copy it now, you won't be able to see it again!"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_list.html:4
+msgid "Are you sure you want to revoke these tokens?"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_list.html:14
+msgid "Token"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_list.html:16
+msgid "Last access"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/api_token_list.html:37
+msgid "Revoke tokens"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:23
+msgid "This user has no biography."
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:76
+msgid "This information is visible to you and admins"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:82
+msgid "Member Since"
+msgstr ""
+
+#: ckanext/theming/themes/bare/templates/user/snippets/info.html:88
+msgid "Last Active"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/content.html:27
+#, python-brace-format
+msgid "Search datasets by {name}: {label}"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/feedback.html:70
+msgid "Loading..."
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/meta.html:28
+#: ckanext/theming/themes/midnight_blue/templates/macros/ui.html:25
+msgid "Toggle navigation"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:6
+msgid "Submit"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/search.html:53
+#, python-brace-format
+msgid "Remove applied filter: {value}"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/section.html:15
+#: ckanext/theming/themes/midnight_blue/templates/macros/ui.html:70
+#, python-brace-format
+msgid "Filter by: {title}"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/section.html:21
+#: ckanext/theming/themes/midnight_blue/templates/macros/ui.html:74
+#, python-brace-format
+msgid "Show More {facet_type}"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/section.html:23
+#: ckanext/theming/themes/midnight_blue/templates/macros/ui.html:76
+#, python-brace-format
+msgid "Show Only Popular {facet_type}"
+msgstr ""
+
+#: ckanext/theming/themes/classic/templates/macros/classic-polyfill/section.html:27
+#: ckanext/theming/themes/midnight_blue/templates/macros/ui.html:81
+#, python-brace-format
+msgid "There are no {facet_type} that match this search"
+msgstr ""
