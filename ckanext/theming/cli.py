@@ -180,13 +180,14 @@ def component_analyze(  # noqa: C901, PLR0912, PLR0915
 
         for component in components:
             comp_func = getattr(ui, component, None)
-            if not comp_func:
-                tk.error_shout(f"Unknown component {component}")
-                continue
+            # if not comp_func:
+            #     tk.error_shout(f"Unknown component {component}")
+            #     continue
 
             ref = lib.get_active_theme().component_reference()[component]
             if category and ref.category != category:
                 continue
+
             # Try to get the source or signature information
             if isinstance(comp_func, Macro):
                 standard_arguments = []
@@ -226,14 +227,20 @@ def component_analyze(  # noqa: C901, PLR0912, PLR0915
                 sig = f"({sig})"
                 comp_type = "Callable macro" if comp_func.caller else "Macro"
                 source_file = inspect.getsourcefile(comp_func._func)  # pyright: ignore[reportPrivateUsage]
-            else:
+
+            elif comp_func:
                 sig = str(inspect.signature(comp_func))
                 comp_type = type(comp_func).__name__
                 source_file = inspect.getsourcefile(comp_func)
 
+            else:
+                sig = "-"
+                comp_type = "-"
+                source_file = "-"
+
             chain: list[str | None] = []
             chain_member = comp_func
-            while chain_parent := getattr(chain_member, "_theming_chain", None):
+            while chain_member and (chain_parent := getattr(chain_member, "_theming_chain", None)):
                 chain.append(inspect.getsourcefile(chain_parent._func))
                 chain_member = chain_parent
 
