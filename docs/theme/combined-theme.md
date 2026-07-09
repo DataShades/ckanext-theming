@@ -54,6 +54,7 @@ def make_theme(name: str = "my-combined-theme"):
 ## Rendering Flow
 
 In a combined theme:
+
 - CKAN checks `my_combined_theme/templates/` first for structural page overrides (e.g. `package/search.html`).
 - Any `ui.*` component macros called inside these templates are resolved locally from `my_combined_theme/templates/macros/ui.html`.
 

@@ -1,8 +1,13 @@
 # Standalone Component Libraries
 
-A **Component Library** (or UI Library) is a type of theme that only provides UI component macros (`ui.*`), asset files (CSS, JS, fonts), and icon mappings. It **does not redefine core CKAN page templates** (like `package/read.html` or `user/login.html`).
+A **Component Library** (or UI Library) is a type of theme that only provides
+UI component macros (`ui.*`), asset files (CSS, JS, fonts), and icon
+mappings. It **does not redefine core CKAN page templates** (like
+`package/read.html` or `user/login.html`).
 
-This pattern allows you to bundle styling rules, CSS frameworks, and interactions into a modular, reusable design system package that other layout themes can inherit from.
+This pattern allows you to bundle styling rules, CSS frameworks, and
+interactions into a modular, reusable design system package that other layout
+themes can inherit from.
 
 
 ## Design System Structure
@@ -12,6 +17,7 @@ A standalone component library (such as the built-in `nds-ui` or `classic-polyfi
 ```
 my_component_library/
  ├── templates/
+ │   ├── base.html         # Optional activation of asset files.
  │   └── macros/
  │       └── ui.html       # Definitions for all standard ui.* macros
  ├── assets/
@@ -24,9 +30,19 @@ my_component_library/
 
 ## Theme Configuration (`theme.py`)
 
-In the library's `theme.py` file, instantiate a `Theme` instance pointing to the library directory. Standalone component libraries often include a custom `icon_map` to map standard icon IDs (e.g., `search`, `trash`) to design-system-specific icon sets (such as Google Material Symbols or FontAwesome):
+In the library's `theme.py` file, instantiate a `Theme` instance pointing to
+the library directory. Standalone component libraries often include a custom
+`icon_map` to map standard icon IDs (e.g., `search`, `trash`) to
+design-system-specific icon sets (such as [Google Material Symbols][material-symbols] or
+[Lucide][lucide]):
 
-```python
+[material-symbols]: https://fonts.google.com/icons?icon.set=Material+Symbols
+[lucide]: https://lucide.dev/
+
+/// admonition
+    type: example
+
+```python title="theme.py"
 import os
 from ckanext.theming.lib import Theme
 
@@ -49,20 +65,23 @@ def make_theme(name: str = "my-component-library"):
     )
 ```
 
+///
+
 ## The Macro Registry (`templates/macros/ui.html`)
 
-In a component library, `ui.html` contains the concrete implementations of all standard components declared in [components.yaml](file:///home/sergey/projects/core/ckanext-theming/ckanext/theming/components.yaml) using the CSS classes of your chosen design system.
+In a component library, `ui.html` contains the concrete implementations of all
+standard components using the CSS classes of your chosen design system.
 
 ### Inheritance Fallback Setup (Important for Library Authors)
 To allow child themes to selectively override specific macros while falling back to the library implementations for the rest, you must use **re-exports with the default fallback strategy**:
 
 Instead of defining macros directly, write fallback bindings:
 
-```django
+```django title="templates/macros/ui.html"
 {# templates/macros/ui.html #}
 
 {%- macro _button(content, href, type="button", style="primary") -%}
-    <button {{ ui.util.attrs(kwargs, {"class": "nds-btn nds-btn--" ~ style}) }} type="{{ type }}">
+    <button {{ ui.util.attrs(kwargs, {"type": type, "class": "nds-btn nds-btn--" ~ style}) }}>
         {{ content }}
     </button>
 {%- endmacro -%}
@@ -74,7 +93,7 @@ Instead of defining macros directly, write fallback bindings:
 ### Modular Macro Files for Large Design Systems
 For large component libraries, putting all macro definitions inside a single `ui.html` file makes it unmaintainable. Instead, split the macros into logical files inside a subdirectory (e.g. `templates/macros/ui/`) and import them with context in the main `ui.html`:
 
-```django
+```django title="templates/macros/ui.html"
 {# templates/macros/ui.html #}
 {% import "macros/ui/forms.html" as _forms with context %}
 {% import "macros/ui/feedback.html" as _feedback with context %}
@@ -89,7 +108,9 @@ For large component libraries, putting all macro definitions inside a single `ui
 
 ## JavaScript Initialization in Component Libraries
 
-Interactive components (like popovers, modals, or toasts) often require JavaScript. As a best practice, **avoid inline `<script>` tags inside macro definitions**. Inline scripts suffer from several issues:
+Interactive components (like popovers, modals, or toasts) often require
+JavaScript. As a best practice, **avoid inline `<script>` tags inside macro
+definitions**. Inline scripts suffer from several issues:
 
 - They pollute the DOM and degrade page performance.
 - They may execute before the main JavaScript bundle is fully loaded (resulting in `undefined` reference errors).
@@ -115,37 +136,19 @@ attributes (e.g. `data-bs-toggle="popover"`) or custom targets:
 {%- endmacro %}
 ```
 
-!!! note
-
-       Make sure to pass `popover_attrs` without specifying `key=None` in
-       `augment_attrs`. Omitting it (which defaults to `key="attrs"`) ensures
-       that fully qualified names like `data-bs-toggle` are correctly nested
-       within the `attrs` sub-dictionary so that they are serialized to HTML
-       attributes.
-
 **Initialize globally in the theme JS asset:**
 
-Create a single initialization script in `assets/js/` (and register it in `webassets.yml`) that runs on `DOMContentLoaded` and targets the elements declaratively:
+Create a single initialization script in `assets/js/` (and register it in
+`webassets.yml`) that runs on `DOMContentLoaded` and targets the elements
+declaratively:
 
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
     // Find all declarative popovers
     const popovers = document.querySelectorAll('[data-bs-toggle="popover"]');
     popovers.forEach((el) => {
-        // Safely resolve content references (if target is in another element)
-        const contentAttr = el.getAttribute('data-bs-content') || '';
-        const match = contentAttr.match(/^\(see\s+(#.+)\)$/);
-        const options = {};
-        if (match && match[1]) {
-            const targetEl = document.querySelector(match[1]);
-            if (targetEl) {
-                options.content = targetEl.innerHTML;
-                options.html = true;
-            }
-        }
-
         // Initialize idempotently
-        bootstrap.Popover.getOrCreateInstance(el, options);
+        bootstrap.Popover.getOrCreateInstance(el);
     });
 });
 ```

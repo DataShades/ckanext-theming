@@ -41,9 +41,9 @@ For more complex content (like nested HTML or other components), use the `ui.uti
     ```django
     {{ ui.something("CONTENT", argument="value") }}
 
-    {% call ui.util.call(ui.something, argument="value") %}
+    {% call ui.util.call(ui.something, argument="value") -%}
         CONTENT
-    {% endcall %}
+    {%- endcall %}
     ```
 
 

@@ -69,7 +69,7 @@ For example, your custom `templates/header.html` page template might look like t
         </nav>
 
         <div class="header-actions">
-            {% if c.userobj %}
+            {% if current_user.is_authenticated %}
                 {{ ui.button("Dashboard", href=h.url_for("user.dashboard"), style="secondary") }}
             {% else %}
                 {{ ui.button("Log In", href=h.url_for("user.login"), style="primary") }}

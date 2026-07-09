@@ -99,10 +99,10 @@ example, `bare` theme registers emoji icons inside `make_theme`.
 
 /// tip
 
-If your extension contains multiple themes, or you just don't want to mix
-theme files with plugin files, even though there is nothing wrong with it,
-you can create theme inide the subfolder. Specify path to the theme's
-parent folder as a second argument for the CLI command
+If your extension contains multiple themes, or you just don't want to mix theme
+files with plugin files, even though there is nothing wrong with it, you can
+create theme inside the subfolder. Specify path to the theme's parent folder as
+a second argument for the CLI command
 
 ```sh
 ckan theme create my_basic_theme ./themes
@@ -150,7 +150,7 @@ ignored.
 
 /// note
 
-Due to CKAN's plugin load order, it's recommended to put `themeing` plugin
+Due to CKAN's plugin load order, it's recommended to put `theming` plugin
 in the end of the plugins list, so that other extensions have a chance to
 override templates provided by theme.
 
@@ -182,9 +182,12 @@ my_basic_theme/
 
 ---
 
-## Implementing the macros/ui.html
+## Implementing the `macros/ui.html`
 
-The `templates/macros/ui.html` file serves as the main entry point for the theming system. Whenever a template calls `{{ ui.button(...) }}` or `{{ ui.card(...) }}`, the loader maps the call to a macro defined inside this file.
+The `templates/macros/ui.html` file serves as the main entry point for the
+theming system. Whenever a template calls `#!django {{ ui.button(...) }}` or
+`#!django {{ ui.card(...) }}`, the loader maps the call to a macro defined
+inside this file.
 
 Here is an example `ui.html` content.
 

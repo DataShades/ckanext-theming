@@ -60,9 +60,38 @@ If you are a **Portal Maintainer**:
 - You can switch between different visual styles (themes) with a single config change.
 - You reduce the risk of UI breakage when updating CKAN or its extensions.
 
+/// note
+
+In reality, compatibility between different themes is not ideal, so you'll
+still get broken pages. But theming extension reduces the number of
+issues.
+
+Whether there will be broken pages or not mostly depends on theme
+implementation. For example, the basic footer navigation may look like this:
+
+```django
+{% call ui.util.call(ui.footer_main_nav) %}
+    {{ ui.footer_main_nav_item("First link") }}
+    {{ ui.footer_main_nav_item("Second link") }}
+{% endcall %}
+```
+
+As long as theme implements these components atomically, they will be rendered
+correctly whenever you are using them. But if theme expects that there is a
+`#!html <div class="footer-container">` wrapper around footer navigation,
+you'll have to add it manually or else navigation will look broken.
+
+So, if theme is implemented without assumptions about component surrounding, it
+will be more stable. If theme cannot be implemented in this way for some
+reasons, it may require certain work when applied.
+
+///
+
 If you are an **Extension Developer**:
 
 - You don't have to guess which CSS framework the target portal is using.
+- You don't need to provide multiple sets of templates for `bootstrap5`,
+  `bootstrap3`, `midnight-blue` and other base template folders.
 - Your extension will look "correct" on any portal that has a compatible theme.
 - You spend less time writing repetitive HTML and more time on functionality.
 
@@ -72,7 +101,9 @@ The best way to use `ckanext-theming` is to start small:
 
 1. Install the extension.
 2. Choose a base theme (like `classic-polyfill`).
-3. In your next customization or extension, try using `{{ ui.button(...) }}` or `{{ ui.input(...) }}` instead of raw HTML.
+3. In your next customization or extension, try using UI components like
+   `#!django {{ ui.button(...) }}` or `#!django {{ ui.input(...) }}` instead of
+   raw HTML.
 4. See how it simplifies your templates and keeps them clean.
 
 Remember: **You are in control.** Use as much or as little of the theming system

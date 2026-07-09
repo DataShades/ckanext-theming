@@ -82,7 +82,11 @@ This ensures that if a new version of the extension adds a parameter to a standa
 
 ## Modifying Attributes: `ui.util.augment_attrs`
 
-When building macros, you often need to merge default attributes (like default styles, roles, or actions) with user-provided arguments in `kwargs`. **Never** pass an `attrs` dictionary directly if you are forwarding `kwargs` (e.g. `attrs={"class": "foo"}, **kwargs`), as this will completely overwrite any custom attributes the user passes.
+When building macros, you often need to merge default attributes (like default
+styles, roles, or actions) with user-provided arguments in `kwargs`. **Never**
+pass an `attrs` dictionary directly if you are forwarding `kwargs`
+(e.g. `attrs={"class": "foo"}, **kwargs`), as this may conflict with custom
+attributes the user passes.
 
 Instead, always use the helper utility `ui.util.augment_attrs`.
 
@@ -111,7 +115,7 @@ def augment_attrs(
 3. **Modifying Different Targets:**
    If you want to modify a top-level key or a different nested dictionary within `kwargs`, change the `key` parameter. For example, to modify the main kwargs root:
    ```django
-   {{ ui.util.augment_attrs(kwargs, {"data-custom": "value"}, key=None) }}
+   {{ ui.util.augment_attrs(kwargs, {"data-custom": "value"}, key=none) }}
    ```
 
 ### Comprehensive Example
