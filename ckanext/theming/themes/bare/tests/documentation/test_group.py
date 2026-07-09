@@ -10,6 +10,7 @@ from ckan.tests.helpers import call_action
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 def test_index(
     doc_screenshot: Any,
     page: Page,
@@ -27,6 +28,7 @@ def test_index(
     doc_screenshot("group-index-search-empty")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_read(
     doc_screenshot: Any,
@@ -44,6 +46,7 @@ def test_read(
     doc_screenshot("group-read")
 
 
+@pytest.mark.integration
 def test_about(
     doc_screenshot: Any,
     page: Page,
@@ -54,6 +57,7 @@ def test_about(
     doc_screenshot("group-about")
 
 
+@pytest.mark.integration
 def test_new(
     doc_screenshot: Any,
     page: Page,
@@ -69,6 +73,7 @@ def test_new(
     doc_screenshot("group-new-form")
 
 
+@pytest.mark.integration
 def test_edit(
     doc_screenshot: Any,
     page: Page,
@@ -82,6 +87,7 @@ def test_edit(
     doc_screenshot("group-edit-form")
 
 
+@pytest.mark.integration
 def test_confirm_delete(
     doc_screenshot: Any,
     page: Page,
@@ -95,6 +101,7 @@ def test_confirm_delete(
     doc_screenshot("group-confirm-delete")
 
 
+@pytest.mark.integration
 def test_members(
     doc_screenshot: Any,
     page: Page,
@@ -110,6 +117,7 @@ def test_members(
     doc_screenshot("group-members")
 
 
+@pytest.mark.integration
 def test_member_new(
     doc_screenshot: Any,
     page: Page,
@@ -123,6 +131,7 @@ def test_member_new(
     doc_screenshot("group-member-new")
 
 
+@pytest.mark.integration
 def test_manage_members(
     doc_screenshot: Any,
     page: Page,
@@ -139,6 +148,7 @@ def test_manage_members(
     doc_screenshot("group-manage-members")
 
 
+@pytest.mark.integration
 def test_confirm_delete_member(
     doc_screenshot: Any,
     page: Page,
@@ -155,6 +165,7 @@ def test_confirm_delete_member(
     doc_screenshot("group-confirm-delete-member")
 
 
+@pytest.mark.integration
 def test_admins(
     doc_screenshot: Any,
     page: Page,
@@ -165,6 +176,7 @@ def test_admins(
     doc_screenshot("group-admins")
 
 
+@pytest.mark.integration
 def test_activity(
     doc_screenshot: Any,
     page: Page,
@@ -182,6 +194,7 @@ def test_activity(
     doc_screenshot("group-activity")
 
 
+@pytest.mark.integration
 def test_followers(
     doc_screenshot: Any,
     page: Page,

@@ -10,6 +10,7 @@ from ckan.tests.helpers import call_action
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_search(
     doc_screenshot: Any,
@@ -37,6 +38,7 @@ def test_search(
     doc_screenshot("dataset-search-add-button")
 
 
+@pytest.mark.integration
 def test_read(
     doc_screenshot: Any,
     page: Page,
@@ -85,6 +87,7 @@ def test_read(
     doc_screenshot("dataset-read-unfollow-button", clip=sidebar.bounding_box())
 
 
+@pytest.mark.integration
 def test_new(
     doc_screenshot: Any,
     page: Page,
@@ -101,6 +104,7 @@ def test_new(
     doc_screenshot("dataset-new-form")
 
 
+@pytest.mark.integration
 def test_edit(
     doc_screenshot: Any,
     page: Page,
@@ -120,6 +124,7 @@ def test_edit(
     doc_screenshot("dataset-edit-errors", full_page=False)
 
 
+@pytest.mark.integration
 def test_activity(
     doc_screenshot: Any,
     page: Page,
@@ -136,6 +141,7 @@ def test_activity(
     doc_screenshot("dataset-activity-stream")
 
 
+@pytest.mark.integration
 def test_followers(
     doc_screenshot: Any,
     page: Page,
@@ -156,6 +162,7 @@ def test_followers(
     doc_screenshot("dataset-followers-with-followers")
 
 
+@pytest.mark.integration
 def test_groups(
     doc_screenshot: Any,
     page: Page,
@@ -178,6 +185,7 @@ def test_groups(
     doc_screenshot("dataset-groups")
 
 
+@pytest.mark.integration
 def test_resources_manage(
     doc_screenshot: Any,
     page: Page,
@@ -207,6 +215,7 @@ def test_resources_manage(
     doc_screenshot("dataset-resources-reorder")
 
 
+@pytest.mark.integration
 def test_confirm_delete(
     doc_screenshot: Any,
     page: Page,
@@ -221,6 +230,7 @@ def test_confirm_delete(
     doc_screenshot("dataset-confirm-delete")
 
 
+@pytest.mark.integration
 def test_collaborators(
     doc_screenshot: Any,
     page: Page,

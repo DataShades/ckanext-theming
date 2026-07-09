@@ -7,6 +7,7 @@ import ckan.plugins.toolkit as tk
 from ckan.tests.helpers import call_action
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestApiTokens:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
@@ -17,6 +18,7 @@ class TestApiTokens:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestDelete:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
@@ -27,6 +29,7 @@ class TestDelete:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestEdit:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
@@ -37,6 +40,7 @@ class TestEdit:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestFollowers:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any, sysadmin: dict[str, Any]):
@@ -47,6 +51,7 @@ class TestFollowers:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestIndex:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -57,6 +62,7 @@ class TestIndex:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestLoggedOutPage:
     def test_title(self, page: Page, title_builder: Any):
@@ -66,6 +72,7 @@ class TestLoggedOutPage:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestLogin:
     def test_title(self, page: Page, title_builder: Any):
@@ -75,6 +82,7 @@ class TestLogin:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestRead:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
@@ -85,6 +93,7 @@ class TestRead:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestReadGroups:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -97,6 +106,7 @@ class TestReadGroups:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestReadOrganizations:
     def test_title(
@@ -110,6 +120,7 @@ class TestReadOrganizations:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestRegister:
     def test_title(self, page: Page, title_builder: Any):
@@ -119,6 +130,7 @@ class TestRegister:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestRequestReset:
     def test_title(self, page: Page, title_builder: Any):

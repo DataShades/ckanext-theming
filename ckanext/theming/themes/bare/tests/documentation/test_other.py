@@ -6,6 +6,7 @@ from playwright.sync_api import Page
 from ckan import types
 
 
+@pytest.mark.integration
 def test_error_404(
     doc_screenshot: Any,
     page: Page,
@@ -15,6 +16,7 @@ def test_error_404(
     doc_screenshot("error-404")
 
 
+@pytest.mark.integration
 def test_error_403(
     doc_screenshot: Any,
     page: Page,
@@ -24,6 +26,7 @@ def test_error_403(
     doc_screenshot("error-403")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_stats(
     doc_screenshot: Any,

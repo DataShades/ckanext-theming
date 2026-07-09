@@ -8,6 +8,7 @@ import ckan.plugins.toolkit as tk
 from ckan.tests.helpers import call_action
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestDashboard:
     def test_title(self, page: Page, title_builder: Any, user: dict[str, Any], login: Any):
@@ -18,6 +19,7 @@ class TestDashboard:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestGroupActivity:
@@ -28,6 +30,7 @@ class TestGroupActivity:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestGroupChanges:
@@ -44,6 +47,7 @@ class TestGroupChanges:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestOrganizationActivity:
@@ -54,6 +58,7 @@ class TestOrganizationActivity:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestOrganizationChanges:
@@ -76,6 +81,7 @@ class TestOrganizationChanges:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestPackageActivity:
@@ -86,6 +92,7 @@ class TestPackageActivity:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestPackageChanges:
@@ -108,6 +115,7 @@ class TestPackageChanges:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.ckan_config("ckan.plugins", ["activity"])
 @pytest.mark.usefixtures("with_plugins", "clean_db")
 class TestUserActivity:

@@ -3,9 +3,12 @@
         "watch-scripts": "vite build -w",
         "build-scripts": "vite build",
         "typecheck-scripts": "tsc --noEmit",
-        "build-scripts": "vite build",
         "watch-styles": "sass -w assets/scss/main.scss assets/css/main.css",
-        "compile-styles": "sass assets/scss/main.scss assets/css/main.css --no-source-map; sass assets/scss/main-rtl.scss assets/css/main-rtl.css --no-source-map"
+        "compile-styles:prd": "sass assets/scss/main.scss assets/css/main.css --no-source-map; sass assets/scss/main-rtl.scss assets/css/main-rtl.css --no-source-map",
+        "compile-styles": "sass assets/scss/main.scss assets/css/main.css; sass assets/scss/main-rtl.scss assets/css/main-rtl.css",
+        "cleanup": "echo 'cleanup' && rm -rf node_modules",
+        "all": "npm run build-scripts && npm run compile-styles",
+        "ci": "npm ci && run all && npm run cleanup"
     },
     "dependencies": {
         "@types/bootstrap": "^5.2.10",

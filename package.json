@@ -1,10 +1,18 @@
 {
+  "scripts": {
+    "bare":"(cd ckanext/theming/themes/bare; npm run ci)",
+    "classic": "(cd ckanext/theming/themes/classic && npm run ci)",
+    "midnight_blue": "echo 'no package exists for midnight_blue theme'",
+    "cleanup": "rm -rf node_modules",
+    "all" : "npm run bare && npm run classic && npm run midnight_blue",
+    "ci": "npm ci && npm run all && npm run cleanup"
+  },
   "dependencies": {
     "@picocss/pico": "^2.1.1",
     "@tailwindcss/cli": "^4.1.17",
     "bootstrap": "^5.3.8",
     "bulma": "^1.0.4",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.10"

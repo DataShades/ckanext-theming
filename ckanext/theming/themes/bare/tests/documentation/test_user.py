@@ -1,5 +1,6 @@
 from typing import Any
 
+import pytest
 from faker import Faker
 from playwright.sync_api import Page
 
@@ -9,6 +10,7 @@ from ckan.tests.helpers import call_action
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 def test_login(
     doc_screenshot: Any,
     page: Page,
@@ -21,6 +23,7 @@ def test_login(
     doc_screenshot("user-login-errors", full_page=False)
 
 
+@pytest.mark.integration
 def test_logout(
     doc_screenshot: Any,
     page: Page,
@@ -33,6 +36,7 @@ def test_logout(
     doc_screenshot("user-logout")
 
 
+@pytest.mark.integration
 def test_register(
     doc_screenshot: Any,
     page: Page,
@@ -47,6 +51,7 @@ def test_register(
     doc_screenshot("user-register-form")
 
 
+@pytest.mark.integration
 def test_read(
     doc_screenshot: Any,
     page: Page,
@@ -74,6 +79,7 @@ def test_read(
         doc_screenshot("user-read-follow-button", clip=sidebar.bounding_box())
 
 
+@pytest.mark.integration
 def test_edit(
     doc_screenshot: Any,
     page: Page,
@@ -87,6 +93,7 @@ def test_edit(
     doc_screenshot("user-edit")
 
 
+@pytest.mark.integration
 def test_activity(
     doc_screenshot: Any,
     page: Page,
@@ -103,6 +110,7 @@ def test_activity(
     doc_screenshot("user-activity")
 
 
+@pytest.mark.integration
 def test_followers(
     doc_screenshot: Any,
     page: Page,
@@ -123,6 +131,7 @@ def test_followers(
     doc_screenshot("user-followers-with-followers")
 
 
+@pytest.mark.integration
 def test_organizations(
     doc_screenshot: Any,
     page: Page,
@@ -136,6 +145,7 @@ def test_organizations(
     doc_screenshot("user-organizations")
 
 
+@pytest.mark.integration
 def test_groups(
     doc_screenshot: Any,
     page: Page,
@@ -152,6 +162,7 @@ def test_groups(
     doc_screenshot("user-groups")
 
 
+@pytest.mark.integration
 def test_list(
     doc_screenshot: Any,
     page: Page,
@@ -169,6 +180,7 @@ def test_list(
     doc_screenshot("user-list-search")
 
 
+@pytest.mark.integration
 def test_api_tokens(
     doc_screenshot: Any,
     page: Page,
@@ -184,6 +196,7 @@ def test_api_tokens(
     doc_screenshot("user-api-tokens")
 
 
+@pytest.mark.integration
 def test_request_reset(
     doc_screenshot: Any,
     page: Page,
@@ -193,6 +206,7 @@ def test_request_reset(
     doc_screenshot("user-request-reset")
 
 
+@pytest.mark.integration
 def test_confirm_delete(
     doc_screenshot: Any,
     page: Page,

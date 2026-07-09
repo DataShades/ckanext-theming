@@ -1,14 +1,20 @@
 import logging
+import sys
 from typing import Any, cast
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 from flask import Blueprint
 from jinja2 import pass_context
 from jinja2.runtime import Context
-from typing_extensions import override
 
 import ckan.plugins.toolkit as tk
 from ckan import plugins as p
 from ckan import types
+from ckan.common import CKANConfig
 
 from . import config as cfg
 from . import lib, views
@@ -56,7 +62,7 @@ class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
         return app
 
 
-def _is_main_implementation(self: ThemingMixin, config: types.CKANConfig):
+def _is_main_implementation(self: ThemingMixin, config: CKANConfig):
     """Check if the current plugin instance is the main implementation of ThemingMixin.
 
     The main implementations is either the theming plugin itself it it's

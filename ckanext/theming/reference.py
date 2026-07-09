@@ -5,12 +5,18 @@ import dataclasses
 import enum
 import fnmatch
 import os
+import sys
 from collections import defaultdict
 from collections.abc import Callable, Hashable, Iterator, Mapping, MutableMapping
 from typing import Any, TypeVar
 
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+
 import msgspec
-from typing_extensions import override
 
 
 class Matcher(msgspec.Struct):

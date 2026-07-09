@@ -7,6 +7,7 @@ import ckan.plugins.toolkit as tk
 from ckan import types
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestResourceDelete:
     def test_title(
@@ -19,6 +20,7 @@ class TestResourceDelete:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestResourceEdit:
     def test_title(
@@ -38,6 +40,7 @@ class TestResourceEdit:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestResourceNew:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, package: dict[str, Any]):
@@ -48,6 +51,7 @@ class TestResourceNew:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestResourceRead:
     def test_title(
@@ -67,6 +71,7 @@ class TestResourceRead:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestResourceViews:
     def test_title(

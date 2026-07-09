@@ -2,12 +2,13 @@ import fnmatch
 from typing import Any, cast
 
 import pytest
-from ckanext.theming import reference
 from playwright.sync_api import Page
+from werkzeug.routing.rules import Rule
 
 import ckan.plugins.toolkit as tk
 from ckan.types import FixtureApp, FixtureCkanConfig, TestFactory
-from werkzeug.routing import Rule
+
+from ckanext.theming import reference
 
 
 @pytest.fixture
@@ -45,6 +46,7 @@ def source_data(
     return source
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins", "clean_db", "clean_index")
 class TestPages:
     def test_screenshots(  # noqa: PLR0913, C901

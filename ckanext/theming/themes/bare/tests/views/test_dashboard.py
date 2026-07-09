@@ -6,6 +6,7 @@ from playwright.sync_api import Page, expect
 import ckan.plugins.toolkit as tk
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestDatasets:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
@@ -16,6 +17,7 @@ class TestDatasets:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroups:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
@@ -26,6 +28,7 @@ class TestGroups:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizations:
     def test_title(self, page: Page, login: Any, user: dict[str, Any], title_builder: Any):
