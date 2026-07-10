@@ -10,6 +10,7 @@ nav = [
   "philosophy.md",
   "styleguide.md",
   "migration.md",
+  "integration.md",
   "recipes.md",
   { "Theme Development" = [
     "theme/basic.md",

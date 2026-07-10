@@ -168,7 +168,7 @@ registering a custom theme is more correct according to the goal.
 There are two similar methods: `get_additional_theme_ui_sources` and
 `get_default_theme_ui_sources`.
 
-The `get_additional_theme_ui_sources` aggresively registers components,
+The `get_additional_theme_ui_sources` aggressively registers components,
 overriding any existing component provided by theme. Use it to replace
 component unconditionally.
 
