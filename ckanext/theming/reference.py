@@ -1,18 +1,22 @@
 """Reference definitions for components used in the system."""
 
-from __future__ import annotations
-
 import copy
 import dataclasses
 import enum
 import fnmatch
 import os
+import sys
 from collections import defaultdict
 from collections.abc import Callable, Hashable, Iterator, Mapping, MutableMapping
 from typing import Any, TypeVar
 
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+
 import msgspec
-from typing_extensions import override
 
 
 class Matcher(msgspec.Struct):
@@ -48,16 +52,16 @@ class Category(enum.Enum):
 
 
 @dataclasses.dataclass(frozen=True)
+class MacroArgument:
+    description: str = ""
+    type: str = "any"
+
+
+@dataclasses.dataclass(frozen=True)
 class Component:
     category: Category = Category.CUSTOM
     description: str = ""
     arguments: dict[str, MacroArgument] = dataclasses.field(default_factory=dict)
-
-
-@dataclasses.dataclass(frozen=True)
-class MacroArgument:
-    description: str = ""
-    type: str = "any"
 
 
 @dataclasses.dataclass(frozen=True)

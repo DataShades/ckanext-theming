@@ -1,25 +1,58 @@
 name: Tests
-on: [push, pull_request]
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+    workflow_call:
+
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v7
+        - uses: actions/setup-python@v6
+          with:
+            python-version: '3.14'
+        - name: Install requirements
+          run: pip install flake8 pycodestyle
+        - name: Check syntax
+          run: flake8 . --count --select=E901,E999,F821,F822,F823 --show-source --statistics --extend-exclude ckan
+#        - name: Ruff Check
+#          run:  pip intall ruff && ruff --config pyproject.toml check ##We use an action hook but locally should be this command
+        - uses: astral-sh/ruff-action@0ce1b0bf8b818ef400413f810f8a11cdbda0034b #v4.0.0
+
   test:
+    strategy:
+      matrix:
+        include: #ckan-image see https://github.com/ckan/ckan-docker-base, ckan-version controls other image tags
+          - ckan-version: "2.12"
+            ckan-image: "2.12-py3.14"
+            experimental: false
+          - ckan-version: "master"
+            ckan-image: "master"
+            experimental: true  # master is unstable, good to know if we are compatible or not
+      fail-fast: false
+
+    name: ${{ matrix.experimental && '**Fail_Ignored** ' || '' }} CKAN ${{ matrix.ckan-version }}
     runs-on: ubuntu-latest
     container:
-      # The CKAN version tag of the Solr and Postgres containers should match
-      # the one of the container the tests run on.
-      # You can switch this base image with a custom image tailored to your project
-      image: ckan/ckan-dev:2.12
+      image: ckan/ckan-dev:${{ matrix.ckan-image }}
+      # --hostname ckan allows chrome container to access this container for bdd testing
+      options: --user root  --hostname ckan
     services:
       solr:
-        image: ckan/ckan-solr:2.12-solr9
+        image: ckan/ckan-solr:${{ matrix.ckan-version }}-solr9
       postgres:
-        image: ckan/ckan-postgres-dev:2.12
+        image: ckan/ckan-postgres-dev:${{ matrix.ckan-version }}
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
       redis:
-          image: redis:3
+          image: redis:7
 
     env:
       CKAN_SQLALCHEMY_URL: postgresql://ckan_default:pass@postgres/ckan_test
@@ -29,25 +62,212 @@ jobs:
       CKAN_REDIS_URL: redis://redis:6379/1
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
+      continue-on-error: ${{ matrix.experimental }}
     - name: Install requirements
+      continue-on-error: ${{ matrix.experimental }}
       # Install any extra requirements your extension has here (dev requirements, other extensions etc)
       run: |
-        pip install -r requirements.txt
-        pip install -r dev-requirements.txt
-        pip install -e .
+        pip install -e .[dev,test]  # Installs the main package and dev dependencies
+        playwright install --with-deps
+
+        echo "TODO: also run theme js/css complication steps here and remove node_modules afterwards"
+
     - name: Setup extension
+      continue-on-error: ${{ matrix.experimental }}
       # Extra initialization steps
       run: |
-        # Replace default path to CKAN core config file with the one on the container
+        # Replace default path to CKAN core config file with the one on the container "/srv/app/src/ckan/test-ckan.ini"
         sed -i -e 's/use = config:.*/use = config:\/srv\/app\/src\/ckan\/test-core.ini/' test.ini
 
         ckan -c test.ini db init
-    - name: Run tests
-      run: pytest --ckan-ini=test.ini --cov=ckanext.example_theming --disable-warnings ckanext/example_theming
+      env:
+          CKAN_THEME: bare
+          CKAN_INI: /srv/app/ckan.ini
+          CKAN_SITE_URL: http://ckan:5000/
 
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/ruff-action@v3
+    - name: Run unit tests
+      continue-on-error: ${{ matrix.experimental }}
+      run: pytest -m unit --ckan-ini=test.ini --cov=ckanext.theming --disable-warnings ckanext/theming/tests --junit-xml=/tmp/artifacts/junit/results.xml
+      env:
+          CKAN_THEME: bare
+          CKAN_INI: /srv/app/ckan.ini
+          CKAN_SITE_URL: http://ckan:5000/
+
+    - name: Config for BDD Integration testing
+      run: |
+        echo "::group::Install curl, procps, wget"
+        if [ -f /etc/alpine-release ]; then
+          apk add --no-cache procps curl
+        elif [ -f /etc/debian_version ]; then
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential curl procps wget
+        fi
+        echo "::endgroup::"
+
+        echo "::group::ckan config"
+        ## Since we are using the ckan-dev as the running container, we need to manually setup the system
+        ## https://github.com/ckan/ckan-docker-base/blob/main/ckan-2.11/setup/start_ckan_development.sh
+
+        echo "Setting beaker.session.secret in ini file"
+        ckan config-tool $CKAN_INI "beaker.session.secret=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
+        ckan config-tool $CKAN_INI "SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
+        ckan config-tool $CKAN_INI "WTF_CSRF_SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
+        JWT_SECRET=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')
+        ckan config-tool $CKAN_INI "api_token.jwt.encode.secret=${JWT_SECRET}"
+        ckan config-tool $CKAN_INI "api_token.jwt.decode.secret=${JWT_SECRET}"
+
+        ckan config-tool $CKAN_INI "ckan.plugins = theming activity stats datastore image_view text_view"
+        ckan config-tool $CKAN_INI "ckan.site_url = http://ckan:5000/"
+        ckan config-tool $CKAN_INI  -s server:main "host = 0.0.0.0"
+        ckan config-tool $CKAN_INI  -s server:main "port = 5000"
+
+        echo "::endgroup::"
+
+        echo "::group::ckan.ini debug output"
+        echo "cat /srv/app/ckan.ini"
+
+        cat /srv/app/ckan.ini
+        echo "::endgroup::"
+
+        echo "::group::ckan etc hosts output"
+        echo "/etc/hosts"
+        #        if ! grep -q "127.0.0.1 ckan" /etc/hosts; then
+        #          echo "" >> /etc/hosts
+        #          echo "127.0.0.1 ckan" >> /etc/hosts
+        #        fi
+        cat /etc/hosts
+        echo "::endgroup::"
+
+      env:
+          CKAN_THEME: bare
+          CKAN_INI: /srv/app/ckan.ini
+          CKAN_SITE_URL: http://ckan:5000/
+
+
+
+    - name: Prep Website Integration harness
+      continue-on-error: ${{ matrix.experimental }}
+      run: |
+        rm -rf test/screenshots/*
+        mkdir -p test/screenshots
+
+        echo "start website to configure"
+        ckan -c $CKAN_INI run -H 0.0.0.0 > test/screenshots/ckan.log 2>&1 &
+        CKAN_PID=$!
+        ckan -c $CKAN_INI jobs worker > test/screenshots/ckan-worker.log 2>&1  &
+        WORKER_PID=$!
+        echo "CKAN PIDS are CKAN_PID=$CKAN_PID, WORKER_PID=$WORKER_PID"
+        sleep 5
+
+        echo "::group::ckan clean db and init"
+        ckan db clean --yes
+        ckan db init
+        echo "::endgroup::"
+
+        echo "::group::create test data"
+        chmod +x ./bin/*
+        echo "create test data"
+        ./bin/create-test-data.sh
+        echo "::endgroup::"
+
+        echo "stopping ckan"
+        kill -9 $PID || true
+        kill -9 $WORKER_PID || true
+      env:
+          CKAN_THEME: bare
+          CKAN_INI: /srv/app/ckan.ini
+          CKAN_SITE_URL: http://ckan:5000/
+
+    - name: Run Bare Theme tests
+      continue-on-error: ${{ matrix.experimental }}
+      run: |
+        ckan -c $CKAN_INI run -H 0.0.0.0 > test/screenshots/ckan.log 2>&1 &
+        CKAN_PID=$!
+        ckan -c $CKAN_INI jobs worker > test/screenshots/ckan-worker.log 2>&1  &
+        WORKER_PID=$!
+        echo "CKAN PIDS are CKAN_PID=$CKAN_PID, WORKER_PID=$WORKER_PID"
+        sleep 5
+
+        #echo "::group::Theme: ${CKAN_THEME}: Unit tests "
+        #pytest -m unit --ckan-ini=test.ini --cov=ckanext.theming --disable-warnings ckanext/theming/themes/${CKAN_THEME} --junit-xml=/tmp/artifacts/junit/results_unit_${CKAN_THEME}.xml
+        #echo "::endgroup::"
+
+        echo "::group::Theme: ${THEME} Integration tests "
+        pytest -m integration --ckan-ini=test.ini --cov=ckanext.theming --disable-warnings ckanext/theming/themes/${CKAN_THEME} --junit-xml=/tmp/artifacts/junit/results_integration_${CKAN_THEME}.xml
+        echo "::endgroup::"
+
+        echo "stopping ckan"
+        kill -9 $PID || true
+        kill -9 $WORKER_PID || true
+      env:
+          CKAN_THEME: bare
+          CKAN_INI: /srv/app/ckan.ini
+          CKAN_SITE_URL: http://ckan:5000/
+
+
+    - name: Run Classic Theme tests
+      continue-on-error: ${{ matrix.experimental }}
+      run: |
+        ckan -c $CKAN_INI run -H 0.0.0.0 > test/screenshots/ckan.log 2>&1 &
+        CKAN_PID=$!
+        ckan -c $CKAN_INI jobs worker > test/screenshots/ckan-worker.log 2>&1  &
+        WORKER_PID=$!
+        echo "CKAN PIDS are CKAN_PID=$CKAN_PID, WORKER_PID=$WORKER_PID"
+        sleep 5
+
+        echo "::group::Theme: ${CKAN_THEME}: Unit tests "
+        pytest -m unit --ckan-ini=test.ini --cov=ckanext.theming --disable-warnings ckanext/theming/themes/${CKAN_THEME} --junit-xml=/tmp/artifacts/junit/results_unit_${CKAN_THEME}.xml
+        echo "::endgroup::"
+
+        echo "::group::Theme: ${THEME} Integration tests "
+        pytest -m integration --ckan-ini=test.ini --cov=ckanext.theming --disable-warnings ckanext/theming/themes/${CKAN_THEME} --junit-xml=/tmp/artifacts/junit/results_integration_${CKAN_THEME}.xml
+        echo "::endgroup::"
+
+        echo "stopping ckan"
+        kill -9 $PID || true
+        kill -9 $WORKER_PID || true
+      env:
+          CKAN_THEME: classic
+          CKAN_INI: /srv/app/ckan.ini
+          CKAN_SITE_URL: http://ckan:5000/
+
+    - name: ${{ matrix.experimental && '**Fail_Ignored** ' || '' }} Test Summary
+      uses: test-summary/action@v2
+      continue-on-error: ${{ matrix.experimental }}
+      with:
+        paths: "/tmp/artifacts/junit/*.xml"
+      if: always()
+
+    - name: Install packages required for codecov
+      continue-on-error: true
+      if: ${{ !cancelled() }}
+      run: |
+        #ubuntu based images
+        apt-get update
+        apt-get install -y --no-install-recommends curl gpg
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v5
+      if: ${{ !cancelled() }}
+      continue-on-error: true
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        verbose: false # optional (default = false)
+
+    - name: Get Cover
+      uses: orgoro/coverage@3f13a558c5af7376496aa4848bf0224aead366ac  # v3.2
+      if: ${{ !cancelled() }}
+      continue-on-error: true
+      with:
+        coverageFile: coverage.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload test results to Codecov
+      uses: codecov/test-results-action@v1
+      if: ${{ !cancelled() }}
+      continue-on-error: true
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        verbose: false  # optional (default = false)
+

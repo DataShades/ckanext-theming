@@ -1,3 +1,5 @@
+# Zensical ~ configuration file
+# https://github.com/zensical/zensical
 [project]
 site_name = "Theme Documentation"
 site_description = "Portal pages documentation for CKAN theme"
@@ -134,7 +136,7 @@ features = [
 logo = "img/logo.png"
 
 [project.extra.vars]
-site_url = "http://localhost:5000"
+site_url = "http://ckan:5000"
 
 [[project.theme.palette]]
 scheme = "default"

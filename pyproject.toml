@@ -37,6 +37,7 @@ theming = "ckanext.theming.plugin:ThemingPlugin"
 ckan = "ckan.lib.extract:extract_ckan"
 
 [project.optional-dependencies]
+lint = ["ruff", "flake8", "pycodestyle"]
 test = ["pytest-ckan", "pytest-pretty"]
 docs = ["zensical"]
 dev = ["pytest-ckan", "pytest-pretty", "zensical", "pre-commit", "pytest-playwright"]
@@ -49,7 +50,7 @@ build-backend = "setuptools.build_meta"
 find = {}
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py310" ##3.14 on 2.12 but master is still on 3.10.
 line-length = 120
 
 [tool.ruff.lint]
@@ -126,6 +127,10 @@ self = ["ckanext.theming"]
 addopts = "--ckan-ini test.ini -m 'not benchmark'"
 testpaths = ["ckanext/theming/tests"]
 filterwarnings = [
+]
+markers = [
+    "unit: marks tests as unit tests",
+    "integration: marks tests as integration tests"
 ]
 
 [tool.pyright]

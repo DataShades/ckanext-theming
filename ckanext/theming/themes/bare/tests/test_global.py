@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import fnmatch
 from typing import Any, cast
 
@@ -48,6 +46,7 @@ def source_data(
     return source
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins", "clean_db", "clean_index")
 class TestPages:
     def test_screenshots(  # noqa: PLR0913, C901
@@ -59,7 +58,7 @@ class TestPages:
         app: FixtureApp,
         source_data: reference.Source,
     ):
-        url_map = cast("dict[str, list[Rule]]", app.flask_app.url_map._rules_by_endpoint)
+        url_map = cast(dict[str, list[Rule]], app.flask_app.url_map._rules_by_endpoint)
         for name, rules in url_map.items():
             if any(fnmatch.fnmatch(name, pattern) for pattern in source_data.ignore):
                 continue

@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pytest
 
 from ckan import types
@@ -12,6 +10,7 @@ def util():
     return lib.Util(lib.Theme("test", None))
 
 
+@pytest.mark.unit
 def test_init(app: types.CKANApp):
     """Util class initialized in new UI."""
     theme = lib.Theme("test", None, ui_factory=lib.MacroUI)
@@ -19,6 +18,7 @@ def test_init(app: types.CKANApp):
     assert isinstance(ui.util, lib.Util)
 
 
+@pytest.mark.unit
 class TestUtilAttrs:
     def test_escape(self, util: lib.Util):
         """Attrs method properly escapes attribute values."""
@@ -90,6 +90,7 @@ class TestUtilAttrs:
         ]
 
 
+@pytest.mark.unit
 class TestUtilTag:
     def test_tag(self, util: lib.Util):
         """Tag method generates correct HTML tag."""

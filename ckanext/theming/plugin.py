@@ -1,16 +1,20 @@
-from __future__ import annotations
-
 import logging
+import sys
 from typing import Any, cast
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 from flask import Blueprint
 from jinja2 import pass_context
 from jinja2.runtime import Context
-from typing_extensions import override
 
 import ckan.plugins.toolkit as tk
 from ckan import plugins as p
 from ckan import types
+from ckan.common import CKANConfig
 
 from . import config as cfg
 from . import lib, views
@@ -18,22 +22,6 @@ from .interfaces import ITheme
 from .themes import make_bare_theme, make_classic_polyfill, make_mb_polyfill
 
 log = logging.getLogger(__name__)
-
-
-def _is_main_implementation(self: ThemingMixin, config: types.CKANConfig):
-    """Check if the current plugin instance is the main implementation of ThemingMixin.
-
-    The main implementations is either the theming plugin itself it it's
-    loaded, or the last loaded plugin that extends ThemingMixin.
-    """
-    if p.plugin_loaded("theming"):
-        return self.name == "theming"
-
-    for name in reversed(config["ckan.plugins"]):
-        plugin = p.get_plugin(name)
-        if not isinstance(plugin, ThemingMixin):
-            continue
-        return plugin == self
 
 
 class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
@@ -72,6 +60,22 @@ class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
         else:
             log.warning("Cannot initialize UI in the non-flask application")
         return app
+
+
+def _is_main_implementation(self: ThemingMixin, config: CKANConfig):
+    """Check if the current plugin instance is the main implementation of ThemingMixin.
+
+    The main implementations is either the theming plugin itself it it's
+    loaded, or the last loaded plugin that extends ThemingMixin.
+    """
+    if p.plugin_loaded("theming"):
+        return self.name == "theming"
+
+    for name in reversed(config["ckan.plugins"]):
+        plugin = p.get_plugin(name)
+        if not isinstance(plugin, ThemingMixin):
+            continue
+        return plugin == self
 
 
 @tk.blanket.cli

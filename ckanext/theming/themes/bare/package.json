@@ -15,6 +15,9 @@
         "styles": "gulp build",
         "watch-styles": "DEBUG=1 gulp watch",
         "scripts": "tsc",
-        "watch-scripts": "tsc -w"
+        "watch-scripts": "tsc -w",
+        "cleanup": "echo 'cleanup' && rm -rf node_modules",
+        "all": "npm run scripts && npm run styles",
+        "ci": "npm ci && npm run all && npm run cleanup"
     }
 }

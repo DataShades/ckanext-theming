@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 import pytest
@@ -12,6 +10,7 @@ from ckan.tests.helpers import call_action
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 def test_index(
     doc_screenshot: Any,
     page: Page,
@@ -35,6 +34,7 @@ def test_index(
     doc_screenshot("organization-index-with-add-button")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_read(
     doc_screenshot: Any,
@@ -52,6 +52,7 @@ def test_read(
     doc_screenshot("organization-read")
 
 
+@pytest.mark.integration
 def test_about(
     doc_screenshot: Any,
     page: Page,
@@ -62,6 +63,7 @@ def test_about(
     doc_screenshot("organization-about")
 
 
+@pytest.mark.integration
 def test_new(
     doc_screenshot: Any,
     page: Page,
@@ -77,6 +79,7 @@ def test_new(
     doc_screenshot("organization-new-form")
 
 
+@pytest.mark.integration
 def test_edit(
     doc_screenshot: Any,
     page: Page,
@@ -90,6 +93,7 @@ def test_edit(
     doc_screenshot("organization-edit-form")
 
 
+@pytest.mark.integration
 def test_confirm_delete(
     doc_screenshot: Any,
     page: Page,
@@ -103,6 +107,7 @@ def test_confirm_delete(
     doc_screenshot("organization-confirm-delete")
 
 
+@pytest.mark.integration
 def test_members(
     doc_screenshot: Any,
     page: Page,
@@ -124,6 +129,7 @@ def test_members(
     doc_screenshot("organization-members")
 
 
+@pytest.mark.integration
 def test_member_new(
     doc_screenshot: Any,
     page: Page,
@@ -137,6 +143,7 @@ def test_member_new(
     doc_screenshot("organization-member-new")
 
 
+@pytest.mark.integration
 def test_manage_members(
     doc_screenshot: Any,
     page: Page,
@@ -159,6 +166,7 @@ def test_manage_members(
     doc_screenshot("organization-manage-members")
 
 
+@pytest.mark.integration
 def test_confirm_delete_member(
     doc_screenshot: Any,
     page: Page,
@@ -181,6 +189,7 @@ def test_confirm_delete_member(
     doc_screenshot("organization-confirm-delete-member")
 
 
+@pytest.mark.integration
 def test_admins(
     doc_screenshot: Any,
     page: Page,
@@ -192,6 +201,7 @@ def test_admins(
     doc_screenshot("organization-admins")
 
 
+@pytest.mark.integration
 def test_activity(
     doc_screenshot: Any,
     page: Page,
@@ -209,6 +219,7 @@ def test_activity(
     doc_screenshot("organization-activity")
 
 
+@pytest.mark.integration
 def test_bulk_process(
     doc_screenshot: Any,
     page: Page,

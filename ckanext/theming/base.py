@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import abc
 import datetime
 from collections.abc import Iterable
@@ -15,6 +13,47 @@ from . import reference
 
 class PElement(Protocol):
     def __call__(self, *args: Any, **kwargs: Any) -> Markup: ...
+
+
+class BaseTheme(abc.ABC):
+    """Information about a theme.
+
+    :param name: Name of the theme.
+    :param path: Path to the theme directory.
+    :param parent: Name of the parent theme, or None.
+    :param template_folder: Subdirectory for templates.
+    :param public_folder: Subdirectory for public static files.
+    :param asset_folder: Subdirectory for asset files.
+    :param ui_factory: Factory class for creating the UI instance.
+    :param util_factory: Factory class for creating the Util instance.
+    :param icon_map: Mapping of common icon names to theme-specific names.
+    """
+
+    name: str
+    path: str | None
+    parent: str | None = None
+
+    template_folder: str
+    public_folder: str
+    asset_folder: str
+    ui_factory: type["UI"]  # noqa: UP037 Forward Reference
+    util_factory: type["BaseUtil"] # noqa: UP037 Forward Reference
+    icon_map: dict[str, str]
+
+    @abc.abstractmethod
+    def build_ui(self, app: types.CKANApp) -> "UI": ...  # noqa: UP037 Forward Reference
+
+    @abc.abstractmethod
+    def template_path(self) -> str | None: ...
+
+    @abc.abstractmethod
+    def public_path(self) -> str | None: ...
+
+    @abc.abstractmethod
+    def asset_path(self) -> str | None: ...
+
+    @abc.abstractmethod
+    def component_reference(self) -> reference.Glossary[str, reference.Component]: ...
 
 
 class BaseUtil(abc.ABC):
@@ -37,6 +76,7 @@ class BaseUtil(abc.ABC):
     def map(self, el: PElement, items: Iterable[Any], /, *args: Any, **kwargs: Any) -> str: ...
 
     @abc.abstractmethod
+    # datetime.UTC after 3.11 but for master still on 3.10 needs no alias version
     def now(self, tz: datetime.timezone = datetime.timezone.utc) -> datetime.datetime: ...
 
     @abc.abstractmethod
@@ -71,44 +111,3 @@ class UI(Iterable[str], abc.ABC):
 
     @abc.abstractmethod
     def _add_component(self, name: str, component: PElement): ...
-
-
-class BaseTheme(abc.ABC):
-    """Information about a theme.
-
-    :param name: Name of the theme.
-    :param path: Path to the theme directory.
-    :param parent: Name of the parent theme, or None.
-    :param template_folder: Subdirectory for templates.
-    :param public_folder: Subdirectory for public static files.
-    :param asset_folder: Subdirectory for asset files.
-    :param ui_factory: Factory class for creating the UI instance.
-    :param util_factory: Factory class for creating the Util instance.
-    :param icon_map: Mapping of common icon names to theme-specific names.
-    """
-
-    name: str
-    path: str | None
-    parent: str | None = None
-
-    template_folder: str
-    public_folder: str
-    asset_folder: str
-    ui_factory: type[UI]
-    util_factory: type[BaseUtil]
-    icon_map: dict[str, str]
-
-    @abc.abstractmethod
-    def build_ui(self, app: types.CKANApp) -> UI: ...
-
-    @abc.abstractmethod
-    def template_path(self) -> str | None: ...
-
-    @abc.abstractmethod
-    def public_path(self) -> str | None: ...
-
-    @abc.abstractmethod
-    def asset_path(self) -> str | None: ...
-
-    @abc.abstractmethod
-    def component_reference(self) -> reference.Glossary[str, reference.Component]: ...

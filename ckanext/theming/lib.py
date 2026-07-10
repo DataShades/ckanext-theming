@@ -14,22 +14,26 @@ Example usage::
     btn = ui.link("Click me!", href="https://ckan.org")
 """
 
-from __future__ import annotations
-
 import dataclasses
 import datetime
 import logging
 import os
+import sys
 import uuid
 from collections import defaultdict
 from collections.abc import Iterable, Iterator
 from typing import Any, cast
 
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+
 from flask import current_app
 from jinja2 import Undefined
 from jinja2.runtime import Macro
 from markupsafe import Markup
-from typing_extensions import override
 from werkzeug.local import LocalProxy
 
 import ckan.plugins as p
@@ -50,7 +54,7 @@ NAMESPACE_UI = uuid.uuid5(uuid.NAMESPACE_OID, "ui")
 
 class Util(BaseUtil):
     _storage_key: str = "ui_storage"
-    _theme: Theme
+    _theme: "Theme"  # noqa: UP037 Forward Reference
     _extra_class_attr: str = "_extra_class"
     _attr_groups: list[tuple[str, str]] = [
         ("aria", "aria-"),
@@ -64,7 +68,7 @@ class Util(BaseUtil):
         return value.replace("&", "&amp;").replace('"', "&quot;")
 
     @override
-    def __init__(self, theme: Theme):
+    def __init__(self, theme: "Theme"):  # noqa: UP037 Forward Reference
         self._theme = theme
 
     @override
@@ -223,6 +227,7 @@ class Util(BaseUtil):
         return Markup().join(el(item, *args, **kwargs) for item in items)
 
     @override
+    # datetime.UTC after 3.11 but for master still on 3.10 needs no alias version
     def now(self, tz: datetime.timezone = datetime.timezone.utc) -> datetime.datetime:
         """Get the current UTC datetime.
 
@@ -327,7 +332,7 @@ class MacroUI(UI):
     _inv: dict[str, PElement]
 
     @override
-    def __init__(self, app: types.CKANApp, theme: Theme, util: Util):
+    def __init__(self, app: types.CKANApp, theme: "Theme", util: Util):  # noqa: UP037 Forward Reference
         self.util = util
 
         self._inv = {}

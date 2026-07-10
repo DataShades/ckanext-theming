@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 import pytest
@@ -8,6 +6,7 @@ from playwright.sync_api import Page, expect
 import ckan.plugins.toolkit as tk
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestIndex:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -18,6 +17,7 @@ class TestIndex:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestConfig:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -28,6 +28,7 @@ class TestConfig:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestTrash:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -38,6 +39,7 @@ class TestTrash:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestResetConfig:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):

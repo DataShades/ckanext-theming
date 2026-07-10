@@ -1,3 +1,4 @@
+# https://github.com/zensical/zensical
 [project]
 site_name = "ckanext-theming"
 site_description = "Documentation for the CKAN theming extension"

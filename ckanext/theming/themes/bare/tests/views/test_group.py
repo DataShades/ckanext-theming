@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 import pytest
@@ -9,6 +7,7 @@ import ckan.plugins.toolkit as tk
 from ckan.tests.helpers import call_action
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupAbout:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -19,6 +18,7 @@ class TestGroupAbout:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupAdmins:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -29,6 +29,7 @@ class TestGroupAdmins:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupDelete:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -39,6 +40,7 @@ class TestGroupDelete:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupEdit:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -49,6 +51,7 @@ class TestGroupEdit:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupFollowers:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -70,6 +73,7 @@ class TestGroupIndex:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupManageMembers:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -80,6 +84,7 @@ class TestGroupManageMembers:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupMemberDelete:
     def test_title(
@@ -99,6 +104,7 @@ class TestGroupMemberDelete:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupMemberNew:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -109,6 +115,7 @@ class TestGroupMemberNew:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupMembers:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -119,6 +126,7 @@ class TestGroupMembers:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupNew:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -129,6 +137,7 @@ class TestGroupNew:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestGroupRead:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any, group: dict[str, Any]):
@@ -139,6 +148,7 @@ class TestGroupRead:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationAbout:
     def test_title(
@@ -151,6 +161,7 @@ class TestOrganizationAbout:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationAdmins:
     def test_title(
@@ -163,6 +174,7 @@ class TestOrganizationAdmins:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationDelete:
     def test_title(
@@ -175,6 +187,7 @@ class TestOrganizationDelete:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationEdit:
     def test_title(
@@ -187,6 +200,7 @@ class TestOrganizationEdit:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationFollowers:
     def test_title(
@@ -199,6 +213,7 @@ class TestOrganizationFollowers:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationIndex:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -209,6 +224,7 @@ class TestOrganizationIndex:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationManageMembers:
     def test_title(
@@ -221,6 +237,7 @@ class TestOrganizationManageMembers:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationMemberDelete:
     def test_title(
@@ -240,6 +257,7 @@ class TestOrganizationMemberDelete:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationMemberNew:
     def test_title(
@@ -252,6 +270,7 @@ class TestOrganizationMemberNew:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationMembers:
     def test_title(
@@ -264,6 +283,7 @@ class TestOrganizationMembers:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationNew:
     def test_title(self, page: Page, login: Any, sysadmin: dict[str, Any], title_builder: Any):
@@ -274,6 +294,7 @@ class TestOrganizationNew:
         expect(page).to_have_title(expected)
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestOrganizationRead:
     def test_title(

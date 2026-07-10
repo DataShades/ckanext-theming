@@ -1,7 +1,6 @@
-from __future__ import annotations
-
 from typing import Any
 
+import pytest
 from playwright.sync_api import Page
 
 from ckan import types
@@ -10,6 +9,7 @@ from ckan.tests.helpers import call_action
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 def test_read(
     doc_screenshot: Any,
     page: Page,
@@ -37,6 +37,7 @@ def test_read(
     doc_screenshot("resource-read-edit-button")
 
 
+@pytest.mark.integration
 def test_new(
     doc_screenshot: Any,
     page: Page,
@@ -50,6 +51,7 @@ def test_new(
     doc_screenshot("resource-new")
 
 
+@pytest.mark.integration
 def test_edit(
     doc_screenshot: Any,
     page: Page,
@@ -68,6 +70,7 @@ def test_edit(
     doc_screenshot("resource-edit-errors", full_page=False)
 
 
+@pytest.mark.integration
 def test_confirm_delete(
     doc_screenshot: Any,
     page: Page,
@@ -82,6 +85,7 @@ def test_confirm_delete(
     doc_screenshot("dataset-confirm-delete-resource")
 
 
+@pytest.mark.integration
 def test_views(
     doc_screenshot: Any,
     page: Page,
@@ -104,6 +108,7 @@ def test_views(
     doc_screenshot("resource-views-add")
 
 
+@pytest.mark.integration
 def test_dictionary(
     doc_screenshot: Any,
     page: Page,

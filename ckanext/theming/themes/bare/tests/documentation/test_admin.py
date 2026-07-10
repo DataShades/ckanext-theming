@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 import pytest
@@ -11,6 +9,7 @@ from ckan import types
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_sysadmins(
     doc_screenshot: Any,
@@ -25,6 +24,7 @@ def test_sysadmins(
     doc_screenshot("admin-sysadmins")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_config(
     doc_screenshot: Any,
@@ -39,6 +39,7 @@ def test_config(
     doc_screenshot("admin-config")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_confirm_reset(
     doc_screenshot: Any,
@@ -52,6 +53,7 @@ def test_confirm_reset(
     doc_screenshot("admin-confirm-reset")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_trash(
     doc_screenshot: Any,

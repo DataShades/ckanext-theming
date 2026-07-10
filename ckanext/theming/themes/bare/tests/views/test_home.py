@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 import pytest
@@ -10,6 +8,7 @@ import ckan.plugins.toolkit as tk
 from ckanext.theming.themes.bare.tests.conftest import ElementLocator
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestAbout:
     """Test the About page."""
@@ -28,6 +27,7 @@ class TestAbout:
         expect(breadcrumbs).to_contain_text("About")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("with_plugins")
 class TestIndex:
     """Test the Home page."""

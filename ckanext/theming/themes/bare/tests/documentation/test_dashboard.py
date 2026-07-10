@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Any
 
 import pytest
@@ -8,6 +6,7 @@ from playwright.sync_api import Page
 from ckan import types
 
 
+@pytest.mark.integration
 def test_dashboard(
     doc_screenshot: Any,
     page: Page,
@@ -23,6 +22,7 @@ def test_dashboard(
     doc_screenshot("dashboard")
 
 
+@pytest.mark.integration
 @pytest.mark.usefixtures("clean_index")
 def test_datasets(
     doc_screenshot: Any,
@@ -39,6 +39,7 @@ def test_datasets(
     doc_screenshot("dashboard-datasets")
 
 
+@pytest.mark.integration
 def test_organizations(
     doc_screenshot: Any,
     page: Page,
@@ -54,6 +55,7 @@ def test_organizations(
     doc_screenshot("dashboard-organizations")
 
 
+@pytest.mark.integration
 def test_groups(
     doc_screenshot: Any,
     page: Page,
