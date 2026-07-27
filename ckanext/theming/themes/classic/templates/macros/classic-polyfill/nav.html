@@ -32,7 +32,7 @@
 
 {%- macro content_nav_item(content, href, active, icon) -%}
     {%- set prefix = (ui.icon(icon) ~ " ") if icon else "" -%}
-    {{ ui.nav_item(prefix ~ content, href=href, active=active, **kwargs) }}
+    <li {% if active %}class="active"{% endif %}>{{ ui.link(prefix ~ content, href, **kwargs) }}</li>
 {%- endmacro %}
 
 {%- macro footer_main_nav_item(content, href, active) -%}
