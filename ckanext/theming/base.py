@@ -93,8 +93,8 @@ class BaseUtil(abc.ABC):
     @abc.abstractmethod
     def icon(self, name: str) -> str: ...
 
-    # @abc.abstractmethod
-    # def config(self, name: str) -> str: ...
+    @abc.abstractmethod
+    def get_config(self, key: str) -> Any: ...
 
 
 class UI(Iterable[str], abc.ABC):
