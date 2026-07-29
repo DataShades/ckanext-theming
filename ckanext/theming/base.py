@@ -37,7 +37,7 @@ class BaseTheme(abc.ABC):
     public_folder: str
     asset_folder: str
     ui_factory: type["UI"]  # noqa: UP037 Forward Reference
-    util_factory: type["BaseUtil"] # noqa: UP037 Forward Reference
+    util_factory: type["BaseUtil"]  # noqa: UP037 Forward Reference
     icon_map: dict[str, str]
 
     @abc.abstractmethod
@@ -92,6 +92,9 @@ class BaseUtil(abc.ABC):
 
     @abc.abstractmethod
     def icon(self, name: str) -> str: ...
+
+    # @abc.abstractmethod
+    # def config(self, name: str) -> str: ...
 
 
 class UI(Iterable[str], abc.ABC):
