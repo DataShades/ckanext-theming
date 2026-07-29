@@ -8,9 +8,6 @@ help:
 changelog:  ## compile changelog
 	git cliff --output CHANGELOG.md $(if $(bump),--tag $(bump))
 
-deploy-docs:  ## build and publish documentation
-	mkdocs gh-deploy
-
 test-server:  ## start server for frontend testing
 	yes | ckan -c test.ini db clean
 	ckan -c test.ini db upgrade
