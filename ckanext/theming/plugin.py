@@ -7,6 +7,8 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
+import functools
+
 from flask import Blueprint
 from jinja2 import pass_context
 from jinja2.runtime import Context
@@ -25,7 +27,9 @@ log = logging.getLogger(__name__)
 
 
 def themed_plugin(cls: type[p.Plugin]):
-    return type(f"Themed{cls.__name__}", (ThemingMixin, cls), {})
+    wrapper = type(f"Themed{cls.__name__}", (ThemingMixin, cls), {})
+    functools.update_wrapper(wrapper, cls, updated=())
+    return wrapper
 
 
 class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):

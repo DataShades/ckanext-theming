@@ -31,7 +31,7 @@ Add `ckanext-theming` to your extension's requirements (e.g., in `setup.py`,
 `pyproject.toml`, or `requirements.txt`) with a minimal version restriction:
 
 ```toml title="pyproject.toml"
-dependencies = ["ckanext-theming>=0.0.5"]
+dependencies = ["ckanext-theming>=0.0.6"]
 ```
 
 ### The Recommended Approach: `@themed_plugin` Decorator
