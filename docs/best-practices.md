@@ -1,14 +1,14 @@
 
-# Technical Best Practices
+# Technical best practices
 
 This page explains the technical advantages of the `ckanext-theming` system
 and how to ensure your themes are high-quality, performant, and accessible.
 
-## Performance: Macros vs. Snippets
+## Performance: macros vs. snippets
 
 One of the secondary benefits of this system is improved rendering performance.
 
-### 1. Compiled Code
+### 1. Compiled code
 Standard CKAN snippets (`{% snippet ... %}`) are processed at runtime. Every
 time a snippet is called, Jinja2 (potentially) checks the filesystem and
 performs a search through the template directories.
@@ -55,16 +55,16 @@ HTML will correctly include `aria-label="Search datasets"`.
 Whenever possible, use semantic HTML tags. The system provides `ui.util.tag`
 to help you render dynamic wrappers while keeping the inner content semantic.
 
-### 3. Keyboard Navigation
+### 3. Keyboard navigation
 Ensure that interactive components (buttons, links, inputs) have visible focus
 states and correct `tabindex` behavior if you are using non-standard elements
 (like a `<div>` styled as a button—though we highly recommend against this).
 
 ---
 
-## Maintenance & Stability
+## Maintenance & stability
 
-### 1. Avoid Positional Arguments
+### 1. Avoid positional arguments
 Except for the first `content` argument (when applicable), **always use named arguments**.
 
 This ensures that if a new version of the extension adds a parameter to a standard component, your theme will not break because of a signature mismatch. The `**kwargs` (implicit in macros) will safely catch and ignore any parameters your specific theme doesn't handle yet.
@@ -80,7 +80,7 @@ This ensures that if a new version of the extension adds a parameter to a standa
 ```
 
 
-## Modifying Attributes: `ui.util.augment_attrs`
+## Modifying attributes: `ui.util.augment_attrs`
 
 When building macros, you often need to merge default attributes (like default
 styles, roles, or actions) with user-provided arguments in `kwargs`. **Never**
@@ -90,7 +90,7 @@ attributes the user passes.
 
 Instead, always use the helper utility `ui.util.augment_attrs`.
 
-### Function Signature
+### Function signature
 ```python
 def augment_attrs(
     kwargs: dict[str, Any],
@@ -101,7 +101,7 @@ def augment_attrs(
 ) -> dict[str, Any]
 ```
 
-### Best Practice Rules for `augment_attrs`
+### Best practice rules for `augment_attrs`
 1. **Targeting Attributes Sub-dictionary (Default):**
    By default, `key="attrs"`. This merges a dictionary of defaults into the `attrs` sub-dictionary within `kwargs`.
    ```django
@@ -118,7 +118,7 @@ def augment_attrs(
    {{ ui.util.augment_attrs(kwargs, {"data-custom": "value"}, key=none) }}
    ```
 
-### Comprehensive Example
+### Comprehensive example
 Here is a robust menu link component that safely combines role attributes and CSS classes:
 ```django
 {% macro menu_link(content, href=None) %}

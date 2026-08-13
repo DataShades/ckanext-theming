@@ -1,12 +1,12 @@
-# Combined Themes
+# Combined themes
 
-A **Combined Theme** provides both page-level templates and its own UI component library together in a single package. It registers a theme name that does not inherit from any parent (except perhaps standard fallbacks) and overrides both structural layouts and component macros inside its own directory.
+A **combined theme** provides both page-level templates and its own UI component library together in a single package. It registers a theme name that does not inherit from any parent (except perhaps standard fallbacks) and overrides both structural layouts and component macros inside its own directory.
 
 The `midnight-blue-portable` theme is a prime example of a combined theme.
 
 ---
 
-## File Structure of a Combined Theme
+## File structure of a combined theme
 
 A combined theme defines both structural files and macro files inside the same templates hierarchy:
 
@@ -30,7 +30,7 @@ my_combined_theme/
 
 ---
 
-## Configuring the Theme (`theme.py`)
+## Configuring the theme (`theme.py`)
 
 Since a combined theme provides all components natively, it does not require a parent setting (or it can inherit from a minimal fallback polyfill like `classic-polyfill`):
 
@@ -51,7 +51,7 @@ def make_theme(name: str = "my-combined-theme"):
 
 ---
 
-## Rendering Flow
+## Rendering flow
 
 In a combined theme:
 
@@ -60,7 +60,7 @@ In a combined theme:
 
 ---
 
-## When to Build a Combined Theme
+## When to build a combined theme
 
 **Tight Visual Coupling**: If the layout elements (e.g., sidebars, grids, headers) are tightly dependent on component styles (e.g. card sizes, button paddings) and the design cannot easily be separated into an independent layout wrapper.
 

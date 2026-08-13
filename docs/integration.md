@@ -11,7 +11,7 @@ standard `ui` components while remaining fully functional whether
 
 ---
 
-## How It Works
+## How it works
 
 When you decorate your plugin class with `@themed_plugin`, the theming extension provides automatic, zero-config fallbacks:
 
@@ -25,7 +25,7 @@ This ensures that template components "just work" even on portals running a clas
 
 ---
 
-## Implementing the Integration
+## Implementing the integration
 
 Add `ckanext-theming` to your extension's requirements (e.g., in `setup.py`,
 `pyproject.toml`, or `requirements.txt`) with a minimal version restriction:
@@ -34,7 +34,7 @@ Add `ckanext-theming` to your extension's requirements (e.g., in `setup.py`,
 dependencies = ["ckanext-theming>=0.0.6"]
 ```
 
-### The Recommended Approach: `@themed_plugin` Decorator
+### The recommended approach: `@themed_plugin` decorator
 
 Decorate your plugin class with the `@themed_plugin` decorator. It dynamically
 wraps your plugin class and injects the theming compatibility layer cleanly:
@@ -129,7 +129,7 @@ class MyPlugin(ThemingMixin, p.IConfigurer, p.IMiddleware, p.SingletonPlugin):
 
 
 
-## Soft Dependency Integration
+## Soft dependency integration
 
 If you want to ensure theming is completely optional and do not want to include
 it into dependencies of your extension, you can dynamically load the decorator
@@ -165,7 +165,7 @@ class MyPlugin(p.SingletonPlugin):
 
 ---
 
-## Constraints & Compatibility
+## Constraints & compatibility
 
 This integration pattern relies on interface inheritance behavior introduced in
 **CKAN >= 2.11**. If your extension must support older legacy versions of CKAN,

@@ -1,12 +1,12 @@
 
-# Migration Guide: Snippets to Macros
+# Migration Guide: snippets to macros
 
 If you are coming from traditional CKAN development, you are likely used to
 writing raw HTML with framework-specific classes or using snippets for complex
 UI elements. This guide shows how these patterns translate to the
 `ckanext-theming` system.
 
-## 1. Simple Buttons
+## 1. Simple buttons
 
 ### Traditional
 You write HTML with Bootstrap classes (or whatever framework you use).
@@ -16,7 +16,7 @@ You write HTML with Bootstrap classes (or whatever framework you use).
 </button>
 ```
 
-### With Macros
+### With macros
 You use a semantic call. The theme handles the `btn`, `btn-primary`, and `btn-lg` classes.
 ```django
 {{ ui.button(_("Save Dataset"), type="submit", style="primary", size="lg") }}
@@ -24,7 +24,7 @@ You use a semantic call. The theme handles the `btn`, `btn-primary`, and `btn-lg
 
 ---
 
-## 2. Information Alerts
+## 2. Information alerts
 
 ### Traditional
 ```html
@@ -34,14 +34,14 @@ You use a semantic call. The theme handles the `btn`, `btn-primary`, and `btn-lg
 </div>
 ```
 
-### With Macros
+### With macros
 ```django
 {{ ui.alert(_("This dataset is public."), style="info", icon="info-circle") }}
 ```
 
 ---
 
-## 3. Complex Cards (Snippets)
+## 3. Complex cards (snippets)
 
 ### Traditional
 You might use a snippet and pass data to it.
@@ -49,7 +49,7 @@ You might use a snippet and pass data to it.
 {% snippet "snippets/package_item.html", package=pkg %}
 ```
 
-### With Macros
+### With macros
 You use the `package` component. It's still a single line, but it's now part of
 a standardized API that works across different themes.
 ```django
@@ -58,7 +58,7 @@ a standardized API that works across different themes.
 
 ---
 
-## 4. Nested Content (The `call` pattern)
+## 4. Nested content (the `call` pattern)
 
 This is where the most power lies. Traditional CKAN development often makes it
 hard to pass complex HTML into a snippet without using multiple blocks or
@@ -75,7 +75,7 @@ global variables.
 </div>
 ```
 
-### With Macros
+### With macros
 Using `ui.util.call`, you can nest components and raw HTML naturally.
 ```django
 {% call ui.util.call(ui.card, title="Custom Header") %}
@@ -86,7 +86,7 @@ Using `ui.util.call`, you can nest components and raw HTML naturally.
 
 ---
 
-## 5. Form Fields
+## 5. Form fields
 
 ### Traditional
 ```django
@@ -95,7 +95,7 @@ Using `ui.util.call`, you can nest components and raw HTML naturally.
 
 ```
 
-### With Macros
+### With macros
 The macro handles the wrapper, label, ID generation, and accessibility attributes.
 ```django
 {{ ui.input(name="title", label=_("Title"), value=data.title, placeholder="eg. My Dataset") }}
@@ -103,11 +103,11 @@ The macro handles the wrapper, label, ID generation, and accessibility attribute
 
 ---
 
-## Summary of Changes
+## Summary of changes
 
-| Feature | Traditional CKAN | ckanext-theming |
-| :--- | :--- | :--- |
-| **Logic** | Mix of HTML and template logic | Pure semantic calls |
-| **CSS Classes** | Hardcoded in templates | Abstracted into the theme |
-| **Portability** | Locked to one CSS framework | Works with any compatible theme |
-| **Maintenance** | Update HTML in every template | Update macro in one place |
+| Feature         | Traditional CKAN               | ckanext-theming                 |
+|-----------------|--------------------------------|---------------------------------|
+| **Logic**       | Mix of HTML and template logic | Pure semantic calls             |
+| **CSS Classes** | Hardcoded in templates         | Abstracted into the theme       |
+| **Portability** | Locked to one CSS framework    | Works with any compatible theme |
+| **Maintenance** | Update HTML in every template  | Update macro in one place       |

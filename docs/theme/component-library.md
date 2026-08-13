@@ -1,4 +1,4 @@
-# Standalone Component Libraries
+# Standalone component libraries
 
 A **Component Library** (or UI Library) is a type of theme that only provides
 UI component macros (`ui.*`), asset files (CSS, JS, fonts), and icon
@@ -10,7 +10,7 @@ interactions into a modular, reusable design system package that other layout
 themes can inherit from.
 
 
-## Design System Structure
+## Design system structure
 
 A standalone component library (such as the built-in `nds-ui` or `classic-polyfill` libraries) is structured like this:
 
@@ -28,7 +28,7 @@ my_component_library/
 ```
 
 
-## Theme Configuration (`theme.py`)
+## Theme configuration (`theme.py`)
 
 In the library's `theme.py` file, instantiate a `Theme` instance pointing to
 the library directory. Standalone component libraries often include a custom
@@ -67,12 +67,12 @@ def make_theme(name: str = "my-component-library"):
 
 ///
 
-## The Macro Registry (`templates/macros/ui.html`)
+## The macro registry (`templates/macros/ui.html`)
 
 In a component library, `ui.html` contains the concrete implementations of all
 standard components using the CSS classes of your chosen design system.
 
-### Inheritance Fallback Setup (Important for Library Authors)
+### Inheritance fallback setup (important for library authors)
 To allow child themes to selectively override specific macros while falling back to the library implementations for the rest, you must use **re-exports with the default fallback strategy**:
 
 Instead of defining macros directly, write fallback bindings:
@@ -90,7 +90,7 @@ Instead of defining macros directly, write fallback bindings:
 {% set button = button | default(_button) %}
 ```
 
-### Modular Macro Files for Large Design Systems
+### Modular macro files for large design systems
 For large component libraries, putting all macro definitions inside a single `ui.html` file makes it unmaintainable. Instead, split the macros into logical files inside a subdirectory (e.g. `templates/macros/ui/`) and import them with context in the main `ui.html`:
 
 ```django title="templates/macros/ui.html"
@@ -106,7 +106,7 @@ For large component libraries, putting all macro definitions inside a single `ui
 ```
 
 
-## JavaScript Initialization in Component Libraries
+## JavaScript initialization in component libraries
 
 Interactive components (like popovers, modals, or toasts) often require
 JavaScript. As a best practice, **avoid inline `<script>` tags inside macro
@@ -116,7 +116,7 @@ definitions**. Inline scripts suffer from several issues:
 - They may execute before the main JavaScript bundle is fully loaded (resulting in `undefined` reference errors).
 - They cause duplicate initialization or fail to bind when components are dynamically injected/re-rendered (e.g. via AJAX/HTMX).
 
-### Recommended Pattern: Declarative Attributes and Global Initializer
+### Recommended pattern: declarative attributes and global initializer
 
 **Declare triggers in the macro HTML:**
 
@@ -172,7 +172,7 @@ popover(content, props) {
 ```
 
 
-## Why Create a Standalone Component Library?
+## Why create a standalone component library?
 
 **Reusability**: You can write the complex markup and class rules for a framework (such as Tailwind CSS or Bulma) once.
 
