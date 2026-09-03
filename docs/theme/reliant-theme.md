@@ -1,4 +1,4 @@
-# Themes Relying on Component Libraries
+# Themes relying on component libraries
 
 A **Layout-Only Theme** focuses on page structure, HTML page skeletons (`base.html`, `page.html`), and page-level routes (like `package/search.html`). It does not define custom CSS or JS assets itself, nor does it contain a `macros/` folder. Instead, it delegates all component rendering to a standalone **Component Library** by setting it as its `parent`.
 
@@ -6,7 +6,7 @@ This pattern separates structural layout changes from core style implementations
 
 ---
 
-## Structure of a Reliant Theme
+## Structure of a reliant theme
 
 An example of this split is the `nsw-design-system` theme which inherits from the `nds-ui` library:
 
@@ -25,7 +25,7 @@ Notice that there is **no** `templates/macros/ui.html` or `assets/` folder in th
 
 ---
 
-## Configuring the Theme (`theme.py`)
+## Configuring the theme (`theme.py`)
 
 To inherit from a component library, set the `parent` parameter in the `Theme` class to the name of the target UI library:
 
@@ -46,7 +46,7 @@ def make_theme(name: str = "my-reliant-theme"):
 
 ---
 
-## Building Templates
+## Building templates
 
 Inside your reliant theme templates, you can call any `ui.*` components defined by the parent library.
 
@@ -86,7 +86,7 @@ When CKAN renders this header:
 
 ---
 
-## Key Advantages
+## Key advantages
 
 **Shared Styling**: Multiple reliant themes (e.g. `nsw-design-system-dark`, `nsw-design-system-minimal`) can share the exact same component definitions in `nds-ui`, making them look consistent while rearranging the layout grids.
 

@@ -1,4 +1,16 @@
 
+## [v0.0.5](https://github.com/DataShades/ckanext-theming/releases/tag/v0.0.5) - 2026-07-29
+[Compare with v0.0.4](https://github.com/DataShades/ckanext-theming/compare/v0.0.4..v0.0.5)
+
+### 🚀 Features
+
+- ui.util.get_config for simplified configuration access ([d66b7eb](https://github.com/DataShades/ckanext-theming/commit/d66b7eb119a9a1dc5c50d4b87fdd3d5e85c905a4))
+- themed_plugin decoraator ([e26f648](https://github.com/DataShades/ckanext-theming/commit/e26f648bab964744bcf23c22b2f067b7f5efc9d3))
+
+### 🐛 Bug Fixes
+
+- visually incorrect content_nav_item implementation ([07ee538](https://github.com/DataShades/ckanext-theming/commit/07ee5385759ad00a5106b83e37a506c07a9397c7))
+
 ## [v0.0.3](https://github.com/DataShades/ckanext-theming/releases/tag/v0.0.3) - 2026-07-01
 [Compare with v0.0.2](https://github.com/DataShades/ckanext-theming/compare/v0.0.2..v0.0.3)
 

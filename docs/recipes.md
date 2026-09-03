@@ -1,4 +1,4 @@
-# Recipes & Best Practices
+# Recipes & best practices
 
 This page contains a collection of common patterns and solutions for real-world
 theming tasks.

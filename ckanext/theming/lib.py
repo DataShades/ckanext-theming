@@ -316,6 +316,11 @@ class Util(BaseUtil):
             else:
                 return name
 
+    @override
+    def get_config(self, key: str):
+        """Get the CKAN configuration option."""
+        return tk.config.get(key)
+
 
 class MacroUI(UI):
     """A UI implementation that loads macros from a Jinja2 template.

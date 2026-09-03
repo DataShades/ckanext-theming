@@ -7,6 +7,8 @@ if sys.version_info >= (3, 12):
 else:
     from typing_extensions import override
 
+import functools
+
 from flask import Blueprint
 from jinja2 import pass_context
 from jinja2.runtime import Context
@@ -24,9 +26,17 @@ from .themes import make_bare_theme, make_classic_polyfill, make_mb_polyfill
 log = logging.getLogger(__name__)
 
 
+def themed_plugin(cls: type[p.Plugin]):
+    wrapper = type(f"Themed{cls.__name__}", (ThemingMixin, cls), {})
+    functools.update_wrapper(wrapper, cls, updated=())
+    return wrapper
+
+
 class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
     @override
     def update_config(self, config: Any):
+        super().update_config(config)
+
         if not _is_main_implementation(self, config):
             return
 
@@ -37,21 +47,27 @@ class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
             lib.enable_theme(theme, config)
 
     @override
-    def register_themes(self) -> list[lib.Theme]:
-        if not _is_main_implementation(self, tk.config):
-            return []
+    def register_themes(self):
+        themes = super().register_themes()
 
-        return [make_classic_polyfill(), make_mb_polyfill()]
+        if not _is_main_implementation(self, tk.config):
+            return themes
+
+        return list(themes) + [make_classic_polyfill(), make_mb_polyfill()]
 
     @override
     def get_default_theme_ui_sources(self) -> list[str]:
-        if not _is_main_implementation(self, tk.config):
-            return []
+        sources = super().get_default_theme_ui_sources()
 
-        return ["macros/theming_default_ui.html"]
+        if not _is_main_implementation(self, tk.config):
+            return sources
+
+        return sources + ["macros/theming_default_ui.html"]
 
     @override
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:
+        app = super().make_middleware(app, config)
+
         if not _is_main_implementation(self, tk.config):
             return app
 

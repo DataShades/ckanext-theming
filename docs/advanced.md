@@ -1,14 +1,14 @@
-# Advanced Development
+# Advanced development
 
 This page covers advanced hooks and techniques for extension developers who
 want to integrate deeply with the theming system.
 
-## The `ITheme` Interface
+## The `ITheme` interface
 
 Extensions can interact with the theming system by implementing the `ITheme`
 interface.
 
-### Providing Default Implementations
+### Providing default implementations
 If your extension provides a new UI component that should have a generic
 fallback implementation, use `get_default_theme_ui_sources`.
 
@@ -23,7 +23,7 @@ theme does **not** define a macro with the same name.
 **Use Case**: Providing basic markup for a new widget that a theme can
   optionally style later.
 
-### Providing Additional Components
+### Providing additional components
 To provide components that should **not** be overridden by themes, use
 `get_additional_theme_ui_sources`.
 
@@ -38,7 +38,7 @@ def get_additional_theme_ui_sources(self) -> list[str]:
 **Use Case**: Complex logic-heavy widgets where the HTML structure is
   critical for the extension's functionality.
 
-### Patching the UI Object
+### Patching the UI object
 For absolute control, you can use `patch_theme_ui` to dynamically add or
 modify components on the `ui` object.
 
@@ -50,12 +50,12 @@ def patch_theme_ui(self, theme, ui):
 
 ---
 
-## Advanced Theme Definition
+## Advanced theme definition
 
 When registering a `Theme` class, you can customize several advanced parameters
 to adapt it to your workflow or frontend build chain.
 
-### Customizing Theme Directory Structure
+### Customizing theme directory structure
 
 By default, the `Theme` class looks for assets, public files, and templates in
 standard folder locations. If your project has a different structure (for
@@ -81,13 +81,13 @@ theme = Theme(
 
 ---
 
-## Icon Abstraction and Mapping
+## Icon abstraction and mapping
 
 To ensure that different themes can swap icon libraries (e.g., FontAwesome,
 Material Icons, or custom SVG assets) without breaking template logic, the
 theming extension provides an icon mapping abstraction.
 
-### Specifying Icon Maps
+### Specifying icon maps
 
 The `Theme` class accepts an `icon_map` dictionary that translates generic icon identifier requests (such as `"home"`, `"trash"`, `"edit"`) to theme-specific names:
 
@@ -104,7 +104,7 @@ theme = Theme(
 )
 ```
 
-### Resolving Icons in Templates
+### Resolving icons in templates
 
 Inside your templates, call `ui.icon(name)` (which delegates to `ui.util.icon(name)`) to fetch the mapped icon identifier.
 
@@ -128,13 +128,13 @@ Typically, you define a custom `icon` macro in your theme's `macros/ui.html` whi
 
 ---
 
-## Extending the Utility Library
+## Extending the utility library
 
 The theming system attaches a utility helper library to `ui.util` in
 templates. You can extend or customize these utilities for a specific theme by
 providing a custom `util_factory`.
 
-### Extending Util via `util_factory`
+### Extending util via `util_factory`
 
 To add custom utilities:
 1. Subclass the default `Util` (or `BaseUtil`) class.
@@ -167,7 +167,7 @@ theme = Theme(
 )
 ```
 
-### Accessing Custom Utilities in Templates
+### Accessing custom utilities in templates
 
 In your Jinja templates, you can call these custom helpers directly from `ui.util`:
 
@@ -177,7 +177,7 @@ In your Jinja templates, you can call these custom helpers directly from `ui.uti
 
 ---
 
-## Customizing the UI Registration Factory
+## Customizing the UI registration factory
 
 By default, the `Theme` class uses `MacroUI` to locate and load element macros
 from your template files. If you need complete control over how UI elements are
@@ -220,7 +220,7 @@ You can then call the programmatically added component in your templates:
 
 ---
 
-## Component Categories
+## Component categories
 
 In `components.yaml` (and when using CLI tools), components are grouped into
 categories. Understanding these helps you prioritize your implementation:

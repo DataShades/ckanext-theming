@@ -1,4 +1,6 @@
 {% extends "page.html" %}
+{% set pkg = pkg_dict %}
+
 {%- block page_layout -%}sidebar-end{%- endblock %}
 {% set dataset_type = pkg_dict.type if pkg_dict else dataset_type or 'dataset' %}
 

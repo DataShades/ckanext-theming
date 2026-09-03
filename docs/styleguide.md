@@ -1,10 +1,10 @@
-# The Component Explorer
+# The component explorer
 
 One of the most useful features of `ckanext-theming` is the built-in
 **Component Explorer**. This is a live styleguide that shows you exactly how
 every component looks and behaves in your **currently active theme**.
 
-## Accessing the Styleguide
+## Accessing the component explorer
 
 Once the extension is installed and enabled, add the following to your CKAN configuration file (e.g., `ckan.ini`):
 
@@ -23,9 +23,9 @@ unless you are actively developing the portal's theme.
 ///
 
 
-## What You Can Find Here
+## What you can find here
 
-### 1. Component Previews
+### Component previews
 
 Browse through all standard UI components (buttons, cards, forms, etc.). Each
 component page shows:
@@ -36,7 +36,7 @@ component page shows:
 
 **Arguments Reference**: A table of all standard arguments supported by the component (as declared in the component library schema).
 
-### 2. JavaScript reference
+### JavaScript reference
 
 The `/theming/js/` section provides a reference for the JavaScript functions
 available inside `sandbox.ui`:
@@ -46,14 +46,14 @@ sb = ckan.sandbox();
 const btn = sb.ui.button("Click");
 ```
 
-### 3. Utility Function Reference
+### Utility function reference
 
 The `/theming/util/` section provides a reference for the `ui.util` functions,
 such as `id()`, `now()`, and the critical `attrs()` helper.
 
 
 
-## Why Use the Explorer?
+## Why use the explorer?
 
 - **For Theme Developers**: It serves as a checklist. You can quickly see which
   components you haven't implemented yet or which ones need visual polish.
@@ -63,7 +63,7 @@ such as `id()`, `now()`, and the critical `attrs()` helper.
   attributes) of components in a clean, isolated environment.
 
 
-## Adding Components and Examples to the Styleguide
+## Adding components and examples to the component explorer
 
 Themes and extensions can dynamically add new components and extend existing
 examples in the Component Explorer. This allows you to document theme-specific
@@ -94,17 +94,22 @@ mytheme/
 
 ///
 
-### Extending Existing Component Examples
+### Extending existing component examples
 
 To add custom examples to a standard component (like `button`, `card`, etc.), create an HTML file inside the active theme's `templates/theming/examples/{component_name}/` directory.
 
-* The files are loaded in alphabetical/numerical order. Prefixing them with
-  `001_`, `002_` helps control ordering. It's recommended to start custom
-  examples with prefix like `010_` or `020_`, to put them after all standard
-  examples
-* Inside the file, use the `show_example` helper to render the interactive code
-  box. Note, content of this macro call must be wrapped into `raw` jinja2 tag,
-  to avoid immediate rendering.
+/// admonition
+    type: tip
+
+Files are loaded in alphabetical/numerical order. Prefixing them with `001_`,
+`002_` helps control ordering. It's recommended to start custom examples with
+prefix like `010_` or `020_`, to put them after all standard examples
+
+///
+
+Inside the file, call the `show_example` macro to render the interactive code
+box. Note, content of this macro call must be wrapped into `raw` jinja2 tag, to
+avoid immediate rendering.
 
 /// admonition | Adding theme-specific button examples
     type: example
@@ -132,19 +137,19 @@ To add custom examples to a standard component (like `button`, `card`, etc.), cr
     type: hint
 
 Wrap your example code in `#!django {%- raw %}` ... `#!django {%- endraw %}`
-inside the `show_example` call. This allows the Component Explorer to display
+inside the `show_example` call. This allows the component explorer to display
 both the live preview of the component and the raw Jinja code snippet for
 developers to copy.
 
 ///
 
-### Registering New Custom Components
+### Registering new custom components
 
 If your theme or extension introduces entirely new components that are not part
 of the standard `ckanext-theming` library, you can register them on the
-styleguide sidebar and create dedicated documentation pages for them.
+component explorer sidebar and create dedicated documentation pages for them.
 
-#### Step A: Register the Component Page
+#### Step A: register the component page
 
 Create a template file named `{component_name}.html` in the active theme's
 `templates/theming/components/` directory. This file defines the description,
@@ -217,7 +222,7 @@ for related components, define in the global scope of the template a variable
 
 ///
 
-#### Step B: Add Examples for the Custom Component
+#### Step B: add examples for the custom component
 
 Once the component is registered, you can provide examples for it. Create an
 example HTML file under

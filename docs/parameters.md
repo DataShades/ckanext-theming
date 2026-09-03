@@ -1,4 +1,4 @@
-# Standard Parameter Values
+# Standard parameter values
 
 This page describes the expected values for common parameters across all UI
 components. Using standardized parameter values ensures consistency across
@@ -6,7 +6,7 @@ different themes and simplifies theme switching. Each theme implementation
 should support these standard values, though they may translate them to
 framework-specific equivalents.
 
-## Size Parameters
+## Size parameters
 
 Size parameters are used across many components to control sizing and
 spacing. The following values are standardized:
@@ -19,7 +19,7 @@ spacing. The following values are standardized:
 | `lg`  | Large size            | Bootstrap: `lg`, Tailwind: `lg`, Bulma: `is-medium`              |
 | `xl`  | Extra large size      | Bootstrap: `lg`, Tailwind: `xl`, Bulma: `is-large`               |
 
-## Style/Variant Parameters
+## Style/variant parameters
 
 Style parameters control the visual appearance and semantic meaning of
 components. The following values are standardized:
@@ -36,7 +36,7 @@ components. The following values are standardized:
 | `dark`      | Dark/high contrast style        | Bootstrap: `dark`, Tailwind: `dark`, Bulma: `is-dark`                              |
 
 
-## Icon Parameters
+## Icon parameters
 
 Icon parameters expect Font Awesome icon names without the `fa-` prefix. Themes
 that use different icon sets should provide translation via `ui.util.icon()`.
@@ -85,7 +85,7 @@ that use different icon sets should provide translation via `ui.util.icon()`.
     ```
 
 
-## Direction Parameters
+## Direction parameters
 
 Direction parameters control layout orientation and positioning:
 
@@ -97,7 +97,7 @@ Direction parameters control layout orientation and positioning:
 | `column-reverse` | Reverse vertical layout   | Flexbox: `flex-column-reverse`                 |
 
 
-## Alignment Parameters
+## Alignment parameters
 
 Alignment parameters control content alignment within components:
 
@@ -108,7 +108,7 @@ Alignment parameters control content alignment within components:
 | `end`      | Align to end (right/bottom) | Bootstrap: `end`, Tailwind: `items-end`, Bulma: `has-text-right`          |
 
 
-## Position Parameters
+## Position parameters
 
 Position parameters control element positioning and placement:
 
@@ -120,7 +120,7 @@ Position parameters control element positioning and placement:
 | `right`  | Right position  | Bootstrap: `right`, Tailwind: `right-0`                   |
 | `center` | Center position | Bootstrap: `center`, Tailwind: `center`                   |
 
-## State Parameters
+## State parameters
 
 State parameters control component states and behaviors:
 
@@ -132,7 +132,7 @@ State parameters control component states and behaviors:
 | `required` | Required state                        | HTML attribute: `required`                                        |
 | `checked`  | Checked state (for checkboxes/radios) | HTML attribute: `checked`                                         |
 
-## Spacing Parameters
+## Spacing parameters
 
 Spacing parameters control padding and margin:
 
@@ -144,7 +144,7 @@ Spacing parameters control padding and margin:
 | `lg`   | Large spacing       | Bootstrap: `3`, Tailwind: `3`, Bulma: `3` |
 | `xl`   | Extra large spacing | Bootstrap: `4`, Tailwind: `4`, Bulma: `4` |
 
-## Color Parameters
+## Color parameters
 
 Color parameters control color schemes and themes:
 
@@ -158,7 +158,7 @@ Color parameters control color schemes and themes:
 | `info`      | Informational/blue color | Bootstrap: `info`, Tailwind: `info`, Bulma: `info`                |
 
 
-## Implementation Guidelines
+## Implementation guidelines
 
 When implementing themes, ensure that:
 

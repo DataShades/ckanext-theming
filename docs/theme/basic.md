@@ -1,10 +1,10 @@
-# Basic Theme Creation
+# Basic theme creation
 
 A theme defines the visual identity of a CKAN instance. The simplest way to create a theme is to bootstrap it using the CLI and start mapping standard CKAN components.
 
 ---
 
-## 3-Step Theme Setup
+## 3-step theme setup
 
 /// Note
 
@@ -22,7 +22,7 @@ In this way, theme folder will be created next to `plugin.py`.
 ///
 
 
-### Bootstrap the Structure
+### Bootstrap the structure
 
 Use the CKAN CLI to create a theme directory containing the default folder structure:
 ```bash
@@ -46,7 +46,7 @@ must be enabled.
 
 ///
 
-### Register the Theme
+### Register the theme
 
 In your extension's `plugin.py`, implement the `ITheme` interface and
 register your theme by returning a list of `Theme` instances from
@@ -135,7 +135,7 @@ scripts won't be loaded and you'll see broken page.
 
 ///
 
-### Activate the Theme
+### Activate the theme
 
 Make sure that `theming` and your theme plugin is enabled. Then activate newly
 created theme via `ckan.ui.theme`.
@@ -167,7 +167,7 @@ templates. But it's recommended to keep them together and treat combination
 
 ---
 
-## Minimal File Structure
+## Minimal file structure
 
 A basic theme requires at least the following file structure to map macros and assets:
 

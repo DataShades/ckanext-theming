@@ -1,9 +1,9 @@
-# Portal Maintainers Guide
+# Portal maintainers guide
 
 As a **Portal Maintainer** (or Site Administrator), your role is to configure the CKAN portal, integrate chosen extensions, and manage branding customizations. This guide focuses on configuring themes, safely applying local customizations, and maintaining portals across upgrades.
 
 
-## Core Maintenance Goals
+## Core maintenance goals
 
 **Branding & Theme Swappability**: Configure the site's layout and color palettes to match organization guidelines. Maintain the ability to swap themes without breaking site features.
 
@@ -12,7 +12,7 @@ As a **Portal Maintainer** (or Site Administrator), your role is to configure th
 **Consistent User Experience**: Ensure that components from different third-party extensions share a cohesive visual styling.
 
 
-## Theme Configuration
+## Theme configuration
 
 The active theme is controlled by the `ckan.ui.theme` setting in your CKAN configuration file (`.ini`):
 
@@ -27,25 +27,25 @@ ckan theme list
 ```
 
 
-## Applying Custom Styling Safely
+## Applying custom styling safely
 
 If you need to make cosmetic adjustments (like altering colors, font sizes, or paddings) to match local branding, follow these best practices:
 
-### 1. Prefer `_extra_class` Over Custom CSS Wrappers
+### 1. Prefer `_extra_class` over custom CSS wrappers
 When calling standard macros, pass custom class names via the `_extra_class` argument. This appends your class to the theme's native layout container safely:
 ```django
 {{ ui.button("Join Us", href="/join", _extra_class="my-brand-glow") }}
 ```
 
-### 2. Declare Custom Styles in Local Stylesheets
+### 2. Declare custom styles in local stylesheets
 Avoid editing core theme stylesheets or the component library files. Put custom CSS rules into your own extension's asset files, using the custom classes declared in `_extra_class`.
 
 
-## Overriding Components Locally
+## Overriding components locally
 
 If a third-party extension registers a custom component (e.g. `map_viewer`) but the active theme does not style it properly, you can override its styling locally.
 
-### Step-by-Step Component Override
+### Step-by-step component override
 1. Create a custom extension (or use your portal's local customization extension).
 2. Register an additional theme UI source in your plugin class:
    ```python

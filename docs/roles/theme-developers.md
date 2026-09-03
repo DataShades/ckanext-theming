@@ -1,9 +1,9 @@
-# Theme Developers Guide
+# Theme developers guide
 
 As a **Theme Developer**, your primary goal is to establish a cohesive visual system and implement the component macro API (`ui.*`) to render pages reliably. This guide highlights the customization philosophy of `ckanext-theming` and how to architect themes for scalability.
 
 
-## Architectural Goals
+## Architectural goals
 
 **API Completeness**: Implement all standard components to ensure any extension
 relying on `ui.*` components renders without throwing errors. Use `ckan theme
@@ -14,7 +14,7 @@ component check` CLI command to see any missing component implementation.
 **Accessibility**: Guarantee keyboard navigation, screen reader support, and focus states on all interactive elements.
 
 
-## Customization Philosophy: Macros vs. Snippets
+## Customization philosophy: macros vs. snippets
 
 Traditional CKAN development promotes overriding individual snippets (`{%
 snippet "snippets/package_item.html" %}`) to customize parts of a
@@ -32,13 +32,13 @@ supports customization of its components (e.g. by accepting slot arguments,
 nested blocks via `ui.util.call`, or custom dictionaries).
 
 
-## Handling Complex Components
+## Handling complex components
 
 For complex, large components (such as a search facets panel, header block, or
 activity streams list), writing all the HTML directly inside a single macro in
 `ui.html` makes the file unreadable.
 
-### Best Practice: Separate Implementation Files
+### Best practice: separate implementation files
 You should move the implementation of complex components into separate helper
 files within your theme (e.g., under a subfolder in `templates/`) and include
 them inside the macro body:
@@ -56,7 +56,7 @@ them inside the macro body:
 {%- endmacro -%}
 ```
 
-### Constraints for Users & Extensions
+### Constraints for users & extensions
 
 **Theme-Specific Implementation**: The helper files (like
 `search_facets_impl.html`) are theme-specific implementation details.
@@ -67,7 +67,7 @@ are certain the portal will not switch themes. If the theme changes, those
 files will disappear, causing rendering failures.
 
 
-## Incorporating Popular Extension Components
+## Incorporating popular extension components
 
 As a theme creator, you want your theme to look stunning when popular CKAN
 extensions (such as [ckanext-spatial](https://github.com/ckan/ckanext-spatial)

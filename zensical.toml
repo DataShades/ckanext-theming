@@ -13,13 +13,13 @@ nav = [
   "migration.md",
   "integration.md",
   "recipes.md",
-  { "Theme Development" = [
+  { "Theme development" = [
     "theme/basic.md",
     "theme/component-library.md",
     "theme/reliant-theme.md",
     "theme/combined-theme.md",
   ] },
-  { "Role Guides" = [
+  { "Role guides" = [
     "roles/theme-developers.md",
     "roles/extension-developers.md",
     "roles/portal-maintainers.md",

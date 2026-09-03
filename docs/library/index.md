@@ -1,5 +1,5 @@
 
-# Component Library
+# Component library
 
 The component library is the heart of the theming system. It provides a set of
 high-level, semantic building blocks that you use to construct your user
@@ -13,7 +13,7 @@ for its chosen CSS framework.
 
 Most components follow a simple, predictable pattern.
 
-### 1. Simple Content
+### 1. Simple content
 For components that just take text or a simple string, pass it as the first
 argument:
 
@@ -22,7 +22,7 @@ argument:
 {{ ui.alert("Success message", style="success") }}
 ```
 
-### 2. Complex Content (Block Usage)
+### 2. Complex content (block usage)
 For more complex content (like nested HTML or other components), use the `ui.util.call` helper:
 
 ```django
@@ -47,7 +47,7 @@ For more complex content (like nested HTML or other components), use the `ui.uti
     ```
 
 
-### 3. Entity-based Components
+### 3. Entity-based components
 Some components are designed to work directly with CKAN's data objects (like
 datasets, organizations, or users):
 
@@ -56,7 +56,7 @@ datasets, organizations, or users):
 {{ ui.user(user=user_dict) }}
 ```
 
-## Key Benefits
+## Key benefits
 
 **Semantic Code**: Your templates describe *what* an element is (a button, a card), not *how* it should look.
 
@@ -64,7 +64,7 @@ datasets, organizations, or users):
 
 **Clean Templates**: Drastically reduce the amount of boilerplate HTML in your templates.
 
-## Diving Deeper
+## Diving deeper
 
 While you can get very far with just the basics, the system offers powerful
 features for advanced use cases:
@@ -75,11 +75,11 @@ features for advanced use cases:
 
 ---
 
-## Technical Details
+## Technical details
 
-### Parameter Handling
+### Parameter handling
 
-#### Named Arguments Convention
+#### Named arguments convention
 
 All arguments after the first content argument (if applicable) should be passed
 by name. This approach provides flexibility for different themes to implement
@@ -90,7 +90,7 @@ their own variations of components with varying numbers of parameters:
 {{ ui.input(type="text", placeholder="Enter text", required=true) }}
 ```
 
-### Arbitrary Named Parameters
+### Arbitrary named parameters
 
 Every component accepts arbitrary named parameters. If a component doesn't know
 how to handle a particular parameter, it will be ignored. This allows for
@@ -100,9 +100,9 @@ maximum flexibility when working with different themes:
 {{ ui.button("Submit", custom_param="ignored", style="primary") }}
 ```
 
-## HTML Attributes
+## HTML attributes
 
-### Standard Attributes
+### Standard attributes
 
 HTML attributes can be passed via the `attrs` dictionary parameter:
 
@@ -112,7 +112,7 @@ HTML attributes can be passed via the `attrs` dictionary parameter:
 ) }}
 ```
 
-### Special Attribute Namespaces
+### Special attribute namespaces
 
 Attributes from common namespaces (`data-`, `aria-`, `hx-`, and `on` event
 handlers) can be passed either inside the `attrs` dictionary or via separate
@@ -133,7 +133,7 @@ appropriate namespace (`data-`, `aria-`, `hx-`) or treated as event handlers
 (`on`). Attributes specified via separate parameters have higher precedence
 than ones from `attrs` dictionary.
 
-### Attribute Precedence
+### Attribute precedence
 
 Attributes passed via arguments have higher precedence than attributes defined
 in the macro implementation. This allows you to override default behavior:
@@ -143,7 +143,7 @@ in the macro implementation. This allows you to override default behavior:
 {{ ui.button("Text", attrs={"class": "custom-class"}) }}
 ```
 
-### Custom CSS Classes
+### Custom CSS classes
 
 If you want to *add* a class to the default ones instead of replacing them
 entirely, use the `_extra_class` parameter:
@@ -155,9 +155,9 @@ entirely, use the `_extra_class` parameter:
 
 ---
 
-## Block Elements and Complex Content
+## Block elements and complex content
 
-### Inline vs Block Usage
+### Inline vs block usage
 
 Components that accept content as their first parameter can be used in two ways:
 
@@ -199,7 +199,7 @@ implementation.
 
 
 
-### Mapping Over Collections
+### Mapping over collections
 
 Multiple items can be processed and concatenated using `ui.util.map`:
 
@@ -217,9 +217,9 @@ Alternatively, you can concatenate components as Jinja2 strings:
 {{ ui.icon("search") ~ ui.icon("home") ~ ui.icon("user") }}
 ```
 
-## Interactive Element Coordination
+## Interactive element coordination
 
-### Handle Components
+### Handle components
 
 Handle components (like modal handles, dialog handles, etc.) are typically
 connected to their corresponding interactive elements via matching `id`
@@ -233,7 +233,7 @@ parameters:
 {{ ui.modal("Modal content", id="my-modal") }}
 ```
 
-### Unique ID Generation
+### Unique ID generation
 
 To guarantee ID uniqueness, use the `ui.util.id()` helper instead of hardcoding IDs:
 
@@ -252,9 +252,9 @@ Using `ui.util.id()` with a specific value is useful when you have a unique
 attribute of the rendered entity that contains characters not allowed in HTML
 ID attributes, allowing you to obfuscate the value in a reproducible manner.
 
-## Utility Functions
+## Utility functions
 
-### Date and Time
+### Date and time
 
 Current datetime can be obtained via `ui.util.now()`:
 
@@ -262,7 +262,7 @@ Current datetime can be obtained via `ui.util.now()`:
 {{ ui.datetime(ui.util.now(), date_format="%Y-%m-%d") }}
 ```
 
-### Request-Scoped Data Storage
+### Request-scoped data storage
 
 Data can be stored during a request using `ui.util.keep_item()` and retrieved
 later with `ui.util.pop_items()`:
@@ -287,7 +287,7 @@ messages, alerts, or metadata) throughout templates without concerning yourself
 about the actual rendering location, then collecting and rendering them
 together at the appropriate place further in the layout.
 
-## Icon Normalization
+## Icon normalization
 
 Icons can be normalized using `ui.util.icon()` which maps common icon names to
 their corresponding names in the theme's icon set:
@@ -300,7 +300,7 @@ their corresponding names in the theme's icon set:
 Note, this mapping is usually performed inside macro implementation and just
 writing `{{ ui.icon("search") }}` should work in the same way.
 
-## Best Practices
+## Best practices
 
 1. **Consistency**: Always pass content as the first positional argument when applicable
 2. **Flexibility**: Use named arguments for all styling and behavioral parameters

@@ -1,9 +1,9 @@
-# CLI Reference
+# CLI reference
 
 The theming system provides comprehensive CLI tools for theme development,
 auditing, and debugging.
 
-## Development Workflow
+## Development workflow
 
 While developing a theme, you can use these commands to ensure quality and
 completeness:

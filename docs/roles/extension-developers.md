@@ -1,9 +1,9 @@
-# Extension Developers Guide
+# Extension developers guide
 
 As an **Extension Developer**, your goal is to build feature-rich plugins that integrate seamlessly with whatever theme a portal maintainer chooses. This guide explains how to leverage standardized components, register custom components securely, and handle theme-specific styling without breaking other layouts.
 
 
-## Core Development Goals
+## Core development goals
 
 **Theme Portability**: Do not write raw HTML with framework-specific classes
 (e.g. Bootstrap's `btn btn-primary` or Tailwind's `bg-blue-500`).
@@ -15,11 +15,11 @@ ui.button(...) }}`) in your extension templates.
 theme that doesn't natively support your extension, the layout does not break.
 
 
-## Registering Custom Components
+## Registering custom components
 
 Sometimes your extension needs to introduce a brand-new UI component that is not part of CKAN's standard list (for example, a `harvester_status` box or a `map_viewer`).
 
-### The Method: Registering via Default Components Hook
+### The method: registering via default components hook
 You should implement the `ITheme` interface in your extension's plugin class and register your custom component files using `get_default_theme_ui_sources()`:
 
 ```python
@@ -27,24 +27,24 @@ You should implement the `ITheme` interface in your extension's plugin class and
 import ckan.plugins as p
 from ckanext.theming.interfaces import ITheme
 
-class MyExtensionPlugin(p.SingletonPlugin, ITheme):
+class MyExtensionPlugin(ITheme, p.SingletonPlugin):
 
     def get_default_theme_ui_sources(self) -> list[str]:
         # Return the path to the file defining your custom components
         return ["templates/macros/my_extension_defaults.html"]
 ```
 
-### Why Do This?
+### Why do this?
 **Seamless Customization**: Theme creators who want to explicitly support your extension can redefine your custom macros (e.g., `harvester_status`) inside their own `ui.html` using their theme's native CSS classes.
 
 **Automatic Fallback**: If the active theme does not override the macro, the theming loader automatically falls back to the default component implementation provided in your `my_extension_defaults.html` file.
 
 
-## Scenario Playbook: Customization & Coexistence
+## Scenario playbook: customization & coexistence
 
 Here are common scenarios you will encounter as an extension developer, and the recommended behavior:
 
-### Scenario A: You want to customize a component specifically for a popular theme
+### Scenario A: you want to customize a component specifically for a popular theme
 
 **The Problem**: You want to alter a component's structure to match the look of
 a popular theme (e.g. `nsw-design-system`), but doing so with raw markup might
@@ -59,7 +59,7 @@ break other themes.
           ui._add_component("custom_widget", nds_custom_implementation)
   ```
 
-### Scenario B: You want to let portal maintainers integrate your components manually
+### Scenario B: you want to let portal maintainers integrate your components manually
 
 **The Goal**: Provide advanced layout controls that can't be automatically
   inserted without risking container layout issues.
@@ -69,7 +69,7 @@ document how the end user can call or incorporate them into their theme's
 templates. Provide code snippets and mockups rather than injecting raw tags
 programmatically.
 
-### Scenario C: You need to pass complex layout blocks into standard theme components
+### Scenario C: you need to pass complex layout blocks into standard theme components
 
 **The Goal**: You want to render a complex panel of filters inside a `ui.card` component.
 
