@@ -1,5 +1,5 @@
 
-# Migration Guide: snippets to macros
+# Migration from snippets to macros
 
 If you are coming from traditional CKAN development, you are likely used to
 writing raw HTML with framework-specific classes or using snippets for complex

@@ -62,7 +62,7 @@ class ThemingMixin(ITheme, p.IConfigurer, p.IMiddleware):
         if not _is_main_implementation(self, tk.config):
             return sources
 
-        return sources + ["macros/theming_default_ui.html"]
+        return ["macros/theming_default_ui.html"] + sources
 
     @override
     def make_middleware(self, app: types.CKANApp, config: Any) -> types.CKANApp:

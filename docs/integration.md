@@ -154,13 +154,7 @@ class MyPlugin(p.SingletonPlugin):
     # the following method will register additional UI macros. Otherwise, it will never
     # be called.
     def get_default_theme_ui_sources(self):
-        # We need to check if the parent defines get_default_theme_ui_sources
-        # since it's not defined when ckanext-theming is missing
-        if hasattr(super(), "get_default_theme_ui_sources"):
-            sources = super().get_default_theme_ui_sources()
-        else:
-            sources = []
-        return sources + ["my_extension/default_ui.html"]
+        return ["my_extension/default_ui.html"]
 ```
 
 ---
