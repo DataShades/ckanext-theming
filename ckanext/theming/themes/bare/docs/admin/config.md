@@ -4,6 +4,7 @@ Site configuration management.
 
 ## Overview
 
+
 The config page provides:
 
 - Site settings form
@@ -18,6 +19,7 @@ The config page provides:
 ///
 
 ## URL Pattern
+
 
 ```
 GET /ckan-admin/config

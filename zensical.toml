@@ -18,6 +18,8 @@ nav = [
     "theme/component-library.md",
     "theme/reliant-theme.md",
     "theme/combined-theme.md",
+    "theme/customizing-components.md",
+    "theme/exposing-components.md",
   ] },
   { "Role guides" = [
     "roles/theme-developers.md",

@@ -62,3 +62,9 @@ If a third-party extension registers a custom component (e.g. `map_viewer`) but 
    {%- endmacro -%}
    ```
 This will take precedence over the fallback component provided by the extension, allowing you to control its styling completely.
+
+/// tip
+
+For an in-depth guide on component priority resolution, macro signatures, and wrapping existing implementations, see [Customizing components](../theme/customizing-components.md).
+
+///

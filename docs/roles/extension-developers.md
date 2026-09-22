@@ -39,6 +39,12 @@ class MyExtensionPlugin(ITheme, p.SingletonPlugin):
 
 **Automatic Fallback**: If the active theme does not override the macro, the theming loader automatically falls back to the default component implementation provided in your `my_extension_defaults.html` file.
 
+/// tip
+
+For detailed examples of building custom components from native primitives (`ui.card`, `ui.badge`, `ui.alert`) and enabling user overrides, see [Exposing custom components](../theme/exposing-components.md).
+
+///
+
 
 ## Scenario playbook: customization & coexistence
 
