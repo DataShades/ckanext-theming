@@ -516,7 +516,7 @@ def resolve_paths(theme: str | None) -> list[str]:
 def get_active_theme():
     theme = cfg.theme()
     if not theme:
-        if tk.config.get("ckan.base_templates_folder") == "templates-midnight-blue":
+        if tk.check_ckan_version("2.12.99") or tk.config.get("ckan.base_templates_folder") == "templates-midnight-blue":
             theme = "midnight-blue-polyfill"
         else:
             theme = "classic-polyfill"
