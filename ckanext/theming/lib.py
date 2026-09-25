@@ -209,7 +209,12 @@ class Util(BaseUtil):
             msg = "`kwargs` inside call block shadows outer `kwargs`"
             raise ValueError(msg)
 
-        return el(caller(), *args, **kwargs)
+        if getattr(el, "caller", False):
+            kwargs["caller"] = caller
+        else:
+            args = (caller(),) + args
+
+        return el(*args, **kwargs)
 
     @override
     def map(self, el: PElement, items: Iterable[Any], /, *args: Any, **kwargs: Any) -> Markup:
